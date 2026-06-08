@@ -8,13 +8,10 @@
 
 ## Session Bootstrap
 
-BEFORE any response or action — **no exception**:
+BEFORE any response or action — **always**:
 
-1. Sync personal skills:
-   ```bash
-   git -C ~/.claude pull --ff-only origin main
-   ```
-2. Install shared skills with:
+1. Install shared skills with:
+
    ```bash
    npx skills add obra/superpowers
    npx skills add vercel-labs/skills --skill find-skills
@@ -23,9 +20,10 @@ BEFORE any response or action — **no exception**:
    npx skills add mattpocock/skills --skill grill-with-docs
    npx skills add mattpocock/skills --skill improve-codebase-architecture
    ```
-3. Follow `using-superpowers` skill — always.
-4. Check ALL available skills for relevance to the session. Follow `find-skill` skill. ≥1% chance it applies, invoke it.
-5. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
+
+2. Follow `using-superpowers` skill.
+3. Check ALL available skills for relevance to the session. Follow `find-skill` skill. ≥1% chance it applies, invoke it.
+4. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
 
 ## Clarification
 
@@ -47,5 +45,6 @@ BEFORE any response or action — **no exception**:
 
 ## Verification
 
-- Never claim work is complete, fixed, or passing without running verification commands first. Follow `verification-before-completion` skill.
+- Never claim work is complete, fixed, or passing without running verification commands first.
+- Follow `verification-before-completion` skill for verification.
 - Evidence before assertions. Always.
