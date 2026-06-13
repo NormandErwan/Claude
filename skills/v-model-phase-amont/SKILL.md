@@ -1,5 +1,6 @@
 ---
 name: v-model-phase-amont
+version: 1.1.0
 description: >
   Skill pour la phase amont d'un projet logiciel : capture du besoin
   operationnel, etude de faisabilité, business case, charte de projet.

@@ -2,3 +2,5 @@
 skills/*
 !skills/token-*
 !skills/v-model-*
+.agents/
+skills-lock.json

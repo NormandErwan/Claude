@@ -1,5 +1,6 @@
 ---
 name: v-model-implementation
+version: 1.1.0
 description: >
   Skill pour la phase d'implémentation du modèle en V. Utiliser quand un
   développeur commence a coder un composant, quand on genere du code depuis
@@ -56,6 +57,33 @@ Format de signalement ecrit minimal :
 
 Ne jamais "deviner" une zone floue sans la signaler. Voir `v-model-guide`
 (protocole d'escalade) pour la procedure complete.
+
+---
+
+## Si le défaut remet en cause un niveau supérieur
+
+L'ambiguïté et la dette technique restent locales au LLD. Un troisième cas
+existe : l'implémentation révèle qu'une décision d'un niveau supérieur est
+*erronée* (HLD, SRS ou SRD), pas seulement floue ou impraticable.
+
+Ne pas corriger uniquement le LLD ni le code. Déclencher un Change Request
+interne :
+
+1. Stopper l'implémentation du point concerné.
+2. Ouvrir un Change Request (voir `v-model-gestion` §5), `Demandeur = équipe technique`.
+3. Impact Assessment : remonter niveau par niveau (LLD → HLD → SRS → SRD) pour
+   identifier la décision la plus haute invalidée.
+4. Corriger d'abord le niveau le plus haut impacté, puis re-dériver vers le bas.
+5. Mettre à jour la baseline et le registre des décisions.
+
+**Règle :** on corrige du haut vers le bas. Patcher seulement le code laisse
+les documents mentir.
+
+| Nature du souci | Traitement |
+|---|---|
+| LLD flou, décision juste pas détaillée | Mise à jour LLD (protocole d'ambiguïté ci-dessus) |
+| Écart pragmatique sans remise en cause amont | Dette technique (section « Signal d'alarme » ci-dessous) |
+| Décision HLD/SRS/SRD invalidée | CR interne + Impact Assessment (`v-model-gestion` §5) |
 
 ---
 
