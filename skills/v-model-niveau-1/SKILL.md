@@ -1,5 +1,6 @@
 ---
 name: v-model-niveau-1
+version: 1.0.0
 description: >
   Skill pour le Niveau 1 du modèle en V : Exigences système (System
   Requirements Document). Utiliser après validation de la phase amont,
