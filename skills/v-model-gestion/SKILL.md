@@ -1,6 +1,6 @@
 ---
 name: v-model-gestion
-version: 1.0.0
+version: 1.1.0
 description: >
   Skill pour les artefacts de gestion de projet dans le modèle V : plan de
   projet, registre des risques, registre des decisions, gestion des
@@ -154,9 +154,11 @@ Elle répond a : "qu'est-ce qu'on a livre exactement le [date] ?"
 
 ---
 
-## 5. Gestion des évolutions (Change Management)
+## 5. Gestion des évolutions (Change Management — interne ou client)
 
-Quand le client demande quelque chose de nouveau en cours de projet.
+Quand une évolution est demandée en cours de projet — par le client, ou par
+l'équipe technique quand l'implémentation révèle qu'une décision amont est
+erronée (voir `v-model-implementation`).
 
 **Processus :**
 
@@ -165,7 +167,7 @@ Quand le client demande quelque chose de nouveau en cours de projet.
 
 **CR-XXX — [date] :**
 **Demande :** [description de ce que le client veut]
-**Demandeur :** [client / partie prenante]
+**Demandeur :** [client / partie prenante / équipe technique]
 
 **Étape 2 :** Impact Assessment
 **Impact fonctionnel :** [documents du V a modifier]

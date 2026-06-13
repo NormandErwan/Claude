@@ -1,6 +1,6 @@
 ---
 name: v-model-tests
-version: 1.0.0
+version: 1.1.0
 description: >
   Skill pour la branche droite du modèle en V : tests unitaires, tests
   d'intégration, tests d'acceptance et tests de validation système. Utiliser
