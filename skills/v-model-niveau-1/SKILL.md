@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-1
-version: 1.1.0
+version: 1.2.0
 description: >
   Skill pour le Niveau 1 du modèle en V : Exigences système (System
   Requirements Document). Utiliser après validation de la phase amont,
@@ -67,6 +67,10 @@ parcourir ce tableau.
 
 ## 0. Audit de l'EBO
 
+Les parcours utilisateur produits en phase amont sont le fil conducteur de cet audit.
+Chaque étape d'un parcours devrait être couverte par au moins une exigence SYS-F.
+Un élément de parcours sans exigence correspondante = besoin non couvert.
+
 L'EBO exprime un besoin, mais peut contenir du vocabulaire de solution
 hérité de la phase amont. Avant de rédiger une seule exigence :
 
@@ -123,7 +127,8 @@ Tracer cet audit : chaque reformulation est une décision à consigner
 ```
 ### SYS-F-XXX : le système doit [verbe observable] [complément].
 
-**Origine :** [référence EBO]
+**Origine EBO :** [référence]
+**Parcours source :** [NOM-PARCOURS, étape N]
 **Vérifiable par :** [type de test imaginable]
 ```
 
@@ -202,14 +207,21 @@ Ce sur quoi le système repose mais que l'équipe ne controle pas.
 
 ---
 
-## 7. Matrice de traçabilité EBO → SYS
+## 7. Matrice de traçabilité EBO → Parcours → SYS
 
 Les origines en ligne dans chaque exigence ne prouvent pas la couverture.
 Produire une matrice consolidée, artefact obligatoire du SRD
 (docs/requirements/traceability.md).
 
-Format : un tableau à deux colonnes — élément EBO, exigence(s) SYS qui
-le couvrent.
+Format : un tableau à trois colonnes — élément EBO, parcours utilisateur, exigence(s) SYS :
+
+```markdown
+| Élément EBO | Parcours utilisateur | Exigence(s) SYS |
+|---|---|---|
+```
+
+Règle : un élément EBO sans parcours intermédiaire associé est un signal d'alerte
+(besoin non modélisé). Traitement : créer le parcours manquant ou justifier son absence.
 
 La matrice se lit dans les deux sens :
 - Élément EBO sans exigence en face : besoin non couvert. Compléter le SRD.
@@ -269,7 +281,9 @@ Ne pas démarrer le Niveau 2 si une case est vide.
 - [ ] Chaque exigence est unique, vérifiable, traçable, non ambiguë
 - [ ] Aucune exigence ne présuppose une solution technique
 - [ ] Tous les éléments de l'EBO sont couverts par au moins une exigence
-- [ ] La matrice EBO → SYS est complète et sans exigence orpheline non qualifiée
+- [ ] La matrice EBO → Parcours → SYS est complète et sans exigence orpheline non qualifiée
+- [ ] Chaque parcours utilisateur principal est couvert par au moins une SYS-F
+- [ ] La matrice EBO → Parcours → SYS est sans ligne vide dans la colonne parcours
 - [ ] Le périmètre exclu est documente
 - [ ] Les hypothèses sont listees avec leur risque si invalide
 - [ ] Le client a valide le SRD (il reconnait son besoin dans ces exigences)
