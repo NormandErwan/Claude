@@ -1,12 +1,12 @@
 ---
 name: v-model-phase-amont
-version: 1.1.0
+version: 1.2.0
 description: >
   Skill pour la phase amont d'un projet logiciel : capture du besoin
-  operationnel, etude de faisabilité, business case, charte de projet.
-  Utiliser avant tout travail technique, quand le client exprime un besoin,
-  quand on démarre un projet, ou quand on doit justifier l'existence du projet.
-  Prerequis obligatoire avant v-model-niveau-1.
+  operationnel, etude de faisabilité, business case, charte de projet,
+  parcours utilisateur. Utiliser avant tout travail technique, quand le client
+  exprime un besoin, quand on démarre un projet, ou quand on doit justifier
+  l'existence du projet. Prerequis obligatoire avant v-model-niveau-1.
 ---
 
 # Phase amont
@@ -162,6 +162,50 @@ les bonnes questions et accelere la conversation.
 
 ---
 
+## 5. Parcours utilisateur
+
+**Objectif :** modéliser qui fait quoi dans quel ordre avant d'écrire la première exigence.
+
+**Règle de couverture :** au moins un parcours par acteur primaire identifié dans l'EBO,
+au moins un parcours d'erreur par parcours principal.
+
+**Template :**
+
+```markdown
+# Parcours utilisateur : [NOM-PARCOURS]
+
+**Acteur :** [rôle exact tel que défini dans l'EBO]
+**Déclencheur :** [événement qui lance l'interaction]
+**Précondition :** [état du système avant le déclencheur]
+**Objectif opérationnel :** [ce que l'acteur cherche à accomplir]
+
+## Étapes — flux nominal
+
+| # | Action acteur | Réponse système | Résultat observable |
+|---|---|---|---|
+| 1 | | | |
+
+## Variantes
+
+| Variante | Étape de divergence | Comportement attendu |
+|---|---|---|
+| Erreur : [cas] | Étape N | |
+| Cas limite : [cas] | Étape N | |
+
+## Exigences SYS couvertes
+
+- [SYS-F-XXX] — à compléter lors de la rédaction du SRD
+```
+
+**Arborescence :**
+
+```
+docs/00-amont/
+  04-user-journeys.md   ← nouveau
+```
+
+---
+
 ## Porte de validation -- Phase amont
 
 Ne pas démarrer le Niveau 1 si une de ces cases est vide.
@@ -173,6 +217,9 @@ Ne pas démarrer le Niveau 1 si une de ces cases est vide.
 - [ ] La Charte est signee par le client ET le responsable technique
 - [ ] Le périmètre exclu est aussi clair que le périmètre inclus
 - [ ] Les hypothèses de planification sont documentees (pas implicites)
+- [ ] Au moins un parcours utilisateur documenté par acteur primaire de l'EBO
+- [ ] Chaque parcours a au moins une variante d'erreur
+- [ ] La colonne "Exigences SYS couvertes" sera complétée au Niveau 1
 ```
 
 ---
@@ -186,6 +233,9 @@ L'important : la decision de faire est tracée quelque part, même en une phrase
 **Ce qui ne peut pas être supprime :** la validation du périmètre par le client
 et la liste des hypothèses. Sans elles, le scope creep est garantie.
 
+Sur un petit projet, un tableau 3 colonnes (étape / action / résultat) suffit pour les
+parcours, mais le parcours lui-même ne peut pas être supprimé.
+
 ---
 
 ## Anti-patterns frequents
@@ -195,3 +245,6 @@ et la liste des hypothèses. Sans elles, le scope creep est garantie.
 - Hypothèses de planification implicites ("on suppose que...") non ecrites.
 - Charte non signee = projet sans mandat clair.
 - Passer au Niveau 1 avant que le client ait valide l'EBO.
+- Parcours ecrits après le SRD (ils ne servent alors plus à trouver les exigences manquantes).
+- Parcours uniquement happy path (les variantes d'erreur sont la source des exigences de robustesse).
+- Acteur générique "utilisateur" sans rôle défini (un parcours sans acteur nommé ne couvre rien).

@@ -1,6 +1,6 @@
 ---
 name: v-model-tests
-version: 1.1.0
+version: 1.2.0
 description: >
   Skill pour la branche droite du modèle en V : tests unitaires, tests
   d'intégration, tests d'acceptance et tests de validation système. Utiliser
@@ -198,6 +198,11 @@ qui revele les erreurs de comparaison (< vs <=).
 satisfait les exigences système.
 **Implique :** logiciel + materiel cible + interfaces reelles ou simulateurs haute fidelite.
 
+**Règle de dérivation depuis les parcours :**
+- Flux nominal d'un parcours → un scénario TVS principal (TC-SYS-F-XXX-NOM)
+- Chaque variante d'erreur d'un parcours → un scénario TVS alternatif (TC-SYS-F-XXX-ERR-N)
+- Un parcours sans scénario TVS = validation système incomplète
+
 ### Format de procedure de validation système
 
 ```
@@ -214,7 +219,8 @@ satisfait les exigences système.
 
 ## Scénario
 
-- [Description du scenario operationnel teste]
+- [Parcours source : NOM-PARCOURS, flux : nominal / variante N]
+- [Description du scenario operationnel joué]
 
 ## Étapes
 
@@ -229,6 +235,30 @@ satisfait les exigences système.
 ## Critère d'échec
 
 - [Seuil de rejet]
+```
+
+### Template de generation de procedures TVS
+
+```
+**Contexte :**
+
+**SRD valide :** [exigences concernées SYS-F-XXX]
+**Parcours utilisateur :** [liste des parcours documentés en phase amont]
+
+## Tâche
+
+- Générer les procédures de validation système pour [liste d'exigences].
+
+## Contraintes
+
+- Chaque parcours utilisateur documenté en phase amont a au moins un scénario TVS associé
+- Les variantes d'erreur des parcours génèrent des scénarios TVS distincts
+- Environnement de test spécifié (matériel cible ou simulateur haute fidélité)
+- Critère de succes mesurable et non ambigu
+
+## Format
+
+- Une procédure complète par scénario, format standardisé ci-dessus
 ```
 
 ### Points spécifiques a la validation système
@@ -282,6 +312,7 @@ Avant livraison :
 - [ ] Tous les ADRs ont au moins un test d'intégration associé
 - [ ] Toutes les procedures d'acceptance sont exécutées et les résultats documentes
 - [ ] Toutes les procedures de validation système sont executees
+- [ ] Chaque parcours utilisateur (flux nominal + variantes) a au moins un scénario TVS associé
 - [ ] La matrice de traçabilité est complete (aucune exigence sans test)
 - [ ] Les proces-verbaux de recette sont signes (si requis contractuellement)
 ```

@@ -35,6 +35,13 @@ BEFORE any response or action — **always**:
 - After drafting a plan: internally check assumptions, alternatives, expert challenges.
 - Output the critical analysis and revised response only — not the draft.
 
+## Versionnage des skills v-model
+
+La suite v-model est versionnée en bloc : tous les skills `v-model-*` portent
+toujours le même numéro de version. Quand un skill est modifié, bumper tous les
+autres au même niveau avant de commiter. Mettre à jour CHANGELOG.md avec une
+entrée pour la nouvelle version.
+
 ## Code / Docs / Commits / PRs
 
 - Concise style.
