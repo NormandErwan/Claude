@@ -1,5 +1,9 @@
 # Changelog -- suite v-model
 
+## [1.2.0] -- 2026-06-14
+
+Parcours utilisateur : v-model-phase-amont gagne §5 (template, arborescence, gate, anti-patterns, minimum viable) ; v-model-niveau-1 fait de l'audit EBO un exercice parcours-first, ajoute le champ Parcours source dans §2 et reformate §7 en matrice EBO→Parcours→SYS ; v-model-tests §4 gagne la règle de dérivation depuis les parcours, un champ Parcours source dans le Scénario TVS et un template de génération TVS. Règle de versionnage introduite : tous les skills v-model évoluent ensemble.
+
 ## [1.1.0] -- 2026-06-13
 
 Patchs Q3 -- remontee multi-niveaux : v-model-implementation gagne une section 'Si le defaut remet en cause un niveau superieur' declenchant un CR interne ; v-model-gestion §5 s'ouvre au declencheur interne (Demandeur = equipe technique) et renvoie vers v-model-implementation. Regle : corriger du haut vers le bas.
