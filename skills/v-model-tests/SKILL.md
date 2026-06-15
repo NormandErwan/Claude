@@ -1,13 +1,13 @@
 ---
 name: v-model-tests
-version: 1.2.0
+version: 1.2.1
 description: >
   Skill pour la branche droite du modèle en V : tests unitaires, tests
   d'intégration, tests d'acceptance et tests de validation système. Utiliser
-  quand on doit ecrire des tests de n'importe quel niveau, générer des
-  procedures de test, ou maintenir la matrice de traçabilité tests/exigences.
+  quand on doit écrire des tests de n'importe quel niveau, générer des
+  procédures de test, ou maintenir la matrice de traçabilité tests/exigences.
   Chaque niveau de test est le miroir d'un niveau de spécification et se
-  prepare en même temps que ce niveau, pas après l'implémentation.
+  prépare en même temps que ce niveau, pas après l'implémentation.
 ---
 
 # Tests : branche droite du V
@@ -15,12 +15,12 @@ description: >
 ## Principe fondamental
 
 **Tester n'est pas trouver des bugs.**
-Tester, c'est vérifier qu'une decision prise a gauche du V est respectee a droite.
+Tester, c'est vérifier qu'une décision prise à gauche du V est respectée à droite.
 
 - Un test sans exigence tracée n'a pas de raison d'être.
 - Une exigence sans test est non vérifiable -- donc inutile.
-- Les cas de test s'ecrivent depuis les critères d'acceptance, pas depuis le code.
-- Chaque niveau de test se prepare **en même temps** que son niveau miroir.
+- Les cas de test s'écrivent depuis les critères d'acceptance, pas depuis le code.
+- Chaque niveau de test se prépare **en même temps** que son niveau miroir.
 
 ---
 
@@ -38,8 +38,8 @@ Tester, c'est vérifier qu'une decision prise a gauche du V est respectee a droi
 
 ## 1. Tests unitaires (miroir du LLD)
 
-**Verifient :** chaque composant fait ce que sa spécification détaillée stipule.
-**Isolement :** toutes les dependances sont remplacees par des substituts (mocks/stubs).
+**Vérifient :** chaque composant fait ce que sa spécification détaillée stipule.
+**Isolement :** toutes les dépendances sont remplacées par des substituts (mocks/stubs).
 
 ### Template de generation de tests unitaires
 
@@ -51,16 +51,16 @@ Tester, c'est vérifier qu'une decision prise a gauche du V est respectee a droi
 
 ## Tâche
 
-- Generer les tests unitaires pour [NomComposant].
+- Générer les tests unitaires pour [NomComposant].
 
 ## Contraintes
 
-- Un test positif et un test négatif pour chaque règle metier du LLD
-- Couvrir les cas limites identifies dans le LLD
+- Un test positif et un test négatif pour chaque règle métier du LLD
+- Couvrir les cas limites identifiés dans le LLD
 - Couvrir chaque transition de la machine d'états si applicable
-- Nommage : [Methode]_[Condition]_[ResultatAttendu]
+- Nommage : [Méthode]_[Condition]_[RésultatAttendu]
 - Chaque test référence son exigence source en commentaire
-- Les dependances sont toutes mockees (aucune vraie BDD, aucun vrai reseau)
+- Les dépendances sont toutes mockées (aucune vraie BDD, aucun vrai réseau)
 
 ## Format
 
@@ -72,26 +72,26 @@ Tester, c'est vérifier qu'une decision prise a gauche du V est respectee a droi
 La couverture de code (code coverage) est un indicateur insuffisant seul.
 Ce qui compte : chaque règle metier du LLD a au moins un test positif et un négatif.
 
-**Questions a poser pour chaque règle LLD :**
-- Qu'est-ce qui se passe quand la precondition est satisfaite ?
+**Questions à poser pour chaque règle LLD :**
+- Qu'est-ce qui se passe quand la précondition est satisfaite ?
 - Qu'est-ce qui se passe quand elle ne l'est pas ?
-- Qu'est-ce qui se passe a la limite exacte (cas frontiere) ?
+- Qu'est-ce qui se passe à la limite exacte (cas frontière) ?
 
-**Règle obligatoire pour toute règle a seuil numérique : 3 cas minimum.**
+**Règle obligatoire pour toute règle à seuil numérique : 3 cas minimum.**
 ```
 Cas 1 : valeur strictement inférieure au seuil  -> comportement nominal
-Cas 2 : valeur exactement egale au seuil        -> cas frontiere (souvent le plus revealateur)
+Cas 2 : valeur exactement égale au seuil        -> cas frontière (souvent le plus révélateur)
 Cas 3 : valeur strictement supérieure au seuil  -> comportement de rejet
 ```
 Le cas 2 est celui que les développeurs oublient le plus souvent et
-qui revele les erreurs de comparaison (< vs <=).
+qui révèle les erreurs de comparaison (< vs <=).
 
 ---
 
 ## 2. Tests d'intégration (miroir du HLD)
 
-**Verifient :** les composants communiquent comme l'architecture le specifie.
-**Pas de mock des dependances internes.** Implémentations reelles.
+**Vérifient :** les composants communiquent comme l'architecture le spécifie.
+**Pas de mock des dépendances internes.** Implémentations réelles.
 
 ### Template de generation de tests d'intégration
 
@@ -104,34 +104,34 @@ qui revele les erreurs de comparaison (< vs <=).
 
 ## Tâche
 
-- Generer les tests d'intégration pour [interaction entre composants].
+- Générer les tests d'intégration pour [interaction entre composants].
 
 ## Contraintes
 
-- Utiliser les implémentations reelles (pas de mocks internes)
-- Seules les dependances externes sont simulees (reseau, BDD de production)
-- Couvrir les scenarios de panne (perte de liaison, erreur de persistance)
-- Couvrir les comportements specifies dans les ADRs pertinents
+- Utiliser les implémentations réelles (pas de mocks internes)
+- Seules les dépendances externes sont simulées (réseau, BDD de production)
+- Couvrir les scénarios de panne (perte de liaison, erreur de persistance)
+- Couvrir les comportements spécifiés dans les ADRs pertinents
 - Chaque test référence son ADR ou exigence source
 
 ## Format
 
-- Un test par comportement d'intégration specifie dans le HLD
+- Un test par comportement d'intégration spécifié dans le HLD
 ```
 
-### Scenarios prioritaires
+### Scénarios prioritaires
 
 - Flux de données nominal entre composants.
 - Propagation des erreurs (un composant en erreur impacte-t-il correctement les autres ?).
 - Comportements lors des transitions d'état (machine d'états inter-composants).
-- Garanties de persistance (integrite en cas de coupure).
+- Garanties de persistance (intégrité en cas de coupure).
 
 ---
 
 ## 3. Tests d'acceptance (miroir du SRS)
 
-**Verifient :** le logiciel satisfait ses exigences du point de vue de l'utilisateur.
-**En defense :** souvent formels, avec proces-verbal signe.
+**Vérifient :** le logiciel satisfait ses exigences du point de vue de l'utilisateur.
+**En défense :** souvent formels, avec procès-verbal signé.
 
 ### Format de procedure de test acceptance
 
@@ -154,17 +154,17 @@ qui revele les erreurs de comparaison (< vs <=).
 - 2. [Action précise]
 - ...
 
-## Critère de succes
+## Critère de succès
 
 - [Condition observable et mesurable]
 
 ## Critère d'échec
 
-- [Ce qui constitue un échec -- aussi précis que le succes]
+- [Ce qui constitue un échec -- aussi précis que le succès]
 
-## Materiel spécifique
+## Matériel spécifique
 
-- [Si applicable : banc de simulation, equipement de mesure, etc.]
+- [Si applicable : banc de simulation, équipement de mesure, etc.]
 ```
 
 ### Template de generation de procedures d'acceptance
@@ -176,14 +176,14 @@ qui revele les erreurs de comparaison (< vs <=).
 
 ## Tâche
 
-- Rediger les procedures de test acceptance pour [liste d'exigences].
+- Rédiger les procédures de test acceptance pour [liste d'exigences].
 
 ## Contraintes
 
-- Methode de verification selon SW-V-XXX pour chaque exigence
-- Critère de succes numérique et non ambigu
-- Preconditions completement specifiees
-- Étapes executables par un technicien sans interpretation
+- Méthode de vérification selon SW-V-XXX pour chaque exigence
+- Critère de succès numérique et non ambigu
+- Préconditions complètement spécifiées
+- Étapes exécutables par un technicien sans interprétation
 
 ## Format
 
@@ -194,9 +194,9 @@ qui revele les erreurs de comparaison (< vs <=).
 
 ## 4. Tests de validation système (miroir du SRD)
 
-**Verifient :** le système complet, dans son environnement reel (ou proche),
+**Vérifient :** le système complet, dans son environnement réel (ou proche),
 satisfait les exigences système.
-**Implique :** logiciel + materiel cible + interfaces reelles ou simulateurs haute fidelite.
+**Implique :** logiciel + matériel cible + interfaces réelles ou simulateurs haute fidélité.
 
 **Règle de dérivation depuis les parcours :**
 - Flux nominal d'un parcours → un scénario TVS principal (TC-SYS-F-XXX-NOM)
@@ -210,17 +210,17 @@ satisfait les exigences système.
 
 **Exigence source :** SYS-F-XXX
 **Méthode :** [test / analyse / inspection / démonstration]
-**Environnement :** [materiel et configuration requis]
+**Environnement :** [matériel et configuration requis]
 
 ## Préconditions
 
-- [Configuration système complete requise]
-- [Simulateurs ou equipements nécessaires]
+- [Configuration système complète requise]
+- [Simulateurs ou équipements nécessaires]
 
 ## Scénario
 
 - [Parcours source : NOM-PARCOURS, flux : nominal / variante N]
-- [Description du scenario operationnel joué]
+- [Description du scénario opérationnel joué]
 
 ## Étapes
 
@@ -228,9 +228,9 @@ satisfait les exigences système.
 - 2. [Mesure]
 - ...
 
-## Critère de succes
+## Critère de succès
 
-- [Mesure précise sur N repetitions si applicable]
+- [Mesure précise sur N répétitions si applicable]
 
 ## Critère d'échec
 
@@ -254,34 +254,34 @@ satisfait les exigences système.
 - Chaque parcours utilisateur documenté en phase amont a au moins un scénario TVS associé
 - Les variantes d'erreur des parcours génèrent des scénarios TVS distincts
 - Environnement de test spécifié (matériel cible ou simulateur haute fidélité)
-- Critère de succes mesurable et non ambigu
+- Critère de succès mesurable et non ambigu
 
 ## Format
 
 - Une procédure complète par scénario, format standardisé ci-dessus
 ```
 
-### Points spécifiques a la validation système
+### Points spécifiques à la validation système
 
-- Tester dans les conditions operationnelles reelles si possible.
-- Inclure des utilisateurs reels (pas uniquement des ingenieurs).
-- Tester les scenarios de panne et de mode degrade.
-- Documenter les deviations entre conditions de test et conditions operationnelles.
+- Tester dans les conditions opérationnelles réelles si possible.
+- Inclure des utilisateurs réels (pas uniquement des ingénieurs).
+- Tester les scénarios de panne et de mode dégradé.
+- Documenter les déviations entre conditions de test et conditions opérationnelles.
 
 ---
 
 ## 5. Matrice de traçabilité tests / exigences
 
-A maintenir dans `docs/tests/traceability.md`. Mise a jour après chaque sprint.
+À maintenir dans `docs/tests/traceability.md`. Mise à jour après chaque sprint.
 
 **Format :**
 
 | Identifiant test | Type | Exigence source | Niveau | Statut |
 |---|---|---|---|---|
-| [nom du test] | Unitaire | SW-F-XXX | Niveau 4 | Passe / Échec / A exécuter |
-| TC-SW-F-XXX | Acceptance | SW-F-XXX | Niveau 2 | A exécuter |
+| [nom du test] | Unitaire | SW-F-XXX | Niveau 4 | Passe / Échec / À exécuter |
+| TC-SW-F-XXX | Acceptance | SW-F-XXX | Niveau 2 | À exécuter |
 
-**Requetes de controle regulier :**
+**Requêtes de contrôle régulier :**
 
 ```
 # Tâche
@@ -307,24 +307,24 @@ Avant livraison :
 
 ```
 - [ ] Tous les tests unitaires passent
-- [ ] Toutes les règles metier du LLD ont au moins un test positif et négatif
+- [ ] Toutes les règles métier du LLD ont au moins un test positif et négatif
 - [ ] Tous les tests d'intégration passent
 - [ ] Tous les ADRs ont au moins un test d'intégration associé
-- [ ] Toutes les procedures d'acceptance sont exécutées et les résultats documentes
-- [ ] Toutes les procedures de validation système sont executees
+- [ ] Toutes les procédures d'acceptance sont exécutées et les résultats documentés
+- [ ] Toutes les procédures de validation système sont exécutées
 - [ ] Chaque parcours utilisateur (flux nominal + variantes) a au moins un scénario TVS associé
-- [ ] La matrice de traçabilité est complete (aucune exigence sans test)
-- [ ] Les proces-verbaux de recette sont signes (si requis contractuellement)
+- [ ] La matrice de traçabilité est complète (aucune exigence sans test)
+- [ ] Les procès-verbaux de recette sont signés (si requis contractuellement)
 ```
 
 ---
 
-## Anti-patterns frequents
+## Anti-patterns fréquents
 
-- Tests ecrits en lisant le code (testent ce que le code fait, pas ce qu'il devrait faire).
-- Tests sans assertion (ils passent toujours, ne verifient rien).
-- Tests qui dependent les uns des autres (ordre d'execution cache).
-- Procedures d'acceptance sans critère de succes numérique.
-- Matrice de traçabilité reconstituee en fin de projet.
-- Tests unitaires avec de vraies dependances (reseau, BDD) -- ce sont des tests d'intégration.
-- "On testera quand ce sera fini" -- les tests se preparent en même temps que les specs.
+- Tests écrits en lisant le code (testent ce que le code fait, pas ce qu'il devrait faire).
+- Tests sans assertion (ils passent toujours, ne vérifient rien).
+- Tests qui dépendent les uns des autres (ordre d'exécution caché).
+- Procédures d'acceptance sans critère de succès numérique.
+- Matrice de traçabilité reconstituée en fin de projet.
+- Tests unitaires avec de vraies dépendances (réseau, BDD) -- ce sont des tests d'intégration.
+- "On testera quand ce sera fini" -- les tests se préparent en même temps que les specs.

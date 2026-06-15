@@ -1,12 +1,12 @@
 ---
 name: v-model-niveau-1
-version: 1.2.0
+version: 1.2.1
 description: >
   Skill pour le Niveau 1 du modèle en V : Exigences système (System
   Requirements Document). Utiliser après validation de la phase amont,
   pour transformer le besoin client en exigences vérifiables et traçables.
   Déclencher quand on doit rédiger ou valider un SRD, des exigences système,
-  ou un cahier des charges système. Prerequis : v-model-phase-amont valide.
+  ou un cahier des charges système. Prérequis : v-model-phase-amont valide.
   Skill suivant : v-model-niveau-2.
 ---
 
@@ -14,9 +14,9 @@ description: >
 
 ## Contexte
 
-**Répond a :** que doit faire le système complet, et dans quel contexte ?
-**Agnostique a la solution :** ne presuppose pas logiciel, materiel, ou procedure.
-**Input :** EBO valide + Charte signee.
+**Répond à :** que doit faire le système complet, et dans quel contexte ?
+**Agnostique à la solution :** ne présuppose pas logiciel, matériel, ou procédure.
+**Input :** EBO valide + Charte signée.
 **Output :** System Requirements Document (SRD).
 **Skill suivant :** `v-model-niveau-2`.
 
@@ -26,20 +26,20 @@ description: >
 
 | Role | Responsabilité |
 |---|---|
-| Analyste / Responsable produit | Redige le SRD |
-| Representant client | Valide chaque exigence |
-| Responsable technique | Verifie la vérifiabilité et l'absence de solutions presupposees |
-| Autorite d'homologation (si applicable) | Valide les exigences reglementaires |
+| Analyste / Responsable produit | Rédige le SRD |
+| Représentant client | Valide chaque exigence |
+| Responsable technique | Vérifie la vérifiabilité et l'absence de solutions présupposées |
+| Autorité d'homologation (si applicable) | Valide les exigences réglementaires |
 
 ---
 
 ## Critères de qualité d'une exigence
 
 Chaque exigence doit être :
-- **Unique** : une seule idee par exigence.
+- **Unique** : une seule idée par exigence.
 - **Vérifiable** : un test est imaginable.
 - **Traçable** : elle pointe vers un élément de l'EBO.
-- **Non ambiguë** : une seule interpretation possible.
+- **Non ambiguë** : une seule interprétation possible.
 - **Agnostique** : elle ne dit pas "comment", seulement "quoi".
 
 Format d'identifiant : `SYS-F-001` (fonctionnel), `SYS-NF-001` (non-fonctionnel),
@@ -118,10 +118,10 @@ Tracer cet audit : chaque reformulation est une décision à consigner
 
 ## 2. Exigences fonctionnelles système
 
-**Questions a se poser pour chaque besoin de l'EBO :**
-- Qu'est-ce que le système doit permettre a l'operateur de faire ?
-- Dans quelles conditions cette action est-elle declenchee ?
-- Quelle est la consequence observable attendue ?
+**Questions à se poser pour chaque besoin de l'EBO :**
+- Qu'est-ce que le système doit permettre à l'opérateur de faire ?
+- Dans quelles conditions cette action est-elle déclenchée ?
+- Quelle est la conséquence observable attendue ?
 
 **Template par exigence :**
 ```
@@ -152,15 +152,15 @@ pas une fonction particuliere.
 
 **Categories a couvrir :**
 
-| Categorie | Question a poser |
+| Catégorie | Question à poser |
 |---|---|
 | Performance | Sous quelle charge, en combien de temps ? |
-| Disponibilité | Quel uptime ? Quel temps de redemarrage acceptable ? |
+| Disponibilité | Quel uptime ? Quel temps de redémarrage acceptable ? |
 | Fiabilité | Quel taux d'erreur acceptable ? |
 | Sécurité | Quel niveau de protection des données ? |
-| Maintenabilité | Qui maintient, avec quelle facilite ? |
+| Maintenabilité | Qui maintient, avec quelle facilité ? |
 | Utilisabilité | Qui utilise, avec quelle formation ? |
-| Portabilite | Sur quels environnements ? |
+| Portabilité | Sur quels environnements ? |
 
 **A ce niveau, les seuils sont indicatifs.** Ils seront quantifies au Niveau 2.
 
@@ -183,8 +183,8 @@ interfaces de données.
 
 ## 5. Contraintes système
 
-Ce qui reduit l'espace des solutions sans être un besoin fonctionnel.
-Elles viennent de l'extérieur de l'équipe (reglements, contrats, stack imposee).
+Ce qui réduit l'espace des solutions sans être un besoin fonctionnel.
+Elles viennent de l'extérieur de l'équipe (règlements, contrats, stack imposée).
 
 ```
 # # SYS-C-XXX
@@ -259,8 +259,8 @@ Avant d'ajouter une exigence au SRD, vérifier :
 **Contexte :** SRD complet, EBO valide
 
 **Tâche :** Auditer le SRD
-**Contraintes :** Verifier pour chaque exigence les 4 critères (unique,
-  vérifiable, traçable, non ambiguë). Verifier que toutes les sections
+**Contraintes :** Vérifier pour chaque exigence les 4 critères (unique,
+  vérifiable, traçable, non ambiguë). Vérifier que toutes les sections
   de l'EBO sont couvertes. Signaler les exigences qui glissent vers le "comment".
 
 ## Format
@@ -284,10 +284,10 @@ Ne pas démarrer le Niveau 2 si une case est vide.
 - [ ] La matrice EBO → Parcours → SYS est complète et sans exigence orpheline non qualifiée
 - [ ] Chaque parcours utilisateur principal est couvert par au moins une SYS-F
 - [ ] La matrice EBO → Parcours → SYS est sans ligne vide dans la colonne parcours
-- [ ] Le périmètre exclu est documente
-- [ ] Les hypothèses sont listees avec leur risque si invalide
-- [ ] Le client a valide le SRD (il reconnait son besoin dans ces exigences)
-- [ ] L'autorite de validation (homologation) a valide les exigences reglementaires
+- [ ] Le périmètre exclu est documenté
+- [ ] Les hypothèses sont listées avec leur risque si invalide
+- [ ] Le client a validé le SRD (il reconnaît son besoin dans ces exigences)
+- [ ] L'autorité de validation (homologation) a validé les exigences réglementaires
 - [ ] La revue critique de premier brouillon a été effectuée (voir v-model-guide)
 ```
 
@@ -304,12 +304,12 @@ même dans un document unique -- la traçabilité reste obligatoire.
 
 ---
 
-## Anti-patterns frequents
+## Anti-patterns fréquents
 
-- Exigences ecrites par l'équipe technique sans validation client.
+- Exigences écrites par l'équipe technique sans validation client.
 - NFRs sans seuil ("le système doit être rapide").
 - Exigences qui mentionnent une technologie ("le système doit utiliser REST").
-- Exigences non traçables vers l'EBO (features inventes par l'équipe).
-- Hypothèses implicites non documentees.
-- SRD considéré "fige" -- il doit pouvoir être mis à jour via le processus
+- Exigences non traçables vers l'EBO (features inventées par l'équipe).
+- Hypothèses implicites non documentées.
+- SRD considéré "figé" -- il doit pouvoir être mis à jour via le processus
   de gestion des évolutions (`v-model-gestion`).

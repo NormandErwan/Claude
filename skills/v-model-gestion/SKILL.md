@@ -1,6 +1,6 @@
 ---
 name: v-model-gestion
-version: 1.2.0
+version: 1.2.1
 description: >
   Skill pour les artefacts de gestion de projet dans le modèle V : plan de
   projet, registre des risques, registre des decisions, gestion des
@@ -33,8 +33,8 @@ Ces documents existent en parallele du V -- ils ne sont pas dans le V, ils l'ent
 
 ## 1. Plan de projet
 
-**Objectif :** contrat interne de l'équipe. Etabli en debut de projet,
-mis à jour a chaque jalon significatif.
+**Objectif :** contrat interne de l'équipe. Établi en début de projet,
+mis à jour à chaque jalon significatif.
 
 **Template :**
 ```
@@ -59,13 +59,13 @@ mis à jour a chaque jalon significatif.
 ```
 
 **Règle :** si le plan suppose quelque chose sur l'environnement extérieur,
-c'est une hypothèse de planification -- elle doit être documentee.
+c'est une hypothèse de planification -- elle doit être documentée.
 
 ---
 
 ## 2. Registre des risques
 
-**Objectif :** liste vivante des risques identifies. Mise a jour a chaque revue.
+**Objectif :** liste vivante des risques identifiés. Mise à jour à chaque revue.
 
 **Format par risque :**
 
@@ -73,18 +73,18 @@ c'est une hypothèse de planification -- elle doit être documentee.
 |---|---|
 | Identifiant | RSK-XXX |
 | Description | [Quoi pourrait mal se passer, et comment] |
-| Probabilité | Faible / Moyenne / Elevee |
-| Impact | Faible / Moyen / Eleve -- [consequence concrete] |
+| Probabilité | Faible / Moyenne / Élevée |
+| Impact | Faible / Moyen / Élevé -- [conséquence concrète] |
 | Strategie | Mitigation / Contingence / Acceptation / Transfert |
 | Action | [Ce qu'on fait concretement] |
 | Proprietaire | [Qui surveille ce risque] |
 | Statut | Ouvert / Surveille / Clos |
 
-**Strategies :**
-- **Mitigation :** reduire la probabilité (ex. : prototype technique avant le design).
-- **Contingence :** plan B si le risque se materialise.
-- **Acceptation :** on assume -- decision documentee, pas ignoree.
-- **Transfert :** rendre le risque contractuel (assurance, clause penale).
+**Stratégies :**
+- **Mitigation :** réduire la probabilité (ex. : prototype technique avant le design).
+- **Contingence :** plan B si le risque se matérialise.
+- **Acceptation :** on assume -- décision documentée, pas ignorée.
+- **Transfert :** rendre le risque contractuel (assurance, clause pénale).
 
 **Template de détection de risques :**
 ```
@@ -94,10 +94,10 @@ c'est une hypothèse de planification -- elle doit être documentee.
 
 ## Contraintes
 
-- Risques techniques (hypothèses non confirmees, dependances externes)
+- Risques techniques (hypothèses non confirmées, dépendances externes)
 - Risques planning (livraisons tierces, disponibilité des parties prenantes)
-- Risques metier (évolution du besoin, contraintes reglementaires)
-- Risques équipe (competences, disponibilité)
+- Risques métier (évolution du besoin, contraintes réglementaires)
+- Risques équipe (compétences, disponibilité)
 
 ## Format
 
@@ -115,11 +115,11 @@ périmètre, budget, organisation, arbitrages client.
 ```
 # DCL-XXX — [date]
 
-**Décision :** [ce qui a été decide]
+**Décision :** [ce qui a été décidé]
 **Contexte :** [pourquoi cette décision était nécessaire]
 **Parties prenantes :** [qui a décidé]
 **Conséquences :** [impact sur le périmètre / planning / budget]
-**Référence :** [CR-XXX si lié a une demande d'évolution]
+**Référence :** [CR-XXX si lié à une demande d'évolution]
 ```
 
 **Règle :** toute decision qui modifie le périmètre, le budget ou le planning
@@ -129,14 +129,14 @@ doit avoir une entree dans ce registre. Même les petites.
 
 ## 4. Gestion des configurations
 
-**Objectif :** garantir qu'on sait exactement ce qui a été livre a quelle date.
+**Objectif :** garantir qu'on sait exactement ce qui a été livré à quelle date.
 
 **Éléments sous configuration :**
 - Code source (versionne avec tags).
 - Documents du V (SRD, SRS, HLD, LLD, procedures de test).
 - Fichiers de parametres et de configuration.
 
-**Baseline :** photo du système a un instant donne (typiquement a chaque jalon).
+**Baseline :** photo du système à un instant donné (typiquement à chaque jalon).
 Elle répond a : "qu'est-ce qu'on a livre exactement le [date] ?"
 
 **Politique de baseline :**
@@ -171,21 +171,21 @@ erronée (voir `v-model-implementation`).
 
 **Étape 2 :** Impact Assessment
 **Impact fonctionnel :** [documents du V a modifier]
-**Impact planning :** [nombre de jours de charge supplementaire]
+**Impact planning :** [nombre de jours de charge supplémentaire]
 **Impact budget :** [cout additionnel]
 **Documents impactes :** [SRD / SRS / HLD / LLD / tests]
 
-**Étape 3 :** Decision
-- Accepte / Refuse / Differe -- [justification]
-**Si accepte :** [mise à jour du plan et des documents]
-**Valide par :** [selon politique de délégation ci-dessous]
+**Étape 3 :** Décision
+- Accepté / Refusé / Différé -- [justification]
+**Si accepté :** [mise à jour du plan et des documents]
+**Validé par :** [selon politique de délégation ci-dessous]
 
-POLITIQUE DE DÉLÉGATION (a definir en debut de projet et documenter dans la Charte) :
+POLITIQUE DE DÉLÉGATION (à définir en début de projet et documenter dans la Charte) :
 - < 1 jour-homme, dans l'enveloppe budget -> Responsable technique seul
-- 1 a 5 jours-homme                       -> Responsable technique + confirmation client
+- 1 à 5 jours-homme                       -> Responsable technique + confirmation client
 - > 5 jours-homme ou hors enveloppe       -> Client + direction, par avenant contractuel
 
-**Étape 4 :** Mise a jour
+**Étape 4 :** Mise à jour
 **Documents modifies :** [liste]
 **Baseline mise à jour :** [version]
 **Registre des decisions :** DCL-XXX
@@ -198,7 +198,7 @@ Chaque petite demande non tracée s'accumule silencieusement.
 
 ## 6. Tableau de bord et rapport d'avancement
 
-**Frequence :** hebdomadaire ou par sprint.
+**Fréquence :** hebdomadaire ou par sprint.
 
 **Template :**
 ```
@@ -208,7 +208,7 @@ Chaque petite demande non tracée s'accumule silencieusement.
 ## Avancement
 
 **Jalons complétés :** [liste]
-**Jalons en retard :** [liste + cause + nouveau delai prévu]
+**Jalons en retard :** [liste + cause + nouveau délai prévu]
 **Avancement global :** [X% complete selon plan]
 
 ## Risques actifs
@@ -221,8 +221,8 @@ Chaque petite demande non tracée s'accumule silencieusement.
 
 ## Prevision a fin de projet
 
-**Delai :** [a jour / retard de N semaines / avance]
-**Budget :** [à budget / depassement de N%]
+**Délai :** [à jour / retard de N semaines / avance]
+**Budget :** [à budget / dépassement de N %]
 ```
 
 **Signal d'alarme :** un tableau de bord toujours vert jusqu'au jour ou tout
@@ -235,15 +235,15 @@ Les problèmes doivent remonter tot, pas être caches.
 
 | Jalon | Après | Ce qu'on verifie |
 |---|---|---|
-| SRR (System Requirements Review) | Niveau 1 | Exigences système completes et coherentes |
+| SRR (System Requirements Review) | Niveau 1 | Exigences système complètes et cohérentes |
 | SFR (Software Functional Review) | Niveau 2 | Exigences logiciel couvrent les exigences système |
-| PDR (Preliminary Design Review) | Niveau 3 | Architecture satisfait les exigences, risques maitrises |
+| PDR (Preliminary Design Review) | Niveau 3 | Architecture satisfait les exigences, risques maîtrisés |
 | CDR (Critical Design Review) | Niveau 4 | Conception suffisante pour démarrer l'implémentation |
-| TRR (Test Readiness Review) | Avant tests | Environnement pret, procedures ecrites |
-| FAT (Factory Acceptance Test) | Après tests | Système satisfait les exigences -- livraison autorisee |
+| TRR (Test Readiness Review) | Avant tests | Environnement prêt, procédures écrites |
+| FAT (Factory Acceptance Test) | Après tests | Système satisfait les exigences -- livraison autorisée |
 
-**En contexte defense :** ces jalons sont souvent contractuels et donnent lieu
-a des revues formelles avec le client, avec un compte-rendu signe.
+**En contexte défense :** ces jalons sont souvent contractuels et donnent lieu
+à des revues formelles avec le client, avec un compte-rendu signé.
 
 ---
 
@@ -257,20 +257,20 @@ a des revues formelles avec le client, avec un compte-rendu signe.
 ## Contraintes
 
 - Lister les livrables attendus a ce jalon
-- Verifier la porte de validation du niveau correspondant
-- Identifier les points ouverts (risques, decisions en attente, écarts)
-- Preparer les questions que le client posera probablement
+- Vérifier la porte de validation du niveau correspondant
+- Identifier les points ouverts (risques, décisions en attente, écarts)
+- Préparer les questions que le client posera probablement
 
 ## Format
 
 **Livrables disponibles :** [liste avec statut]
 **Points ouverts :** [liste avec responsable et echeance]
-**Questions anticipees :** [liste avec reponses preparees]
+**Questions anticipées :** [liste avec réponses préparées]
 ```
 
 ---
 
-## Anti-patterns frequents
+## Anti-patterns fréquents
 
 - Registre des risques créé en début de projet et jamais mis à jour.
 - Decisions orales non tracées dans le registre -- impossible a retrouver 3 mois après.

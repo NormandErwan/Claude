@@ -1,12 +1,12 @@
 ---
 name: v-model-niveau-2
-version: 1.2.0
+version: 1.2.1
 description: >
   Skill pour le Niveau 2 du modèle en V : Exigences logiciel (Software
   Requirements Spécification). Utiliser après validation du SRD pour allouer
   les exigences système au logiciel et les raffiner en spécifications
-  vérifiables. Déclencher quand on redige un SRS, une STB, ou qu'on definit
-  ce que le logiciel doit faire. Prerequis : v-model-niveau-1 valide.
+  vérifiables. Déclencher quand on rédige un SRS, une STB, ou qu'on définit
+  ce que le logiciel doit faire. Prérequis : v-model-niveau-1 valide.
   Skill suivant : v-model-niveau-3.
 ---
 
@@ -14,8 +14,8 @@ description: >
 
 ## Contexte
 
-**Répond a :** qu'est-ce que le logiciel prend en charge parmi toutes les exigences système ?
-**Premier niveau ou l'équipe de developpement est l'audience principale.**
+**Répond à :** qu'est-ce que le logiciel prend en charge parmi toutes les exigences système ?
+**Premier niveau où l'équipe de développement est l'audience principale.**
 **Input :** SRD valide.
 **Output :** Software Requirements Spécification (SRS).
 **Skill suivant :** `v-model-niveau-3`.
@@ -26,10 +26,10 @@ description: >
 
 | Role | Responsabilité |
 |---|---|
-| Analyste / Responsable produit | Redige le SRS |
+| Analyste / Responsable produit | Rédige le SRS |
 | Responsable technique | Valide la faisabilité technique de chaque exigence |
-| Representant client | Valide les critères d'acceptance |
-| Expert sécurité (si applicable) | Valide les exigences de surete et sécurité |
+| Représentant client | Valide les critères d'acceptance |
+| Expert sécurité (si applicable) | Valide les exigences de sûreté et sécurité |
 
 ---
 
@@ -51,13 +51,13 @@ Une exigence logiciel sans parent système est du hors-périmètre.
 
 ## 2. Exigences fonctionnelles logiciel
 
-Les exigences système allouees au logiciel, reformulees avec suffisamment
-de precision pour être implementables et testables.
+Les exigences système allouées au logiciel, reformulées avec suffisamment
+de précision pour être implémentables et testables.
 
-**Questions a se poser :**
+**Questions à se poser :**
 - Quel comportement observable le logiciel produit-il ?
-- Dans quelle sequence, dans quel état ?
-- Quelles règles metier s'appliquent ?
+- Dans quelle séquence, dans quel état ?
+- Quelles règles métier s'appliquent ?
 
 **Template par exigence :**
 ```
@@ -86,16 +86,16 @@ Ne pas inventer un seuil. Creer une question explicite et bloquer l'avancement :
 - Dans quelles conditions (charge, environnement) ?
 **Bloque :** passage au Niveau 3 sur les composants dependants de cette NFR.
 ```
-Envoyer au client et attendre une reponse avant de continuer.
+Envoyer au client et attendre une réponse avant de continuer.
 
 **Template :**
 ```
 ### SW-NF-XXX ([catégorie]) : [Métrique] doit être [seuil] dans les conditions suivantes :
 - Charge : [nombre d'utilisateurs, volume de données]
-- Environnement : [materiel cible, configuration]
-- Duree : [periode de mesure si applicable]
+- Environnement : [matériel cible, configuration]
+- Durée : [période de mesure si applicable]
 **Origine :** SYS-NF-YYY
-**Methode de verification :** [test / analyse / inspection / demonstration]
+**Méthode de vérification :** [test / analyse / inspection / démonstration]
 ```
 
 ---
@@ -152,8 +152,8 @@ La branche droite du V commence ici -- chaque exigence definit comment elle sera
 # # SW-V-XXX
 
 
-**Preconditions :** [état du système avant le test]
-**Critère de succes :** [mesure précise]
+**Préconditions :** [état du système avant le test]
+**Critère de succès :** [mesure précise]
 **Critère d'échec :** [ce qui constitue un échec]
 ```
 
@@ -186,10 +186,10 @@ La branche droite du V commence ici -- chaque exigence definit comment elle sera
 
 ## Contraintes
 
-- Verifier que chaque exigence logiciel a un parent système
-- Verifier que chaque NFR a un seuil et une condition de mesure
-- Verifier que chaque exigence a une methode de verification
-- Identifier les exigences système non allouees (oublis potentiels)
+- Vérifier que chaque exigence logiciel a un parent système
+- Vérifier que chaque NFR a un seuil et une condition de mesure
+- Vérifier que chaque exigence a une méthode de vérification
+- Identifier les exigences système non allouées (oublis potentiels)
 
 ## Format
 
@@ -205,10 +205,10 @@ La branche droite du V commence ici -- chaque exigence definit comment elle sera
 
 A maintenir des ce niveau dans `docs/requirements/traceability.md`.
 
-| Exigence logiciel | Origine système | Methode de verification | Statut |
+| Exigence logiciel | Origine système | Méthode de vérification | Statut |
 |---|---|---|---|
-| SW-F-001 | SYS-F-001 | Test | A implementer |
-| SW-NF-001 | SYS-NF-001 | Test | A implementer |
+| SW-F-001 | SYS-F-001 | Test | À implémenter |
+| SW-NF-001 | SYS-NF-001 | Test | À implémenter |
 
 ---
 
@@ -218,33 +218,33 @@ Ne pas démarrer le Niveau 3 si une case est vide.
 
 ```
 - [ ] Chaque exigence logiciel pointe vers au moins une exigence système
-- [ ] Toutes les exigences système allouees au logiciel sont couvertes
+- [ ] Toutes les exigences système allouées au logiciel sont couvertes
 - [ ] Toutes les NFRs ont un seuil numérique et une condition de mesure
-- [ ] Toutes les exigences ont une methode de verification identifiée
-- [ ] Les exigences de sécurité couvrent traçabilité, mode degrade, classification des données
-- [ ] La matrice de traçabilité est initialisee
-- [ ] Le responsable technique a valide la faisabilité technique de chaque exigence
+- [ ] Toutes les exigences ont une méthode de vérification identifiée
+- [ ] Les exigences de sécurité couvrent traçabilité, mode dégradé, classification des données
+- [ ] La matrice de traçabilité est initialisée
+- [ ] Le responsable technique a validé la faisabilité technique de chaque exigence
 ```
 
 ---
 
 ## Minimum viable (petit projet)
 
-Si les niveaux 1 et 2 sont fusionnes, conserver :
+Si les niveaux 1 et 2 sont fusionnés, conserver :
 - Les identifiants distincts (SYS-F-XXX et SW-F-XXX).
 - L'allocation (même implicite, la noter).
 - Les seuils numériques sur toutes les NFRs.
-- La methode de verification sur chaque exigence.
+- La méthode de vérification sur chaque exigence.
 
 ---
 
-## Anti-patterns frequents
+## Anti-patterns fréquents
 
-- NFRs copiees du SRD sans quantification ("le système doit être rapide").
-- Exigences fonctionnelles qui decrivent une implémentation ("le logiciel utilise une queue").
-- Absence de methode de verification -- l'exigence ne sera pas testee.
-- Exigences de sécurité reportees "a plus tard".
-- Matrice de traçabilité non initialisee -- elle sera impossible a reconstituer ensuite.
+- NFRs copiées du SRD sans quantification ("le système doit être rapide").
+- Exigences fonctionnelles qui décrivent une implémentation ("le logiciel utilise une queue").
+- Absence de méthode de vérification -- l'exigence ne sera pas testée.
+- Exigences de sécurité reportées "à plus tard".
+- Matrice de traçabilité non initialisée -- elle sera impossible à reconstituer ensuite.
 - Renommer un composant avec sed plutôt qu'à la main : le nom apparaît à la fois
   en texte libre (où la mise à jour est souhaitable) et dans des identifiants
   stables comme REQ-AUTH-001 ou ADR-AuthModule-01 (où elle ne l'est pas).

@@ -1,17 +1,17 @@
 ---
 name: v-model-guide
-version: 1.2.0
+version: 1.2.1
 description: >
-  Point d'entree unique pour la methode V de developpement logiciel. Utiliser
-  ce skill pour tout projet logiciel structure : démarrage de projet, question
-  sur la methode, doute sur quelle étape suivre, ou ambiguïté découverte en
-  cours de travail. Contient le routage vers le bon skill selon le role et la
+  Point d'entrée unique pour la méthode V de développement logiciel. Utiliser
+  ce skill pour tout projet logiciel structuré : démarrage de projet, question
+  sur la méthode, doute sur quelle étape suivre, ou ambiguïté découverte en
+  cours de travail. Contient le routage vers le bon skill selon le rôle et la
   tâche, la vue d'ensemble du modèle en V, et le protocole d'escalade.
-  Déclencher systématiquement en debut de projet ou quand le role ou l'étape
+  Déclencher systématiquement en début de projet ou quand le rôle ou l'étape
   suivante est incertaine.
 ---
 
-# Guide methode V -- Point d'entree
+# Guide méthode V -- Point d'entrée
 
 ## Utilisation de ce skill
 
@@ -25,7 +25,7 @@ description: >
 
 | Role | Tâche | Skill |
 |---|---|---|
-| Tout role | Démarrer un projet, comprendre la methode | Ce skill (vue d'ensemble ci-dessous) |
+| Tout rôle | Démarrer un projet, comprendre la méthode | Ce skill (vue d'ensemble ci-dessous) |
 | Analyste / Responsable produit | Capturer le besoin client, faisabilité | `v-model-phase-amont` |
 | Analyste / Responsable produit | Définir les exigences système | `v-model-niveau-1` |
 | Analyste / Responsable produit | Définir les exigences logiciel | `v-model-niveau-2` |
@@ -36,7 +36,7 @@ description: >
 | Développeur / Testeur | Ecrire des tests (tous types) | `v-model-tests` |
 | Responsable technique | Revue de code, tâches pour juniors | `v-model-équipe` |
 | Chef de projet / Responsable technique | Risques, jalons, decisions de gestion | `v-model-gestion` |
-| Tout role | Ambiguïté ou blocage en cours de travail | Protocole d'escalade ci-dessous |
+| Tout rôle | Ambiguïté ou blocage en cours de travail | Protocole d'escalade ci-dessous |
 | Tout rôle | Premier brouillon d'un artefact terminé | Revue critique ci-dessous |
 
 Un même individu peut tenir plusieurs roles. Lire le skill correspondant a la tâche du moment.
@@ -61,12 +61,12 @@ PHASE AMONT
 +-------- NIV 4 : Conception    <--------> Tests unitaires
 |         [v-model-niveau-4]               [v-model-tests]
 |
-+---------- IMPLÉMENTATION                 [v-model-implémentation]
++---------- IMPLÉMENTATION                 [v-model-implementation]
 ```
 
 **Branche gauche :** on raffine -- du problème vers la solution.
-**Branche droite :** on verifie -- chaque niveau definit ses tests en miroir.
-**Flux inverses normaux :** une decision de conception peut invalider une spec.
+**Branche droite :** on vérifie -- chaque niveau définit ses tests en miroir.
+**Flux inverses normaux :** une décision de conception peut invalider une spec.
 Remonter explicitement via le protocole d'escalade.
 
 ---
@@ -79,7 +79,7 @@ Remonter explicitement via le protocole d'escalade.
 - Plus on descend dans le V, plus on bascule vers la spécification.
 
 **Quoi vs Comment**
-- Niveaux 1 et 2 : quoi faire (agnostique a la solution technique).
+- Niveaux 1 et 2 : quoi faire (agnostique à la solution technique).
 - Niveaux 3 et 4 : comment le faire (decisions techniques).
 - Une spécification de niveau 2 qui dit "comment" contraint inutilement l'implémentation.
 
@@ -95,7 +95,7 @@ Chaque skill de niveau contient sa porte de validation spécifique.
 
 ## Protocole d'escalade
 
-Quand une ambiguïté ou un blocage est decouvert en cours de travail :
+Quand une ambiguïté ou un blocage est découvert en cours de travail :
 
 **1. Identifier le niveau d'origine de l'ambiguïté**
 
@@ -108,7 +108,7 @@ Quand une ambiguïté ou un blocage est decouvert en cours de travail :
 | Conception detail (niv 4) | Niveau 3 ou 2 |
 | Architecture (niv 3) | Niveau 2 ou 1 |
 
-**2. Mettre a jour le document du niveau d'origine.**
+**2. Mettre à jour le document du niveau d'origine.**
 Le document est la source de verite. Pas le code, pas un message de discussion.
 
 **3. Reprendre depuis le niveau corrigé.**
@@ -138,7 +138,7 @@ explicite — y compris si aucun problème n'est trouvé.
 | Lentille | Question |
 |---|---|
 | Héritage | Le brouillon reprend-il du vocabulaire de solution ou des décisions de l'artefact d'entrée, au lieu de les reformuler en besoin ? |
-| Périmètre | Chaque élément trace-t-il à l'artefact d'entrée ? Tout orphelin est-il qualifié : clarification dans le périmètre, ou demande d'évolution à tracer via v-model-gestion ? |
+| Périmètre | Chaque élément tracé vers l'artefact d'entrée ? Tout orphelin est-il qualifié : clarification dans le périmètre, ou demande d'évolution à tracer via v-model-gestion ? |
 | Vérifiabilité | Chaque critère mesure-t-il la propriété visée, et non un proxy ? Est-il observable de l'extérieur ? |
 | Abstraction | Des éléments similaires en nombre auraient-ils dû être unifiés en une règle générale avant d'être énumérés ? |
 | Couverture | Tout l'artefact d'entrée est-il couvert par au moins un élément ? |
@@ -187,9 +187,9 @@ Règle : toute decision existe dans un fichier versionne.
 
 ## Règles d'or
 
-1. Le document precede le code. Aucun composant n'est implemente sans LLD valide.
-2. L'ambiguïté remonte -- elle n'est pas resolue sur place.
-3. La traçabilité se maintient en temps reel, pas reconstituee après coup.
-4. La validation humaine est obligatoire a chaque niveau.
-5. Un fichier par decision. Ce qui n'est pas ecrit n'existe pas.
+1. Le document précède le code. Aucun composant n'est implémenté sans LLD valide.
+2. L'ambiguïté remonte -- elle n'est pas résolue sur place.
+3. La traçabilité se maintient en temps réel, pas reconstituée après coup.
+4. La validation humaine est obligatoire à chaque niveau.
+5. Un fichier par décision. Ce qui n'est pas écrit n'existe pas.
 6. Tout premier brouillon passe la revue critique avant d'être montré ou validé.

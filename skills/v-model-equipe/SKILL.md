@@ -1,6 +1,6 @@
 ---
 name: v-model-equipe
-version: 1.2.0
+version: 1.2.1
 description: >
   Skill pour les pratiques d'équipe dans le modèle V : Définition of Ready,
   Définition of Done, backlog, estimation, revue de code, intégration des
@@ -14,11 +14,11 @@ description: >
 
 ## Contexte
 
-Ce skill répond a : **comment l'équipe travaille au quotidien pour produire
-ce que les specs decrivent ?**
+Ce skill répond à : **comment l'équipe travaille au quotidien pour produire
+ce que les specs décrivent ?**
 
-Il s'applique en parallele de tous les autres skills du V.
-La methode sans pratique d'équipe reste theorique.
+Il s'applique en parallèle de tous les autres skills du V.
+La méthode sans pratique d'équipe reste théorique.
 
 ---
 
@@ -28,7 +28,7 @@ La methode sans pratique d'équipe reste theorique.
 |---|---|
 | Responsable produit (PO) | Priorise le backlog, valide les critères d'acceptance |
 | Responsable technique | Produit HLD et LLD, disponible pour les questions de conception |
-| Développeur | Implemente depuis le LLD, signale les ambiguites |
+| Développeur | Implemente depuis le LLD, signale les ambiguïtés |
 | Reviewer | Revue de code (peut être le responsable technique ou un pair) |
 
 ---
@@ -69,41 +69,41 @@ Ce qu'une tâche doit satisfaire pour être considérée terminée.
 
 ---
 
-## 3. Structurer le travail : du besoin a la tâche
+## 3. Structurer le travail : du besoin à la tâche
 
 ```
 Exigence (SW-F-XXX du SRS)
     |
     v
-**Feature :** ensemble coherent derive d'une ou plusieurs exigences
+**Feature :** ensemble cohérent dérivé d'une ou plusieurs exigences
     |
     v
-**User Story :** unite de valeur du point de vue utilisateur
-    En tant que [role], je veux [action] afin de [benefice].
+**User Story :** unité de valeur du point de vue utilisateur
+    En tant que [role], je veux [action] afin de [bénéfice].
     |
     v
-Tâche (Task) : unite realisable en < 1 jour par un développeur
+Tâche (Task) : unité réalisable en < 1 jour par un développeur
 ```
 
 **Critères d'acceptance d'une User Story :**
 Conditions observables qui permettent de dire que la Story est satisfaite.
-Elles font le lien avec les procedures de test d'acceptance.
+Elles font le lien avec les procédures de test d'acceptance.
 
 ---
 
 ## 4. Backlog et refinement
 
-**Deux erreurs frequentes :**
-- Backlog comme poubelle : tout entre, rien ne sort, priorites opaques.
-- Backlog fige : s'il ne change pas, on ne l'utilise pas pour piloter.
+**Deux erreurs fréquentes :**
+- Backlog comme poubelle : tout entre, rien ne sort, priorités opaques.
+- Backlog figé : s'il ne change pas, on ne l'utilise pas pour piloter.
 
 **Session de refinement (1h par semaine) :**
 ```
 Objectifs :
-- [ ] Verifier que les stories du prochain sprint sont Ready
-- [ ] Decouper les stories trop grosses (> 2 jours)
-- [ ] Estimer les items non estimes
-- [ ] Reordonner selon les priorites actuelles
+- [ ] Vérifier que les stories du prochain sprint sont Ready
+- [ ] Découper les stories trop grosses (> 2 jours)
+- [ ] Estimer les items non estimés
+- [ ] Réordonner selon les priorités actuelles
 - [ ] Supprimer ce qui n'a plus de valeur
 **Participants :** responsable produit + responsable technique + développeurs
 ```
@@ -112,48 +112,48 @@ Objectifs :
 
 ## 5. Estimation
 
-**L'objectif de l'estimation n'est pas la precision -- c'est la détection des incomprehensions.**
+**L'objectif de l'estimation n'est pas la précision -- c'est la détection des incompréhensions.**
 
-Quand deux développeurs estiment très differemment une même tâche,
+Quand deux développeurs estiment très différemment une même tâche,
 c'est presque toujours parce qu'ils ne comprennent pas la même chose.
 La discussion qui s'ensuit a plus de valeur que le chiffre final.
 
 **Planning Poker :**
 - Chaque développeur estime en silence.
-- Revelation simultanee.
-- Les écarts importants declenchent une discussion.
+- Révélation simultanée.
+- Les écarts importants déclenchent une discussion.
 - On ne moyenne pas -- on comprend l'écart.
 
 **Sur une petite équipe de juniors :**
 Commencer par des estimations en jours (plus intuitif que les Story Points).
-Passer aux points quand l'équipe a acquis le reflexe d'estimer ensemble.
+Passer aux points quand l'équipe a acquis le réflexe d'estimer ensemble.
 
 ---
 
 ## 6. Revue de code
 
-**Deux objectifs simultanes : ameliorer le code ET developper le développeur.**
-Ces deux objectifs ne sont pas toujours servis par les memes commentaires.
+**Deux objectifs simultanés : améliorer le code ET développer le développeur.**
+Ces deux objectifs ne sont pas toujours servis par les mêmes commentaires.
 
 ### Structure de revue
 
 **Passe 1 -- Correctness et sécurité (prioritaire)**
 - Écarts par rapport au LLD.
-- Violations des contrats d'erreur specifies.
+- Violations des contrats d'erreur spécifiés.
 - Problèmes de sécurité au regard des SW-S-XXX.
 - Conditions de concurrence (contraintes transversales HLD).
 
-**Passe 2 -- Architecture et lisibilite**
+**Passe 2 -- Architecture et lisibilité**
 - Violations des règles transversales du HLD.
-- Couplages non justifies.
-- Lisibilite et nommage.
+- Couplages non justifiés.
+- Lisibilité et nommage.
 
-### Categories de commentaires
+### Catégories de commentaires
 
 ```
 [bloquant]    Doit être corrigé avant merge. Violation du LLD ou de la sécurité.
-[suggestion]  Amelioration recommandee. Non bloquante.
-[question]    Clarification demandee. Peut reveler un problème ou une incomprehension.
+[suggestion]  Amélioration recommandée. Non bloquante.
+[question]    Clarification demandée. Peut révéler un problème ou une incompréhension.
 [nit]         Detail mineur de style. A traiter en dernier, jamais bloquant.
 ```
 
@@ -172,33 +172,33 @@ Ces deux objectifs ne sont pas toujours servis par les memes commentaires.
 
 ## Contraintes
 
-- Categoriser chaque commentaire [bloquant] / [suggestion] / [question] / [nit]
+- Catégoriser chaque commentaire [bloquant] / [suggestion] / [question] / [nit]
 - Pour [bloquant] et [suggestion] : expliquer pourquoi (référence au LLD si possible)
-- Ne pas reecrire a la place du développeur : poser une question
-- Cohérence : memes règles sur toutes les PRs
+- Ne pas réécrire à la place du développeur : poser une question
+- Cohérence : mêmes règles sur toutes les PRs.
 
 ## Format
 
-- Passe 1 (correctness) : [liste commentaires avec categorie]
-- Passe 2 (architecture) : [liste commentaires avec categorie]
+- Passe 1 (correctness) : [liste commentaires avec catégorie]
+- Passe 2 (architecture) : [liste commentaires avec catégorie]
 **Verdict :** [Approuve / Approuve avec modifications mineures / Modifications requises]
 ```
 
-**Delai maximum : 24h après ouverture de la PR.**
-Une PR qui attend detruit le rythme de l'équipe.
+**Délai maximum : 24 h après ouverture de la PR.**
+Une PR qui attend détruit le rythme de l'équipe.
 
-**Si le LLD est silencieux sur un point souleve en revue :**
+**Si le LLD est silencieux sur un point soulevé en revue :**
 Le commentaire devient automatiquement `[question]`, jamais `[bloquant]`.
 Formuler ainsi : "Le LLD ne couvre pas ce cas. Est-ce intentionnel ?
-Si non, ce point doit être ajoute au LLD avant implémentation."
+Si non, ce point doit être ajouté au LLD avant implémentation."
 Ce commentaire peut déclencher une mise à jour du LLD via le protocole
 d'escalade (`v-model-guide`). Ne pas bloquer la PR pour un silence du LLD
 -- bloquer uniquement pour une violation du LLD.
 
-### Complément pedagogique : session de pair review
+### Complément pédagogique : session de pair review
 
 Une fois par sprint, revue en pair (reviewer + auteur ensemble) pour :
-- Expliquer les decisions de conception (pas seulement les corrections).
+- Expliquer les décisions de conception (pas seulement les corrections).
 - Illustrer un concept général depuis ce code spécifique.
 - Identifier un exercice que le développeur peut faire seul après.
 
@@ -210,9 +210,9 @@ Une fois par sprint, revue en pair (reviewer + auteur ensemble) pour :
 Un composant entier (même petit) avec une interface définie apprend plus
 qu'une succession de corrections de style.
 
-**Le LLD est leur point d'entree.**
-Si le LLD est insuffisant, ils prendront des decisions sans le contexte pour les prendre.
-La completude du LLD est une prerequis pour deleguer l'implémentation.
+**Le LLD est leur point d'entrée.**
+Si le LLD est insuffisant, ils prendront des décisions sans le contexte pour les prendre.
+La complétude du LLD est une préalable pour déléguer l'implémentation.
 
 ### Template de creation de tâches pour juniors
 
@@ -224,7 +224,7 @@ La completude du LLD est une prerequis pour deleguer l'implémentation.
 
 ## Tâche
 
-- Generer les tâches d'implémentation pour un développeur junior.
+- Générer les tâches d'implémentation pour un développeur junior.
 
 ## Contraintes
 
@@ -251,12 +251,12 @@ La completude du LLD est une prerequis pour deleguer l'implémentation.
 
 ## Tâche
 
-- Preparer une session de pair review de 30 minutes.
+- Préparer une session de pair review de 30 minutes.
 
 ## Contraintes
 
-- 2 ou 3 points cles maximum (pas tous les [nit])
-- Pour chaque point : la question a poser pour engager la reflexion
+- 2 ou 3 points clés maximum (pas tous les [nit])
+- Pour chaque point : la question à poser pour engager la réflexion
 - Un concept général a illustrer depuis ce code
 - Un exercice court que le développeur peut faire seul après
 
@@ -278,18 +278,18 @@ La completude du LLD est une prerequis pour deleguer l'implémentation.
 # Dette technique — [composant]
 
 **Description :** [description concrète de l'écart]
-**Impact :** [ce que ca empeche ou complique, référence a une exigence si possible]
+**Impact :** [ce que ça empêche ou complique, référence à une exigence si possible]
 **Effort estimé :** [X jours]
 **Risque si non traité :** [consequence mesurable]
 ```
 
 **La prioriser explicitement :**
 Elle est en concurrence avec les features dans le backlog.
-"On la traitera quand on a le temps" = elle ne sera jamais traitee.
+"On la traitera quand on a le temps" = elle ne sera jamais traitée.
 
 **Instaurer la culture du signalement :**
 Un junior qui contourne un problème sans le signaler produit de la dette invisible.
-Signaler = bien faire son travail. Ne pas signaler = dette cachee.
+Signaler = bien faire son travail. Ne pas signaler = dette cachée.
 
 ---
 
@@ -307,8 +307,8 @@ Signaler = bien faire son travail. Ne pas signaler = dette cachee.
 ## Mardi – jeudi
 
 - Standup (15 min)
-- Developpement
-- Revues de code au fil de l'eau (< 24h après ouverture de PR)
+- Développement
+- Revues de code au fil de l'eau (< 24 h après ouverture de PR)
 
 ## Vendredi
 
@@ -323,22 +323,22 @@ Signaler = bien faire son travail. Ne pas signaler = dette cachee.
 - Ce qui me bloque.
 
 Objectif : synchronisation horizontale entre développeurs, pas rapport au chef.
-Les bloquants remontent immediatement -- pas au standup du lendemain.
+Les bloquants remontent immédiatement -- pas au standup du lendemain.
 
-**Retrospective -- une seule action concrete par sprint :**
+**Rétrospective -- une seule action concrète par sprint :**
 ```
-Ce qu'on garde | Ce qu'on ameliore | Ce qu'on arrete
+Ce qu'on garde | Ce qu'on améliore | Ce qu'on arrête
      [item]    |      [item]        |     [item]
 ```
-Une liste de 12 resolutions non tenues n'est pas une retrospective.
+Une liste de 12 résolutions non tenues n'est pas une rétrospective.
 
 ---
 
-## Anti-patterns frequents
+## Anti-patterns fréquents
 
-- DoR et DoD existent sur papier mais ne sont pas verifiees en pratique.
+- DoR et DoD existent sur papier mais ne sont pas vérifiées en pratique.
 - Standup = rapport au chef (le responsable technique parle en dernier, pas en premier).
 - Revue de code = police du style (les [nit] prennent plus de place que les [bloquant]).
-- Juniors uniquement affectés a des tâches de style -- progression lente.
-- Dette technique non trackee : "on le sait mais on n'a pas le temps".
-- Retrospective annulee quand le sprint s'est bien passe -- c'est quand qu'on analyse ?
+- Juniors uniquement affectés à des tâches de style -- progression lente.
+- Dette technique non tracée : "on le sait mais on n'a pas le temps".
+- Rétrospective annulée quand le sprint s'est bien passé -- c'est quand qu'on analyse ?

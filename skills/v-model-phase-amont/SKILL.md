@@ -1,19 +1,19 @@
 ---
 name: v-model-phase-amont
-version: 1.2.0
+version: 1.2.1
 description: >
   Skill pour la phase amont d'un projet logiciel : capture du besoin
-  operationnel, etude de faisabilité, business case, charte de projet,
+  opérationnel, étude de faisabilité, business case, charte de projet,
   parcours utilisateur. Utiliser avant tout travail technique, quand le client
   exprime un besoin, quand on démarre un projet, ou quand on doit justifier
-  l'existence du projet. Prerequis obligatoire avant v-model-niveau-1.
+  l'existence du projet. Prérequis obligatoire avant v-model-niveau-1.
 ---
 
 # Phase amont
 
 ## Contexte
 
-La phase amont répond a une question differente du reste du V :
+La phase amont répond à une question différente du reste du V :
 **pourquoi ce projet, et est-il viable ?**
 Pas encore "que doit faire le système" -- c'est "doit-on construire ce système".
 
@@ -76,31 +76,31 @@ les bonnes questions et accelere la conversation.
 # Faisabilité technique
 
 **Capacités requises :** [ce que le système doit savoir faire]
-**Maturité technologique :** [disponible / a developper / rupture]
+**Maturité technologique :** [disponible / à développer / rupture]
 **Conclusion :** [faisable / risque / non faisable]
 
-## Faisabilité financiere
+## Faisabilité financière
 
 **Estimation grossière :** [ordres de grandeur, mois-homme]
-**Enveloppe disponible :** [budget communique]
-**Conclusion :** [coherent / tension / incompatible]
+**Enveloppe disponible :** [budget communiqué]
+**Conclusion :** [cohérent / tension / incompatible]
 
 ## Faisabilité calendaire
 
-**Delai demande :** [date souhaitee par le client]
-**Delai estime :** [avec les ressources disponibles]
+**Délai demandé :** [date souhaitée par le client]
+**Délai estimé :** [avec les ressources disponibles]
 **Conclusion :** [tenable / serré / impossible]
 
 ## Faisabilité organisationnelle
 
-**Competences disponibles :** [ce qu'on a]
-**Montee en competence requise :** [ce qu'on doit acquerir]
-**Conclusion :** [autonome / accompagne / bloquant]
+**Compétences disponibles :** [ce qu'on a]
+**Montée en compétence requise :** [ce qu'on doit acquérir]
+**Conclusion :** [autonome / accompagné / bloquant]
 
 ## Conclusion globale
 
 **Faisable :** [oui / non / oui sous conditions]
-**Conditions :** [périmètre, ressources, hypothèses a confirmer]
+**Conditions :** [périmètre, ressources, hypothèses à confirmer]
 ```
 
 ---
@@ -114,7 +114,7 @@ les bonnes questions et accelere la conversation.
 # Business case
 
 **Problème résolu :** [en une phrase, impact mesurable]
-**Valeur attendue :** [gain operationnel, réduction de risque, conformite]
+**Valeur attendue :** [gain opérationnel, réduction de risque, conformité]
 **Coût estimé :** [mois-homme, infrastructure, licences]
 **Alternatives considérées :** [pourquoi écartées]
 **Risques principaux :** [2-3 risques cles]
@@ -140,19 +140,19 @@ les bonnes questions et accelere la conversation.
 **Représentant client :** [nom]
 **Autorité de validation finale :** [nom]
 
-## Budget et delai
+## Budget et délai
 
 **Budget alloué :** [mois-homme ou euros]
 **Jalon de livraison :** [date]
-**Jalons intermediaires :** [si applicable]
+**Jalons intermédiaires :** [si applicable]
 
-## Critères de succes
+## Critères de succès
 
-- [Ce qui doit être vrai pour que le projet soit considéré reussi]
+- [Ce qui doit être vrai pour que le projet soit considéré réussi]
 
 ## Contraintes majeures
 
-- [Normes, certifications, environnements imposes, stacks techniques imposes]
+- [Normes, certifications, environnements imposés, stacks techniques imposés]
 
 ## Signatures
 
@@ -211,12 +211,12 @@ docs/00-amont/
 Ne pas démarrer le Niveau 1 si une de ces cases est vide.
 
 ```
-- [ ] L'EBO est valide par le client (il se reconnait dans le problème decrit)
+- [ ] L'EBO est validé par le client (il se reconnaît dans le problème décrit)
 - [ ] La faisabilité conclut "faisable" ou "faisable sous conditions documentees"
-- [ ] Les conditions de faisabilité sont acceptees par les parties prenantes
-- [ ] La Charte est signee par le client ET le responsable technique
+- [ ] Les conditions de faisabilité sont acceptées par les parties prenantes
+- [ ] La Charte est signée par le client ET le responsable technique
 - [ ] Le périmètre exclu est aussi clair que le périmètre inclus
-- [ ] Les hypothèses de planification sont documentees (pas implicites)
+- [ ] Les hypothèses de planification sont documentées (pas implicites)
 - [ ] Au moins un parcours utilisateur documenté par acteur primaire de l'EBO
 - [ ] Chaque parcours a au moins une variante d'erreur
 - [ ] La colonne "Exigences SYS couvertes" sera complétée au Niveau 1
@@ -230,7 +230,7 @@ Sur un projet de quelques jours, Business Case et Charte peuvent être fusionnes
 en un seul email ou compte-rendu de reunion de 30 minutes.
 L'important : la decision de faire est tracée quelque part, même en une phrase.
 
-**Ce qui ne peut pas être supprime :** la validation du périmètre par le client
+**Ce qui ne peut pas être supprimé :** la validation du périmètre par le client
 et la liste des hypothèses. Sans elles, le scope creep est garantie.
 
 Sur un petit projet, un tableau 3 colonnes (étape / action / résultat) suffit pour les
@@ -238,13 +238,13 @@ parcours, mais le parcours lui-même ne peut pas être supprimé.
 
 ---
 
-## Anti-patterns frequents
+## Anti-patterns fréquents
 
-- EBO ecrit par l'équipe technique sans avoir parle au client.
+- EBO écrit par l'équipe technique sans avoir parlé au client.
 - Périmètre défini uniquement par ce qu'on inclut (pas ce qu'on exclut).
-- Hypothèses de planification implicites ("on suppose que...") non ecrites.
-- Charte non signee = projet sans mandat clair.
-- Passer au Niveau 1 avant que le client ait valide l'EBO.
-- Parcours ecrits après le SRD (ils ne servent alors plus à trouver les exigences manquantes).
+- Hypothèses de planification implicites ("on suppose que...") non écrites.
+- Charte non signée = projet sans mandat clair.
+- Passer au Niveau 1 avant que le client ait validé l'EBO.
+- Parcours écrits après le SRD (ils ne servent alors plus à trouver les exigences manquantes).
 - Parcours uniquement happy path (les variantes d'erreur sont la source des exigences de robustesse).
 - Acteur générique "utilisateur" sans rôle défini (un parcours sans acteur nommé ne couvre rien).

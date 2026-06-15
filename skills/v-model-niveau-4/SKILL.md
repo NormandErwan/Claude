@@ -1,22 +1,22 @@
 ---
 name: v-model-niveau-4
-version: 1.2.0
+version: 1.2.1
 description: >
   Skill pour le Niveau 4 du modèle en V : Conception détaillée / Low-Level
-  Design. Utiliser après validation du HLD pour specifier chaque composant
-  au niveau ou un développeur peut implementer sans prendre de decision
-  d'architecture. Déclencher quand on doit rédiger un LLD, un DDD, specifier
+  Design. Utiliser après validation du HLD pour spécifier chaque composant
+  au niveau où un développeur peut implémenter sans prendre de décision
+  d'architecture. Déclencher quand on doit rédiger un LLD, un DDD, spécifier
   une interface, une structure de données, un algorithme, ou un contrat
-  d'erreur. Prerequis : v-model-niveau-3 valide. Skill suivant :
-  v-model-implémentation et v-model-tests (tests unitaires).
+  d'erreur. Prérequis : v-model-niveau-3 valide. Skill suivant :
+  v-model-implementation et v-model-tests (tests unitaires).
 ---
 
 # Niveau 4 : Conception détaillée (LLD)
 
 ## Contexte
 
-**Répond a :** comment chaque composant est-il implemente en detail ?
-**Un développeur doit pouvoir implementer a partir de ce niveau sans decision de conception.**
+**Répond à :** comment chaque composant est-il implémenté en détail ?
+**Un développeur doit pouvoir implémenter à partir de ce niveau sans décision de conception.**
 **Input :** HLD valide + ADRs.
 **Output :** Low-Level Design Document (LLD), un fichier par composant.
 **Skill suivant :** `v-model-implementation` + `v-model-tests` (tests unitaires).
@@ -27,21 +27,21 @@ description: >
 
 | Role | Responsabilité |
 |---|---|
-| Architecte / Responsable technique | Redige le LLD de chaque composant |
-| Développeur senior | Valide la faisabilité et la completude |
-| Développeur junior | Lit le LLD -- signale toute ambiguïté avant d'implementer |
+| Architecte / Responsable technique | Rédige le LLD de chaque composant |
+| Développeur senior | Valide la faisabilité et la complétude |
+| Développeur junior | Lit le LLD -- signale toute ambiguïté avant d'implémenter |
 
 ---
 
 ## Règle fondamentale
 
-**Specifier les decisions que le développeur ne doit pas prendre seul.
+**Spécifier les décisions que le développeur ne doit pas prendre seul.
 Pas le code lui-même.**
 
 Un LLD trop vague -> le développeur invente ses propres conventions.
 Un LLD trop détaillé -> du pseudo-code inutile que personne ne lit.
 
-**Critère de completude :** un développeur junior peut implementer le composant
+**Critère de complétude :** un développeur junior peut implémenter le composant
 en posant uniquement des questions de syntaxe, jamais des questions de conception.
 
 ---
@@ -94,12 +94,12 @@ Pour chaque interface exposee par le composant :
 ```
 [NomInterface]
   [NomMethode]([parametres]) -> [type de retour]
-**Precondition :** [ce qui doit être vrai avant l'appel]
+**Précondition :** [ce qui doit être vrai avant l'appel]
 **Postcondition :** [ce qui est garanti après l'appel]
 **Erreur :** [ExceptionType] si [condition]
-**Garantie :** [propriete observable, ex. "résultat transmis en < 500ms"]
+**Garantie :** [propriété observable, ex. "résultat transmis en < 500 ms"]
 **Idempotent :** [oui / non]
-**Traçabilité :** [SW-F-XXX ou SW-S-XXX satisfait par cette methode]
+**Traçabilité :** [SW-F-XXX ou SW-S-XXX satisfait par cette méthode]
 ```
 
 ---
@@ -118,7 +118,7 @@ Pour chaque structure centrale du composant :
 ```
 
 **Couvrir :** les invariants (ce qui doit toujours être vrai sur la structure),
-les valeurs interdites, les unites si applicable (metres, WGS84...).
+les valeurs interdites, les unités si applicable (mètres, WGS84...).
 
 ---
 
@@ -184,7 +184,7 @@ TABLE [nom]
 
 - [Toute transition X est atomique et couvre les tables A et B]
 
-## Strategie d'integrite
+## Stratégie d'intégrité
 
 - [Comment les données sont protégées en cas de coupure]
 **Exigence :** [SYS-NF-XXX ou SW-NF-XXX]
@@ -194,8 +194,8 @@ TABLE [nom]
 
 ## 6. Contrats d'erreur
 
-Les erreurs sont des decisions de conception -- ne pas les laisser au jugement
-du développeur. Une erreur non specifiee sera gérée inconsistamment.
+Les erreurs sont des décisions de conception -- ne pas les laisser au jugement
+du développeur. Une erreur non spécifiée sera gérée inconsistamment.
 
 **Template :**
 
@@ -204,8 +204,8 @@ du développeur. Une erreur non specifiee sera gérée inconsistamment.
 | [condition] | [ExceptionType] | Debug/Info/Warning/Error/Critical | [ce que le code appelant doit faire] |
 
 **Règle générale :**
-- Erreurs operateur (entree invalide) : exception recuperable, message utilisateur.
-- Erreurs système (BDD, reseau, materiel) : Critical, remontent sans detail technique.
+- Erreurs opérateur (entrée invalide) : exception récupérable, message utilisateur.
+- Erreurs système (BDD, réseau, matériel) : Critical, remontent sans détail technique.
 
 ---
 
@@ -217,7 +217,7 @@ Chaque élément du LLD doit pointer vers l'exigence qu'il satisfait.
 
 | Élément LLD | Exigence satisfaite |
 |---|---|
-| [methode ou comportement] | [SW-F-XXX ou SW-S-XXX] |
+| [méthode ou comportement] | [SW-F-XXX ou SW-S-XXX] |
 
 Si un élément du LLD ne pointe vers aucune exigence : le supprimer ou
 l'ajouter comme exigence manquante via le processus d'évolution (`v-model-gestion`).
@@ -233,11 +233,11 @@ l'ajouter comme exigence manquante via le processus d'évolution (`v-model-gesti
 
 ## Contraintes
 
-- Identifier les decisions que le développeur devra prendre seul
-- (zones de LLD incompletes)
-- Verifier que chaque élément pointe vers une exigence
-- Verifier que les contrats d'erreur couvrent toutes les situations d'échec
-- Verifier que la machine d'états couvre tous les états possibles
+- Identifier les décisions que le développeur devra prendre seul
+- (zones de LLD incomplètes)
+- Vérifier que chaque élément pointe vers une exigence
+- Vérifier que les contrats d'erreur couvrent toutes les situations d'échec
+- Vérifier que la machine d'états couvre tous les états possibles
 
 ## Format
 
@@ -254,16 +254,16 @@ l'ajouter comme exigence manquante via le processus d'évolution (`v-model-gesti
 Ne pas démarrer l'implémentation si une case est vide.
 
 ```
-- [ ] Toutes les interfaces exposees par le composant sont specifiees
-    (preconditions, postconditions, erreurs, garanties)
+- [ ] Toutes les interfaces exposées par le composant sont spécifiées
+    (préconditions, postconditions, erreurs, garanties)
 - [ ] Pour chaque composant non trivial : décision de bibliothèque documentée
     (bibliothèque retenue avec justification, ou rejet explicite avec raison)
-- [ ] Toutes les structures de données centrales sont specifiees avec leurs invariants
+- [ ] Toutes les structures de données centrales sont spécifiées avec leurs invariants
 - [ ] Tous les algorithmes non triviaux ont une spécification (pas juste un nom)
 - [ ] Les machines d'états couvrent tous les états et toutes les transitions
 - [ ] Les contrats d'erreur couvrent toutes les situations d'échec identifiées
 - [ ] Chaque élément du LLD pointe vers une exigence du SRS
-- [ ] Un développeur junior a relu le LLD et n'a pose que des questions de syntaxe
+- [ ] Un développeur junior a relu le LLD et n'a posé que des questions de syntaxe
 ```
 
 ---
@@ -278,18 +278,18 @@ Si HLD et LLD sont fusionnes, conserver au minimum :
 
 ---
 
-## Anti-patterns frequents
+## Anti-patterns fréquents
 
 - LLD qui est du pseudo-code : trop détaillé, plus personne ne le lit.
-- LLD qui laisse les erreurs au développeur : inconsistance garantie.
-- Laisser la sélection de bibliothèque au développeur : inconsistance de stack,
+- LLD qui laisse les erreurs au développeur : incohérence garantie.
+- Laisser la sélection de bibliothèque au développeur : incohérence de stack,
   risques de sécurité, et dette technique évitable.
 - Implémenter custom ce qu'une bibliothèque bien maintenue résout déjà : coût
   de maintenance sans valeur ajoutée. Documenter le rejet si une contrainte l'impose.
-- Machines d'états incompletes : états manquants decouverts a l'intégration.
-- Éléments LLD sans exigence : fonctionnalite non demandee implementee.
-- LLD redige après l'implémentation : il ne sert alors qu'a la documentation,
-  pas a guider -- valeur reduite, erreurs reproduites.
+- Machines d'états incomplètes : états manquants découverts à l'intégration.
+- Éléments LLD sans exigence : fonctionnalité non demandée implémentée.
+- LLD rédigé après l'implémentation : il ne sert alors qu'à la documentation,
+  pas à guider -- valeur réduite, erreurs reproduites.
 - Développeur qui "devine" une zone floue du LLD sans signaler l'ambiguïté :
   instaurer la culture que signaler = bien faire son travail.
 - Renommer une interface ou un composant avec sed dans le LLD : le nom peut

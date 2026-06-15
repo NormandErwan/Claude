@@ -1,5 +1,9 @@
 # Changelog -- suite v-model
 
+## [1.2.1] -- 2026-06-15
+
+Corrections orthographiques et diacritiques : correction systématique des accents manquants et des fautes de français dans tous les 10 skills v-model (à/a, é/e, è/e, ç/c, ô/o, etc.). Tous les skills v-model passent à la version 1.2.1 selon la règle de versionnage en bloc.
+
 ## [1.2.0] -- 2026-06-14
 
 Parcours utilisateur : v-model-phase-amont gagne §5 (template, arborescence, gate, anti-patterns, minimum viable) ; v-model-niveau-1 fait de l'audit EBO un exercice parcours-first, ajoute le champ Parcours source dans §2 et reformate §7 en matrice EBO→Parcours→SYS ; v-model-tests §4 gagne la règle de dérivation depuis les parcours, un champ Parcours source dans le Scénario TVS et un template de génération TVS. Règle de versionnage introduite : tous les skills v-model évoluent ensemble.
