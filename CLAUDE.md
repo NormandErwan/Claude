@@ -24,6 +24,7 @@ BEFORE any response or action — **always**:
 2. Follow `using-superpowers` skill.
 3. Check ALL available skills for relevance to the session. Follow `find-skill` skill. ≥1% chance it applies, invoke it.
 4. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
+5. Always start in plan mode.
 
 ## Clarification
 
