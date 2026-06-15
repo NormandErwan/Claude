@@ -19,6 +19,7 @@ BEFORE any response or action — **always**:
    npx skills add aaronontheweb/dotnet-skills
    npx skills add mattpocock/skills --skill grill-with-docs
    npx skills add mattpocock/skills --skill improve-codebase-architecture
+   npx skills add DietrichGebert/ponytail
    ```
 
 2. Follow `using-superpowers` skill.
@@ -48,7 +49,7 @@ entrée pour la nouvelle version.
 - Concise style.
 - Follow `caveman-commit` skill for commits.
 - CI logs inaccessible? STOP. Ask before any further action.
-- After creating a PR: IMMEDIATELY self-review before considering the task complete using `requesting-code-review` and `receiving-code-review` skill.
+- After creating a PR: IMMEDIATELY self-review before considering the task complete: first run `ponytail-review` (over-engineering pass), then `requesting-code-review` and `receiving-code-review` (correctness + architecture).
 - When PR is accepted, follow `finishing-a-development-branch` skill.
 
 ## Verification
