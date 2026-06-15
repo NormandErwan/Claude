@@ -1,12 +1,12 @@
 ---
 name: v-model-niveau-3
-version: 1.2.0
+version: 1.2.1
 description: >
   Skill pour le Niveau 3 du modèle en V : Architecture / High-Level Design.
   Utiliser après validation du SRS pour décider la structure du système
   logiciel et documenter chaque choix structurant via des ADRs. Déclencher
   quand on doit concevoir l'architecture, rédiger un HLD, un SAD, un dossier
-  d'architecture, ou des Architecture Decision Records. Prerequis :
+  d'architecture, ou des Architecture Decision Records. Prérequis :
   v-model-niveau-2 valide. Skill suivant : v-model-niveau-4.
 ---
 
@@ -14,8 +14,8 @@ description: >
 
 ## Contexte
 
-**Répond a :** comment le logiciel est-il structure pour satisfaire les exigences ?
-**Premier niveau ou on répond au "comment". Chaque choix structurant doit être justifie.**
+**Répond à :** comment le logiciel est-il structuré pour satisfaire les exigences ?
+**Premier niveau où on répond au "comment". Chaque choix structurant doit être justifié.**
 **Input :** SRS valide.
 **Output :** Software Architecture Document (SAD / HLD) + ADRs.
 **Skill suivant :** `v-model-niveau-4` (un LLD par composant).
@@ -67,8 +67,8 @@ Si la description d'un composant contient "et", il fait probablement deux choses
 
 ## 2. ADR -- Format et processus
 
-Chaque decision architecturale structurante fait l'objet d'un ADR.
-Un ADR non ecrit est une decision qui sera remise en question indefiniment.
+Chaque décision architecturale structurante fait l'objet d'un ADR.
+Un ADR non écrit est une décision qui sera remise en question indéfiniment.
 
 **Template ADR :**
 ```
@@ -80,43 +80,43 @@ Un ADR non ecrit est une decision qui sera remise en question indefiniment.
 ## Contexte
 
 - [Situation qui rend cette décision nécessaire]
-- [Exigences concernees : SW-F-XXX, SW-NF-XXX, SYS-H-XXX]
+- [Exigences concernées : SW-F-XXX, SW-NF-XXX, SYS-H-XXX]
 
 ## Options considérées
 
 **Option A :** [description]
 + [avantage]
-- [inconvenient]
+- [inconvénient]
 **Option B :** [description]
 + [avantage]
-- [inconvenient]
+- [inconvénient]
 
-## Decision
+## Décision
 
 - [Option retenue]
 
 ## Justification
 
-- [Pourquoi cette option satisfait mieux les exigences concernees]
-- [Pourquoi les autres options ont été ecartees]
+- [Pourquoi cette option satisfait mieux les exigences concernées]
+- [Pourquoi les autres options ont été écartées]
 
 ## Hypothèses
 
 - [Ce qui doit être vrai pour que cette décision reste valide]
-- [Si une hypothèse est invalidee : revoir cet ADR]
+- [Si une hypothèse est invalidée : revoir cet ADR]
 
-## Consequences
+## Conséquences
 
 - [Impact sur les autres composants]
 - [Dette technique introduite si applicable]
-- [Contraintes posees sur les niveaux inférieurs]
+- [Contraintes posées sur les niveaux inférieurs]
 ```
 
-**Quand creer un ADR :**
+**Quand créer un ADR :**
 - Choix de pattern de communication entre composants.
 - Choix de technologie de persistance.
-- Choix d'isolation d'un protocole ou d'une dependance externe.
-- Toute decision dont la remise en cause couterait plus d'une journee.
+- Choix d'isolation d'un protocole ou d'une dépendance externe.
+- Toute décision dont la remise en cause coûterait plus d'une journée.
 
 ---
 
@@ -133,10 +133,10 @@ Ici : qui depend de qui, dans quelle direction, via quel contrat de haut niveau.
 **Direction :** [A consomme B / A publie vers B]
 **Nature :** [synchrone / événement / flux]
 
-## Regles de dependance
+## Règles de dépendance
 
-- [Regle 1 : ex. "les dependances ne remontent jamais vers l'UI"]
-- [Regle 2 : ex. "aucun composant ne reference une implementation concrete"]
+- [Règle 1 : ex. "les dépendances ne remontent jamais vers l'UI"]
+- [Règle 2 : ex. "aucun composant ne référence une implémentation concrète"]
 ```
 
 ---
@@ -161,12 +161,12 @@ injection de dependances, politique de gestion d'erreur.
 
 ## 5. Vue de déploiement
 
-Comment le logiciel s'execute sur le materiel cible.
+Comment le logiciel s'exécute sur le matériel cible.
 
-**Questions a couvrir :**
-- Sur quel(s) environnement(s) le logiciel s'execute-t-il ?
-- Y a-t-il des composants serveur ? Des dependances d'infrastructure ?
-- Comment est distribue le logiciel (installeur, conteneur, service...) ?
+**Questions à couvrir :**
+- Sur quel(s) environnement(s) le logiciel s'exécute-t-il ?
+- Y a-t-il des composants serveur ? Des dépendances d'infrastructure ?
+- Comment est distribué le logiciel (installeur, conteneur, service...) ?
 
 ---
 
@@ -180,9 +180,9 @@ Comment le logiciel s'execute sur le materiel cible.
 ## Contraintes
 
 - Pour chaque architecture : composants, interfaces, avantages, risques
-- Evaluer explicitement chaque NFR cle : [lister SW-NF-XXX pertinents]
-- Identifier l'exigence la plus difficile a satisfaire dans chaque option
-- Si deux architectures satisfont les memes NFRs a egalite, evaluer :
+- Évaluer explicitement chaque NFR clé : [lister SW-NF-XXX pertinents]
+- Identifier l'exigence la plus difficile à satisfaire dans chaque option
+- Si deux architectures satisfont les mêmes NFRs à égalité, évaluer :
 - (a) Testabilité : peut-on tester chaque composant indépendamment ?
 - (b) Evolutivite : quelle architecture absorbe mieux les changements probables ?
 - (c) Complexité pour l'équipe : compte tenu du niveau des développeurs
@@ -193,8 +193,8 @@ Comment le logiciel s'execute sur le materiel cible.
 **Composants :** ...
 **Satisfait SW-NF-XXX car :** ...
 **Risque principal :** ...
-- [repeter pour B et C]
-**Recommandation :** [avec justification sur les 3 critères si egalite NFRs]
+- [répéter pour B et C]
+**Recommandation :** [avec justification sur les 3 critères si égalité NFRs]
 ```
 
 ---
@@ -209,9 +209,9 @@ Comment le logiciel s'execute sur le materiel cible.
 ## Contraintes
 
 - Pour chaque NFR du SRS : montrer comment l'architecture la satisfait
-- Identifier les NFRs pour lesquelles la satisfaction n'est pas evidente
+- Identifier les NFRs pour lesquelles la satisfaction n'est pas évidente
 - Identifier les couplages sans justification dans un ADR
-- Verifier que chaque composant a une responsabilité unique
+- Vérifier que chaque composant a une responsabilité unique
 
 ## Format
 
@@ -228,12 +228,12 @@ Comment le logiciel s'execute sur le materiel cible.
 Ne pas démarrer le Niveau 4 si une case est vide.
 
 ```
-- [ ] Chaque composant a une responsabilité unique documentee
-- [ ] Chaque decision structurante a un ADR avec options considerees et justification
+- [ ] Chaque composant a une responsabilité unique documentée
+- [ ] Chaque décision structurante a un ADR avec options considérées et justification
 - [ ] Chaque NFR du SRS a une explication de satisfaction dans le HLD
-- [ ] Les dependances entre composants sont documentees et justifiees
-- [ ] Les contraintes transversales sont listees et vérifiables
-- [ ] La vue de déploiement est coherente avec les contraintes du SRD (SYS-C-XXX)
+- [ ] Les dépendances entre composants sont documentées et justifiées
+- [ ] Les contraintes transversales sont listées et vérifiables
+- [ ] La vue de déploiement est cohérente avec les contraintes du SRD (SYS-C-XXX)
 - [ ] Le HLD a été revu lors du PDR (Preliminary Design Review)
 ```
 
@@ -249,16 +249,16 @@ Dans ce cas, conserver absolument :
 
 ---
 
-## Anti-patterns frequents
+## Anti-patterns fréquents
 
 - Architecture "big ball of mud" : composants sans responsabilité claire.
-- Decisions sans ADR : "on a décidé comme ça" sans trace du pourquoi.
-- ADR sans options considerees : une decision sans alternatives évaluées
-  n'est pas une decision -- c'est une habitude.
-- NFRs non adressees par l'architecture : elles seront des surprises a l'intégration.
-- Couplage fort injustifie entre composants.
-- Architecture figee : un ADR peut être remplace (statut "Deprecie") --
-  l'important est que le remplacement soit aussi documente.
+- Décisions sans ADR : "on a décidé comme ça" sans trace du pourquoi.
+- ADR sans options considérées : une décision sans alternatives évaluées
+  n'est pas une décision -- c'est une habitude.
+- NFRs non adressées par l'architecture : elles seront des surprises à l'intégration.
+- Couplage fort injustifié entre composants.
+- Architecture figée : un ADR peut être remplacé (statut "Déprécié") --
+  l'important est que le remplacement soit aussi documenté.
 - Renommer un composant dans le HLD avec sed : les ADRs référencés comme
   "ADR-003 : Choix du composant AuthModule" ont un identifiant numérique stable
   (ADR-003) et un titre qui peut évoluer. sed ne peut pas distinguer les deux.
