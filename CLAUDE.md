@@ -23,7 +23,7 @@ Once per session, before any response:
    ```
 
 2. Follow `using-superpowers` skill.
-3. Always start in plan mode.
+3. Start in plan mode. No exceptions.
 
 ## Per-turn skill search
 
@@ -32,10 +32,9 @@ At the start of every turn, before any response or action:
 1. Identify the topic or task of this turn (one keyword).
 2. Announce: `Searching skills.sh for [topic] skill...`
 3. Fetch `https://skills.sh/api/search?q=<topic-keyword>&limit=10` via WebFetch.
-   If the request fails or returns no results, surface the error (see ## Network errors).
+   On failure: surface the error (→ Network errors).
 4. If relevant skills are found, install each with `npx skills add <pkg>/<skill>` and apply it.
-5. Check ALL locally available skills for relevance to the turn. Follow `find-skill` skill.
-   ≥1% chance it applies, invoke it.
+5. Check ALL local skills for relevance; follow `find-skill`. Invoke if ≥1% chance it applies.
 6. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
 7. Never declare a skill unavailable without first querying the API.
 
@@ -44,13 +43,11 @@ At the start of every turn, before any response or action:
 Never silently swallow HTTP errors or network blocks. If any external request returns a
 non-2xx response or a proxy block ("Host not in allowlist", 403, 404, timeout):
 
-1. Surface it immediately: `[BLOCKED] <url> — <status> / <message>`
-2. Do NOT continue the operation as if the call had succeeded.
+1. Surface immediately: `[BLOCKED] <url> — <status> / <message>` — including silent "No results" that may hide a network error.
+2. Do NOT continue as if the call had succeeded.
 3. If the blocked host is needed for the task, tell the user and stop.
 
-This applies to every tool that makes network calls: WebFetch, Bash (curl/wget/npx),
-and MCP tools. Treat a silent "No results" that may hide a network error as suspicious —
-confirm the API actually responded before trusting an empty result.
+Applies to: WebFetch, Bash (curl/wget/npx), MCP tools.
 
 ## Clarification
 
