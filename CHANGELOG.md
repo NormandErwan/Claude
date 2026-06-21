@@ -1,5 +1,9 @@
 # Changelog -- suite v-model
 
+## [1.3.0] -- 2026-06-21
+
+Porte de coherence propagation : v-model-gestion gagne §8 (trigger commit ≥2 docs, 4 points : identifiants renommes, contrats d'interface, noms entre niveaux de conception, tracabilite des exigences) — generalisee pour tout projet, pas de references aux fichiers du projet d'origine. Skill retrospective ajoute dans CLAUDE.md (6 codes F1-F6, trigger binaire, format de sortie normalise). Bootstrap CLAUDE.md : recherche proactive de skills via `npx skills find` avant toute declaration d'absence.
+
 ## [1.2.1] -- 2026-06-15
 
 Corrections orthographiques et diacritiques : correction systématique des accents manquants et des fautes de français dans tous les 10 skills v-model (à/a, é/e, è/e, ç/c, ô/o, etc.). Tous les skills v-model passent à la version 1.2.1 selon la règle de versionnage en bloc.

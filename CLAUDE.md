@@ -10,7 +10,7 @@
 
 BEFORE any response or action — **always**:
 
-1. Install shared skills with:
+1. Install shared skills:
 
    ```bash
    npx skills add obra/superpowers
@@ -22,8 +22,19 @@ BEFORE any response or action — **always**:
    npx skills add DietrichGebert/ponytail
    ```
 
+   Then, for each major topic of the session, proactively search for additional
+   skills **before doing anything else**:
+
+   ```bash
+   npx skills find <topic-keyword>
+   ```
+
+   Announce before each search: `Searching skills.sh for [topic] skill...`
+   If a relevant result is found, install it with `npx skills add <pkg>/<skill>` and apply it.
+   **Never declare a skill unavailable without first running `npx skills find`.**
+
 2. Follow `using-superpowers` skill.
-3. Check ALL available skills for relevance to the session. Follow `find-skill` skill. ≥1% chance it applies, invoke it.
+3. Check ALL available skills for relevance to the session. Follow `find-skill` skill. ≥1% chance it applies, invoke it. If a skill is named by the user and not found locally, run `npx skills find <keyword>` before reporting it absent.
 4. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
 5. Always start in plan mode.
 
@@ -57,3 +68,27 @@ entrée pour la nouvelle version.
 - Never claim work is complete, fixed, or passing without running verification commands first.
 - Follow `verification-before-completion` skill for verification.
 - Evidence before assertions. Always.
+
+## Skill retrospective
+
+Immediately before ending any turn in which ≥1 of these events occurred:
+
+| Code | Observable event |
+|---|---|
+| F1 | A plan step was revised or abandoned after starting (backtracking) |
+| F2 | A file was read a second time in the same turn because the first read was insufficient |
+| F3 | An inconsistency between two documents discovered and fixed that a prior checklist should have caught |
+| F4 | A skill was invoked but its guidance did not cover the situation — had to deviate |
+| F5 | The user corrected a factual error in the model's output during this turn |
+| F6 | A tool returned an error requiring a different approach than the plan assumed |
+
+If ≥1 code triggered, emit before ending the turn:
+
+```
+Skill retrospective [triggered codes]:
+- [Modify/Create/Delete] <skill> — <one sentence why> — <minimal change>
+(max 3 items)
+```
+
+Never apply the change without explicit user approval.
+If 0 codes triggered: skip silently.

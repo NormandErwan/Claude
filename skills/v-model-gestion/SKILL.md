@@ -1,6 +1,6 @@
 ---
 name: v-model-gestion
-version: 1.2.1
+version: 1.3.0
 description: >
   Skill pour les artefacts de gestion de projet dans le modèle V : plan de
   projet, registre des risques, registre des decisions, gestion des
@@ -267,6 +267,38 @@ Les problèmes doivent remonter tot, pas être caches.
 **Points ouverts :** [liste avec responsable et echeance]
 **Questions anticipées :** [liste avec réponses préparées]
 ```
+
+---
+
+## 8. Porte de cohérence propagation
+
+**Déclencheur :** avant tout commit touchant ≥2 fichiers de documentation
+(répertoire `docs/` ou équivalent dans le projet).
+
+**Checklist (dans l'ordre) :**
+
+1. **Identifiants renommés** — pour chaque identifiant modifié (nom d'entité,
+   code de retour, interface, exigence fonctionnelle), grep tous les autres
+   fichiers de documentation sur l'ancienne forme.
+   Résultat attendu : 0 occurrence.
+
+2. **Contrats d'interface** — chaque interface définie dans un document de
+   conception bas niveau → trouver le test miroir dans le document de test
+   correspondant. Tous les attributs du contrat (paramètres, codes de retour,
+   schéma de données) : identiques entre les deux documents.
+
+3. **Noms entre niveaux de conception** — chaque entité nommée dans un document
+   de bas niveau (ex. : table, composant, module) → même nom dans le document
+   de niveau supérieur là où elle est référencée.
+   Exemples de paires : LLD↔HLD, HLD↔SRS, DAL↔modèle de données.
+
+4. **Traçabilité** — tout identifiant d'exigence fonctionnel a une ligne dans
+   la matrice de traçabilité. Tout identifiant système a une procédure de test
+   associée dans le plan de test.
+
+**Sortie si échec :** `[DOC-A] <entité> ≠ [DOC-B] <entité>` — une ligne par écart. Corriger avant de committer.
+
+**Sortie si OK :** `Porte cohérence : OK (N identifiants, M paires vérifiées)`.
 
 ---
 
