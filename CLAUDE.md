@@ -8,7 +8,7 @@
 
 ## Session Bootstrap
 
-At the start of a new session — once only:
+Once per session, before any response:
 
 1. Install shared skills:
 
@@ -54,34 +54,30 @@ confirm the API actually responded before trusting an empty result.
 
 ## Clarification
 
-- Never assume. Focused clarifying questions BEFORE acting.
-- Follow `grill-with-docs` and `zoom-out` skills.
+Before acting on any ambiguous or underspecified request: ask focused clarifying questions.
+Follow `grill-with-docs` and `zoom-out` skills.
 
 ## Plan review
 
-- After drafting a plan: internally check assumptions, alternatives, expert challenges.
-- Output the critical analysis and revised response only — not the draft.
+After drafting a plan: check assumptions, alternatives, and expert challenges internally.
+Output the critical analysis and revised plan only — not the draft.
 
 ## Versionnage des skills v-model
 
-La suite v-model est versionnée en bloc : tous les skills `v-model-*` portent
-toujours le même numéro de version. Quand un skill est modifié, bumper tous les
-autres au même niveau avant de commiter. Mettre à jour CHANGELOG.md avec une
-entrée pour la nouvelle version.
+All `v-model-*` skills share one version. On any modification: bump all to the same version,
+then add a CHANGELOG.md entry.
 
 ## Code / Docs / Commits / PRs
 
-- Concise style.
 - Follow `caveman-commit` skill for commits.
-- CI logs inaccessible? STOP. Ask before any further action.
-- After creating a PR: IMMEDIATELY self-review before considering the task complete: first run `ponytail-review` (over-engineering pass), then `requesting-code-review` and `receiving-code-review` (correctness + architecture).
+- CI logs inaccessible → STOP. Ask before any further action.
+- After creating a PR: run `ponytail-review` (over-engineering pass), then `requesting-code-review` + `receiving-code-review` (correctness + architecture).
 - When PR is accepted, follow `finishing-a-development-branch` skill.
 
 ## Verification
 
-- Never claim work is complete, fixed, or passing without running verification commands first.
-- Follow `verification-before-completion` skill for verification.
-- Evidence before assertions. Always.
+Before claiming work complete, fixed, or passing: run verification commands first.
+Follow `verification-before-completion` skill. Evidence before assertions.
 
 ## Skill retrospective
 
