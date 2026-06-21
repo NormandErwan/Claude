@@ -2,5 +2,6 @@
 skills/*
 !skills/token-*
 !skills/v-model-*
+!skills/prompt-engineering
 .agents/
 skills-lock.json

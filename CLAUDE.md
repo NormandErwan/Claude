@@ -8,9 +8,9 @@
 
 ## Session Bootstrap
 
-BEFORE any response or action — **always**:
+Once per session, before any response:
 
-1. Install shared skills with:
+1. Install shared skills:
 
    ```bash
    npx skills add obra/superpowers
@@ -23,37 +23,79 @@ BEFORE any response or action — **always**:
    ```
 
 2. Follow `using-superpowers` skill.
-3. Check ALL available skills for relevance to the session. Follow `find-skill` skill. ≥1% chance it applies, invoke it.
-4. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
-5. Always start in plan mode.
+3. Start in plan mode. No exceptions.
+
+## Per-turn skill search
+
+At the start of every turn, before any response or action:
+
+1. Identify the topic or task of this turn (one keyword).
+2. Announce: `Searching skills.sh for [topic] skill...`
+3. Fetch `https://skills.sh/api/search?q=<topic-keyword>&limit=10` via WebFetch.
+   On failure: surface the error (→ Network errors).
+4. If relevant skills are found, install each with `npx skills add <pkg>/<skill>` and apply it.
+5. Check ALL local skills for relevance; follow `find-skill`. Invoke if ≥1% chance it applies.
+6. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
+7. Never declare a skill unavailable without first querying the API.
+
+## Network errors
+
+Never silently swallow HTTP errors or network blocks. If any external request returns a
+non-2xx response or a proxy block ("Host not in allowlist", 403, 404, timeout):
+
+1. Surface immediately: `[BLOCKED] <url> — <status> / <message>` — including silent "No results" that may hide a network error.
+2. Do NOT continue as if the call had succeeded.
+3. If the blocked host is needed for the task, tell the user and stop.
+
+Applies to: WebFetch, Bash (curl/wget/npx), MCP tools.
 
 ## Clarification
 
-- Never assume. Focused clarifying questions BEFORE acting.
-- Follow `grill-with-docs` and `zoom-out` skills.
+Before acting on any ambiguous or underspecified request: ask focused clarifying questions.
+Follow `grill-with-docs` and `zoom-out` skills.
 
 ## Plan review
 
-- After drafting a plan: internally check assumptions, alternatives, expert challenges.
-- Output the critical analysis and revised response only — not the draft.
+After drafting a plan: check assumptions, alternatives, and expert challenges internally.
+Output the critical analysis and revised plan only — not the draft.
 
 ## Versionnage des skills v-model
 
-La suite v-model est versionnée en bloc : tous les skills `v-model-*` portent
-toujours le même numéro de version. Quand un skill est modifié, bumper tous les
-autres au même niveau avant de commiter. Mettre à jour CHANGELOG.md avec une
-entrée pour la nouvelle version.
+All `v-model-*` skills share one version. On any modification: bump all to the same version,
+then add a CHANGELOG.md entry.
 
 ## Code / Docs / Commits / PRs
 
-- Concise style.
 - Follow `caveman-commit` skill for commits.
-- CI logs inaccessible? STOP. Ask before any further action.
-- After creating a PR: IMMEDIATELY self-review before considering the task complete: first run `ponytail-review` (over-engineering pass), then `requesting-code-review` and `receiving-code-review` (correctness + architecture).
+- CI logs inaccessible → STOP. Ask before any further action.
+- After creating a PR: run `ponytail-review` (over-engineering pass), then `requesting-code-review` + `receiving-code-review` (correctness + architecture).
 - When PR is accepted, follow `finishing-a-development-branch` skill.
 
 ## Verification
 
-- Never claim work is complete, fixed, or passing without running verification commands first.
-- Follow `verification-before-completion` skill for verification.
-- Evidence before assertions. Always.
+Before claiming work complete, fixed, or passing: run verification commands first.
+Follow `verification-before-completion` skill. Evidence before assertions.
+
+## Skill retrospective
+
+Immediately before ending any turn in which ≥1 of these events occurred:
+
+| Code | Observable event |
+|---|---|
+| F1 | A plan step was revised or abandoned after starting (backtracking) |
+| F2 | A file was read a second time in the same turn because the first read was insufficient |
+| F3 | An inconsistency between two documents discovered and fixed that a prior checklist should have caught |
+| F4 | A skill was invoked but its guidance did not cover the situation — had to deviate |
+| F5 | The user corrected a factual error in the model's output during this turn |
+| F6 | A tool returned an error requiring a different approach than the plan assumed |
+
+If ≥1 code triggered, emit before ending the turn:
+
+```
+Skill retrospective [triggered codes]:
+- [Modify/Create/Delete] <skill> — <one sentence why> — <minimal change>
+(max 3 items)
+```
+
+Never apply the change without explicit user approval.
+If 0 codes triggered: skip silently.
