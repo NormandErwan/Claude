@@ -8,7 +8,7 @@
 
 ## Session Bootstrap
 
-BEFORE any response or action — **always**:
+At the start of a new session — once only:
 
 1. Install shared skills:
 
@@ -22,21 +22,21 @@ BEFORE any response or action — **always**:
    npx skills add DietrichGebert/ponytail
    ```
 
-   Then, for each major topic of the session, proactively search for additional
-   skills **before doing anything else**:
-
-   ```bash
-   npx skills find <topic-keyword>
-   ```
-
-   Announce before each search: `Searching skills.sh for [topic] skill...`
-   If a relevant result is found, install it with `npx skills add <pkg>/<skill>` and apply it.
-   **Never declare a skill unavailable without first running `npx skills find`.**
-
 2. Follow `using-superpowers` skill.
-3. Check ALL available skills for relevance to the session. Follow `find-skill` skill. ≥1% chance it applies, invoke it. If a skill is named by the user and not found locally, run `npx skills find <keyword>` before reporting it absent.
-4. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
-5. Always start in plan mode.
+3. Always start in plan mode.
+
+## Per-turn skill search
+
+At the start of every turn, before any response or action:
+
+1. Identify the topic or task of this turn (one keyword).
+2. Announce: `Searching skills.sh for [topic] skill...`
+3. Run `npx skills find <topic-keyword>`.
+4. If a relevant result is found, install with `npx skills add <pkg>/<skill>` and apply it.
+5. Check ALL locally available skills for relevance to the turn. Follow `find-skill` skill.
+   ≥1% chance it applies, invoke it.
+6. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
+7. Never declare a skill unavailable without first running `npx skills find`.
 
 ## Clarification
 
