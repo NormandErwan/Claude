@@ -1,6 +1,8 @@
 ---
 name: writing-skills
-description: Use when creating new skills, editing existing skills, or verifying skills work before deployment
+description: Use when creating a new skill, editing an existing one, verifying it works before
+  deployment, benchmarking whether it improves task quality, fixing unreliable triggering,
+  or when an agent rationalizes around a skill's rules.
 ---
 
 # Writing Skills
@@ -344,6 +346,8 @@ Choose most relevant language:
 
 You're good at porting - one great example is enough.
 
+For skills that include executable scripts, see `executable-code-skills.md`.
+
 ## File Organization
 
 ### Self-Contained Skill
@@ -407,6 +411,20 @@ Different skill types need different test approaches:
 - Identify rationalizations and add explicit counters
 
 **Success criteria:** Agent follows rule under maximum pressure
+
+**→ See `testing-skills-with-subagents.md`** for the full pressure-testing methodology
+(RED-GREEN-REFACTOR, pressure types, rationalization tables, meta-testing).
+
+### Technique / Pattern / Reference Skills
+
+For skills that improve output quality rather than enforce compliance, use **empirical A/B
+testing** instead of pressure scenarios:
+
+**→ See `evaluating-skills-with-subagents.md`** for the full evaluation methodology
+(quality A/B benchmark, blind comparison, trigger-description optimization).
+
+The sub-sections below describe what each skill type needs; the measurement approach is in
+that document.
 
 ### Technique Skills (how-to guides)
 
@@ -580,6 +598,14 @@ step2 [label="read file"];
 helper1, helper2, step3, pattern4
 **Why bad:** Labels should have semantic meaning
 
+### ❌ Windows-style paths
+`scripts\helper.py`, `reference\guide.md`
+**Why bad:** Fails on Unix. Use forward slashes everywhere.
+
+### ❌ Too many options
+"You can use pypdf, or pdfplumber, or PyMuPDF, or pdf2image…"
+**Why bad:** Decision fatigue. Provide one default; add escape hatch for the rare exception.
+
 ## STOP: Before Moving to Next Skill
 
 **After writing ANY skill, you MUST STOP and complete the deployment process.**
@@ -627,6 +653,9 @@ Deploying untested skills = deploying untested code. It's a violation of quality
 - [ ] Common mistakes section
 - [ ] No narrative storytelling
 - [ ] Supporting files only for tools or heavy reference
+- [ ] SKILL.md body under 500 lines (use progressive disclosure if over)
+- [ ] No Windows-style paths (forward slashes only)
+- [ ] Tested on Haiku, Sonnet, and Opus (not one model only)
 
 **Deployment:**
 - [ ] Commit skill to git and push to your fork (if configured)
