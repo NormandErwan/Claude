@@ -265,3 +265,7 @@ Quality A/B evaluation requires the full CLI environment.
 
 When running scripts inside a Cowork session, the scripts may need the `--static` flag to
 disable network requests and work within the static execution environment.
+
+---
+
+_Reconstructed from Anthropic `skill-creator` example machinery (Apache-2.0). See `SOURCES.md`._

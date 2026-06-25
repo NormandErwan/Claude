@@ -272,3 +272,7 @@ Save notes to `{output_path}` as a JSON array of strings:
 - Make subjective quality judgments ("the output was good/bad")
 - Speculate about causes without evidence
 - Repeat information already in the run_summary aggregates
+
+---
+
+_Source: Anthropic `skill-creator` example (Apache-2.0). See `SOURCES.md`._

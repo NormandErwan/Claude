@@ -264,3 +264,7 @@ Before shipping a skill with executable code:
 * [ ] Validation or verification steps added for critical operations
 * [ ] Feedback loops included for quality-critical tasks
 * [ ] Execution vs. read-as-reference intent is explicit for every script reference
+
+---
+
+_Extracted from Anthropic official skill-authoring documentation. See `SOURCES.md`._

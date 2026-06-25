@@ -1,6 +1,6 @@
 # JSON Schemas
 
-This document defines the JSON schemas used by skill-creator.
+This document defines the JSON schemas used by writing-skills evaluation scripts.
 
 ---
 
@@ -428,3 +428,7 @@ Output from post-hoc analyzer. Located at `<grading-dir>/analysis.json`.
   }
 }
 ```
+
+---
+
+_Source: Anthropic `skill-creator` example (Apache-2.0). See `SOURCES.md`._
