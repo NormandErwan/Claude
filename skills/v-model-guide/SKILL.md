@@ -1,6 +1,6 @@
 ---
 name: v-model-guide
-version: 1.3.0
+version: 1.4.0
 description: >
   Point d'entrée unique pour la méthode V de développement logiciel. Utiliser
   ce skill pour tout projet logiciel structuré : démarrage de projet, question

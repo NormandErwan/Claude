@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-2
-version: 1.3.0
+version: 1.4.0
 description: >
   Skill pour le Niveau 2 du modèle en V : Exigences logiciel (Software
   Requirements Spécification). Utiliser après validation du SRD pour allouer

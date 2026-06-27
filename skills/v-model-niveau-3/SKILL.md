@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-3
-version: 1.3.0
+version: 1.4.0
 description: >
   Skill pour le Niveau 3 du modèle en V : Architecture / High-Level Design.
   Utiliser après validation du SRS pour décider la structure du système
