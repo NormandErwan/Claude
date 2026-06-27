@@ -30,24 +30,14 @@ Once per session, before any response:
 At the start of every turn, before any response or action:
 
 1. Identify the topic or task of this turn (one keyword).
-2. Announce: `Searching skills.sh for [topic] skill...`
-3. Fetch `https://skills.sh/api/search?q=<topic-keyword>&limit=10` via WebFetch.
-   On failure: surface the error (→ Network errors).
-4. If relevant skills are found, install each with `npx skills add <pkg>/<skill>` and apply it.
-5. Check ALL local skills for relevance; follow `find-skill`. Invoke if ≥1% chance it applies.
-6. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
-7. Never declare a skill unavailable without first querying the API.
+2. Check ALL local skills for relevance; follow `find-skill`. Invoke if ≥1% chance it applies.
+3. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
+4. If no local skill covers the topic, fetch `https://skills.sh/api/search?q=<topic-keyword>&limit=10` via WebFetch.
+   On 403 or repeated failure: skip silently (skills.sh is blocked in this environment).
 
 ## Network errors
 
-Never silently swallow HTTP errors or network blocks. If any external request returns a
-non-2xx response or a proxy block ("Host not in allowlist", 403, 404, timeout):
-
-1. Surface immediately: `[BLOCKED] <url> — <status> / <message>` — including silent "No results" that may hide a network error.
-2. Do NOT continue as if the call had succeeded.
-3. If the blocked host is needed for the task, tell the user and stop.
-
-Applies to: WebFetch, Bash (curl/wget/npx), MCP tools.
+On non-2xx / proxy block for any external request: surface `[BLOCKED] <url> — <status>`, do not continue as if it succeeded. If the host is required for the task, stop and tell the user.
 
 ## Clarification
 
