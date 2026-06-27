@@ -1,6 +1,6 @@
 ---
 name: v-model-guide
-version: 1.3.0
+version: 1.4.0
 description: >
   Point d'entrée unique pour la méthode V de développement logiciel. Utiliser
   ce skill pour tout projet logiciel structuré : démarrage de projet, question
@@ -131,6 +131,28 @@ de [nom de l'artefact]. »
 **Pourquoi maintenant.** Les défauts structurants (solution présupposée,
 hors-périmètre, critère non vérifiable) coûtent peu à corriger sur le
 brouillon 1, beaucoup sur le brouillon 6.
+
+**Vérification préalable — Propagation ADR→LLD.** Si le projet contient des
+ADRs et des LLDs, exécuter cette vérification avant les 5 lentilles.
+
+1. **Détection ADR postérieur à LLD :** pour chaque ADR, comparer sa date avec
+   la date de dernière révision des LLDs mentionnés dans son §Conséquences.
+   Tout ADR daté après l'un de ces LLDs est un *ADR candidat*.
+
+2. **Liste de propagation :** pour chaque ADR candidat, lire explicitement son
+   §Conséquences et lister les LLDs que ce paragraphe contraint de mettre à
+   jour, avec la formulation exacte du texte source.
+
+**Sortie obligatoire — une ligne par ADR candidat :**
+
+```
+ADR-XXX ([date ADR]) > LLD-[composant] ([date LLD])
+  §Conséquences impose : LLD-[composant], LLD-[composant], ...
+  Statut : [À METTRE À JOUR / Vérifié à jour]
+```
+
+Si aucun ADR candidat trouvé : écrire `Propagation ADR→LLD : RAS`.
+Sans cette sortie, la vérification n'a pas eu lieu.
 
 **Les 5 lentilles.** Pour chaque lentille, rédiger une ligne de résultat
 explicite — y compris si aucun problème n'est trouvé.

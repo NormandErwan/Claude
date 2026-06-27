@@ -1,6 +1,6 @@
 ---
 name: v-model-gestion
-version: 1.3.0
+version: 1.4.0
 description: >
   Skill pour les artefacts de gestion de projet dans le modèle V : plan de
   projet, registre des risques, registre des decisions, gestion des

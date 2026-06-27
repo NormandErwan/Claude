@@ -1,5 +1,9 @@
 # Changelog -- suite v-model
 
+## [1.4.0] -- 2026-06-26
+
+Propagation ADR→LLD : v-model-guide gagne une vérification préalable aux 5 lentilles — détection des ADRs datés après les LLDs qu'ils impactent, puis liste explicite des LLDs que le §Conséquences de chaque ADR candidat impose de mettre à jour, avec sortie structurée obligatoire (une ligne par ADR candidat ou mention « RAS »). Surface les écarts de propagation avant la revue critique plutôt que pendant.
+
 ## [1.3.0] -- 2026-06-21
 
 Porte de coherence propagation : v-model-gestion gagne §8 (trigger commit ≥2 docs, 4 points : identifiants renommes, contrats d'interface, noms entre niveaux de conception, tracabilite des exigences) — generalisee pour tout projet, pas de references aux fichiers du projet d'origine. Skill retrospective ajoute dans CLAUDE.md (6 codes F1-F6, trigger binaire, format de sortie normalise). Bootstrap CLAUDE.md : recherche proactive de skills via `npx skills find` avant toute declaration d'absence.
