@@ -1,8 +1,8 @@
 ---
 name: writing-skills
-description: Use when creating a new skill, editing an existing one, verifying it works before
-  deployment, benchmarking whether it improves task quality, fixing unreliable triggering,
-  or when an agent rationalizes around a skill's rules.
+description: Use when creating a new skill, editing an existing one, verifying a skill works
+  before deployment, benchmarking whether it improves task quality, fixing unreliable
+  triggering, or when an agent rationalizes around a skill's rules.
 ---
 
 # Writing Skills
