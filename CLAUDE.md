@@ -29,7 +29,7 @@ Once per session, before any response:
 
 At the start of every turn, before any response or action:
 
-1. Identify the topic or task of this turn (one keyword).
+1. Identify the topic or task of this turn.
 2. Check ALL local skills for relevance; follow `find-skill`. Invoke if ≥1% chance it applies.
 3. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
 4. If no local skill covers the topic, fetch `https://skills.sh/api/search?q=<topic-keyword>&limit=10` via WebFetch.
