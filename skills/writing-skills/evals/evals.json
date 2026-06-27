@@ -1,0 +1,40 @@
+{
+  "skill_name": "writing-skills",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a new skill called 'defensive-sql' that teaches agents to always use parameterized queries. Include a bad example and a good example, a description, and a brief anti-patterns section.",
+      "expected_output": "A SKILL.md with valid YAML frontmatter (name + description starting with 'Use when'), at least one code example, anti-patterns section, no @-syntax, under 500 lines.",
+      "expectations": [
+        "Frontmatter has 'name' and 'description' fields",
+        "Description starts with 'Use when'",
+        "Description does not summarize the workflow (no mention of 'parameterize' or 'interpolate' in the description field itself)",
+        "File contains at least one fenced code block",
+        "No @ syntax used for cross-file references (no @filename or @path pattern)",
+        "File is under 500 lines"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "The following skill description is bad. Explain what is wrong and write a corrected version.\n\n```yaml\ndescription: Use for writing SQL queries - always parameterize, never interpolate user input, validate types before passing to DB\n```",
+      "expected_output": "Agent identifies the 'summarizes workflow' anti-pattern. New description starts with 'Use when', describes the triggering situation (not the solution).",
+      "expectations": [
+        "Agent identifies at least one anti-pattern (workflow summary, solution detail, or violates 'Use when' convention)",
+        "New description starts with 'Use when'",
+        "New description does not contain 'parameterize', 'interpolate', or 'validate types' (solution steps)",
+        "Explanation cites a concrete reason from the skill guidance (not just 'it is bad')"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Review this SKILL.md content and list all anti-patterns you find:\n\n```\n---\nname: my-skill\n---\n# My Skill\nThis skill helps you write better code. When you need to refactor, follow these steps:\n1. Identify the smell\n2. Extract the method\n3. Rename for clarity\n\nSee @helpers/refactor-guide.md for more.\n\nscripts\\helper.py handles the extraction step.\n```",
+      "expected_output": "Agent identifies: missing description field, @-syntax cross-reference, Windows-style path (backslash), absent 'Use when' trigger convention.",
+      "expectations": [
+        "Agent flags the missing 'description' frontmatter field",
+        "Agent flags the @-syntax cross-reference as forbidden",
+        "Agent flags the Windows-style path backslash (scripts\\\\helper.py)",
+        "Agent notes the description should start with 'Use when' or that a description field is required"
+      ]
+    }
+  ]
+}

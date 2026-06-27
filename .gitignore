@@ -3,5 +3,7 @@ skills/*
 !skills/token-*
 !skills/v-model-*
 !skills/prompt-engineering
+!skills/writing-skills
+!skills/writing-great-skills
 .agents/
 skills-lock.json

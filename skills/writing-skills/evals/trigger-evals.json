@@ -1,0 +1,78 @@
+{
+  "skill_name": "writing-skills",
+  "description": "Trigger evals: queries that should (positive) and should not (negative) fire writing-skills.",
+  "evals": [
+    {
+      "id": 1,
+      "query": "How do I write a skill for handling async tests?",
+      "expected_trigger": true,
+      "reason": "Explicit skill creation request"
+    },
+    {
+      "id": 2,
+      "query": "My skill never fires when it should",
+      "expected_trigger": true,
+      "reason": "Unreliable triggering — covered by description"
+    },
+    {
+      "id": 3,
+      "query": "Claude completely ignores my skill",
+      "expected_trigger": true,
+      "reason": "Unreliable triggering"
+    },
+    {
+      "id": 4,
+      "query": "Can you help me improve this skill description?",
+      "expected_trigger": true,
+      "reason": "Editing an existing skill"
+    },
+    {
+      "id": 5,
+      "query": "The agent rationalizes around my TDD skill and skips tests anyway",
+      "expected_trigger": true,
+      "reason": "Agent rationalizing around rules — covered by description"
+    },
+    {
+      "id": 6,
+      "query": "I want to create a skill to enforce code reviews before merging",
+      "expected_trigger": true,
+      "reason": "Creating a new skill"
+    },
+    {
+      "id": 7,
+      "query": "How do I test if my skill actually works before deploying it?",
+      "expected_trigger": true,
+      "reason": "Verifying before deployment"
+    },
+    {
+      "id": 8,
+      "query": "Write me a unit test for this function",
+      "expected_trigger": false,
+      "reason": "Code testing, not skill authoring"
+    },
+    {
+      "id": 9,
+      "query": "How do I deploy my Docker app to production?",
+      "expected_trigger": false,
+      "reason": "Unrelated to skills"
+    },
+    {
+      "id": 10,
+      "query": "What is the best Python linting tool?",
+      "expected_trigger": false,
+      "reason": "Unrelated to skills"
+    },
+    {
+      "id": 11,
+      "query": "Review my PR changes",
+      "expected_trigger": false,
+      "reason": "Code review, not skill creation"
+    },
+    {
+      "id": 12,
+      "query": "How do I set up GitHub Actions for CI?",
+      "expected_trigger": false,
+      "reason": "CI/CD setup, unrelated to skills"
+    }
+  ]
+}
