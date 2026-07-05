@@ -7,28 +7,19 @@
 
 ## Session Bootstrap
 
-Skills from external repos are vendored directly under `skills/` via `git subtree`
-(see git log for `vendor(skills):` commits) — no runtime install step required.
-Each is grouped in a folder named after its origin repo: `skills/superpowers/`,
-`skills/vercel-labs-skills/`, `skills/caveman/`, `skills/mattpocock-skills/`,
-`skills/ponytail/`, `skills/dotnet-skills/`. Natively-authored skills (no external
-origin) live under `skills/claude/`.
+Once per session, before any response or action:
 
-Once per session, before any response:
-
-1. Follow `using-superpowers` skill.
-2. Load `caveman` skill as soon as context allows (ultra-compressed output).
-3. Start in plan mode. No exceptions.
+1. Follow `using-superpowers` and `caveman` skills, *always*.
+3. Start in plan mode, *always*.
 
 ## Per-turn in session
 
 At the start of every turn, before any response or action:
 
 1. Identify the topic or task of this turn.
-2. Check ALL local skills for relevance; follow `find-skills`. Invoke if ≥1% chance it applies.
-3. Follow `caveman-compress` when compressing memory files, `caveman-review` when reviewing code/PRs, `caveman-help` on demand for the full command reference.
-4. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
-5. Clarification: Before acting on any ambiguous or underspecified request: ask focused clarifying questions. Follow `grilling` and `grill-with-docs` skills for that.
+2. Check ALL local skills for relevance; follow `find-skills` if no relevant local skills. Invoke any skill if ≥1% chance it applies.
+3. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
+4. Clarification: Before acting on any ambiguous or underspecified request: ask focused clarifying questions with `grilling` and `grill-with-docs` skills.
 
 
 ## Network errors
