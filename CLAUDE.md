@@ -11,7 +11,8 @@ Skills from external repos are vendored directly under `skills/` via `git subtre
 (see git log for `vendor(skills):` commits) — no runtime install step required.
 Each is grouped in a folder named after its origin repo: `skills/superpowers/`,
 `skills/vercel-labs-skills/`, `skills/caveman/`, `skills/mattpocock-skills/`,
-`skills/ponytail/`, `skills/dotnet-skills/`.
+`skills/ponytail/`, `skills/dotnet-skills/`. Natively-authored skills (no external
+origin) live under `skills/claude/`.
 
 Once per session, before any response:
 
