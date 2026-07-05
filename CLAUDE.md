@@ -7,9 +7,11 @@
 
 ## Session Bootstrap
 
-Skills from external repos (superpowers, vercel-labs/skills, caveman, dotnet-skills,
-mattpocock/skills, ponytail) are vendored directly under `skills/` via `git subtree`
+Skills from external repos are vendored directly under `skills/` via `git subtree`
 (see git log for `vendor(skills):` commits) — no runtime install step required.
+Each is grouped in a folder named after its origin repo: `skills/superpowers/`,
+`skills/vercel-labs-skills/`, `skills/caveman/`, `skills/mattpocock-skills/`,
+`skills/ponytail/`, `skills/dotnet-skills/`.
 
 Once per session, before any response:
 
