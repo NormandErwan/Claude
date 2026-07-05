@@ -7,31 +7,23 @@
 
 ## Session Bootstrap
 
+Skills from external repos (superpowers, vercel-labs/skills, caveman, dotnet-skills,
+mattpocock/skills, ponytail) are vendored directly under `skills/` via `git subtree`
+(see git log for `vendor(skills):` commits) — no runtime install step required.
+
 Once per session, before any response:
 
-1. Install shared skills:
-
-   ```bash
-   npx skills add obra/superpowers
-   npx skills add vercel-labs/skills --skill find-skills
-   npx skills add juliusbrussee/caveman --skill caveman-commit
-   npx skills add aaronontheweb/dotnet-skills
-   npx skills add mattpocock/skills --skill grill-with-docs
-   npx skills add mattpocock/skills --skill improve-codebase-architecture
-   npx skills add DietrichGebert/ponytail
-   ```
-
-2. Follow `using-superpowers` skill.
-3. Start in plan mode. No exceptions.
+1. Follow `using-superpowers` skill.
+2. Start in plan mode. No exceptions.
 
 ## Per-turn in session
 
 At the start of every turn, before any response or action:
 
 1. Identify the topic or task of this turn.
-2. Check ALL local skills for relevance; follow `find-skill`. Invoke if ≥1% chance it applies.
+2. Check ALL local skills for relevance; follow `find-skills`. Invoke if ≥1% chance it applies.
 3. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
-4. Clarification: Before acting on any ambiguous or underspecified request: ask focused clarifying questions. Follow `grilling`, `grill-with-docs` and `zoom-out` skills for that
+4. Clarification: Before acting on any ambiguous or underspecified request: ask focused clarifying questions. Follow `grilling` and `grill-with-docs` skills for that.
 
 
 ## Network errors
