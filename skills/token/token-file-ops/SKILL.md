@@ -1,7 +1,7 @@
 ---
 name: token-file-ops
 description: Use when reading, editing, creating, or manipulating files; or running commands with potentially large output. Provides generic bash-first patterns for any file type. For .NET/C# specific patterns, also load token-dotnet.
-version: 1.2.0
+version: 1.3.0
 allowed-tools: Bash, Read, Grep, Glob
 ---
 
@@ -103,6 +103,28 @@ sed -i.bak 's/old/new/g' file.md && rm file.md.bak
 find . -name "*.md" -exec sed -i.bak 's/old/new/g' {} + \
   && find . -name "*.md.bak" -delete
 ```
+
+## Editing With Edit/Write: Read With the Read Tool First
+
+The Edit and Write tools require that the target file was first read with the
+Read tool in this session. A `cat`, `head`, or `sed -n` in Bash does NOT count —
+the tool still refuses until you Read it, so the bash peek is wasted work.
+
+When you already know you will Edit or Write a file, open it once with the Read
+tool up front. Do not inspect it with `cat` first and then Read it again.
+
+```bash
+# DON'T — cat does not satisfy Edit/Write's precondition; you Read it anyway
+cat config.yaml            # wasted: still must Read before Edit
+# Read config.yaml         # forced second pass
+
+# DO — Read once, then Edit
+# Read config.yaml
+# Edit config.yaml
+```
+
+This is the exception to "never Read." For a plain substitution across a file,
+still prefer `sed -i.bak` — it needs no Read at all.
 
 ## Reading Selectively When You Must
 
