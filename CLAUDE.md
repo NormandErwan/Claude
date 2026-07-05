@@ -5,12 +5,6 @@
 - Adapt to the user's language, but keep a concise style.
 - No filler phrases ("great question", "certainly"). Lead with the answer.
 
-## Caveman mode
-
-Load `caveman`, `caveman-compress`, and `caveman-review` as soon as the task and
-context allow (ultra-compressed output, memory-file compression, compressed
-review comments). Follow `caveman-help` on demand for the full command reference.
-
 ## Session Bootstrap
 
 Skills from external repos are vendored directly under `skills/` via `git subtree`
@@ -23,7 +17,8 @@ origin) live under `skills/claude/`.
 Once per session, before any response:
 
 1. Follow `using-superpowers` skill.
-2. Start in plan mode. No exceptions.
+2. Load `caveman` skill as soon as context allows (ultra-compressed output).
+3. Start in plan mode. No exceptions.
 
 ## Per-turn in session
 
@@ -31,8 +26,9 @@ At the start of every turn, before any response or action:
 
 1. Identify the topic or task of this turn.
 2. Check ALL local skills for relevance; follow `find-skills`. Invoke if ≥1% chance it applies.
-3. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
-4. Clarification: Before acting on any ambiguous or underspecified request: ask focused clarifying questions. Follow `grilling` and `grill-with-docs` skills for that.
+3. Follow `caveman-compress` when compressing memory files, `caveman-review` when reviewing code/PRs, `caveman-help` on demand for the full command reference.
+4. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
+5. Clarification: Before acting on any ambiguous or underspecified request: ask focused clarifying questions. Follow `grilling` and `grill-with-docs` skills for that.
 
 
 ## Network errors
