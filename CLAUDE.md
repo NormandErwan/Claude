@@ -34,7 +34,7 @@ Output the critical analysis and revised plan only — not the draft.
 ## v-model skills
 
 All `v-model-*` skills share one version. On any modification: bump all to the same version,
-then add a CHANGELOG.md entry.
+then add a `skills/v-model/CHANGELOG.md` entry.
 
 ## Code / Docs / Commits / PRs
 
