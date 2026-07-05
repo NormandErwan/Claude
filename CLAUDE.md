@@ -5,6 +5,12 @@
 - Adapt to the user's language, but keep a concise style.
 - No filler phrases ("great question", "certainly"). Lead with the answer.
 
+## Caveman mode
+
+Load `caveman`, `caveman-compress`, and `caveman-review` as soon as the task and
+context allow (ultra-compressed output, memory-file compression, compressed
+review comments). Follow `caveman-help` on demand for the full command reference.
+
 ## Session Bootstrap
 
 Skills from external repos are vendored directly under `skills/` via `git subtree`
