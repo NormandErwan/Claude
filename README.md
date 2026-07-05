@@ -9,7 +9,7 @@ selection vendored from external repos.
 
 | Folder | Origin |
 |---|---|
-| `skills/claude/` | this repo (v-model-*, token-*, prompt-engineering, writing-skills, writing-great-skills) |
+| `skills/claude/` | this repo: `v-model/` (v-model-*), `token/` (token-*), plus prompt-engineering, writing-skills, writing-great-skills |
 | `skills/superpowers/` | `obra/superpowers` (subset) |
 | `skills/vercel-labs-skills/` | `vercel-labs/skills` |
 | `skills/caveman/` | `juliusbrussee/caveman` (subset) |

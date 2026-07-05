@@ -4,7 +4,7 @@ import sys, re, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILL_GLOB = "skills/claude/v-model-*/SKILL.md"
+SKILL_GLOB = "skills/claude/v-model/v-model-*/SKILL.md"
 GUIDE = None  # guide-methode-projet-logiciel.md absent du depot
 CHANGELOG = ROOT / "CHANGELOG.md"
 SEMVER = re.compile(r"^\d+\.\d+\.\d+$")
