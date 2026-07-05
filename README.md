@@ -5,11 +5,13 @@ selection vendored from external repos.
 
 ## Layout
 
-`skills/` is grouped by origin, one folder per source repo:
+Skills natively authored in this repo live directly under `skills/`:
+`v-model/` (v-model-*), `token/` (token-*), `prompt-engineering/`, `writing-skills/`.
+
+Vendored skills are grouped by origin, one folder per source repo:
 
 | Folder | Origin |
 |---|---|
-| `skills/claude/` | this repo: `v-model/` (v-model-*), `token/` (token-*), plus prompt-engineering, writing-skills, writing-great-skills |
 | `skills/superpowers/` | `obra/superpowers` (subset) |
 | `skills/vercel-labs-skills/` | `vercel-labs/skills` |
 | `skills/caveman/` | `juliusbrussee/caveman` (subset) |

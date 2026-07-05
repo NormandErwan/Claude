@@ -24,7 +24,7 @@ gives the full provenance.
 - **URL:** https://github.com/mattpocock/skills
 - **License:** MIT (public open-source package)
 - **Files contributed:**
-  - `../writing-great-skills/GLOSSARY.md`
+  - `references/GLOSSARY.md`
 
 ---
 
