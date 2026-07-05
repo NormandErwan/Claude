@@ -28,7 +28,7 @@ here and in `obra/superpowers`, with different content) and unwanted content.
 |---|---|---|---|
 | `superpowers/*` | `obra/superpowers` | `skills/<name>` | `main` |
 | `vercel-labs-skills/find-skills` | `vercel-labs/skills` | `skills/find-skills` | `main` |
-| `caveman/caveman-commit` | `juliusbrussee/caveman` | `skills/caveman-commit` | `main` |
+| `caveman/caveman-commit`, `caveman`, `caveman-compress`, `caveman-review`, `caveman-help` | `juliusbrussee/caveman` | `skills/<name>` | `main` |
 | `mattpocock-skills/grill-with-docs`, `improve-codebase-architecture` | `mattpocock/skills` | `skills/engineering/<name>` | `main` |
 | `mattpocock-skills/grilling` | `mattpocock/skills` | `skills/productivity/grilling` | `main` |
 | `ponytail/ponytail-review` | `DietrichGebert/ponytail` | `skills/ponytail-review` | `main` |
