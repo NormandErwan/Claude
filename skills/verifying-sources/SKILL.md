@@ -1,6 +1,6 @@
 ---
 name: verifying-sources
-description: Use when about to state a factual, technical, historical, or procedural claim - a version number, default value, statistic, API behavior, "X always/never does Y", or "the docs say" - requires searching and citing a source first, or explicitly labeling the claim unverified; grounds claims in evidence, not memory
+description: Use when about to state a factual, technical, historical, or procedural claim - a version number, default value, statistic, API behavior, "X always/never does Y", "the docs say", "best practice is" - that you have not verified against a source this turn, or when tempted to answer a factual question from memory under time pressure
 ---
 
 # Verifying Sources
@@ -45,7 +45,8 @@ BEFORE stating any factual/technical/historical/procedural claim:
 1. IDENTIFY: Is this a claim the reader will act on? (see list above)
 2. SEARCH: Look it up now - docs, source, web, the file in front of you
 3. FOUND?
-   - YES: State the claim WITH the source cited
+   - YES: State the claim WITH the source cited (source must support the
+          EXACT claim - see "The source must actually support the exact claim")
    - NO:  SEARCH ONCE MORE with different terms
 4. STILL NOT FOUND?
    - State "no source found" explicitly
