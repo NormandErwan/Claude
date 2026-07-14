@@ -37,6 +37,17 @@ Any assertion whose truth the reader will act on:
 Opinions, plans, and reasoning about the current code you can see are NOT claims
 needing an external source - but claims ABOUT what code does elsewhere are.
 
+## What Does NOT Need A Lookup
+
+Do not burn a search on facts that are stable, non-versioned, non-numeric, and
+textbook-universal - the kind you would stake maximal confidence on. State them
+plainly: "Python is dynamically typed", "HTTP is stateless", "JSON is text".
+
+The exemption is narrow. The moment a claim carries a version, a number, a default
+value, a date, an absolute ("always", "never"), or a "the docs/spec say", it is
+NOT trivial - verify it. If you feel the pull to label something "trivial" to dodge
+a lookup you are not actually sure of, that pull IS the rationalization - verify.
+
 ## The Gate Function
 
 ```
@@ -116,7 +127,8 @@ as verified.
 - "I'm pretty sure", "IIRC", "I think it's", "should be" - stated as if it were fact
 - Time pressure: "just tell me fast", "don't overthink it", "reviewer is waiting"
 - Reaching for memory because searching feels slow
-- Answering a factual question with tool_uses still at 0
+- Answering a NON-trivial factual question (version, number, default, date,
+  absolute, "the docs say") with tool_uses still at 0
 - Citing an aggregator, mirror, or re-host as if it were the primary source
 - Treating a similar-but-different model or version as if it documented yours
 
