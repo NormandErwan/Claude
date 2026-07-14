@@ -43,7 +43,9 @@ needing an external source - but claims ABOUT what code does elsewhere are.
 BEFORE stating any factual/technical/historical/procedural claim:
 
 1. IDENTIFY: Is this a claim the reader will act on? (see list above)
-2. SEARCH: Look it up now - docs, source, web, the file in front of you
+2. SEARCH: Look up the MOST PRIMARY source you can reach - official docs,
+          source code, spec, changelog, the vendor's own manual, the file in
+          front of you. Aggregators and re-hosts are leads, not citations.
 3. FOUND?
    - YES: State the claim WITH the source cited (source must support the
           EXACT claim - see "The source must actually support the exact claim")
@@ -75,6 +77,38 @@ history is. If the source backs a narrower fact than you are stating, narrow the
 claim to what the source supports, or label the gap a hypothesis. Citing something
 adjacent is not citing the claim.
 
+## Source Quality - Prefer Primary
+
+A citation is only as good as its source. Rank before you trust; a weak or
+off-target source is not verification.
+
+Hierarchy (reach for the highest you can):
+
+1. **Primary** - the artifact itself: official docs, source code, the spec/RFC,
+   release notes/changelog, the vendor's own manual, the real command output or
+   API response.
+2. **Secondary** - a reputable description of the primary: maintainer posts, MDN,
+   an accepted answer that quotes the primary.
+3. **Tertiary** - aggregators, manual re-host/mirror sites, random blogs, forum
+   guesses, AI summaries. Use ONLY as a lead to a primary source, never as the
+   citation.
+
+Judge each source (PARC):
+
+- **Primacy** - the thing itself, or someone describing it?
+- **Authority** - does the publisher own or officially cover it?
+- **Relevance** - does it match the EXACT version/model/case, not an adjacent one?
+- **Corroboration** - do two independent sources agree?
+
+**Analogous is not the same.** A manual for a *similar* model (a different Tuya
+switch) supports a HYPOTHESIS about yours, never a verified fact. Say: "no primary
+source for model X; the near-identical model Y documents Z (hypothesis)".
+
+**If every primary source is network-blocked** (403/429/503, dead link), say so
+with the `[BLOCKED] <url> - <status>` status, and downgrade the whole answer to
+hypothesis. Do not backfill the gap with tertiary/adjacent sources and present it
+as verified.
+
 ## Red Flags - STOP
 
 - About to type a version number, default, or statistic you did not just look up
@@ -83,6 +117,8 @@ adjacent is not citing the claim.
 - Time pressure: "just tell me fast", "don't overthink it", "reviewer is waiting"
 - Reaching for memory because searching feels slow
 - Answering a factual question with tool_uses still at 0
+- Citing an aggregator, mirror, or re-host as if it were the primary source
+- Treating a similar-but-different model or version as if it documented yours
 
 ## Rationalization Prevention
 
@@ -95,6 +131,8 @@ adjacent is not citing the claim.
 | "It's probably right" | Probably-right stated as certainly-right is a lie |
 | "It turned out true" | Right by luck is still ungrounded. Cite next time |
 | "Too obscure to find" | Then say "no source found" and label it hypothesis |
+| "An aggregator/mirror says so" | Re-hosts go stale or altered. Trace the primary |
+| "A similar model/version matches" | Adjacent is hypothesis-grade, not fact |
 | "Different wording, rule doesn't apply" | Spirit over letter. Any factual claim counts |
 
 ## Relationship To Other Skills
