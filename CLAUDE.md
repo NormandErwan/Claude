@@ -31,6 +31,12 @@ On non-2xx / proxy block for any external request: surface `[BLOCKED] <url> — 
 After drafting a plan: check assumptions, alternatives, and expert challenges internally.
 Output the critical analysis and revised plan only — not the draft.
 
+## Local development first
+
+- Never use a CI run to discover whether code works. Reproduce the failure locally and fix it before pushing — see the project's own CLAUDE.md for its local build/lint/test commands.
+- A commit whose only purpose is "push and see what CI says" is not allowed. Iterate locally; push once the local checks are green.
+- If local reproduction is genuinely impossible (the failure only occurs in the CI environment), say so explicitly and get confirmation before using CI runs to iterate.
+
 ## Code / Docs / Commits / PRs
 
 - ALWAYS use English and ASCII only (no Unicode).
