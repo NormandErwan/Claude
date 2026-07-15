@@ -39,6 +39,13 @@ Output the critical analysis and revised plan only — not the draft.
 - After creating or updating a PR: ALWAYS run `ponytail-review` (over-engineering pass), then `requesting-code-review` + `receiving-code-review` (correctness + architecture).
 - When PR is accepted, follow `finishing-a-development-branch` skill.
 
+## PR watching
+
+Stop self re-arming check-ins once CI is green, `mergeable_state` is `clean`,
+and there are no unresolved review comments — do not wait for merge/close.
+Only keep polling if something is still pending (CI running, changes
+requested, merge conflict, unresolved threads).
+
 ## Verification
 
 Before claiming work complete, fixed, or passing: run verification commands first. Follow `verification-before-completion` skill. Evidence before assertions.
