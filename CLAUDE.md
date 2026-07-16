@@ -10,17 +10,15 @@
 Once per session, before any response or action:
 
 1. Follow `using-superpowers` and `caveman` skills, *always*.
-3. Start in plan mode, *always*.
+2. Start in plan mode, *always*.
 
 ## Per-turn in session
 
 At the start of every turn, before any response or action:
 
-1. Identify the topic or task of this turn.
-2. Check ALL local skills for relevance; follow `find-skills` if no relevant local skills. Invoke any skill if ≥1% chance it applies.
-3. ANNOUNCE "Using [skill] to [purpose]" for every skill applied.
-4. Clarification: Before acting on any ambiguous or underspecified request: ask focused clarifying questions with `grilling` and `grill-with-docs` skills.
-
+1. Identify this turn's task.
+2. Scan local skills for relevance; invoke any with ≥1% chance it applies, announcing "Using [skill] to [purpose]" for each. No relevant local skill → follow `find-skills`.
+3. Ambiguous or underspecified request → ask focused clarifying questions (`grilling`, `grill-with-docs`) before acting.
 
 ## Network errors
 
@@ -35,7 +33,7 @@ Output the critical analysis and revised plan only — not the draft.
 
 - Never use a CI run to discover whether code works. Reproduce the failure locally and fix it before pushing — see the project's own CLAUDE.md for its local build/lint/test commands.
 - A commit whose only purpose is "push and see what CI says" is not allowed. Iterate locally; push once the local checks are green.
-- If local reproduction is genuinely impossible (the failure only occurs in the CI environment), say so explicitly and get confirmation before using CI runs to iterate.
+- Failure is CI-only and can't be reproduced locally → say so explicitly and get confirmation before using CI runs to iterate.
 
 ## Code / Docs / Commits / PRs
 
