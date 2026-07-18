@@ -7,10 +7,7 @@
 
 ## Session Bootstrap
 
-Once per session, before any response or action:
-
-1. Follow `using-superpowers` skill, *always*.
-2. Start in plan mode, *always*.
+Once per session, before any response or action: follow `using-superpowers` skill, *always*.
 
 ## Per-turn in session
 
@@ -18,7 +15,15 @@ At the start of every turn, before any response or action:
 
 1. Identify this turn's task.
 2. Scan local skills for relevance; invoke any with ≥1% chance it applies, announcing "Using [skill] to [purpose]" for each. No relevant local skill → follow `find-skills`.
-3. Ambiguous or underspecified request → ask focused clarifying questions (`grilling`, `grill-with-docs`) before acting.
+3. Task is obvious → act directly. Obvious requires ALL of:
+   - Exact content/command already specified by the user, or exactly one correct interpretation exists (typo, single unambiguous bug, pure read-only lookup).
+   - Touches one file or one clear location.
+   - No design or approach choice involved.
+4. Not obvious → Clarify, Planify, Validate before acting:
+   - Clarify: ask focused questions (`grilling`, `grill-with-docs`) until every ambiguity is closed.
+   - Planify: draft the concrete approach.
+   - Validate: get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit/Write/Bash/git/PR calls).
+   - No exceptions.
 
 ## Network errors
 
