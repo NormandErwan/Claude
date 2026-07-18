@@ -39,11 +39,9 @@ here and in `obra/superpowers`, with different content) and unwanted content.
 
 ### Updating a vendored skill
 
-Neither `git subtree pull` nor `git subtree merge` works here: both need a
-`git-subtree-dir` trailer on a prior commit to find the original add, but this
-repo's vendoring commits were squash-merged via GitHub PR, which strips that
-trailer. Re-sync the tree manually instead, per skill, when an update is
-actually needed (no scheduled sync):
+`git subtree pull`/`merge` don't work here: vendoring commits were
+squash-merged via PR, stripping the `git-subtree-dir` trailer they need.
+Re-sync manually per skill instead (no scheduled sync):
 
 ```bash
 git clone --depth 1 --branch <branch> https://github.com/<owner>/<repo>.git /tmp/<repo>
@@ -55,13 +53,7 @@ git read-tree --prefix=skills/<origin>/<skill>/ -u FETCH_HEAD
 git diff --cached --quiet || git commit -m "vendor(skills): update <skill> from <owner>/<repo>"
 ```
 
-`git subtree split` scopes the fetched commit's tree to just the skill's
-subdirectory, so `git read-tree --prefix=... -u FETCH_HEAD` replaces the local
-copy wholesale; the `git diff --cached --quiet` guard skips the commit when
-upstream hasn't changed.
-
-New skill from a repo not yet listed: same recipe, but skip `git rm` (nothing
-exists yet at that prefix), then add a row to the table above.
+New skill: same recipe, skip `git rm`, then add a row above.
 
 ## Installing skills locally
 

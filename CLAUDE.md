@@ -4,6 +4,7 @@
 
 - Adapt to the user's language, but keep a concise style.
 - No filler phrases ("great question", "certainly"). Lead with the answer.
+- Same applies to docs/READMEs/commits: state facts and commands directly, no restating what the code already shows.
 
 ## Session Bootstrap
 
