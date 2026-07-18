@@ -5,7 +5,7 @@
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-target_root="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
+target_root="$HOME/.claude/skills"
 
 mkdir -p "$target_root"
 

@@ -57,9 +57,9 @@ New skill from a repo not yet listed: same recipe, `git subtree add` instead of
 ## Installing skills locally
 
 `scripts/install-skills.sh` copies every skill in this repo into
-`~/.claude/skills/` (or `$CLAUDE_SKILLS_DIR` if set), flattening the
-`skills/<origin>/<name>/` layout to `<name>/`. This repo is the source of
-truth: each skill is always overwritten with the repo's version.
+`~/.claude/skills/`, flattening the `skills/<origin>/<name>/` layout to
+`<name>/`. This repo is the source of truth: each skill is always
+overwritten with the repo's version.
 
 ```bash
 ./scripts/install-skills.sh
