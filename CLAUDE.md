@@ -22,7 +22,7 @@ At the start of every turn, before any response or action:
 4. Not obvious → Clarify, Planify, Validate before acting:
    - Clarify: ask focused questions (`grilling`, `grill-with-docs`) until every ambiguity is closed.
    - Planify: draft the concrete approach.
-   - Validate: get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit, Write, a mutating Bash/git command, or a PR call). Read-only lookups (Read/Grep/Glob, `git status`/`diff`/`log`) don't need it. No exceptions.
+   - Validate: always get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit, Write, a mutating Bash/git command, or a PR call). Read-only lookups (Read/Grep/Glob, `git status`/`diff`/`log`) don't need it.
 
 ## Network errors
 
@@ -45,7 +45,11 @@ Output the critical analysis and revised plan only — not the draft.
 - Follow `caveman` skill for PR descriptions and code comments. Follow `caveman-commit` skill for commit messages. Don't load `caveman` outside these three cases.
 - Modifying this file (CLAUDE.md) → use `prompt-engineering` skill.
 - CI logs inaccessible → STOP. Ask before any further action.
-- Immediately after creating or updating a PR — `gh pr create`/`gh pr edit`, or an MCP `create_pull_request`/`update_pull_request` call — before the turn ends: run `ponytail-review`, then `requesting-code-review` + `receiving-code-review`. No exceptions — this is part of the PR action itself, not optional follow-up.
+- Immediately after creating or updating a PR — `gh pr create`/`gh pr edit`, or an MCP `create_pull_request`/`update_pull_request` call — before the turn ends: always run `ponytail-review`, then `requesting-code-review` + `receiving-code-review`. This is part of the PR action itself, not optional follow-up.
+
+## Naming
+
+Every 2-3 turns, once scope is clear or has shifted: draft a short title, confirm via `AskUserQuestion`, then rename the PR (`update_pull_request`/`gh pr edit`) and the conversation title if available.
 
 ## PR watching
 
