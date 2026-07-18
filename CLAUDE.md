@@ -45,7 +45,7 @@ Output the critical analysis and revised plan only — not the draft.
 - Follow `caveman` skill for PR descriptions and code comments. Follow `caveman-commit` skill for commit messages. Don't load `caveman` outside these three cases.
 - Modifying this file (CLAUDE.md) → use `prompt-engineering` skill.
 - CI logs inaccessible → STOP. Ask before any further action.
-- Immediately after a PR call that changes the diff — `gh pr create`/`gh pr edit`, or an MCP `create_pull_request`/`update_pull_request` call — before the turn ends: always run `ponytail-review`, then `requesting-code-review` + `receiving-code-review`. Metadata-only updates (title/body, no file changes) are exempt. This is part of the PR action itself, not optional follow-up.
+- Immediately after creating a PR, or pushing new commits to an open PR's branch — `gh pr create`/`git push`, or an MCP `create_pull_request` call — before the turn ends: always run `ponytail-review`, then `requesting-code-review` + `receiving-code-review`. A metadata-only edit (title/body via `gh pr edit`/`update_pull_request`, no new commits since the last review) is exempt. This is part of the PR action itself, not optional follow-up.
 
 ## Naming
 
