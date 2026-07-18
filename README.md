@@ -6,7 +6,8 @@ selection vendored from external repos.
 ## Layout
 
 Skills natively authored in this repo live directly under `skills/`:
-`v-model/` (v-model-*), `token/` (token-*), `prompt-engineering/`, `writing-skills/`.
+`v-model/` (v-model-*), `token/` (token-*), `prompt-engineering/`, `writing-skills/`,
+`verifying-sources/`.
 
 Vendored skills are grouped by origin, one folder per source repo:
 
@@ -38,21 +39,29 @@ here and in `obra/superpowers`, with different content) and unwanted content.
 
 ### Updating a vendored skill
 
-`git subtree pull` doesn't apply — it needs the prefix to mirror the whole
-source repo, but each skill here is split from a single subdirectory. Re-split
-manually instead, per skill, when an update is actually needed (no scheduled sync):
+Neither `git subtree pull` nor `git subtree merge` works here: both need a
+`git-subtree-dir` trailer on a prior commit to find the original add, but this
+repo's vendoring commits were squash-merged via GitHub PR, which strips that
+trailer. Re-sync the tree manually instead, per skill, when an update is
+actually needed (no scheduled sync):
 
 ```bash
-git clone --depth 1 https://github.com/<owner>/<repo>.git /tmp/<repo>
+git clone --depth 1 --branch <branch> https://github.com/<owner>/<repo>.git /tmp/<repo>
 cd /tmp/<repo> && git subtree split --prefix=<path-in-source> -b split-<skill>
 cd /path/to/this/repo
 git fetch /tmp/<repo> split-<skill>
-git subtree merge --prefix=skills/<origin>/<skill> FETCH_HEAD --squash \
-  -m "vendor(skills): update <skill> from <owner>/<repo>"
+git rm -r skills/<origin>/<skill>
+git read-tree --prefix=skills/<origin>/<skill>/ -u FETCH_HEAD
+git diff --cached --quiet || git commit -m "vendor(skills): update <skill> from <owner>/<repo>"
 ```
 
-New skill from a repo not yet listed: same recipe, `git subtree add` instead of
-`merge` (prefix doesn't exist yet), then add a row to the table above.
+`git subtree split` scopes the fetched commit's tree to just the skill's
+subdirectory, so `git read-tree --prefix=... -u FETCH_HEAD` replaces the local
+copy wholesale; the `git diff --cached --quiet` guard skips the commit when
+upstream hasn't changed.
+
+New skill from a repo not yet listed: same recipe, but skip `git rm` (nothing
+exists yet at that prefix), then add a row to the table above.
 
 ## Installing skills locally
 
