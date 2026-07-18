@@ -9,7 +9,7 @@
 
 Once per session, before any response or action:
 
-1. Follow `using-superpowers` and `caveman` skills, *always*.
+1. Follow `using-superpowers` and `caveman` skills, *always*. If either fails to load ("Unknown skill"), run `scripts/install-skills.sh` first, then retry.
 2. Start in plan mode, *always*.
 
 ## Per-turn in session
