@@ -38,10 +38,10 @@ Output the critical analysis and revised plan only — not the draft.
 ## Code / Docs / Commits / PRs
 
 - ALWAYS use English and ASCII only (no Unicode).
-- Follow `caveman` skill for PR descriptions and code comments; `caveman-commit` for commit messages. Don't load `caveman` outside these three cases.
+- Follow `caveman` skill for PR descriptions and code comments. Follow `caveman-commit` skill for commit messages. Don't load `caveman` outside these three cases.
 - Modifying this file (CLAUDE.md) → use `prompt-engineering` skill.
 - CI logs inaccessible → STOP. Ask before any further action.
-- Immediately after any `create_pull_request` or `update_pull_request` tool call, before the turn ends: run `ponytail-review`, then `requesting-code-review` + `receiving-code-review`. No exceptions — this is part of the PR action itself, not optional follow-up.
+- Immediately after creating or updating a PR — `gh pr create`/`gh pr edit`, or an MCP `create_pull_request`/`update_pull_request` call — before the turn ends: run `ponytail-review`, then `requesting-code-review` + `receiving-code-review`. No exceptions — this is part of the PR action itself, not optional follow-up.
 
 ## PR watching
 
