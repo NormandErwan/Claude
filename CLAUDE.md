@@ -22,8 +22,7 @@ At the start of every turn, before any response or action:
 4. Not obvious → Clarify, Planify, Validate before acting:
    - Clarify: ask focused questions (`grilling`, `grill-with-docs`) until every ambiguity is closed.
    - Planify: draft the concrete approach.
-   - Validate: get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit/Write/Bash/git/PR calls).
-   - No exceptions.
+   - Validate: get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit/Write/Bash/git/PR calls). No exceptions.
 
 ## Network errors
 
