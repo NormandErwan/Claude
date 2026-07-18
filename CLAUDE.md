@@ -49,7 +49,7 @@ Output the critical analysis and revised plan only — not the draft.
 
 ## Naming
 
-Every 2-3 turns, once scope is clear or has shifted: draft a short title, confirm via `AskUserQuestion`, then rename the PR (`update_pull_request`/`gh pr edit`) and the conversation title if available.
+Every 2-3 turns since the last rename, once scope is clear or has shifted: draft a short title, confirm via `AskUserQuestion`, then rename the PR (`update_pull_request`/`gh pr edit`), and the conversation title too when a rename tool exists for it.
 
 ## PR watching
 
