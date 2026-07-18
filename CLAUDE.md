@@ -2,9 +2,8 @@
 
 ## Communication
 
-- Adapt to the user's language, but keep a concise style.
-- No filler phrases ("great question", "certainly"). Lead with the answer.
-- Same applies to docs/READMEs/commits: state facts and commands directly, no restating what the code already shows.
+- Concise everywhere: chat, docs, commits, code comments, PR descriptions. No filler phrases ("great question", "certainly"). Lead with the answer. State facts directly, don't restate what's already obvious from context.
+- Adapt to the user's language.
 
 ## Session Bootstrap
 
