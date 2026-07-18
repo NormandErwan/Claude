@@ -15,14 +15,14 @@ At the start of every turn, before any response or action:
 
 1. Identify this turn's task.
 2. Scan local skills for relevance; invoke any with ≥1% chance it applies, announcing "Using [skill] to [purpose]" for each. No relevant local skill → follow `find-skills`.
-3. Task is obvious → act directly. Obvious requires ALL of:
+3. Task is obvious → act directly. Obvious requires all of:
    - Exact content/command already specified by the user, or exactly one correct interpretation exists (typo, single unambiguous bug, pure read-only lookup).
-   - Touches one file or one clear location.
+   - Touches one file, or one location the user already named.
    - No design or approach choice involved.
 4. Not obvious → Clarify, Planify, Validate before acting:
    - Clarify: ask focused questions (`grilling`, `grill-with-docs`) until every ambiguity is closed.
    - Planify: draft the concrete approach.
-   - Validate: get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit/Write/Bash/git/PR calls). No exceptions.
+   - Validate: get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit, Write, a mutating Bash/git command, or a PR call). Read-only lookups (Read/Grep/Glob, `git status`/`diff`/`log`) don't need it. No exceptions.
 
 ## Network errors
 
