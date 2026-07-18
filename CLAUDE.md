@@ -2,14 +2,14 @@
 
 ## Communication
 
-- Adapt to the user's language, but keep a concise style.
-- No filler phrases ("great question", "certainly"). Lead with the answer.
+- Concise everywhere: chat, docs, code. No filler phrases ("great question", "certainly"). Lead with the answer. State facts directly, don't restate what's already obvious from context.
+- Adapt to the user's language.
 
 ## Session Bootstrap
 
 Once per session, before any response or action:
 
-1. Follow `using-superpowers` and `caveman` skills, *always*. If either fails to load ("Unknown skill"), run `scripts/install-skills.sh` first, then retry.
+1. Follow `using-superpowers` skill, *always*.
 2. Start in plan mode, *always*.
 
 ## Per-turn in session
@@ -38,10 +38,10 @@ Output the critical analysis and revised plan only — not the draft.
 ## Code / Docs / Commits / PRs
 
 - ALWAYS use English and ASCII only (no Unicode).
-- Follow `caveman-commit` skill for commits.
+- Follow `caveman` skill for PR descriptions and code comments; `caveman-commit` for commit messages. Don't load `caveman` outside these three cases.
+- Modifying this file (CLAUDE.md) → use `prompt-engineering` skill.
 - CI logs inaccessible → STOP. Ask before any further action.
-- After creating or updating a PR: ALWAYS run `ponytail-review` (over-engineering pass), then `requesting-code-review` + `receiving-code-review` (correctness + architecture).
-- When PR is accepted, follow `finishing-a-development-branch` skill.
+- Immediately after any `create_pull_request` or `update_pull_request` tool call, before the turn ends: run `ponytail-review`, then `requesting-code-review` + `receiving-code-review`. No exceptions — this is part of the PR action itself, not optional follow-up.
 
 ## PR watching
 
@@ -54,7 +54,7 @@ requested, merge conflict, unresolved threads).
 
 Before claiming work complete, fixed, or passing: run verification commands first. Follow `verification-before-completion` skill. Evidence before assertions.
 
-## Skill retrospective
+## Retrospective
 
 Immediately before ending any turn in which ≥1 of these events occurred:
 
@@ -66,12 +66,13 @@ Immediately before ending any turn in which ≥1 of these events occurred:
 | F4 | A skill was invoked but its guidance did not cover the situation — had to deviate |
 | F5 | The user corrected a factual error in the model's output during this turn |
 | F6 | A tool returned an error requiring a different approach than the plan assumed |
+| F7 | The user gave an explicit instruction, correction, or preference during the conversation not yet captured in CLAUDE.md or a skill |
 
 If ≥1 code triggered, emit before ending the turn:
 
 ```
-Skill retrospective [triggered codes]:
-- [Modify/Create/Delete] <skill> — <one sentence why> — <minimal change>
+Retrospective [triggered codes]:
+- [Modify/Create/Delete] <skill | CLAUDE.md section | user preference> — <one sentence why> — <minimal change>
 (max 3 items)
 ```
 
