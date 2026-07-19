@@ -350,6 +350,13 @@ Do not modify the command or add additional flags.
 - **Narrow bridge with cliffs on both sides**: There's only one safe way forward. Provide specific guardrails and exact instructions (low freedom). Example: database migrations that must run in exact sequence.
 - **Open field with no hazards**: Many paths lead to success. Give general direction and trust Claude to find the best route (high freedom). Example: code reviews where context determines the best approach.
 
+### Match structure to signal density
+
+Claude scans bullet and tree structure more reliably than it parses paragraphs. Default to lists over prose for rules, steps, or conditions.
+
+- **Compression must track freedom.** Low-freedom content (trigger conditions, checklists, exact sequences — see above) must stay exact: compressing it into vague bullets destroys the precision that makes it reliable. High-freedom guidance can stay as terse prose or a short list — it doesn't need a rigid checklist to work.
+- **Don't restate what Claude already knows** (see "Concise is key" above) — the same discipline applies to structure: no bullet tree explaining a tool Claude already understands (e.g. what `AskUserQuestion` does).
+
 # Persuasion Principles for Agent Communication
 
 Usefull for writing prompts, including but not limited to: commands, hooks, skills for Claude Code, or prompts for sub agents or any other LLM interaction.
