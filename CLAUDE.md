@@ -36,7 +36,7 @@ At the start of every turn, before any response or action:
 - Failure is CI-only and can't be reproduced locally → say so explicitly and get confirmation before using CI runs to iterate.
 - Before claiming work complete, fixed, or passing: always run verification commands first. Follow `verification-before-completion` skill. Evidence before assertions.
 
-## Code / Docs / Commits / PRs
+## Code / Docs / Commits
 
 - ALWAYS use English and ASCII only (no Unicode).
 - Follow `caveman` skill for PR descriptions and code comments. Follow `caveman-commit` skill for commit messages. Don't load `caveman` outside these three cases.
