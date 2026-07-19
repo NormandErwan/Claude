@@ -21,7 +21,7 @@ At the start of every turn, before any response or action:
    - No design or approach choice involved.
 4. Not obvious → Clarify, Planify, Validate before acting:
    - Clarify: ask focused questions (`grilling`, `grill-with-docs`) until every ambiguity is closed.
-   - Planify: draft the concrete approach, always self-reviewed per `## Plan review` before showing it.
+   - Planify: draft the concrete approach. Always self-review it per `## Plan review` before showing it.
    - Validate: always get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit, Write, a mutating Bash/git command, or a PR call). Read-only lookups (Read/Grep/Glob, `git status`/`diff`/`log`) don't need it.
 
 ## Network errors
@@ -45,7 +45,7 @@ Output the critical analysis and revised plan only — not the draft.
 - Follow `caveman` skill for PR descriptions and code comments. Follow `caveman-commit` skill for commit messages. Don't load `caveman` outside these three cases.
 - Modifying this file (CLAUDE.md) → use `prompt-engineering` skill.
 - CI logs inaccessible → STOP. Ask before any further action.
-- Before ending a turn that pushed diff-changing PR commits without a review yet (`gh pr create`/`git push`, or an MCP `create_pull_request` call): the last task of an EnterPlanMode-approved plan just finished → always run `ponytail-review`, then `requesting-code-review` + `receiving-code-review` immediately, no asking. Otherwise → ask via `AskUserQuestion` whether to review now or keep going. A metadata-only edit (title/body via `gh pr edit`/`update_pull_request`, no new commits since the last review) is exempt.
+- Before ending any turn while a diff-changing PR push (`gh pr create`/`git push`, or an MCP `create_pull_request` call) remains unreviewed: the last task of an EnterPlanMode-approved plan just finished → always run `ponytail-review`, then `requesting-code-review` + `receiving-code-review` immediately, no asking. Otherwise → ask via `AskUserQuestion` whether to review now or keep going, every turn, until answered. A metadata-only edit (title/body via `gh pr edit`/`update_pull_request`, no new commits since the last review) is exempt.
 
 ## Naming
 
