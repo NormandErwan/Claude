@@ -21,46 +21,32 @@ At the start of every turn, before any response or action:
    - No design or approach choice involved.
 4. Not obvious → Clarify, Planify, Validate before acting:
    - Clarify: ask focused questions (`grilling`, `grill-with-docs`) until every ambiguity is closed.
-   - Planify: draft the concrete approach. Always self-review it per `## Plan review` before showing it.
+   - Planify: draft the concrete approach. Always self-review it first — check assumptions, alternatives, expert challenges — and show only the critical analysis + revised plan, never the draft.
    - Validate: always get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit, Write, a mutating Bash/git command, or a PR call). Read-only lookups (Read/Grep/Glob, `git status`/`diff`/`log`) don't need it.
 
-## Network errors
+## Error handling
 
-On non-2xx / proxy block for any external request: surface `[BLOCKED] <url> — <status>`, do not continue as if it succeeded. If the host is required for the task, stop and tell the user.
+- Non-2xx / proxy block on any external request → surface `[BLOCKED] <url> — <status>`, don't continue as if it succeeded. If the host is required for the task, stop and tell the user.
+- CI logs inaccessible → STOP. Ask before any further action.
 
-## Plan review
-
-Always, after drafting a plan: check assumptions, alternatives, and expert challenges internally.
-Output the critical analysis and revised plan only — not the draft.
-
-## Local development first
+## Local development & verification
 
 - Never use a CI run to discover whether code works. Reproduce the failure locally and fix it before pushing — see the project's own CLAUDE.md for its local build/lint/test commands.
 - A commit whose only purpose is "push and see what CI says" is not allowed. Iterate locally; push once the local checks are green.
 - Failure is CI-only and can't be reproduced locally → say so explicitly and get confirmation before using CI runs to iterate.
+- Before claiming work complete, fixed, or passing: always run verification commands first. Follow `verification-before-completion` skill. Evidence before assertions.
 
 ## Code / Docs / Commits / PRs
 
 - ALWAYS use English and ASCII only (no Unicode).
 - Follow `caveman` skill for PR descriptions and code comments. Follow `caveman-commit` skill for commit messages. Don't load `caveman` outside these three cases.
 - Modifying this file (CLAUDE.md) → use `prompt-engineering` skill.
-- CI logs inaccessible → STOP. Ask before any further action.
+
+## PR lifecycle
+
 - Before ending any turn while a diff-changing PR push (`gh pr create`/`git push`, or an MCP `create_pull_request` call) remains unreviewed: the last task of an EnterPlanMode-approved plan just finished → always run `ponytail-review`, then `requesting-code-review` + `receiving-code-review` immediately, no asking. Otherwise → ask via `AskUserQuestion` whether to review now or keep going, every turn, until answered or the PR merges/closes. A metadata-only edit (title/body via `gh pr edit`/`update_pull_request`, no new commits since the last review) is exempt.
-
-## Naming
-
-Every 2-3 turns since the last rename, once scope is clear or has shifted: draft a short title, confirm via `AskUserQuestion`, then rename the PR (`update_pull_request`/`gh pr edit`), and the conversation title too when a rename tool exists for it.
-
-## PR watching
-
-Stop self re-arming check-ins once CI is green, `mergeable_state` is `clean`,
-and there are no unresolved review comments — do not wait for merge/close.
-Only keep polling if something is still pending (CI running, changes
-requested, merge conflict, unresolved threads).
-
-## Verification
-
-Before claiming work complete, fixed, or passing: run verification commands first. Follow `verification-before-completion` skill. Evidence before assertions.
+- Every 2-3 turns since the last rename, once scope is clear or has shifted: draft a short title, confirm via `AskUserQuestion`, then rename the PR (`update_pull_request`/`gh pr edit`), and the conversation title too when a rename tool exists for it.
+- Stop self re-arming check-ins once CI is green, `mergeable_state` is `clean`, and there are no unresolved review comments — don't wait for merge/close. Keep polling only if something is still pending (CI running, changes requested, merge conflict, unresolved threads).
 
 ## Retrospective
 
