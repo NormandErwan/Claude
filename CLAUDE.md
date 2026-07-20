@@ -44,8 +44,8 @@ At the start of every turn, before any response or action:
 
 ## Vendoring
 
-- A consumer repo locally `git subtree add`/updated a skill from here (their squash-merged PRs strip the `git-subtree-dir` trailer, so `git subtree push` back doesn't work) → re-apply the same skill(s) here via the documented recipe (README.md "Updating a vendored skill"), commit, push, open a PR. Pre-authorized: skip the Per-turn Validate/AskUserQuestion gate for this specific action; normal PR lifecycle rules still apply.
-- Consumers are expected to periodically re-pull from here the same way, per README.md.
+- A consumer repo locally `git subtree add`/updated a skill it can't push back (see README.md "Keeping consumers in sync") → re-apply the same skill(s) here via the documented recipe (README.md "Updating a vendored skill"), commit, push, open a PR. Pre-authorized: skip the Per-turn Validate/AskUserQuestion gate for this workflow; normal PR lifecycle rules still apply.
+- Consumers are expected to periodically re-pull from here the same way, per README.md "Keeping consumers in sync".
 
 ## PR lifecycle
 

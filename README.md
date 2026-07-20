@@ -63,11 +63,11 @@ New skill: same recipe, skip `git rm`, then add a row above.
 
 ### Keeping consumers in sync
 
-Two directions, both manual (no scheduled sync):
+Two directions, both manual (no scheduled sync), both hitting the same
+`git subtree push`-doesn't-work problem described above:
 
-- **Push back**: a consumer added/updated a skill locally via `git subtree add` (their
-  squash-merged PRs strip the `git-subtree-dir` trailer, so `git subtree push` doesn't
-  work) → re-apply the same skill(s) here using the recipe above, then push/PR so other
+- **Push back**: a consumer added/updated a skill locally via `git subtree add` →
+  re-apply the same skill(s) here using the recipe above, then push/PR so other
   consumers get it too.
 - **Pull down**: consumers should periodically re-run the recipe above (this repo as
   `<owner>/<repo>`) to catch updates made here.
