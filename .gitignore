@@ -1,4 +1,5 @@
 *
-!skills
-!scripts
+!skills/
+!skills/**
+!scripts/
 !*.md

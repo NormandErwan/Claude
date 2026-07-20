@@ -1,84 +1,30 @@
 # Claude
 
-Skills library for Claude Code: natively-authored skills plus a curated
-selection vendored from external repos.
+Skills library for Claude Code: natively-authored skills plus a curated selection vendored from external repos.
 
 ## Layout
 
-Skills natively authored in this repo live directly under `skills/`:
-`v-model/` (v-model-*), `token/` (token-*), `prompt-engineering/`, `writing-skills/`,
-`verifying-sources/`.
+All skills are grouped by origin under `skills`:
 
-Vendored skills are grouped by origin, one folder per source repo:
+- Natively-authored skills under `skills/normanderwan/`.
+- Vendored skills under `skills/<owner>/<repo>/<skill-name>`:
 
-| Folder | Origin |
-|---|---|
-| `skills/superpowers/` | `obra/superpowers` (subset) |
-| `skills/vercel-labs-skills/` | `vercel-labs/skills` |
-| `skills/caveman/` | `juliusbrussee/caveman` (subset) |
-| `skills/mattpocock-skills/` | `mattpocock/skills` (subset) |
-| `skills/ponytail/` | `DietrichGebert/ponytail` (subset) |
-| `skills/dotnet-skills/` | `aaronontheweb/dotnet-skills` (subset) |
-| `skills/anthropics-skills/` | `anthropics/skills` (subset) |
-| `skills/agent-skills/` | `vercel-labs/agent-skills` (subset) |
-| `skills/extract-design-system/` | `arvindrk/extract-design-system` |
+  | Owner            | Repo                    | Skill                                                          |
+  | ---------------- | ----------------------- | -------------------------------------------------------------- |
+  | `obra`           | `superpowers`           | `*`                                                            |
+  | `vercel-labs`    | `skills`                | `find-skills`                                                  |
+  | `juliusbrussee`  | `caveman`               | `caveman-commit`, `caveman`                                    |
+  | `mattpocock`     | `skills`                | `grilling`, `grill-with-docs`, `improve-codebase-architecture` |
+  | `DietrichGebert` | `ponytail`              | `*`                                                            |
+  | `aaronontheweb`  | `dotnet-skills`         | `*`                                                            |
+  | `anthropics`     | `skills`                | `frontend-design`                                              |
+  | `vercel-labs`    | `agent-skills`          | `web-design-guidelines`                                        |
+  | `arvindrk`       | `extract-design-system` | `extract-design-system`                                        |
 
-## Vendoring
-
-External skills are committed via `git subtree`, split per skill (not whole-repo)
-into `skills/<origin>/<skill-name>/` — no runtime install, no `npx skills add`.
-Per-skill splitting avoids name collisions (e.g. `writing-skills` exists both
-here and in `obra/superpowers`, with different content) and unwanted content.
-
-| Local skill | Source repo | Path in source | Branch |
-|---|---|---|---|
-| `superpowers/*` | `obra/superpowers` | `skills/<name>` | `main` |
-| `vercel-labs-skills/find-skills` | `vercel-labs/skills` | `skills/find-skills` | `main` |
-| `caveman/caveman-commit`, `caveman`, `caveman-compress`, `caveman-review`, `caveman-help` | `juliusbrussee/caveman` | `skills/<name>` | `main` |
-| `mattpocock-skills/grill-with-docs`, `improve-codebase-architecture` | `mattpocock/skills` | `skills/engineering/<name>` | `main` |
-| `mattpocock-skills/grilling` | `mattpocock/skills` | `skills/productivity/grilling` | `main` |
-| `ponytail/ponytail-review` | `DietrichGebert/ponytail` | `skills/ponytail-review` | `main` |
-| `dotnet-skills/<name>` | `aaronontheweb/dotnet-skills` | `skills/<name>` | `master` |
-| `anthropics-skills/frontend-design` | `anthropics/skills` | `skills/frontend-design` | `main` |
-| `agent-skills/web-design-guidelines` | `vercel-labs/agent-skills` | `skills/web-design-guidelines` | `main` |
-| `extract-design-system` | `arvindrk/extract-design-system` | `skills/extract-design-system` | `main` |
-
-### Updating a vendored skill
-
-`git subtree pull`/`merge` don't work here: vendoring commits were
-squash-merged via PR, stripping the `git-subtree-dir` trailer they need.
-Re-sync manually per skill instead (no scheduled sync):
-
-```bash
-git clone --depth 1 --branch <branch> https://github.com/<owner>/<repo>.git /tmp/<repo>
-cd /tmp/<repo> && git subtree split --prefix=<path-in-source> -b split-<skill>
-cd /path/to/this/repo
-git fetch /tmp/<repo> split-<skill>
-git rm -r skills/<origin>/<skill>
-git read-tree --prefix=skills/<origin>/<skill>/ -u FETCH_HEAD
-git diff --cached --quiet || git commit -m "vendor(skills): update <skill> from <owner>/<repo>"
-```
-
-New skill: same recipe, skip `git rm`, then add a row above.
-
-### Keeping consumers in sync
-
-Two directions, both manual (no scheduled sync), both hitting the same
-`git subtree push`-doesn't-work problem described above:
-
-- **Push back**: a consumer added/updated a skill locally via `git subtree add` →
-  re-apply the same skill(s) here using the recipe above, then push/PR so other
-  consumers get it too.
-- **Pull down**: consumers should periodically re-run the recipe above (this repo as
-  `<owner>/<repo>`) to catch updates made here.
+  - Install or update a vendored skill with:
+    `npx degit https://github.com/<owner>/<repo>/skills/<skill-name> skills/<owner>/<repo>/<skill-name>`
 
 ## Installing skills locally
 
-`scripts/install-skills.sh` copies every skill in this repo into
-`~/.claude/skills/`, flattening the `skills/<origin>/<name>/` layout to
-`<name>/`. This repo is the source of truth: each skill is always
-overwritten with the repo's version.
-
-```bash
-./scripts/install-skills.sh
-```
+- Run `scripts/install-skills.sh` to copy every skill in this repo into `~/.claude/skills/`.
+- Always overwrite every local skill with the repo's version.
