@@ -19,6 +19,9 @@ Vendored skills are grouped by origin, one folder per source repo:
 | `skills/mattpocock-skills/` | `mattpocock/skills` (subset) |
 | `skills/ponytail/` | `DietrichGebert/ponytail` (subset) |
 | `skills/dotnet-skills/` | `aaronontheweb/dotnet-skills` (subset) |
+| `skills/anthropics-skills/` | `anthropics/skills` (subset) |
+| `skills/agent-skills/` | `vercel-labs/agent-skills` (subset) |
+| `skills/extract-design-system/` | `arvindrk/extract-design-system` |
 
 ## Vendoring
 
@@ -36,6 +39,9 @@ here and in `obra/superpowers`, with different content) and unwanted content.
 | `mattpocock-skills/grilling` | `mattpocock/skills` | `skills/productivity/grilling` | `main` |
 | `ponytail/ponytail-review` | `DietrichGebert/ponytail` | `skills/ponytail-review` | `main` |
 | `dotnet-skills/<name>` | `aaronontheweb/dotnet-skills` | `skills/<name>` | `master` |
+| `anthropics-skills/frontend-design` | `anthropics/skills` | `skills/frontend-design` | `main` |
+| `agent-skills/web-design-guidelines` | `vercel-labs/agent-skills` | `skills/web-design-guidelines` | `main` |
+| `extract-design-system` | `arvindrk/extract-design-system` | `skills/extract-design-system` | `main` |
 
 ### Updating a vendored skill
 
