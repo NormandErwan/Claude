@@ -42,6 +42,11 @@ At the start of every turn, before any response or action:
 - Follow `caveman` skill for PR descriptions and code comments. Follow `caveman-commit` skill for commit messages. Don't load `caveman` outside these three cases.
 - Modifying this file (CLAUDE.md) → use `prompt-engineering` skill.
 
+## Vendoring
+
+- A consumer repo locally `git subtree add`/updated a skill from here (their squash-merged PRs strip the `git-subtree-dir` trailer, so `git subtree push` back doesn't work) → re-apply the same skill(s) here via the documented recipe (README.md "Updating a vendored skill"), commit, push, open a PR. Pre-authorized: skip the Per-turn Validate/AskUserQuestion gate for this specific action; normal PR lifecycle rules still apply.
+- Consumers are expected to periodically re-pull from here the same way, per README.md.
+
 ## PR lifecycle
 
 - Before ending any turn while a diff-changing PR push (`gh pr create`/`git push`, or an MCP `create_pull_request` call) remains unreviewed: the last task of an EnterPlanMode-approved plan just finished → always run `ponytail-review`, then `requesting-code-review` + `receiving-code-review` immediately, no asking. Otherwise → ask via `AskUserQuestion` whether to review now or keep going, every turn, until answered or the PR merges/closes. A metadata-only edit (title/body via `gh pr edit`/`update_pull_request`, no new commits since the last review) is exempt.
