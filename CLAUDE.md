@@ -7,7 +7,10 @@
 
 ## Session Bootstrap
 
-Once per session, before any response or action: follow `using-superpowers` skill, *always*.
+Once per session, before any response or action:
+
+1. Follow `using-superpowers` skill, *always*.
+2. Load every external skill listed in README.md's `## Usage` section via `npx skills add`.
 
 ## Per-turn in session
 

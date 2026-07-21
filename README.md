@@ -2,14 +2,6 @@
 
 Natively-authored skills library for Claude Code.
 
-## Layout
-
-All skills live under `skills/normanderwan/`:
-
-- `skills/` — `prompt-engineering`, `verifying-sources`, `writing-skills`
-- `token/` — `token-*`
-- `v-model/` — `v-model-*`
-
 ## Usage
 
 External skills are not vendored here. Install them per session with the
@@ -38,25 +30,33 @@ npx skills add anthropics/skills@frontend-design
 npx skills add arvindrk/extract-design-system@extract-design-system
 npx skills add juliusbrussee/caveman@caveman
 npx skills add juliusbrussee/caveman@caveman-commit
-npx skills add juliusbrussee/caveman@caveman-compress
-npx skills add juliusbrussee/caveman@caveman-help
-npx skills add juliusbrussee/caveman@caveman-review
 npx skills add mattpocock/skills@grill-with-docs
 npx skills add mattpocock/skills@grilling
 npx skills add mattpocock/skills@improve-codebase-architecture
+npx skills add obra/superpowers@brainstorming
+npx skills add obra/superpowers@dispatching-parallel-agents
+npx skills add obra/superpowers@executing-plans
 npx skills add obra/superpowers@finishing-a-development-branch
 npx skills add obra/superpowers@receiving-code-review
 npx skills add obra/superpowers@requesting-code-review
+npx skills add obra/superpowers@subagent-driven-development
+npx skills add obra/superpowers@systematic-debugging
+npx skills add obra/superpowers@test-driven-development
+npx skills add obra/superpowers@using-git-worktrees
 npx skills add obra/superpowers@using-superpowers
 npx skills add obra/superpowers@verification-before-completion
 npx skills add vercel-labs/agent-skills@web-design-guidelines
 npx skills add vercel-labs/skills@find-skills
 ```
 
+`obra/superpowers@writing-skills` is deliberately excluded: this repo has
+its own `writing-skills` skill with different content, and installing both
+collides on the same skill name.
+
 ## Adding this repo to another project
 
-Pull the skills above into a consumer repo's `.claude` directory with
-`git subtree`:
+Pull this repo's natively-authored skills into a consumer repo's `.claude`
+directory with `git subtree`:
 
 ```bash
 git subtree add --prefix=.claude https://github.com/NormandErwan/Claude.git main --squash
