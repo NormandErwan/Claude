@@ -3,15 +3,16 @@
 import sys, re, datetime
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+VMODEL_DIR = Path(__file__).resolve().parent.parent
+SKILLS_ROOT = VMODEL_DIR.parent
 SKILL_GLOB = "v-model-*/SKILL.md"
 GUIDE = None  # guide-methode-projet-logiciel.md absent du depot
-CHANGELOG = ROOT / "CHANGELOG.md"
+CHANGELOG = VMODEL_DIR / "CHANGELOG.md"
 SEMVER = re.compile(r"^\d+\.\d+\.\d+$")
 
 
 def skill_files():
-    return sorted(ROOT.glob(SKILL_GLOB))
+    return sorted(SKILLS_ROOT.glob(SKILL_GLOB))
 
 
 def _frontmatter_bounds(lines):
@@ -95,7 +96,7 @@ def check():
     vs = all_versions()
     head = changelog_head_version(CHANGELOG)
     distinct = {v for v in vs.values() if v is not None}
-    missing = [str(f.relative_to(ROOT)) for f, v in vs.items() if v is None]
+    missing = [str(f.relative_to(SKILLS_ROOT)) for f, v in vs.items() if v is None]
     ok = True
     if missing:
         print("Version absente :", *missing, sep="\n  ")
