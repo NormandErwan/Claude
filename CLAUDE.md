@@ -31,6 +31,8 @@ At the start of every turn, before any response or action:
 
 - Non-2xx / proxy block on any external request → surface `[BLOCKED] <url> — <status>`, don't continue as if it succeeded. If the host is required for the task, stop and tell the user.
 - CI logs inaccessible → STOP. Ask before any further action.
+- A Validate-gate `AskUserQuestion` (or any mutating-action permission prompt) closes unanswered — denied, dismissed, or timed out — → treat as no decision, never as approval of any option including the recommended default. Don't execute the gated action. Note it's still open and re-ask.
+- A non-mutating deliverable-channel prompt (e.g. `Artifact` publish) closes unanswered → fall back once to the safer/plainer channel (e.g. plain file) without re-prompting.
 
 ## Local development & verification
 
