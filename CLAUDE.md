@@ -23,7 +23,7 @@ At the start of every turn, before any response or action:
    - Touches one file, or one location the user already named.
    - No design or approach choice involved.
 4. Not obvious → Clarify, Planify, Validate before acting:
-   - Clarify: ask focused questions (`grilling`, `grill-with-docs`) until every ambiguity is closed.
+   - Clarify: ask focused questions (`grill-me`, `grill-with-docs`) until every ambiguity is closed.
    - Planify: draft the concrete approach. Always self-review it first — check assumptions, alternatives, expert challenges — and show only the critical analysis + revised plan, never the draft.
    - Validate: always get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit, Write, a mutating Bash/git command, or a PR call). Read-only lookups (Read/Grep/Glob, `git status`/`diff`/`log`) don't need it.
 

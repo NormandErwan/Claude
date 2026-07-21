@@ -52,6 +52,7 @@ npx skills add obra/superpowers@test-driven-development
 npx skills add obra/superpowers@using-git-worktrees
 npx skills add obra/superpowers@using-superpowers
 npx skills add obra/superpowers@verification-before-completion
+npx skills add obra/superpowers@writing-plans
 npx skills add vercel-labs/agent-skills@web-design-guidelines
 npx skills add vercel-labs/skills@find-skills
 ```
