@@ -32,13 +32,14 @@ npx skills add juliusbrussee/caveman@caveman
 npx skills add juliusbrussee/caveman@caveman-commit
 npx skills add mattpocock/skills@codebase-design
 npx skills add mattpocock/skills@domain-modeling
+npx skills add mattpocock/skills@grill-me
 npx skills add mattpocock/skills@grill-with-docs
-npx skills add mattpocock/skills@grilling
 npx skills add mattpocock/skills@handoff
 npx skills add mattpocock/skills@improve-codebase-architecture
 npx skills add mattpocock/skills@prototype
 npx skills add mattpocock/skills@research
 npx skills add mattpocock/skills@resolving-merge-conflicts
+npx skills add mattpocock/skills@teach
 npx skills add obra/superpowers@brainstorming
 npx skills add obra/superpowers@dispatching-parallel-agents
 npx skills add obra/superpowers@executing-plans
