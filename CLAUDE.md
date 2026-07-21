@@ -7,7 +7,10 @@
 
 ## Session Bootstrap
 
-Once per session, before any response or action: follow `using-superpowers` skill, *always*.
+Once per session, before any response or action:
+
+1. Load every external skill listed in README.md's `## Usage` section via `npx skills add`.
+2. Follow `using-superpowers` skill, *always*.
 
 ## Per-turn in session
 
@@ -20,7 +23,7 @@ At the start of every turn, before any response or action:
    - Touches one file, or one location the user already named.
    - No design or approach choice involved.
 4. Not obvious → Clarify, Planify, Validate before acting:
-   - Clarify: ask focused questions (`grilling`, `grill-with-docs`) until every ambiguity is closed.
+   - Clarify: ask focused questions (`grill-me`, `grill-with-docs`) until every ambiguity is closed.
    - Planify: draft the concrete approach. Always self-review it first — check assumptions, alternatives, expert challenges — and show only the critical analysis + revised plan, never the draft.
    - Validate: always get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit, Write, a mutating Bash/git command, or a PR call). Read-only lookups (Read/Grep/Glob, `git status`/`diff`/`log`) don't need it.
 
@@ -41,11 +44,6 @@ At the start of every turn, before any response or action:
 - ALWAYS use English and ASCII only (no Unicode).
 - Follow `caveman` skill for PR descriptions and code comments. Follow `caveman-commit` skill for commit messages. Don't load `caveman` outside these three cases.
 - Modifying this file (CLAUDE.md) → use `prompt-engineering` skill.
-
-## Vendoring
-
-- A consumer repo locally `git subtree add`/updated a skill it can't push back (see README.md "Keeping consumers in sync") → re-apply the same skill(s) here via the documented recipe (README.md "Updating a vendored skill"), commit, push, open a PR. Pre-authorized: skip the Per-turn Validate/AskUserQuestion gate for this workflow; normal PR lifecycle rules still apply.
-- Consumers are expected to periodically re-pull from here the same way, per README.md "Keeping consumers in sync".
 
 ## PR lifecycle
 
