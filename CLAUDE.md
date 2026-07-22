@@ -33,7 +33,7 @@
 ## Code / docs / commits
 - English + ASCII only.
 - `caveman`: PR descriptions, code comments. `caveman-commit`: commit messages. Nowhere else.
-- Editing this file -> also `prompt-engineering`, in addition to the routing above.
+- Editing this file -> also `prompt-engineering`, on top of the routing above.
 
 ## PR lifecycle
 
