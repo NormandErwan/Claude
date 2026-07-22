@@ -11,7 +11,7 @@
 ## Every turn
 1. Identify the task.
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `find-skills`.
-3. Obvious? (literal content/command, or one unambiguous reading; one named file/location; zero design choice) -> act.
+3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
 4. Not obvious -> Clarify (`grill-me`/`grill-with-docs` to zero ambiguity) -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (`AskUserQuestion` before Edit/Write/mutating Bash-git/PR call; read-only skips).
 
 ## Error handling
@@ -34,15 +34,18 @@
 - English + ASCII only.
 - `caveman`: PR descriptions, code comments. `caveman-commit`: commit messages. Nowhere else.
 - Editing this file -> also `prompt-engineering`, on top of the routing above.
+- Rewriting any CLAUDE.md for brevity: verify every rule survives with equivalent meaning (rule-by-rule vs the original), get an independent review before merging, A/B two candidates via agent dry-run if unsure which reads clearer.
 
 ## PR lifecycle
+
+Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 
 | Trigger | Action |
 |---|---|
 | Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then `requesting-code-review` + `receiving-code-review`, no asking |
 | Turn would end with an unreviewed diff-changing push, otherwise | `AskUserQuestion`: review now or keep going - every turn until answered or PR merges/closes |
 | Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
-| >=2-3 turns since last rename, scope clear/shifted | Draft short title, confirm via `AskUserQuestion`, rename PR + conversation title |
+| >=2-3 turns since last rename, scope clear/shifted | Draft short title, confirm via `AskUserQuestion`, rename PR + conversation title (if a rename tool exists) |
 | CI green, `mergeable_state: clean`, no unresolved comments | Stop self re-arming (don't wait for merge/close) |
 | Anything still pending (CI running, changes requested, conflict, unresolved threads) | Keep polling |
 
