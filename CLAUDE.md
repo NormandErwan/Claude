@@ -26,7 +26,6 @@
 | Validate-gate `AskUserQuestion` (or mutating prompt) unanswered | Max out its wait/timeout, then treat as no decision (not approval, not even default); don't act; re-ask |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
 | Same gated prompt unanswered twice | No 3rd try: `AskUserQuestion` -> re-ask as plain text; other -> stop, report attempt + reason, wait |
-| Tool call errors (not AskUserQuestion) | Don't surface it in chat; retry silently or proceed |
 
 ## Local dev & verification
 - Don't use CI to find out if code works - reproduce locally, fix, then push (target project's own build/lint/test commands).
