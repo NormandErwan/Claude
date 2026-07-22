@@ -33,7 +33,7 @@
 
 ## Code / docs / commits
 - English + ASCII only.
-- `caveman`: PR descriptions, code comments. `caveman-commit`: commit messages. Nowhere else.
+- `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Editing this file -> also `prompt-engineering`, on top of the routing above.
 - Rewriting any CLAUDE.md for brevity: verify every rule survives with equivalent meaning (rule-by-rule vs the original), get an independent review before merging, A/B two candidates via agent dry-run if unsure which reads clearer.
 
