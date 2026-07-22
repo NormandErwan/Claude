@@ -13,7 +13,7 @@
 1. Identify the task.
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `find-skills`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
-4. Not obvious, or any suspected ambiguity/gap -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (`AskUserQuestion` before Edit/Write/mutating Bash-git/PR call; read-only skips).
+4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (`AskUserQuestion` before Edit/Write/mutating Bash-git/PR call; read-only skips).
 5. End of turn: announce an estimated token count used. Better to continue in a new session -> offer to draft the next-session prompt.
 
 ## Tool calls
@@ -54,6 +54,7 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 | >=2-3 turns since last rename, scope clear/shifted | Draft short title, confirm via `AskUserQuestion`, rename PR + conversation title (if a rename tool exists) |
 | CI green, `mergeable_state: clean`, no unresolved comments | Stop self re-arming (don't wait for merge/close) |
 | Anything still pending (CI running, changes requested, conflict, unresolved threads) | Keep polling |
+| After creating/subscribing a PR | No scheduled `send_later` check-in; react to incoming webhook events only |
 
 ## Retrospective
 
