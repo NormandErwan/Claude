@@ -5,9 +5,10 @@
 - Match user's language.
 
 ## Bootstrap - once per session
-1. `npx skills add` everything under README.md `## Usage`.
-2. Load `verifying-sources` and follow `using-superpowers`.
-3. Skill installed mid-session may not be invocable via Skill tool until next session -- if missing, say so, don't assume it loaded.
+1. This repo cloned as a dependency in the current project -> `git pull` it automatically.
+2. `npx skills add` everything under README.md `## Usage`.
+3. Load `verifying-sources` and follow `using-superpowers`.
+4. Skill installed mid-session may not be invocable via Skill tool until next session -- if missing, say so, don't assume it loaded.
 
 ## Every turn
 1. Identify the task.
