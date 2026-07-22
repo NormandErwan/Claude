@@ -6,14 +6,19 @@
 
 ## Bootstrap - once per session
 1. `npx skills add` everything under README.md `## Usage`.
-2. Always follow `using-superpowers`.
+2. Load `verifying-sources` and follow `using-superpowers`.
 3. Skill installed mid-session may not be invocable via Skill tool until next session -- if missing, say so, don't assume it loaded.
 
 ## Every turn
 1. Identify the task.
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `find-skills`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
-4. Not obvious -> Clarify (`grill-me`/`grill-with-docs` to zero ambiguity) -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (`AskUserQuestion` before Edit/Write/mutating Bash-git/PR call; read-only skips).
+4. Not obvious, or any suspected ambiguity/gap -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (`AskUserQuestion` before Edit/Write/mutating Bash-git/PR call; read-only skips).
+5. End of turn: announce an estimated token count used. Better to continue in a new session -> offer to draft the next-session prompt.
+
+## Tool calls
+- Max out the timeout on every call that supports one.
+- Call errors (e.g. a user-question prompt fails to send) -> don't surface it in chat; retry silently or proceed.
 
 ## Error handling
 
