@@ -5,15 +5,17 @@
 - Match user's language.
 
 ## Bootstrap - once per session
-1. `npx skills add` everything under README.md `## Usage`.
-2. Always follow `using-superpowers`.
-3. Skill installed mid-session may not be invocable via Skill tool until next session -- if missing, say so, don't assume it loaded.
+1. This repo added as a `.claude` subtree in the current project -> `git subtree pull --prefix=.claude https://github.com/NormandErwan/Claude.git main --squash` automatically.
+2. `npx skills add` everything under README.md `## Usage`.
+3. Load `verifying-sources` and follow `using-superpowers`.
+4. Skill installed mid-session may not be invocable via Skill tool until next session -- if missing, say so, don't assume it loaded.
 
 ## Every turn
 1. Identify the task.
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `find-skills`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
-4. Not obvious -> Clarify (`grill-me`/`grill-with-docs` to zero ambiguity) -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (`AskUserQuestion` before Edit/Write/mutating Bash-git/PR call; read-only skips).
+4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (`AskUserQuestion` before Edit/Write/mutating Bash-git/PR call; read-only skips).
+5. End of turn: announce an estimated token count used. Better to continue in a new session -> offer to draft the next-session prompt.
 
 ## Error handling
 
@@ -21,7 +23,7 @@
 |---|---|
 | External request non-2xx / proxy block | `[BLOCKED] <url> - <status>`; if host required, stop and tell user |
 | CI logs inaccessible | Stop, ask before continuing |
-| Validate-gate `AskUserQuestion` (or mutating prompt) unanswered | Treat as no decision (not approval, not even default); don't act; re-ask |
+| Validate-gate `AskUserQuestion` (or mutating prompt) unanswered | Max out its wait/timeout, then treat as no decision (not approval, not even default); don't act; re-ask |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
 | Same gated prompt unanswered twice | No 3rd try: `AskUserQuestion` -> re-ask as plain text; other -> stop, report attempt + reason, wait |
 
