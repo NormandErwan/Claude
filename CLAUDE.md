@@ -1,80 +1,73 @@
 # CLAUDE.md
 
 ## Communication
+- Concise everywhere. No filler. Answer first, state facts, no restating the obvious.
+- Match user's language.
 
-- Concise everywhere: chat, docs, code. No filler phrases ("great question", "certainly"). Lead with the answer. State facts directly, don't restate what's already obvious from context.
-- Adapt to the user's language.
+## Bootstrap - once per session
+1. `npx skills add` everything under README.md `## Usage`.
+2. Always follow `using-superpowers`.
+3. Skill installed mid-session may not be invocable via Skill tool until next session -- if missing, say so, don't assume it loaded.
 
-## Session Bootstrap
-
-Once per session, before any response or action:
-
-1. Load every external skill listed in README.md's `## Usage` section via `npx skills add`.
-2. Follow `using-superpowers` skill, *always*.
-
-## Per-turn in session
-
-At the start of every turn, before any response or action:
-
-1. Identify this turn's task.
-2. Scan local skills for relevance; invoke any with ≥1% chance it applies, announcing "Using [skill] to [purpose]" for each. No relevant local skill → follow `find-skills`.
-3. Task is obvious → act directly. Obvious requires all of:
-   - Exact content/command already specified by the user, or exactly one correct interpretation exists (typo, single unambiguous bug, pure read-only lookup).
-   - Touches one file, or one location the user already named.
-   - No design or approach choice involved.
-4. Not obvious → Clarify, Planify, Validate before acting:
-   - Clarify: ask focused questions (`grill-me`, `grill-with-docs`) until every ambiguity is closed.
-   - Planify: draft the concrete approach. Always self-review it first — check assumptions, alternatives, expert challenges — and show only the critical analysis + revised plan, never the draft.
-   - Validate: always get explicit go-ahead via `AskUserQuestion` before any mutating action (Edit, Write, a mutating Bash/git command, or a PR call). Read-only lookups (Read/Grep/Glob, `git status`/`diff`/`log`) don't need it.
+## Every turn
+1. Identify the task.
+2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `find-skills`.
+3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
+4. Not obvious -> Clarify (`grill-me`/`grill-with-docs` to zero ambiguity) -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (`AskUserQuestion` before Edit/Write/mutating Bash-git/PR call; read-only skips).
 
 ## Error handling
 
-- Non-2xx / proxy block on any external request → surface `[BLOCKED] <url> — <status>`, don't continue as if it succeeded. If the host is required for the task, stop and tell the user.
-- CI logs inaccessible → STOP. Ask before any further action.
-- A Validate-gate `AskUserQuestion` (or any mutating-action permission prompt) closes unanswered — denied, dismissed, or timed out — → treat as no decision, never as approval of any option including the recommended default. Don't execute the gated action. Note it's still open and re-ask.
-- A non-mutating deliverable-channel prompt (e.g. `Artifact` publish) closes unanswered → fall back once to the safer/plainer channel (e.g. plain file) without re-prompting.
-- Same gated prompt closes unanswered twice in a row → don't retry a 3rd time. `AskUserQuestion`: re-ask as plain text, next reply = answer. Other gated action: stop, state what was attempted and why, wait.
+| Trigger | Action |
+|---|---|
+| External request non-2xx / proxy block | `[BLOCKED] <url> - <status>`; if host required, stop and tell user |
+| CI logs inaccessible | Stop, ask before continuing |
+| Validate-gate `AskUserQuestion` (or mutating prompt) unanswered | Treat as no decision (not approval, not even default); don't act; re-ask |
+| Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
+| Same gated prompt unanswered twice | No 3rd try: `AskUserQuestion` -> re-ask as plain text; other -> stop, report attempt + reason, wait |
 
-## Local development & verification
+## Local dev & verification
+- Don't use CI to find out if code works - reproduce locally, fix, then push (target project's own build/lint/test commands).
+- No push-to-see-what-CI-says commits. Iterate locally, push when green.
+- CI-only, not reproducible locally -> say so, confirm before iterating via CI.
+- Before "done/fixed/passing" claims -> run verification commands (`verification-before-completion`). Evidence first.
 
-- Never use a CI run to discover whether code works. Reproduce the failure locally and fix it before pushing — see the project's own CLAUDE.md for its local build/lint/test commands.
-- A commit whose only purpose is "push and see what CI says" is not allowed. Iterate locally; push once the local checks are green.
-- Failure is CI-only and can't be reproduced locally → say so explicitly and get confirmation before using CI runs to iterate.
-- Before claiming work complete, fixed, or passing: always run verification commands first. Follow `verification-before-completion` skill. Evidence before assertions.
-
-## Code / Docs / Commits
-
-- ALWAYS use English and ASCII only (no Unicode).
-- Follow `caveman` skill for PR descriptions and code comments. Follow `caveman-commit` skill for commit messages. Don't load `caveman` outside these three cases.
-- Modifying this file (CLAUDE.md) → use `prompt-engineering` skill.
+## Code / docs / commits
+- English + ASCII only.
+- `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
+- Editing this file -> also `prompt-engineering`, on top of the routing above.
+- Rewriting any CLAUDE.md for brevity: verify every rule survives with equivalent meaning (rule-by-rule vs the original), get an independent review before merging, A/B two candidates via agent dry-run if unsure which reads clearer.
 
 ## PR lifecycle
 
-- Before ending any turn while a diff-changing PR push (`gh pr create`/`git push`, or an MCP `create_pull_request` call) remains unreviewed: the last task of an EnterPlanMode-approved plan just finished → always run `ponytail-review`, then `requesting-code-review` + `receiving-code-review` immediately, no asking. Otherwise → ask via `AskUserQuestion` whether to review now or keep going, every turn, until answered or the PR merges/closes. A metadata-only edit (title/body via `gh pr edit`/`update_pull_request`, no new commits since the last review) is exempt.
-- Every 2-3 turns since the last rename, once scope is clear or has shifted: draft a short title, confirm via `AskUserQuestion`, then rename the PR (`update_pull_request`/`gh pr edit`), and the conversation title too when a rename tool exists for it.
-- Stop self re-arming check-ins once CI is green, `mergeable_state` is `clean`, and there are no unresolved review comments — don't wait for merge/close. Keep polling only if something is still pending (CI running, changes requested, merge conflict, unresolved threads).
+Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
+
+| Trigger | Action |
+|---|---|
+| Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then `requesting-code-review` + `receiving-code-review`, no asking |
+| Turn would end with an unreviewed diff-changing push, otherwise | `AskUserQuestion`: review now or keep going - every turn until answered or PR merges/closes |
+| Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
+| >=2-3 turns since last rename, scope clear/shifted | Draft short title, confirm via `AskUserQuestion`, rename PR + conversation title (if a rename tool exists) |
+| CI green, `mergeable_state: clean`, no unresolved comments | Stop self re-arming (don't wait for merge/close) |
+| Anything still pending (CI running, changes requested, conflict, unresolved threads) | Keep polling |
 
 ## Retrospective
 
-Immediately before ending any turn in which ≥1 of these events occurred:
+Immediately before ending a turn where >=1 fired:
 
-| Code | Observable event |
+| Code | Event |
 |---|---|
-| F1 | A plan step was revised or abandoned after starting (backtracking) |
-| F2 | A file was read a second time in the same turn because the first read was insufficient |
-| F3 | An inconsistency between two documents discovered and fixed that a prior checklist should have caught |
-| F4 | A skill was invoked but its guidance did not cover the situation — had to deviate |
-| F5 | The user corrected a factual error in the model's output during this turn |
-| F6 | A tool returned an error requiring a different approach than the plan assumed |
-| F7 | The user gave an explicit instruction, correction, or preference during the conversation not yet captured in CLAUDE.md or a skill |
+| F1 | Plan step revised/abandoned mid-execution |
+| F2 | File re-read same turn, first read insufficient |
+| F3 | Cross-doc inconsistency found+fixed a checklist should've caught |
+| F4 | Skill invoked but didn't cover the case - deviated |
+| F5 | User corrected a factual error this turn |
+| F6 | Tool error forced a different approach than planned |
+| F7 | User gave an instruction/preference not yet captured anywhere |
 
-If ≥1 code triggered, emit before ending the turn:
-
+>=1 fired -> emit before ending turn:
 ```
-Retrospective [triggered codes]:
-- [Modify/Create/Delete] <skill | CLAUDE.md section | user preference> — <one sentence why> — <minimal change>
-(max 3 items)
+Retrospective [codes]:
+- [Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <why, one sentence> - <minimal change>
+(max 3)
 ```
-
-Never apply the change without explicit user approval.
-If 0 codes triggered: skip silently.
+Never apply without explicit approval. 0 fired -> skip silently.
