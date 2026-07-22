@@ -54,7 +54,6 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 | >=2-3 turns since last rename, scope clear/shifted | Draft short title, confirm via `AskUserQuestion`, rename PR + conversation title (if a rename tool exists) |
 | CI green, `mergeable_state: clean`, no unresolved comments | Stop self re-arming (don't wait for merge/close) |
 | Anything still pending (CI running, changes requested, conflict, unresolved threads) | Keep polling |
-| After creating/subscribing a PR | No scheduled `send_later` check-in; react to incoming webhook events only |
 
 ## Retrospective
 
