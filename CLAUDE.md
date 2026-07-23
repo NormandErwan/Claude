@@ -14,7 +14,7 @@
 1. Identify the task.
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `find-skills`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
-4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (`AskUserQuestion` before Edit/Write/mutating Bash-git/PR call; read-only skips).
+4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call; read-only skips).
 5. End of turn: announce an estimated token count used. Better to continue in a new session -> offer to draft the next-session prompt.
 
 ## Error handling
@@ -23,9 +23,9 @@
 |---|---|
 | External request non-2xx / proxy block | `[BLOCKED] <url> - <status>`; if host required, stop and tell user |
 | CI logs inaccessible | Stop, ask before continuing |
-| Validate-gate `AskUserQuestion` (or mutating prompt) unanswered | Max out its wait/timeout, then treat as no decision (not approval, not even default); don't act; re-ask |
+| `AskUserQuestion` tool | Broken when reply is delayed (anthropics/claude-code#70648, unfixed) - don't use; ask in plain text instead. Revisit once fixed |
+| Validate-gate question (or mutating prompt) unanswered | End turn, don't act (not approval, not even default); wait for reply. Unanswered twice -> stop, report attempt + reason, wait |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
-| Same gated prompt unanswered twice | No 3rd try: `AskUserQuestion` -> re-ask as plain text; other -> stop, report attempt + reason, wait |
 
 ## Local dev & verification
 - Don't use CI to find out if code works - reproduce locally, fix, then push (target project's own build/lint/test commands).
@@ -46,9 +46,9 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 | Trigger | Action |
 |---|---|
 | Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then `requesting-code-review` + `receiving-code-review`, no asking |
-| Turn would end with an unreviewed diff-changing push, otherwise | `AskUserQuestion`: review now or keep going - every turn until answered or PR merges/closes |
+| Turn would end with an unreviewed diff-changing push, otherwise | Plain-text question: review now or keep going - ask once, wait until answered or PR merges/closes |
 | Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
-| >=2-3 turns since last rename, scope clear/shifted | Draft short title, confirm via `AskUserQuestion`, rename PR + conversation title (if a rename tool exists) |
+| >=2-3 turns since last rename, scope clear/shifted | Draft short title, confirm via plain-text question, rename PR + conversation title (if a rename tool exists) |
 | CI green, `mergeable_state: clean`, no unresolved comments | Stop self re-arming (don't wait for merge/close) |
 | Anything still pending (CI running, changes requested, conflict, unresolved threads) | Keep polling |
 
