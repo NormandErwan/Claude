@@ -1,4 +1,43 @@
 *
-!skills/
-!skills/**
 !*.md
+!skills/
+# Allowlist each native skill dir explicitly (not a blanket !skills/**).
+# When consumed as a .claude subtree, a blanket unignore here would also
+# unignore session-installed skill caches the consumer repo means to ignore.
+# Add two lines here for every new skill added under skills/.
+!skills/prompt-engineering/
+!skills/prompt-engineering/**
+!skills/token-codebase-exploration/
+!skills/token-codebase-exploration/**
+!skills/token-dotnet/
+!skills/token-dotnet/**
+!skills/token-efficiency/
+!skills/token-efficiency/**
+!skills/token-file-ops/
+!skills/token-file-ops/**
+!skills/v-model/
+!skills/v-model/**
+!skills/v-model-equipe/
+!skills/v-model-equipe/**
+!skills/v-model-gestion/
+!skills/v-model-gestion/**
+!skills/v-model-guide/
+!skills/v-model-guide/**
+!skills/v-model-implementation/
+!skills/v-model-implementation/**
+!skills/v-model-niveau-1/
+!skills/v-model-niveau-1/**
+!skills/v-model-niveau-2/
+!skills/v-model-niveau-2/**
+!skills/v-model-niveau-3/
+!skills/v-model-niveau-3/**
+!skills/v-model-niveau-4/
+!skills/v-model-niveau-4/**
+!skills/v-model-phase-amont/
+!skills/v-model-phase-amont/**
+!skills/v-model-tests/
+!skills/v-model-tests/**
+!skills/verifying-sources/
+!skills/verifying-sources/**
+!skills/writing-skills/
+!skills/writing-skills/**
