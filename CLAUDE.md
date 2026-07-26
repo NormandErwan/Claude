@@ -24,7 +24,7 @@
 | External request non-2xx / proxy block | `[BLOCKED] <url> - <status>`; if host required, stop and tell user |
 | CI logs inaccessible | Stop, ask before continuing |
 | `AskUserQuestion` tool | Broken when reply is delayed (anthropics/claude-code#70648, unfixed) - don't use; ask in plain text instead. Revisit once fixed |
-| Validate-gate question (or mutating prompt) unanswered | End turn, don't act (not approval, not even default); wait for reply. Unanswered twice -> stop, report attempt + reason, wait |
+| Validate-gate question (or mutating prompt) unanswered | End turn, don't act; wait silently - hook/notification noise isn't a reply. Unanswered twice -> stop, report attempt + reason, wait |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
 
 ## Local dev & verification
