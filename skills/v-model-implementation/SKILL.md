@@ -1,6 +1,6 @@
 ---
 name: v-model-implementation
-version: 1.4.0
+version: 2.0.0
 description: >
   Skill pour la phase d'implémentation du modèle en V. Utiliser quand un
   développeur commence à coder un composant, quand on génère du code depuis
@@ -128,7 +128,7 @@ Référence : `v-model-tests` (section tests unitaires).
 ```
 **Contexte :**
 
-**LLD du composant :** [contenu ou référence au fichier]
+**LLD du composant :** [contenu, ou lien relatif vers 400-detailed-design/411-lld-<composant>.md]
 **Interfaces disponibles :** [interfaces des dependances]
 **Contraintes transversales :** [HLD-T-XXX applicables]
 

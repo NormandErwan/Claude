@@ -1,6 +1,6 @@
 ---
 name: v-model-phase-amont
-version: 1.4.0
+version: 2.0.0
 description: >
   Skill pour la phase amont d'un projet logiciel : capture du besoin
   opérationnel, étude de faisabilité, business case, charte de projet,
@@ -200,9 +200,15 @@ au moins un parcours d'erreur par parcours principal.
 **Arborescence :**
 
 ```
-docs/00-amont/
-  04-user-journeys.md   ← nouveau
+docs/000-upstream/
+  010-ebo.md
+  020-feasibility.md
+  030-business-case.md
+  040-project-charter.md
+  050-user-journeys.md   <- produit par cette section
 ```
+
+Nommage, préfixes et porte de nommage : `v-model-documents`.
 
 ---
 

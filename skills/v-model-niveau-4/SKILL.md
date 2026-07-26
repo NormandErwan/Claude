@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-4
-version: 1.4.0
+version: 2.0.0
 description: >
   Skill pour le Niveau 4 du modèle en V : Conception détaillée / Low-Level
   Design. Utiliser après validation du HLD pour spécifier chaque composant
@@ -18,7 +18,10 @@ description: >
 **Répond à :** comment chaque composant est-il implémenté en détail ?
 **Un développeur doit pouvoir implémenter à partir de ce niveau sans décision de conception.**
 **Input :** HLD valide + ADRs.
-**Output :** Low-Level Design Document (LLD), un fichier par composant.
+**Output :** Low-Level Design Document (LLD), un fichier par composant --
+`400-detailed-design/411-lld-<composant>.md`, puis les numéros suivants du
+même bloc. Le nom du fichier est l'identifiant du LLD, il n'en a pas d'autre
+(`v-model-documents`).
 **Skill suivant :** `v-model-implementation` + `v-model-tests` (tests unitaires).
 
 ---
@@ -212,6 +215,8 @@ du développeur. Une erreur non spécifiée sera gérée inconsistamment.
 ## 7. Traçabilité vers le Niveau 2
 
 Chaque élément du LLD doit pointer vers l'exigence qu'il satisfait.
+La matrice consolidée du niveau est rangée en tête du répertoire de conception
+détaillée : `400-detailed-design/410-architecture-traceability.md`.
 
 **Template :**
 
@@ -293,7 +298,7 @@ Si HLD et LLD sont fusionnes, conserver au minimum :
 - Développeur qui "devine" une zone floue du LLD sans signaler l'ambiguïté :
   instaurer la culture que signaler = bien faire son travail.
 - Renommer une interface ou un composant avec sed dans le LLD : le nom peut
-  apparaître dans des identifiants LLD-COMP-XX, dans la matrice de traçabilité,
-  et dans les références croisées vers le HLD. Chaque contexte a un comportement
+  apparaître dans le nom de fichier du LLD lui-même, dans la matrice de
+  traçabilité, et dans les références croisées vers le HLD. Chaque contexte a un comportement
   attendu différent. Lire le LLD, chercher toutes les occurrences, éditer manuellement
   selon le contexte de chaque apparition.

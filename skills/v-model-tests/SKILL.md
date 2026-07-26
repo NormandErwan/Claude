@@ -1,6 +1,6 @@
 ---
 name: v-model-tests
-version: 1.4.0
+version: 2.0.0
 description: >
   Skill pour la branche droite du modèle en V : tests unitaires, tests
   d'intégration, tests d'acceptance et tests de validation système. Utiliser
@@ -33,6 +33,17 @@ Tester, c'est vérifier qu'une décision prise à gauche du V est respectée à 
 | Tests d'acceptance | Niveau 2 (SRS) | Section 3 |
 | Tests de validation système | Niveau 1 (SRD) | Section 4 |
 | Matrice de traçabilité | Tous niveaux | Section 5 |
+
+Les tests ont leur répertoire propre, pas un miroir par niveau du V. L'ordre
+des fichiers suit l'ordre d'exécution (`v-model-documents`) :
+
+| Artefact | Fichier |
+|---|---|
+| Matrice de traçabilité | `500-tests/510-requirements-traceability.md` |
+| Procédures unitaires | `500-tests/520-unit.md` |
+| Procédures d'intégration | `500-tests/530-integration.md` |
+| Procédures d'acceptance | `500-tests/540-acceptance.md` |
+| Procédures de validation système | `500-tests/550-system-validation.md` |
 
 ---
 
@@ -272,7 +283,13 @@ satisfait les exigences système.
 
 ## 5. Matrice de traçabilité tests / exigences
 
-À maintenir dans `docs/tests/traceability.md`. Mise à jour après chaque sprint.
+À maintenir dans `500-tests/510-requirements-traceability.md`. Mise à jour après
+chaque sprint.
+
+**Une seule matrice pour les quatre niveaux de test.** Les tests sont le seul
+niveau à sources multiples (SRD, SRS, HLD, LLD) : quatre matrices séparées
+obligeraient à chercher dans quatre fichiers pour répondre à « cette exigence
+est-elle couverte ? ». La colonne Niveau porte l'information de niveau source.
 
 **Format :**
 

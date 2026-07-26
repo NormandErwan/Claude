@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-3
-version: 1.4.0
+version: 2.0.0
 description: >
   Skill pour le Niveau 3 du modèle en V : Architecture / High-Level Design.
   Utiliser après validation du SRS pour décider la structure du système
@@ -17,7 +17,8 @@ description: >
 **Répond à :** comment le logiciel est-il structuré pour satisfaire les exigences ?
 **Premier niveau où on répond au "comment". Chaque choix structurant doit être justifié.**
 **Input :** SRS valide.
-**Output :** Software Architecture Document (SAD / HLD) + ADRs.
+**Output :** Software Architecture Document (SAD / HLD) -- `300-architecture/320-hld.md`
+-- et un fichier par ADR dans le même répertoire.
 **Skill suivant :** `v-model-niveau-4` (un LLD par composant).
 
 ---
@@ -70,12 +71,16 @@ Si la description d'un composant contient "et", il fait probablement deux choses
 Chaque décision architecturale structurante fait l'objet d'un ADR.
 Un ADR non écrit est une décision qui sera remise en question indéfiniment.
 
+**Un ADR n'a pas de numéro propre.** Son identifiant est son nom de fichier :
+`331-adr-<topic>.md`, puis les numéros suivants dans le même bloc. On le
+référence par ce nom, en lien relatif (`v-model-documents`).
+
 **Template ADR :**
 ```
-# ADR-XXX — [titre de la décision]
+# [titre de la décision]
 
 **Date :** [date]
-**Statut :** [Proposé / Accepté / Déprécié / Remplacé par ADR-YYY]
+**Statut :** [Proposé / Accepté / Déprécié / Remplacé par <nom du fichier successeur>]
 
 ## Contexte
 
@@ -147,8 +152,9 @@ Decisions qui s'appliquent a tous les composants.
 
 **Template :**
 ```
-# # HLD-T-XXX
+### HLD-T-XXX
 
+[Contrainte qui s'applique à tous les composants].
 
 **Justification :** [quelle exigence ou ADR l'impose]
 **Vérifiable par :** [inspection statique / test / revue]
@@ -167,6 +173,24 @@ Comment le logiciel s'exécute sur le matériel cible.
 - Sur quel(s) environnement(s) le logiciel s'exécute-t-il ?
 - Y a-t-il des composants serveur ? Des dépendances d'infrastructure ?
 - Comment est distribué le logiciel (installeur, conteneur, service...) ?
+
+---
+
+## 6. Matrice de traçabilité SRS → architecture
+
+Artefact obligatoire du niveau, rangé en tête du répertoire d'architecture :
+`300-architecture/310-software-requirements-traceability.md`. Une matrice porte
+le nom de son niveau source et vit dans son niveau cible (`v-model-documents`).
+
+**Format :**
+
+```markdown
+| Exigence logiciel | Composant(s) | ADR justifiant le choix |
+|---|---|---|
+```
+
+Lecture dans les deux sens : une exigence sans composant en face n'est portée
+par personne ; un composant sans exigence n'a pas de raison d'exister.
 
 ---
 
@@ -233,6 +257,8 @@ Ne pas démarrer le Niveau 4 si une case est vide.
 - [ ] Chaque NFR du SRS a une explication de satisfaction dans le HLD
 - [ ] Les dépendances entre composants sont documentées et justifiées
 - [ ] Les contraintes transversales sont listées et vérifiables
+- [ ] La matrice SRS → architecture est complète (aucune exigence sans composant,
+    aucun composant sans exigence)
 - [ ] La vue de déploiement est cohérente avec les contraintes du SRD (SYS-C-XXX)
 - [ ] Le HLD a été revu lors du PDR (Preliminary Design Review)
 ```
@@ -259,7 +285,10 @@ Dans ce cas, conserver absolument :
 - Couplage fort injustifié entre composants.
 - Architecture figée : un ADR peut être remplacé (statut "Déprécié") --
   l'important est que le remplacement soit aussi documenté.
-- Renommer un composant dans le HLD avec sed : les ADRs référencés comme
-  "ADR-003 : Choix du composant AuthModule" ont un identifiant numérique stable
-  (ADR-003) et un titre qui peut évoluer. sed ne peut pas distinguer les deux.
+- Renommer un composant dans le HLD avec sed : le nom d'un composant apparaît
+  à la fois en texte libre (où la mise à jour est souhaitable) et dans des noms
+  de fichiers d'ADR ou de LLD, qui sont des identifiants stables (où elle ne
+  l'est pas). sed ne peut pas distinguer les deux.
   Lire le HLD section par section avant tout remplacement de terme.
+- Numéroter les ADRs à part de leur nom de fichier : deux identifiants pour un
+  objet, donc deux occasions de diverger.

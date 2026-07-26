@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-2
-version: 1.4.0
+version: 2.0.0
 description: >
   Skill pour le Niveau 2 du modèle en V : Exigences logiciel (Software
   Requirements Spécification). Utiliser après validation du SRD pour allouer
@@ -17,8 +17,12 @@ description: >
 **Répond à :** qu'est-ce que le logiciel prend en charge parmi toutes les exigences système ?
 **Premier niveau où l'équipe de développement est l'audience principale.**
 **Input :** SRD valide.
-**Output :** Software Requirements Spécification (SRS).
+**Output :** Software Requirements Spécification (SRS) -- `200-software-requirements/220-srs.md`.
 **Skill suivant :** `v-model-niveau-3`.
+
+**Titre de section = identifiant seul, énoncé en dessous** dans tous les
+templates ci-dessous : l'ancre reste stable quand l'énoncé est reformulé
+(`v-model-documents`).
 
 ---
 
@@ -61,7 +65,9 @@ de précision pour être implémentables et testables.
 
 **Template par exigence :**
 ```
-### SW-F-XXX : le logiciel doit [comportement précis].
+### SW-F-XXX
+
+Le logiciel doit [comportement précis].
 
 **Origine :** SYS-F-YYY
 **Critère d'acceptance :** [condition observable qui prouve que l'exigence est satisfaite]
@@ -90,7 +96,10 @@ Envoyer au client et attendre une réponse avant de continuer.
 
 **Template :**
 ```
-### SW-NF-XXX ([catégorie]) : [Métrique] doit être [seuil] dans les conditions suivantes :
+### SW-NF-XXX
+
+**Catégorie :** [performance / disponibilité / sécurité / ...]
+[Métrique] doit être [seuil] dans les conditions suivantes :
 - Charge : [nombre d'utilisateurs, volume de données]
 - Environnement : [matériel cible, configuration]
 - Durée : [période de mesure si applicable]
@@ -106,11 +115,11 @@ Pas encore la spécification d'API -- c'est le Niveau 4. Ici : le "quoi", pas le
 
 **Template :**
 ```
-# # SW-I-XXX
+### SW-I-XXX
 
+[Description de l'interface].
 
-- [description de l'interface].
-- Format / protocole : [si impose par une contrainte externe]
+**Format / protocole :** [si imposé par une contrainte externe]
 **Origine :** SYS-I-YYY
 ```
 
@@ -128,8 +137,9 @@ En contexte defense ou critique, ce bloc peut être plus volumineux que les fonc
 
 **Template :**
 ```
-# # SW-S-XXX
+### SW-S-XXX
 
+[Exigence de sûreté ou de sécurité, formulée en comportement observable].
 
 **Origine :** SYS-NF-YYY ou SYS-C-YYY
 **Methode de verification :** [inspection / test / analyse]
@@ -149,8 +159,9 @@ La branche droite du V commence ici -- chaque exigence definit comment elle sera
 
 **Template :**
 ```
-# # SW-V-XXX
+### SW-V-XXX
 
+[Exigence vérifiée] par [test / analyse / inspection / démonstration].
 
 **Préconditions :** [état du système avant le test]
 **Critère de succès :** [mesure précise]
@@ -203,7 +214,8 @@ La branche droite du V commence ici -- chaque exigence definit comment elle sera
 
 ## Matrice de traçabilité initiale
 
-A maintenir des ce niveau dans `docs/requirements/traceability.md`.
+A maintenir des ce niveau dans
+`200-software-requirements/210-system-requirements-traceability.md`.
 
 | Exigence logiciel | Origine système | Méthode de vérification | Statut |
 |---|---|---|---|
@@ -247,7 +259,8 @@ Si les niveaux 1 et 2 sont fusionnés, conserver :
 - Matrice de traçabilité non initialisée -- elle sera impossible à reconstituer ensuite.
 - Renommer un composant avec sed plutôt qu'à la main : le nom apparaît à la fois
   en texte libre (où la mise à jour est souhaitable) et dans des identifiants
-  stables comme REQ-AUTH-001 ou ADR-AuthModule-01 (où elle ne l'est pas).
+  stables comme REQ-AUTH-001, ou dans un nom de fichier de grille comme
+  `421-lld-auth-module.md` (où elle ne l'est pas).
   Toujours lire le document, identifier tous les contextes d'apparition, et éditer
   chaque occurrence selon son contexte. Le brise-traçabilité silencieux est un
   anti-pattern critique dans la méthode V.

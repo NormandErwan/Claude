@@ -1,6 +1,6 @@
 ---
 name: v-model-equipe
-version: 1.4.0
+version: 2.0.0
 description: >
   Skill pour les pratiques d'équipe dans le modèle V : Définition of Ready,
   Définition of Done, backlog, estimation, revue de code, intégration des
@@ -38,6 +38,8 @@ La méthode sans pratique d'équipe reste théorique.
 Ce qu'une tâche doit satisfaire avant qu'un développeur puisse la commencer.
 **Une tâche non Ready ne doit pas entrer dans un sprint.**
 
+Fichier : `700-conventions/710-definition-of-ready.md`.
+
 ```
 # Définition of ready — [nom du projet]
 
@@ -55,6 +57,8 @@ Ce qu'une tâche doit satisfaire avant qu'un développeur puisse la commencer.
 
 Ce qu'une tâche doit satisfaire pour être considérée terminée.
 **Affichée et rappelée — pas mémorisée.**
+
+Fichier : `700-conventions/720-definition-of-done.md`.
 
 ```
 # Définition of done — [nom du projet]
@@ -92,6 +96,10 @@ Elles font le lien avec les procédures de test d'acceptance.
 ---
 
 ## 4. Backlog et refinement
+
+Fichier : `800-status/810-backlog.md`. Artefact **vivant** : un fichier unique
+écrasé à chaque mise à jour, jamais mis sous baseline. L'historique des
+priorités est dans git, pas dans le nom du fichier (`v-model-documents`).
 
 **Deux erreurs fréquentes :**
 - Backlog comme poubelle : tout entre, rien ne sort, priorités opaques.
@@ -134,6 +142,8 @@ Passer aux points quand l'équipe a acquis le réflexe d'estimer ensemble.
 
 **Deux objectifs simultanés : améliorer le code ET développer le développeur.**
 Ces deux objectifs ne sont pas toujours servis par les mêmes commentaires.
+
+Convention d'équipe : `700-conventions/730-code-review.md`.
 
 ### Structure de revue
 
@@ -272,6 +282,10 @@ La complétude du LLD est une préalable pour déléguer l'implémentation.
 ## 8. Gestion de la dette technique
 
 **La rendre visible -- pas l'ignorer.**
+
+Fichier : `800-status/820-technical-debt.md`. Artefact **vivant**, écrasé,
+jamais mis sous baseline -- au même titre que le backlog avec lequel il est en
+concurrence.
 
 **Format de ticket de dette acceptable :**
 ```
