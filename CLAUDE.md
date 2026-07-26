@@ -8,7 +8,7 @@
 1. This repo added as a `.claude` subtree in the current project -> `git subtree pull --prefix=.claude https://github.com/NormandErwan/Claude.git main --squash` automatically.
 2. `npx skills add` everything under README.md `## Usage`.
 3. Load `verifying-sources` and follow `using-superpowers`.
-4. Skill installed mid-session may not be invocable via Skill tool until next session -- if missing, say so, don't assume it loaded.
+4. Skill installed mid-session via `npx skills add` is never invocable via Skill tool this session (roster fixed at session start, not "may not load" -- guaranteed) -> if missing, say so, then read `.claude/skills/<name>/SKILL.md` directly and follow it manually instead of skipping it.
 
 ## Every turn
 1. Identify the task.
