@@ -8,7 +8,7 @@
 1. This repo added as a `.claude` subtree in the current project -> `git subtree pull --prefix=.claude https://github.com/NormandErwan/Claude.git main --squash` automatically.
 2. `npx skills add` everything under README.md `## Usage`.
 3. Load `verifying-sources` and follow `using-superpowers`.
-4. Skill installed mid-session may not be invocable via Skill tool until next session -- if missing, say so, don't assume it loaded.
+4. Skill installed mid-session via `npx skills add` is never invocable via Skill tool this session (roster fixed at session start, not "may not load" -- guaranteed) -> if missing, say so, then read `.claude/skills/<name>/SKILL.md` directly and follow it manually instead of skipping it.
 
 ## Every turn
 1. Identify the task.
@@ -25,7 +25,7 @@
 | External request non-2xx / proxy block | `[BLOCKED] <url> - <status>`; if host required, stop and tell user |
 | CI logs inaccessible | Stop, ask before continuing |
 | `AskUserQuestion` tool | Broken when reply is delayed (anthropics/claude-code#70648, unfixed) - don't use; ask in plain text instead. Revisit once fixed |
-| Validate-gate question (or mutating prompt) unanswered | End turn, don't act (not approval, not even default); wait for reply. Unanswered twice -> stop, report attempt + reason, wait |
+| Validate-gate question (or mutating prompt) unanswered | End turn, don't act; wait silently - hook/notification noise isn't a reply. Unanswered twice -> stop, report attempt + reason, wait |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
 
 ## Local dev & verification
