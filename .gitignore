@@ -41,3 +41,11 @@
 !skills/verifying-sources/**
 !skills/writing-skills/
 !skills/writing-skills/**
+
+# SessionStart hook experiment (installs README.md's `## Usage` skills before
+# turn 1). Only takes effect when this repo is the project root; a subtree
+# consumer would land it at .claude/.claude/, which Claude Code doesn't read.
+!.claude/
+!.claude/hooks/
+!.claude/hooks/session-start.sh
+!.claude/settings.json
