@@ -37,8 +37,8 @@
 ## Code / docs / commits
 - English + ASCII only.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
-- Editing this file -> also `prompt-engineering`, on top of the routing above.
-- Rewriting any CLAUDE.md for brevity: verify every rule survives with equivalent meaning (rule-by-rule vs the original), get an independent review before merging, A/B two candidates via agent dry-run if unsure which reads clearer.
+- Editing any CLAUDE.md -> `prompt-engineering` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
+- Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
 
 ## PR lifecycle
 
