@@ -28,7 +28,7 @@ description: >
 |---|---|
 | Développeur (junior ou senior) | Implemente le composant depuis le LLD |
 | Responsable technique | Produit le LLD, disponible pour les questions de conception |
-| Reviewer | Revue de code après implémentation (`v-model-équipe`) |
+| Reviewer | Revue de code après implémentation (`v-model-equipe`) |
 
 ---
 
@@ -128,7 +128,7 @@ Référence : `v-model-tests` (section tests unitaires).
 ```
 **Contexte :**
 
-**LLD du composant :** [contenu, ou lien relatif vers 400-detailed-design/411-lld-<composant>.md]
+**LLD du composant :** [contenu, ou lien relatif vers 400-detailed-design/420-lld-<composant>.md]
 **Interfaces disponibles :** [interfaces des dependances]
 **Contraintes transversales :** [HLD-T-XXX applicables]
 

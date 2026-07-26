@@ -19,8 +19,8 @@ description: >
 **Un développeur doit pouvoir implémenter à partir de ce niveau sans décision de conception.**
 **Input :** HLD valide + ADRs.
 **Output :** Low-Level Design Document (LLD), un fichier par composant --
-`400-detailed-design/411-lld-<composant>.md`, puis les numéros suivants du
-même bloc. Le nom du fichier est l'identifiant du LLD, il n'en a pas d'autre
+`400-detailed-design/420-lld-<composant>.md`, puis par pas de 10 dans le même
+bloc. Le nom du fichier est l'identifiant du LLD, il n'en a pas d'autre
 (`v-model-documents`).
 **Skill suivant :** `v-model-implementation` + `v-model-tests` (tests unitaires).
 
@@ -212,20 +212,27 @@ du développeur. Une erreur non spécifiée sera gérée inconsistamment.
 
 ---
 
-## 7. Traçabilité vers le Niveau 2
+## 7. Traçabilité
 
-Chaque élément du LLD doit pointer vers l'exigence qu'il satisfait.
+Chaque élément du LLD doit pointer vers l'exigence qu'il satisfait, et chaque
+composant du HLD doit être couvert par un LLD.
+
 La matrice consolidée du niveau est rangée en tête du répertoire de conception
-détaillée : `400-detailed-design/410-architecture-traceability.md`.
+détaillée : `400-detailed-design/410-architecture-traceability.md`. Elle porte
+le nom de son niveau source -- l'architecture -- et prouve donc d'abord la
+couverture du HLD, la colonne d'exigence conservant le lien vers le Niveau 2.
 
 **Template :**
 
-| Élément LLD | Exigence satisfaite |
-|---|---|
-| [méthode ou comportement] | [SW-F-XXX ou SW-S-XXX] |
+| Composant HLD | Élément LLD | Exigence satisfaite |
+|---|---|---|
+| [NomComposant] | [méthode ou comportement] | [SW-F-XXX ou SW-S-XXX] |
 
-Si un élément du LLD ne pointe vers aucune exigence : le supprimer ou
-l'ajouter comme exigence manquante via le processus d'évolution (`v-model-gestion`).
+Lecture dans les deux sens :
+- Composant HLD sans ligne : aucun LLD ne le spécifie, l'implémentation
+  inventera sa conception.
+- Élément LLD sans exigence : le supprimer, ou l'ajouter comme exigence
+  manquante via le processus d'évolution (`v-model-gestion`).
 
 ---
 

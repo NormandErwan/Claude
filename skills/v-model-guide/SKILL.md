@@ -34,7 +34,7 @@ description: >
 | Développeur | Implementer un composant depuis une spec | `v-model-implementation` |
 | Développeur | LLD ambigu ou incomplet sur un point précis | Protocole d'escalade ci-dessous |
 | Développeur / Testeur | Ecrire des tests (tous types) | `v-model-tests` |
-| Responsable technique | Revue de code, tâches pour juniors | `v-model-équipe` |
+| Responsable technique | Revue de code, tâches pour juniors | `v-model-equipe` |
 | Chef de projet / Responsable technique | Risques, jalons, decisions de gestion | `v-model-gestion` |
 | Tout rôle | Créer, nommer ou ranger un document | `v-model-documents` |
 | Tout rôle | Ambiguïté ou blocage en cours de travail | Protocole d'escalade ci-dessous |
@@ -200,6 +200,7 @@ Nomenclature complète, règles de nommage et porte de nommage :
 
 ```
 docs/
+  README.md                   -- ordre de lecture, carte des artefacts
   000-upstream/               -- EBO, faisabilité, business case, charte, parcours
   100-system-requirements/    -- matrice amont, SRD
   200-software-requirements/  -- matrice système, SRS

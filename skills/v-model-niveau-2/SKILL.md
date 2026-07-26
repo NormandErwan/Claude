@@ -260,7 +260,7 @@ Si les niveaux 1 et 2 sont fusionnés, conserver :
 - Renommer un composant avec sed plutôt qu'à la main : le nom apparaît à la fois
   en texte libre (où la mise à jour est souhaitable) et dans des identifiants
   stables comme REQ-AUTH-001, ou dans un nom de fichier de grille comme
-  `421-lld-auth-module.md` (où elle ne l'est pas).
+  `430-lld-auth-module.md` (où elle ne l'est pas).
   Toujours lire le document, identifier tous les contextes d'apparition, et éditer
   chaque occurrence selon son contexte. Le brise-traçabilité silencieux est un
   anti-pattern critique dans la méthode V.

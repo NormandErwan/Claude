@@ -146,34 +146,38 @@ qui révèle les erreurs de comparaison (< vs <=).
 
 ### Format de procedure de test acceptance
 
+Une procédure = une section du fichier de procédures, titrée par l'identifiant
+seul. Les sous-parties sont d'un niveau en dessous : sans cela, dix procédures
+dans un fichier produisent dix ancres `#préconditions` (`v-model-documents`).
+
 ```
-# Procédure de test : TC-SW-F-XXX
+### TC-SW-F-XXX
 
 **Exigence source :** SW-F-XXX
 **Méthode :** [test / analyse / inspection / démonstration]
 **Auteur :** [nom]
 **Date de rédaction :** [date]
 
-## Préconditions
+#### Préconditions
 
 - [État du système avant le test]
 - [Données ou configuration nécessaires]
 
-## Étapes
+#### Étapes
 
 - 1. [Action précise]
 - 2. [Action précise]
 - ...
 
-## Critère de succès
+#### Critère de succès
 
 - [Condition observable et mesurable]
 
-## Critère d'échec
+#### Critère d'échec
 
 - [Ce qui constitue un échec -- aussi précis que le succès]
 
-## Matériel spécifique
+#### Matériel spécifique
 
 - [Si applicable : banc de simulation, équipement de mesure, etc.]
 ```
@@ -217,33 +221,33 @@ satisfait les exigences système.
 ### Format de procedure de validation système
 
 ```
-# Procédure de test : TC-SYS-F-XXX
+### TC-SYS-F-XXX
 
 **Exigence source :** SYS-F-XXX
 **Méthode :** [test / analyse / inspection / démonstration]
 **Environnement :** [matériel et configuration requis]
 
-## Préconditions
+#### Préconditions
 
 - [Configuration système complète requise]
 - [Simulateurs ou équipements nécessaires]
 
-## Scénario
+#### Scénario
 
 - [Parcours source : NOM-PARCOURS, flux : nominal / variante N]
 - [Description du scénario opérationnel joué]
 
-## Étapes
+#### Étapes
 
 - 1. [Action]
 - 2. [Mesure]
 - ...
 
-## Critère de succès
+#### Critère de succès
 
 - [Mesure précise sur N répétitions si applicable]
 
-## Critère d'échec
+#### Critère d'échec
 
 - [Seuil de rejet]
 ```

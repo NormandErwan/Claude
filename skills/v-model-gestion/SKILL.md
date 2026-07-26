@@ -84,7 +84,8 @@ c'est une hypothèse de planification -- elle doit être documentée.
 
 **Objectif :** liste vivante des risques identifiés. Mise à jour à chaque revue.
 
-**Format par risque :**
+**Format par risque :** une section `### RSK-XXX` du registre, dont le corps
+renseigne les champs ci-dessous.
 
 | Champ | Description |
 |---|---|
@@ -128,10 +129,12 @@ c'est une hypothèse de planification -- elle doit être documentée.
 **Distinct des ADRs techniques.** Couvre les decisions de gestion :
 périmètre, budget, organisation, arbitrages client.
 
-**Format :**
+**Format :** une section par décision dans le registre, titrée par l'identifiant
+seul pour que l'ancre `#dcl-001` reste stable (`v-model-documents`).
 ```
-# DCL-XXX — [date]
+### DCL-XXX
 
+**Date :** [date]
 **Décision :** [ce qui a été décidé]
 **Contexte :** [pourquoi cette décision était nécessaire]
 **Parties prenantes :** [qui a décidé]
@@ -159,8 +162,9 @@ Elle répond a : "qu'est-ce qu'on a livre exactement le [date] ?"
 **Politique de baseline :** consignée dans `600-management/650-baselines.md`,
 une entrée par jalon.
 ```
-# Baseline [nom] — [date du jalon]
+### Baseline [nom]
 
+**Date du jalon :** [date]
 **Code :** [tag git ou version]
 **Amont :** 000-upstream/ — [version]
 **SRD :** 100-system-requirements/120-srd.md — [version]
@@ -168,6 +172,8 @@ une entrée par jalon.
 **HLD + ADRs :** 300-architecture/ — [version]
 **LLD :** 400-detailed-design/ — [version par composant]
 **Procedures de test :** 500-tests/ — [version]
+**Gestion :** 600-management/ — [version]
+**Conventions :** 700-conventions/ — [version]
 **Statut des tests :** [résultats]
 ```
 
@@ -184,12 +190,14 @@ Quand une évolution est demandée en cours de projet — par le client, ou par
 l'équipe technique quand l'implémentation révèle qu'une décision amont est
 erronée (voir `v-model-implementation`).
 
-**Processus :**
+**Processus :** une section par demande dans le registre des demandes
+d'évolution, titrée par l'identifiant seul (`v-model-documents`).
 
 ```
-# Étape 1
+### CR-XXX
 
-**CR-XXX — [date] :**
+**Étape 1 :** Demande
+**Date :** [date]
 **Demande :** [description de ce que le client veut]
 **Demandeur :** [client / partie prenante / équipe technique]
 
@@ -309,8 +317,10 @@ Les problèmes doivent remonter tot, pas être caches.
 
 **Checklist (dans l'ordre) :**
 
-0. **Porte de nommage** — exécuter la checklist de `v-model-documents` sur
-   chaque fichier créé, renommé ou déplacé par le commit.
+0. **Porte de nommage — re-vérification** — la porte de `v-model-documents`
+   s'exécute avant l'écriture de chaque fichier ; on la rejoue ici sur
+   l'ensemble des fichiers créés, renommés ou déplacés par le commit, y compris
+   ceux que quelqu'un d'autre a produits.
    Sortie attendue : `Porte nommage : OK (N fichiers vérifiés)`, ou une ligne
    par écart. Un fichier mal placé ou mal nommé propage des liens faux dans
    tous les documents qui le citent : le corriger avant les points suivants.
