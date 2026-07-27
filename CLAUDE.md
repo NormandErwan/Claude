@@ -69,10 +69,9 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 
 | Trigger | Action |
 |---|---|
-| Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then `code-review-and-quality` (`npx skills add addyosmani/agent-skills` first if not loaded), no asking |
+| Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then mattpocock `code-review`, no asking |
 | Turn would end with an unreviewed diff-changing push, otherwise | Plain-text question: review now or keep going - ask once, wait until answered or PR merges/closes |
 | Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
-| Change touches a `SKILL.md` | Also run mattpocock `code-review` (spec-compliance axis) alongside `code-review-and-quality` |
 | >=2-3 turns since last rename, scope clear/shifted | Draft short title, confirm via plain-text question, rename PR + conversation title (if a rename tool exists) |
 | CI green, `mergeable_state: clean`, no unresolved comments | Stop self re-arming (don't wait for merge/close) |
 | Merge conflict blocks the push | Resolve via mattpocock `resolving-merge-conflicts`, then push |
