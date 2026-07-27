@@ -97,7 +97,7 @@ docs/
   300-architecture/
     310-software-requirements-traceability.md
     320-hld.md
-    331-adr-<topic>.md
+    330-adr-<topic>.md
   400-detailed-design/
     410-architecture-traceability.md
     420-lld-<composant>.md
@@ -128,7 +128,7 @@ docs/
 ```
 
 Les deux blocs par entité courent jusqu'à la fin de leur centaine : les ADRs
-de 331 à 399, les LLDs de 420 à 499.
+de 330 à 399, les LLDs de 420 à 499.
 
 ### Ce que la grille impose
 
@@ -212,7 +212,7 @@ Toute référence à un document se fait en **lien markdown relatif**, libellé 
 le nom de fichier sans extension :
 
 ```markdown
-[331-adr-event-sourcing](../300-architecture/331-adr-event-sourcing.md)
+[330-adr-event-sourcing](../300-architecture/330-adr-event-sourcing.md)
 ```
 
 **Relatif, jamais absolu.** Un lien commençant par une barre oblique est résolu

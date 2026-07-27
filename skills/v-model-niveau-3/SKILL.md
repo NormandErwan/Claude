@@ -72,7 +72,7 @@ Chaque décision architecturale structurante fait l'objet d'un ADR.
 Un ADR non écrit est une décision qui sera remise en question indéfiniment.
 
 **Un ADR n'a pas de numéro propre.** Son identifiant est son nom de fichier :
-`331-adr-<topic>.md`, puis les numéros suivants dans le même bloc. On le
+`330-adr-<topic>.md`, puis les numéros suivants dans le même bloc. On le
 référence par ce nom, en lien relatif (`v-model-documents`).
 
 **Template ADR :**

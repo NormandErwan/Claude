@@ -147,7 +147,7 @@ ADRs et des LLDs, exécuter cette vérification avant les 5 lentilles.
 **Sortie obligatoire — une ligne par ADR candidat :**
 
 ```
-331-adr-<topic> ([date ADR]) > 420-lld-<composant> ([date LLD])
+330-adr-<topic> ([date ADR]) > 420-lld-<composant> ([date LLD])
   §Conséquences impose : 420-lld-<composant>, 430-lld-<composant>, ...
   Statut : [À METTRE À JOUR / Vérifié à jour]
 ```
