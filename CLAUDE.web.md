@@ -5,10 +5,7 @@
 - Match user's language.
 
 ## Bootstrap - once per session
-1. This repo added as a `.claude` subtree in the current project -> `git subtree pull --prefix=.claude https://github.com/NormandErwan/Claude.git main --squash` automatically.
-2. `npx skills add` everything under README.md `## Usage`.
-3. Load `verifying-sources` and follow `using-superpowers`.
-4. Skill installed mid-session via `npx skills add` is never invocable via Skill tool this session (roster fixed at session start, not "may not load" -- guaranteed) -> if missing, say so, then read `.claude/skills/<name>/SKILL.md` directly and follow it manually instead of skipping it.
+1. Load `verifying-sources` and follow `using-superpowers`.
 
 ## Every turn
 1. Identify the task.
@@ -23,36 +20,14 @@
 | Trigger | Action |
 |---|---|
 | External request non-2xx / proxy block | `[BLOCKED] <url> - <status>`; if host required, stop and tell user |
-| CI logs inaccessible | Stop, ask before continuing |
-| `AskUserQuestion` tool | Broken when reply is delayed (anthropics/claude-code#70648, unfixed) - don't use; ask in plain text instead. Revisit once fixed |
 | Validate-gate question (or mutating prompt) unanswered | End turn, don't act; wait silently - hook/notification noise isn't a reply. Unanswered twice -> stop, report attempt + reason, wait |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
-
-## Local dev & verification
-- Don't use CI to find out if code works - reproduce locally, fix, then push (target project's own build/lint/test commands).
-- No push-to-see-what-CI-says commits. Iterate locally, push when green.
-- CI-only, not reproducible locally -> say so, confirm before iterating via CI.
-- Before "done/fixed/passing" claims -> run verification commands (`verification-before-completion`). Evidence first.
 
 ## Code / docs / commits
 - English + ASCII only.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Editing any CLAUDE.md -> `prompt-engineering` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
-- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Bootstrap, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit.
-
-## PR lifecycle
-
-Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
-
-| Trigger | Action |
-|---|---|
-| Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then `requesting-code-review` + `receiving-code-review`, no asking |
-| Turn would end with an unreviewed diff-changing push, otherwise | Plain-text question: review now or keep going - ask once, wait until answered or PR merges/closes |
-| Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
-| >=2-3 turns since last rename, scope clear/shifted | Draft short title, confirm via plain-text question, rename PR + conversation title (if a rename tool exists) |
-| CI green, `mergeable_state: clean`, no unresolved comments | Stop self re-arming (don't wait for merge/close) |
-| Anything still pending (CI running, changes requested, conflict, unresolved threads) | Keep polling |
 
 ## Retrospective
 
