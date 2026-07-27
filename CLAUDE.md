@@ -11,7 +11,6 @@
    npx skills add DietrichGebert/ponytail@ponytail-audit
    npx skills add DietrichGebert/ponytail@ponytail-review
    npx skills add anthropics/skills@frontend-design
-   npx skills add arvindrk/extract-design-system@extract-design-system
    npx skills add juliusbrussee/caveman@caveman
    npx skills add juliusbrussee/caveman@caveman-commit
    npx skills add mattpocock/skills@code-review
@@ -25,14 +24,12 @@
    npx skills add mattpocock/skills@research
    npx skills add mattpocock/skills@resolving-merge-conflicts
    npx skills add mattpocock/skills@teach
-   npx skills add vercel-labs/agent-skills@web-design-guidelines
-   npx skills add vercel-labs/skills@find-skills
    ```
 3. Skill installed mid-session via `npx skills add` is never invocable via Skill tool this session (roster fixed at session start, not "may not load" -- guaranteed) -> if missing, say so, then read `.claude/skills/<name>/SKILL.md` directly and follow it manually instead of skipping it.
 
 ## Every turn
-1. Identify the task. Topic is .NET/C#/Blazor, or user asks -> `npx skills add aaronontheweb/dotnet-skills` (whole repo, if not already loaded this session).
-2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `find-skills`. Always check regardless of scan: any file op or multi-file task -> `token-efficiency`; unfamiliar code area or need the bigger picture -> `zoom-out`; about to state an unverified factual/technical/procedural claim -> `verifying-sources`.
+1. Identify the task. Topic is .NET/C#/Blazor, or user asks -> `npx skills add aaronontheweb/dotnet-skills` (whole repo, if not already loaded this session). Topic is web/frontend design, or user asks -> `npx skills add arvindrk/extract-design-system@extract-design-system` and `npx skills add vercel-labs/agent-skills@web-design-guidelines` (if not already loaded this session).
+2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `npx skills add vercel-labs/skills@find-skills` (if not already loaded this session), then use it. Always check regardless of scan: any file op or multi-file task -> `token-efficiency`; unfamiliar code area or need the bigger picture -> `zoom-out`; about to state an unverified factual/technical/procedural claim -> `verifying-sources`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
 4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call; read-only skips).
    - Remote/cloud session -> batch `grill-me`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
