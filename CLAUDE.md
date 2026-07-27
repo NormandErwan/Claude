@@ -8,6 +8,7 @@
 1. This repo added as a `.claude` subtree in the current project -> `git subtree pull --prefix=.claude https://github.com/NormandErwan/Claude.git main --squash` automatically.
 2. `npx skills add` every line below, every session. Leave dotnet-skills and agent-skills uninstalled for now (see Every turn 1, 5).
    ```bash
+   npx skills add DietrichGebert/ponytail@ponytail-audit
    npx skills add DietrichGebert/ponytail@ponytail-review
    npx skills add anthropics/skills@frontend-design
    npx skills add arvindrk/extract-design-system@extract-design-system
@@ -35,8 +36,9 @@
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
 4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call; read-only skips).
    - Remote/cloud session -> batch `grill-me`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
-5. Large-scope work (new subsystem, multi-session, or user asks for the full process) -> `npx skills add addyosmani/agent-skills` (whole repo, if not already loaded this session), then follow `using-agent-skills` to route by phase: Define (`interview-me`/`idea-refine`/`spec-driven-development`) -> Plan (`planning-and-task-breakdown`) -> Build (`incremental-implementation`/`test-driven-development`/...) -> Verify (`debugging-and-error-recovery`/`browser-testing-with-devtools`) -> Review (`code-review-and-quality`) -> Ship (`git-workflow-and-versioning`/...). Default for normal-sized tasks: skip this, steps 2-4 are enough.
-6. End of turn: announce estimated tokens used. Offer to draft the next-session prompt when continuing elsewhere is better, proactively at >=100k tokens (non-blocking, continue if ignored).
+   - Domain/data model involved -> also `domain-modeling`. New module/interface design -> also `codebase-design`. Unfamiliar domain needing primary sources -> also `research`. Design question needing a throwaway spike -> also `prototype`.
+5. Large-scope work (new subsystem, multi-session, or user asks for the full process) -> `npx skills add addyosmani/agent-skills` (whole repo, if not already loaded this session), then follow `using-agent-skills` to route by phase: Define (`interview-me`/`idea-refine`/`spec-driven-development`) -> Plan (`planning-and-task-breakdown`) -> Build (`incremental-implementation`/`test-driven-development`/...) -> Verify (`debugging-and-error-recovery`/`browser-testing-with-devtools`) -> Review (`code-review-and-quality`) -> Ship (`git-workflow-and-versioning`/...). Default for normal-sized tasks: skip this, steps 2-4 are enough. Once triggered, agent-skills phases supersede step 4's mattpocock routing for this task.
+6. End of turn: announce estimated tokens used. Offer to draft the next-session prompt (use `handoff` to structure it) when continuing elsewhere is better, proactively at >=100k tokens (non-blocking, continue if ignored).
 
 ## Error handling
 
@@ -73,6 +75,7 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 | Change touches a `SKILL.md` | Also run mattpocock `code-review` (spec-compliance axis) alongside `code-review-and-quality` |
 | >=2-3 turns since last rename, scope clear/shifted | Draft short title, confirm via plain-text question, rename PR + conversation title (if a rename tool exists) |
 | CI green, `mergeable_state: clean`, no unresolved comments | Stop self re-arming (don't wait for merge/close) |
+| Merge conflict blocks the push | Resolve via mattpocock `resolving-merge-conflicts`, then push |
 | Anything still pending (CI running, changes requested, conflict, unresolved threads) | Keep polling |
 
 ## Retrospective
