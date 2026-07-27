@@ -76,7 +76,7 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 | >=2-3 turns since last rename, scope clear/shifted | Draft short title, confirm via plain-text question, rename PR + conversation title (if a rename tool exists) |
 | CI green, `mergeable_state: clean`, no unresolved comments | Stop self re-arming (don't wait for merge/close) |
 | Merge conflict blocks the push | Resolve via mattpocock `resolving-merge-conflicts`, then push |
-| Anything still pending (CI running, changes requested, conflict, unresolved threads) | Keep polling |
+| Anything still pending (CI running, changes requested, unresolved threads) | Keep polling |
 
 ## Retrospective
 
