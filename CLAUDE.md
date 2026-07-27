@@ -6,17 +6,36 @@
 
 ## Bootstrap - once per session
 1. This repo added as a `.claude` subtree in the current project -> `git subtree pull --prefix=.claude https://github.com/NormandErwan/Claude.git main --squash` automatically.
-2. `npx skills add` everything under README.md `## Usage` > Always. Leave `## Usage` > Conditional uninstalled for now (see Every turn 1).
-3. Load `verifying-sources` and follow `using-agent-skills`.
-4. Skill installed mid-session via `npx skills add` is never invocable via Skill tool this session (roster fixed at session start, not "may not load" -- guaranteed) -> if missing, say so, then read `.claude/skills/<name>/SKILL.md` directly and follow it manually instead of skipping it.
+2. `npx skills add` every line below, every session. Leave dotnet-skills and agent-skills uninstalled for now (see Every turn 1, 5).
+   ```bash
+   npx skills add DietrichGebert/ponytail@ponytail-review
+   npx skills add anthropics/skills@frontend-design
+   npx skills add arvindrk/extract-design-system@extract-design-system
+   npx skills add juliusbrussee/caveman@caveman
+   npx skills add juliusbrussee/caveman@caveman-commit
+   npx skills add mattpocock/skills@code-review
+   npx skills add mattpocock/skills@codebase-design
+   npx skills add mattpocock/skills@domain-modeling
+   npx skills add mattpocock/skills@grill-me
+   npx skills add mattpocock/skills@grill-with-docs
+   npx skills add mattpocock/skills@handoff
+   npx skills add mattpocock/skills@improve-codebase-architecture
+   npx skills add mattpocock/skills@prototype
+   npx skills add mattpocock/skills@research
+   npx skills add mattpocock/skills@resolving-merge-conflicts
+   npx skills add mattpocock/skills@teach
+   npx skills add vercel-labs/agent-skills@web-design-guidelines
+   npx skills add vercel-labs/skills@find-skills
+   ```
+3. Skill installed mid-session via `npx skills add` is never invocable via Skill tool this session (roster fixed at session start, not "may not load" -- guaranteed) -> if missing, say so, then read `.claude/skills/<name>/SKILL.md` directly and follow it manually instead of skipping it.
 
 ## Every turn
-1. Identify the task. Topic is .NET/C#/Blazor, or user asks -> `npx skills add` README's Conditional dotnet-skills set (if not already loaded this session).
-2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `find-skills`. Always check regardless of scan: any file op or multi-file task -> `token-efficiency`; unfamiliar code area or need the bigger picture -> `zoom-out`.
+1. Identify the task. Topic is .NET/C#/Blazor, or user asks -> `npx skills add aaronontheweb/dotnet-skills` (whole repo, if not already loaded this session).
+2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `find-skills`. Always check regardless of scan: any file op or multi-file task -> `token-efficiency`; unfamiliar code area or need the bigger picture -> `zoom-out`; about to state an unverified factual/technical/procedural claim -> `verifying-sources`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
 4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call; read-only skips).
    - Remote/cloud session -> batch `grill-me`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
-5. Large-scope work (new subsystem, multi-session, or user asks for the full process) -> `npx skills add addyosmani/agent-skills` (if not already loaded this session), then route by phase: Define (`interview-me`/`idea-refine`/`spec-driven-development`) -> Plan (`planning-and-task-breakdown`) -> Build (`incremental-implementation`/`test-driven-development`/...) -> Verify (`debugging-and-error-recovery`/`browser-testing-with-devtools`) -> Review (`code-review-and-quality`) -> Ship (`git-workflow-and-versioning`/...). Default for normal-sized tasks: skip this, steps 2-4 are enough.
+5. Large-scope work (new subsystem, multi-session, or user asks for the full process) -> `npx skills add addyosmani/agent-skills` (whole repo, if not already loaded this session), then follow `using-agent-skills` to route by phase: Define (`interview-me`/`idea-refine`/`spec-driven-development`) -> Plan (`planning-and-task-breakdown`) -> Build (`incremental-implementation`/`test-driven-development`/...) -> Verify (`debugging-and-error-recovery`/`browser-testing-with-devtools`) -> Review (`code-review-and-quality`) -> Ship (`git-workflow-and-versioning`/...). Default for normal-sized tasks: skip this, steps 2-4 are enough.
 6. End of turn: announce estimated tokens used. Offer to draft the next-session prompt when continuing elsewhere is better, proactively at >=100k tokens (non-blocking, continue if ignored).
 
 ## Error handling
@@ -48,7 +67,7 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 
 | Trigger | Action |
 |---|---|
-| Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then `code-review-and-quality`, no asking |
+| Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then `code-review-and-quality` (`npx skills add addyosmani/agent-skills` first if not loaded), no asking |
 | Turn would end with an unreviewed diff-changing push, otherwise | Plain-text question: review now or keep going - ask once, wait until answered or PR merges/closes |
 | Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
 | Change touches a `SKILL.md` | Also run mattpocock `code-review` (spec-compliance axis) alongside `code-review-and-quality` |
