@@ -7,8 +7,7 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 | prompt-engineering | local | `9a6d56b036` |
 | token-efficiency | local | `9a6d56b036` |
 | verifying-sources | local | `9a6d56b036` |
-| zoom-out | `mattpocock/skills@zoom-out` | `e112a6b03c` |
-| find-skills | `vercel-labs/skills@find-skills` | `773fb2c7bb` |
+| token-codebase-exploration | local | `9a6d56b036` |
 | grill-me | `mattpocock/skills@grill-me` | `697d4ce974` |
 | grill-with-docs | `mattpocock/skills@grill-with-docs` | `697d4ce974` |
 | domain-modeling | `mattpocock/skills@domain-modeling` | `697d4ce974` |
