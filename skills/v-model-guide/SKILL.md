@@ -1,6 +1,6 @@
 ---
 name: v-model-guide
-version: 1.4.0
+version: 2.0.0
 description: >
   Point d'entrée unique pour la méthode V de développement logiciel. Utiliser
   ce skill pour tout projet logiciel structuré : démarrage de projet, question
@@ -34,8 +34,9 @@ description: >
 | Développeur | Implementer un composant depuis une spec | `v-model-implementation` |
 | Développeur | LLD ambigu ou incomplet sur un point précis | Protocole d'escalade ci-dessous |
 | Développeur / Testeur | Ecrire des tests (tous types) | `v-model-tests` |
-| Responsable technique | Revue de code, tâches pour juniors | `v-model-équipe` |
+| Responsable technique | Revue de code, tâches pour juniors | `v-model-equipe` |
 | Chef de projet / Responsable technique | Risques, jalons, decisions de gestion | `v-model-gestion` |
+| Tout rôle | Créer, nommer ou ranger un document | `v-model-documents` |
 | Tout rôle | Ambiguïté ou blocage en cours de travail | Protocole d'escalade ci-dessous |
 | Tout rôle | Premier brouillon d'un artefact terminé | Revue critique ci-dessous |
 
@@ -146,10 +147,13 @@ ADRs et des LLDs, exécuter cette vérification avant les 5 lentilles.
 **Sortie obligatoire — une ligne par ADR candidat :**
 
 ```
-ADR-XXX ([date ADR]) > LLD-[composant] ([date LLD])
-  §Conséquences impose : LLD-[composant], LLD-[composant], ...
+330-adr-<topic> ([date ADR]) > 420-lld-<composant> ([date LLD])
+  §Conséquences impose : 420-lld-<composant>, 430-lld-<composant>, ...
   Statut : [À METTRE À JOUR / Vérifié à jour]
 ```
+
+Les ADRs et les LLDs sont désignés par leur nom de fichier de grille, seul
+identifiant d'un document (`v-model-documents`).
 
 Si aucun ADR candidat trouvé : écrire `Propagation ADR→LLD : RAS`.
 Sans cette sortie, la vérification n'a pas eu lieu.
@@ -191,19 +195,25 @@ Chacun signifie : revue critique non faite. La faire maintenant.
 
 ## Structure de fichiers du projet
 
+Nomenclature complète, règles de nommage et porte de nommage :
+`v-model-documents`. Vue d'ensemble, un répertoire par niveau :
+
 ```
 docs/
-  amont/         -- EBO, faisabilité, business case, charte
-  requirements/  -- srd.md, srs.md, traceability.md
-  design/
-    hld.md
-    adr/         -- Un fichier par ADR (ADR-001-*.md)
-    lld/         -- Un fichier par composant
-  tests/         -- Procedures, matrice de traçabilité
-  management/    -- Risques, decisions, backlog
+  README.md                   -- ordre de lecture, carte des artefacts
+  000-upstream/               -- EBO, faisabilité, business case, charte, parcours
+  100-system-requirements/    -- matrice amont, SRD
+  200-software-requirements/  -- matrice système, SRS
+  300-architecture/           -- matrice logiciel, HLD, un fichier par ADR
+  400-detailed-design/        -- matrice architecture, un fichier par composant
+  500-tests/                  -- matrice exigences, procédures par niveau de test
+  600-management/             -- plan, risques, décisions, évolutions, baselines, jalons
+  700-conventions/            -- DoR, DoD, revue de code
+  800-status/                 -- backlog, dette technique, tableau de bord, rapports datés
 ```
 
-Règle : toute decision existe dans un fichier versionne.
+Règle : toute decision existe dans un fichier versionne. Le nom du fichier est
+l'identifiant du document -- aucun document n'a de numéro propre.
 
 ---
 
@@ -213,5 +223,6 @@ Règle : toute decision existe dans un fichier versionne.
 2. L'ambiguïté remonte -- elle n'est pas résolue sur place.
 3. La traçabilité se maintient en temps réel, pas reconstituée après coup.
 4. La validation humaine est obligatoire à chaque niveau.
-5. Un fichier par décision. Ce qui n'est pas écrit n'existe pas.
+5. Un fichier par décision, nommé selon la grille (`v-model-documents`).
+   Ce qui n'est pas écrit n'existe pas.
 6. Tout premier brouillon passe la revue critique avant d'être montré ou validé.

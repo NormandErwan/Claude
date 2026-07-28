@@ -1,6 +1,6 @@
 ---
 name: v-model-gestion
-version: 1.4.0
+version: 2.0.0
 description: >
   Skill pour les artefacts de gestion de projet dans le modèle V : plan de
   projet, registre des risques, registre des decisions, gestion des
@@ -28,6 +28,23 @@ Ces documents existent en parallele du V -- ils ne sont pas dans le V, ils l'ent
 | Chef de projet | Plan, tableau de bord, jalons |
 | Responsable technique | Registre des risques, registre des decisions, gestion des configurations |
 | Tout le monde | Signaler les risques et blocages |
+
+---
+
+## Emplacement des artefacts de gestion
+
+| Artefact | Fichier | Sous-famille |
+|---|---|---|
+| Plan de projet | `600-management/610-project-plan.md` | Permanent |
+| Registre des risques | `600-management/620-risk-register.md` | Permanent |
+| Registre des décisions | `600-management/630-decision-register.md` | Permanent |
+| Demandes d'évolution | `600-management/640-change-requests.md` | Permanent |
+| Baselines | `600-management/650-baselines.md` | Permanent |
+| Jalons de revue | `600-management/660-review-milestones.md` | Permanent |
+| Tableau de bord | `800-status/830-dashboard.md` | Vivant, écrasé |
+| Rapport d'avancement | `800-status/YYYY-MM-DD-progress.md` | Instantané daté |
+
+Règles de nommage et porte de nommage : `v-model-documents`.
 
 ---
 
@@ -67,7 +84,8 @@ c'est une hypothèse de planification -- elle doit être documentée.
 
 **Objectif :** liste vivante des risques identifiés. Mise à jour à chaque revue.
 
-**Format par risque :**
+**Format par risque :** une section `### RSK-XXX` du registre, dont le corps
+renseigne les champs ci-dessous.
 
 | Champ | Description |
 |---|---|
@@ -111,10 +129,12 @@ c'est une hypothèse de planification -- elle doit être documentée.
 **Distinct des ADRs techniques.** Couvre les decisions de gestion :
 périmètre, budget, organisation, arbitrages client.
 
-**Format :**
+**Format :** une section par décision dans le registre, titrée par l'identifiant
+seul pour que l'ancre `#dcl-001` reste stable (`v-model-documents`).
 ```
-# DCL-XXX — [date]
+### DCL-XXX
 
+**Date :** [date]
 **Décision :** [ce qui a été décidé]
 **Contexte :** [pourquoi cette décision était nécessaire]
 **Parties prenantes :** [qui a décidé]
@@ -139,18 +159,28 @@ doit avoir une entree dans ce registre. Même les petites.
 **Baseline :** photo du système à un instant donné (typiquement à chaque jalon).
 Elle répond a : "qu'est-ce qu'on a livre exactement le [date] ?"
 
-**Politique de baseline :**
+**Politique de baseline :** consignée dans `600-management/650-baselines.md`,
+une entrée par jalon.
 ```
-# Baseline [nom] — [date du jalon]
+### Baseline [nom]
 
+**Date du jalon :** [date]
 **Code :** [tag git ou version]
-****SRD :** ** [version]
-****SRS :** ** [version]
-- HLD + ADRs : [version]
-****LLD :** ** [version par composant]
-**Procedures de test :** [version]
+**Amont :** 000-upstream/ — [version]
+**SRD :** 100-system-requirements/120-srd.md — [version]
+**SRS :** 200-software-requirements/220-srs.md — [version]
+**HLD + ADRs :** 300-architecture/ — [version]
+**LLD :** 400-detailed-design/ — [version par composant]
+**Procedures de test :** 500-tests/ — [version]
+**Gestion :** 600-management/ — [version]
+**Conventions :** 700-conventions/ — [version]
 **Statut des tests :** [résultats]
 ```
+
+**Le répertoire d'état (`800-status/`) n'est jamais mis sous baseline.** Ses
+fichiers d'état courant sont écrasés à chaque mise à jour et ses instantanés
+datés sont déjà immuables : les figer une seconde fois n'apporte rien et
+laisserait croire que le backlog d'un jalon fait partie du livrable.
 
 ---
 
@@ -160,12 +190,14 @@ Quand une évolution est demandée en cours de projet — par le client, ou par
 l'équipe technique quand l'implémentation révèle qu'une décision amont est
 erronée (voir `v-model-implementation`).
 
-**Processus :**
+**Processus :** une section par demande dans le registre des demandes
+d'évolution, titrée par l'identifiant seul (`v-model-documents`).
 
 ```
-# Étape 1
+### CR-XXX
 
-**CR-XXX — [date] :**
+**Étape 1 :** Demande
+**Date :** [date]
 **Demande :** [description de ce que le client veut]
 **Demandeur :** [client / partie prenante / équipe technique]
 
@@ -199,6 +231,14 @@ Chaque petite demande non tracée s'accumule silencieusement.
 ## 6. Tableau de bord et rapport d'avancement
 
 **Fréquence :** hebdomadaire ou par sprint.
+
+Deux artefacts distincts, deux sous-familles distinctes :
+- Le **tableau de bord** (`800-status/830-dashboard.md`) donne l'état courant.
+  Un seul fichier, écrasé à chaque mise à jour.
+- Le **rapport d'avancement** (`800-status/YYYY-MM-DD-progress.md`) est un
+  instantané daté : un fichier par occurrence, **jamais modifié après
+  écriture**. Une erreur se corrige dans le rapport suivant, qui la cite.
+  Réécrire un rapport publié détruit sa seule valeur, qui est d'être une trace.
 
 **Template :**
 ```
@@ -276,6 +316,14 @@ Les problèmes doivent remonter tot, pas être caches.
 (répertoire `docs/` ou équivalent dans le projet).
 
 **Checklist (dans l'ordre) :**
+
+0. **Porte de nommage — re-vérification** — la porte de `v-model-documents`
+   s'exécute avant l'écriture de chaque fichier ; on la rejoue ici sur
+   l'ensemble des fichiers créés, renommés ou déplacés par le commit, y compris
+   ceux que quelqu'un d'autre a produits.
+   Sortie attendue : `Porte nommage : OK (N fichiers vérifiés)`, ou une ligne
+   par écart. Un fichier mal placé ou mal nommé propage des liens faux dans
+   tous les documents qui le citent : le corriger avant les points suivants.
 
 1. **Identifiants renommés** — pour chaque identifiant modifié (nom d'entité,
    code de retour, interface, exigence fonctionnelle), grep tous les autres

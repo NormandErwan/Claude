@@ -17,6 +17,8 @@
 !skills/token-file-ops/**
 !skills/v-model/
 !skills/v-model/**
+!skills/v-model-documents/
+!skills/v-model-documents/**
 !skills/v-model-equipe/
 !skills/v-model-equipe/**
 !skills/v-model-gestion/
