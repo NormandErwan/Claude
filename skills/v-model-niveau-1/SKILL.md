@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-1
-version: 1.4.0
+version: 2.0.0
 description: >
   Skill pour le Niveau 1 du modèle en V : Exigences système (System
   Requirements Document). Utiliser après validation de la phase amont,
@@ -17,7 +17,7 @@ description: >
 **Répond à :** que doit faire le système complet, et dans quel contexte ?
 **Agnostique à la solution :** ne présuppose pas logiciel, matériel, ou procédure.
 **Input :** EBO valide + Charte signée.
-**Output :** System Requirements Document (SRD).
+**Output :** System Requirements Document (SRD) -- `100-system-requirements/120-srd.md`.
 **Skill suivant :** `v-model-niveau-2`.
 
 ---
@@ -44,6 +44,11 @@ Chaque exigence doit être :
 
 Format d'identifiant : `SYS-F-001` (fonctionnel), `SYS-NF-001` (non-fonctionnel),
 `SYS-I-001` (interface), `SYS-C-001` (contrainte), `SYS-H-001` (hypothèse).
+
+**Le titre de section est l'identifiant seul, l'énoncé passe en dessous.**
+L'ancre générée (`#sys-f-001`) reste alors stable quand l'énoncé est reformulé.
+Un titre qui contient l'énoncé casse tous les liens entrants à la première
+reformulation (`v-model-documents`).
 
 **Numérotation par sections dès le départ.** Pour tout SRD non trivial,
 numéroter par tranches : SYS-F-1XX, 2XX par sous-domaine fonctionnel ;
@@ -125,7 +130,9 @@ Tracer cet audit : chaque reformulation est une décision à consigner
 
 **Template par exigence :**
 ```
-### SYS-F-XXX : le système doit [verbe observable] [complément].
+### SYS-F-XXX
+
+Le système doit [verbe observable] [complément].
 
 **Origine EBO :** [référence]
 **Parcours source :** [NOM-PARCOURS, étape N]
@@ -172,8 +179,7 @@ pas une fonction particuliere.
 ```
 ### SYS-I-XXX
 
-
-- [description de l'interface] via [protocole/moyen impose si connu].
+[Description de l'interface] via [protocole ou moyen imposé si connu].
 ```
 
 Couvrir : interfaces utilisateur, interfaces système, interfaces materiel,
@@ -187,9 +193,11 @@ Ce qui réduit l'espace des solutions sans être un besoin fonctionnel.
 Elles viennent de l'extérieur de l'équipe (règlements, contrats, stack imposée).
 
 ```
-# # SYS-C-XXX
+### SYS-C-XXX
 
+[Contrainte qui réduit l'espace des solutions].
 
+**Origine :** [règlement, contrat, stack imposée]
 ```
 
 ---
@@ -199,8 +207,9 @@ Elles viennent de l'extérieur de l'équipe (règlements, contrats, stack impos�
 Ce sur quoi le système repose mais que l'équipe ne controle pas.
 
 ```
-# # SYS-H-XXX
+### SYS-H-XXX
 
+[Ce sur quoi le système repose sans le contrôler].
 
 **Risque si invalide :** [impact sur le projet].
 ```
@@ -210,8 +219,10 @@ Ce sur quoi le système repose mais que l'équipe ne controle pas.
 ## 7. Matrice de traçabilité EBO → Parcours → SYS
 
 Les origines en ligne dans chaque exigence ne prouvent pas la couverture.
-Produire une matrice consolidée, artefact obligatoire du SRD
-(docs/requirements/traceability.md).
+Produire une matrice consolidée, artefact obligatoire du niveau, rangée en tête
+du répertoire des exigences système :
+`100-system-requirements/110-upstream-traceability.md`. Une matrice porte le nom
+de son niveau source et vit dans son niveau cible (`v-model-documents`).
 
 Format : un tableau à trois colonnes — élément EBO, parcours utilisateur, exigence(s) SYS :
 
