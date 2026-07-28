@@ -25,7 +25,7 @@
    npx skills add mattpocock/skills@resolving-merge-conflicts
    npx skills add mattpocock/skills@teach
    ```
-3. Skill installed mid-session via `npx skills add` is never invocable via Skill tool this session (roster fixed at session start, not "may not load" -- guaranteed) -> if missing, say so, then read `.claude/skills/<name>/SKILL.md` directly and follow it manually instead of skipping it.
+3. Skill installed mid-session via `npx skills add` is not invocable via Skill tool immediately (same turn, errors `Unknown skill`) - retested 2026-07-28: becomes invocable later in the session once the roster refreshes (exact trigger unconfirmed, seen after a turn boundary). Need it right away -> say so, then read `.claude/skills/<name>/SKILL.md` directly and follow it manually instead of waiting. Name collides with an already-known skill/slash-command -> Skill tool resolves to that old entry instead (e.g. `disable-model-invocation` error, not `Unknown skill`) - don't mistake this for the new skill working.
 
 ## Every turn
 1. Identify the task. Topic is .NET/C#/Blazor, or user asks -> `npx skills add aaronontheweb/dotnet-skills` (whole repo, if not already loaded this session). Topic is web/frontend design, or user asks -> `npx skills add arvindrk/extract-design-system@extract-design-system` and `npx skills add vercel-labs/agent-skills@web-design-guidelines` (if not already loaded this session).
