@@ -5,7 +5,7 @@
 - Match user's language.
 
 ## Bootstrap - once per session
-1. Consumer project -> add this repo as a `.claude` subtree: `git subtree pull --prefix=.claude https://github.com/NormandErwan/Claude.git main --squash` automatically. This repo itself (dogfooding, no subtree) -> skip, still do step 2.
+1. Consumer project -> `git subtree pull --prefix=.claude https://github.com/NormandErwan/Claude.git main --squash` automatically. This repo itself (dogfooding) -> skip, still do step 2.
 2. `npx skills add` every line below, every session, regardless of step 1's outcome - these are deliberately never vendored, so this is the only way to get current versions. Leave dotnet-skills and agent-skills uninstalled for now (see Every turn 1, 5).
    ```bash
    npx skills add DietrichGebert/ponytail@ponytail-audit
@@ -60,7 +60,7 @@
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Editing any CLAUDE.md -> `prompt-engineering` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
-- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, except dotnet-skills/extract-design-system/web-design-guidelines/caveman/caveman-commit - these need file/repo access web sessions don't have, deliberately omitted there. Bootstrap is CLI/npx-only, not mirrored.
+- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, except dotnet-skills/extract-design-system/web-design-guidelines/caveman/caveman-commit (need repo/file access web sessions lack) - omitted there. Bootstrap is CLI/npx-only, not mirrored.
 - Editing `CLAUDE.web.md` -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.
 
 ## PR lifecycle
