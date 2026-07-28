@@ -19,7 +19,7 @@
 | Trigger | Action |
 |---|---|
 | External request non-2xx / proxy block | `[BLOCKED] <url> - <status>`; if host required, stop and tell user |
-| Validate-gate question (or mutating prompt) unanswered | End turn, don't act; wait silently - hook/notification noise isn't a reply. Unanswered twice -> stop, report attempt + reason, wait |
+| Validate-gate question (or mutating prompt) unanswered | End turn, don't act; wait silently - hook/notification noise isn't a reply, but counts toward the twice-unanswered threshold below. Unanswered twice -> stop, report attempt + reason, wait |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
 
 ## Retrospective
