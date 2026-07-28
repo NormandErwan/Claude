@@ -25,7 +25,7 @@
    npx skills add mattpocock/skills@resolving-merge-conflicts
    npx skills add mattpocock/skills@teach
    ```
-3. Skill installed mid-session via `npx skills add` is never invocable via Skill tool this session (roster fixed at session start, not "may not load" -- guaranteed) -> if missing, say so, then read `.claude/skills/<name>/SKILL.md` directly and follow it manually instead of skipping it.
+3. Skill installed via `npx skills add` mid-session errors `Unknown skill` if invoked same turn, becomes invocable later in the session. Need it now -> read `.claude/skills/<name>/SKILL.md` directly instead of waiting. Name collision with an existing skill -> resolves to the old entry (`disable-model-invocation` error) instead of the new one.
 
 ## Every turn
 1. Identify the task. Topic is .NET/C#/Blazor, or user asks -> `npx skills add aaronontheweb/dotnet-skills` (whole repo, if not already loaded this session). Topic is web/frontend design, or user asks -> `npx skills add arvindrk/extract-design-system@extract-design-system` and `npx skills add vercel-labs/agent-skills@web-design-guidelines` (if not already loaded this session).
@@ -44,7 +44,7 @@
 | External request non-2xx / proxy block | `[BLOCKED] <url> - <status>`; if host required, stop and tell user |
 | CI logs inaccessible | Stop, ask before continuing |
 | `AskUserQuestion` tool | Broken when reply is delayed (anthropics/claude-code#70648, unfixed) - don't use; ask in plain text instead. Revisit once fixed |
-| Validate-gate question (or mutating prompt) unanswered | End turn, don't act; wait silently - hook/notification noise isn't a reply. Unanswered twice -> stop, report attempt + reason, wait |
+| Validate-gate question (or mutating prompt) unanswered | End turn, don't act; wait silently - hook/notification noise isn't a reply, but counts toward the twice-unanswered threshold below. Unanswered twice -> stop, report attempt + reason, wait |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
 
 ## Local dev & verification
@@ -58,7 +58,7 @@
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Editing any CLAUDE.md -> `prompt-engineering` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
-- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit. Bootstrap is CLI/npx-only, not mirrored.
+- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Retrospective) -> update `CLAUDE.web.md` in the same commit. Bootstrap and Code/docs/commits are CLI/repo-only (web has no file/repo access), not mirrored.
 
 ## PR lifecycle
 
