@@ -4,16 +4,15 @@
 - Concise everywhere. No filler. Answer first, state facts, no restating the obvious.
 - Match user's language.
 
-## Bootstrap - once per session
-1. Load `verifying-sources` and follow `using-superpowers`.
-
 ## Every turn
-1. Identify the task.
-2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `find-skills`.
+1. Identify the task. Topic is .NET/C#/Blazor, or user asks -> use dotnet-skills. Topic is web/frontend design, or user asks -> use extract-design-system and web-design-guidelines.
+2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]"). None -> `find-skills`. Always check regardless of scan: any file op or multi-file task -> `token-efficiency`; unfamiliar code area or need the bigger picture -> `zoom-out`; about to state an unverified factual/technical/procedural claim -> `verifying-sources`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
 4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call; read-only skips).
    - Remote/cloud session -> batch `grill-me`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
-5. End of turn: announce estimated tokens used. Offer to draft the next-session prompt when continuing elsewhere is better, proactively at >=100k tokens (non-blocking, continue if ignored).
+   - Domain/data model involved -> also `domain-modeling`. New module/interface design -> also `codebase-design`. Unfamiliar domain needing primary sources -> also `research`. Design question needing a throwaway spike -> also `prototype`.
+5. Large-scope work (new subsystem, multi-session, or user asks for the full process) -> use agent-skills, following `using-agent-skills` to route by phase: Define (`interview-me`/`idea-refine`/`spec-driven-development`) -> Plan (`planning-and-task-breakdown`) -> Build (`incremental-implementation`/`test-driven-development`/...) -> Verify (`debugging-and-error-recovery`/`browser-testing-with-devtools`) -> Review (`code-review-and-quality`) -> Ship (`git-workflow-and-versioning`/...). Default for normal-sized tasks: skip this, steps 2-4 are enough. Once triggered, agent-skills phases supersede step 4's mattpocock routing for this task.
+6. End of turn: announce estimated tokens used. Offer to draft the next-session prompt (use `handoff` to structure it) when continuing elsewhere is better, proactively at >=100k tokens (non-blocking, continue if ignored).
 
 ## Error handling
 
