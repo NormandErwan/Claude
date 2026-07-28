@@ -2,7 +2,7 @@
 
 ## Communication
 - Concise everywhere - effective (right result) and efficient (least tokens/steps). No filler. Answer first, state facts, no restating the obvious.
-- That rule targets wording, not document structure - multi-level layout for human readability is fine as long as agent comprehension isn't hurt.
+- Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
 - Match user's language.
 
 ## Bootstrap - once per session
@@ -45,7 +45,7 @@
      - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
      - About to state an unverified factual/technical/procedural claim -> `verifying-sources`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
-4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> pipeline: `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call; read-only skips).
+4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call; read-only skips).
    - Remote/cloud session -> batch `grill-me`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
    - Domain/data model involved -> also `domain-modeling`.
    - New module/interface design -> also `codebase-design`.
@@ -79,8 +79,7 @@
   - Say so.
   - Confirm before iterating via CI.
 - Before "done/fixed/passing" claims:
-  - Run verification commands.
-  - Evidence first.
+  - Run verification commands - evidence first.
 
 ## Code / docs / commits
 - English + ASCII only.
