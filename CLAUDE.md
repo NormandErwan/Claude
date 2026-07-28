@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 ## Communication
-- Concise everywhere. No filler. Answer first, state facts, no restating the obvious.
+- Concise everywhere - efficace (right result) and efficient (least tokens/steps). No filler. Answer first, state facts, no restating the obvious.
 - Match user's language.
 
 ## Bootstrap - once per session
