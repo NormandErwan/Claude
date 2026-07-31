@@ -96,7 +96,7 @@ skills/
 
 **Frontmatter (YAML):**
 - Two required fields: `name` and `description` (see [agentskills.io/specification](https://agentskills.io/specification) for all supported fields)
-- `version`: required, `Major.Minor.patch`. New skill starts at `1.0.0`. Bump Patch for clarifications/typos, Minor for added sections/rules that don't break existing usage, Major for structural/behavioral changes that invalidate prior usage.
+- `version`: required, `Major.Minor.patch`, top-level field (not nested under `metadata`). New skill starts at `1.0.0`. Bump Patch for clarifications/typos, Minor for added sections/rules that don't break existing usage, Major for structural/behavioral changes that invalidate prior usage.
 - Max 1024 characters total
 - `name`: Use letters, numbers, and hyphens only (no parentheses, special chars)
 - `description`: Third-person, describes ONLY when to use (NOT what it does)
