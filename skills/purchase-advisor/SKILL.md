@@ -49,10 +49,14 @@ skill adds the purchase-specific steps in between.
    fallback for when no concrete option is known, not a default style.
 4. **Compare against the buyer's criteria in a table** - price, total cost of
    ownership (maintenance, consumables, subscriptions, resale value), and the
-   2-3 value drivers that actually matter for this decision. Mark assumptions
-   and confidence level; no false precision (don't invent a specific % ROI
-   from vague inputs) - but don't let "no real-time price feed" become an
-   excuse to withhold concrete recommendations you do know.
+   2-3 value drivers that actually matter for this decision. For a
+   recurring/subscription purchase, add a cancellation-friction/churn-risk
+   dimension (lock-in period, notice required, penalty) - TCO alone doesn't
+   capture how hard it is to get out. Add an ethical/environmental value
+   driver only if the user raises it themselves, not by default. Mark
+   assumptions and confidence level; no false precision (don't invent a
+   specific % ROI from vague inputs) - but don't let "no real-time price
+   feed" become an excuse to withhold concrete recommendations you do know.
 5. **Reflect and self-critique the comparison** - per `practical-advice` steps
    3-4, applied to the table itself: does it favor the first option by
    default, what's assumed, what's missing.
@@ -66,7 +70,8 @@ skill adds the purchase-specific steps in between.
 | Option | Named real product/brand, incl. wait/used/rent/don't-buy |
 | Price | Sticker price |
 | Total cost of ownership | Maintenance, consumables, subscriptions, resale |
-| Value driver 1-3 | Whatever matters most for this decision |
+| Cancellation friction | Recurring/subscription purchases only - lock-in, notice, penalty |
+| Value driver 1-3 | Whatever matters most; ethical/environmental only if user raised it |
 | Confidence | High/medium/low per estimate |
 
 ## Common Mistakes

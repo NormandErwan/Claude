@@ -104,6 +104,10 @@ skills/
   - Include specific symptoms, situations, and contexts
   - **NEVER summarize the skill's process or workflow** (see `cso-guide.md` for why)
   - Keep under 500 characters if possible
+- `metadata.version` (optional): `"MAJOR.MINOR"` string - the spec's only sanctioned version
+  field, there is no top-level `version`. Bump MINOR for wording tweaks, MAJOR for a changed
+  Core Pattern step. Bump only on a shipped change, not per benchmark iteration. No separate
+  CHANGELOG - git log already covers it.
 
 ```markdown
 ---

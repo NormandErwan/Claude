@@ -43,6 +43,8 @@ question - critique it once, then revise.
    multi-section audit.
 5. **Revise** - rewrite the answer incorporating the critique. Merge it into
    a stronger answer; don't tack the critique on as caveats.
+6. **Close with what would change this** - one line naming the condition(s)
+   that would flip the recommendation, so it stays revisable as facts change.
 
 ## Quick Reference
 
@@ -53,6 +55,7 @@ question - critique it once, then revise.
 | Reflect | Interrupt rushing to the first answer | Never |
 | Self-critique | Surface assumptions + alternatives | Never |
 | Revise | Merge critique into final answer | Never |
+| What would change it | Keep the recommendation revisable | Never |
 
 ## Example
 
@@ -72,6 +75,9 @@ question - critique it once, then revise.
 > the lower-risk default. If raw still matters to you, do it only with a
 > vet-formulated recipe (not homemade improvisation) to avoid the deficiency
 > risk that makes raw diets risky in the first place.
+>
+> *This would change if a vet has already diagnosed a condition raw feeding
+> is meant to address - follow their specific guidance instead.*
 
 ## Common Mistakes
 
