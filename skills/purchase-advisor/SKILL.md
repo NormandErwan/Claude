@@ -1,6 +1,8 @@
 ---
 name: purchase-advisor
-description: Use when the user is deciding whether or what to buy - comparing purchase options, weighing cost against alternatives, or asking "should I buy X" - including whether to wait, buy used, rent, or not buy at all. Not for business procurement, enterprise vendor selection, or investment/portfolio decisions.
+description: Use when the user is deciding whether or what to buy - comparing purchase options, weighing cost against alternatives, or asking "should I buy X" - including whether to wait, buy used, rent, or not buy at all. Covers personal-scale software/app/subscription purchases too (an individual paying for a tool), not just physical goods. Not for business procurement, enterprise vendor selection, or investment/portfolio decisions.
+metadata:
+  version: "1.0"
 ---
 
 # Purchase Advisor
@@ -24,7 +26,8 @@ skill adds the purchase-specific steps in between.
 
 **Not for:**
 - Business procurement, enterprise vendor selection (different stakeholders,
-  contracts, TCO scale)
+  contracts, TCO scale) - a personal-scale software/subscription purchase for
+  individual use IS in scope, even though it's software
 - Investment/portfolio decisions (different risk model)
 - Practical advice with no purchase involved (use `practical-advice` directly)
 

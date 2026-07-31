@@ -1,6 +1,8 @@
 ---
 name: practical-advice
-description: Use when the user asks for personal, non-technical advice with no single correct answer - personal finance, veterinary or pet care choices, management or interpersonal decisions, legal-adjacent personal questions, or other life decisions. Not for software/coding/dev questions, or questions with one objectively correct answer.
+description: Use when the user asks for personal, non-technical advice with no single correct answer - personal finance, veterinary or pet care choices, management or interpersonal decisions, legal-adjacent personal questions, or other life decisions. Not for software/coding/dev engineering questions, or questions with one objectively correct answer. Personal purchases of software/subscriptions route to `purchase-advisor` instead.
+metadata:
+  version: "1.0"
 ---
 
 # Practical Advice
@@ -23,7 +25,9 @@ question - critique it once, then revise.
   long term)
 
 **Not for:**
-- Software/coding/dev/technical questions
+- Software/coding/dev **engineering** questions (technical/architecture work) -
+  a personal purchase of software or a subscription is still in scope, via
+  `purchase-advisor`
 - Questions with one factually correct answer (use `verifying-sources` instead)
 - Buying decisions (use `purchase-advisor` - it reuses the loop below)
 
@@ -32,30 +36,43 @@ question - critique it once, then revise.
 1. **Frame the need** - only if the ask is underspecified (missing budget,
    timeline, risk tolerance, values, constraints). Ask directly, or invoke
    `grilling` if the ambiguity runs deep. Skip entirely when the ask is
-   already concrete - don't interrogate a clear question.
+   already concrete - don't interrogate a clear question, and don't re-frame
+   a same-domain followup already asked earlier in the session.
 2. **Answer as a named domain expert** - state the persona explicitly ("As a
-   [domain] expert...") and give a direct, complete first-pass answer.
+   [domain] expert...") and give a direct, complete first-pass answer. On a
+   same-domain followup in the same session, don't reintroduce the persona -
+   answer directly using the context already established.
 3. **Pause before finalizing** - take the time to reflect. Don't finalize the
    first plausible answer; check it actually addresses what was asked.
 4. **Self-critique the draft** - list the assumptions made, and surface 1-3
    credible alternatives or considerations the first pass missed. Scale the
    depth to the stakes: a quick personal question needs 1-2 lines, not a
-   multi-section audit.
+   multi-section audit; a same-domain followup needs this only if it adds a
+   new tradeoff. When the stakes involve legal exposure, health, or losing
+   something hard to reverse (housing, a job), also flag any specific
+   fact/figure/threshold stated with confidence in step 2 that isn't
+   verified - point to `verifying-sources` or a relevant professional rather
+   than asserting it.
 5. **Revise** - rewrite the answer incorporating the critique. Merge it into
    a stronger answer; don't tack the critique on as caveats.
 6. **Close with what would change this** - one line naming the condition(s)
    that would flip the recommendation, so it stays revisable as facts change.
 
+**If the user asks to skip the ceremony** ("just a direct answer", "no
+analysis") - steps 3-6 still happen, but stay internal: reply with only the
+revised answer, dropping the visible critique and closing line. Don't skip
+the critique itself, only its visible form.
+
 ## Quick Reference
 
 | Step | Purpose | Skip when |
 |---|---|---|
-| Frame | Fill missing constraints | Ask is already concrete |
-| Expert answer | Anchor a direct first pass | Never |
+| Frame | Fill missing constraints | Ask is already concrete, or a same-domain followup |
+| Expert answer | Anchor a direct first pass | Never (persona reintro skipped on a same-domain followup) |
 | Reflect | Interrupt rushing to the first answer | Never |
-| Self-critique | Surface assumptions + alternatives | Never |
+| Self-critique | Surface assumptions + alternatives; verify facts if high-stakes | Never (visible form only, if user wants a direct answer) |
 | Revise | Merge critique into final answer | Never |
-| What would change it | Keep the recommendation revisable | Never |
+| What would change it | Keep the recommendation revisable | Never (visible form only, if user wants a direct answer) |
 
 ## Example
 
@@ -91,3 +108,9 @@ question - critique it once, then revise.
   not genuinely different considerations
 - Writing a multi-section visible audit trail for a low-stakes question -
   match the critique's length to how much the decision matters
+- Treating "just a direct answer" as license to skip the internal critique
+  itself, not just its visible form
+- Re-framing or reintroducing the persona on a same-domain followup already
+  established earlier in the session
+- Stating a specific legal threshold, dosage, or figure with confidence on a
+  high-stakes question without flagging it for verification
