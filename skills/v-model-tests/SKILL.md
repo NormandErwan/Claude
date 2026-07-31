@@ -1,6 +1,6 @@
 ---
 name: v-model-tests
-version: 2.0.0
+version: 2.1.0
 description: >
   Skill pour la branche droite du modèle en V : tests unitaires, tests
   d'intégration, tests d'acceptance et tests de validation système. Utiliser
@@ -335,6 +335,8 @@ Avant livraison :
 - [ ] Toutes les procédures de validation système sont exécutées
 - [ ] Chaque parcours utilisateur (flux nominal + variantes) a au moins un scénario TVS associé
 - [ ] La matrice de traçabilité est complète (aucune exigence sans test)
+- [ ] Le fichier de la matrice de traçabilité existe à son chemin de grille
+    (`500-tests/510-requirements-traceability.md`)
 - [ ] Les procès-verbaux de recette sont signés (si requis contractuellement)
 ```
 

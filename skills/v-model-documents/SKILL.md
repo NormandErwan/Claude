@@ -1,6 +1,6 @@
 ---
 name: v-model-documents
-version: 2.0.0
+version: 2.1.0
 description: >
   Nomenclature documentaire du modèle en V : où ranger un document, comment le
   nommer, comment le référencer depuis un autre document. Déclencher à chaque
@@ -197,6 +197,15 @@ par entité, à partir du numéro que la grille déclare pour ce bloc : les LLDs
 se numérotent 420, 430, 440, et un composant ajouté entre deux voisins
 prend 425.
 
+**Exception -- une séquence de documents datés se numérote par pas de 1**
+(exemple : les ADR, 330, 331, 332, ...). Motif : un document daté s'ajoute
+après le dernier, jamais en insertion rétroactive -- le pas de 10 n'a rien à
+absorber.
+
+**Repli si le pas de 10 ne suffit pas.** Un bloc par entité à pas de 10 est
+borné (420-499 : 8 numéros pour les LLDs). Au-delà, numéroter par pas de 1
+depuis le début du bloc plutôt que renuméroter l'existant.
+
 **R3 -- préfixe de type quand le répertoire contient un artefact par entité.**
 Deux répertoires sont dans ce cas : l'architecture (un fichier par décision) et
 la conception détaillée (un fichier par composant). Le préfixe de type rend le
@@ -305,9 +314,10 @@ documentation. À exécuter avant l'écriture du contenu, pas après.
 2. **Répertoire** -- celui du niveau du V ou de la famille correspondante.
    Aucun sous-répertoire créé.
 3. **Préfixe** -- trois chiffres, premier chiffre égal à celui du répertoire,
-   pas de 10 depuis le numéro que la grille déclare pour le bloc. Un numéro
-   intermédiaire ne sert qu'à insérer entre deux voisins déjà pris. Un
-   instantané daté porte la date à la place du préfixe.
+   pas de 10 depuis le numéro que la grille déclare pour le bloc (pas de 1
+   pour une séquence de documents datés, ex. les ADR). Un numéro intermédiaire
+   ne sert qu'à insérer entre deux voisins déjà pris. Un instantané daté porte
+   la date à la place du préfixe.
 4. **Unicité globale** -- le numéro n'existe nulle part ailleurs dans la
    documentation.
 5. **Forme du nom** -- minuscules, tirets, ASCII, anglais, extension `.md`.

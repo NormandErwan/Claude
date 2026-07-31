@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-3
-version: 2.0.0
+version: 2.1.0
 description: >
   Skill pour le Niveau 3 du modèle en V : Architecture / High-Level Design.
   Utiliser après validation du SRS pour décider la structure du système
@@ -72,8 +72,8 @@ Chaque décision architecturale structurante fait l'objet d'un ADR.
 Un ADR non écrit est une décision qui sera remise en question indéfiniment.
 
 **Un ADR n'a pas de numéro propre.** Son identifiant est son nom de fichier :
-`330-adr-<topic>.md`, puis les numéros suivants dans le même bloc. On le
-référence par ce nom, en lien relatif (`v-model-documents`).
+`330-adr-<topic>.md`, puis les numéros suivants par pas de 1, jamais par pas
+de 10. On le référence par ce nom, en lien relatif (`v-model-documents`).
 
 **Template ADR :**
 ```
@@ -259,6 +259,8 @@ Ne pas démarrer le Niveau 4 si une case est vide.
 - [ ] Les contraintes transversales sont listées et vérifiables
 - [ ] La matrice SRS → architecture est complète (aucune exigence sans composant,
     aucun composant sans exigence)
+- [ ] Le fichier de la matrice de traçabilité existe à son chemin de grille
+    (`300-architecture/310-software-requirements-traceability.md`)
 - [ ] La vue de déploiement est cohérente avec les contraintes du SRD (SYS-C-XXX)
 - [ ] Le HLD a été revu lors du PDR (Preliminary Design Review)
 ```

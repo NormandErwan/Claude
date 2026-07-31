@@ -1,6 +1,6 @@
 ---
 name: v-model-implementation
-version: 2.0.0
+version: 2.1.0
 description: >
   Skill pour la phase d'implémentation du modèle en V. Utiliser quand un
   développeur commence à coder un composant, quand on génère du code depuis

@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-4
-version: 2.0.0
+version: 2.1.0
 description: >
   Skill pour le Niveau 4 du modèle en V : Conception détaillée / Low-Level
   Design. Utiliser après validation du HLD pour spécifier chaque composant
