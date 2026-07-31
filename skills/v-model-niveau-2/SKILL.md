@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-2
-version: 2.1.0
+version: 2.2.0
 description: >
   Skill pour le Niveau 2 du modèle en V : Exigences logiciel (Software
   Requirements Spécification). Utiliser après validation du SRD pour allouer
@@ -39,7 +39,7 @@ templates ci-dessous : l'ancre reste stable quand l'énoncé est reformulé
 
 ## 1. Allocation des exigences système
 
-Première decision : pour chaque exigence système, ce qui la satisfait.
+Pour chaque exigence système : ce qui la satisfait.
 
 **Template d'allocation :**
 
@@ -48,8 +48,7 @@ Première decision : pour chaque exigence système, ce qui la satisfait.
 | SYS-F-XXX : [intitule] | X | | | |
 | SYS-F-YYY : [intitule] | | | | X (logiciel + operateur) |
 
-**Règle :** chaque exigence logiciel doit pointer vers au moins une exigence système.
-Une exigence logiciel sans parent système est du hors-périmètre.
+**Règle :** chaque exigence logiciel pointe vers au moins une exigence système -- sans parent système, elle est hors-périmètre.
 
 ---
 
@@ -80,7 +79,7 @@ Le logiciel doit [comportement précis].
 Les NFRs système vagues deviennent des mesures précises avec condition de mesure.
 
 **Règle absolue : une NFR sans seuil numérique et sans condition de mesure
-est inutile. Elle sera source de litige en recette.**
+est inutile -- source de litige en recette.**
 
 **Si la NFR ne peut pas être reformulee sans input client :**
 Ne pas inventer un seuil. Creer une question explicite et bloquer l'avancement :
@@ -149,7 +148,7 @@ En contexte defense ou critique, ce bloc peut être plus volumineux que les fonc
 
 ## 6. Exigences de verification
 
-La branche droite du V commence ici -- chaque exigence definit comment elle sera verifiee.
+La branche droite du V commence ici : chaque exigence définit sa méthode de vérification.
 
 **Methodes de verification :**
 - **Test :** execution sur le système, mesure du résultat.

@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-3
-version: 2.1.0
+version: 2.2.0
 description: >
   Skill pour le Niveau 3 du modèle en V : Architecture / High-Level Design.
   Utiliser après validation du SRS pour décider la structure du système
@@ -36,13 +36,12 @@ description: >
 
 ## Principe fondateur
 
-Le HLD ne dit pas "voici comment implementer X".
-Il dit "voici les composants qui existent, pourquoi ils existent, et pourquoi
-cette structure satisfait les exigences -- en particulier les NFRs".
+Le HLD dit "voici les composants qui existent, pourquoi ils existent, et
+pourquoi cette structure satisfait les exigences -- en particulier les
+NFRs", pas "voici comment implementer X".
 
-**Une architecture sans justification est une architecture imposee.**
-Les développeurs qui ne comprennent pas pourquoi l'architecture est ainsi
-vont la contourner ou la violer.
+**Une architecture sans justification est une architecture imposee** --
+les développeurs qui n'en comprennent pas les raisons la contournent ou la violent.
 
 ---
 
@@ -68,8 +67,8 @@ Si la description d'un composant contient "et", il fait probablement deux choses
 
 ## 2. ADR -- Format et processus
 
-Chaque décision architecturale structurante fait l'objet d'un ADR.
-Un ADR non écrit est une décision qui sera remise en question indéfiniment.
+Chaque décision architecturale structurante fait l'objet d'un ADR --
+un ADR non écrit est une décision remise en question indéfiniment.
 
 **Un ADR n'a pas de numéro propre.** Son identifiant est son nom de fichier :
 `330-adr-<topic>.md`, puis les numéros suivants par pas de 1, jamais par pas
@@ -147,8 +146,6 @@ Ici : qui depend de qui, dans quelle direction, via quel contrat de haut niveau.
 ---
 
 ## 4. Contraintes transversales
-
-Decisions qui s'appliquent a tous les composants.
 
 **Template :**
 ```

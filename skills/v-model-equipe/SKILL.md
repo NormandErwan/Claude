@@ -1,6 +1,6 @@
 ---
 name: v-model-equipe
-version: 2.1.0
+version: 2.2.0
 description: >
   Skill pour les pratiques d'équipe dans le modèle V : Définition of Ready,
   Définition of Done, backlog, estimation, revue de code, intégration des
@@ -17,8 +17,8 @@ description: >
 Ce skill répond à : **comment l'équipe travaille au quotidien pour produire
 ce que les specs décrivent ?**
 
-Il s'applique en parallèle de tous les autres skills du V.
-La méthode sans pratique d'équipe reste théorique.
+S'applique en parallèle de tous les autres skills du V -- sans pratique
+d'équipe, la méthode reste théorique.
 
 ---
 
@@ -89,9 +89,8 @@ Exigence (SW-F-XXX du SRS)
 Tâche (Task) : unité réalisable en < 1 jour par un développeur
 ```
 
-**Critères d'acceptance d'une User Story :**
-Conditions observables qui permettent de dire que la Story est satisfaite.
-Elles font le lien avec les procédures de test d'acceptance.
+**Critères d'acceptance d'une User Story :** conditions observables validant
+la Story, liées aux procédures de test d'acceptance.
 
 ---
 
@@ -120,11 +119,11 @@ Objectifs :
 
 ## 5. Estimation
 
-**L'objectif de l'estimation n'est pas la précision -- c'est la détection des incompréhensions.**
+**L'objectif n'est pas la précision -- c'est la détection des incompréhensions.**
 
-Quand deux développeurs estiment très différemment une même tâche,
-c'est presque toujours parce qu'ils ne comprennent pas la même chose.
-La discussion qui s'ensuit a plus de valeur que le chiffre final.
+Un écart d'estimation important entre deux développeurs révèle presque
+toujours une divergence de compréhension : la discussion qui s'ensuit vaut
+plus que le chiffre final.
 
 **Planning Poker :**
 - Chaque développeur estime en silence.
@@ -132,16 +131,16 @@ La discussion qui s'ensuit a plus de valeur que le chiffre final.
 - Les écarts importants déclenchent une discussion.
 - On ne moyenne pas -- on comprend l'écart.
 
-**Sur une petite équipe de juniors :**
-Commencer par des estimations en jours (plus intuitif que les Story Points).
-Passer aux points quand l'équipe a acquis le réflexe d'estimer ensemble.
+**Petite équipe de juniors :** commencer en jours (plus intuitif que les
+Story Points), passer aux points une fois le réflexe d'estimation collective
+acquis.
 
 ---
 
 ## 6. Revue de code
 
-**Deux objectifs simultanés : améliorer le code ET développer le développeur.**
-Ces deux objectifs ne sont pas toujours servis par les mêmes commentaires.
+**Deux objectifs simultanés : améliorer le code ET développer le
+développeur** -- pas toujours servis par les mêmes commentaires.
 
 Convention d'équipe : `700-conventions/730-code-review.md`.
 
@@ -197,13 +196,13 @@ Convention d'équipe : `700-conventions/730-code-review.md`.
 **Délai maximum : 24 h après ouverture de la PR.**
 Une PR qui attend détruit le rythme de l'équipe.
 
-**Si le LLD est silencieux sur un point soulevé en revue :**
-Le commentaire devient automatiquement `[question]`, jamais `[bloquant]`.
+**Si le LLD est silencieux sur un point soulevé en revue :** le commentaire
+devient automatiquement `[question]`, jamais `[bloquant]`.
 Formuler ainsi : "Le LLD ne couvre pas ce cas. Est-ce intentionnel ?
 Si non, ce point doit être ajouté au LLD avant implémentation."
-Ce commentaire peut déclencher une mise à jour du LLD via le protocole
-d'escalade (`v-model-guide`). Ne pas bloquer la PR pour un silence du LLD
--- bloquer uniquement pour une violation du LLD.
+Peut déclencher une mise à jour du LLD via le protocole d'escalade
+(`v-model-guide`). Ne pas bloquer pour un silence du LLD -- uniquement pour
+une violation.
 
 ### Complément pédagogique : session de pair review
 
@@ -216,13 +215,12 @@ Une fois par sprint, revue en pair (reviewer + auteur ensemble) pour :
 
 ## 7. Intégration des développeurs juniors
 
-**Leur donner de la surface, pas du fond.**
-Un composant entier (même petit) avec une interface définie apprend plus
-qu'une succession de corrections de style.
+**Leur donner de la surface, pas du fond.** Un composant entier (même petit)
+avec une interface définie apprend plus qu'une succession de corrections de
+style.
 
-**Le LLD est leur point d'entrée.**
-Si le LLD est insuffisant, ils prendront des décisions sans le contexte pour les prendre.
-La complétude du LLD est une préalable pour déléguer l'implémentation.
+**Le LLD est leur point d'entrée** : s'il est insuffisant, ils décideront
+sans contexte. Sa complétude est un préalable à la délégation.
 
 ### Template de creation de tâches pour juniors
 
@@ -284,7 +282,7 @@ La complétude du LLD est une préalable pour déléguer l'implémentation.
 **La rendre visible -- pas l'ignorer.**
 
 Fichier : `800-status/820-technical-debt.md`. Artefact **vivant**, écrasé,
-jamais mis sous baseline -- au même titre que le backlog avec lequel il est en
+jamais mis sous baseline -- comme le backlog, avec lequel elle est en
 concurrence.
 
 **Format de ticket de dette acceptable :**
@@ -297,13 +295,12 @@ concurrence.
 **Risque si non traité :** [consequence mesurable]
 ```
 
-**La prioriser explicitement :**
-Elle est en concurrence avec les features dans le backlog.
-"On la traitera quand on a le temps" = elle ne sera jamais traitée.
+**La prioriser explicitement :** en concurrence avec les features du
+backlog -- "on la traitera quand on a le temps" = jamais traitée.
 
-**Instaurer la culture du signalement :**
-Un junior qui contourne un problème sans le signaler produit de la dette invisible.
-Signaler = bien faire son travail. Ne pas signaler = dette cachée.
+**Instaurer la culture du signalement :** un junior qui contourne un
+problème sans le signaler produit de la dette invisible. Signaler = bien
+faire son travail.
 
 ---
 
@@ -336,8 +333,8 @@ Signaler = bien faire son travail. Ne pas signaler = dette cachée.
 - Ce que je fais aujourd'hui.
 - Ce qui me bloque.
 
-Objectif : synchronisation horizontale entre développeurs, pas rapport au chef.
-Les bloquants remontent immédiatement -- pas au standup du lendemain.
+Objectif : synchronisation horizontale entre développeurs, pas rapport au
+chef -- les bloquants remontent immédiatement, pas au standup du lendemain.
 
 **Rétrospective -- une seule action concrète par sprint :**
 ```

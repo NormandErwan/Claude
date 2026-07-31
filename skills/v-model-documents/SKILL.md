@@ -1,6 +1,6 @@
 ---
 name: v-model-documents
-version: 2.1.0
+version: 2.2.0
 description: >
   Nomenclature documentaire du modèle en V : où ranger un document, comment le
   nommer, comment le référencer depuis un autre document. Déclencher à chaque

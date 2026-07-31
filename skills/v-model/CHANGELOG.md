@@ -1,5 +1,9 @@
 # Changelog -- suite v-model
 
+## [2.2.0] -- 2026-07-31
+
+Condensation : passe de densité de formulation sur les 11 skills (règle déjà appliquée au CLAUDE.md racine -- tableaux/listes plutôt que prose, aucune phrase qui ne fait que reformuler un titre ou un identifiant). Sorties obligatoires, drapeaux rouges, grilles d'identifiants et références croisées entre skills préservés mot pour mot ; validation A/B (original vs condensé, subagents) sur un échantillon de 3 skills avant extension aux 8 autres. Aucun changement de sens, de structure ou de procédure. Fusionné sur la version 2.1.0 ci-dessous.
+
 ## [2.1.0] -- 2026-07-29
 
 Repli de numérotation et porte de traçabilité par fichier. `v-model-documents`

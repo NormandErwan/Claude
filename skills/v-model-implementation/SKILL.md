@@ -1,13 +1,13 @@
 ---
 name: v-model-implementation
-version: 2.1.0
+version: 2.2.0
 description: >
   Skill pour la phase d'implémentation du modèle en V. Utiliser quand un
   développeur commence à coder un composant, quand on génère du code depuis
   une spécification, ou quand on veut structurer le travail d'implémentation
   depuis un LLD. Prérequis strict : LLD du composant valide et porte de
-  validation du Niveau 4 complétée. Skill connexe : v-model-tests pour les
-  tests unitaires à produire en parallèle.
+  validation du Niveau 4 complétée. Skill connexe : v-model-tests (tests
+  unitaires à produire en parallèle).
 ---
 
 # Implémentation
@@ -34,8 +34,7 @@ description: >
 
 ## Principe fondamental
 
-Si un développeur prend une décision de conception pendant l'implémentation,
-c'est le signal que le LLD était insuffisant -- pas que le développeur a mal travaillé.
+Décision de conception prise pendant l'implémentation = signal que le LLD était insuffisant, pas faute du développeur.
 
 **Protocole en cas d'ambiguïté :**
 1. Stopper l'implémentation du point ambigu.
@@ -55,16 +54,14 @@ Format de signalement ecrit minimal :
 **Bloque :** implémentation de [methode] jusqu'a clarification
 ```
 
-Ne jamais "deviner" une zone floue sans la signaler. Voir `v-model-guide`
-(protocole d'escalade) pour la procedure complete.
+Ne jamais "deviner" une zone floue sans la signaler (voir `v-model-guide`, protocole d'escalade, pour la procedure complete).
 
 ---
 
 ## Si le défaut remet en cause un niveau supérieur
 
-L'ambiguïté et la dette technique restent locales au LLD. Un troisième cas
-existe : l'implémentation révèle qu'une décision d'un niveau supérieur est
-*erronée* (HLD, SRS ou SRD), pas seulement floue ou impraticable.
+Ambiguïté et dette technique restent locales au LLD. Troisième cas : l'implémentation révèle qu'une décision d'un niveau supérieur est
+*erronée* (HLD, SRS ou SRD) -- pas seulement floue ou impraticable.
 
 Ne pas corriger uniquement le LLD ni le code. Déclencher un Change Request
 interne :
@@ -91,7 +88,7 @@ les documents mentir.
 
 **1. Préparer le contexte**
 
-Avant de commencer, rassembler :
+Rassembler :
 - Le LLD du composant a implementer.
 - Les interfaces des composants dont il depend (déjà implementes).
 - Les ADRs pertinents du HLD.
@@ -99,13 +96,12 @@ Avant de commencer, rassembler :
 
 **2. Générer la structure (pas l'implémentation)**
 
-Commencer par le squelette : classes, interfaces, enums, méthodes vides
-avec leurs préconditions en commentaire.
-Faire valider la structure avant d'implémenter le comportement.
+Squelette d'abord : classes, interfaces, enums, méthodes vides avec préconditions en commentaire.
+Faire valider avant d'implémenter le comportement.
 
 **3. Implémenter les validations de préconditions en premier**
 
-Les erreurs d'entrée doivent être détectées avant toute logique métier.
+Erreurs d'entrée détectées avant toute logique métier.
 Référence : contrats d'erreur du LLD.
 
 **4. Implémenter la logique métier**
@@ -171,7 +167,7 @@ Référence : `v-model-tests` (section tests unitaires).
 
 ## Vérifier la cohérence entre composants
 
-Après implémentation de plusieurs composants, vérifier les incohérences :
+Après plusieurs composants implémentés, vérifier les incohérences :
 
 ```
 **Contexte :** [ComposantA] et [ComposantB] implémentés
