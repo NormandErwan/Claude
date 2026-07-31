@@ -1,6 +1,6 @@
 ---
 name: v-model-phase-amont
-version: 2.1.0
+version: 2.2.0
 description: >
   Skill pour la phase amont d'un projet logiciel : capture du besoin
   opérationnel, étude de faisabilité, business case, charte de projet,
@@ -13,9 +13,9 @@ description: >
 
 ## Contexte
 
-La phase amont répond à une question différente du reste du V :
-**pourquoi ce projet, et est-il viable ?**
-Pas encore "que doit faire le système" -- c'est "doit-on construire ce système".
+La phase amont pose une question différente du reste du V :
+**pourquoi ce projet, et est-il viable ?** -- pas "que doit faire le système",
+mais "doit-on le construire".
 
 **Input :** besoin exprime par le client (verbal, email, appel d'offres).
 **Output :** quatre documents qui autorisent le projet a exister.
@@ -47,7 +47,7 @@ Pas encore "que doit faire le système" -- c'est "doit-on construire ce système
 1. Produire un draft d'EBO depuis ce qu'on a (même incomplet).
 2. Poser les questions au client pour valider et combler les zones floues.
 3. Mettre a jour le draft jusqu'a validation client.
-Ne pas attendre les reponses du client pour commencer -- le draft force
+Ne pas attendre les reponses du client pour commencer : le draft force
 les bonnes questions et accelere la conversation.
 
 **Template EBO :**
@@ -232,15 +232,15 @@ Ne pas démarrer le Niveau 1 si une de ces cases est vide.
 
 ## Minimum viable (petit projet)
 
-Sur un projet de quelques jours, Business Case et Charte peuvent être fusionnes
-en un seul email ou compte-rendu de reunion de 30 minutes.
-L'important : la decision de faire est tracée quelque part, même en une phrase.
+Sur un projet de quelques jours, Business Case et Charte fusionnables en un
+email ou un compte-rendu de reunion de 30 minutes. L'important : la decision
+de faire est tracée quelque part, même en une phrase.
 
-**Ce qui ne peut pas être supprimé :** la validation du périmètre par le client
-et la liste des hypothèses. Sans elles, le scope creep est garantie.
+**Ce qui ne peut pas être supprimé :** validation du périmètre par le client
+et liste des hypothèses -- sans elles, scope creep garanti.
 
-Sur un petit projet, un tableau 3 colonnes (étape / action / résultat) suffit pour les
-parcours, mais le parcours lui-même ne peut pas être supprimé.
+Pour les parcours, un tableau 3 colonnes (étape / action / résultat) suffit,
+mais le parcours lui-même reste obligatoire.
 
 ---
 

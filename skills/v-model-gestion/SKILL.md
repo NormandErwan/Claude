@@ -1,6 +1,6 @@
 ---
 name: v-model-gestion
-version: 2.1.0
+version: 2.2.0
 description: >
   Skill pour les artefacts de gestion de projet dans le modèle V : plan de
   projet, registre des risques, registre des decisions, gestion des
@@ -14,10 +14,9 @@ description: >
 
 ## Contexte
 
-Les artefacts de gestion pilotent le projet sans décrire ce qu'on construit.
-Ils répondent a : **est-ce que le projet se deroule comme prévu, et sinon que fait-on ?**
+Pilotent le projet sans décrire ce qu'on construit : **est-ce que le projet se deroule comme prévu, et sinon que fait-on ?**
 
-Ces documents existent en parallele du V -- ils ne sont pas dans le V, ils l'entourent.
+Existent en parallele du V -- pas dans le V, ils l'entourent.
 
 ---
 
@@ -50,8 +49,7 @@ Règles de nommage et porte de nommage : `v-model-documents`.
 
 ## 1. Plan de projet
 
-**Objectif :** contrat interne de l'équipe. Établi en début de projet,
-mis à jour à chaque jalon significatif.
+**Objectif :** contrat interne de l'équipe -- établi en début de projet, mis à jour à chaque jalon significatif.
 
 **Template :**
 ```
@@ -75,17 +73,15 @@ mis à jour à chaque jalon significatif.
 ****hp-002 :** ** [hypothèse]. Si invalide : [impact sur le plan].
 ```
 
-**Règle :** si le plan suppose quelque chose sur l'environnement extérieur,
-c'est une hypothèse de planification -- elle doit être documentée.
+**Règle :** si le plan suppose quelque chose sur l'environnement extérieur, c'est une hypothèse de planification à documenter.
 
 ---
 
 ## 2. Registre des risques
 
-**Objectif :** liste vivante des risques identifiés. Mise à jour à chaque revue.
+**Objectif :** liste vivante des risques identifiés, mise à jour à chaque revue.
 
-**Format par risque :** une section `### RSK-XXX` du registre, dont le corps
-renseigne les champs ci-dessous.
+**Format par risque :** section `### RSK-XXX` du registre, champs ci-dessous.
 
 | Champ | Description |
 |---|---|
@@ -142,8 +138,7 @@ seul pour que l'ancre `#dcl-001` reste stable (`v-model-documents`).
 **Référence :** [CR-XXX si lié à une demande d'évolution]
 ```
 
-**Règle :** toute decision qui modifie le périmètre, le budget ou le planning
-doit avoir une entree dans ce registre. Même les petites.
+**Règle :** toute decision qui modifie le périmètre, le budget ou le planning doit avoir une entree dans ce registre -- même les petites.
 
 ---
 
@@ -156,8 +151,8 @@ doit avoir une entree dans ce registre. Même les petites.
 - Documents du V (SRD, SRS, HLD, LLD, procedures de test).
 - Fichiers de parametres et de configuration.
 
-**Baseline :** photo du système à un instant donné (typiquement à chaque jalon).
-Elle répond a : "qu'est-ce qu'on a livre exactement le [date] ?"
+**Baseline :** photo du système à un instant donné (typiquement à chaque
+jalon) -- répond a : "qu'est-ce qu'on a livre exactement le [date] ?"
 
 **Politique de baseline :** consignée dans `600-management/650-baselines.md`,
 une entrée par jalon.
@@ -177,18 +172,18 @@ une entrée par jalon.
 **Statut des tests :** [résultats]
 ```
 
-**Le répertoire d'état (`800-status/`) n'est jamais mis sous baseline.** Ses
-fichiers d'état courant sont écrasés à chaque mise à jour et ses instantanés
-datés sont déjà immuables : les figer une seconde fois n'apporte rien et
-laisserait croire que le backlog d'un jalon fait partie du livrable.
+**Le répertoire d'état (`800-status/`) n'est jamais mis sous baseline** : ses
+fichiers courants sont écrasés à chaque mise à jour, ses instantanés datés
+déjà immuables -- les figer une seconde fois n'apporte rien et laisserait
+croire que le backlog d'un jalon fait partie du livrable.
 
 ---
 
 ## 5. Gestion des évolutions (Change Management — interne ou client)
 
-Quand une évolution est demandée en cours de projet — par le client, ou par
-l'équipe technique quand l'implémentation révèle qu'une décision amont est
-erronée (voir `v-model-implementation`).
+Déclenché quand une évolution est demandée en cours de projet — par le
+client, ou par l'équipe technique quand l'implémentation révèle qu'une
+décision amont est erronée (voir `v-model-implementation`).
 
 **Processus :** une section par demande dans le registre des demandes
 d'évolution, titrée par l'identifiant seul (`v-model-documents`).
@@ -223,8 +218,7 @@ POLITIQUE DE DÉLÉGATION (à définir en début de projet et documenter dans la
 **Registre des decisions :** DCL-XXX
 ```
 
-**Le scope creep se produit quand les étapes 1 a 3 sont absentes.**
-Chaque petite demande non tracée s'accumule silencieusement.
+**Le scope creep se produit quand les étapes 1 a 3 sont absentes** -- chaque petite demande non tracée s'accumule silencieusement.
 
 ---
 
@@ -233,12 +227,11 @@ Chaque petite demande non tracée s'accumule silencieusement.
 **Fréquence :** hebdomadaire ou par sprint.
 
 Deux artefacts distincts, deux sous-familles distinctes :
-- Le **tableau de bord** (`800-status/830-dashboard.md`) donne l'état courant.
-  Un seul fichier, écrasé à chaque mise à jour.
+- Le **tableau de bord** (`800-status/830-dashboard.md`) donne l'état courant : un seul fichier, écrasé à chaque mise à jour.
 - Le **rapport d'avancement** (`800-status/YYYY-MM-DD-progress.md`) est un
   instantané daté : un fichier par occurrence, **jamais modifié après
-  écriture**. Une erreur se corrige dans le rapport suivant, qui la cite.
-  Réécrire un rapport publié détruit sa seule valeur, qui est d'être une trace.
+  écriture**. Une erreur se corrige dans le rapport suivant, qui la cite --
+  réécrire un rapport publié détruit sa seule valeur, qui est d'être une trace.
 
 **Template :**
 ```
@@ -266,8 +259,8 @@ Deux artefacts distincts, deux sous-familles distinctes :
 ```
 
 **Signal d'alarme :** un tableau de bord toujours vert jusqu'au jour ou tout
-s'effondre n'est pas un outil de pilotage -- c'est de la communication descendante.
-Les problèmes doivent remonter tot, pas être caches.
+s'effondre n'est pas un outil de pilotage mais de la communication
+descendante -- les problèmes doivent remonter tot, pas être caches.
 
 ---
 
@@ -282,8 +275,7 @@ Les problèmes doivent remonter tot, pas être caches.
 | TRR (Test Readiness Review) | Avant tests | Environnement prêt, procédures écrites |
 | FAT (Factory Acceptance Test) | Après tests | Système satisfait les exigences -- livraison autorisée |
 
-**En contexte défense :** ces jalons sont souvent contractuels et donnent lieu
-à des revues formelles avec le client, avec un compte-rendu signé.
+**En contexte défense :** ces jalons sont souvent contractuels, avec revues formelles et compte-rendu signé.
 
 ---
 

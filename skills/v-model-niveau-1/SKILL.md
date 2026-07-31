@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-1
-version: 2.1.0
+version: 2.2.0
 description: >
   Skill pour le Niveau 1 du modèle en V : Exigences système (System
   Requirements Document). Utiliser après validation de la phase amont,
@@ -45,21 +45,18 @@ Chaque exigence doit être :
 Format d'identifiant : `SYS-F-001` (fonctionnel), `SYS-NF-001` (non-fonctionnel),
 `SYS-I-001` (interface), `SYS-C-001` (contrainte), `SYS-H-001` (hypothèse).
 
-**Le titre de section est l'identifiant seul, l'énoncé passe en dessous.**
-L'ancre générée (`#sys-f-001`) reste alors stable quand l'énoncé est reformulé.
-Un titre qui contient l'énoncé casse tous les liens entrants à la première
-reformulation (`v-model-documents`).
+**Le titre de section est l'identifiant seul, l'énoncé passe en dessous** : l'ancre
+(`#sys-f-001`) reste stable si l'énoncé est reformulé ; un titre contenant l'énoncé
+casse les liens entrants à la première reformulation (`v-model-documents`).
 
-**Numérotation par sections dès le départ.** Pour tout SRD non trivial,
-numéroter par tranches : SYS-F-1XX, 2XX par sous-domaine fonctionnel ;
-même principe pour les autres familles. La numérotation purement
-séquentielle oblige à tout renuméroter dès qu'une exigence s'insère
-au milieu.
+**Numérotation par sections dès le départ** : pour tout SRD non trivial, numéroter
+par tranches (SYS-F-1XX, 2XX par sous-domaine fonctionnel ; même principe pour les
+autres familles) -- la numérotation purement séquentielle oblige à tout renuméroter
+dès qu'une exigence s'insère au milieu.
 
 ### Anti-patterns de vérifiabilité
 
-Avant de valider le champ « Vérifiable par » de chaque exigence,
-parcourir ce tableau.
+Avant de valider le champ « Vérifiable par » de chaque exigence, parcourir ce tableau.
 
 | Anti-pattern | Exemple | Correction |
 |---|---|---|
@@ -72,12 +69,12 @@ parcourir ce tableau.
 
 ## 0. Audit de l'EBO
 
-Les parcours utilisateur produits en phase amont sont le fil conducteur de cet audit.
-Chaque étape d'un parcours devrait être couverte par au moins une exigence SYS-F.
-Un élément de parcours sans exigence correspondante = besoin non couvert.
+Les parcours utilisateur de la phase amont sont le fil conducteur de cet audit :
+chaque étape devrait être couverte par au moins une exigence SYS-F ; un élément de
+parcours sans exigence correspondante = besoin non couvert.
 
-L'EBO exprime un besoin, mais peut contenir du vocabulaire de solution
-hérité de la phase amont. Avant de rédiger une seule exigence :
+L'EBO exprime un besoin mais peut contenir du vocabulaire de solution hérité de la
+phase amont. Avant de rédiger une seule exigence :
 
 1. Parcourir l'EBO et lister tout terme qui désigne un comment plutôt
    qu'un quoi : technologies, composants, mécanismes, artefacts
@@ -87,10 +84,10 @@ hérité de la phase amont. Avant de rédiger une seule exigence :
 3. Rédiger les exigences à partir du besoin reformulé, jamais du terme
    de solution.
 
-Exemple : un EBO qui parle de « tags personal / shared » présuppose un
-mécanisme de marquage. Le besoin sous-jacent : distinguer les dépenses
-selon à qui elles incombent. C'est ce besoin qui devient l'exigence ;
-le mécanisme de tag est une décision de niveau 3 ou 4.
+Exemple : un EBO qui parle de « tags personal / shared » présuppose un mécanisme
+de marquage ; le besoin sous-jacent est de distinguer les dépenses selon à qui
+elles incombent -- c'est ce besoin qui devient l'exigence, le mécanisme de tag
+étant une décision de niveau 3 ou 4.
 
 Tracer cet audit : chaque reformulation est une décision à consigner
 (registre des décisions, v-model-gestion).
@@ -139,12 +136,11 @@ Le système doit [verbe observable] [complément].
 **Vérifiable par :** [type de test imaginable]
 ```
 
-**Avant d'énumérer des règles, modéliser.** Si un besoin se traduit par
-plusieurs règles qui partagent la même structure (mêmes variables, mêmes
-types de cas), arrêter l'énumération dès qu'elles atteignent trois.
-Modéliser le besoin sous-jacent de façon abstraite, puis vérifier qu'une
-règle générale unique ne le couvre pas. N'énumérer des cas distincts que
-s'ils relèvent de logiques réellement différentes.
+**Avant d'énumérer des règles, modéliser** : si un besoin se traduit par plusieurs
+règles partageant la même structure (mêmes variables, mêmes types de cas), arrêter
+l'énumération dès qu'elles atteignent trois, modéliser le besoin sous-jacent de
+façon abstraite, puis vérifier qu'une règle générale unique ne le couvre pas.
+N'énumérer des cas distincts que s'ils relèvent de logiques réellement différentes.
 
 Exemple : neuf règles de calcul de solde (nature × compte × sens) se
 réduisent souvent à une seule règle paramétrée — une énumération, pas
@@ -154,8 +150,8 @@ neuf besoins.
 
 ## 3. Exigences non-fonctionnelles système (NFRs)
 
-Les NFRs s'appliquent transversalement. Elles contraignent l'architecture,
-pas une fonction particuliere.
+Les NFRs s'appliquent transversalement : elles contraignent l'architecture,
+pas une fonction particulière.
 
 **Categories a couvrir :**
 
@@ -169,7 +165,7 @@ pas une fonction particuliere.
 | Utilisabilité | Qui utilise, avec quelle formation ? |
 | Portabilité | Sur quels environnements ? |
 
-**A ce niveau, les seuils sont indicatifs.** Ils seront quantifies au Niveau 2.
+**Les seuils sont indicatifs à ce niveau** -- quantifiés au Niveau 2.
 
 ---
 
@@ -189,8 +185,8 @@ interfaces de données.
 
 ## 5. Contraintes système
 
-Ce qui réduit l'espace des solutions sans être un besoin fonctionnel.
-Elles viennent de l'extérieur de l'équipe (règlements, contrats, stack imposée).
+Réduit l'espace des solutions sans être un besoin fonctionnel ; vient de
+l'extérieur de l'équipe (règlements, contrats, stack imposée).
 
 ```
 ### SYS-C-XXX
@@ -218,11 +214,10 @@ Ce sur quoi le système repose mais que l'équipe ne controle pas.
 
 ## 7. Matrice de traçabilité EBO → Parcours → SYS
 
-Les origines en ligne dans chaque exigence ne prouvent pas la couverture.
-Produire une matrice consolidée, artefact obligatoire du niveau, rangée en tête
-du répertoire des exigences système :
-`100-system-requirements/110-upstream-traceability.md`. Une matrice porte le nom
-de son niveau source et vit dans son niveau cible (`v-model-documents`).
+Les origines en ligne dans chaque exigence ne prouvent pas la couverture. Produire
+une matrice consolidée, artefact obligatoire du niveau, rangée en tête du
+répertoire des exigences système : `100-system-requirements/110-upstream-traceability.md`
+(nommée d'après son niveau source, vit dans son niveau cible -- `v-model-documents`).
 
 Format : un tableau à trois colonnes — élément EBO, parcours utilisateur, exigence(s) SYS :
 
@@ -232,14 +227,14 @@ Format : un tableau à trois colonnes — élément EBO, parcours utilisateur, e
 ```
 
 Règle : un élément EBO sans parcours intermédiaire associé est un signal d'alerte
-(besoin non modélisé). Traitement : créer le parcours manquant ou justifier son absence.
+(besoin non modélisé) -- créer le parcours manquant ou justifier son absence.
 
 La matrice se lit dans les deux sens :
 - Élément EBO sans exigence en face : besoin non couvert. Compléter le SRD.
-- Exigence SYS sans origine EBO : exigence orpheline. Deux issues, jamais
-  une troisième. Soit l'EBO est incomplet : le compléter et tracer. Soit
-  c'est une demande d'évolution hors Charte : la tracer comme telle via
-  v-model-gestion. Ne jamais laisser une orpheline non qualifiée.
+- Exigence SYS sans origine EBO : exigence orpheline, deux issues jamais une
+  troisième. Soit l'EBO est incomplet : le compléter et tracer. Soit c'est une
+  demande d'évolution hors Charte : la tracer comme telle via v-model-gestion.
+  Ne jamais laisser une orpheline non qualifiée.
 
 ---
 

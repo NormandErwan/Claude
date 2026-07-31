@@ -1,6 +1,6 @@
 ---
 name: v-model-guide
-version: 2.1.0
+version: 2.2.0
 description: >
   Point d'entrée unique pour la méthode V de développement logiciel. Utiliser
   ce skill pour tout projet logiciel structuré : démarrage de projet, question
@@ -40,7 +40,7 @@ description: >
 | Tout rôle | Ambiguïté ou blocage en cours de travail | Protocole d'escalade ci-dessous |
 | Tout rôle | Premier brouillon d'un artefact terminé | Revue critique ci-dessous |
 
-Un même individu peut tenir plusieurs roles. Lire le skill correspondant a la tâche du moment.
+Un individu peut tenir plusieurs rôles -- suivre le skill de la tâche du moment.
 
 ---
 
@@ -67,8 +67,7 @@ PHASE AMONT
 
 **Branche gauche :** on raffine -- du problème vers la solution.
 **Branche droite :** on vérifie -- chaque niveau définit ses tests en miroir.
-**Flux inverses normaux :** une décision de conception peut invalider une spec.
-Remonter explicitement via le protocole d'escalade.
+**Flux inverses normaux :** une décision de conception peut invalider une spec -- remonter explicitement via le protocole d'escalade.
 
 ---
 
@@ -88,9 +87,7 @@ Remonter explicitement via le protocole d'escalade.
 
 ## Porte de validation entre niveaux
 
-Chaque niveau produit une porte de validation.
-Ne pas passer au niveau N+1 si la porte du niveau N est incomplete.
-Chaque skill de niveau contient sa porte de validation spécifique.
+Chaque niveau produit une porte de validation, détaillée dans son skill de niveau. Ne pas passer au niveau N+1 si celle du niveau N est incomplète.
 
 ---
 
@@ -109,11 +106,9 @@ Quand une ambiguïté ou un blocage est découvert en cours de travail :
 | Conception detail (niv 4) | Niveau 3 ou 2 |
 | Architecture (niv 3) | Niveau 2 ou 1 |
 
-**2. Mettre à jour le document du niveau d'origine.**
-Le document est la source de verite. Pas le code, pas un message de discussion.
+**2. Mettre à jour le document du niveau d'origine** -- source de vérité, pas le code, pas un message de discussion.
 
-**3. Reprendre depuis le niveau corrigé.**
-Vérifier si les niveaux inférieurs sont impactes.
+**3. Reprendre depuis le niveau corrigé** -- vérifier l'impact sur les niveaux inférieurs.
 
 **4. Tracer la decision dans le registre** (`v-model-gestion`).
 
@@ -121,10 +116,9 @@ Vérifier si les niveaux inférieurs sont impactes.
 
 ## Revue critique de premier brouillon
 
-Tout premier brouillon d'un artefact (EBO, SRD, SRS, HLD, LLD, plan de
-tests) passe cette revue AVANT toute validation client ou passage au
-niveau suivant. Ce n'est pas optionnel : un brouillon non revu n'est pas
-montrable.
+Tout premier brouillon d'artefact (EBO, SRD, SRS, HLD, LLD, plan de tests)
+passe cette revue AVANT toute validation client ou passage au niveau
+suivant -- non optionnel : un brouillon non revu n'est pas montrable.
 
 **Avant de commencer.** Annoncer : « Je démarre la revue critique
 de [nom de l'artefact]. »
@@ -136,13 +130,13 @@ brouillon 1, beaucoup sur le brouillon 6.
 **Vérification préalable — Propagation ADR→LLD.** Si le projet contient des
 ADRs et des LLDs, exécuter cette vérification avant les 5 lentilles.
 
-1. **Détection ADR postérieur à LLD :** pour chaque ADR, comparer sa date avec
-   la date de dernière révision des LLDs mentionnés dans son §Conséquences.
-   Tout ADR daté après l'un de ces LLDs est un *ADR candidat*.
+1. **Détection ADR postérieur à LLD :** pour chaque ADR, comparer sa date à
+   la date de dernière révision des LLDs mentionnés dans son §Conséquences --
+   tout ADR daté après l'un d'eux est un *ADR candidat*.
 
-2. **Liste de propagation :** pour chaque ADR candidat, lire explicitement son
-   §Conséquences et lister les LLDs que ce paragraphe contraint de mettre à
-   jour, avec la formulation exacte du texte source.
+2. **Liste de propagation :** pour chaque ADR candidat, lire son §Conséquences
+   et lister les LLDs que ce paragraphe contraint de mettre à jour, avec la
+   formulation exacte du texte source.
 
 **Sortie obligatoire — une ligne par ADR candidat :**
 

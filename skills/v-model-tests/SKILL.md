@@ -1,6 +1,6 @@
 ---
 name: v-model-tests
-version: 2.1.0
+version: 2.2.0
 description: >
   Skill pour la branche droite du modèle en V : tests unitaires, tests
   d'intégration, tests d'acceptance et tests de validation système. Utiliser
@@ -34,8 +34,8 @@ Tester, c'est vérifier qu'une décision prise à gauche du V est respectée à 
 | Tests de validation système | Niveau 1 (SRD) | Section 4 |
 | Matrice de traçabilité | Tous niveaux | Section 5 |
 
-Les tests ont leur répertoire propre, pas un miroir par niveau du V. L'ordre
-des fichiers suit l'ordre d'exécution (`v-model-documents`) :
+Répertoire propre aux tests, pas de miroir par niveau du V. Ordre des
+fichiers = ordre d'exécution (`v-model-documents`) :
 
 | Artefact | Fichier |
 |---|---|
@@ -80,8 +80,8 @@ des fichiers suit l'ordre d'exécution (`v-model-documents`) :
 
 ### Règles de couverture
 
-La couverture de code (code coverage) est un indicateur insuffisant seul.
-Ce qui compte : chaque règle metier du LLD a au moins un test positif et un négatif.
+La couverture de code seule ne suffit pas. Ce qui compte : chaque règle
+métier du LLD a au moins un test positif et un négatif.
 
 **Questions à poser pour chaque règle LLD :**
 - Qu'est-ce qui se passe quand la précondition est satisfaite ?
@@ -94,8 +94,7 @@ Cas 1 : valeur strictement inférieure au seuil  -> comportement nominal
 Cas 2 : valeur exactement égale au seuil        -> cas frontière (souvent le plus révélateur)
 Cas 3 : valeur strictement supérieure au seuil  -> comportement de rejet
 ```
-Le cas 2 est celui que les développeurs oublient le plus souvent et
-qui révèle les erreurs de comparaison (< vs <=).
+Cas 2 : le plus souvent oublié, révèle les erreurs de comparaison (< vs <=).
 
 ---
 
@@ -146,9 +145,9 @@ qui révèle les erreurs de comparaison (< vs <=).
 
 ### Format de procedure de test acceptance
 
-Une procédure = une section du fichier de procédures, titrée par l'identifiant
-seul. Les sous-parties sont d'un niveau en dessous : sans cela, dix procédures
-dans un fichier produisent dix ancres `#préconditions` (`v-model-documents`).
+Une procédure = une section titrée par l'identifiant seul, sous-parties un
+niveau en dessous : sinon dix procédures produisent dix ancres
+`#préconditions` (`v-model-documents`).
 
 ```
 ### TC-SW-F-XXX
@@ -290,10 +289,10 @@ satisfait les exigences système.
 À maintenir dans `500-tests/510-requirements-traceability.md`. Mise à jour après
 chaque sprint.
 
-**Une seule matrice pour les quatre niveaux de test.** Les tests sont le seul
-niveau à sources multiples (SRD, SRS, HLD, LLD) : quatre matrices séparées
-obligeraient à chercher dans quatre fichiers pour répondre à « cette exigence
-est-elle couverte ? ». La colonne Niveau porte l'information de niveau source.
+**Une seule matrice pour les quatre niveaux de test.** Tests = seul niveau à
+sources multiples (SRD, SRS, HLD, LLD) : quatre matrices sépareraient dans
+quatre fichiers la réponse à « cette exigence est-elle couverte ? ». La
+colonne Niveau porte l'information de niveau source.
 
 **Format :**
 

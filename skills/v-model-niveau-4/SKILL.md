@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-4
-version: 2.1.0
+version: 2.2.0
 description: >
   Skill pour le Niveau 4 du modèle en V : Conception détaillée / Low-Level
   Design. Utiliser après validation du HLD pour spécifier chaque composant
@@ -51,9 +51,9 @@ en posant uniquement des questions de syntaxe, jamais des questions de conceptio
 
 ## Règle : Décision de bibliothèque
 
-Avant de specifier l'implémentation d'un composant non trivial, TOUJOURS vérifier
-si une bibliothèque ou un outil existant résout déjà le problème — même si les
-exigences ou le plan n'en font pas mention.
+Avant de spécifier un composant non trivial, TOUJOURS vérifier si une bibliothèque
+ou un outil existant résout déjà le problème — même si les exigences ou le plan
+n'en font pas mention.
 
 **La sélection ou le rejet d'une bibliothèque est une décision de conception :
 elle appartient au LLD, pas au développeur.**
@@ -91,7 +91,7 @@ Si aucune bibliothèque n'est pertinente : écrire explicitement
 
 ## 1. Spécification des interfaces
 
-Pour chaque interface exposee par le composant :
+Pour chaque interface exposée :
 
 **Template :**
 ```
@@ -109,7 +109,7 @@ Pour chaque interface exposee par le composant :
 
 ## 2. Spécification des structures de données
 
-Pour chaque structure centrale du composant :
+Pour chaque structure centrale :
 
 **Template :**
 ```
@@ -127,8 +127,8 @@ les valeurs interdites, les unités si applicable (mètres, WGS84...).
 
 ## 3. Spécification des algorithmes
 
-Uniquement les algorithmes non triviaux -- ceux ou le développeur pourrait
-prendre une mauvaise decision s'il n'est pas guide.
+Uniquement les algorithmes non triviaux -- où une mauvaise décision est possible
+sans guidage.
 
 **Template :**
 ```
@@ -147,7 +147,7 @@ prendre une mauvaise decision s'il n'est pas guide.
 
 ## 4. Machines d'états
 
-Pour chaque composant avec des états distincts :
+Pour chaque composant à états distincts :
 
 **Template :**
 ```
@@ -197,8 +197,8 @@ TABLE [nom]
 
 ## 6. Contrats d'erreur
 
-Les erreurs sont des décisions de conception -- ne pas les laisser au jugement
-du développeur. Une erreur non spécifiée sera gérée inconsistamment.
+Les erreurs sont des décisions de conception, pas un jugement laissé au
+développeur : non spécifiées, elles sont gérées inconsistamment.
 
 **Template :**
 

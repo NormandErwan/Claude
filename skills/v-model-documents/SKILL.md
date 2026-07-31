@@ -1,6 +1,6 @@
 ---
 name: v-model-documents
-version: 2.1.0
+version: 2.2.0
 description: >
   Nomenclature documentaire du modèle en V : où ranger un document, comment le
   nommer, comment le référencer depuis un autre document. Déclencher à chaque
@@ -26,9 +26,8 @@ committer le document.
 
 ## 1. Sous-familles -- l'axe de classement est la durée de vie
 
-Avant de nommer un document, décider à quelle sous-famille il appartient : trois
-vivent dans le dépôt, une n'y entre jamais. La sous-famille détermine la forme
-du fichier, pas seulement son emplacement.
+Décider d'abord la sous-famille : trois vivent dans le dépôt, une n'y entre
+jamais. Elle détermine la forme du fichier, pas seulement son emplacement.
 
 | Sous-famille | Exemples | Forme dans le dépôt |
 |---|---|---|
@@ -50,15 +49,14 @@ Poser ces questions dans l'ordre. La première réponse positive tranche.
 4. Sinon -> **document de travail**, hors dépôt.
 
 **La fréquence de mise à jour ne classe rien.** Le registre des risques change
-à chaque revue et reste permanent : ce qui le rend permanent est qu'on doit
-pouvoir dire quels risques étaient ouverts au moment d'un jalon. Le backlog
-change aussi souvent et reste vivant : personne n'a besoin de savoir ce qu'il
-contenait il y a six mois.
+à chaque revue et reste permanent : il faut pouvoir dire quels risques
+étaient ouverts à un jalon donné. Le backlog change aussi souvent et reste
+vivant : personne n'a besoin de savoir son contenu d'il y a six mois.
 
 ### Le document de travail ne se committe pas
 
 Les plans produits par les skills d'agent (`writing-plans`, `brainstorming`)
-ne vont pas dans la documentation du projet. Motif : un répertoire de travail
+ne vont pas dans la documentation du projet : un répertoire de travail
 versionné devient un cimetière que personne ne nettoie, et un lecteur ne
 distingue plus le plan abandonné du document de référence.
 
@@ -71,9 +69,9 @@ distingue plus le plan abandonné du document de référence.
 | Un constat daté (audit, revue, mesure) | Un instantané daté |
 | Rien de durable | Rien. Il disparaît avec la PR |
 
-**Corollaire :** un instantané daté n'est jamais corrigé après coup. Une erreur
-dans un rapport d'avancement se corrige dans le rapport **suivant**, qui cite
-l'erreur. Réécrire l'histoire supprime la seule valeur de l'instantané.
+**Corollaire :** un instantané daté n'est jamais corrigé après coup ;
+l'erreur se corrige dans le rapport **suivant**, qui la cite. Réécrire
+l'histoire supprime la seule valeur de l'instantané.
 
 ---
 
@@ -137,8 +135,8 @@ de 330 à 399, les LLDs de 420 à 499.
 - **Préfixe numérique à trois chiffres sur tous les répertoires et tous les
   fichiers.** Le premier chiffre d'un fichier est celui de son répertoire.
 - **Unicité globale.** Jamais deux fois le même numéro dans toute la
-  documentation, même dans deux répertoires différents. Un numéro identifie un
-  document, pas une position dans un dossier.
+  documentation, même entre répertoires : un numéro identifie un document,
+  pas une position dans un dossier.
 - **Un seul niveau de répertoire.** Pas de sous-dossier par thème ni par
   entité : deux niveaux cassent le tri et rendent les chemins relatifs fragiles.
 - **Chemins et noms de fichiers en anglais ASCII.** La prose des documents
@@ -149,21 +147,21 @@ de 330 à 399, les LLDs de 420 à 499.
 
 ### Matrices de traçabilité
 
-Une matrice est le **premier document du niveau cible** et porte le nom du
-**niveau source**, qui est le niveau parent adjacent. On la range donc chez
-celui qui doit prouver sa couverture, pas chez celui qui est couvert.
+Une matrice est le **premier document du niveau cible**, nommée d'après le
+**niveau source** (le niveau parent adjacent) : rangée chez celui qui doit
+prouver sa couverture, pas chez celui qui est couvert.
 
-**Exception -- les tests.** Le niveau des tests est le seul à sources
-multiples (SRD, SRS, HLD, LLD) : « nom = niveau source » n'y désigne aucun
-parent unique. Il porte donc **une matrice unique** couvrant toutes les
-exigences, quel que soit leur niveau d'origine, avec une colonne de niveau.
+**Exception -- les tests.** Seul niveau à sources multiples (SRD, SRS, HLD,
+LLD), où « nom = niveau source » ne désigne aucun parent unique : il porte
+donc **une matrice unique** couvrant toutes les exigences, avec une colonne
+de niveau.
 
 ### Instantanés datés -- seule exemption à la grille
 
 Le répertoire d'état accepte des fichiers préfixés `YYYY-MM-DD-` sans numéro
-de grille. Motif : ces fichiers ne sont pas bornés en nombre (un par semaine
-pendant des années) alors qu'un bloc de centaine offre environ 90 numéros, et
-la date joue déjà le rôle de clé de tri unique.
+de grille : non bornés en nombre (un par semaine pendant des années) contre
+~90 numéros par bloc de centaine, et la date joue déjà le rôle de clé de tri
+unique.
 
 Les fichiers d'état courant du même répertoire restent numérotés : ils sont
 bornés, il y en a un de chaque et un seul.
@@ -173,9 +171,9 @@ d'un répertoire qu'un fichier nommé exactement `README.md`.
 
 ### Petit projet
 
-La grille s'applique intégralement, mais **les fichiers absents ne sont pas
-créés à vide**. Un fichier vide « pour respecter la grille » est un mensonge :
-le lecteur croit que l'artefact existe.
+La grille s'applique intégralement mais sans créer les fichiers absents à
+vide : un fichier vide « pour respecter la grille » est un mensonge, le
+lecteur croit que l'artefact existe.
 
 Fusionner deux documents est autorisé (business case et charte, HLD et LLD,
 SRD et SRS). **Le numéro conservé est celui du document survivant** -- celui
@@ -187,15 +185,14 @@ dont le titre décrit le contenu fusionné.
 
 **R1 -- minuscules et tirets, systématiquement.** Les identifiants gardent leur
 casse canonique dans la prose (`SYS-F-001`, `DCL-001`), jamais dans un nom de
-fichier. Motif : macOS et Windows ont des systèmes de fichiers insensibles à la
+fichier : macOS et Windows ont des systèmes de fichiers insensibles à la
 casse, deux noms qui ne diffèrent que par la casse s'écrasent silencieusement.
 
 **R2 -- préfixe numérique par pas de 10 dans un bloc de centaine.** Les pas
-libres absorbent les insertions sans renumérotation. Un document inséré entre
-deux voisins prend le numéro intermédiaire. La règle vaut aussi dans un bloc
-par entité, à partir du numéro que la grille déclare pour ce bloc : les LLDs
-se numérotent 420, 430, 440, et un composant ajouté entre deux voisins
-prend 425.
+libres absorbent les insertions sans renumérotation : un document inséré
+entre deux voisins prend le numéro intermédiaire. Vaut aussi dans un bloc par
+entité, à partir du numéro que la grille déclare pour ce bloc : les LLDs se
+numérotent 420, 430, 440, un composant ajouté entre deux voisins prend 425.
 
 **Exception -- une séquence de documents datés se numérote par pas de 1**
 (exemple : les ADR, 330, 331, 332, ...). Motif : un document daté s'ajoute
@@ -207,15 +204,15 @@ borné (420-499 : 8 numéros pour les LLDs). Au-delà, numéroter par pas de 1
 depuis le début du bloc plutôt que renuméroter l'existant.
 
 **R3 -- préfixe de type quand le répertoire contient un artefact par entité.**
-Deux répertoires sont dans ce cas : l'architecture (un fichier par décision) et
-la conception détaillée (un fichier par composant). Le préfixe de type rend le
-répertoire lisible sans ouvrir les fichiers.
+Deux cas : l'architecture (un fichier par décision) et la conception
+détaillée (un fichier par composant) -- il rend le répertoire lisible sans
+ouvrir les fichiers.
 
 ### Le nom du fichier est son identifiant
 
-Il n'existe **aucun identifiant de document en dehors de son nom de fichier**.
-Un ADR n'a pas de numéro propre, un LLD n'a pas de code composant : le numéro
-de grille est le seul identifiant, et il est déjà dans le chemin.
+Aucun identifiant de document n'existe en dehors de son nom de fichier : un
+ADR n'a pas de numéro propre, un LLD n'a pas de code composant, le numéro de
+grille est le seul identifiant, déjà présent dans le chemin.
 
 Toute référence à un document se fait en **lien markdown relatif**, libellé par
 le nom de fichier sans extension :
@@ -224,10 +221,10 @@ le nom de fichier sans extension :
 [330-adr-event-sourcing](../300-architecture/330-adr-event-sourcing.md)
 ```
 
-**Relatif, jamais absolu.** Un lien commençant par une barre oblique est résolu
-depuis la racine du dépôt : il casse dans un clone hors GitHub, et il est
-faux dès que le projet n'est pas à la racine du dépôt (monorepo). La
-documentation GitHub recommande explicitement les liens relatifs.
+**Relatif, jamais absolu.** Un lien commençant par une barre oblique se
+résout depuis la racine du dépôt : il casse dans un clone hors GitHub et
+devient faux dès que le projet n'est pas à la racine (monorepo) -- GitHub
+recommande explicitement les liens relatifs.
 
 ### Les identifiants qui ne sont pas des fichiers sont des ancres
 
@@ -243,10 +240,9 @@ Le système doit [verbe observable] [complément].
 **Origine EBO :** ...
 ```
 
-Motif : l'ancre générée est `#sys-f-001`, stable même si l'énoncé est
-reformulé. Un titre `### SYS-F-001 : le système doit ...` produit une ancre
-qui contient l'énoncé et casse tous les liens entrants à la première
-reformulation.
+L'ancre générée est `#sys-f-001`, stable même si l'énoncé est reformulé. Un
+titre `### SYS-F-001 : le système doit ...` produit une ancre contenant
+l'énoncé, qui casse tous les liens entrants à la première reformulation.
 
 **Un fichier de famille met toutes ses entités au même niveau de titre.** La
 grille donne un seul fichier pour N entités : registre des décisions, registre
@@ -254,17 +250,16 @@ des demandes d'évolution, baselines, procédures de test. Chaque entité est un
 section `###` portant son identifiant, ses sous-parties sont en `####`.
 
 Un template rédigé comme un document autonome (`#` en tête, `##` pour ses
-sous-parties) est faux dans ce contexte : dix procédures dans un fichier
-produisent dix titres de premier niveau et des ancres `#preconditions-1`,
-`#preconditions-2`. Aucune entité n'est alors référençable.
+sous-parties) est faux ici : dix procédures dans un fichier produisent dix
+titres de premier niveau, des ancres `#preconditions-1`, `#preconditions-2`,
+et aucune entité référençable.
 
 ---
 
 ## 4. Page d'accueil de la documentation
 
-Un nouveau contributeur doit pouvoir se repérer sans demander. La page
-d'accueil donne un ordre de lecture et une carte des artefacts -- pas une
-duplication de la grille.
+Un nouveau contributeur doit pouvoir se repérer sans demander : ordre de
+lecture et carte des artefacts -- pas une duplication de la grille.
 
 **Template :**
 
@@ -309,8 +304,7 @@ documentation. À exécuter avant l'écriture du contenu, pas après.
 **Checklist, dans l'ordre :**
 
 1. **Sous-famille identifiée** -- permanent, état courant, ou instantané daté.
-   Si c'est un document de travail : ne pas créer le fichier. Le contenu va
-   dans la PR.
+   Si document de travail : ne pas créer le fichier, le contenu va dans la PR.
 2. **Répertoire** -- celui du niveau du V ou de la famille correspondante.
    Aucun sous-répertoire créé.
 3. **Préfixe** -- trois chiffres, premier chiffre égal à celui du répertoire,
@@ -347,8 +341,8 @@ Une documentation déjà écrite se réaligne en **une PR dédiée**, jamais mé
 à un changement de contenu.
 
 1. **Renommer avec `git mv`**, pour que l'historique de chaque fichier suive.
-2. **Aucune modification de contenu dans cette PR**, sauf les liens. Un diff
-   qui mêle renommage et réécriture est illisible et ne sera pas revu.
+2. **Aucune modification de contenu**, sauf les liens : un diff qui mêle
+   renommage et réécriture est illisible et ne sera pas revu.
 3. **Mettre à jour tous les liens entrants.** Chercher l'ancien nom dans toute
    la documentation et dans le code (les README de modules pointent souvent
    vers la conception détaillée). Résultat attendu : zéro occurrence.
@@ -356,8 +350,8 @@ Une documentation déjà écrite se réaligne en **une PR dédiée**, jamais mé
    seulement sur les fichiers touchés -- c'est l'occasion de détecter les
    numéros en collision.
 5. **Exécuter la porte de cohérence** de `v-model-gestion` avant de committer.
-6. **Tracer le renommage** dans le registre des décisions. Les baselines
-   antérieures désignent des chemins historiques : elles restent valides et ne
+6. **Tracer le renommage** dans le registre des décisions : les baselines
+   antérieures désignent des chemins historiques, elles restent valides et ne
    sont pas réécrites.
 
 ---
