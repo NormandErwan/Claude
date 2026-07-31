@@ -235,34 +235,6 @@ Re-run `run_eval` once more on the full eval set to confirm the applied descript
 
 ---
 
-## Track 4 — Conciseness Pass (optional)
-
-Run when a skill is verbose or nearing the spec's ~500-line/5000-token ceiling. Not mandatory
-for a small skill that's already well under the ceiling.
-
-### Step 1: Draft a condensed candidate
-
-Rewrite the skill for length: cut repetition, tighten wording, collapse redundant examples.
-Keep every triggering condition, Core Pattern step, and rule intact - this is a wording pass,
-not a scope cut.
-
-### Step 2: Blind-compare against the original
-
-Run Track 2's blind comparison (`agents/comparator.md`) on the same evals used for the
-skill's Quality A/B pass, condensed candidate as one version, current SKILL.md as the other.
-
-### Step 3: Adopt only on zero regression
-
-Adopt the condensed version only if the comparator finds no quality regression - this is a
-zero-tolerance gate, not a size/quality tradeoff. Any regressed eval means revise the
-candidate or keep the original.
-
-### Step 4: Report the delta
-
-State the SKILL.md line-count delta (before -> after) alongside the comparison result.
-
----
-
 ## Package and Present
 
 After quality and trigger evals both pass:

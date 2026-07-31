@@ -1,8 +1,7 @@
 ---
 name: practical-advice
 description: Use when the user asks for personal, non-technical advice with no single correct answer - personal finance, veterinary or pet care choices, management or interpersonal decisions, legal-adjacent personal questions, or other life decisions. Not for software/coding/dev engineering questions, or questions with one objectively correct answer. Personal purchases of software/subscriptions route to `purchase-advisor` instead.
-metadata:
-  version: "1.0"
+version: "1.0"
 ---
 
 # Practical Advice
