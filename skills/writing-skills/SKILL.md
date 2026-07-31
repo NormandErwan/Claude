@@ -1,5 +1,6 @@
 ---
 name: writing-skills
+version: 1.0.0
 description: Use when creating a new skill, editing an existing one, verifying a skill works
   before deployment, benchmarking whether it improves task quality, fixing unreliable
   triggering, or when an agent rationalizes around a skill's rules.
@@ -95,6 +96,7 @@ skills/
 
 **Frontmatter (YAML):**
 - Two required fields: `name` and `description` (see [agentskills.io/specification](https://agentskills.io/specification) for all supported fields)
+- `version`: required, `Major.Minor.patch`, top-level field (not nested under `metadata`). New skill starts at `1.0.0`. Bump Patch for clarifications/typos, Minor for added sections/rules that don't break existing usage, Major for structural/behavioral changes that invalidate prior usage.
 - Max 1024 characters total
 - `name`: Use letters, numbers, and hyphens only (no parentheses, special chars)
 - `description`: Third-person, describes ONLY when to use (NOT what it does)
@@ -420,6 +422,7 @@ gerunds: `condition-based-waiting`, not `async-helpers`.
 **GREEN Phase - Write Minimal Skill:**
 - [ ] Name uses only letters, numbers, hyphens (no parentheses/special chars)
 - [ ] YAML frontmatter with required `name` and `description` fields (max 1024 chars; see [spec](https://agentskills.io/specification))
+- [ ] `version` set (`1.0.0` new, bumped per semver on edits)
 - [ ] Description starts with "Use when..." and includes specific triggers/symptoms
 - [ ] Description written in third person
 - [ ] Keywords throughout for search (errors, symptoms, tools)
@@ -445,8 +448,11 @@ gerunds: `condition-based-waiting`, not `async-helpers`.
 - [ ] SKILL.md body under 500 lines (use progressive disclosure if over)
 - [ ] No Windows-style paths (forward slashes only)
 - [ ] Tested on Haiku, Sonnet, and Opus (not one model only)
+- [ ] Body and reference files are a concise first draft - no post-hoc tightening pass
 
 **Deployment:**
+- [ ] Every checklist item above re-verified against the finished file - drafting-time self-checks alone can miss gaps (e.g. a planned example that never made it in)
+- [ ] Native skill (this repo) -> add its 2 lines to `.gitignore`, verify with `git status`
 - [ ] Commit skill to git and push to your fork (if configured)
 - [ ] Consider contributing back via PR (if broadly useful)
 

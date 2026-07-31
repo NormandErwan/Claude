@@ -1,5 +1,6 @@
 ---
 name: verifying-sources
+version: 1.0.0
 description: Use when about to state a factual, technical, historical, or procedural claim - a version number, default value, statistic, API behavior, "X always/never does Y", "the docs say", "best practice is" - that you have not verified against a source this turn, or when tempted to answer a factual question from memory under time pressure
 ---
 
