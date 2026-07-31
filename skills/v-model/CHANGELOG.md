@@ -1,5 +1,17 @@
 # Changelog -- suite v-model
 
+## [2.1.0] -- 2026-07-29
+
+Repli de numérotation et porte de traçabilité par fichier. `v-model-documents`
+R2 gagne un repli pas-10 -> pas-1 quand un bloc par entité déborde ses
+numéros, et une exception pas-1 pour toute séquence de documents datés
+(exemple : les ADR, 330, 331, 332, ...) -- un document daté s'ajoute après le
+dernier, jamais en insertion rétroactive, donc rien à absorber par le pas de
+10. Les portes de validation de `v-model-niveau-2`, `v-model-niveau-3` et
+`v-model-tests` gagnent un critère de sortie vérifiant que le fichier de la
+matrice de traçabilité existe à son chemin de grille, pas seulement que son
+contenu est jugé complet.
+
 ## [2.0.0] -- 2026-07-26
 
 Nomenclature documentaire — rupture. Nouveau skill `v-model-documents`, onzième de la suite : classement des documents par durée de vie (permanent, état courant écrasé, instantané daté immuable, document de travail hors dépôt), grille de référence à préfixe numérique unique sur trois chiffres pour tous les répertoires et tous les fichiers, règles de nommage (minuscules-tiret, pas de 10, préfixe de type), porte de nommage à sortie écrite obligatoire, et procédure de reprise d'un dépôt existant. Les dix skills existants sont réalignés sur cette grille : tous les chemins documentaires changent, à commencer par la contradiction `docs/amont/` contre `docs/00-amont/` qui devient `000-upstream/`. Seconde rupture : un ADR n'a plus d'identifiant propre, `ADR-NNN` est supprimé du vocabulaire — le nom de fichier de grille est le seul identifiant d'un document, et toute référence se fait en lien markdown relatif. Le bloc ADR démarre à 330, symétrique du bloc LLD (420) qui prend lui aussi le multiple de dix laissé libre par la matrice de traçabilité de son niveau, plutôt que le 331 hérité du plan initial. Les identifiants qui désignent des sections (SYS-*, SW-*, HLD-T-*, DCL-*, CR-*, RSK-*, TC-*) passent en titre seul avec l'énoncé en dessous, pour que l'ancre survive à une reformulation ; six titres markdown malformés sont corrigés au passage. Corollaire applique aux templates : un fichier qui porte N entités (registres, baselines, procédures de test) les met toutes en `###` avec leurs sous-parties en `####`, faute de quoi dix procédures dans un fichier produisent dix titres de premier niveau et aucune ancre stable. Le guide gagne une entrée de routage vers le nouveau skill, v-model-gestion une étape 0 de porte de nommage dans sa porte de cohérence et l'interdiction de mettre le répertoire d'état sous baseline, v-model-niveau-3 une matrice de traçabilité SRS vers architecture.

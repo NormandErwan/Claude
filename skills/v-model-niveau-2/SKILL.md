@@ -1,6 +1,6 @@
 ---
 name: v-model-niveau-2
-version: 2.0.0
+version: 2.1.0
 description: >
   Skill pour le Niveau 2 du modèle en V : Exigences logiciel (Software
   Requirements Spécification). Utiliser après validation du SRD pour allouer
@@ -235,6 +235,8 @@ Ne pas démarrer le Niveau 3 si une case est vide.
 - [ ] Toutes les exigences ont une méthode de vérification identifiée
 - [ ] Les exigences de sécurité couvrent traçabilité, mode dégradé, classification des données
 - [ ] La matrice de traçabilité est initialisée
+- [ ] Le fichier de la matrice de traçabilité existe à son chemin de grille
+    (`200-software-requirements/210-system-requirements-traceability.md`)
 - [ ] Le responsable technique a validé la faisabilité technique de chaque exigence
 ```
 

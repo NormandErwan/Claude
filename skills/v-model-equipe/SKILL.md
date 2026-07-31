@@ -1,6 +1,6 @@
 ---
 name: v-model-equipe
-version: 2.0.0
+version: 2.1.0
 description: >
   Skill pour les pratiques d'équipe dans le modèle V : Définition of Ready,
   Définition of Done, backlog, estimation, revue de code, intégration des
