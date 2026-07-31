@@ -451,6 +451,7 @@ gerunds: `condition-based-waiting`, not `async-helpers`.
 - [ ] Body and reference files are a concise first draft - no post-hoc tightening pass
 
 **Deployment:**
+- [ ] Every checklist item above re-verified against the finished file - drafting-time self-checks alone can miss gaps (e.g. a planned example that never made it in)
 - [ ] Native skill (this repo) -> add its 2 lines to `.gitignore`, verify with `git status`
 - [ ] Commit skill to git and push to your fork (if configured)
 - [ ] Consider contributing back via PR (if broadly useful)
