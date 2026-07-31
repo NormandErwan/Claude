@@ -44,6 +44,7 @@
      - Any file op or multi-file task -> `token-efficiency`.
      - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
      - About to state an unverified factual/technical/procedural claim -> `verifying-sources`.
+     - 2+ independent tasks, no shared state/dependency -> `dispatching-parallel-agents`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
 4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grill-me` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call; read-only skips).
    - Remote/cloud session -> batch `grill-me`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
@@ -52,6 +53,7 @@
    - Unfamiliar domain needing primary sources -> also `research`.
    - Design question needing a throwaway spike -> also `prototype`.
 5. Large-scope work (new subsystem, multi-session, or user asks for the full process):
+   - User names a specific skill/methodology (e.g. writing-skills) -> follow its own process directly, skip phase routing below.
    - `npx skills add addyosmani/agent-skills` (whole repo, if not already loaded this session).
    - Follow `using-agent-skills` to route by phase: Define (`interview-me`/`idea-refine`/`spec-driven-development`) -> Plan (`planning-and-task-breakdown`) -> Build (`incremental-implementation`/`test-driven-development`/...) -> Verify (`debugging-and-error-recovery`/`browser-testing-with-devtools`) -> Review (`code-review-and-quality`) -> Ship (`git-workflow-and-versioning`/...).
    - Default for normal-sized tasks: skip this, steps 2-4 are enough.
