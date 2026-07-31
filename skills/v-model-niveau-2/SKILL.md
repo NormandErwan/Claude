@@ -48,7 +48,7 @@ Pour chaque exigence système : ce qui la satisfait.
 | SYS-F-XXX : [intitule] | X | | | |
 | SYS-F-YYY : [intitule] | | | | X (logiciel + operateur) |
 
-**Règle :** chaque exigence logiciel pointe vers au moins une exigence système -- sans parent système, elle est hors-périmètre.
+**Règle :** chaque exigence logiciel doit pointer vers au moins une exigence système -- sans parent système, elle est hors-périmètre.
 
 ---
 

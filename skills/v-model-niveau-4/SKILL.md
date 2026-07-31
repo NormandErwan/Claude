@@ -51,7 +51,7 @@ en posant uniquement des questions de syntaxe, jamais des questions de conceptio
 
 ## Règle : Décision de bibliothèque
 
-Avant d'implémenter un composant non trivial, TOUJOURS vérifier si une bibliothèque
+Avant de spécifier un composant non trivial, TOUJOURS vérifier si une bibliothèque
 ou un outil existant résout déjà le problème — même si les exigences ou le plan
 n'en font pas mention.
 
