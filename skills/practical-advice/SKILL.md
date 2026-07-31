@@ -68,11 +68,13 @@ the critique itself, only its visible form.
 | Step | Purpose | Skip when |
 |---|---|---|
 | Frame | Fill missing constraints | Ask is already concrete, or a same-domain followup |
-| Expert answer | Anchor a direct first pass | Never (persona reintro skipped on a same-domain followup) |
+| Expert answer | Anchor a direct first pass | Persona intro skipped on a same-domain followup (the answer itself never is) |
 | Reflect | Interrupt rushing to the first answer | Never |
-| Self-critique | Surface assumptions + alternatives; verify facts if high-stakes | Never (visible form only, if user wants a direct answer) |
+| Self-critique | Surface assumptions + alternatives; verify facts if high-stakes | Never* |
 | Revise | Merge critique into final answer | Never |
-| What would change it | Keep the recommendation revisable | Never (visible form only, if user wants a direct answer) |
+| What would change it | Keep the recommendation revisable | Never* |
+
+*Visible form only - stays internal if the user asked for a direct answer.
 
 ## Example
 
