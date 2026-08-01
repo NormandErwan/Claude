@@ -12,6 +12,5 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 | grill-with-docs | `mattpocock/skills@grill-with-docs` | `697d4ce974` |
 | research | `mattpocock/skills@research` | `697d4ce974` |
 | handoff | `mattpocock/skills@handoff` | `697d4ce974` |
-| dispatching-parallel-agents | `obra/superpowers@dispatching-parallel-agents` | `6dbbbda3ba` |
 
 Checked: 2026-08-01
