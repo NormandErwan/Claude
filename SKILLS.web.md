@@ -8,6 +8,10 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 | token-efficiency | local | `9a6d56b036` |
 | verifying-sources | local | `9a6d56b036` |
 | token-codebase-exploration | local | `9a6d56b036` |
+| token-dotnet | local | `9a6d56b036` |
+| token-file-ops | local | `9a6d56b036` |
+| practical-advice | local | `361ebe56ad` |
+| purchase-advisor | local | `361ebe56ad` |
 | grill-me | `mattpocock/skills@grill-me` | `697d4ce974` |
 | grill-with-docs | `mattpocock/skills@grill-with-docs` | `697d4ce974` |
 | domain-modeling | `mattpocock/skills@domain-modeling` | `697d4ce974` |
@@ -28,4 +32,4 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 | code-review-and-quality | `addyosmani/agent-skills@code-review-and-quality` | `e270415226` |
 | git-workflow-and-versioning | `addyosmani/agent-skills@git-workflow-and-versioning` | `1ffce563cf` |
 
-Checked: 2026-07-28
+Checked: 2026-08-01

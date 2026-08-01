@@ -7,10 +7,12 @@
 
 ## Every turn
 1. Identify the task.
+   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `practical-advice`; a purchase decision -> `purchase-advisor` (reuses its loop). Supersedes step 4's grill-me/Planify/Validate - the skill's own frame/self-critique/revise loop replaces it.
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
    - Always check regardless of scan:
-     - Any file op or multi-file task -> `token-efficiency`.
+     - Any file op or multi-file task -> `token-efficiency`, `token-file-ops`.
+     - C#/.NET file op -> also `token-dotnet`.
      - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
      - About to state an unverified factual/technical/procedural claim -> `verifying-sources`.
      - 2+ independent tasks, no shared state/dependency -> `dispatching-parallel-agents`.
