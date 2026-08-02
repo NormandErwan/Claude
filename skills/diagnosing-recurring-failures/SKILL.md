@@ -24,9 +24,8 @@ prove the countermeasure with evidence you named in advance.
 - Recurring process friction: rework, handoff churn, the same review comment
 
 **Not for:**
-- Debugging a single live bug in progress - that is
-  `debugging-and-error-recovery`, which supersedes this skill when invoked
-- A one-off failure with no history of repeating
+- Debugging a single live bug in progress - a one-off, not a recurrence
+- A failure with no history of repeating
 
 ## Core Pattern
 
@@ -52,8 +51,7 @@ prove the countermeasure with evidence you named in advance.
    with what the failure taught.
 
 **Exit:** if the countermeasure turns out to be a personal, non-technical
-judgment call, hand off to `practical-advice` - or `purchase-advisor` when
-it is a buying decision. One-way; finish there.
+judgment call, hand off to `practical-advice`. One-way; finish there.
 
 ## Quick Reference
 
@@ -102,14 +100,10 @@ and good until the next key.
 
 ## Common Mistakes
 
-- Stopping at an event because it is immediately fixable - fixable is not the
-  same as causal
 - Accepting a blame-shaped answer ("someone forgot") as terminal; it names a
   person, not a mechanism
 - Running the chain on a symptom nobody framed, so there is no target
   condition to check the fix against
-- Treating five as the required number of whys - stop at the answer type, not
-  a count
 - Using the category sweep as a brainstorm dump: candidates listed, none
   discarded, nothing converged
 - Applying the countermeasure and declaring it done without checking the
