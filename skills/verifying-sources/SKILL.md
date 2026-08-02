@@ -110,7 +110,9 @@ Judge each source (PARC):
 - **Primacy** - the thing itself, or someone describing it?
 - **Authority** - does the publisher own or officially cover it?
 - **Relevance** - does it match the EXACT version/model/case, not an adjacent one?
-- **Corroboration** - do two independent sources agree?
+- **Corroboration** - do two INDEPENDENT sources agree? Near-identical titles,
+  structure, or phrasing across "different" domains is a syndication signal, not
+  agreement - clones of the same template do not corroborate each other.
 
 **Analogous is not the same.** A manual for a *similar* model (a different Tuya
 switch) supports a HYPOTHESIS about yours, never a verified fact. Say: "no primary
@@ -120,6 +122,39 @@ source for model X; the near-identical model Y documents Z (hypothesis)".
 with the `[BLOCKED] <url> - <status>` status, and downgrade the whole answer to
 hypothesis. Do not backfill the gap with tertiary/adjacent sources and present it
 as verified.
+
+## Recognizing Content Farms And Syndicated Content
+
+Common in consumer/DIY/craft/lifestyle topics (home improvement, gardening,
+cooking, health-adjacent advice) where no single official body publishes an
+answer, so search results are dominated by SEO/AI-written sites. Signals a
+source is tertiary regardless of how professional it looks:
+
+- No named author or credential, no publish date
+- Title/structure nearly identical to other "independent" results (same FAQ
+  skeleton reworded by different domains)
+- Generic answer with no reference to a standard, spec, technical datasheet,
+  or named institution
+- Monetized via ads/affiliate links, not by selling the expertise or product
+  itself
+
+If most/all top results share this pattern, treat the whole result set as
+tertiary - it is a lead to search harder with, never a citation.
+
+## Craft And Consumer Domains Have Primary Sources Too
+
+No "official docs" page does not mean no primary source exists - it means you
+have not searched for the right one yet. Before settling for blog consensus,
+search for:
+
+- Manufacturer technical data sheets (fiche technique) for the specific product
+- Technical standards governing the work (DTU, NF, ISO, EN)
+- Trade federations / technical institutes (e.g. FCBA, CSTB, CAPEB, ADEME)
+  instead of lifestyle blogs
+- A named, credentialed professional instead of an anonymous "redaction"
+
+Only fall back to blog-consensus-as-hypothesis after that search comes up
+empty.
 
 ## Red Flags - STOP
 
@@ -132,6 +167,10 @@ as verified.
   absolute, "the docs say") with tool_uses still at 0
 - Citing an aggregator, mirror, or re-host as if it were the primary source
 - Treating a similar-but-different model or version as if it documented yours
+- Several results agree but share the same generic FAQ skeleton and no named
+  author - that is syndication, not corroboration
+- Treating "a blog covers this topic" as authority when no standard,
+  manufacturer, or named expert was found
 
 ## Rationalization Prevention
 
@@ -147,6 +186,8 @@ as verified.
 | "An aggregator/mirror says so" | Re-hosts go stale or altered. Trace the primary |
 | "A similar model/version matches" | Adjacent is hypothesis-grade, not fact |
 | "Different wording, rule doesn't apply" | Spirit over letter. Any factual claim counts |
+| "Several sites say the same thing" | Could be the same content-farm template reworded - check independence, not count |
+| "It's a whole blog dedicated to this topic" | A niche isn't authority - find the standard/manufacturer/institute behind the claim |
 
 ## Relationship To Other Skills
 
