@@ -140,9 +140,8 @@ the reader believes the claim:
 - A trade or industry association funded by the sector it defends
 
 A financial stake does not disqualify the source, but it is not authority
-either: verify the exact claim against a source with no stake in the answer
-(the regulation text, a public body, an independent lab, the manufacturer's
-own technical documentation for a product-specific fact) before stating it as
+either: verify the exact claim against a neutral source instead (see Craft
+And Consumer Domains Have Primary Sources Too below) before stating it as
 fact.
 
 ## Recognizing Content Farms And Syndicated Content
@@ -153,8 +152,8 @@ answer, so search results are dominated by SEO/AI-written sites. Signals a
 source is tertiary regardless of how professional it looks:
 
 - No named author or credential, no publish date
-- Title/structure nearly identical to other "independent" results (same FAQ
-  skeleton reworded by different domains)
+- Title/structure nearly identical to other "independent" results - see
+  Corroboration above, this is the same syndication signal
 - Generic answer with no reference to a standard, spec, technical datasheet,
   or named institution
 - Monetized via ads/affiliate links, not by selling the expertise or product
@@ -177,6 +176,11 @@ search for:
 
 Only fall back to blog-consensus-as-hypothesis after that search comes up
 empty.
+
+**Search-tool summaries can misattribute.** A tool's auto-generated synthesis
+may name an authoritative body ("X confirms...") that is not actually among
+the returned source URLs. Check the citation is really in the result list
+before using it - do not trust the summary's framing.
 
 ## Red Flags - STOP
 
