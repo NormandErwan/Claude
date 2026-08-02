@@ -21,6 +21,9 @@ Tester, c'est vérifier qu'une décision prise à gauche du V est respectée à 
 - Une exigence sans test est non vérifiable -- donc inutile.
 - Les cas de test s'écrivent depuis les critères d'acceptance, pas depuis le code.
 - Chaque niveau de test se prépare **en même temps** que son niveau miroir.
+- Cas à >=3 paramètres combinables : couverture par paires via
+  `pict-test-designer` (install distant, `CLAUDE.md` Every turn 1) au lieu
+  d'énumérer les combinaisons.
 
 ---
 

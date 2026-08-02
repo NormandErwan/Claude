@@ -7,6 +7,7 @@
 
 ## Every turn
 1. Identify the task.
+   - Problem/friction recurring after a fix, or a Retrospective event re-firing -> `diagnosing-recurring-failures`.
    - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `practical-advice`; purchase decision -> `purchase-advisor` (reuses its loop) - supersedes step 4's grilling/Planify/Validate (own frame/self-critique/revise loop).
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
@@ -39,21 +40,22 @@
 
 Immediately before ending a turn where >=1 fired:
 
-| Code | Event |
+| Event | Trigger |
 |---|---|
-| F1 | Plan step revised/abandoned mid-execution |
-| F2 | File re-read same turn, first read insufficient |
-| F3 | Cross-doc inconsistency found+fixed a checklist should've caught |
-| F4 | Skill invoked but didn't cover the case - deviated |
-| F5 | User corrected a factual error this turn |
-| F6 | Tool error forced a different approach than planned |
-| F7 | User gave an instruction/preference not yet captured anywhere |
+| plan-revised | Plan step revised/abandoned mid-execution |
+| reread | File re-read same turn, first read insufficient |
+| doc-drift | Cross-doc inconsistency found+fixed a checklist should've caught |
+| skill-gap | Skill invoked but didn't cover the case - deviated |
+| fact-corrected | User corrected a factual error this turn |
+| tool-blocked | Tool error forced a different approach than planned |
+| new-preference | User gave an instruction/preference not yet captured anywhere |
 
 >=1 fired -> emit before ending turn:
 ```
-Retrospective [codes]:
+Retrospective [events]:
 - [Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <why, one sentence> - <minimal change>
 (max 3)
 ```
 - Never apply without explicit approval.
+- Same event fires again after a fix, or its cause isn't evident -> `diagnosing-recurring-failures` instead of a second log line.
 - 0 fired -> skip silently.
