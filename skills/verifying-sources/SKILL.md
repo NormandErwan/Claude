@@ -108,7 +108,10 @@ Hierarchy (reach for the highest you can):
 Judge each source (PARC):
 
 - **Primacy** - the thing itself, or someone describing it?
-- **Authority** - does the publisher own or officially cover it?
+- **Authority** - does the publisher own or officially cover it? A financial
+  stake in the reader believing the claim (seller, broker, lead-generation site,
+  industry association) downgrades authority a notch even if the publisher is
+  named and specialized - see Conflict Of Interest below.
 - **Relevance** - does it match the EXACT version/model/case, not an adjacent one?
 - **Corroboration** - do two INDEPENDENT sources agree? Near-identical titles,
   structure, or phrasing across "different" domains is a syndication signal, not
@@ -122,6 +125,25 @@ source for model X; the near-identical model Y documents Z (hypothesis)".
 with the `[BLOCKED] <url> - <status>` status, and downgrade the whole answer to
 hypothesis. Do not backfill the gap with tertiary/adjacent sources and present it
 as verified.
+
+## Conflict Of Interest
+
+A source can be well-written, named, and topic-specific - and still not be
+neutral. Before citing a specialized commercial source, check who benefits if
+the reader believes the claim:
+
+- A company selling a service/product stating that its own product/service is
+  legally required, medically necessary, or "the recommended choice"
+- A comparator, broker, or lead-generation site whose revenue depends on the
+  reader contacting or buying (insurance broker, credit comparator, repair
+  network)
+- A trade or industry association funded by the sector it defends
+
+A financial stake does not disqualify the source, but it is not authority
+either: verify the exact claim against a source with no stake in the answer
+(the regulation text, a public body, an independent lab, the manufacturer's
+own technical documentation for a product-specific fact) before stating it as
+fact.
 
 ## Recognizing Content Farms And Syndicated Content
 
@@ -171,6 +193,11 @@ empty.
   author - that is syndication, not corroboration
 - Treating "a blog covers this topic" as authority when no standard,
   manufacturer, or named expert was found
+- Citing a seller, broker, or lead-generation site's claim about its own
+  product/service as if it were neutral authority
+- Trusting a search tool's auto-generated summary attribution ("X confirms...")
+  without checking the cited claim actually appears in one of the listed
+  source URLs
 
 ## Rationalization Prevention
 
@@ -188,6 +215,8 @@ empty.
 | "Different wording, rule doesn't apply" | Spirit over letter. Any factual claim counts |
 | "Several sites say the same thing" | Could be the same content-farm template reworded - check independence, not count |
 | "It's a whole blog dedicated to this topic" | A niche isn't authority - find the standard/manufacturer/institute behind the claim |
+| "The site specializes in exactly this service" | Selling it isn't the same as being neutral about it - check who benefits |
+| "The search summary says the official body confirms it" | Verify that body's URL is actually in the source list - summaries fabricate attributions |
 
 ## Relationship To Other Skills
 
