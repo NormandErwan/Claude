@@ -1,4 +1,4 @@
-# write-skills — Résultats de test
+# write-skill — Résultats de test
 
 **Date :** 2026-06-27  
 **Modèle testé :** claude-sonnet-4-6  

@@ -1,7 +1,7 @@
 # CSO Guide — Claude Search Optimization
 
 Full reference for making skills discoverable and efficient.
-Companion to `write-skills/SKILL.md` (see CSO section for the summary).
+Companion to `write-skill/SKILL.md` (see CSO section for the summary).
 
 ---
 

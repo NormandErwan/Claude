@@ -1,6 +1,6 @@
 {
-  "skill_name": "write-skills",
-  "description": "Trigger evals: queries that should (positive) and should not (negative) fire write-skills.",
+  "skill_name": "write-skill",
+  "description": "Trigger evals: queries that should (positive) and should not (negative) fire write-skill.",
   "evals": [
     {
       "id": 1,

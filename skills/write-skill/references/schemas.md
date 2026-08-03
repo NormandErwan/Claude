@@ -1,6 +1,6 @@
 # JSON Schemas
 
-This document defines the JSON schemas used by write-skills evaluation scripts.
+This document defines the JSON schemas used by write-skill evaluation scripts.
 
 ---
 

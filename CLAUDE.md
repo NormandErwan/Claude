@@ -44,7 +44,7 @@
    - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 4's grilling/Planify/Validate (own frame/self-critique/revise loop).
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
-   - Heavy skill (write-skills and similar) -> invoke via independent Agent, not main context.
+   - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
    - Always check regardless of scan:
      - Any file op or multi-file task -> `token-efficiency`, `token-file-ops`.
      - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
@@ -57,7 +57,7 @@
    - Unfamiliar domain needing primary sources -> also `research`.
    - Design question needing a throwaway spike -> also `prototype`.
 5. Large-scope work (new subsystem, multi-session, or user asks for the full process):
-   - User names a specific skill/methodology (e.g. write-skills) -> follow its own process directly, skip phase routing below.
+   - User names a specific skill/methodology (e.g. write-skill) -> follow its own process directly, skip phase routing below.
    - `npx skills add addyosmani/agent-skills` (whole repo, if not already loaded this session).
    - Follow `using-agent-skills` to route by phase: Define (`interview-me`/`idea-refine`/`spec-driven-development`) -> Plan (`planning-and-task-breakdown`) -> Build (`incremental-implementation`/`test-driven-development`/...) -> Verify (`debugging-and-error-recovery`/`browser-testing-with-devtools`) -> Review (`code-review-and-quality`) -> Ship (`git-workflow-and-versioning`/...).
    - Default for normal-sized tasks: skip this, steps 2-4 are enough.
