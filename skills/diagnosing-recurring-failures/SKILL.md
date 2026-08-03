@@ -56,13 +56,6 @@ it is a buying decision. One-way; finish there.
 
 ## Quick Reference
 
-| Step | Question it answers | Done when |
-|---|---|---|
-| Frame | What recurs, how often, and what would count as fixed? | Current and target conditions are written and measurable |
-| Trace | Which decision - not which event - allows this? | The answer is a process or design decision |
-| Branch | Which candidate causes does evidence actually support? | Survivors named, discards recorded with reasons |
-| Prove | Did the countermeasure move the target condition? | Predicted evidence checked, then standardized or looped |
-
 **Event vs decision:**
 
 | Answer | Type | Keep going? |
