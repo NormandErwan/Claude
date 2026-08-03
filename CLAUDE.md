@@ -38,6 +38,9 @@
 1. Identify the task.
    - Topic is .NET/C#/Blazor, or user asks -> `npx skills add aaronontheweb/dotnet-skills` (whole repo, if not already loaded this session) and `token-dotnet` (grep/search patterns).
    - Topic is web/frontend design, or user asks -> `npx skills add arvindrk/extract-design-system@extract-design-system` and `npx skills add vercel-labs/agent-skills@web-design-guidelines` (if not already loaded this session).
+   - Test design with >=3 combinable parameters (matrix, config, API surface) -> `npx skills add omkamal/pypict-claude-skill@pict-test-designer` (if not already loaded this session).
+   - User explicitly asks for parallel/sub-agents -> `npx skills add obra/superpowers@dispatching-parallel-agents` and `npx skills add obra/superpowers@subagent-driven-development` (if not already loaded this session).
+   - Failure/friction recurring after a fix -> `root-cause`.
    - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `practical-advice`; purchase decision -> `purchase-advisor` (reuses its loop) - supersedes step 4's grilling/Planify/Validate (own frame/self-critique/revise loop).
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
@@ -86,7 +89,7 @@
   - Run verification commands - evidence first.
 
 ## Code / docs / commits
-- English + ASCII only.
+- English + ASCII only, except inside a skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills.
 - Any technical/code doc (README, manifests, comments, PR/commit bodies) -> concise first pass, not a tightening pass after: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Editing any CLAUDE.md -> `prompt-engineering` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
@@ -112,21 +115,22 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 
 Immediately before ending a turn where >=1 fired:
 
-| Code | Event |
+| Event | Trigger |
 |---|---|
-| F1 | Plan step revised/abandoned mid-execution |
-| F2 | File re-read same turn, first read insufficient |
-| F3 | Cross-doc inconsistency found+fixed a checklist should've caught |
-| F4 | Skill invoked but didn't cover the case - deviated |
-| F5 | User corrected a factual error this turn |
-| F6 | Tool error forced a different approach than planned |
-| F7 | User gave an instruction/preference not yet captured anywhere |
+| plan-revised | Plan step revised/abandoned mid-execution |
+| reread | File re-read same turn, first read insufficient |
+| doc-drift | Cross-doc inconsistency found+fixed a checklist should've caught |
+| skill-gap | Skill invoked but didn't cover the case - deviated |
+| fact-corrected | User corrected a factual error this turn |
+| tool-blocked | Tool error forced a different approach than planned |
+| new-preference | User gave an instruction/preference not yet captured anywhere |
 
 >=1 fired -> emit before ending turn:
 ```
-Retrospective [codes]:
+Retrospective [events]:
 - [Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <why, one sentence> - <minimal change>
 (max 3)
 ```
 - Never apply without explicit approval.
+- Same event fires again after a fix, or its cause isn't evident -> `root-cause` instead of a second log line.
 - 0 fired -> skip silently.
