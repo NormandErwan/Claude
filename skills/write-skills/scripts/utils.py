@@ -1,4 +1,4 @@
-"""Shared utilities for writing-skills evaluation scripts."""
+"""Shared utilities for write-skills evaluation scripts."""
 
 from pathlib import Path
 

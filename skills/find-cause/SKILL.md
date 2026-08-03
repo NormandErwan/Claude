@@ -1,10 +1,10 @@
 ---
-name: root-cause
-description: Use when a failure or friction keeps coming back after a fix - a repeat incident, a recurring CI or build break, the same review comment raised again, a Retrospective event firing a second time, or when someone asks why this keeps happening. Not for debugging a single live bug in progress (`debugging-and-error-recovery` covers that). Personal, non-technical judgment calls route to `practical-advice`/`purchase-advisor`.
+name: find-cause
+description: Use when a failure or friction keeps coming back after a fix - a repeat incident, a recurring CI or build break, the same review comment raised again, a Retrospective event firing a second time, or when someone asks why this keeps happening. Not for debugging a single live bug in progress (`debugging-and-error-recovery` covers that). Personal, non-technical judgment calls route to `guide-decision`/`guide-purchase`.
 version: 1.0.0
 ---
 
-# Root Cause
+# Find Cause
 
 ## Overview
 
@@ -51,7 +51,7 @@ prove the countermeasure with evidence you named in advance.
    with what the failure taught.
 
 **Exit:** if the countermeasure turns out to be a personal, non-technical
-judgment call, hand off to `practical-advice` - or `purchase-advisor` when
+judgment call, hand off to `guide-decision` - or `guide-purchase` when
 it is a buying decision. One-way; finish there.
 
 ## Quick Reference

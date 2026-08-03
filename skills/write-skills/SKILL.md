@@ -1,12 +1,12 @@
 ---
-name: writing-skills
+name: write-skills
 version: 1.0.0
 description: Use when creating a new skill, editing an existing one, verifying a skill works
   before deployment, benchmarking whether it improves task quality, fixing unreliable
   triggering, or when an agent rationalizes around a skill's rules.
 ---
 
-# Writing Skills
+# Write Skills
 
 ## Overview
 

@@ -40,15 +40,15 @@
    - Topic is web/frontend design, or user asks -> `npx skills add arvindrk/extract-design-system@extract-design-system` and `npx skills add vercel-labs/agent-skills@web-design-guidelines` (if not already loaded this session).
    - Test design with >=3 combinable parameters (matrix, config, API surface) -> `npx skills add omkamal/pypict-claude-skill@pict-test-designer` (if not already loaded this session).
    - User explicitly asks for parallel/sub-agents -> `npx skills add obra/superpowers@dispatching-parallel-agents` and `npx skills add obra/superpowers@subagent-driven-development` (if not already loaded this session).
-   - Failure/friction recurring after a fix -> `root-cause`.
-   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `practical-advice`; purchase decision -> `purchase-advisor` (reuses its loop) - supersedes step 4's grilling/Planify/Validate (own frame/self-critique/revise loop).
+   - Failure/friction recurring after a fix -> `find-cause`.
+   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 4's grilling/Planify/Validate (own frame/self-critique/revise loop).
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
-   - Heavy skill (writing-skills and similar) -> invoke via independent Agent, not main context.
+   - Heavy skill (write-skills and similar) -> invoke via independent Agent, not main context.
    - Always check regardless of scan:
      - Any file op or multi-file task -> `token-efficiency`, `token-file-ops`.
      - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
-     - About to state an unverified factual/technical/procedural claim -> `verifying-sources`.
+     - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
 4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call; read-only skips).
    - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
@@ -57,7 +57,7 @@
    - Unfamiliar domain needing primary sources -> also `research`.
    - Design question needing a throwaway spike -> also `prototype`.
 5. Large-scope work (new subsystem, multi-session, or user asks for the full process):
-   - User names a specific skill/methodology (e.g. writing-skills) -> follow its own process directly, skip phase routing below.
+   - User names a specific skill/methodology (e.g. write-skills) -> follow its own process directly, skip phase routing below.
    - `npx skills add addyosmani/agent-skills` (whole repo, if not already loaded this session).
    - Follow `using-agent-skills` to route by phase: Define (`interview-me`/`idea-refine`/`spec-driven-development`) -> Plan (`planning-and-task-breakdown`) -> Build (`incremental-implementation`/`test-driven-development`/...) -> Verify (`debugging-and-error-recovery`/`browser-testing-with-devtools`) -> Review (`code-review-and-quality`) -> Ship (`git-workflow-and-versioning`/...).
    - Default for normal-sized tasks: skip this, steps 2-4 are enough.
@@ -92,7 +92,7 @@
 - English + ASCII only, except inside a skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills.
 - Any technical/code doc (README, manifests, comments, PR/commit bodies) -> concise first pass, not a tightening pass after: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
-- Editing any CLAUDE.md -> `prompt-engineering` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
+- Editing any CLAUDE.md -> `craft-prompt` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
 - Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored.
 - Editing `CLAUDE.web.md` -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.
@@ -132,5 +132,5 @@ Retrospective [events]:
 (max 3)
 ```
 - Never apply without explicit approval.
-- Same event fires again after a fix, or its cause isn't evident -> `root-cause` instead of a second log line.
+- Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
 - 0 fired -> skip silently.

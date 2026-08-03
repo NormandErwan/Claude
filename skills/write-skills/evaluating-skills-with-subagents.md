@@ -90,7 +90,7 @@ The grader writes `grading.json` alongside `outputs/` (schema: `references/schem
 ### Step 4: Aggregate results
 
 ```bash
-cd writing-skills
+cd write-skills
 python -m scripts.aggregate_benchmark benchmark/<timestamp>/
 ```
 
@@ -185,7 +185,7 @@ prevent the description from over-firing and consuming context on every turn.
 ### Step 2: Test current description
 
 ```bash
-cd writing-skills
+cd write-skills
 python -m scripts.run_eval \
   --eval-set eval-set.json \
   --skill-path <path-to-skill> \
