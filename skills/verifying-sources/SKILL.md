@@ -1,7 +1,7 @@
 ---
 name: verifying-sources
 version: 1.0.0
-description: Use when about to state a factual, technical, historical, or procedural claim - a version number, default value, statistic, API behavior, "X always/never does Y", "the docs say", "best practice is" - that you have not verified against a source this turn, or when tempted to answer a factual question from memory under time pressure
+description: Use when about to state a factual, technical, historical, or procedural claim in ANY domain (software, DIY/craft, health, legal, finance...) - a version number, default value, statistic, API behavior, a legal deadline, a health claim, a manufacturer spec, "X always/never does Y", "the docs say", "best practice is" - that you have not verified against a source this turn, or when tempted to answer a factual question from memory under time pressure
 ---
 
 # Verifying Sources
@@ -108,9 +108,14 @@ Hierarchy (reach for the highest you can):
 Judge each source (PARC):
 
 - **Primacy** - the thing itself, or someone describing it?
-- **Authority** - does the publisher own or officially cover it?
+- **Authority** - does the publisher own or officially cover it? A financial
+  stake in the reader believing the claim (seller, broker, lead-generation site,
+  industry association) downgrades authority a notch even if the publisher is
+  named and specialized - see Conflict Of Interest below.
 - **Relevance** - does it match the EXACT version/model/case, not an adjacent one?
-- **Corroboration** - do two independent sources agree?
+- **Corroboration** - do two INDEPENDENT sources agree? Near-identical titles,
+  structure, or phrasing across "different" domains is a syndication signal, not
+  agreement - clones of the same template do not corroborate each other.
 
 **Analogous is not the same.** A manual for a *similar* model (a different Tuya
 switch) supports a HYPOTHESIS about yours, never a verified fact. Say: "no primary
@@ -120,6 +125,62 @@ source for model X; the near-identical model Y documents Z (hypothesis)".
 with the `[BLOCKED] <url> - <status>` status, and downgrade the whole answer to
 hypothesis. Do not backfill the gap with tertiary/adjacent sources and present it
 as verified.
+
+## Conflict Of Interest
+
+A source can be well-written, named, and topic-specific - and still not be
+neutral. Before citing a specialized commercial source, check who benefits if
+the reader believes the claim:
+
+- A company selling a service/product stating that its own product/service is
+  legally required, medically necessary, or "the recommended choice"
+- A comparator, broker, or lead-generation site whose revenue depends on the
+  reader contacting or buying (insurance broker, credit comparator, repair
+  network)
+- A trade or industry association funded by the sector it defends
+
+A financial stake does not disqualify the source, but it is not authority
+either: verify the exact claim against a neutral source instead (see Craft
+And Consumer Domains Have Primary Sources Too below) before stating it as
+fact.
+
+## Recognizing Content Farms And Syndicated Content
+
+Common in consumer/DIY/craft/lifestyle topics (home improvement, gardening,
+cooking, health-adjacent advice) where no single official body publishes an
+answer, so search results are dominated by SEO/AI-written sites. Signals a
+source is tertiary regardless of how professional it looks:
+
+- No named author or credential, no publish date
+- Title/structure nearly identical to other "independent" results - see
+  Corroboration above, this is the same syndication signal
+- Generic answer with no reference to a standard, spec, technical datasheet,
+  or named institution
+- Monetized via ads/affiliate links, not by selling the expertise or product
+  itself
+
+If most/all top results share this pattern, treat the whole result set as
+tertiary - it is a lead to search harder with, never a citation.
+
+## Craft And Consumer Domains Have Primary Sources Too
+
+No "official docs" page does not mean no primary source exists - it means you
+have not searched for the right one yet. Before settling for blog consensus,
+search for:
+
+- Manufacturer technical data sheets (fiche technique) for the specific product
+- Technical standards governing the work (DTU, NF, ISO, EN)
+- Trade federations / technical institutes (e.g. FCBA, CSTB, CAPEB, ADEME)
+  instead of lifestyle blogs
+- A named, credentialed professional instead of an anonymous "redaction"
+
+Only fall back to blog-consensus-as-hypothesis after that search comes up
+empty.
+
+**Search-tool summaries can misattribute.** A tool's auto-generated synthesis
+may name an authoritative body ("X confirms...") that is not actually among
+the returned source URLs. Check the citation is really in the result list
+before using it - do not trust the summary's framing.
 
 ## Red Flags - STOP
 
@@ -132,6 +193,15 @@ as verified.
   absolute, "the docs say") with tool_uses still at 0
 - Citing an aggregator, mirror, or re-host as if it were the primary source
 - Treating a similar-but-different model or version as if it documented yours
+- Several results agree but share the same generic FAQ skeleton and no named
+  author - that is syndication, not corroboration
+- Treating "a blog covers this topic" as authority when no standard,
+  manufacturer, or named expert was found
+- Citing a seller, broker, or lead-generation site's claim about its own
+  product/service as if it were neutral authority
+- Trusting a search tool's auto-generated summary attribution ("X confirms...")
+  without checking the cited claim actually appears in one of the listed
+  source URLs
 
 ## Rationalization Prevention
 
@@ -147,6 +217,10 @@ as verified.
 | "An aggregator/mirror says so" | Re-hosts go stale or altered. Trace the primary |
 | "A similar model/version matches" | Adjacent is hypothesis-grade, not fact |
 | "Different wording, rule doesn't apply" | Spirit over letter. Any factual claim counts |
+| "Several sites say the same thing" | Could be the same content-farm template reworded - check independence, not count |
+| "It's a whole blog dedicated to this topic" | A niche isn't authority - find the standard/manufacturer/institute behind the claim |
+| "The site specializes in exactly this service" | Selling it isn't the same as being neutral about it - check who benefits |
+| "The search summary says the official body confirms it" | Verify that body's URL is actually in the source list - summaries fabricate attributions |
 
 ## Relationship To Other Skills
 
