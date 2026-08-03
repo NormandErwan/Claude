@@ -7,7 +7,7 @@
 
 ## Every turn
 1. Identify the task.
-   - Failure/friction recurring after a fix -> `diagnosing-recurring-failures`.
+   - Failure/friction recurring after a fix -> `root-cause`.
    - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `practical-advice`; purchase decision -> `purchase-advisor` (reuses its loop) - supersedes step 4's grilling/Planify/Validate (own frame/self-critique/revise loop).
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
@@ -57,5 +57,5 @@ Retrospective [events]:
 (max 3)
 ```
 - Never apply without explicit approval.
-- Same event fires again after a fix, or its cause isn't evident -> `diagnosing-recurring-failures` instead of a second log line.
+- Same event fires again after a fix, or its cause isn't evident -> `root-cause` instead of a second log line.
 - 0 fired -> skip silently.

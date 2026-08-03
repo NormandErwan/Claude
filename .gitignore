@@ -5,8 +5,8 @@
 # When consumed as a .claude subtree, a blanket unignore here would also
 # unignore session-installed skill caches the consumer repo means to ignore.
 # Add two lines here for every new skill added under skills/.
-!skills/diagnosing-recurring-failures/
-!skills/diagnosing-recurring-failures/**
+!skills/root-cause/
+!skills/root-cause/**
 !skills/practical-advice/
 !skills/practical-advice/**
 !skills/prompt-engineering/

@@ -5,7 +5,7 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 | Skill | Source | Commit |
 |---|---|---|
 | prompt-engineering | local | `9a6d56b036` |
-| diagnosing-recurring-failures | local | `487723721b` |
+| root-cause | local | `487723721b` |
 | verifying-sources | local | `32bf944df5` |
 | practical-advice | local | `361ebe56ad` |
 | purchase-advisor | local | `361ebe56ad` |
