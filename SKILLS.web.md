@@ -4,11 +4,11 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 
 | Skill | Source | Commit |
 |---|---|---|
-| craft-prompt | local | `9a6d56b036` |
-| find-cause | local | `487723721b` |
-| verify-sources | local | `32bf944df5` |
-| guide-decision | local | `361ebe56ad` |
-| guide-purchase | local | `361ebe56ad` |
+| craft-prompt | local | `7aa7d4762a` |
+| find-cause | local | `7aa7d4762a` |
+| verify-sources | local | `7aa7d4762a` |
+| guide-decision | local | `7aa7d4762a` |
+| guide-purchase | local | `7aa7d4762a` |
 | grilling | `mattpocock/skills@grilling` | `697d4ce974` |
 | grill-with-docs | `mattpocock/skills@grill-with-docs` | `697d4ce974` |
 | research | `mattpocock/skills@research` | `697d4ce974` |
