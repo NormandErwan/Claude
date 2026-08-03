@@ -89,7 +89,7 @@
   - Run verification commands - evidence first.
 
 ## Code / docs / commits
-- English + ASCII only.
+- English + ASCII only, except inside a skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills.
 - Any technical/code doc (README, manifests, comments, PR/commit bodies) -> concise first pass, not a tightening pass after: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Editing any CLAUDE.md -> `prompt-engineering` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
