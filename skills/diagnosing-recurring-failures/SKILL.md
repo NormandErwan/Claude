@@ -1,6 +1,6 @@
 ---
 name: diagnosing-recurring-failures
-description: Use when a failure or friction keeps coming back after a fix - a repeat incident, a recurring CI or build break, the same review comment raised again, a Retrospective event firing a second time, or when someone asks why this keeps happening. Not for debugging a single live bug in progress (`debugging-and-error-recovery` covers that). Personal, non-technical judgment calls route to `practical-advice`.
+description: Use when a failure or friction keeps coming back after a fix - a repeat incident, a recurring CI or build break, the same review comment raised again, a Retrospective event firing a second time, or when someone asks why this keeps happening. Not for debugging a single live bug in progress (`debugging-and-error-recovery` covers that). Personal, non-technical judgment calls route to `practical-advice`/`purchase-advisor`.
 version: 1.0.0
 ---
 
@@ -51,7 +51,8 @@ prove the countermeasure with evidence you named in advance.
    with what the failure taught.
 
 **Exit:** if the countermeasure turns out to be a personal, non-technical
-judgment call, hand off to `practical-advice`. One-way; finish there.
+judgment call, hand off to `practical-advice` - or `purchase-advisor` when
+it is a buying decision. One-way; finish there.
 
 ## Quick Reference
 
