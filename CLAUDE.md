@@ -41,6 +41,7 @@
    - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `practical-advice`; purchase decision -> `purchase-advisor` (reuses its loop) - supersedes step 4's grilling/Planify/Validate (own frame/self-critique/revise loop).
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
+   - Heavy skill (writing-skills and similar) -> invoke via independent Agent, not main context.
    - Always check regardless of scan:
      - Any file op or multi-file task -> `token-efficiency`, `token-file-ops`.
      - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
@@ -90,7 +91,7 @@
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Editing any CLAUDE.md -> `prompt-engineering` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
-- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, omitting anything dev/code-specific (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references. Bootstrap is CLI/npx-only, not mirrored.
+- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored.
 - Editing `CLAUDE.web.md` -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.
 
 ## PR lifecycle
