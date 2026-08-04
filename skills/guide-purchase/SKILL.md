@@ -1,10 +1,10 @@
 ---
-name: purchase-advisor
+name: guide-purchase
 description: Use when the user is deciding whether or what to buy - comparing purchase options, weighing cost against alternatives, or asking "should I buy X" - including whether to wait, buy used, rent, or not buy at all. Covers personal-scale software/app/subscription purchases too (an individual paying for a tool), not just physical goods. Not for business procurement, enterprise vendor selection, or investment/portfolio decisions.
 version: 1.0.0
 ---
 
-# Purchase Advisor
+# Guide Purchase
 
 ## Overview
 
@@ -14,7 +14,7 @@ own criteria - not a single yes/no gut check on the item they already named.
 
 **Core principle:** Compare options, not just confirm the one already named.
 
-Builds on `practical-advice`'s frame/reflect/self-critique/revise loop; this
+Builds on `guide-decision`'s frame/reflect/self-critique/revise loop; this
 skill adds the purchase-specific steps in between.
 
 ## When to Use
@@ -28,7 +28,7 @@ skill adds the purchase-specific steps in between.
   contracts, TCO scale) - a personal-scale software/subscription purchase for
   individual use IS in scope, even though it's software
 - Investment/portfolio decisions (different risk model)
-- Practical advice with no purchase involved (use `practical-advice` directly)
+- Practical advice with no purchase involved (use `guide-decision` directly)
 
 ## Core Pattern
 
@@ -59,7 +59,7 @@ skill adds the purchase-specific steps in between.
    assumptions and confidence level; no false precision (don't invent a
    specific % ROI from vague inputs) - but don't let "no real-time price
    feed" become an excuse to withhold concrete recommendations you do know.
-5. **Reflect and self-critique the comparison** - per `practical-advice` steps
+5. **Reflect and self-critique the comparison** - per `guide-decision` steps
    3-4, applied to the table itself: does it favor the first option by
    default, what's assumed, what's missing.
 6. **Recommend one option** (or "wait until X") plus what would have to be

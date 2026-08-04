@@ -7,13 +7,13 @@
 
 ## Every turn
 1. Identify the task.
-   - Failure/friction recurring after a fix -> `root-cause`.
-   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `practical-advice`; purchase decision -> `purchase-advisor` (reuses its loop) - supersedes step 4's grilling/Planify/Validate (own frame/self-critique/revise loop).
+   - Failure/friction recurring after a fix -> `find-cause`.
+   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 4's grilling/Planify/Validate (own frame/self-critique/revise loop).
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
-   - Heavy skill (writing-skills and similar) -> invoke via independent Agent, not main context.
+   - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
    - Always check regardless of scan:
-     - About to state an unverified factual/technical/procedural claim -> `verifying-sources`.
+     - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
 4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before any mutating action; read-only skips).
    - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
@@ -32,7 +32,7 @@
 
 ## Code / docs / commits
 - English + ASCII only, except inside a skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills.
-- Editing any CLAUDE.md -> `prompt-engineering` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
+- Editing any CLAUDE.md -> `craft-prompt` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
 - Editing this file triggers a `SKILLS.web.md` refresh and update-download proposal - done from a Claude Code session, since this file has no repo access to do it itself.
 
@@ -57,5 +57,5 @@ Retrospective [events]:
 (max 3)
 ```
 - Never apply without explicit approval.
-- Same event fires again after a fix, or its cause isn't evident -> `root-cause` instead of a second log line.
+- Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
 - 0 fired -> skip silently.

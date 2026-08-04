@@ -1,10 +1,10 @@
 ---
-name: practical-advice
-description: Use when the user asks for personal, non-technical advice with no single correct answer - personal finance, veterinary or pet care choices, management or interpersonal decisions, legal-adjacent personal questions, or other life decisions. Not for software/coding/dev engineering questions, or questions with one objectively correct answer. Personal purchases of software/subscriptions route to `purchase-advisor` instead.
+name: guide-decision
+description: Use when the user asks for personal, non-technical advice with no single correct answer - personal finance, veterinary or pet care choices, management or interpersonal decisions, legal-adjacent personal questions, or other life decisions. Not for software/coding/dev engineering questions, or questions with one objectively correct answer. Personal purchases of software/subscriptions route to `guide-purchase` instead.
 version: 1.0.0
 ---
 
-# Practical Advice
+# Guide Decision
 
 ## Overview
 
@@ -26,9 +26,9 @@ question - critique it once, then revise.
 **Not for:**
 - Software/coding/dev **engineering** questions (technical/architecture work) -
   a personal purchase of software or a subscription is still in scope, via
-  `purchase-advisor`
-- Questions with one factually correct answer (use `verifying-sources` instead)
-- Buying decisions (use `purchase-advisor` - it reuses the loop below)
+  `guide-purchase`
+- Questions with one factually correct answer (use `verify-sources` instead)
+- Buying decisions (use `guide-purchase` - it reuses the loop below)
 
 ## Core Pattern
 
@@ -50,7 +50,7 @@ question - critique it once, then revise.
    new tradeoff. When the stakes involve legal exposure, health, or losing
    something hard to reverse (housing, a job), also flag any specific
    fact/figure/threshold stated with confidence in step 2 that isn't
-   verified - point to `verifying-sources` or a relevant professional rather
+   verified - point to `verify-sources` or a relevant professional rather
    than asserting it.
 5. **Revise** - rewrite the answer incorporating the critique. Merge it into
    a stronger answer; don't tack the critique on as caveats.

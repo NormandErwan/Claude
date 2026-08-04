@@ -1,10 +1,10 @@
 ---
 version: 1.0.0
-name: prompt-engineering
+name: craft-prompt
 description: Use this skill when you writing commands, hooks, skills for Agent, or prompts for sub agents or any other LLM interaction, including optimizing prompts, improving LLM outputs, or designing production prompt templates.
 ---
 
-# Prompt Engineering Patterns
+# Craft Prompt
 
 Advanced prompt engineering techniques to maximize LLM performance, reliability, and controllability.
 

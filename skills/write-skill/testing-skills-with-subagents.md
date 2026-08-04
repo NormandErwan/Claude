@@ -139,7 +139,7 @@ Forces explicit choice.
 
 **Best tests combine 3+ pressures.**
 
-**Why this works:** See prompt-engineering/SKILL.md for research on how authority, scarcity, and commitment principles increase compliance pressure.
+**Why this works:** See craft-prompt/SKILL.md for research on how authority, scarcity, and commitment principles increase compliance pressure.
 
 ### Key Elements of Good Scenarios
 
