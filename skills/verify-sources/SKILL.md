@@ -1,6 +1,6 @@
 ---
 name: verify-sources
-version: 1.0.0
+version: 1.1.0
 description: Use when about to state a factual, technical, historical, or procedural claim in ANY domain (software, DIY/craft, health, legal, finance...) - a version number, default value, statistic, API behavior, a legal deadline, a health claim, a manufacturer spec, "X always/never does Y", "the docs say", "best practice is" - that you have not verified against a source this turn, or when tempted to answer a factual question from memory under time pressure
 ---
 
@@ -54,6 +54,9 @@ a lookup you are not actually sure of, that pull IS the rationalization - verify
 ```
 BEFORE stating any factual/technical/historical/procedural claim:
 
+0. PIN:    Does the claim depend on a version/model/year/variant the user has
+          not stated? If yes, ASK before searching - you cannot source a fact
+          about an instance you have not identified
 1. IDENTIFY: Is this a claim the reader will act on? (see list above)
 2. SEARCH: Look up the MOST PRIMARY source you can reach - official docs,
           source code, spec, changelog, the vendor's own manual, the file in
@@ -70,6 +73,23 @@ BEFORE stating any factual/technical/historical/procedural claim:
 
 The loop is bounded: search, then one more search, then stop and label. Do not
 spin forever, and do not silently drop the claim - say you could not verify it.
+
+## Pin The Instance Before Searching
+
+"What oil does a Peugeot 207 take" has no verifiable answer: year, engine and
+trim each change it. Searching anyway returns a source that is authoritative
+about *a* 207 and wrong about *theirs* - worse than no answer, because it
+arrives with a citation attached.
+
+Ask for the identifying attributes the claim hangs on - version, model number,
+year, engine, trim, jurisdiction, edition - and ask for the reference itself,
+never a photo or a full inventory. One targeted question, then search. This is
+`guide-decision`'s framing gate applied to facts: an unasked question that
+changes the fact is not ceremony.
+
+If the user cannot supply it, answer per variant, or label the answer a
+hypothesis and name the attribute it hinges on. Never silently pick the most
+common variant - that is a guess wearing a citation.
 
 ## Verified vs Hypothesis
 
@@ -192,6 +212,8 @@ before using it - do not trust the summary's framing.
 - Answering a NON-trivial factual question (version, number, default, date,
   absolute, "the docs say") with tool_uses still at 0
 - Citing an aggregator, mirror, or re-host as if it were the primary source
+- Searching for a fact about a model/version/year the user never stated - pin
+  the instance first, the search cannot fix an unidentified subject
 - Treating a similar-but-different model or version as if it documented yours
 - Several results agree but share the same generic FAQ skeleton and no named
   author - that is syndication, not corroboration
