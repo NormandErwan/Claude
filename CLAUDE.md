@@ -41,7 +41,7 @@
    - Test design with >=3 combinable parameters (matrix, config, API surface) -> `npx skills add omkamal/pypict-claude-skill@pict-test-designer` (if not already loaded this session).
    - User explicitly asks for parallel/sub-agents -> `npx skills add obra/superpowers@dispatching-parallel-agents` and `npx skills add obra/superpowers@subagent-driven-development` (if not already loaded this session).
    - Failure/friction recurring after a fix -> `find-cause`.
-   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 4's grilling/Planify/Validate (own frame/self-critique/revise loop).
+   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 4's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
@@ -95,7 +95,7 @@
 - Editing any CLAUDE.md -> `craft-prompt` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
 - Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored.
-- Editing `CLAUDE.web.md` -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.
+- Editing `CLAUDE.web.md`, or any skill `SKILLS.web.md` lists -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.
 
 ## PR lifecycle
 

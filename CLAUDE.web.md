@@ -8,7 +8,7 @@
 ## Every turn
 1. Identify the task.
    - Failure/friction recurring after a fix -> `find-cause`.
-   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 4's grilling/Planify/Validate (own frame/self-critique/revise loop).
+   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 4's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
 2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
@@ -34,7 +34,7 @@
 - English + ASCII only, except inside a skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills.
 - Editing any CLAUDE.md -> `craft-prompt` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
-- Editing this file triggers a `SKILLS.web.md` refresh and update-download proposal - done from a Claude Code session, since this file has no repo access to do it itself.
+- Editing this file, or any skill `SKILLS.web.md` lists, triggers a `SKILLS.web.md` refresh and update-download proposal - done from a Claude Code session, since this file has no repo access to do it itself.
 
 ## Retrospective
 

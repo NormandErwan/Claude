@@ -1,7 +1,7 @@
 ---
 name: guide-purchase
 description: Use when the user is deciding whether or what to buy - comparing purchase options, weighing cost against alternatives, or asking "should I buy X" - including whether to wait, buy used, rent, or not buy at all. Covers personal-scale software/app/subscription purchases too (an individual paying for a tool), not just physical goods. Not for business procurement, enterprise vendor selection, or investment/portfolio decisions.
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Guide Purchase
@@ -14,8 +14,8 @@ own criteria - not a single yes/no gut check on the item they already named.
 
 **Core principle:** Compare options, not just confirm the one already named.
 
-Builds on `guide-decision`'s frame/reflect/self-critique/revise loop; this
-skill adds the purchase-specific steps in between.
+Builds on `guide-decision`'s frame/reflect/self-critique/revise/consolidate
+loop; this skill adds the purchase-specific steps in between.
 
 ## When to Use
 
@@ -32,9 +32,19 @@ skill adds the purchase-specific steps in between.
 
 ## Core Pattern
 
-1. **Frame the decision** - budget ceiling, must-have vs. nice-to-have
-   criteria, how long they intend to keep/use it, urgency. Ask if missing,
-   skip if already given.
+1. **Frame the decision** - a `grilling` gate per `guide-decision` step 1,
+   run **before any pricing or comparison**: budget ceiling, must-have vs.
+   nice-to-have criteria, urgency, and - the part most often guessed instead
+   of asked - **what already exists that the purchase has to fit**:
+   - mounting/support and how it is installed, dimensions and clearances
+   - the exact model or reference it must be compatible with, whenever
+     variants differ in a way that changes the answer - ask for the
+     reference, not a photo or a full inventory
+   - how long they intend to keep it, which sets the horizon every TCO
+     number is computed over
+
+   A figure costed against a guessed setup is worse than no figure: it looks
+   decided. Ask if missing, skip if already given.
 2. **Gate the rigor to the stakes.** Low-cost, easily-reversible, one-off
    purchase (a household item under a few hundred euros/dollars, no
    recurring cost, no long commitment) -> **light path**: name 2-3 concrete
@@ -64,6 +74,10 @@ skill adds the purchase-specific steps in between.
    default, what's assumed, what's missing.
 6. **Recommend one option** (or "wait until X") plus what would have to be
    true to flip the recommendation.
+7. **Consolidate** - when the frame or the recommendation has materially
+   changed across refinement rounds, re-issue the full comparison as one
+   document instead of another increment. A table amended by three rounds of
+   deltas is no longer a comparison.
 
 ## Quick Reference
 
@@ -81,14 +95,18 @@ skill adds the purchase-specific steps in between.
 > User: "Is it worth getting a Peloton bike, or should I just get a regular
 > gym membership?"
 
-Frame: used at home, 3+ years, budget flexible within reason - high-stakes
-(large upfront cost, multi-year use) -> full path.
+Frame (asked, not assumed): used at home, 3+ years, budget flexible within
+reason - and, asked before any pricing: first-floor flat, no lift, tight
+stair turn. That last answer changes the comparison before a single figure
+is written: marketplace bikes are collection-only and too heavy for one
+person to carry up, while a new one ships with room-of-choice delivery and
+assembly. High-stakes (large upfront cost, multi-year use) -> full path.
 
 | Option | Price | TCO | Cancellation friction | Value driver: convenience | Confidence |
 |---|---|---|---|---|---|
 | Peloton Bike+ | ~1900 EUR | +44 EUR/mo app subscription, no resale market to speak of | Cancel app anytime; bike itself is a sunk cost either way | Zero commute, on-demand classes | High |
 | Local gym membership | ~40 EUR/mo | No equipment cost, but commute time | Many gyms lock in 12-month contracts with an early-exit penalty | Commute + fixed class schedule | High |
-| Used Peloton bike (marketplace) | ~800-1000 EUR | Same 44 EUR/mo app fee | Same as new bike | Same convenience, unknown hardware condition | Medium |
+| Used Peloton bike (marketplace) | ~800-1000 EUR | Same 44 EUR/mo app fee, plus movers or two helpers to get it up the stairs | Same as new bike | Same convenience once installed, unknown hardware condition | Medium |
 | Don't buy - bodyweight/running at home | 0 EUR | 0 EUR | None | No structured classes | High |
 
 *Assumption: no strong preference for in-person group energy. Alternative not
@@ -96,17 +114,25 @@ yet weighed: a 12-month gym contract's cancellation penalty can rival a year
 of the Peloton app fee - the "cheaper" option isn't automatically the lower-
 friction one.*
 
-Revised: if the appeal is genuinely the on-demand convenience, a used Peloton
-plus the app fee is the better cost/convenience tradeoff over a new bike or a
-locked-in gym contract - the cancellation friction on a 12-month gym
-membership is easy to underweight against a sticker price that looks cheaper
-per month.
+Revised: the used bike's 900 EUR saving is the best sticker price on the
+table and still the wrong answer here - collection-only, up a stair turn it
+does not fit through without help that eats the discount. Of the two that
+survive the frame, a new bike plus the app fee beats a 12-month gym contract
+if the appeal is genuinely on-demand convenience: the cancellation friction
+on the membership is easy to underweight against a monthly price that looks
+cheaper.
 
 *This would change if you value in-person group classes or gym equipment
 variety over convenience - a no-contract gym membership then beats both.*
 
 ## Common Mistakes
 
+- Costing a setup whose physical constraints were assumed rather than asked -
+  the mounting, the clearances, the compatible reference; every number below
+  inherits the guess
+- Answering a model-specific question from a generic mental model when
+  variants differ - ask which model before describing what it does or what
+  fits it
 - Comparing the named product against trivial variants instead of a real
   competitor or the wait/used/don't-buy option
 - Quoting precise numbers (exact ROI, exact resale value) the user's inputs
