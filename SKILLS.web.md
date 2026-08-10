@@ -14,4 +14,4 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 | research | `mattpocock/skills@research` | `697d4ce974` |
 | handoff | `mattpocock/skills@handoff` | `697d4ce974` |
 
-Checked: 2026-08-09
+Checked: 2026-08-10
