@@ -96,16 +96,17 @@ loop; this skill adds the purchase-specific steps in between.
 > gym membership?"
 
 Frame (asked, not assumed): used at home, 3+ years, budget flexible within
-reason, spare room with 2x1.5 m of floor and a normal domestic socket - the
-footprint rules out nothing here, but on a bulkier machine it would have
-eliminated an option before any pricing. High-stakes (large upfront cost,
-multi-year use) -> full path.
+reason - and, asked before any pricing: first-floor flat, no lift, tight
+stair turn. That last answer changes the comparison before a single figure
+is written: marketplace bikes are collection-only and too heavy for one
+person to carry up, while a new one ships with room-of-choice delivery and
+assembly. High-stakes (large upfront cost, multi-year use) -> full path.
 
 | Option | Price | TCO | Cancellation friction | Value driver: convenience | Confidence |
 |---|---|---|---|---|---|
 | Peloton Bike+ | ~1900 EUR | +44 EUR/mo app subscription, no resale market to speak of | Cancel app anytime; bike itself is a sunk cost either way | Zero commute, on-demand classes | High |
 | Local gym membership | ~40 EUR/mo | No equipment cost, but commute time | Many gyms lock in 12-month contracts with an early-exit penalty | Commute + fixed class schedule | High |
-| Used Peloton bike (marketplace) | ~800-1000 EUR | Same 44 EUR/mo app fee | Same as new bike | Same convenience, unknown hardware condition | Medium |
+| Used Peloton bike (marketplace) | ~800-1000 EUR | Same 44 EUR/mo app fee, plus movers or two helpers to get it up the stairs | Same as new bike | Same convenience once installed, unknown hardware condition | Medium |
 | Don't buy - bodyweight/running at home | 0 EUR | 0 EUR | None | No structured classes | High |
 
 *Assumption: no strong preference for in-person group energy. Alternative not
@@ -113,11 +114,13 @@ yet weighed: a 12-month gym contract's cancellation penalty can rival a year
 of the Peloton app fee - the "cheaper" option isn't automatically the lower-
 friction one.*
 
-Revised: if the appeal is genuinely the on-demand convenience, a used Peloton
-plus the app fee is the better cost/convenience tradeoff over a new bike or a
-locked-in gym contract - the cancellation friction on a 12-month gym
-membership is easy to underweight against a sticker price that looks cheaper
-per month.
+Revised: the used bike's 900 EUR saving is the best sticker price on the
+table and still the wrong answer here - collection-only, up a stair turn it
+does not fit through without help that eats the discount. Of the two that
+survive the frame, a new bike plus the app fee beats a 12-month gym contract
+if the appeal is genuinely on-demand convenience: the cancellation friction
+on the membership is easy to underweight against a monthly price that looks
+cheaper.
 
 *This would change if you value in-person group classes or gym equipment
 variety over convenience - a no-contract gym membership then beats both.*

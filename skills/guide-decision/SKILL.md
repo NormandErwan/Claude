@@ -8,12 +8,12 @@ version: 1.1.0
 
 ## Overview
 
-A confident first answer is a draft, not a verdict. Domain framing plus a
-deliberate self-review catches assumptions and alternatives a single pass
-misses.
+An unframed question has no right answer, and a confident first answer is a
+draft, not a verdict. Framing before the answer, then a deliberate
+self-review, catches the assumptions and alternatives a single pass misses.
 
-**Core principle:** Never ship the first plausible answer to a judgment-call
-question - critique it once, then revise.
+**Core principle:** Never answer a question you have not finished framing -
+then never ship the first plausible answer either.
 
 ## When to Use
 
@@ -25,10 +25,9 @@ question - critique it once, then revise.
 
 **Not for:**
 - **Technical/architecture** work - how to build, structure, or fix a system.
-  The exclusion is technical, not "anything near software": method and
-  delivery calls (how to estimate, how to plan, which process to run) are
-  judgment calls and stay in scope, as does a personal purchase of software
-  or a subscription, via `guide-purchase`
+  Method and delivery calls (how to estimate, how to plan, which process to
+  run) stay in scope, as does a personal software or subscription purchase,
+  via `guide-purchase`
 - Questions with one factually correct answer (use `verify-sources` instead)
 - Buying decisions (use `guide-purchase` - it reuses the loop below)
 
@@ -65,9 +64,8 @@ question - critique it once, then revise.
 5. **Revise** - rewrite the answer incorporating the critique. Merge it into
    a stronger answer; don't tack the critique on as caveats. If the reasoning
    surfaced a variable you guessed that step 1 could not have known to ask
-   about, ask it now and mark the recommendation provisional on it - a net
-   for what only becomes visible once the domain work is done, not a second
-   round of framing.
+   about, ask it now and mark the recommendation provisional on it - not a
+   second round of framing.
 6. **Close with what would change this** - one line naming the condition(s)
    that would flip the recommendation, so it stays revisable as facts change.
 7. **Consolidate** - when the frame or the recommendation has materially
