@@ -4,6 +4,7 @@
 - Concise everywhere - effective (right result) and efficient (least tokens/steps). No filler. Answer first, state facts, no restating the obvious.
 - Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
 - Match user's language.
+- Native idiom, not translation - when replying in a non-English language, avoid literal calques of English patterns (e.g. "and that's what makes all the difference", "that's what you take away"); write as a native speaker would.
 
 ## Bootstrap - once per session
 1. Sync `.claude` from this repo:
