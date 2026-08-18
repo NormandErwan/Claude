@@ -62,4 +62,4 @@ Retrospective [events]:
 - 0 fired -> skip silently.
 
 ## Web-only
-- Chat temporaire (claude.ai la signale non sauvegardée) + travail substantiel en cours -> régénérer un handoff téléchargeable (`handoff`, sortie markdown par défaut) à la fin de chaque tour qualifiant - rien à perdre si le chat disparaît sans préavis.
+- Temporary chat (claude.ai flags it as unsaved) + substantial work in progress -> regenerate a downloadable handoff (`handoff`, default markdown output) at the end of each qualifying turn - nothing lost if the chat disappears without warning.
