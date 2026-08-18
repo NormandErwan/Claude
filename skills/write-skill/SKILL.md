@@ -1,6 +1,6 @@
 ---
 name: write-skill
-version: 1.0.0
+version: 1.1.0
 description: Use when creating a new skill, editing an existing one, verifying a skill works
   before deployment, benchmarking whether it improves task quality, fixing unreliable
   triggering, or when an agent rationalizes around a skill's rules.
@@ -399,6 +399,12 @@ gerunds: `condition-based-waiting`, not `async-helpers`.
 "You can use pypdf, or pdfplumber, or PyMuPDF, or pdf2image…"
 **Why bad:** Decision fatigue. Provide one default; add escape hatch for the rare exception.
 
+### ❌ Domain-by-domain catalog instead of a general rule
+Separate bullets/sections for "finance decisions", "health decisions", "legal decisions"
+that each restate the same underlying rule with different nouns.
+**Why bad:** Doesn't generalize to the next domain that shows up. When correcting a skill,
+state the rule once at the level it actually applies, not as a growing list of examples.
+
 ## STOP: Before Moving to Next Skill
 
 **After writing ANY skill, you MUST STOP and complete the deployment process.**
@@ -453,6 +459,7 @@ gerunds: `condition-based-waiting`, not `async-helpers`.
 **Deployment:**
 - [ ] Every checklist item above re-verified against the finished file - drafting-time self-checks alone can miss gaps (e.g. a planned example that never made it in)
 - [ ] Native skill (this repo) -> add its 2 lines to `.gitignore`, verify with `git status`
+- [ ] Version bumped and skill listed in `SKILLS.web.md` -> update its commit hash there too (see CLAUDE.md `Code / docs / commits`)
 - [ ] Commit skill to git and push to your fork (if configured)
 - [ ] Consider contributing back via PR (if broadly useful)
 

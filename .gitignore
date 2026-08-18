@@ -5,14 +5,14 @@
 # When consumed as a .claude subtree, a blanket unignore here would also
 # unignore session-installed skill caches the consumer repo means to ignore.
 # Add two lines here for every new skill added under skills/.
-!skills/root-cause/
-!skills/root-cause/**
-!skills/practical-advice/
-!skills/practical-advice/**
-!skills/prompt-engineering/
-!skills/prompt-engineering/**
-!skills/purchase-advisor/
-!skills/purchase-advisor/**
+!skills/craft-prompt/
+!skills/craft-prompt/**
+!skills/find-cause/
+!skills/find-cause/**
+!skills/guide-decision/
+!skills/guide-decision/**
+!skills/guide-purchase/
+!skills/guide-purchase/**
 !skills/token-codebase-exploration/
 !skills/token-codebase-exploration/**
 !skills/token-dotnet/
@@ -45,7 +45,7 @@
 !skills/v-model-phase-amont/**
 !skills/v-model-tests/
 !skills/v-model-tests/**
-!skills/verifying-sources/
-!skills/verifying-sources/**
-!skills/writing-skills/
-!skills/writing-skills/**
+!skills/verify-sources/
+!skills/verify-sources/**
+!skills/write-skill/
+!skills/write-skill/**
