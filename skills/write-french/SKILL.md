@@ -138,17 +138,29 @@ chat replies: applying the rules while writing is enough there.
 
 ## Real-World Impact
 
-Blind-scored defects per 1000 words, no-skill vs skill, across three
-independent topics and registers (informal management coaching, formal
-technical craft, formal legal/administrative):
+Blind-scored defects per 1000 words, no-skill vs skill, across four
+independent topics, registers and genres (informal management coaching,
+formal technical craft, formal legal/administrative, impersonal scientific
+synthesis):
 
-| Topic | No skill | v1.0.0 | v1.1.0 |
+| Topic | No skill | v1.0.0 | v1.1.0/1.2.0 |
 |---|---|---|---|
 | Management | 14.5 | 4.6 | 4.41 |
 | Pastry technique | 7.26 | 3.64 | 3.14 |
 | Tenant rights | 3.87 | 11.3 (regression) | 2.29 |
+| Sleep/memory synthesis (held-out) | 8.76 | - | 6.22 |
 
 v1.0.0 helped informal and technical registers but made formal legal French
 worse - it missed jargon outside management vocabulary and let idiomatic
 swaps drift meaning. v1.1.0 (defect 5's precision-over-idiom guardrail,
-generalized defect 3) fixed the regression without hurting the other two.
+generalized defect 3) fixed the regression without hurting the other two,
+and held up on a fourth topic never used to derive the fix, including a
+genre with no direct address and no actionable-step structure.
+
+**Known limit, confirmed three times across four topics, not fixed by
+wording alone:** the skill still lets one field-specific term through
+unglossed each time it is tested on a new domain (`pousse` in pastry,
+`d'équerre` in a pastry retest, `taille d'effet` here) - a writer fluent
+in a field under-flags its own jargon as jargon even when told to check
+for it. Category 3's rule is sound; catching this needs a second-pass
+reviewer role, not another rewording of the definition.
