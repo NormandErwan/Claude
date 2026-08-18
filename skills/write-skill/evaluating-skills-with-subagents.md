@@ -16,6 +16,11 @@ pressure scenarios under RED-GREEN-REFACTOR, not A/B measurement.
 Run both tracks before shipping a skill. A skill that improves quality but never fires is useless.
 A skill that fires reliably but doesn't help is noise.
 
+**Orchestration constraint:** run Step 2 (execution) and Step 3 (grading) as separate Agent
+calls from the orchestrating session. Never delegate both to one subagent — a subagent has
+no Agent tool of its own, so it can't spawn a grader as a nested call, and ends up grading
+its own output instead. That is self-grading, which this methodology forbids.
+
 ---
 
 ## Track 1 — Quality A/B Evaluation
