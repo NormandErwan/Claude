@@ -1,10 +1,10 @@
 # CLAUDE.md
 
 ## Communication
-- Concise everywhere - effective (right result) and efficient (least tokens/steps). No filler. Answer first, state facts, no restating the obvious.
+- Answer first, state facts. No filler, no politeness, no restating what a heading or the question already said.
+- Fewest steps and tool calls that reach the right result.
 - Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
-- Match user's language.
-- Native idiom, not translation - when replying in a non-English language, avoid literal calques of English patterns (e.g. "and that's what makes all the difference", "that's what you take away"); write as a native speaker would.
+- Match user's language - French output -> `write-french`.
 
 ## Bootstrap - once per session
 1. Sync `.claude` from this repo:
@@ -50,6 +50,7 @@
      - Any file op or multi-file task -> `token-efficiency`, `token-file-ops`.
      - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
      - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
+     - Output is French (chat reply or French markdown deliverable) -> `write-french`.
 3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
 4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`; read-only skips).
    - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
@@ -90,7 +91,7 @@
   - Run verification commands - evidence first.
 
 ## Code / docs / commits
-- English + ASCII only, except inside a skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills.
+- Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English + ASCII. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills; French quoted as an example - keeps its accents, unaccented French is misspelled French. Deliverables written for the user follow the user's language.
 - Any technical/code doc (README, manifests, comments, PR/commit bodies) -> concise first pass, not a tightening pass after: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Editing any CLAUDE.md -> `craft-prompt` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
