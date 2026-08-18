@@ -60,3 +60,6 @@ Retrospective [events]:
 - Never apply without explicit approval.
 - Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
 - 0 fired -> skip silently.
+
+## Web-only
+- Chat temporaire (claude.ai la signale non sauvegardée) + travail substantiel en cours -> régénérer un handoff téléchargeable (`handoff`, sortie markdown par défaut) à la fin de chaque tour qualifiant - rien à perdre si le chat disparaît sans préavis.
