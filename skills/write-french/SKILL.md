@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.0.0
+version: 1.1.0
 description: Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase.
 ---
 
@@ -13,7 +13,12 @@ reader rarely calls it wrong; they call it foreign, and they slow down to guess
 what was meant.
 
 **Core principle:** write the sentence a French speaker would have written to say
-that thing - not the French translation of the English sentence.
+that thing - not the French translation of the English sentence. In a technical,
+legal or administrative register, that French speaker is a specialist: they reach
+for the field's exact, established term or collocation, not a looser paraphrase.
+Native does not mean casual. Trading a precise locution for one that only sounds
+more idiomatic is a gain solely if it means exactly the same thing - check the
+swap, do not assume it because it reads more fluently.
 
 Rules below are in English, examples in French with their accents. A translated
 example proves nothing about French.
@@ -62,8 +67,11 @@ A word carrying the meaning was dropped to make the sentence shorter.
 
 ### 3. Term used before being defined
 
-Jargon the reader must already know to follow the sentence. Define at first use,
-or replace with what it describes.
+Jargon the reader must already know to follow the sentence - a legal term of art
+or a trade word counts exactly as much as an abstract management noun. Test: would
+a competent reader outside this specific field stumble on it? If yes, define it at
+first use, or replace it with what it describes - regardless of which field it
+came from.
 
 | Instead of | Write |
 |---|---|
@@ -94,11 +102,15 @@ chat replies: applying the rules while writing is enough there.
 
 1. Read each sentence against the five defects, one category at a time. Mixing
    the categories in one pass hides the ones you are not looking for.
-2. Rewrite each hit, then re-check the rewrite against all five. Removing a
+2. Rewrite only the sentences that actually hit a defect. A sentence with none
+   stays untouched - polishing a clean sentence for style, not to fix a listed
+   defect, is how new defects get introduced.
+3. Rewrite each hit, then re-check the rewrite against all five. Removing a
    calque by compressing further moves the defect into category 2, it does not
-   remove it.
-3. Last check on the whole text: every jargon term defined at first use, every
-   sentence has a subject and a verb.
+   remove it; trading a precise term for one that merely sounds more idiomatic
+   moves it into category 5 the moment the meaning drifts.
+4. Last check on the whole text: every jargon term - legal, technical or
+   management - defined at first use, every sentence has a subject and a verb.
 
 ## Red Flags - Stop And Rewrite
 
@@ -106,7 +118,11 @@ chat replies: applying the rules while writing is enough there.
 - An adjective doing the work of a noun (« Fréquent et petit vaut mieux... »)
 - A colon or a dash standing in for the verb
 - An abstract noun carrying the sentence: valeur, impact, niveau, dimension
-- A jargon term used now, explained later, or never
+- A jargon term used now, explained later, or never - legal and technical terms
+  of art included, not only abstract nouns
+- A rewrite picked because it sounds more natural, without checking it still
+  means exactly the same thing
+- A sentence you rewrote though it hit none of the five defects
 - An imperative form you did not actually check
 - A turn of phrase you cannot recall ever hearing
 
@@ -115,4 +131,9 @@ chat replies: applying the rules while writing is enough there.
 - Shortening a clumsy sentence instead of rewriting it - defect 2 replaces defect 1
 - Defining a term two lines after its first use and calling it defined
 - Treating « toxique », « asymétrique », « indirect » as explanations
+- Treating jargon as a management-only problem - a legal term of art
+  (« contradictoire ») or a trade word (« pousse ») needs the same gloss
+- Swapping a precise term for a more idiomatic-sounding one and drifting the
+  meaning in the process - « ne vaut plus rien » is not « ne vaut rien »
+- Rewriting a sentence that had no defect, for style alone
 - Running the review pass on a chat reply, or skipping it on a deliverable
