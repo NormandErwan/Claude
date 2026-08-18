@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.1.0
+version: 1.2.0
 description: Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase.
 ---
 
@@ -13,12 +13,7 @@ reader rarely calls it wrong; they call it foreign, and they slow down to guess
 what was meant.
 
 **Core principle:** write the sentence a French speaker would have written to say
-that thing - not the French translation of the English sentence. In a technical,
-legal or administrative register, that French speaker is a specialist: they reach
-for the field's exact, established term or collocation, not a looser paraphrase.
-Native does not mean casual. Trading a precise locution for one that only sounds
-more idiomatic is a gain solely if it means exactly the same thing - check the
-swap, do not assume it because it reads more fluently.
+that thing - not the French translation of the English sentence.
 
 Rules below are in English, examples in French with their accents. A translated
 example proves nothing about French.
@@ -28,8 +23,8 @@ example proves nothing about French.
 - Any French output: chat replies, guides, reports, syntheses
 - The user writes in French, so the reply is French
 
-**Not for:** skills, handoffs, commit messages, PR bodies, code and code
-comments - English by repo rule.
+**Not for:** skills, handoffs, commit messages, PR bodies, code, code
+comments, README files and manifests - English by repo rule.
 
 ## Concision Has A Floor
 
@@ -88,12 +83,19 @@ came from.
 
 ### 5. Lexical ambiguity
 
-The first reading is not the intended one, or the turn of phrase was invented.
+The first reading is not the intended one, the turn of phrase was invented, or a
+precise/established term was swapped for one that only sounds more idiomatic and
+the meaning drifted in the process. In a technical, legal or administrative
+register, native means the specialist's exact term, not a looser paraphrase -
+check that a swap means exactly the same thing before trusting that it reads
+more fluently. This is different from defect 3: there, the term is undefined for
+the reader; here, the term was correct and got traded away.
 
 | Instead of | Write |
 |---|---|
 | « Les gens se contredisent en réunion » | « Les gens osent contredire les autres en réunion » |
 | « pèse lourd chez l'autre » | « prend beaucoup d'importance pour la personne qui la reçoit » |
+| « une contestation orale ne vaut plus rien » | « une contestation orale ne vaut rien » |
 
 ## Review Pass - Markdown Deliverables Only
 
@@ -107,10 +109,9 @@ chat replies: applying the rules while writing is enough there.
    defect, is how new defects get introduced.
 3. Rewrite each hit, then re-check the rewrite against all five. Removing a
    calque by compressing further moves the defect into category 2, it does not
-   remove it; trading a precise term for one that merely sounds more idiomatic
-   moves it into category 5 the moment the meaning drifts.
-4. Last check on the whole text: every jargon term - legal, technical or
-   management - defined at first use, every sentence has a subject and a verb.
+   remove it.
+4. Last check on the whole text: every jargon term defined at first use, every
+   sentence has a subject and a verb.
 
 ## Red Flags - Stop And Rewrite
 
@@ -118,10 +119,7 @@ chat replies: applying the rules while writing is enough there.
 - An adjective doing the work of a noun (« Fréquent et petit vaut mieux... »)
 - A colon or a dash standing in for the verb
 - An abstract noun carrying the sentence: valeur, impact, niveau, dimension
-- A jargon term used now, explained later, or never - legal and technical terms
-  of art included, not only abstract nouns
-- A rewrite picked because it sounds more natural, without checking it still
-  means exactly the same thing
+- A jargon term used now, explained later, or never
 - A sentence you rewrote though it hit none of the five defects
 - An imperative form you did not actually check
 - A turn of phrase you cannot recall ever hearing
@@ -137,3 +135,20 @@ chat replies: applying the rules while writing is enough there.
   meaning in the process - « ne vaut plus rien » is not « ne vaut rien »
 - Rewriting a sentence that had no defect, for style alone
 - Running the review pass on a chat reply, or skipping it on a deliverable
+
+## Real-World Impact
+
+Blind-scored defects per 1000 words, no-skill vs skill, across three
+independent topics and registers (informal management coaching, formal
+technical craft, formal legal/administrative):
+
+| Topic | No skill | v1.0.0 | v1.1.0 |
+|---|---|---|---|
+| Management | 14.5 | 4.6 | 4.41 |
+| Pastry technique | 7.26 | 3.64 | 3.14 |
+| Tenant rights | 3.87 | 11.3 (regression) | 2.29 |
+
+v1.0.0 helped informal and technical registers but made formal legal French
+worse - it missed jargon outside management vocabulary and let idiomatic
+swaps drift meaning. v1.1.0 (defect 5's precision-over-idiom guardrail,
+generalized defect 3) fixed the regression without hurting the other two.
