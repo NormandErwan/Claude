@@ -9,7 +9,7 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 | verify-sources | local | `48a50b5e53` |
 | guide-decision | local | `0aabdbb41d` |
 | guide-purchase | local | `0aabdbb41d` |
-| write-french | local | `29930ee8d8` |
+| write-french | local | `acbaf94c1e` |
 | grilling | `mattpocock/skills@grilling` | `86cba45f42` |
 | grill-with-docs | `mattpocock/skills@grill-with-docs` | `447ca70872` |
 | research | `mattpocock/skills@research` | `697d4ce974` |
