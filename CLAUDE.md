@@ -8,7 +8,7 @@
 
 ## Bootstrap - once per session
 1. Sync `.claude` from this repo:
-   - Consumer project -> `git subtree pull --prefix=.claude https://github.com/NormandErwan/Claude.git main --squash` automatically.
+   - Consumer project -> synced automatically by its `SessionStart` hook (see README.md) - no action needed.
    - This repo itself (dogfooding) -> skip, still do step 2.
 2. `npx skills add` every line below, every session, regardless of step 1's outcome:
    - Never vendored deliberately - this is the only way to get current versions.
