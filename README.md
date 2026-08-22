@@ -69,4 +69,10 @@ manual sync.
       If the file cannot be read, stop and report the error before proceeding.
    ```
 
+That's the whole consumer-side `.claude/`: hook wiring, `.gitignore`, and the
+project's own root `CLAUDE.md`. Do not also copy this repo's own
+`README.md`, `CLAUDE.web.md`, or `SKILLS.web.md` into it - they stay
+exclusive to this repo (the `.web` ones are for manual upload to claude.ai
+projects).
+
 See `NormandErwan/Accounts` for a working example.
