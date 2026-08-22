@@ -1,6 +1,8 @@
 *
 !*.md
 !skills/
+!templates/
+!templates/**
 # Allowlist each native skill dir explicitly (not a blanket !skills/**).
 # When consumed as a .claude subtree, a blanket unignore here would also
 # unignore session-installed skill caches the consumer repo means to ignore.
