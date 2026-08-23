@@ -21,8 +21,7 @@
    - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
    - Unfamiliar domain needing primary sources -> also `research`.
 5. End of turn:
-   - Announce estimated tokens used.
-   - Offer to draft the next-session prompt (use `handoff` to structure it) when continuing elsewhere is better, proactively at >=100k tokens (non-blocking, continue if ignored).
+   - Offer a `handoff` once per trigger, non-blocking: user signals a pause or a move elsewhere; topic no longer matches the accumulated history (suggest a fresh session).
 
 ## Error handling
 
@@ -55,12 +54,16 @@ Immediately before ending a turn where >=1 fired:
 >=1 fired -> emit before ending turn:
 ```
 Retrospective [events]:
-- [Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <why, one sentence> - <minimal change>
+- <class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class>
 (max 3)
 ```
+- Name the class, then the change: a rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
+- Factor first: extend, generalize or sharpen an existing rule. A new rule needs one clause saying why none covers the class.
+- Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
 - Never apply without explicit approval.
 - Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
 - 0 fired -> skip silently.
 
 ## Web-only
+- Retrospective entry -> no repo here: put it in the reply and in the handoff, for a Claude Code session to file in `RETROSPECTIVE.md`.
 - Temporary chat (claude.ai flags it as unsaved) + substantial work in progress -> regenerate a downloadable handoff (`handoff`, default markdown output) at the end of each qualifying turn - nothing lost if the chat disappears without warning.
