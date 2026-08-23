@@ -57,7 +57,7 @@ Retrospective [events]:
 - <class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class>
 (max 3)
 ```
-- Name the class, then the change: a rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
+- A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
 - Factor first: extend, generalize or sharpen an existing rule. A new rule needs one clause saying why none covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
 - Never apply without explicit approval.

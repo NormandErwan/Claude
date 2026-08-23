@@ -1,6 +1,6 @@
 # RETROSPECTIVE.md
 
-Ledger of Retrospective entries (`CLAUDE.md` `Retrospective`). One row per entry, approved or not - the discards are what `find-cause` reads next time. Over ~50 entries -> compact: entries whose rule is applied and still stands collapse to one line per class; rejected and pending ones stay verbatim.
+Ledger of Retrospective entries. One row per entry, approved or not. `CLAUDE.md` `Retrospective` holds the rules for filing and compacting it.
 
 | Date | Events | Class | Proposed change | Decision | Landed in |
 |---|---|---|---|---|---|
