@@ -15,8 +15,8 @@
 !skills/guide-decision/**
 !skills/guide-purchase/
 !skills/guide-purchase/**
-!skills/single-source-of-truth/
-!skills/single-source-of-truth/**
+!skills/prevent-drift/
+!skills/prevent-drift/**
 !skills/token-codebase-exploration/
 !skills/token-codebase-exploration/**
 !skills/token-dotnet/
