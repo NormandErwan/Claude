@@ -10,6 +10,7 @@
 1. Sync `.claude` from this repo:
    - Consumer project -> synced automatically by its `SessionStart` hook (see README.md) - no action needed.
    - This repo itself (dogfooding) -> skip, still do step 2.
+   - Consumer project's root `CLAUDE.md` wins over the synced `.claude/CLAUDE.md` wherever the two diverge - it carries that repo's own derogations.
 2. `npx skills add` every line below, every session, regardless of step 1's outcome:
    - Never vendored deliberately - this is the only way to get current versions.
    - Leave dotnet-skills and agent-skills uninstalled for now (see Every turn 1, 5).
