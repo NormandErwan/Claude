@@ -73,7 +73,6 @@
 ## Agents
 - Delegate to a subagent when the output is verbose and only the conclusion matters upstream - test runs, log sweeps, doc fetching. Simple task -> `model: haiku`.
 - Don't delegate work that needs context this session already holds: the subagent starts cold and re-derives it. Session forbids unasked spawns -> ask first.
-- Agent team (off by default): ~7x tokens in plan mode, one context window per teammate. Only when the wall-clock saved beats that - Sonnet teammates, small team, focused spawn prompt, shut them down when done.
 
 ## Error handling
 
