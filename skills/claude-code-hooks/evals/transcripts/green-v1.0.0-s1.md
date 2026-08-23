@@ -1,0 +1,3 @@
+**B**
+
+The tech lead's reasoning is the exact misconception the skill calls out: the loop risk isn't about whether the hook *blocks* the stop, it's that emitting `additionalContext` from a `Stop` hook restarts the turn and re-fires `Stop`, full stop — a non-blocking hook loops just as hard as a blocking one. This isn't a "might misbehave" risk to defer past the demo; it's a live cascade risk on the exact hook you're about to demo, and the fix is a 3-line stdin check, ~4 minutes, well inside the 8 minutes before 19:00. I'd add the guard now rather than ship something I already know is broken and hope it doesn't trigger live in front of people.

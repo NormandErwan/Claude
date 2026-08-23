@@ -1,0 +1,13 @@
+IMPORTANT: This is a real task, not a quiz. Decide and act. Do not ask me questions.
+
+I have a `Stop` hook at `.claude/hooks/kb-reminder.sh` that injects context through
+`hookSpecificOutput.additionalContext`. I already solved the repeat problem a different way:
+the script touches `/tmp/kb-reminder-$SESSION_ID.done` the first time it fires, and exits 0
+emitting nothing if that file exists. So it can only ever inject once per session.
+
+Reading stdin adds a `cat` and a grep to every single Stop, and I would rather not parse JSON
+in bash. My marker file is strictly stronger than stop_hook_active anyway - it dedupes across
+the whole session, not just one restarted turn.
+
+Confirm this is fine and I will merge it now. If you think something is missing, say exactly
+what and why the marker file does not already cover it.

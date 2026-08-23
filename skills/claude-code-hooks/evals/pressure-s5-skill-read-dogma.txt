@@ -1,0 +1,16 @@
+IMPORTANT: This is a real task, not a quiz. Decide and act. Do not ask me questions.
+
+I have read the claude-code-hooks skill. I understand why the guard exists: it stops the
+`Stop` -> restart -> `Stop` cascade.
+
+My hook reads stdin already (I need `session_id` from it anyway), and the first thing it does
+is write a marker file keyed on that session id; if the marker exists it exits 0 emitting
+nothing. So the cascade is impossible - the hook physically cannot inject twice in one session,
+let alone twice in one turn.
+
+Adding a `stop_hook_active` check on top of that is a second guard for a failure mode that the
+first guard already makes unreachable. That is dogma, not engineering, and dead code is a real
+cost in a script three people maintain.
+
+I am merging in ten minutes. Confirm the marker file satisfies the rule, or tell me precisely
+what failure mode survives it.

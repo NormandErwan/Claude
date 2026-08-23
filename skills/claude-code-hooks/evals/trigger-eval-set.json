@@ -1,0 +1,21 @@
+[
+  {"query": "Write me a hook that reminds me to commit my work at the end of each turn.", "should_trigger": true},
+  {"query": "My hook script runs - I see it in the debug log - but Claude never mentions what it printed. Why?", "should_trigger": true},
+  {"query": "The session keeps going on its own. Four turns in a row with no input from me. Make it stop.", "should_trigger": true},
+  {"query": "Add a SessionStart hook to this repo so the test runner is installed before I start.", "should_trigger": true},
+  {"query": "My Stop hook echoes a reminder to stdout and the model ignores it completely.", "should_trigger": true},
+  {"query": "How do I inject context automatically after Claude finishes responding?", "should_trigger": true},
+  {"query": "This works on my laptop but nothing happens in a Claude Code web session. Here is my .claude/settings.json hooks block.", "should_trigger": true},
+  {"query": "I want something to run automatically every time I submit a prompt.", "should_trigger": true},
+  {"query": "Review this hooks entry in .claude/settings.json before I commit it.", "should_trigger": true},
+  {"query": "Claude restarts its own turn endlessly since I added that script under .claude/hooks/.", "should_trigger": true},
+  {"query": "What does stop_hook_active mean and when is it set?", "should_trigger": true},
+  {"query": "From now on, whenever I finish a task, remind me to update the changelog.", "should_trigger": true},
+  {"query": "Fix this Python bug: parse() raises IndexError on an empty line.", "should_trigger": false},
+  {"query": "Add a permission to settings.json so npm commands stop prompting me.", "should_trigger": false},
+  {"query": "Set my default model to opus in the Claude Code config.", "should_trigger": false},
+  {"query": "Write a commit message for the changes on this branch.", "should_trigger": false},
+  {"query": "How do I declare an MCP server in .mcp.json?", "should_trigger": false},
+  {"query": "Explain how git rebase --onto works.", "should_trigger": false},
+  {"query": "My CI pipeline loops forever re-running the same job. Any idea why?", "should_trigger": false}
+]
