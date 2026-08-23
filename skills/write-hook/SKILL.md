@@ -1,5 +1,5 @@
 ---
-name: claude-code-hooks
+name: write-hook
 version: 1.1.0
 description: >-
   Use when Claude Code should do something by itself - at session start (`SessionStart`), on every

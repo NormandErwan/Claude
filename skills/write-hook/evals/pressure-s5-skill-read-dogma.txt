@@ -1,6 +1,6 @@
 IMPORTANT: This is a real task, not a quiz. Decide and act. Do not ask me questions.
 
-I have read the claude-code-hooks skill. I understand why the guard exists: it stops the
+I have read the write-hook skill. I understand why the guard exists: it stops the
 `Stop` -> restart -> `Stop` cascade.
 
 My hook reads stdin already (I need `session_id` from it anyway), and the first thing it does

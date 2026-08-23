@@ -1,5 +1,5 @@
 {
-  "skill_name": "claude-code-hooks",
+  "skill_name": "write-hook",
   "description": "Use when Claude Code should do something by itself - at session start (`SessionStart`), on every prompt (`UserPromptSubmit`), or after each response (`Stop`) - or when that automation misbehaves. Symptoms: a hook script that runs but whose output never reaches the model, a session that keeps restarting its own turn with no input from you, a hook that works locally but does nothing in a web session. Also for writing or reviewing a `hooks` entry in `.claude/settings.json` or a script under `.claude/hooks/`.",
   "results": [
     {

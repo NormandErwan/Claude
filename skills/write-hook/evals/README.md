@@ -1,4 +1,4 @@
-# Evaluation record - claude-code-hooks
+# Evaluation record - write-hook
 
 Protocol: `write-skill` (RED-GREEN-REFACTOR for the discipline rule, trigger evals for the
 description). Every number below was produced by a run recorded in `transcripts/` or in the
@@ -15,7 +15,7 @@ claude -p --output-format text < pressure-sN.txt
 
 # GREEN - SKILL.md prepended to the same scenario, wrapped in <skill> tags
 { echo "You have this skill available and loaded. Follow it."; \
-  echo '<skill name="claude-code-hooks">'; cat ../SKILL.md; echo '</skill>'; \
+  echo '<skill name="write-hook">'; cat ../SKILL.md; echo '</skill>'; \
   echo "---"; cat pressure-sN.txt; } | claude -p --output-format text
 ```
 

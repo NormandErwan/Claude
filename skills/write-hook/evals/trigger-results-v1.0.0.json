@@ -1,5 +1,5 @@
 {
-  "skill_name": "claude-code-hooks",
+  "skill_name": "write-hook",
   "description": "Use when writing, debugging or reviewing a Claude Code hook - a `hooks` entry in `.claude/settings.json`, a script under `.claude/hooks/`, or any \"run something automatically when X happens\" request. Covers which events inject context, how, and the guard a `Stop` hook cannot ship without. Also triggers on an empty-turn cascade, a hook whose output never reaches the model, or a hook that works locally but not in a cloud session.",
   "results": [
     {
