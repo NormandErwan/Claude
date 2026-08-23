@@ -65,8 +65,14 @@
    - Default for normal-sized tasks: skip this, steps 2-4 are enough.
    - Once triggered, agent-skills phases supersede step 4's mattpocock routing for this task.
 6. End of turn:
-   - Announce estimated tokens used.
-   - Offer to draft the next-session prompt (use `handoff` to structure it) when continuing elsewhere is better, proactively at >=100k tokens (non-blocking, continue if ignored).
+   - Stamp the reply with local time (`date`); no clock available -> skip.
+   - Harness exposes a token figure -> report it as `~<n>k tokens this session`, naming it a remaining budget when that is what it is. None exposed -> skip, never estimate.
+   - Offer a `handoff` once per trigger, non-blocking: user signals a pause or a move elsewhere; topic no longer matches the accumulated history (suggest a fresh session).
+   - Gap since the previous stamp over the cache lifetime (1h subscription, 5 min on API/cloud or usage credits) -> say this turn reprocessed the whole history, then offer the handoff above.
+
+## Agents
+- Delegate to a subagent when the output is verbose and only the conclusion matters upstream - test runs, log sweeps, doc fetching. Simple task -> `model: haiku`.
+- Don't delegate work that needs context this session already holds: the subagent starts cold and re-derives it. Session forbids unasked spawns -> ask first.
 
 ## Error handling
 
@@ -96,7 +102,7 @@
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Editing any CLAUDE.md -> `craft-prompt` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
-- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored. `CLAUDE.web.md` may hold extra sections outside this list (e.g. Web-only) - preserve them, never treat as derived from `CLAUDE.md`.
+- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored. `CLAUDE.web.md` may hold extra sections outside this list (e.g. Web-only) - preserve them, never treat as derived from `CLAUDE.md`. Any `CLAUDE.web.md` edit -> tell the user to re-paste it into the claude.ai preferences, kept identical by hand.
 - Editing `CLAUDE.web.md`, or any skill `SKILLS.web.md` lists -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.
 
 ## PR lifecycle
@@ -130,9 +136,14 @@ Immediately before ending a turn where >=1 fired:
 >=1 fired -> emit before ending turn:
 ```
 Retrospective [events]:
-- [Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <why, one sentence> - <minimal change>
+- <class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class>
 (max 3)
 ```
+- A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
+- Factor first: extend, generalize or sharpen an existing rule. A new rule needs one clause saying why none covers the class.
+- Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
+- Log every entry in `RETROSPECTIVE.md`, approved or not - the discards are what `find-cause` reads next time.
+- `RETROSPECTIVE.md` over ~50 entries -> compact: entries whose rule is applied and still stands collapse to one line per class; rejected and pending ones stay verbatim.
 - Never apply without explicit approval.
 - Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
 - 0 fired -> skip silently.
