@@ -7,6 +7,8 @@
 # When consumed as a .claude subtree, a blanket unignore here would also
 # unignore session-installed skill caches the consumer repo means to ignore.
 # Add two lines here for every new skill added under skills/.
+!skills/claude-code-hooks/
+!skills/claude-code-hooks/**
 !skills/craft-prompt/
 !skills/craft-prompt/**
 !skills/find-cause/
