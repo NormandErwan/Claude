@@ -9,18 +9,18 @@
 ## Every turn
 1. Identify the task.
    - Failure/friction recurring after a fix -> `find-cause`.
-   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 4's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
-2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
-   - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
+   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 5's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
+2. Always check, regardless of what step 3 finds:
+   - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
+   - Output is French (chat reply or French markdown deliverable) -> `write-french`.
+3. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
+   - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
-   - Always check regardless of scan:
-     - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
-     - Output is French (chat reply or French markdown deliverable) -> `write-french`.
-3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
-4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before any mutating action, proposed text already English+ASCII per `Code / docs / commits`; read-only skips).
+4. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
+5. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before any mutating action, proposed text already English+ASCII per `Code / docs / commits`; read-only skips).
    - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
    - Unfamiliar domain needing primary sources -> also `research`.
-5. End of turn:
+6. End of turn:
    - Offer a `handoff` once per trigger, non-blocking: user signals a pause or a move elsewhere; topic no longer matches the accumulated history (suggest a fresh session).
 
 ## Error handling
@@ -34,6 +34,7 @@
 ## Code / docs / commits
 - Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English + ASCII. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills; French quoted as an example - keeps its accents, unaccented French is misspelled French. Deliverables written for the user follow the user's language.
 - Editing any CLAUDE.md -> `craft-prompt` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
+- Any edit to a doc/skill's worked examples or chained steps -> before delivery, check each example against the principle it illustrates and that each step's output still satisfies what the next step consumes.
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
 - Editing this file, or any skill `SKILLS.web.md` lists, triggers a `SKILLS.web.md` refresh and update-download proposal - done from a Claude Code session, since this file has no repo access to do it itself.
 

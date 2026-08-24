@@ -13,7 +13,7 @@
    - Consumer project's root `CLAUDE.md` wins over the synced `.claude/CLAUDE.md` wherever the two diverge - it carries that repo's own derogations.
 2. `npx skills add` every line below, every session, regardless of step 1's outcome:
    - Never vendored deliberately - this is the only way to get current versions.
-   - Leave dotnet-skills and agent-skills uninstalled for now (see Every turn 1, 5).
+   - Leave dotnet-skills and agent-skills uninstalled for now (see Every turn 1, 6).
    ```bash
    npx skills add DietrichGebert/ponytail@ponytail-audit
    npx skills add DietrichGebert/ponytail@ponytail-review
@@ -43,29 +43,29 @@
    - Test design with >=3 combinable parameters (matrix, config, API surface) -> `npx skills add omkamal/pypict-claude-skill@pict-test-designer` (if not already loaded this session).
    - User explicitly asks for parallel/sub-agents -> `npx skills add obra/superpowers@dispatching-parallel-agents` and `npx skills add obra/superpowers@subagent-driven-development` (if not already loaded this session).
    - Failure/friction recurring after a fix -> `find-cause`.
-   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 4's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
-2. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
-   - Same rule for any skill invoked this turn from any step (2, 4, or 5) - no silent invocations.
+   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 5's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
+2. Always check, regardless of what step 3 finds:
+   - Any file op or multi-file task -> `token-efficiency`, `token-file-ops`.
+   - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
+   - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
+   - Output is French (chat reply or French markdown deliverable) -> `write-french`.
+3. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
+   - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
-   - Always check regardless of scan:
-     - Any file op or multi-file task -> `token-efficiency`, `token-file-ops`.
-     - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
-     - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
-     - Output is French (chat reply or French markdown deliverable) -> `write-french`.
-3. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
-4. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`; read-only skips).
+4. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
+5. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`; read-only skips).
    - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
    - Domain/data model involved -> also `domain-modeling`.
    - New module/interface design -> also `codebase-design`.
    - Unfamiliar domain needing primary sources -> also `research`.
    - Design question needing a throwaway spike -> also `prototype`.
-5. Large-scope work (new subsystem, multi-session, or user asks for the full process):
+6. Large-scope work (new subsystem, multi-session, or user asks for the full process):
    - User names a specific skill/methodology (e.g. write-skill) -> follow its own process directly, skip phase routing below.
    - `npx skills add addyosmani/agent-skills` (whole repo, if not already loaded this session).
    - Follow `using-agent-skills` to route by phase: Define (`interview-me`/`idea-refine`/`spec-driven-development`) -> Plan (`planning-and-task-breakdown`) -> Build (`incremental-implementation`/`test-driven-development`/...) -> Verify (`debugging-and-error-recovery`/`browser-testing-with-devtools`) -> Review (`code-review-and-quality`) -> Ship (`git-workflow-and-versioning`/...).
-   - Default for normal-sized tasks: skip this, steps 2-4 are enough.
-   - Once triggered, agent-skills phases supersede step 4's mattpocock routing for this task.
-6. End of turn:
+   - Default for normal-sized tasks: skip this, steps 3-5 are enough.
+   - Once triggered, agent-skills phases supersede step 5's mattpocock routing for this task.
+7. End of turn:
    - Stamp the reply with local time (`date`); no clock available -> skip.
    - Harness exposes a token figure -> report it as `~<n>k tokens this session`, naming it a remaining budget when that is what it is. None exposed -> skip, never estimate.
    - Offer a `handoff` once per trigger, non-blocking: user signals a pause or a move elsewhere; topic no longer matches the accumulated history (suggest a fresh session).
@@ -102,6 +102,7 @@
 - Any technical/code doc (README, manifests, comments, PR/commit bodies) -> concise first pass, not a tightening pass after: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Editing any CLAUDE.md -> `craft-prompt` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
+- Any edit to a doc/skill's worked examples or chained steps -> before delivery, check each example against the principle it illustrates and that each step's output still satisfies what the next step consumes.
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
 - Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored. `CLAUDE.web.md` may hold extra sections outside this list (e.g. Web-only) - preserve them, never treat as derived from `CLAUDE.md`. Any `CLAUDE.web.md` edit -> tell the user to re-paste it into the claude.ai preferences, kept identical by hand.
 - Editing `CLAUDE.web.md`, or any skill `SKILLS.web.md` lists -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.

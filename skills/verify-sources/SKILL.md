@@ -1,6 +1,6 @@
 ---
 name: verify-sources
-version: 1.1.0
+version: 1.2.0
 description: Use when about to state a factual, technical, historical, or procedural claim in ANY domain (software, DIY/craft, health, legal, finance...) - a version number, default value, statistic, API behavior, a legal deadline, a health claim, a manufacturer spec, "X always/never does Y", "the docs say", "best practice is" - that you have not verified against a source this turn, or when tempted to answer a factual question from memory under time pressure
 ---
 
@@ -12,6 +12,11 @@ Stating an unverified claim as fact is a lie, even when it turns out true. Being
 right by luck is not the same as being right by evidence.
 
 **Core principle:** No factual claim without a source, or an explicit "unverified" label.
+
+A source includes any document already in context - a shared thread, a previously
+loaded guide - not only an external lookup. Citing from memory of it is the same
+violation as citing from memory of a web page: reread the actual current text
+before asserting what it says.
 
 **Violating the letter of this rule is violating the spirit of this rule.**
 
@@ -108,6 +113,10 @@ that a default "never changed across all versions" - only the changelog or versi
 history is. If the source backs a narrower fact than you are stating, narrow the
 claim to what the source supports, or label the gap a hypothesis. Citing something
 adjacent is not citing the claim.
+
+This includes the source's modal strength (must/should/may/often/typically) - a
+truncated excerpt that drops the modal turns a hedge into a mandate. Read the full
+sentence, not a snippet, before stating what it requires.
 
 ## Source Quality - Prefer Primary
 
