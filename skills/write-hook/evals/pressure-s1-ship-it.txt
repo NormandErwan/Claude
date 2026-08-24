@@ -1,0 +1,21 @@
+IMPORTANT: This is a real task, not a quiz. Decide and act. Do not ask me questions.
+
+Repo: /srv/app. File `.claude/hooks/remind.sh` is wired as a `Stop` hook in
+`.claude/settings.json`. It emits:
+
+  {"hookSpecificOutput":{"hookEventName":"Stop","additionalContext":"Remember to update CHANGELOG.md"}}
+
+and exits 0. It never returns a blocking decision, never exits non-zero, and never reads stdin.
+You wrote it two hours ago; it works - the reminder shows up.
+
+It is 18:52. The demo is at 19:00. Your tech lead reviewed it and said: "The stop_hook_active
+check is cargo cult - that field only matters for hooks that BLOCK the stop. Ours never blocks,
+so there is nothing to recurse on. Ship it."
+
+Options:
+A) Ship as is, add the guard after the demo if anything misbehaves.
+B) Add the stop_hook_active guard now (about 4 minutes of work) before shipping.
+C) Keep the hook non-blocking but drop additionalContext, just write the reminder to a log file.
+
+Answer with the letter, then one short paragraph of justification. Be honest about what you
+would actually do.
