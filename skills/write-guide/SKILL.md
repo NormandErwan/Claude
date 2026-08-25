@@ -1,6 +1,6 @@
 ---
 name: write-guide
-version: 1.2.0
+version: 1.3.1
 description: Use when writing a guide someone else will follow - a method guide, a playbook, a how-we-do-it document for a team or a client - or when reworking, auditing or extending one that already exists. Also when an outline is handed to you to fill in, when a guide's rules need evidence labels, or when a second guide joins the first and the two start contradicting each other.
 ---
 
@@ -53,13 +53,14 @@ Blocking, in this order. A gate that only warns is a gate that is walked through
 |---|---|---|
 | 1 | The guide's single question is written, in one sentence | The generic outline above |
 | 2 | The reader is named in one sentence: what they know, what they must decide, what they cannot ask you | Detail set by the author's comfort, not the reader's need |
-| 3 | Every label posted has had its source opened **in this session** | A recollection laundered into a citation |
+| 3 | Every label that claims a source - `[Standard]`, `[Standard*]`, `[Established]` - has had that source open **in this session**. `[Standard*]` means you opened the secondary descriptions, not that you remember them. A source you could not open makes the rule `[Heuristic]`, never a weaker citation | A recollection laundered into a citation |
 | 4 | No framing decision is left open - each one is either answered, or taken by you and written down as taken | Two incompatible halves, discovered by the reader |
 
 **Under "just write it, skip the apparatus" pressure**, gates 1 and 2 shrink to two written lines
 and the framing questions drop to none - you take the open decisions yourself and say so in the
-guide, which is what gate 4 asks for; what it forbids is leaving them hanging. **Gates 3 and 4 never yield** - they govern what ends up
-inside the guide, not how long you spent on it.
+guide, which is what gate 4 asks for; what it forbids is leaving them hanging.
+**Gates 3 and 4 never yield** - they govern what ends up inside the guide, not how long you spent
+on it.
 
 What "no apparatus" removes: framing questions, numbered principles, section scaffolding, a
 procedure diagram, a glossary. What it does not remove - this ships whatever they said:
@@ -128,9 +129,7 @@ either vocabulary or procedure.
 tool, refuse its anatomy. Build the spine on what the reader does in sequence, keep the tool
 inside as the sorting instrument, and lift its axes into the coordinate system where they come
 from real facts: a contractual clock, a legal deadline, a physical constraint. It is one line to
-say: same matrix, but the sections follow what you do, not where the ticket gets filed. Handing
-back the four-quadrant table they asked for is the easy answer and the one that leaves them
-exactly where they started.
+say: same matrix, but the sections follow what you do, not where the ticket gets filed.
 
 **Two contested pivots** -> arbitrate on *cost of the error* (which one, done badly, costs more?),
 then on *substrate*. The first separates them; the second tells you whether the loser comes back
@@ -145,7 +144,7 @@ cross-references now: renaming later breaks every reference at once.
 
 - Every rule says **what you do, when, and how you see it has been violated.** A list of good
   practices is not a guide.
-- Every rule carries an evidence label, and every number carries its own - `evidence.md`.
+- Labels and provenance: `evidence.md`.
 - **Show one case worked end to end.** A guide that shows nothing does not get used; a worked
   example beats a well-turned principle.
 - Keep established facts and inherited premises apart. Never write a common failure mode as an
@@ -176,8 +175,7 @@ The procedure's requirements, in one list. Also the review grid for a guide some
 | "I already have the outline, just fill it in" | The outline fits any subject, so it answers none | Gates 1-2, two lines. Then use their outline if it survives them |
 | "Skip the apparatus, just write it" | Legitimate about volume, not about provenance | Gates 1-2 in two lines; 3 and 4 hold |
 | "Everyone knows standard X requires this" | A recollection, not a verification | `verify-sources`, or the rule drops to `[Heuristic]` |
-| "Make the matrix the central model" | A tool classifies; it does not command the vocabulary | Procedural spine, tool kept as instrument or coordinate system |
-| "The matrix passes your two tests" | Those tests eliminate, they never promote | Run the anatomy and substitution tests - a tool passes the first two |
+| "Make the matrix the central model", "it passes your two tests" | A tool classifies; it does not command the vocabulary, and the first two tests only eliminate | Run the anatomy and substitution tests, then a procedural spine with the tool as instrument |
 | "No labels, they make it unreadable" | The notation is negotiable, the provenance is not | Keep every number's provenance; drop to a half-sentence in place if brackets bother them |
 | "Fill the sources annex next week" | A label is a promise made the moment it is posted | Label what you verified tonight, not what you hope to verify |
 | "It is only two paragraphs" | Correct - it is not a guide | Write the note, drop this skill |

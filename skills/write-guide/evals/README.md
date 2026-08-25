@@ -46,13 +46,16 @@ Single run per cell - read each as one observation, not a rate.
 
 ## Results
 
-| Scenario | RED (no skill) | GREEN v1.0.0 | GREEN v1.1.0 | GREEN v1.2.0 |
-|---|---|---|---|---|
-| s1 outline ready | **FAIL** - wrote on the generic outline, no question, no reader | PASS | PASS | PASS |
-| s2 matrix as pivot | **FAIL** - chose A, one section per quadrant | **FAIL** - chose A, "both tests pass" | PASS - chose B | PASS - chose B |
-| s3 standard label | PASS - refused the upgrade unprompted | PASS | PASS | PASS |
-| s4 short note (control) | PASS - wrote the note | PASS | PASS | PASS |
-| s5 no apparatus | **FAIL** - no question, no reader, unsourced numbers | **FAIL** - obeyed the refusal entirely | partial - two lines shipped, labels became prose | PASS |
+| Scenario | RED (no skill) | v1.0.0 | v1.1.0 | v1.2.0 | v1.3.0 | v1.3.1 |
+|---|---|---|---|---|---|---|
+| s1 outline ready | **FAIL** - wrote on the generic outline, no question, no reader | PASS | PASS | PASS | - | - |
+| s2 matrix as pivot | **FAIL** - chose A, one section per quadrant | **FAIL** - chose A, "both tests pass" | PASS - chose B | PASS - chose B | - | - |
+| s3 standard label | PASS - refused the upgrade unprompted | PASS | PASS | PASS | **FAIL** - cited the clause as `[Standard*]` from memory | PASS - chose C, refused `[Standard*]` too |
+| s4 short note (control) | PASS - wrote the note | PASS | PASS | PASS | - | - |
+| s5 no apparatus | **FAIL** - no question, no reader, unsourced numbers | **FAIL** - obeyed the refusal entirely | partial - two lines shipped, labels became prose | PASS | PASS | - |
+
+A dash means the cell was not re-run: v1.3.0 and v1.3.1 touch gate 3 and the evidence rules only,
+so s1, s2 and s4 stand on their v1.2.0 runs.
 
 **s3 gives no signal.** The baseline already refuses to launder a recollection into a citation.
 The scenario is kept because a future revision could break that behaviour, not because the skill
@@ -71,6 +74,23 @@ candidates, a tool passes both and is still a tool. v1.1.0 says so and adds the 
 actually discriminate - **anatomy** (are the sections the tool's own parts?) and **substitution**
 (swap the tool for its neighbour: does the guide have to be rewritten?), plus what to do when the
 requester asks for the tool by name. v1.1.0 s2 then ran the anatomy test and chose B.
+
+**v1.2.0 -> v1.3.0, from a review pass, and it broke s3.** The review found gate 3 unusable as
+written - "every label posted has had its source opened" cannot apply to `[Heuristic]` or
+`[Composition]`, which claim no source. The fix enumerated the three source-claiming labels, and
+the enumeration handed the model a weaker tier to fall back on. s3 v1.3.0, with nothing open at
+all:
+
+> Periodic re-evaluation of suppliers is required `[Standard*]` (ISO 9001:2015 clause 8.4 [...] not yet
+> checked against the primary text, only converging secondary descriptions)
+
+No secondary description was opened either. The label was posted from memory with a caveat
+attached - the exact failure the gate exists to stop, one tier down.
+
+**v1.3.0 -> v1.3.1.** Gate 3 and `evidence.md` now say it: `[Standard*]` means the secondary
+descriptions were open in front of you, and a source you cannot reach makes the rule
+`[Heuristic]`, never a weaker citation. s3 v1.3.1 chose C and named the reason - neither primary
+nor secondary open.
 
 **v1.1.0 -> v1.2.0, from GREEN s5.** v1.1.0 got the two mandatory lines shipped under refusal,
 but the numbers came back carrying prose provenance instead of labels:

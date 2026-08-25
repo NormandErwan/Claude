@@ -21,13 +21,23 @@ under the same `[Standard]` without contradiction. Read the label and the verb t
 session. A source you could not reach drops the rule to `[Heuristic]`, or the rule goes.
 `verify-sources` owns how to check.
 
+**`[Standard*]` is not the fallback for an unreachable source.** It says the secondary
+descriptions were read and converge - so they too have to be open in front of you. A standard you
+cannot reach tonight does not become `[Standard*]`; the rule becomes `[Heuristic]` and you say
+which clause you intend to check. Downgrading the tier instead of the claim is how an unverified
+citation ships wearing an asterisk.
+
 **A principle never vouches for a number it does not contain.** A rule derived from a principle
 inherits its label and says so: `<- P4`. When the derivation adds a threshold the principle never
 stated, the threshold carries its own label:
 
 ```
-A5  No demonstrable slice for a month is a scoping defect   <- P4, threshold [Heuristic]
+P4  Every deliverable piece carries value someone can see          [Established]
+A8  A demonstrable slice lands at least once a month, minimum      <- P4, threshold [Heuristic]
 ```
+
+The principle is sourced; the month is not. Written without the second label, `A8` reads as
+though the source set the cadence.
 
 Without this, every invented number in the guide quietly borrows the authority of the nearest
 sourced principle. This is the single most common way a guide loses its credibility in review.
