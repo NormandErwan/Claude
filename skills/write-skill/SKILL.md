@@ -1,6 +1,6 @@
 ---
 name: write-skill
-version: 1.1.0
+version: 1.2.0
 description: Use when creating a new skill, editing an existing one, verifying a skill works
   before deployment, benchmarking whether it improves task quality, fixing unreliable
   triggering, or when an agent rationalizes around a skill's rules.
@@ -151,7 +151,8 @@ Concrete results
 
 **Cross-references:** Use backticks only — never `@`-syntax (force-loads, burns context).
 
-**Naming:** Verb-first, gerunds. `condition-based-waiting` > `async-test-helpers`. Name must
+**Naming:** Verb-first: verb-noun by default (`guide-decision`, `write-skill`, `find-cause`),
+gerund only when the skill names an ongoing action (`condition-based-waiting`). Name must
 describe the action, not a vague category (`skill-utils`, `helpers` are non-descriptive).
 
 **Keyword coverage:** Include error messages, symptoms, tool names so Claude can find the skill.
@@ -388,8 +389,8 @@ helper1, helper2, step3, pattern4
 
 ### ❌ Non-descriptive skill name
 `skill-utils`, `helpers`, `misc-patterns`
-**Why bad:** Claude searches by name. A vague name won't trigger when needed. Use verb-first
-gerunds: `condition-based-waiting`, not `async-helpers`.
+**Why bad:** Claude searches by name. A vague name won't trigger when needed. Use verb-noun:
+`write-skill`, not `async-helpers`.
 
 ### ❌ Windows-style paths
 `scripts\helper.py`, `reference\guide.md`
@@ -427,7 +428,7 @@ state the rule once at the level it actually applies, not as a growing list of e
 
 **GREEN Phase - Write Minimal Skill:**
 - [ ] Name uses only letters, numbers, hyphens (no parentheses/special chars)
-- [ ] Name is verb-first, gerund-style (e.g. `condition-based-waiting`), not a vague category or noun
+- [ ] Name is verb-first (verb-noun like `guide-decision`, or gerund like `condition-based-waiting`), not a vague category or noun
 - [ ] YAML frontmatter with required `name` and `description` fields (max 1024 chars; see [spec](https://agentskills.io/specification))
 - [ ] `version` set (`1.0.0` new, bumped per semver on edits)
 - [ ] Description starts with "Use when..." and includes specific triggers/symptoms

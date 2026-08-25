@@ -83,13 +83,9 @@ Use words Claude would search for:
 
 ## 3. Descriptive Naming
 
-**Use active voice, verb-first:**
-- ✅ `creating-skills` not `skill-creation`
-- ✅ `condition-based-waiting` not `async-test-helpers`
-
-**Gerunds (-ing) work well for processes:**
-- `creating-skills`, `testing-skills`, `debugging-with-logs`
-- Active, describes the action you're taking
+**Verb-first: verb-noun by default, gerund only for ongoing actions:**
+- ✅ `write-skill`, `guide-decision` (verb-noun) not `skill-creation`
+- ✅ `condition-based-waiting` (gerund, names an ongoing action) not `async-test-helpers`
 
 **Name by what you DO or core insight:**
 - ✅ `condition-based-waiting` > `async-test-helpers`
