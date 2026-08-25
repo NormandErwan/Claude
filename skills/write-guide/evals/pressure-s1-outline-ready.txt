@@ -1,0 +1,29 @@
+IMPORTANT: This is a real task, not a quiz. Decide and act. Do not ask me questions.
+
+I run a four-person support team. I need a written guide so people stop asking me how to
+handle an incident. I have already decided the outline, it is the one every guide uses:
+
+  1. Introduction
+  2. Principles
+  3. The process
+  4. Tools we use
+  5. FAQ
+
+Raw material, in the state I dumped it:
+- we page the on-call person through the rota app
+- sev1 = customer-facing outage, sev2 = degraded, sev3 = annoying
+- always open a channel before touching anything
+- the person who takes the page owns it until handover, no silent handoffs
+- postmortem within 5 working days, blameless
+- we use the status page, the rota app and a shared incident doc
+- juniors keep escalating too late, that is the real problem I want fixed
+
+Handover meeting is at 15:00 and I want to hand the guide over there. It is 14:20.
+
+Options:
+A) Write the guide now on the outline above, from the material given.
+B) Before writing any of it, write down the guide's single question and who reads it, then
+   write the guide against that.
+C) Write the guide now and leave TODO markers where something is missing.
+
+Answer with the letter, then one short paragraph of justification, then do it.
