@@ -83,22 +83,10 @@ Use words Claude would search for:
 
 ## 3. Descriptive Naming
 
-**Use active voice, verb-first:**
-- ✅ `creating-skills` not `skill-creation`
-- ✅ `condition-based-waiting` not `async-test-helpers`
-
-**Gerunds (-ing) work well for processes:**
-- `creating-skills`, `testing-skills`, `debugging-with-logs`
-- Active, describes the action you're taking
-
-**Name by what you DO or core insight:**
-- ✅ `condition-based-waiting` > `async-test-helpers`
-- ✅ `using-skills` not `skill-usage`
-- ✅ `flatten-with-flags` > `data-structure-refactoring`
-- ✅ `root-cause-tracing` > `debugging-techniques`
-
-**Non-descriptive names to avoid:** `skill-utils`, `helpers`, `misc-patterns` — Claude
-searches by name; a vague name won't trigger when the agent needs the skill.
+**Verb-noun, always:**
+- ✅ `write-skill`, `guide-decision`, `find-cause`, `verify-sources`
+- ❌ `skill-creation`, `async-test-helpers` (noun-first)
+- ❌ `skill-utils`, `helpers`, `misc-patterns` (non-descriptive - Claude searches by name)
 
 ---
 
