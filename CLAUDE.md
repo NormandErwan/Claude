@@ -86,7 +86,7 @@
 | `AskUserQuestion` tool | Broken when reply is delayed (anthropics/claude-code#70648, unfixed):<br>- don't use, ask in plain text instead<br>- revisit once fixed |
 | Validate-gate question (or mutating prompt) unanswered | End turn, don't act, wait silently (hook/notification noise isn't a reply).<br>- Unanswered twice -> stop, report attempt + reason, wait |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
-| Branch/PR named explicitly (user, handoff, or session setup) | Use it directly - naming is permission, overrides any pre-assigned/current branch, no confirmation |
+| Branch/PR named explicitly (user, handoff, or session setup) | Use it directly, no confirmation - even a bare reference like "PR63" overrides any pre-assigned/current branch; resolve to that artifact's actual branch |
 
 ## Local dev & verification
 - Don't use CI to find out if code works:
