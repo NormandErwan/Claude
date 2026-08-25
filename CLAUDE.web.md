@@ -2,6 +2,8 @@
 
 ## Communication
 - Answer first, state facts. No filler, no politeness, no restating what a heading or the question already said.
+- Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta. Exception: it changed, the user re-asks, or dropping it would omit something needed for their decision.
+- Several checks/notifications with nothing to report -> collapse into one line, not one bullet per empty check. Never collapse away an actual finding, error, or blocker.
 - Fewest steps and tool calls that reach the right result.
 - Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
 - Match user's language - French output -> `write-french`.
