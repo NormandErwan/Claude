@@ -1,6 +1,6 @@
 ---
 name: write-skill
-version: 1.2.0
+version: 2.0.0
 description: Use when creating a new skill, editing an existing one, verifying a skill works
   before deployment, benchmarking whether it improves task quality, fixing unreliable
   triggering, or when an agent rationalizes around a skill's rules.
@@ -64,7 +64,7 @@ The entire skill creation process follows RED-GREEN-REFACTOR.
 ## Skill Types
 
 ### Technique
-Concrete method with steps to follow (condition-based-waiting, root-cause-tracing)
+Concrete method with steps to follow (find-cause, verify-sources)
 
 ### Pattern
 Way of thinking about problems (flatten-with-flags, test-invariants)
@@ -151,9 +151,8 @@ Concrete results
 
 **Cross-references:** Use backticks only — never `@`-syntax (force-loads, burns context).
 
-**Naming:** Verb-first: verb-noun by default (`guide-decision`, `write-skill`, `find-cause`),
-gerund only when the skill names an ongoing action (`condition-based-waiting`). Name must
-describe the action, not a vague category (`skill-utils`, `helpers` are non-descriptive).
+**Naming:** Verb-noun, e.g. `write-skill`, `guide-decision`, `find-cause`. Not a vague category
+(`skill-utils`, `helpers`).
 
 **Keyword coverage:** Include error messages, symptoms, tool names so Claude can find the skill.
 
@@ -232,7 +231,7 @@ When: All content fits, no heavy reference needed
 
 ### Skill with Reusable Tool
 ```
-condition-based-waiting/
+retry-with-backoff/
   SKILL.md    # Overview + patterns
   example.ts  # Working helpers to adapt
 ```
@@ -301,7 +300,7 @@ that document.
 
 ### Technique Skills (how-to guides)
 
-**Examples:** condition-based-waiting, root-cause-tracing, defensive-programming
+**Examples:** find-cause, verify-sources, prevent-drift
 
 **Test with:**
 - Application scenarios: Can they apply the technique correctly?
@@ -389,8 +388,7 @@ helper1, helper2, step3, pattern4
 
 ### ❌ Non-descriptive skill name
 `skill-utils`, `helpers`, `misc-patterns`
-**Why bad:** Claude searches by name. A vague name won't trigger when needed. Use verb-noun:
-`write-skill`, not `async-helpers`.
+**Why bad:** Claude searches by name - vague names don't trigger. Use verb-noun (see Naming above).
 
 ### ❌ Windows-style paths
 `scripts\helper.py`, `reference\guide.md`
@@ -428,7 +426,7 @@ state the rule once at the level it actually applies, not as a growing list of e
 
 **GREEN Phase - Write Minimal Skill:**
 - [ ] Name uses only letters, numbers, hyphens (no parentheses/special chars)
-- [ ] Name is verb-first (verb-noun like `guide-decision`, or gerund like `condition-based-waiting`), not a vague category or noun
+- [ ] Name is verb-noun (e.g. `write-skill`), not a vague category or noun
 - [ ] YAML frontmatter with required `name` and `description` fields (max 1024 chars; see [spec](https://agentskills.io/specification))
 - [ ] `version` set (`1.0.0` new, bumped per semver on edits)
 - [ ] Description starts with "Use when..." and includes specific triggers/symptoms
