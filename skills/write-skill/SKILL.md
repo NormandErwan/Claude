@@ -427,6 +427,7 @@ state the rule once at the level it actually applies, not as a growing list of e
 
 **GREEN Phase - Write Minimal Skill:**
 - [ ] Name uses only letters, numbers, hyphens (no parentheses/special chars)
+- [ ] Name is verb-first, gerund-style (e.g. `condition-based-waiting`), not a vague category or noun
 - [ ] YAML frontmatter with required `name` and `description` fields (max 1024 chars; see [spec](https://agentskills.io/specification))
 - [ ] `version` set (`1.0.0` new, bumped per semver on edits)
 - [ ] Description starts with "Use when..." and includes specific triggers/symptoms
