@@ -1,5 +1,6 @@
 *
 !*.md
+!LICENSE
 !skills/
 !templates/
 !templates/**
