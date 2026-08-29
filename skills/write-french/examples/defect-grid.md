@@ -35,7 +35,10 @@ The sentence is short because a word carrying the meaning was dropped.
 
 ## 3. Term used before being defined
 
-Jargon the reader must already know to follow the sentence.
+Jargon the reader must already know to follow the sentence. Covers named
+people/frameworks and a document's own coined shorthand too, not just
+abstract nouns - and covers a term glossed only in an appendix or
+bibliography, since the reader meets it in the body first.
 
 | Baseline | Problem |
 |---|---|
@@ -43,6 +46,19 @@ Jargon the reader must already know to follow the sentence.
 | « cherche l'intérêt derrière la position » | negotiation vocabulary, opaque without prior knowledge |
 | « comportement toxique » | covers everything, so names nothing |
 | « le niveau d'autonomie » | defined two lines after its first use |
+| « le squelette ambulant de Cockburn, les tranches de release de Patton » | named methodology authors, never introduced in body text - only in a sources appendix |
+| « Écrire cette frontière avant le premier raffinage » | « frontière » is the document's own metaphor, never cashed out into a concrete action |
+
+## 6. One sentence, several ideas
+
+Every word is fine and the French is correct - two independent claims are
+joined at a conjunction, dash or colon that a period would split cleanly.
+
+| Baseline | Problem |
+|---|---|
+| « Cette frontière n'est pas étanche, et il vaut mieux le dire que le masquer : cinq points du document ont besoin d'un dimensionnement... » | two claims (there is an exception; five points need it) forced into one sentence |
+| « Il ne correspond ni à une couche (...), ni à un composant (...). » | two independent negations sharing one sentence |
+| « Un découpage qui n'a que des tranches n'a pas de périmètre — il ne peut ni se contractualiser, ni se contrôler en couverture » | a claim and its consequence, each complete alone |
 
 ## 4. Wrong or non-existent French
 

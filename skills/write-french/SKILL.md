@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.2.0
+version: 1.3.0
 description: "Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase."
 ---
 
@@ -36,7 +36,7 @@ it is broken: the reader spends more effort rebuilding it than the word would
 have cost. Concision is measured in ideas - one idea per sentence, no idea
 twice - never in characters saved.
 
-## The Five Defects
+## The Six Defects
 
 ### 1. Calque - English phrasing carried over word for word
 
@@ -68,11 +68,22 @@ a competent reader outside this specific field stumble on it? If yes, define it 
 first use, or replace it with what it describes - regardless of which field it
 came from.
 
+Same defect, two more sources the writer misses because they know them cold:
+a named person, framework or methodology dropped without introduction (« Cockburn »,
+« Patton »), and the document's own coined shorthand used as if self-evidently
+precise (« cette frontière », « adossé »). Rule: any named reference or internal
+shorthand used in body prose gets a one-clause gloss at first mention - even when
+an appendix or bibliography elsewhere in the same document explains it in full.
+A guide must be self-contained on a single read-through; a reader does not arrive
+at paragraph three having already read the annex.
+
 | Instead of | Write |
 |---|---|
 | « Tu as maintenant un pouvoir asymétrique » | « Tu évalues les autres, ils ne t'évaluent pas : la même remarque n'a plus le même poids » |
 | « cherche l'intérêt derrière la position » | « cherche ce que chacun veut vraiment obtenir, au-delà de ce qu'il réclame » |
 | « un comportement toxique » | « des remarques qui humilient quelqu'un devant les autres » |
+| « le squelette ambulant de Cockburn, les tranches de release de Patton » | « le squelette ambulant d'Alistair Cockburn - une version minimale de l'application, qui prouve que l'architecture tient - et les tranches de release de Jeff Patton » |
+| « Écrire cette frontière avant le premier raffinage » | « Décider par écrit, avant le premier raffinage, ce qui relève du raffinage interne ou de l'avenant contractuel » |
 
 ### 4. Wrong or non-existent French
 
@@ -97,17 +108,33 @@ the reader; here, the term was correct and got traded away.
 | « pèse lourd chez l'autre » | « prend beaucoup d'importance pour la personne qui la reçoit » |
 | « une contestation orale ne vaut plus rien » | « une contestation orale ne vaut rien » |
 
+### 6. One sentence, several ideas
+
+Every word is fine and the French is correct - the sentence just joins two
+independent claims at a conjunction, dash or colon. Not a calque, not compression:
+splitting it changes nothing but the number of sentences. Test: if the sentence
+contains two clauses each of which could stand alone as a complete, meaningful
+sentence, split it at the joint. This is different from defect 2 - there, a word
+is missing; here, nothing is missing, there is just too much in one sentence.
+
+| Instead of | Write |
+|---|---|
+| « Cette frontière n'est pas étanche, et il vaut mieux le dire que le masquer : cinq points du document ont besoin d'un dimensionnement pour fonctionner — E2.5, §5.2... » | « Cette frontière a une exception, assumée plutôt que cachée. Cinq points du document ont besoin d'un minimum de dimensionnement pour fonctionner : E2.5, §5.2... » |
+| « Il ne correspond ni à une couche (« la base de données »), ni à un composant (« le service d'authentification »). » | « Il ne correspond pas à une couche, comme « la base de données ». Il ne correspond pas non plus à un composant, comme « le service d'authentification ». » |
+| « se lit mieux que « Import d'un fichier conforme », et c'est la forme employée par les patterns du §4 » | « « Importer un fichier conforme » se lit mieux que « Import d'un fichier conforme ». C'est aussi la forme employée par les patterns du §4. » |
+| « Un découpage qui n'a que des tranches n'a pas de périmètre — il ne peut ni se contractualiser, ni se contrôler en couverture » | « Un découpage qui ne contient que des tranches, sans lots, n'a pas de périmètre : il ne peut ni être contractualisé, ni être contrôlé en couverture. » |
+
 ## Review Pass - Markdown Deliverables Only
 
 Required before delivering a French guide, report or synthesis. Not required for
 chat replies: applying the rules while writing is enough there.
 
-1. Read each sentence against the five defects, one category at a time. Mixing
+1. Read each sentence against the six defects, one category at a time. Mixing
    the categories in one pass hides the ones you are not looking for.
 2. Rewrite only the sentences that actually hit a defect. A sentence with none
    stays untouched - polishing a clean sentence for style, not to fix a listed
    defect, is how new defects get introduced.
-3. Rewrite each hit, then re-check the rewrite against all five. Removing a
+3. Rewrite each hit, then re-check the rewrite against all six. Removing a
    calque by compressing further moves the defect into category 2, it does not
    remove it.
 4. Last check on the whole text: every jargon term defined at first use, every
@@ -120,7 +147,10 @@ chat replies: applying the rules while writing is enough there.
 - A colon or a dash standing in for the verb
 - An abstract noun carrying the sentence: valeur, impact, niveau, dimension
 - A jargon term used now, explained later, or never
-- A sentence you rewrote though it hit none of the five defects
+- A named person, framework or internal shorthand term with no gloss at first use,
+  even if an appendix explains it
+- A sentence you could cut in two with a period and lose nothing
+- A sentence you rewrote though it hit none of the six defects
 - An imperative form you did not actually check
 - A turn of phrase you cannot recall ever hearing
 
@@ -131,9 +161,13 @@ chat replies: applying the rules while writing is enough there.
 - Treating « toxique », « asymétrique », « indirect » as explanations
 - Treating jargon as a management-only problem - a legal term of art
   (« contradictoire ») or a trade word (« pousse ») needs the same gloss
+- Treating a bibliography or appendix entry as a definition the body text can
+  skip - the reader meets the term in the body first
 - Swapping a precise term for a more idiomatic-sounding one and drifting the
   meaning in the process - « ne vaut plus rien » is not « ne vaut rien »
 - Rewriting a sentence that had no defect, for style alone
+- Leaving two independent claims joined by « et », « : » or « — » because each
+  half, alone, is grammatically fine - defect 6 is about idea count, not grammar
 - Running the review pass on a chat reply, or skipping it on a deliverable
 
 ## Real-World Impact
@@ -164,3 +198,24 @@ unglossed each time it is tested on a new domain (`pousse` in pastry,
 in a field under-flags its own jargon as jargon even when told to check
 for it. Category 3's rule is sound; catching this needs a second-pass
 reviewer role, not another rewording of the definition.
+
+**v1.3.0 - defects 3 (extended) and 6, held-out topic (formal technical
+methodology, dense cross-referenced corpus, a fifth register/genre):**
+blind A/B, v1.2.0 vs v1.3.0, each version applied by an independent agent
+that saw only its own skill text and the source excerpt (`examples/baseline-guide-lead-tech-fr.md`,
+~1900 words), scored by a third agent blind to which version produced which
+output:
+
+| Defect | v1.2.0 (old) | v1.3.0 (new) |
+|---|---|---|
+| 3 - named refs/internal jargon unglossed | 3.62 | 3.05 |
+| 6 - one sentence, several ideas | 5.68 | 2.04 |
+
+Defect 6 dropped by two thirds - v1.2.0 had no rule against it and left 11
+of the excerpt's fused sentences untouched; v1.3.0 split 7 of them cleanly.
+Defect 3's extended scope (named authors, internal shorthand) moved less -
+both versions still let acronym/framework references (PMI, INVEST) through
+unglossed, so the fix reduces but does not close that gap. Spot-check of
+defects 1, 2, 4, 5 found no regression from the new rules; one anglicism
+(« legacy ») happened to survive in the new-skill run and not the old-skill
+one, sampling noise rather than a rule conflict.
