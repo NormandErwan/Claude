@@ -36,9 +36,10 @@ The sentence is short because a word carrying the meaning was dropped.
 ## 3. Term used before being defined
 
 Jargon the reader must already know to follow the sentence. Covers named
-people/frameworks, bare acronyms/initialisms, and a document's own coined
-shorthand too, not just abstract nouns - and covers a term glossed only in
-an appendix or bibliography, since the reader meets it in the body first.
+people/frameworks, bare acronyms/initialisms, a document's own coined
+shorthand, and a list of several such names dropped in one clause, not just
+abstract nouns - and covers a term glossed only in an appendix or
+bibliography, since the reader meets it in the body first.
 
 | Baseline | Problem |
 |---|---|
@@ -49,6 +50,7 @@ an appendix or bibliography, since the reader meets it in the body first.
 | « le squelette ambulant de Cockburn, les tranches de release de Patton » | named methodology authors, never introduced in body text - only in a sources appendix |
 | « l'arbre de livrables du PMI », « le critère testable d'INVEST » | bare acronyms/initialisms - a reader fluent in the field won't stumble on them, which is exactly why the general "would an outside reader stumble" test misses this case; test instead whether the sentence itself says what the letters stand for |
 | « Écrire cette frontière avant le premier raffinage » | « frontière » is the document's own metaphor, never cashed out into a concrete action |
+| « Nygard, Brown, Fowler, Klein, Cockburn, Fairbanks, Poppendieck » (one enumerating clause) | seven bare names at once; four are cashed out later in the document with a gloss at reuse, three never come back anywhere - the list gives no reader a way to tell which is which |
 
 ## 6. One sentence, several ideas
 

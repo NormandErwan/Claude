@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.3.1
+version: 1.3.2
 description: "Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase."
 ---
 
@@ -62,38 +62,51 @@ A word carrying the meaning was dropped to make the sentence shorter.
 
 ### 3. Term used before being defined
 
-Jargon the reader must already know to follow the sentence - a legal term of art
-or a trade word counts exactly as much as an abstract management noun. Test: would
-a competent reader outside this specific field stumble on it? If yes, define it at
-first use, or replace it with what it describes - regardless of which field it
-came from.
+One test covers every shape this defect takes: strip away what the reader is
+assumed to already know, and check whether the sentence itself still says what a
+reference means and why it is here. If it doesn't, the reference is undefined -
+whether that reference is an abstract management noun, a legal term of art, a
+trade word, a named person or framework, a bare acronym or initialism, the
+document's own coined shorthand, or one name lost inside a list of several. The
+forms differ; the failure is always the same one: the writer already knows what
+it means, so the sentence never bothers to say it.
 
-Same defect, three more sources the writer misses because they know them cold:
-a named person, framework or methodology dropped without introduction (« Cockburn »,
-« Patton »), a bare acronym or initialism standing for an organization, standard or
-named checklist (« PMI », « INVEST »), and the document's own coined shorthand used
-as if self-evidently precise (« cette frontière », « adossé »). The general test
-above ("would a reader outside the field stumble?") does not apply to this trio -
-a reader fluent in the field is exactly who stops noticing these went unglossed.
-Test instead: could you write out in French, right now, what the acronym's letters
-stand for and why the checklist or standard matters here? If the sentence doesn't
-already say that, neither does the reader's memory of it. Rule: any named reference,
-acronym/initialism or internal shorthand used in body prose gets a one-clause gloss
-at first mention - even when an appendix or bibliography elsewhere in the same
-document explains it in full, or the term is a recognized industry standard inside
-the field. A guide must be self-contained on a single read-through; a reader does
-not arrive at paragraph three having already read the annex, and does not carry a
-professional certification just because the writer does.
+The test does not depend on who the reader is - which is exactly why "would a
+reader outside the field stumble?" is the wrong question for a named authority or
+a trade acronym: a reader fluent in the field is precisely who stops noticing
+these went unglossed. Ask the sentence-only question instead: could you write
+out, right now, in French, what this stands for and why it matters here? If the
+sentence doesn't already say that, neither does the reader's memory of it - and
+neither does an appendix or bibliography elsewhere in the document, since the
+reader meets the term in the body first, on a single read-through.
+
+One shape needs a different fix, not a different test: several such references
+thrown into one enumerating clause (« s'appuie sur des auteurs identifiés —
+Nygard, Brown, Fowler, Klein, Cockburn, Fairbanks, Poppendieck »). Glossing every
+name inline trades this defect for defect 6 - a wall of parenthetical asides.
+Apply the same test per name instead: is this one's contribution established
+anywhere else in the document? Yes - leave it bare here; that other point is its
+real first use, and the list is only an index of it. Never - it fails the test
+exactly as an unglossed acronym would, so it has no place in the enumerating
+clause: cut it, and point to wherever the source list already lives (an annex, a
+bibliography) instead of pretending it was introduced in body prose.
+
+Rule: any reference used in body prose - named person, framework, acronym,
+internal shorthand, or one name inside a longer list - gets a one-clause gloss at
+first use, even when an appendix explains it in full or the term is a recognized
+industry standard inside the field. A guide must be self-contained on a single
+read-through; a reader does not arrive at paragraph three having already read the
+annex, and does not carry a professional certification just because the writer
+does.
 
 | Instead of | Write |
 |---|---|
 | « Tu as maintenant un pouvoir asymétrique » | « Tu évalues les autres, ils ne t'évaluent pas : la même remarque n'a plus le même poids » |
-| « cherche l'intérêt derrière la position » | « cherche ce que chacun veut vraiment obtenir, au-delà de ce qu'il réclame » |
 | « un comportement toxique » | « des remarques qui humilient quelqu'un devant les autres » |
-| « le squelette ambulant de Cockburn, les tranches de release de Patton » | « le squelette ambulant d'Alistair Cockburn - une version minimale de l'application, qui prouve que l'architecture tient - et les tranches de release de Jeff Patton » |
-| « l'arbre de livrables du PMI » | « l'arbre de livrables du Project Management Institute (PMI), l'organisme qui édicte le référentiel de gestion de projet PMBOK » |
+| « le squelette ambulant de Cockburn, les tranches de release de Patton » | « le squelette ambulant d'Alistair Cockburn - une version minimale de l'application, qui prouve que l'architecture tient - et les tranches de release de Jeff Patton - des regroupements d'éléments assez complets pour être démontrés » |
 | « le critère testable d'INVEST » | « le critère testable d'INVEST - la grille en six critères (Independent, Negotiable, Valuable, Estimable, Small, Testable) qui évalue une user story » |
 | « Écrire cette frontière avant le premier raffinage » | « Décider par écrit, avant le premier raffinage, ce qui relève du raffinage interne ou de l'avenant contractuel » |
+| « Le reste s'appuie sur des auteurs identifiés — Nygard, Brown, Fowler, Klein, Cockburn, Fairbanks, Poppendieck — et sur des compositions assumées » | « Le reste s'appuie sur des auteurs identifiés — Nygard, Brown, Fowler et Fairbanks — et sur des compositions assumées. Ces quatre noms sont cités et glosés plus loin dans le texte. La liste complète des sources est en annexe E. » |
 
 ### 4. Wrong or non-existent French
 
@@ -160,6 +173,8 @@ chat replies: applying the rules while writing is enough there.
 - A named person, framework, bare acronym/initialism or internal shorthand term
   with no gloss at first use, even if an appendix explains it or the acronym is
   well known inside the field
+- A list of several bare names in one clause where some never come back with
+  a gloss anywhere else in the document
 - A sentence you could cut in two with a period and lose nothing
 - A sentence you rewrote though it hit none of the six defects
 - An imperative form you did not actually check
@@ -175,9 +190,11 @@ chat replies: applying the rules while writing is enough there.
 - Treating a bibliography or appendix entry as a definition the body text can
   skip - the reader meets the term in the body first
 - Treating a trade acronym (PMI, INVEST, SRD) as self-explanatory because
-  specialists in the field all recognize it - the general "would an outside
-  reader stumble" test does not apply here; a fluent reader is who stops seeing
-  it as jargon
+  specialists in the field all recognize it - the test is whether the sentence
+  itself says what it stands for, never whether this reader would stumble on it
+- Treating a name in a list as covered because the list around it says "des
+  auteurs" - a category word glosses the list's shape, not any one name's
+  contribution
 - Swapping a precise term for a more idiomatic-sounding one and drifting the
   meaning in the process - « ne vaut plus rien » is not « ne vaut rien »
 - Rewriting a sentence that had no defect, for style alone
@@ -217,9 +234,10 @@ reviewer role, not another rewording of the definition.
 **v1.3.0 - defects 3 (extended) and 6, held-out topic (formal technical
 methodology, dense cross-referenced corpus, a fifth register/genre):**
 blind A/B, v1.2.0 vs v1.3.0, each version applied by an independent agent
-that saw only its own skill text and the source excerpt (`examples/baseline-guide-lead-tech-fr.md`,
-~1900 words), scored by a third agent blind to which version produced which
-output:
+that saw only its own skill text and a ~1900-word excerpt of an external
+French technical methodology guide (not reproduced here - the source
+belongs to another repository, not this skill), scored by a third agent
+blind to which version produced which output:
 
 | Defect | v1.2.0 (old) | v1.3.0 (new) |
 |---|---|---|
@@ -246,8 +264,8 @@ skip them. Fix: named the acronym/initialism case explicitly alongside named
 persons and frameworks, added a dedicated test ("could you write out what
 the letters stand for, right now?") that does not defer to field-familiarity,
 and added PMI/INVEST as worked table examples. Verified by direct inspection
-against the v1.3.0 output rather than a fresh blind rescore: on
-`baseline-guide-lead-tech-fr.md`, PMI and INVEST are the only two named-
+against the v1.3.0 output rather than a fresh blind rescore: on the same
+excerpt used above, PMI and INVEST are the only two named-
 reference instances that differ between the two rule texts (every other
 instance - Cockburn, Patton, a third uncredited name, the document's own
 "adossé" - is governed by wording neither version changed) and both are
@@ -259,11 +277,12 @@ not a fresh third-party score - flagged here rather than presented as
 equivalent-strength evidence to the table above.
 
 **Cross-topic check, v1.2.0 vs v1.3.1, a second formal-methodology document
-(`examples/baseline-guide-cadrage-technique-fr.md`, ~2050 words, same
-author/register as the guide-2 excerpt, different content - technical
-scoping instead of project breakdown):** same manual-count method as above
-(no isolated agents available), cataloguing every fused-sentence and
-named-reference/acronym candidate against each version's literal rule text:
+(~2050-word excerpt, same external corpus and register as the excerpt
+above, different content - technical scoping instead of project
+breakdown; not reproduced here, same reason as above):** same manual-count
+method as above (no isolated agents available), cataloguing every
+fused-sentence and named-reference/acronym candidate against each
+version's literal rule text:
 
 | Defect | v1.2.0 (old) | v1.3.1 (new) | vs. guide-2 result |
 |---|---|---|---|
