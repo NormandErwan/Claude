@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.3.0
+version: 1.3.1
 description: "Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase."
 ---
 
@@ -68,14 +68,22 @@ a competent reader outside this specific field stumble on it? If yes, define it 
 first use, or replace it with what it describes - regardless of which field it
 came from.
 
-Same defect, two more sources the writer misses because they know them cold:
+Same defect, three more sources the writer misses because they know them cold:
 a named person, framework or methodology dropped without introduction (« Cockburn »,
-« Patton »), and the document's own coined shorthand used as if self-evidently
-precise (« cette frontière », « adossé »). Rule: any named reference or internal
-shorthand used in body prose gets a one-clause gloss at first mention - even when
-an appendix or bibliography elsewhere in the same document explains it in full.
-A guide must be self-contained on a single read-through; a reader does not arrive
-at paragraph three having already read the annex.
+« Patton »), a bare acronym or initialism standing for an organization, standard or
+named checklist (« PMI », « INVEST »), and the document's own coined shorthand used
+as if self-evidently precise (« cette frontière », « adossé »). The general test
+above ("would a reader outside the field stumble?") does not apply to this trio -
+a reader fluent in the field is exactly who stops noticing these went unglossed.
+Test instead: could you write out in French, right now, what the acronym's letters
+stand for and why the checklist or standard matters here? If the sentence doesn't
+already say that, neither does the reader's memory of it. Rule: any named reference,
+acronym/initialism or internal shorthand used in body prose gets a one-clause gloss
+at first mention - even when an appendix or bibliography elsewhere in the same
+document explains it in full, or the term is a recognized industry standard inside
+the field. A guide must be self-contained on a single read-through; a reader does
+not arrive at paragraph three having already read the annex, and does not carry a
+professional certification just because the writer does.
 
 | Instead of | Write |
 |---|---|
@@ -83,6 +91,8 @@ at paragraph three having already read the annex.
 | « cherche l'intérêt derrière la position » | « cherche ce que chacun veut vraiment obtenir, au-delà de ce qu'il réclame » |
 | « un comportement toxique » | « des remarques qui humilient quelqu'un devant les autres » |
 | « le squelette ambulant de Cockburn, les tranches de release de Patton » | « le squelette ambulant d'Alistair Cockburn - une version minimale de l'application, qui prouve que l'architecture tient - et les tranches de release de Jeff Patton » |
+| « l'arbre de livrables du PMI » | « l'arbre de livrables du Project Management Institute (PMI), l'organisme qui édicte le référentiel de gestion de projet PMBOK » |
+| « le critère testable d'INVEST » | « le critère testable d'INVEST - la grille en six critères (Independent, Negotiable, Valuable, Estimable, Small, Testable) qui évalue une user story » |
 | « Écrire cette frontière avant le premier raffinage » | « Décider par écrit, avant le premier raffinage, ce qui relève du raffinage interne ou de l'avenant contractuel » |
 
 ### 4. Wrong or non-existent French
@@ -147,8 +157,9 @@ chat replies: applying the rules while writing is enough there.
 - A colon or a dash standing in for the verb
 - An abstract noun carrying the sentence: valeur, impact, niveau, dimension
 - A jargon term used now, explained later, or never
-- A named person, framework or internal shorthand term with no gloss at first use,
-  even if an appendix explains it
+- A named person, framework, bare acronym/initialism or internal shorthand term
+  with no gloss at first use, even if an appendix explains it or the acronym is
+  well known inside the field
 - A sentence you could cut in two with a period and lose nothing
 - A sentence you rewrote though it hit none of the six defects
 - An imperative form you did not actually check
@@ -163,6 +174,10 @@ chat replies: applying the rules while writing is enough there.
   (« contradictoire ») or a trade word (« pousse ») needs the same gloss
 - Treating a bibliography or appendix entry as a definition the body text can
   skip - the reader meets the term in the body first
+- Treating a trade acronym (PMI, INVEST, SRD) as self-explanatory because
+  specialists in the field all recognize it - the general "would an outside
+  reader stumble" test does not apply here; a fluent reader is who stops seeing
+  it as jargon
 - Swapping a precise term for a more idiomatic-sounding one and drifting the
   meaning in the process - « ne vaut plus rien » is not « ne vaut rien »
 - Rewriting a sentence that had no defect, for style alone
@@ -219,3 +234,45 @@ unglossed, so the fix reduces but does not close that gap. Spot-check of
 defects 1, 2, 4, 5 found no regression from the new rules; one anglicism
 (« legacy ») happened to survive in the new-skill run and not the old-skill
 one, sampling noise rather than a rule conflict.
+
+**v1.3.1 - why PMI/INVEST slipped through, and the fix.** A `craft-prompt`
+pass on defect 3's extension found a real wording gap, not executor
+carelessness: both worked examples (Cockburn, Patton) are full person names,
+so nothing primed the acronym/initialism pattern; and the category's general
+test ("would a reader outside the field stumble?") actively argues the wrong
+way for a trade acronym - a reader fluent in project management or agile
+does not stumble on PMI or INVEST, so applying that test literally says
+skip them. Fix: named the acronym/initialism case explicitly alongside named
+persons and frameworks, added a dedicated test ("could you write out what
+the letters stand for, right now?") that does not defer to field-familiarity,
+and added PMI/INVEST as worked table examples. Verified by direct inspection
+against the v1.3.0 output rather than a fresh blind rescore: on
+`baseline-guide-lead-tech-fr.md`, PMI and INVEST are the only two named-
+reference instances that differ between the two rule texts (every other
+instance - Cockburn, Patton, a third uncredited name, the document's own
+"adossé" - is governed by wording neither version changed) and both are
+now explicitly covered by name and by test. Estimated defect 3: ~2.1/1000w,
+down from 3.05 - a further ~30% cut, on top of v1.2.0 -> v1.3.0's ~16%.
+No separate isolated executor/scorer agents were available in this session
+to rerun the full blind A/B, so this number is a traceable manual count,
+not a fresh third-party score - flagged here rather than presented as
+equivalent-strength evidence to the table above.
+
+**Cross-topic check, v1.2.0 vs v1.3.1, a second formal-methodology document
+(`examples/baseline-guide-cadrage-technique-fr.md`, ~2050 words, same
+author/register as the guide-2 excerpt, different content - technical
+scoping instead of project breakdown):** same manual-count method as above
+(no isolated agents available), cataloguing every fused-sentence and
+named-reference/acronym candidate against each version's literal rule text:
+
+| Defect | v1.2.0 (old) | v1.3.1 (new) | vs. guide-2 result |
+|---|---|---|---|
+| 6 - one sentence, several ideas | ~5.35 (11/11 fused sentences untouched) | ~1.46 (3/11 remain) | Confirmed - comparable or better (-73% vs -64%) |
+| 3 - named refs/internal jargon unglossed | high (0/8 named refs glossed - the rule does not exist) | partial (5/8 fixed) | Partially confirmed - the single-name-drop and acronym pattern generalizes, but exposes a new gap: a sentence listing seven bare surnames in one clause (`Nygard, Brown, Fowler, Klein, Cockburn, Fairbanks, Poppendieck`) is a structure neither version's worked examples cover, and three of the seven (Klein, Cockburn, Poppendieck - the ones never mentioned again) stay unglossed under both |
+
+Defect 6 generalizes cleanly to a fresh document - not overfit to the
+guide-2 excerpt. Defect 3 generalizes for the pattern it was built to catch
+(one named reference embedded in a clause, or a bare acronym) but surfaces
+a distinct, not-yet-fixed failure mode: a bare list of several names in one
+enumerating sentence. Left as a known gap rather than patched now - it needs
+its own worked example and wasn't part of this round's ask.
