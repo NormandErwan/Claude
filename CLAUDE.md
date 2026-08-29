@@ -20,6 +20,7 @@
    npx skills add DietrichGebert/ponytail@ponytail-audit
    npx skills add DietrichGebert/ponytail@ponytail-review
    npx skills add anthropics/skills@frontend-design
+   npx skills add homeassistant-ai/skills@home-assistant-best-practices
    npx skills add juliusbrussee/caveman@caveman
    npx skills add juliusbrussee/caveman@caveman-commit
    npx skills add mattpocock/skills@code-review
