@@ -7,7 +7,7 @@
 - Fewest steps and tool calls that reach the right result.
 - Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
 - Match user's language - French output -> `write-french`.
-- Cut a word only if the reader loses nothing by its absence; leave a sentence for rework if the reader would have to reread it, guess a referent, or reconstruct a dropped word. This is the same test `write-french` applies to French - it holds in any language.
+- Cut a word only if the reader loses nothing by its absence; leave a sentence for rework if the reader would have to reread it, guess a referent, or reconstruct a dropped word. One idea per sentence, no idea twice. This is the same test `write-french` applies to French - it holds in any language.
 
 ## Every turn
 1. Identify the task.
