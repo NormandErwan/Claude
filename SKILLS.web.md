@@ -6,7 +6,7 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 |---|---|---|
 | craft-prompt | local | `7aa7d4762a` |
 | find-cause | local | `7aa7d4762a` |
-| verify-sources | local | `48a50b5e53` |
+| verify-sources | local | `5879b06cae` |
 | guide-decision | local | `0aabdbb41d` |
 | guide-purchase | local | `0aabdbb41d` |
 | write-french | local | `34a05c4793` |
@@ -14,10 +14,15 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 | grill-with-docs | `mattpocock/skills@grill-with-docs` | `447ca70872` |
 | research | `mattpocock/skills@research` | `321658273c` |
 | handoff | `mattpocock/skills@handoff` | `d28dfdc39b` |
+| using-agent-skills | `addyosmani/agent-skills@using-agent-skills` | `d2c37ef622` |
 
-Last full pass: 2026-08-23, every row. The GitHub API returns 403 for
-`mattpocock/skills` through the proxy; a public blobless clone works and is
-what that pass used. Moved since: grilling, research.
+Last full pass: 2026-08-30, every row. `mattpocock/skills` moved its skills under
+category directories (`skills/productivity/`, `skills/engineering/`); those four
+rows are unchanged at their new paths. The GitHub API returns 403 for that repo
+through the proxy, so the pass used a public blobless clone. `addyosmani/agent-skills`
+is the provenance of `CLAUDE.web.md`'s `Non-negotiables`, not an uploaded skill.
+
+Moved at that pass: verify-sources, write-french.
 
 2026-08-31: write-french only, triggered by its own edits (v1.4.0 -> v1.4.3),
 not a full pass.

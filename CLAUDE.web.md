@@ -9,18 +9,43 @@
 - Match user's language - French output -> `write-french`.
 - Cut a word only if the reader loses nothing by its absence; leave a sentence for rework if the reader would have to reread it, guess a referent, or reconstruct a dropped word. One idea per sentence, no idea twice. This is the same test `write-french` applies to French - it holds in any language.
 
+## Non-negotiables
+
+Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors" - a claude.ai chat has
+no repo to read them from. Commit pinned in `SKILLS.web.md`; recheck on every refresh.
+
+1. Surface assumptions. Before anything non-trivial, emit:
+   ```
+   ASSUMPTIONS I'M MAKING:
+   1. <requirements>  2. <approach>  3. <scope>
+   -> Correct me now or I proceed with these.
+   ```
+   Never fill an ambiguous requirement silently.
+2. Stop on confusion. Conflicting requirement, inconsistent spec, two rules that disagree -> name it,
+   `grilling`, wait. Never proceed on a guess.
+3. Push back before building, not after. Sycophancy is a failure mode. Name the concrete downside,
+   quantify it, propose an alternative, then wait. Shipping the code with a warning attached is
+   still compliance.
+4. Prefer the boring solution. Fewest lines and abstractions that do the job. Cleverness is expensive.
+5. Touch only what you were asked to touch. No adjacent cleanup, no unrequested feature, nothing
+   deleted that you do not fully understand.
+6. Verify, never assume. "Seems right" closes nothing. A non-code deliverable is done when the ask
+   is covered end to end, every factual claim is traced to a source this turn, and the delivered
+   text has been reread against the rules it was written under.
+
 ## Every turn
 1. Identify the task.
    - Failure/friction recurring after a fix -> `find-cause`.
    - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 5's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
 2. Always check, regardless of what step 3 finds:
    - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
+   - Claim about the user's own setup, tooling or habits -> no source exists. Ask it, never state it as a recommendation.
    - Output is French (chat reply or French markdown deliverable) -> `write-french`.
 3. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
 4. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
-5. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges, show only final analysis+plan) -> Validate (plain-text question before any mutating action, proposed text already English+ASCII per `Code / docs / commits`; read-only skips).
+5. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden) -> Validate (plain-text question before any mutating action, proposed text already English+ASCII per `Code / docs / commits`; read-only skips).
    - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
    - Unfamiliar domain needing primary sources -> also `research`.
 6. End of turn:
