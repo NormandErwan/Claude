@@ -1,12 +1,38 @@
 # Reader-clarity rule - blind-comparison protocol
 
-Not run yet - a future session executes it. Compares `CLAUDE.md`'s
-reader-clarity rule before and after this session's fix
-(RETROSPECTIVE.md 2026-08-30 rows). Follows `write-skill`'s Track 2
-(Blind Comparison) exactly - see
+Run once, see Results below. Compares `CLAUDE.md`'s reader-clarity rule
+before and after this session's fix (RETROSPECTIVE.md 2026-08-30 rows).
+Follows `write-skill`'s Track 2 (Blind Comparison) exactly - see
 `skills/write-skill/evaluating-skills-with-subagents.md`,
 `skills/write-skill/agents/comparator.md`,
 `skills/write-skill/agents/analyzer.md`.
+
+## Results (2026-08-30)
+
+| Eval | Winner | Why |
+|---|---|---|
+| 1 - CDN chat reply (EN) | A (4/4 vs 3/4) | B cut no word, but fused a third claim onto the sentence with an em dash |
+| 2 - deploy.sh rollback README (EN) | B (3/3 vs 2/3) | A's fallback step needed an unstated backup procedure; B stayed self-contained |
+| 3 - slices vs. layers guide (FR) | A (3/3 vs 1/3) | B chained three "alors que" sentences fusing two independent clauses each |
+| 4 - "make it shorter" trap | TIE (3/3 both) | Both versions compressed without dropping any of the 4 source ideas |
+
+Score: 1 win for B, 2 for A, 1 tie - the opposite of this doc's original
+prediction (B expected to win 3 and 4). Two independent analyzer runs
+(evals 1 and 3) converged on the same cause: the rule only tested the
+subtraction side (don't cut a needed word), never the addition side
+(don't fuse a second independent claim via comma/dash/colon) - an
+executor avoided under-cutting by fusing the missing clause in instead.
+Fixed by adding `write-french`'s own phrase, "one idea per sentence, no
+idea twice," to the rule (commit 644cb33).
+
+Separate, narrower finding from the eval-3 analyzer, not fixed here: a
+parenthetical dash interrupting a subject and its verb is a real gap in
+`write-french`'s named rhetorical constructions (only cleft sentence and
+elliptical antithesis are named) - pre-existing in both commits tested,
+unrelated to this rule change.
+
+Process deviation: the "at most 2 concurrent Agent calls" constraint
+below was exceeded twice (3 at once) during this run, without incident.
 
 ## Versions being compared
 
