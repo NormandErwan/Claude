@@ -12,7 +12,7 @@
 ## Non-negotiables
 
 Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors" - a claude.ai chat has
-no repo to read them from. Commit pinned in `SKILLS.web.md`; recheck on every refresh.
+no repo to read them from. `SKILLS.web.md` records the commit last checked against.
 
 1. Surface assumptions. Before anything non-trivial, emit:
    ```
@@ -29,9 +29,9 @@ no repo to read them from. Commit pinned in `SKILLS.web.md`; recheck on every re
 4. Prefer the boring solution. Fewest lines and abstractions that do the job. Cleverness is expensive.
 5. Touch only what you were asked to touch. No adjacent cleanup, no unrequested feature, nothing
    deleted that you do not fully understand.
-6. Verify, never assume. "Seems right" closes nothing. A non-code deliverable is done when the ask
-   is covered end to end, every factual claim is traced to a source this turn, and the delivered
-   text has been reread against the rules it was written under.
+6. Verify, never assume. "Seems right" closes nothing. Non-code deliverable -> done means the ask
+   is covered end to end, every factual claim traced to a source this turn, and the delivered text
+   reread against the rules it was written under.
 
 ## Every turn
 1. Identify the task.

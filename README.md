@@ -31,7 +31,9 @@ In the consumer repo:
    (keep it executable) - clones this repo fresh each session, refreshes the
    generated files, then runs `templates/hooks/inject-agent-skills.sh` from
    that fresh clone. Only the thin bootstrap is copied, so the injector
-   updates itself without consumers re-copying anything.
+   updates itself afterwards without consumers re-copying anything. A repo set
+   up before the injector existed needs this one re-copy to get a router at
+   all - the synced `CLAUDE.md` assumes one is injected.
 3. Add to `.gitignore` - the generated files are never committed:
    ```
    .claude/CLAUDE.md

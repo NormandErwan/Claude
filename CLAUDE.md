@@ -12,7 +12,8 @@
 ## Non-negotiables
 
 Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors" - a claude.ai chat has
-no repo to read them from. Commit pinned in `SKILLS.web.md`; recheck on every refresh.
+no repo to read them from. The hook clones upstream HEAD; `SKILLS.web.md` records the commit last
+checked against.
 
 1. Surface assumptions. Before anything non-trivial, emit:
    ```
@@ -36,7 +37,7 @@ no repo to read them from. Commit pinned in `SKILLS.web.md`; recheck on every re
 ## Bootstrap - once per session
 1. Sync `.claude` from this repo:
    - Consumer project -> synced automatically by its `SessionStart` hook (see README.md) - no action needed.
-   - This repo itself (dogfooding) -> its own `.claude/hooks/session-start.sh` runs; skip the sync, still do step 2.
+   - This repo itself (dogfooding) -> its own `.claude/settings.json` runs the injector directly; skip the sync, still do step 2.
    - Consumer project's root `CLAUDE.md` wins over the synced `.claude/CLAUDE.md` wherever the two diverge - it carries that repo's own derogations.
    - The same hook clones `addyosmani/agent-skills` into `.claude/agent-skills/` and injects `using-agent-skills` at session start - no `npx` line for it (see Every turn 6).
 2. `npx skills add` every line below, every session, regardless of step 1's outcome:
@@ -92,7 +93,7 @@ no repo to read them from. Commit pinned in `SKILLS.web.md`; recheck on every re
 6. Phase routing - the `SessionStart` hook injects `using-agent-skills`; its flowchart is the map, the skills are in `.claude/agent-skills/skills/<name>/SKILL.md`. Read them from disk: they are not in the Skill roster.
    - Enter when any holds: >=3 files to change, a new module/subsystem/public interface, work spanning sessions, a spec or a plan is asked for, or the user names a phase skill. Below those, steps 3-5 are enough.
    - User names a specific skill/methodology (e.g. write-skill) -> follow its own process directly, skip the flowchart.
-   - Local skills win where they genuinely overlap: `grilling`/`grill-with-docs` over `interview-me`; `code-review` + `ponytail-review` over `code-review-and-quality` (see `PR lifecycle`). Everything else the flowchart names, use as-is.
+   - Where a step-5 skill and a flowchart skill cover the same ground, the step-5 one wins - `grilling`/`grill-with-docs` over `interview-me`, `code-review` + `ponytail-review` over `code-review-and-quality` (see `PR lifecycle`). Otherwise they compose, and everything the flowchart names is used as-is.
    - `grilling` stays step 5's gate: it runs before the flowchart, not instead of it.
 7. End of turn:
    - Stamp the reply with local time (`date`); no clock available -> skip.
