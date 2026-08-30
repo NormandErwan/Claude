@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.4.0
+version: 1.4.1
 description: "Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase."
 ---
 
@@ -193,6 +193,13 @@ chat replies: applying the rules while writing is enough there.
    This step exists because defects 1-6 are patterns, and a sentence can be
    hard to parse on one read without matching any of them by the letter -
    grill it anyway; the reader doesn't care which numbered defect it was.
+   Default to plain, direct phrasing: a cleft sentence (« C'est X qui... »),
+   an elliptical antithesis (« X ne fait pas ceci, Y si »), or any other
+   rhetorical construction has to earn its place over the plain rewrite by
+   being clearer - never by being denser or more striking. When a rhetorical
+   sentence and its plain rewrite say the same thing, keep the plain one;
+   dense rhetoric is what makes a writer misjudge their own sentence as
+   elegant in the first place, so it does not get the benefit of the doubt.
 
 ## Red Flags - Stop And Rewrite
 
@@ -207,6 +214,8 @@ chat replies: applying the rules while writing is enough there.
 - A list of several bare names in one clause where some never come back with
   a gloss anywhere else in the document
 - A sentence you could cut in two with a period and lose nothing
+- A cleft sentence, elliptical antithesis, or other rhetorical construction
+  kept over its plain rewrite without the rhetoric being clearer
 - You noticed a sentence was elegant before you noticed whether it was clear
 - A sentence you rewrote though it hit none of the six defects
 - An imperative form you did not actually check
@@ -235,6 +244,9 @@ chat replies: applying the rules while writing is enough there.
 - Treating a sentence's tightness as evidence it is good, instead of testing
   whether a first-time listener would parse it in one pass - cleverness is the
   writer's reward, not the reader's; the grill step exists to catch this
+- Keeping a cleft sentence or elliptical antithesis on a dense rhetorical
+  register because it parses without a defect, instead of defaulting to the
+  plain phrasing - passing the six defects is not a reason to prefer rhetoric
 - Running the review pass on a chat reply, or skipping it on a deliverable
 
 ## Real-World Impact
@@ -345,3 +357,17 @@ proud of, since pride is not on the list of things defects 1-6 check for. Not
 benchmarked with a fresh blind A/B: the fix responds to two specific,
 human-identified misses, not a measured regression, and the next real-guide
 test should confirm whether the grill step catches this class going forward.
+
+**v1.4.1 - defect 6's mechanical test over-detects on dense rhetorical
+register.** A held-out test on a formal, rhetorically dense guide (elliptical
+antitheses, cleft sentences) found the literal defect-6 test - two independent
+clauses joined at a conjunction, dash or colon - flagging clean, deliberate
+constructions alongside genuinely confusing ones; the grill step (step 5) was
+supposed to make that call but had no stated criterion to decide with. Fixed
+by giving the grill step an explicit default: plain, direct phrasing over any
+rhetorical construction (cleft sentence, elliptical antithesis, or other),
+unless the rhetorical version is demonstrably clearer, not merely denser -
+added to step 5, Red Flags and Common Mistakes. Not benchmarked with a blind
+A/B: the fix names a discrimination criterion the grill step lacked, it does
+not change the mechanical defect tests, so the next held-out rhetorical-register
+test should confirm the grill step now converges with a human's judgment call.
