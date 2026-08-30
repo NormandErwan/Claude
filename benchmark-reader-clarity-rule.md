@@ -10,12 +10,17 @@ reader-clarity rule before and after this session's fix
 
 ## Versions being compared
 
-- Version A (before): `git show 5a61ad5:CLAUDE.md` - `## Communication` and
-  `## Code / docs / commits` sections only.
-- Version B (after): `git show 7e5c58f:CLAUDE.md` - same two sections.
+Before running, materialize each version's `## Communication` and
+`## Code / docs / commits` sections into a real file - agents read file
+paths, not shell commands:
 
-Extract just those two sections into each executor's system prompt; the rest
-of `CLAUDE.md` is irrelevant to this eval.
+```bash
+git show 5a61ad5:CLAUDE.md > /tmp/version-a-full.md   # trim to the two sections, save as version-a.md
+git show 7e5c58f:CLAUDE.md > /tmp/version-b-full.md   # same, save as version-b.md
+```
+
+`version-a.md` / `version-b.md` are the executors' system prompt below, and
+`winner_skill_path` / `loser_skill_path` for the analyzer.
 
 ## Eval tasks
 
@@ -78,13 +83,13 @@ likely to trigger Version A's word-count framing.
 Follow `write-skill`'s Track 2 steps
 (`evaluating-skills-with-subagents.md`) as written, with:
 
-- Executors (steps 1-2): system prompt = the Version A or B excerpt
-  above; user turn = the eval's `prompt`.
+- Executors (steps 1-2): system prompt = `version-a.md` or `version-b.md`
+  from above; user turn = the eval's `prompt`.
 - Comparator (step 3): `agents/comparator.md`, `output_a_path` /
   `output_b_path` from the executors, `eval_prompt` / `expectations`
   from `evals.json` above.
 - Analyzer (step 4): `agents/analyzer.md`, `winner_skill_path` /
-  `loser_skill_path` = the two `git show` refs above.
+  `loser_skill_path` = `version-a.md` / `version-b.md` from above.
 
 Same constraints as write-skill's own doc: execution and grading are
 separate Agent calls, at most 2 concurrent (this session's proxy trips
