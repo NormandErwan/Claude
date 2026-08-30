@@ -4,6 +4,12 @@
 !skills/
 !templates/
 !templates/**
+# This repo's own hook (dogfooding). .claude/agent-skills/ is a session
+# clone of addyosmani/agent-skills and stays ignored.
+!.claude/
+!.claude/settings.json
+!.claude/hooks/
+!.claude/hooks/**
 # Allowlist each native skill dir explicitly (not a blanket !skills/**).
 # When consumed as a .claude subtree, a blanket unignore here would also
 # unignore session-installed skill caches the consumer repo means to ignore.
