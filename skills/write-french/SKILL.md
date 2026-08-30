@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.3.2
+version: 1.4.0
 description: "Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase."
 ---
 
@@ -54,11 +54,22 @@ it back; if the English reads better, the French is a calque.
 
 A word carrying the meaning was dropped to make the sentence shorter.
 
+The excuse changes, the defect doesn't. A writer who prizes saying a lot in a
+few words will drop a verb or a referent on the second half of a sentence and
+call the result elegant - « X ne fait pas ceci, Y si » (Y does, but the verb
+that says so is never written again). It isn't elegant: a reader has to
+silently supply whatever was left out, on the writer's behalf, before the
+sentence closes. Test: say the sentence once, aloud, as if to someone hearing
+it for the first time. If a word is missing before they'd understand it, put
+the word back - a shorter sentence that costs the reader a reconstruction is
+not concise, per the concision floor above.
+
 | Instead of | Write |
 |---|---|
 | « Ta valeur devient indirecte » | « Ce que tu apportes passe désormais par le travail des autres » |
 | « jamais annulé - déplacé au pire » | « Ne l'annule jamais : au pire, déplace-le » |
 | « Réversible et peu coûteuse : tranche vite, seul » | « Quand la décision est réversible et peu coûteuse, tranche vite et seul » |
+| « La procédure ne change pas, son destinataire si » | « La procédure reste la même. Seul le destinataire de ce qu'elle produit change. » |
 
 ### 3. Term used before being defined
 
@@ -140,12 +151,21 @@ contains two clauses each of which could stand alone as a complete, meaningful
 sentence, split it at the joint. This is different from defect 2 - there, a word
 is missing; here, nothing is missing, there is just too much in one sentence.
 
+Three or more parallel claims chained by semicolons are the same defect at a
+larger scale - and splitting them into bare, unconnected sentences loses the
+one thing that justified grouping them: that they stand as independent
+evidence for the same point. Fix by announcing the group in a lead sentence,
+then giving each claim its own sentence. A semicolon rarely earns its place in
+French prose; when several claims need to be held together, a colon that
+introduces them does the job the semicolons were being asked to do.
+
 | Instead of | Write |
 |---|---|
 | « Cette frontière n'est pas étanche, et il vaut mieux le dire que le masquer : cinq points du document ont besoin d'un dimensionnement pour fonctionner — E2.5, §5.2... » | « Cette frontière a une exception, assumée plutôt que cachée. Cinq points du document ont besoin d'un minimum de dimensionnement pour fonctionner : E2.5, §5.2... » |
 | « Il ne correspond ni à une couche (« la base de données »), ni à un composant (« le service d'authentification »). » | « Il ne correspond pas à une couche, comme « la base de données ». Il ne correspond pas non plus à un composant, comme « le service d'authentification ». » |
 | « se lit mieux que « Import d'un fichier conforme », et c'est la forme employée par les patterns du §4 » | « « Importer un fichier conforme » se lit mieux que « Import d'un fichier conforme ». C'est aussi la forme employée par les patterns du §4. » |
 | « Un découpage qui n'a que des tranches n'a pas de périmètre — il ne peut ni se contractualiser, ni se contrôler en couverture » | « Un découpage qui ne contient que des tranches, sans lots, n'a pas de périmètre : il ne peut ni être contractualisé, ni être contrôlé en couverture. » |
+| « Trois signaux le confirment : la charge a doublé sans aide supplémentaire ; les retards s'accumulent depuis trois semaines ; deux personnes ont demandé un point individuel cette semaine » | « Trois signaux le confirment. La charge a doublé sans aide supplémentaire. Les retards s'accumulent depuis trois semaines. Deux personnes ont demandé un point individuel cette semaine. » |
 
 ## Review Pass - Markdown Deliverables Only
 
@@ -162,6 +182,17 @@ chat replies: applying the rules while writing is enough there.
    remove it.
 4. Last check on the whole text: every jargon term defined at first use, every
    sentence has a subject and a verb.
+5. Grill the sentences you found yourself admiring. A sentence that struck you
+   as tight, elegant or well-turned while writing it is exactly the one to
+   interrogate - the same way a design decision gets questioned before it is
+   accepted, not after. Ask what it assumes the reader already knows or can
+   reconstruct alone: which word, referent or link did you leave for them to
+   supply? Say the sentence once, aloud, as if to someone hearing it for the
+   first time with no access to the rest of the document. If they would
+   stumble, or need it twice, the elegance was yours, not theirs - rewrite it.
+   This step exists because defects 1-6 are patterns, and a sentence can be
+   hard to parse on one read without matching any of them by the letter -
+   grill it anyway; the reader doesn't care which numbered defect it was.
 
 ## Red Flags - Stop And Rewrite
 
@@ -176,6 +207,7 @@ chat replies: applying the rules while writing is enough there.
 - A list of several bare names in one clause where some never come back with
   a gloss anywhere else in the document
 - A sentence you could cut in two with a period and lose nothing
+- You noticed a sentence was elegant before you noticed whether it was clear
 - A sentence you rewrote though it hit none of the six defects
 - An imperative form you did not actually check
 - A turn of phrase you cannot recall ever hearing
@@ -200,6 +232,9 @@ chat replies: applying the rules while writing is enough there.
 - Rewriting a sentence that had no defect, for style alone
 - Leaving two independent claims joined by « et », « : » or « — » because each
   half, alone, is grammatically fine - defect 6 is about idea count, not grammar
+- Treating a sentence's tightness as evidence it is good, instead of testing
+  whether a first-time listener would parse it in one pass - cleverness is the
+  writer's reward, not the reader's; the grill step exists to catch this
 - Running the review pass on a chat reply, or skipping it on a deliverable
 
 ## Real-World Impact
@@ -295,3 +330,18 @@ guide-2 excerpt. Defect 3 generalizes for the pattern it was built to catch
 a distinct, not-yet-fixed failure mode: a bare list of several names in one
 enumerating sentence. Left as a known gap rather than patched now - it needs
 its own worked example and wasn't part of this round's ask.
+
+**v1.4.0 - the writer's own bias toward tightness, caught by direct review, not
+a blind A/B.** Applying v1.3.2 by hand to a second real guide surfaced two
+sentences an agent judged as legitimate stylistic choices worth preserving - an
+elliptical antithesis with an elided verb, and three claims chained by
+semicolons - rather than as defects. Both are the pattern this section now
+names directly: a writer (human or agent) rewards itself for saying a lot in
+few words, and mistakes the resulting density for elegance instead of testing
+whether a reader parses it in one pass. Fixed by naming the excuse in defects 2
+and 6 directly, adding a worked example of each, and adding a fifth Review Pass
+step - a grilling-style interrogation of exactly the sentences the writer is
+proud of, since pride is not on the list of things defects 1-6 check for. Not
+benchmarked with a fresh blind A/B: the fix responds to two specific,
+human-identified misses, not a measured regression, and the next real-guide
+test should confirm whether the grill step catches this class going forward.
