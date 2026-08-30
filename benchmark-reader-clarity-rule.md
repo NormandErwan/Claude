@@ -8,41 +8,14 @@ reader-clarity rule before and after this session's fix
 `skills/write-skill/agents/comparator.md`,
 `skills/write-skill/agents/analyzer.md`.
 
-## Version A - rule before this session (commit 5a61ad5)
+## Versions being compared
 
-```markdown
-## Communication (excerpt)
-- Answer first, state facts. No filler, no politeness, no restating what a heading or the question already said.
-- Fewest steps and tool calls that reach the right result.
-- Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
+- Version A (before): `git show 5a61ad5:CLAUDE.md` - `## Communication` and
+  `## Code / docs / commits` sections only.
+- Version B (after): `git show 7e5c58f:CLAUDE.md` - same two sections.
 
-## Code / docs / commits (excerpt)
-- Any technical/code doc (README, manifests, comments, PR/commit bodies) -> concise first pass, not a tightening pass after: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
-- Editing any CLAUDE.md -> `craft-prompt` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
-```
-
-## Version B - rule after this session's fix (final wording)
-
-```markdown
-## Communication (excerpt)
-- Answer first, state facts. No filler, no politeness, no restating what a heading or the question already said.
-- Fewest steps and tool calls that reach the right result.
-- Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
-- Cut a word only if the reader loses nothing by its absence; leave a sentence for rework if the reader would have to reread it, guess a referent, or reconstruct a dropped word - the test `write-french` applies to French, in any language.
-
-## Code / docs / commits (excerpt)
-- Any technical/code doc (README, manifests, comments, PR/commit bodies) -> Communication's word-cutting rule, applied on the first pass, not as a later tightening pass: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
-- Editing any CLAUDE.md -> `craft-prompt` first for structure and degrees-of-freedom guidance; write it under Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never ship a verbose draft to tighten later on request.
-```
-
-Version B is intentionally lighter than an earlier draft of this same fix: the
-first draft added an explicit "two readers" bullet with the `write-french`
-defect list spelled out in Communication, which duplicated the existing
-"No filler..." bullet and mixed in a second, unrelated audience (agent/skill
-text) that Communication doesn't otherwise talk about. Reworked to one short
-bullet that states the test and points to `write-french` instead of
-restating its defect list; the agent/skill-budget case stays only where it's
-actually invoked, in Code / docs / commits.
+Extract just those two sections into each executor's system prompt; the rest
+of `CLAUDE.md` is irrelevant to this eval.
 
 ## Eval tasks
 
@@ -100,34 +73,22 @@ likely to trigger Version A's word-count framing.
 }
 ```
 
-## Steps to run (per eval, x4)
+## Running it
 
-1. **Execute with Version A** - spawn an Agent whose system prompt
-   contains only Version A's excerpt above plus general writing
-   competence (no other `CLAUDE.md` content, no knowledge of Version
-   B). User turn: the eval's `prompt`. Save the output and the full
-   execution transcript.
-2. **Execute with Version B** - same eval prompt, system prompt swapped
-   for Version B's excerpt. Save output and transcript.
-3. **Blind compare** - spawn a comparator Agent using
-   `skills/write-skill/agents/comparator.md` as its system prompt, with
-   `output_a_path`, `output_b_path`, the eval's `prompt` as
-   `eval_prompt`, and the eval's `expectations`. It does not see which
-   version produced which output. Save `comparison.json`.
-4. **Analyze** - spawn an analyzer Agent using
-   `skills/write-skill/agents/analyzer.md`, with `winner` (from step
-   3), `winner_skill_path`/`loser_skill_path` pointing at this file's
-   Version A/B section per the winner, the transcripts from steps 1-2,
-   and `comparison_result_path` = step 3's `comparison.json`. Save
-   `analysis.json`.
+Follow `write-skill`'s Track 2 steps
+(`evaluating-skills-with-subagents.md`) as written, with:
 
-## Orchestration constraints (from write-skill)
+- Executors (steps 1-2): system prompt = the Version A or B excerpt
+  above; user turn = the eval's `prompt`.
+- Comparator (step 3): `agents/comparator.md`, `output_a_path` /
+  `output_b_path` from the executors, `eval_prompt` / `expectations`
+  from `evals.json` above.
+- Analyzer (step 4): `agents/analyzer.md`, `winner_skill_path` /
+  `loser_skill_path` = the two `git show` refs above.
 
-- Steps 1-2 (execution) and steps 3-4 (grading) must be separate Agent
-  calls - never let one subagent grade its own output.
-- Run at most 2 Agent calls concurrently. This session's proxy trips on
-  concurrent headless runs above 2-3 in flight (RETROSPECTIVE.md,
-  2026-08-25, tool-blocked row).
+Same constraints as write-skill's own doc: execution and grading are
+separate Agent calls, at most 2 concurrent (this session's proxy trips
+above that - RETROSPECTIVE.md, 2026-08-25, tool-blocked row).
 
 ## What "winning" means here
 
