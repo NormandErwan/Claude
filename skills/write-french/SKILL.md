@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.4.1
+version: 1.4.2
 description: "Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase."
 ---
 
@@ -166,6 +166,7 @@ introduces them does the job the semicolons were being asked to do.
 | « se lit mieux que « Import d'un fichier conforme », et c'est la forme employée par les patterns du §4 » | « « Importer un fichier conforme » se lit mieux que « Import d'un fichier conforme ». C'est aussi la forme employée par les patterns du §4. » |
 | « Un découpage qui n'a que des tranches n'a pas de périmètre — il ne peut ni se contractualiser, ni se contrôler en couverture » | « Un découpage qui ne contient que des tranches, sans lots, n'a pas de périmètre : il ne peut ni être contractualisé, ni être contrôlé en couverture. » |
 | « Trois signaux le confirment : la charge a doublé sans aide supplémentaire ; les retards s'accumulent depuis trois semaines ; deux personnes ont demandé un point individuel cette semaine » | « Trois signaux le confirment. La charge a doublé sans aide supplémentaire. Les retards s'accumulent depuis trois semaines. Deux personnes ont demandé un point individuel cette semaine. » |
+| « Ce découpage montre un résultat utilisable dès la première tranche, alors qu'un découpage en couches oblige à finir toute la base de données avant qu'un seul écran fonctionne » | « Ce découpage montre un résultat utilisable dès la première tranche. Un découpage en couches oblige au contraire à finir toute la base de données avant qu'un seul écran fonctionne. » |
 
 ## Review Pass - Markdown Deliverables Only
 
@@ -194,9 +195,13 @@ chat replies: applying the rules while writing is enough there.
    hard to parse on one read without matching any of them by the letter -
    grill it anyway; the reader doesn't care which numbered defect it was.
    Default to plain, direct phrasing: a cleft sentence (« C'est X qui... »),
-   an elliptical antithesis (« X ne fait pas ceci, Y si »), or any other
-   rhetorical construction has to earn its place over the plain rewrite by
-   being clearer - never by being denser or more striking. When a rhetorical
+   an elliptical antithesis (« X ne fait pas ceci, Y si »), a parenthetical
+   aside that splits a subject from its verb (« Le projet — lancé en
+   janvier, repoussé deux fois — a finalement livré », where the reader
+   holds « Le projet » in memory across the aside before reaching « a
+   livré »), or any other rhetorical construction has to earn its place
+   over the plain rewrite by being clearer - never by being denser or more
+   striking. When a rhetorical
    sentence and its plain rewrite say the same thing, keep the plain one;
    dense rhetoric is what makes a writer misjudge their own sentence as
    elegant in the first place, so it does not get the benefit of the doubt.
@@ -214,8 +219,9 @@ chat replies: applying the rules while writing is enough there.
 - A list of several bare names in one clause where some never come back with
   a gloss anywhere else in the document
 - A sentence you could cut in two with a period and lose nothing
-- A cleft sentence, elliptical antithesis, or other rhetorical construction
-  kept over its plain rewrite without the rhetoric being clearer
+- A cleft sentence, elliptical antithesis, subject-verb-splitting
+  parenthetical, or other rhetorical construction kept over its plain
+  rewrite without the rhetoric being clearer
 - You noticed a sentence was elegant before you noticed whether it was clear
 - A sentence you rewrote though it hit none of the six defects
 - An imperative form you did not actually check
@@ -244,9 +250,10 @@ chat replies: applying the rules while writing is enough there.
 - Treating a sentence's tightness as evidence it is good, instead of testing
   whether a first-time listener would parse it in one pass - cleverness is the
   writer's reward, not the reader's; the grill step exists to catch this
-- Keeping a cleft sentence or elliptical antithesis on a dense rhetorical
-  register because it parses without a defect, instead of defaulting to the
-  plain phrasing - passing the six defects is not a reason to prefer rhetoric
+- Keeping a cleft sentence, elliptical antithesis, or subject-verb-splitting
+  parenthetical on a dense rhetorical register because it parses without a
+  defect, instead of defaulting to the plain phrasing - passing the six
+  defects is not a reason to prefer rhetoric
 - Running the review pass on a chat reply, or skipping it on a deliverable
 
 ## Real-World Impact
@@ -371,3 +378,17 @@ added to step 5, Red Flags and Common Mistakes. Not benchmarked with a blind
 A/B: the fix names a discrimination criterion the grill step lacked, it does
 not change the mechanical defect tests, so the next held-out rhetorical-register
 test should confirm the grill step now converges with a human's judgment call.
+
+**v1.4.2 - a subject-verb-splitting parenthetical was unnamed.** A blind A/B
+run outside this skill (`CLAUDE.md`'s reader-clarity rule, RETROSPECTIVE.md
+2026-08-30) produced a French paragraph with a dash-set-off aside between a
+subject and its verb (« Découper un projet en tranches verticales — chacune
+livrant une fonctionnalité complète... — permet de... »); defect 6's test
+didn't fire (one clause, not two fused independent ones) and step 5's named
+rhetorical constructions (cleft sentence, elliptical antithesis) didn't cover
+it either, so it passed unflagged. Added as a third named construction to
+step 5, Red Flags and Common Mistakes, plus a `alors que`/`tandis que` worked
+example to defect 6 - none of its prior examples used a contrast conjunction.
+Not benchmarked with a blind A/B: the fix names a construction the grill step
+lacked, the next held-out test involving a parenthetical aside should confirm
+it now gets caught.
