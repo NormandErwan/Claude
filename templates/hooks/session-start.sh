@@ -4,8 +4,8 @@
 set -uo pipefail
 
 REPO_URL="https://github.com/NormandErwan/Claude.git"
-TARGET_DIR="$CLAUDE_PROJECT_DIR/.claude"
-TMP_DIR=$(mktemp -d)
+TARGET_DIR="${CLAUDE_PROJECT_DIR:-.}/.claude"
+TMP_DIR=$(mktemp -d) || TMP_DIR=""
 trap 'rm -rf "$TMP_DIR"' EXIT
 
 if ! git clone --depth 1 --quiet "$REPO_URL" "$TMP_DIR" 2>/dev/null; then
@@ -14,6 +14,7 @@ if ! git clone --depth 1 --quiet "$REPO_URL" "$TMP_DIR" 2>/dev/null; then
   exit 0
 fi
 
+mkdir -p "$TARGET_DIR"
 cp "$TMP_DIR/CLAUDE.md" "$TARGET_DIR/CLAUDE.md.new" && mv "$TARGET_DIR/CLAUDE.md.new" "$TARGET_DIR/CLAUDE.md"
 
 # The skills tree is no longer wiped. install-skills.sh prunes exactly what it
@@ -22,12 +23,13 @@ cp "$TMP_DIR/CLAUDE.md" "$TARGET_DIR/CLAUDE.md.new" && mv "$TARGET_DIR/CLAUDE.md
 # Both steps run from the fresh clone, so they stay current without consumers
 # re-copying a hook.
 INJECT="$TMP_DIR/templates/hooks/inject-agent-skills.sh"
-if [ ! -f "$INJECT" ]; then
+INSTALL="$TMP_DIR/templates/hooks/install-skills.sh"
+if [ ! -f "$INJECT" ] || [ ! -f "$INSTALL" ]; then
   # A clone older than this hook - or a partial one - has no injector, so the
   # envelope has to come from here rather than not at all.
-  echo '{"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "NormandErwan/Claude was cloned but carries no templates/hooks/inject-agent-skills.sh, so no skills were installed and the agent-skills router was not injected. This hook is newer than the repo it pulled."}}'
+  echo '{"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "NormandErwan/Claude was cloned but is missing templates/hooks/install-skills.sh or inject-agent-skills.sh, so no skills were installed and the agent-skills router was not injected. This hook is newer than the repo it pulled."}}'
   exit 0
 fi
 
-bash "$TMP_DIR/templates/hooks/install-skills.sh" "$TARGET_DIR" "$TMP_DIR/skills"
+bash "$INSTALL" "$TARGET_DIR" "$TMP_DIR/skills"
 bash "$INJECT" "$TARGET_DIR"
