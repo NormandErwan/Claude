@@ -14,13 +14,10 @@
 Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors" - a claude.ai chat has
 no repo to read them from. `SKILLS.web.md` records the commit last checked against.
 
-1. Surface assumptions. Before anything non-trivial, emit:
-   ```
-   ASSUMPTIONS I'M MAKING:
-   1. <requirements>  2. <approach>  3. <scope>
-   -> Correct me now or I proceed with these.
-   ```
-   Never fill an ambiguous requirement silently.
+1. Surface assumptions. Before anything non-trivial, say in running prose, in the user's language -
+   never a code block, which wraps badly and reads worse - what you took the requirements, the
+   approach and the scope to be, then invite correction before proceeding. Never fill an ambiguous
+   requirement silently.
 2. Stop on confusion. Conflicting requirement, inconsistent spec, two rules that disagree -> name it,
    `grilling`, wait. Never proceed on a guess.
 3. Push back before building, not after. Sycophancy is a failure mode. Name the concrete downside,

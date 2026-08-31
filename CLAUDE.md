@@ -15,13 +15,10 @@ Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors" - a
 no repo to read them from. The hook clones upstream HEAD; `SKILLS.web.md` records the commit last
 checked against.
 
-1. Surface assumptions. Before anything non-trivial, emit:
-   ```
-   ASSUMPTIONS I'M MAKING:
-   1. <requirements>  2. <approach>  3. <scope>
-   -> Correct me now or I proceed with these.
-   ```
-   Never fill an ambiguous requirement silently.
+1. Surface assumptions. Before anything non-trivial, say in running prose, in the user's language -
+   never a code block, which wraps badly and reads worse - what you took the requirements, the
+   approach and the scope to be, then invite correction before proceeding. Never fill an ambiguous
+   requirement silently.
 2. Stop on confusion. Conflicting requirement, inconsistent spec, two rules that disagree -> name it,
    `grilling`, wait. Never proceed on a guess.
 3. Push back before building, not after. Sycophancy is a failure mode. Name the concrete downside,
@@ -37,39 +34,22 @@ checked against.
 ## Bootstrap - once per session
 1. Sync `.claude` from this repo:
    - Consumer project -> synced automatically by its `SessionStart` hook (see README.md) - no action needed.
-   - This repo itself (dogfooding) -> its own `.claude/settings.json` runs the injector directly; skip the sync, still do step 2.
+   - This repo itself (dogfooding) -> its own `.claude/settings.json` runs the two hook steps directly; skip the sync.
    - Consumer project's root `CLAUDE.md` wins over the synced `.claude/CLAUDE.md` wherever the two diverge - it carries that repo's own derogations.
-   - The same hook clones `addyosmani/agent-skills` into `.claude/agent-skills/` and injects `using-agent-skills` at session start - no `npx` line for it (see Every turn 6).
-2. `npx skills add` every line below, every session, regardless of step 1's outcome:
-   - Never vendored deliberately - this is the only way to get current versions.
-   - Leave dotnet-skills uninstalled for now (see Every turn 1).
-   ```bash
-   npx skills add DietrichGebert/ponytail@ponytail-audit
-   npx skills add DietrichGebert/ponytail@ponytail-review
-   npx skills add anthropics/skills@frontend-design
-   npx skills add homeassistant-ai/skills@home-assistant-best-practices
-   npx skills add juliusbrussee/caveman@caveman
-   npx skills add juliusbrussee/caveman@caveman-commit
-   npx skills add mattpocock/skills@code-review
-   npx skills add mattpocock/skills@codebase-design
-   npx skills add mattpocock/skills@domain-modeling
-   npx skills add mattpocock/skills@grill-with-docs
-   npx skills add mattpocock/skills@grilling
-   npx skills add mattpocock/skills@handoff
-   npx skills add mattpocock/skills@improve-codebase-architecture
-   npx skills add mattpocock/skills@prototype
-   npx skills add mattpocock/skills@research
-   npx skills add mattpocock/skills@resolving-merge-conflicts
-   npx skills add mattpocock/skills@teach
-   ```
-3. Skill installed mid-session via `npx skills add` is never invocable via Skill tool this session (roster fixed at session start - guaranteed, not "may not load"):
+   - The same hook clones `addyosmani/agent-skills` into `.claude/agent-skills/` and injects `using-agent-skills` at session start (see Every turn 6).
+2. External skills are installed by the same hook, into `.claude/skills/`, before the roster is built - nothing to run by hand:
+   - The list lives in `templates/hooks/install-skills.sh`, which owns it. Never vendored here: the hook clones current versions every session.
+   - Four of them declare `disable-model-invocation: true` upstream (`grill-with-docs`, `handoff`, `teach`, `improve-codebase-architecture`) - installed and slash-invocable, but not callable via the Skill tool. Read their `SKILL.md` from disk and follow it, as in step 3.
+   - Topic-gated skills stay out of that list (see Every turn 1).
+3. A skill installed by hand mid-session via `npx skills add` is never invocable via the Skill tool this session (roster fixed at session start - guaranteed, not "may not load"). It also writes into the working directory, not `.claude/skills/`:
    - If missing, say so.
-   - Read `.claude/skills/<name>/SKILL.md` directly and follow it manually instead of skipping it.
+   - Read the installed `SKILL.md` directly and follow it manually instead of skipping it.
 
 ## Every turn
 1. Identify the task.
    - Topic is .NET/C#/Blazor, or user asks -> `npx skills add aaronontheweb/dotnet-skills` (whole repo, if not already loaded this session) and `token-dotnet` (grep/search patterns).
-   - Topic is web/frontend design, or user asks -> `npx skills add arvindrk/extract-design-system@extract-design-system` and `npx skills add vercel-labs/agent-skills@web-design-guidelines` (if not already loaded this session).
+   - Topic is web/frontend design, or user asks -> `npx skills add anthropics/skills@frontend-design`, `npx skills add arvindrk/extract-design-system@extract-design-system` and `npx skills add vercel-labs/agent-skills@web-design-guidelines` (if not already loaded this session).
+   - Topic is Home Assistant, or user asks -> `npx skills add homeassistant-ai/skills@home-assistant-best-practices` (if not already loaded this session).
    - Test design with >=3 combinable parameters (matrix, config, API surface) -> `npx skills add omkamal/pypict-claude-skill@pict-test-designer` (if not already loaded this session).
    - User explicitly asks for parallel/sub-agents -> `npx skills add obra/superpowers@dispatching-parallel-agents` and `npx skills add obra/superpowers@subagent-driven-development` (if not already loaded this session).
    - Failure/friction recurring after a fix -> `find-cause`.
@@ -143,7 +123,7 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 
 | Trigger | Action |
 |---|---|
-| Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then mattpocock `code-review`, no asking |
+| Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then `code-review`, no asking |
 | Turn would end with an unreviewed diff-changing push, otherwise | Plain-text question: review now or keep going.<br>- Ask once, wait until answered or PR merges/closes |
 | Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
 | >=2-3 turns since last rename, scope clear/shifted | Draft short title.<br>- Confirm via plain-text question.<br>- Rename PR + conversation title (if a rename tool exists) |

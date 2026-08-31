@@ -5,6 +5,10 @@
         "hooks": [
           {
             "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/templates/hooks/install-skills.sh $CLAUDE_PROJECT_DIR/.claude"
+          },
+          {
+            "type": "command",
             "command": "$CLAUDE_PROJECT_DIR/templates/hooks/inject-agent-skills.sh $CLAUDE_PROJECT_DIR/.claude"
           }
         ]

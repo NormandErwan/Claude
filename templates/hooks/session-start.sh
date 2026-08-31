@@ -13,6 +13,8 @@ rm -rf "$TARGET_DIR/skills"
 cp -r "$TMP_DIR/skills" "$TARGET_DIR/skills"
 mv "$TARGET_DIR/CLAUDE.md.new" "$TARGET_DIR/CLAUDE.md"
 
-# Run the injector from the fresh clone, not from a copy in this repo: it stays
-# current without consumers ever re-copying a hook.
+# Both steps run from the fresh clone, not from a copy in this repo: they stay
+# current without consumers ever re-copying a hook. Order matters - the skill
+# install writes into the skills/ tree the copy above just replaced.
+bash "$TMP_DIR/templates/hooks/install-skills.sh" "$TARGET_DIR"
 bash "$TMP_DIR/templates/hooks/inject-agent-skills.sh" "$TARGET_DIR"

@@ -4,12 +4,19 @@ Natively-authored skills library for Claude Code.
 
 ## Usage
 
-External skills are not vendored here. Two mechanisms bring them in:
+External skills are not vendored here. Three mechanisms bring them in:
 
 | Source | Mechanism | Listed in |
 |---|---|---|
-| Most external skills | [`npx skills add`](https://skills.sh/), per session | `CLAUDE.md` `## Bootstrap` (always) and `## Every turn` (topic-gated) |
-| `addyosmani/agent-skills` | Cloned and injected by the `SessionStart` hook | `CLAUDE.md` `## Every turn` 6 |
+| The always-on set | Cloned into `.claude/skills/` by the `SessionStart` hook | `templates/hooks/install-skills.sh` |
+| `addyosmani/agent-skills` | Cloned, and its router injected, by the same hook | `templates/hooks/inject-agent-skills.sh` |
+| Topic-gated skills | [`npx skills add`](https://skills.sh/), when the topic comes up | `CLAUDE.md` `## Every turn` 1 |
+
+The hook installs rather than `npx` because the Skill roster is built after
+`SessionStart` hooks run: a mid-session install is never invocable, and lands in
+the working directory rather than `.claude/skills/`. Three shallow clones also
+take about 4.7s against roughly 50s for the equivalent `npx` runs, and git gets
+through proxies that block npm.
 
 ## Adding this repo to another project
 
@@ -30,10 +37,10 @@ In the consumer repo:
 2. Copy `templates/hooks/session-start.sh` to `.claude/hooks/session-start.sh`
    (keep it executable) - clones this repo fresh each session, refreshes the
    generated files, then runs `templates/hooks/inject-agent-skills.sh` from
-   that fresh clone. Only the thin bootstrap is copied, so the injector
-   updates itself afterwards without consumers re-copying anything. A repo set
-   up before the injector existed needs this one re-copy to get a router at
-   all - the synced `CLAUDE.md` assumes one is injected.
+   that fresh clone: `install-skills.sh` then `inject-agent-skills.sh`. Only the
+   thin bootstrap is copied, so both update themselves afterwards without
+   consumers re-copying anything. A repo set up before they existed needs this
+   one re-copy - the synced `CLAUDE.md` assumes both have run.
 3. Add to `.gitignore` - the generated files are never committed:
    ```
    .claude/CLAUDE.md
