@@ -9,12 +9,15 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 | verify-sources | local | `48a50b5e53` |
 | guide-decision | local | `0aabdbb41d` |
 | guide-purchase | local | `0aabdbb41d` |
-| write-french | local | `c3c634a926` |
+| write-french | local | `34a05c4793` |
 | grilling | `mattpocock/skills@grilling` | `85f83d3fde` |
 | grill-with-docs | `mattpocock/skills@grill-with-docs` | `447ca70872` |
 | research | `mattpocock/skills@research` | `321658273c` |
 | handoff | `mattpocock/skills@handoff` | `d28dfdc39b` |
 
-Checked: 2026-08-23, every row. The GitHub API returns 403 for
+Last full pass: 2026-08-23, every row. The GitHub API returns 403 for
 `mattpocock/skills` through the proxy; a public blobless clone works and is
-what this pass used. Moved since the last check: grilling, research.
+what that pass used. Moved since: grilling, research.
+
+2026-08-31: write-french only, triggered by its own edits (v1.4.0 -> v1.4.3),
+not a full pass.

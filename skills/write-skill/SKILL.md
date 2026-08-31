@@ -1,6 +1,6 @@
 ---
 name: write-skill
-version: 2.0.0
+version: 2.1.0
 description: Use when creating a new skill, editing an existing one, verifying a skill works
   before deployment, benchmarking whether it improves task quality, fixing unreliable
   triggering, or when an agent rationalizes around a skill's rules.
@@ -454,7 +454,8 @@ state the rule once at the level it actually applies, not as a growing list of e
 - [ ] SKILL.md body under 500 lines (use progressive disclosure if over)
 - [ ] No Windows-style paths (forward slashes only)
 - [ ] Tested on Haiku, Sonnet, and Opus (not one model only)
-- [ ] Body and reference files are a concise first draft - no post-hoc tightening pass
+- [ ] `craft-prompt` pass for structure and degrees-of-freedom guidance before drafting (see `CLAUDE.md` Code / docs / commits)
+- [ ] Body and reference files write clean on the first draft: cut superfluous words, never fuse or drop meaning to shorten - no post-hoc tightening pass
 
 **Deployment:**
 - [ ] Every checklist item above re-verified against the finished file - drafting-time self-checks alone can miss gaps (e.g. a planned example that never made it in)

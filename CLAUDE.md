@@ -7,6 +7,7 @@
 - Fewest steps and tool calls that reach the right result.
 - Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
 - Match user's language - French output -> `write-french`.
+- Cut a word only if the reader loses nothing by its absence; leave a sentence for rework if the reader would have to reread it, guess a referent, or reconstruct a dropped word. One idea per sentence, no idea twice. This is the same test `write-french` applies to French - it holds in any language.
 
 ## Bootstrap - once per session
 1. Sync `.claude` from this repo:
@@ -102,10 +103,10 @@
 
 ## Code / docs / commits
 - Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English + ASCII. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills; French quoted as an example - keeps its accents, unaccented French is misspelled French. Deliverables written for the user follow the user's language.
-- Any technical/code doc (README, manifests, comments, PR/commit bodies) -> concise first pass, not a tightening pass after: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
+- Any technical/code doc (README, manifests, comments, PR/commit bodies) -> Communication's word-cutting rule, applied on the first pass, not as a later tightening pass: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
-- Editing any CLAUDE.md -> `craft-prompt` first, draft concise on the first pass (apply its Concise-is-key check before proposing, not after) - no exceptions, never ship a verbose draft to tighten later on request.
-- Any edit to a doc/skill's worked examples or chained steps -> before delivery, check each example against the principle it illustrates and that each step's output still satisfies what the next step consumes.
+- Editing any CLAUDE.md -> `craft-prompt` first for structure and degrees-of-freedom guidance; write it under Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never ship a verbose draft to tighten later on request.
+- Any edit to a doc/skill's worked examples or chained steps -> before delivery, check each example against the principle it illustrates and that each step's output still satisfies what the next step consumes. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
 - Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored. `CLAUDE.web.md` may hold extra sections outside this list (e.g. Web-only) - preserve them, never treat as derived from `CLAUDE.md`. Any `CLAUDE.web.md` edit -> tell the user to re-paste it into the claude.ai preferences, kept identical by hand.
 - Editing `CLAUDE.web.md`, or any skill `SKILLS.web.md` lists -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.
