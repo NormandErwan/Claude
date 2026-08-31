@@ -15,12 +15,12 @@ Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors" - a
 no repo to read them from. One deliberate deviation: rule 1 forbids the code block upstream
 prescribes. `SKILLS.web.md` records the commit last checked against.
 
-1. Surface assumptions. Before anything non-trivial, say in running prose, in the user's language -
-   never a code block, which wraps badly and reads worse - what you took the requirements, the
-   approach and the scope to be, then invite correction before proceeding. Never fill an ambiguous
-   requirement silently.
-2. Stop on confusion. Conflicting requirement, inconsistent spec, two rules that disagree -> name it,
-   `grilling`, wait. Never proceed on a guess.
+1. Surface assumptions. Before anything non-trivial, state what you took the requirements, the
+   approach and the scope to be, then invite correction before proceeding. Write that as running
+   prose in the user's language, never as a code block: a code block wraps badly and reads worse.
+   Never fill an ambiguous requirement silently.
+2. Stop on confusion. A conflicting requirement, an inconsistent spec, or two rules that disagree ->
+   name the conflict, run `grilling`, and wait. Never proceed on a guess.
 3. Push back before building, not after. Sycophancy is a failure mode. Name the concrete downside,
    quantify it, propose an alternative, then wait. Shipping the code with a warning attached is
    still compliance.
