@@ -454,7 +454,7 @@ state the rule once at the level it actually applies, not as a growing list of e
 - [ ] SKILL.md body under 500 lines (use progressive disclosure if over)
 - [ ] No Windows-style paths (forward slashes only)
 - [ ] Tested on Haiku, Sonnet, and Opus (not one model only)
-- [ ] `craft-prompt` pass for structure and degrees-of-freedom guidance before drafting - not its Concise-is-key check, superseded by `CLAUDE.md` Communication's word-cutting rule
+- [ ] `craft-prompt` pass for structure and degrees-of-freedom guidance before drafting (see `CLAUDE.md` Code / docs / commits)
 - [ ] Body and reference files write clean on the first draft: cut superfluous words, never fuse or drop meaning to shorten - no post-hoc tightening pass
 
 **Deployment:**
