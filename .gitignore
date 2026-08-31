@@ -5,8 +5,11 @@
 !templates/
 !templates/**
 # This repo's own hook (dogfooding). .claude/agent-skills/ is a session
-# clone of addyosmani/agent-skills and stays ignored.
+# clone of addyosmani/agent-skills and stays ignored. Re-ignore .md files
+# directly under .claude/ - the global !*.md above would otherwise unignore
+# any stray one (e.g. a reverted dogfooding skip regenerating CLAUDE.md).
 !.claude/
+.claude/*.md
 !.claude/settings.json
 # Allowlist each native skill dir explicitly (not a blanket !skills/**).
 # When consumed as a .claude subtree, a blanket unignore here would also
