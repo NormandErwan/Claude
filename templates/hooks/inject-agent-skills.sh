@@ -18,13 +18,19 @@ META="$CLONE_DIR/skills/using-agent-skills/SKILL.md"
 STATUS="$TARGET_DIR/skills/.install-status"
 
 emit() {
+  # Run jq rather than merely finding it: a jq on PATH that fails to execute
+  # used to produce no envelope at all.
+  local out=""
   if command -v jq >/dev/null 2>&1; then
-    jq -cn --arg context "$1" \
-      '{hookSpecificOutput: {hookEventName: "SessionStart", additionalContext: $context}}'
+    out=$(jq -cn --arg context "$1" \
+      '{hookSpecificOutput: {hookEventName: "SessionStart", additionalContext: $context}}' 2>/dev/null)
+  fi
+  if [ -n "$out" ]; then
+    printf '%s\n' "$out"
   else
-    # No jq, so nothing here can be escaped safely - not the router, not the
-    # install status. Name both files instead of asserting either exists.
-    echo '{"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "agent-skills: jq not found, so neither the router nor the skill-install status could be injected. Read .claude/agent-skills/skills/using-agent-skills/SKILL.md and .claude/skills/.install-status directly if they exist."}}'
+    # No working jq, so nothing here can be escaped safely - not the router,
+    # not the install status. Name both files instead of asserting either.
+    echo '{"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "agent-skills: no working jq, so neither the router nor the skill-install status could be injected. Read .claude/agent-skills/skills/using-agent-skills/SKILL.md and .claude/skills/.install-status directly if they exist."}}'
   fi
 }
 

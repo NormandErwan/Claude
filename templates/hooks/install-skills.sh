@@ -1,14 +1,17 @@
 #!/bin/bash
-# Install the always-on external skills into <claude-dir>/skills, so they land
-# in the Skill roster: the roster is built after SessionStart hooks run, while
-# an `npx skills add` issued mid-session arrives too late and writes into the
-# working directory rather than here.
+# Populate <claude-dir>/skills so the Skill roster sees everything: the roster
+# is built after SessionStart hooks run, while an `npx skills add` issued
+# mid-session arrives too late and writes into the working directory.
 #
 # Cloning, not npx: 3 shallow clones take ~3s against ~50s for 14 npx runs, and
-# git gets through proxies that block npm. The hook pair does 4 clones in this
-# repo and 5 in a consumer repo, which also clones the skills repo first.
+# git gets through proxies that block npm.
 #
-# $1 - .claude directory to install into
+# $1 - .claude directory to populate
+# $2 - optional directory of native skills to sync in first
+#
+# Both kinds are marked, and every run prunes what it marked before rebuilding.
+# So a skill deleted upstream disappears here too, while a directory the user
+# put in .claude/skills themselves carries no marker and is never touched.
 #
 # Prints nothing on stdout: the injector step owns it, and SessionStart adds
 # whatever lands there to the session context. Problems go instead to
@@ -16,48 +19,75 @@
 # silent failure would leave CLAUDE.md asserting skills that are not there.
 set -uo pipefail
 
-TARGET="${1:?usage: install-skills.sh <claude-dir>}/skills"
+TARGET="${1:?usage: install-skills.sh <claude-dir> [native-skills-dir]}/skills"
+NATIVE="${2:-}"
 STATUS="$TARGET/.install-status"
-MARKER=".hook-installed"
+MARK_EXT=".hook-installed"
+MARK_NAT=".hook-synced"
 
 # <repo>|<skill>,<skill>,...  Topic-gated skills stay out; see CLAUDE.md Every turn 1.
 REPOS="DietrichGebert/ponytail|ponytail-audit,ponytail-review
 juliusbrussee/caveman|caveman,caveman-commit
 mattpocock/skills|codebase-design,domain-modeling,grill-with-docs,grilling,handoff,improve-codebase-architecture,prototype,research,resolving-merge-conflicts,teach"
 
+EXPECTED=$(printf '%s\n' "$REPOS" | awk -F'|' 'NF{print $2}' | tr ',' '\n' | grep -c .)
+
 mkdir -p "$TARGET"
+# Clear before the gate: a skipped run reports nothing, so last session's
+# problems must not be re-injected as this session's.
+: > "$STATUS"
 
 # The hook also fires on resume, clear and compact. Re-cloning then is waste,
-# but skipping blindly would leave a resumed session in a fresh container with
-# no skills at all - so skip only when a previous run in this container left
-# something behind. `source` comes from the hook payload on stdin; grep, not
-# jq, because this script must work without it.
+# but a half-finished install must still be completed - count the markers
+# rather than trusting that any one of them means the job is done.
 SOURCE=startup
 if [ ! -t 0 ]; then
   PAYLOAD=$(timeout 1 cat 2>/dev/null || true)
-  FOUND=$(printf '%s' "$PAYLOAD" | grep -o '"source"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"\([^"]*\)"$/\1/')
-  [ -n "$FOUND" ] && SOURCE="$FOUND"
+  if command -v jq >/dev/null 2>&1 && FOUND=$(printf '%s' "$PAYLOAD" | jq -re '.source' 2>/dev/null); then
+    SOURCE="$FOUND"
+  else
+    FOUND=$(printf '%s' "$PAYLOAD" | grep -o '"source"[[:space:]]*:[[:space:]]*"[^"]*"' | tail -1 | sed 's/.*"\([^"]*\)"$/\1/')
+    [ -n "$FOUND" ] && SOURCE="$FOUND"
+  fi
 fi
-if [ "$SOURCE" != startup ] && [ -n "$(find "$TARGET" -maxdepth 2 -name "$MARKER" -print -quit 2>/dev/null)" ]; then
+HAVE=$(find "$TARGET" -maxdepth 2 -name "$MARK_EXT" 2>/dev/null | wc -l)
+if [ "$SOURCE" != startup ] && [ "$HAVE" -ge "$EXPECTED" ]; then
+  rm -f "$STATUS"
   exit 0
 fi
 
 # Serialise. Two sessions opening at once would otherwise interleave the prune
-# and the copy below.
+# and the copies below - including the native sync, which shares the tree.
 exec 9>"$TARGET/.install-lock"
 flock 9 2>/dev/null || true
 
 STAGING=$(mktemp -d)
 trap 'rm -rf "$STAGING"' EXIT
-: > "$STATUS"
 
-# Drop only what this hook installed. The marker lives inside each installed
-# directory rather than in one central manifest: there is nothing to truncate,
-# so a killed or concurrent run cannot leave state that makes every skill look
-# native and wedges the install for good.
+# Prune first, so nothing below can merge into a directory that is about to go.
 for d in "$TARGET"/*/; do
-  [ -d "$d" ] && [ -f "$d$MARKER" ] && rm -rf "$d"
+  [ -d "$d" ] || continue
+  { [ -f "$d$MARK_EXT" ] || [ -f "$d$MARK_NAT" ]; } && rm -rf "$d"
 done
+
+# Stage, mark, then move into place. A copy interrupted partway leaves a
+# half-written tree in the staging directory, never an unmarked stump under
+# $TARGET that every later run would mistake for a skill the user owns.
+place() {  # $1 src  $2 name  $3 marker
+  local stage="$STAGING/place.$$"
+  rm -rf "$stage"
+  cp -r "$1" "$stage" 2>/dev/null || return 1
+  touch "$stage/$3" || return 1
+  mv "$stage" "$TARGET/$2" || return 1
+}
+
+if [ -n "$NATIVE" ] && [ -d "$NATIVE" ]; then
+  for d in "$NATIVE"/*/; do
+    [ -d "$d" ] || continue
+    name=$(basename "$d")
+    place "$d" "$name" "$MARK_NAT" || echo "native skill failed to sync: $name" >> "$STATUS"
+  done
+fi
 
 while IFS='|' read -r repo wanted; do
   [ -z "$repo" ] && continue
@@ -68,20 +98,20 @@ while IFS='|' read -r repo wanted; do
   fi
   IFS=',' read -ra names <<< "$wanted"
   for name in "${names[@]}"; do
-    # Anything still standing after the sweep carries no marker, so it is a
-    # native skill. It owns the name; never overwrite it.
+    # Anything standing after the prune carries no marker, so the user put it
+    # there. It owns the name.
     if [ -e "$TARGET/$name" ]; then
-      echo "native skill owns this name, external copy not installed: $name" >> "$STATUS"
+      echo "a directory you own already holds this name, external copy not installed: $name" >> "$STATUS"
       continue
     fi
     # Prune dot-directories by name. Matching '*/.*' against the path would
     # prune everything whenever TMPDIR itself sits under a dot-directory.
     src=$(find "$clone" -name '.*' -prune -o -type d -name "$name" \
             -exec test -f '{}/SKILL.md' \; -print -quit)
-    if [ -n "$src" ]; then
-      cp -r "$src" "$TARGET/$name" && touch "$TARGET/$name/$MARKER"
-    else
+    if [ -z "$src" ]; then
       echo "no directory with a SKILL.md named '$name' in $repo" >> "$STATUS"
+    elif ! place "$src" "$name" "$MARK_EXT"; then
+      echo "copy failed, skill not installed: $name" >> "$STATUS"
     fi
   done
 done <<< "$REPOS"
