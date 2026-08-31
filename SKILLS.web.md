@@ -14,10 +14,13 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 | grill-with-docs | `mattpocock/skills@grill-with-docs` | `447ca70872` |
 | research | `mattpocock/skills@research` | `321658273c` |
 | handoff | `mattpocock/skills@handoff` | `d28dfdc39b` |
+| using-agent-skills | `addyosmani/agent-skills@using-agent-skills` | `2ce8d47a16` |
 
 Last full pass: 2026-08-23, every row. The GitHub API returns 403 for
 `mattpocock/skills` through the proxy; a public blobless clone works and is
-what that pass used. Moved since: grilling, research.
+what that pass used. Moved since: grilling, research. `addyosmani/agent-skills`
+is the provenance of `CLAUDE.md`/`CLAUDE.web.md`'s `Non-negotiables`, not an
+uploaded skill; the commit above pins the hook's clone, not a full-pass check.
 
 2026-08-31: write-french only, triggered by its own edits (v1.4.0 -> v1.4.3),
 not a full pass.
