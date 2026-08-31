@@ -4,8 +4,9 @@
 # an `npx skills add` issued mid-session arrives too late and writes into the
 # working directory rather than here.
 #
-# Cloning, not npx: 3 shallow clones take ~4.7s against ~50s for 14 npx runs,
-# and git gets through proxies that block npm.
+# Cloning, not npx: 3 shallow clones take ~3s against ~50s for 14 npx runs, and
+# git gets through proxies that block npm. The hook pair does 4 clones in this
+# repo and 5 in a consumer repo, which also clones the skills repo first.
 #
 # $1 - .claude directory to install into
 #
@@ -16,27 +17,32 @@
 set -uo pipefail
 
 TARGET="${1:?usage: install-skills.sh <claude-dir>}/skills"
-MANIFEST="$TARGET/.installed-by-hook"
 STATUS="$TARGET/.install-status"
+MARKER=".hook-installed"
 
 # <repo>|<skill>,<skill>,...  Topic-gated skills stay out; see CLAUDE.md Every turn 1.
 REPOS="DietrichGebert/ponytail|ponytail-audit,ponytail-review
 juliusbrussee/caveman|caveman,caveman-commit
 mattpocock/skills|codebase-design,domain-modeling,grill-with-docs,grilling,handoff,improve-codebase-architecture,prototype,research,resolving-merge-conflicts,teach"
 
-STAGING=$(mktemp -d)
-trap 'rm -rf "$STAGING"' EXIT
 mkdir -p "$TARGET"
 
-# Drop only what a previous run installed, so a name dropped from REPOS stops
-# showing up. Native skills are never in the manifest, so they survive.
-if [ -f "$MANIFEST" ]; then
-  while read -r name; do
-    [ -n "$name" ] && rm -rf "${TARGET:?}/$name"
-  done < "$MANIFEST"
-fi
-: > "$MANIFEST"
+# Serialise. Two sessions opening at once would otherwise interleave the prune
+# and the copy below.
+exec 9>"$TARGET/.install-lock"
+flock 9 2>/dev/null || true
+
+STAGING=$(mktemp -d)
+trap 'rm -rf "$STAGING"' EXIT
 : > "$STATUS"
+
+# Drop only what this hook installed. The marker lives inside each installed
+# directory rather than in one central manifest: there is nothing to truncate,
+# so a killed or concurrent run cannot leave state that makes every skill look
+# native and wedges the install for good.
+for d in "$TARGET"/*/; do
+  [ -d "$d" ] && [ -f "$d$MARKER" ] && rm -rf "$d"
+done
 
 while IFS='|' read -r repo wanted; do
   [ -z "$repo" ] && continue
@@ -47,8 +53,8 @@ while IFS='|' read -r repo wanted; do
   fi
   IFS=',' read -ra names <<< "$wanted"
   for name in "${names[@]}"; do
-    # Anything still standing after the manifest sweep is a native skill.
-    # It owns the name; never overwrite it.
+    # Anything still standing after the sweep carries no marker, so it is a
+    # native skill. It owns the name; never overwrite it.
     if [ -e "$TARGET/$name" ]; then
       echo "native skill owns this name, external copy not installed: $name" >> "$STATUS"
       continue
@@ -58,7 +64,7 @@ while IFS='|' read -r repo wanted; do
     src=$(find "$clone" -name '.*' -prune -o -type d -name "$name" \
             -exec test -f '{}/SKILL.md' \; -print -quit)
     if [ -n "$src" ]; then
-      cp -r "$src" "$TARGET/$name" && echo "$name" >> "$MANIFEST"
+      cp -r "$src" "$TARGET/$name" && touch "$TARGET/$name/$MARKER"
     else
       echo "no directory with a SKILL.md named '$name' in $repo" >> "$STATUS"
     fi

@@ -12,7 +12,8 @@
 ## Non-negotiables
 
 Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors" - a claude.ai chat has
-no repo to read them from. The hook clones upstream HEAD; `SKILLS.web.md` records the commit last
+no repo to read them from. One deliberate deviation: rule 1 forbids the code block upstream
+prescribes. The hook clones upstream HEAD; `SKILLS.web.md` records the commit last
 checked against.
 
 1. Surface assumptions. Before anything non-trivial, say in running prose, in the user's language -
@@ -73,7 +74,7 @@ checked against.
 6. Phase routing - the `SessionStart` hook injects `using-agent-skills`; its flowchart is the map, the skills are in `.claude/agent-skills/skills/<name>/SKILL.md`. Read them from disk: they are not in the Skill roster.
    - Enter when any holds: >=3 files to change, a new module/subsystem/public interface, work spanning sessions, a spec or a plan is asked for, or the user names a phase skill. Below those, steps 3-5 are enough.
    - User names a specific skill/methodology (e.g. write-skill) -> follow its own process directly, skip the flowchart.
-   - Where a step-5 skill and a flowchart skill cover the same ground, the step-5 one wins - `grilling`/`grill-with-docs` over `interview-me`, `code-review` + `ponytail-review` over `code-review-and-quality` (see `PR lifecycle`). Otherwise they compose, and everything the flowchart names is used as-is.
+   - Where a step-5 skill and a flowchart skill cover the same ground, the step-5 one wins - `grilling`/`grill-with-docs` over `interview-me`, the built-in `code-review` + `ponytail-review` over `code-review-and-quality` (see `PR lifecycle`). Otherwise they compose, and everything the flowchart names is used as-is.
    - `grilling` stays step 5's gate: it runs before the flowchart, not instead of it.
 7. End of turn:
    - Stamp the reply with local time (`date`); no clock available -> skip.
@@ -123,7 +124,7 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 
 | Trigger | Action |
 |---|---|
-| Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then `code-review`, no asking |
+| Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then the built-in `code-review`, no asking |
 | Turn would end with an unreviewed diff-changing push, otherwise | Plain-text question: review now or keep going.<br>- Ask once, wait until answered or PR merges/closes |
 | Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
 | >=2-3 turns since last rename, scope clear/shifted | Draft short title.<br>- Confirm via plain-text question.<br>- Rename PR + conversation title (if a rename tool exists) |

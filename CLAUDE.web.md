@@ -12,7 +12,8 @@
 ## Non-negotiables
 
 Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors" - a claude.ai chat has
-no repo to read them from. `SKILLS.web.md` records the commit last checked against.
+no repo to read them from. One deliberate deviation: rule 1 forbids the code block upstream
+prescribes. `SKILLS.web.md` records the commit last checked against.
 
 1. Surface assumptions. Before anything non-trivial, say in running prose, in the user's language -
    never a code block, which wraps badly and reads worse - what you took the requirements, the

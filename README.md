@@ -14,9 +14,13 @@ External skills are not vendored here. Three mechanisms bring them in:
 
 The hook installs rather than `npx` because the Skill roster is built after
 `SessionStart` hooks run: a mid-session install is never invocable, and lands in
-the working directory rather than `.claude/skills/`. Three shallow clones also
-take about 4.7s against roughly 50s for the equivalent `npx` runs, and git gets
-through proxies that block npm.
+the working directory rather than `.claude/skills/`. The skill clones also take
+about 3s against roughly 50s for the equivalent `npx` runs, and git gets through
+proxies that block npm.
+
+The hook does 4 shallow clones here and 5 in a consumer repo, which clones this
+repo first, and it re-runs on resume and `/clear` as well as startup. Those few
+seconds are the price of re-injecting the router after a context wipe.
 
 ## Adding this repo to another project
 
@@ -36,11 +40,11 @@ In the consumer repo:
 1. Copy `templates/settings.json` to `.claude/settings.json` - wires the hook.
 2. Copy `templates/hooks/session-start.sh` to `.claude/hooks/session-start.sh`
    (keep it executable) - clones this repo fresh each session, refreshes the
-   generated files, then runs `templates/hooks/inject-agent-skills.sh` from
-   that fresh clone: `install-skills.sh` then `inject-agent-skills.sh`. Only the
-   thin bootstrap is copied, so both update themselves afterwards without
-   consumers re-copying anything. A repo set up before they existed needs this
-   one re-copy - the synced `CLAUDE.md` assumes both have run.
+   generated files, then runs `install-skills.sh` and `inject-agent-skills.sh`
+   from that fresh clone, in that order. Only the thin bootstrap is copied, so
+   both update themselves afterwards without consumers re-copying anything. A
+   repo set up before they existed needs this one re-copy - the synced
+   `CLAUDE.md` assumes both have run.
 3. Add to `.gitignore` - the generated files are never committed:
    ```
    .claude/CLAUDE.md
