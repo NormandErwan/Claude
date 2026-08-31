@@ -10,10 +10,10 @@
 #
 # $1 - .claude directory to install into
 #
-# Prints nothing on stdout: the injector step owns it, and a stray line there
-# breaks the SessionStart envelope. Problems go to skills/.install-status,
-# which inject-agent-skills.sh reads and surfaces - a silent failure would
-# leave CLAUDE.md asserting skills that are not there.
+# Prints nothing on stdout: the injector step owns it, and SessionStart adds
+# whatever lands there to the session context. Problems go instead to
+# skills/.install-status, which inject-agent-skills.sh reads and surfaces - a
+# silent failure would leave CLAUDE.md asserting skills that are not there.
 set -uo pipefail
 
 TARGET="${1:?usage: install-skills.sh <claude-dir>}/skills"
@@ -26,6 +26,21 @@ juliusbrussee/caveman|caveman,caveman-commit
 mattpocock/skills|codebase-design,domain-modeling,grill-with-docs,grilling,handoff,improve-codebase-architecture,prototype,research,resolving-merge-conflicts,teach"
 
 mkdir -p "$TARGET"
+
+# The hook also fires on resume, clear and compact. Re-cloning then is waste,
+# but skipping blindly would leave a resumed session in a fresh container with
+# no skills at all - so skip only when a previous run in this container left
+# something behind. `source` comes from the hook payload on stdin; grep, not
+# jq, because this script must work without it.
+SOURCE=startup
+if [ ! -t 0 ]; then
+  PAYLOAD=$(timeout 1 cat 2>/dev/null || true)
+  FOUND=$(printf '%s' "$PAYLOAD" | grep -o '"source"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"\([^"]*\)"$/\1/')
+  [ -n "$FOUND" ] && SOURCE="$FOUND"
+fi
+if [ "$SOURCE" != startup ] && [ -n "$(find "$TARGET" -maxdepth 2 -name "$MARKER" -print -quit 2>/dev/null)" ]; then
+  exit 0
+fi
 
 # Serialise. Two sessions opening at once would otherwise interleave the prune
 # and the copy below.

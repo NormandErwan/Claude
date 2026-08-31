@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR/templates/hooks/install-skills.sh\" \"$CLAUDE_PROJECT_DIR/.claude\"; \"$CLAUDE_PROJECT_DIR/templates/hooks/inject-agent-skills.sh\" \"$CLAUDE_PROJECT_DIR/.claude\""
+            "command": "mkdir -p \"$CLAUDE_PROJECT_DIR/.claude/skills\"; cp -r \"$CLAUDE_PROJECT_DIR/skills/.\" \"$CLAUDE_PROJECT_DIR/.claude/skills/\"; \"$CLAUDE_PROJECT_DIR/templates/hooks/install-skills.sh\" \"$CLAUDE_PROJECT_DIR/.claude\"; \"$CLAUDE_PROJECT_DIR/templates/hooks/inject-agent-skills.sh\" \"$CLAUDE_PROJECT_DIR/.claude\""
           }
         ]
       }
