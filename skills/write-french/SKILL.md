@@ -194,17 +194,13 @@ chat replies: applying the rules while writing is enough there.
    This step exists because defects 1-6 are patterns, and a sentence can be
    hard to parse on one read without matching any of them by the letter -
    grill it anyway; the reader doesn't care which numbered defect it was.
-   Default to plain, direct phrasing: a cleft sentence (« C'est X qui... »),
-   an elliptical antithesis (« X ne fait pas ceci, Y si »), a parenthetical
-   aside that splits a subject from its verb (« Le projet — lancé en
-   janvier, repoussé deux fois — a finalement livré », where the reader
-   holds « Le projet » in memory across the aside before reaching « a
-   livré »), or any other rhetorical construction has to earn its place
-   over the plain rewrite by being clearer - never by being denser or more
-   striking. When a rhetorical
-   sentence and its plain rewrite say the same thing, keep the plain one;
-   dense rhetoric is what makes a writer misjudge their own sentence as
-   elegant in the first place, so it does not get the benefit of the doubt.
+   Default to plain, direct phrasing over any rhetorical construction -
+   cleft sentence (« C'est X qui... »), elliptical antithesis (« X ne fait
+   pas ceci, Y si »), a subject-verb-splitting aside (« Le projet — lancé
+   en janvier, repoussé deux fois — a finalement livré »), or other. It
+   earns its place only by being clearer, never denser: dense rhetoric is
+   exactly what makes a writer misjudge their own sentence as elegant, so
+   it gets no benefit of the doubt.
 
 ## Red Flags - Stop And Rewrite
 
@@ -365,30 +361,24 @@ benchmarked with a fresh blind A/B: the fix responds to two specific,
 human-identified misses, not a measured regression, and the next real-guide
 test should confirm whether the grill step catches this class going forward.
 
-**v1.4.1 - defect 6's mechanical test over-detects on dense rhetorical
-register.** A held-out test on a formal, rhetorically dense guide (elliptical
-antitheses, cleft sentences) found the literal defect-6 test - two independent
-clauses joined at a conjunction, dash or colon - flagging clean, deliberate
-constructions alongside genuinely confusing ones; the grill step (step 5) was
-supposed to make that call but had no stated criterion to decide with. Fixed
-by giving the grill step an explicit default: plain, direct phrasing over any
-rhetorical construction (cleft sentence, elliptical antithesis, or other),
-unless the rhetorical version is demonstrably clearer, not merely denser -
-added to step 5, Red Flags and Common Mistakes. Not benchmarked with a blind
-A/B: the fix names a discrimination criterion the grill step lacked, it does
-not change the mechanical defect tests, so the next held-out rhetorical-register
-test should confirm the grill step now converges with a human's judgment call.
+**v1.4.1 - defect 6 over-detects on dense rhetorical register.** A held-out
+test on a rhetorically dense guide (elliptical antitheses, cleft sentences)
+found defect 6's literal test - two independent clauses joined at a
+conjunction, dash or colon - flagging clean, deliberate constructions
+alongside genuinely confusing ones; the grill step (step 5) had no criterion
+to tell them apart. Fixed by giving it an explicit default: plain phrasing
+over any rhetorical construction, unless demonstrably clearer, not merely
+denser - added to step 5, Red Flags and Common Mistakes. Not benchmarked:
+this names a discrimination criterion rather than changing the mechanical
+tests; the next rhetorical-register test should confirm it converges with
+human judgment.
 
 **v1.4.2 - a subject-verb-splitting parenthetical was unnamed.** A blind A/B
-run outside this skill (`CLAUDE.md`'s reader-clarity rule, RETROSPECTIVE.md
+outside this skill (`CLAUDE.md`'s reader-clarity rule, RETROSPECTIVE.md
 2026-08-30) produced a French paragraph with a dash-set-off aside between a
-subject and its verb (« Découper un projet en tranches verticales — chacune
-livrant une fonctionnalité complète... — permet de... »); defect 6's test
-didn't fire (one clause, not two fused independent ones) and step 5's named
-rhetorical constructions (cleft sentence, elliptical antithesis) didn't cover
-it either, so it passed unflagged. Added as a third named construction to
-step 5, Red Flags and Common Mistakes, plus a `alors que`/`tandis que` worked
-example to defect 6 - none of its prior examples used a contrast conjunction.
-Not benchmarked with a blind A/B: the fix names a construction the grill step
-lacked, the next held-out test involving a parenthetical aside should confirm
-it now gets caught.
+subject and its verb; neither defect 6 (needs two fused independent clauses)
+nor step 5's named constructions (cleft sentence, elliptical antithesis)
+caught it. Added as a third named construction to step 5, Red Flags and
+Common Mistakes, plus an `alors que`/`tandis que` worked example to defect
+6 - none of its prior rows used a contrast conjunction. Not benchmarked: the
+next test involving a parenthetical aside should confirm it's now caught.
