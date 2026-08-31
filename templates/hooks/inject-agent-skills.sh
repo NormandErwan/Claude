@@ -18,32 +18,42 @@ META="$CLONE_DIR/skills/using-agent-skills/SKILL.md"
 STATUS="$TARGET_DIR/skills/.install-status"
 
 emit() {
-  # Run jq rather than merely finding it: a jq on PATH that fails to execute
-  # used to produce no envelope at all.
+  # Run jq rather than merely finding it: a jq on PATH that fails to execute,
+  # or that exits 0 with something that is not our envelope, must not decide
+  # what this hook prints.
   local out=""
   if command -v jq >/dev/null 2>&1; then
     out=$(jq -cn --arg context "$1" \
       '{hookSpecificOutput: {hookEventName: "SessionStart", additionalContext: $context}}' 2>/dev/null)
   fi
-  if [ -n "$out" ]; then
-    printf '%s\n' "$out"
-  else
-    # No working jq, so nothing here can be escaped safely - not the router,
-    # not the install status. Name both files instead of asserting either.
-    echo '{"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "agent-skills: no working jq, so neither the router nor the skill-install status could be injected. Read .claude/agent-skills/skills/using-agent-skills/SKILL.md and .claude/skills/.install-status directly if they exist."}}'
-  fi
+  case "$out" in
+    '{"hookSpecificOutput"'*) printf '%s\n' "$out" ;;
+    *)
+      # Nothing here can be escaped safely - not the router, not the install
+      # status. Name both files instead of asserting either exists.
+      echo '{"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "agent-skills: no working jq, so neither the router nor the skill-install status could be injected. Read .claude/agent-skills/skills/using-agent-skills/SKILL.md and .claude/skills/.install-status directly if they exist."}}'
+      ;;
+  esac
 }
 
 # Clone aside and swap on success: a blocked clone must leave the previous
 # copy in place, since it is the only fallback left this session.
-STAGING=$(mktemp -d)
-trap 'rm -rf "$STAGING"' EXIT
+STAGING=$(mktemp -d 2>/dev/null) || STAGING=""
+trap '[ -n "$STAGING" ] && rm -rf "$STAGING"' EXIT
 FRESH=no
-if git clone --depth 1 --quiet "$SKILLS_URL" "$STAGING/agent-skills" 2>/dev/null; then
-  rm -rf "$CLONE_DIR"
-  mv "$STAGING/agent-skills" "$CLONE_DIR"
-  FRESH=yes
+if [ -n "$STAGING" ] && git clone --depth 1 --quiet "$SKILLS_URL" "$STAGING/agent-skills" 2>/dev/null; then
+  # Swap only if the clone actually carries the router. A clone that lost it
+  # upstream used to destroy the working copy and then report "no copy on disk".
+  if [ -f "$STAGING/agent-skills/skills/using-agent-skills/SKILL.md" ]; then
+    rm -rf "$CLONE_DIR"
+    mv "$STAGING/agent-skills" "$CLONE_DIR"
+    FRESH=yes
+  fi
 fi
+
+# Read once. Testing the file and then reading it is a window another session's
+# swap can land in, which produced envelopes claiming success with no router.
+ROUTER=$(cat "$META" 2>/dev/null)
 
 # install-skills.sh leaves its problems here; it cannot report them itself
 # without writing to the stdout this script owns. `-s`, not `-f`: an empty
@@ -56,14 +66,14 @@ $(cat "$STATUS")
 "
 fi
 
-if [ -f "$META" ] && [ "$FRESH" = yes ]; then
+if [ -n "$ROUTER" ] && [ "$FRESH" = yes ]; then
   emit "${NOTE}agent-skills loaded. Phase skills are in .claude/agent-skills/skills/<name>/SKILL.md - read them from disk, they are not in the Skill roster.
 
-$(cat "$META")"
-elif [ -f "$META" ]; then
+$ROUTER"
+elif [ -n "$ROUTER" ]; then
   emit "${NOTE}agent-skills: this session's clone was blocked, so the text below comes from a previous session's copy and may be out of date. Phase skills are in .claude/agent-skills/skills/<name>/SKILL.md - read them from disk, they are not in the Skill roster.
 
-$(cat "$META")"
+$ROUTER"
 else
   emit "${NOTE}agent-skills: clone failed and no previous copy on disk, so using-agent-skills was not injected. Phase routing is unavailable this session."
 fi

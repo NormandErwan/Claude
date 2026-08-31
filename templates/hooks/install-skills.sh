@@ -45,7 +45,7 @@ if [ ! -t 0 ]; then
   PAYLOAD=$(timeout 1 cat 2>/dev/null || true)
   if command -v jq >/dev/null 2>&1 && FOUND=$(printf '%s' "$PAYLOAD" | jq -re '.source' 2>/dev/null); then
     SOURCE="$FOUND"
-  elif [ "$(printf '%s' "$PAYLOAD" | grep -c '"source"[[:space:]]*:')" = 1 ]; then
+  elif [ "$(printf '%s' "$PAYLOAD" | grep -o '"source"[[:space:]]*:' | wc -l)" = 1 ]; then
     # Only one candidate, so no top-level/nested ambiguity to get wrong.
     SOURCE=$(printf '%s' "$PAYLOAD" | grep -o '"source"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
   fi
@@ -55,12 +55,26 @@ if [ "$SOURCE" != startup ] && [ -f "$STAMP" ]; then
   exit 0
 fi
 
-exec 9>"$TARGET/.install-lock"
-flock 9 2>/dev/null || true
+LOCKDIR="$TARGET/.install-lock.d"
+[ -n "${LOCKDIR:-}" ] || LOCKDIR=""
+if command -v flock >/dev/null 2>&1; then
+  exec 9>"$TARGET/.install-lock"
+  flock 9 2>/dev/null || true
+else
+  # No flock(1) - macOS. A directory is the portable mutex; give up after 60s
+  # rather than deadlock on one a killed run left behind.
+  for _ in $(seq 1 300); do mkdir "$LOCKDIR" 2>/dev/null && break; sleep 0.2; done
+fi
+
+# From here the tree is about to change, so nothing may still claim it is
+# complete. Restored at the end, only if every repo answered.
+rm -f "$STAMP" 2>/dev/null
 
 STAGE_ROOT="$TARGET/.staging.$$"
 CLONES=$(mktemp -d 2>/dev/null) || { note "no temp directory available, nothing installed"; exit 0; }
-trap 'rm -rf "$CLONES" "$STAGE_ROOT"' EXIT
+trap 'rm -rf "$CLONES" "$STAGE_ROOT" "$LOCKDIR"' EXIT
+# Collect what earlier runs died holding.
+rm -rf "$TARGET"/.staging.* "$TARGET"/.pruning.* 2>/dev/null
 mkdir -p "$STAGE_ROOT" 2>/dev/null || { note "cannot write to $TARGET, nothing installed"; exit 0; }
 
 # Publish by same-directory rename. Refuse an occupied name outright: `mv` onto
@@ -116,13 +130,15 @@ for d in "$TARGET"/*/; do
   [ -d "$d" ] || continue
   name=$(basename "$d")
   if [ -f "$d$MARK_NAT" ]; then
-    :                                   # native is re-placed from $NATIVE below
+    # Same rule as a repo that did not answer: with no source to re-place them
+    # from, the copies on disk are the best there is.
+    [ -n "$NATIVE_NAMES" ] || continue
   elif [ -f "$d$MARK_EXT" ]; then
     has "$name" "$KEEP" && continue     # its repo did not answer - keep the copy
   else
     continue                            # no marker: the user owns it
   fi
-  mv "$d" "$TARGET/.pruning.$$" 2>/dev/null && rm -rf "$TARGET/.pruning.$$"
+  mv "$d" "$STAGE_ROOT/.pruned" 2>/dev/null && rm -rf "$STAGE_ROOT/.pruned"
 done
 
 # 3. Publish.
