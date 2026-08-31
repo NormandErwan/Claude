@@ -34,10 +34,19 @@ if git clone --depth 1 --quiet "$SKILLS_URL" "$STAGING/agent-skills" 2>/dev/null
   mv "$STAGING/agent-skills" "$CLONE_DIR"
 fi
 
+# install-skills.sh leaves its problems here; it cannot report them itself
+# without breaking the envelope this script emits.
+NOTE=""
+STATUS="$TARGET_DIR/skills/.install-status"
+[ -f "$STATUS" ] && NOTE="Skill install reported problems this session:
+$(cat "$STATUS")
+
+"
+
 if [ -f "$META" ]; then
-  emit "agent-skills loaded. Phase skills are in .claude/agent-skills/skills/<name>/SKILL.md - read them from disk, they are not in the Skill roster.
+  emit "${NOTE}agent-skills loaded. Phase skills are in .claude/agent-skills/skills/<name>/SKILL.md - read them from disk, they are not in the Skill roster.
 
 $(cat "$META")"
 else
-  emit "agent-skills: clone failed and no previous copy on disk, so using-agent-skills was not injected. Phase routing is unavailable this session."
+  emit "${NOTE}agent-skills: clone failed and no previous copy on disk, so using-agent-skills was not injected. Phase routing is unavailable this session."
 fi

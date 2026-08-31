@@ -43,7 +43,7 @@ checked against.
    - Topic-gated skills stay out of that list (see Every turn 1).
 3. A skill installed by hand mid-session via `npx skills add` is never invocable via the Skill tool this session (roster fixed at session start - guaranteed, not "may not load"). It also writes into the working directory, not `.claude/skills/`:
    - If missing, say so.
-   - Read the installed `SKILL.md` directly and follow it manually instead of skipping it.
+   - Read the installed `SKILL.md` directly - `.claude/skills/<name>/SKILL.md` for anything the hook installed - and follow it manually instead of skipping it.
 
 ## Every turn
 1. Identify the task.

@@ -22,7 +22,7 @@ rows are unchanged at their new paths. The GitHub API returns 403 for that repo
 through the proxy, so the pass used a public blobless clone. `addyosmani/agent-skills`
 is the provenance of `CLAUDE.web.md`'s `Non-negotiables`, not an uploaded skill.
 
-Moved at that pass: verify-sources, write-french.
+Moved at that pass: verify-sources, write-french (zips sent 2026-08-30).
 
-2026-08-31: write-french only, triggered by its own edits (v1.4.0 -> v1.4.3),
-not a full pass.
+2026-08-31: write-french moved again with its own edits (v1.4.0 -> v1.4.3), so its
+zip is owed again; every other row unchanged. Not a full pass.
