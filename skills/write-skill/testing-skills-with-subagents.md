@@ -49,6 +49,7 @@ This is identical to TDD's "write failing test first" - you MUST see what agents
 **Process:**
 
 - [ ] **Create pressure scenarios** (3+ combined pressures)
+- [ ] **Cap concurrent runs at two** - see `evaluating-skills-with-subagents.md`'s Orchestration constraint (same proxy limit applies here)
 - [ ] **Run WITHOUT skill** - give agents realistic task with pressures
 - [ ] **Document choices and rationalizations** word-for-word
 - [ ] **Identify patterns** - which excuses appear repeatedly?

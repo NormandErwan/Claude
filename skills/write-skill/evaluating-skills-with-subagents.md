@@ -21,6 +21,10 @@ calls from the orchestrating session. Never delegate both to one subagent — a 
 no Agent tool of its own, so it can't spawn a grader as a nested call, and ends up grading
 its own output instead. That is self-grading, which this methodology forbids.
 
+Cap concurrent subagent runs (execution, grading, comparison alike) at two — a third trips the
+session proxy's certificate check. A run that fails on transport is a bad sample, not a result:
+rerun it, don't keep its output.
+
 ---
 
 ## Track 1 — Quality A/B Evaluation
@@ -51,6 +55,9 @@ Create `evals/evals.json` in the skill directory (schema: `references/schemas.md
 - Concrete and completable in one agent turn
 - Representative of real usage, not contrived
 - At least 3 evals to detect variance; more = better signal
+- Self-contained: the prompt carries whatever context the task needs, not assumed to exist in the
+  working directory. Every arm reporting the same missing-context complaint invalidates the cell —
+  fix the eval and rerun, don't score it.
 
 ### Step 2: Run with-skill and without-skill subagents
 
