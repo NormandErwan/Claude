@@ -1,6 +1,6 @@
 ---
 name: prevent-drift
-version: 1.0.0
+version: 1.1.0
 description: Use when a fact is about to exist in two places - writing a rule into a CLAUDE.md, a skill, a README, a hook or a config file; adding a note that restates a setting; reviewing a diff that repeats something stated elsewhere; editing a rule that other files also state. Also when auditing a knowledge base, a docs tree or a config set for drift, or when two files already disagree about the same fact.
 ---
 
@@ -34,7 +34,7 @@ Good: Hidden files are listed under `:hidden` in `logseq/config.edn`
 | Before writing any fact into a file | Does it already live somewhere? `git grep` a distinctive phrase of it |
 | When editing a rule | Hunt its copies before you finish. An edited rule with an unedited copy IS the drift |
 | When **moving** a fact to a new file | Hunt what read it at the old address. A move breaks references silently: the readers still run, they just read nothing, or the wrong thing |
-| Before opening or updating a PR | Run the scan below over the diff's files |
+| Before opening or updating a PR | Run the scan below, scoped to the diff's files |
 | When a doc and a config disagree | Treat it as a bug report, not a formatting nit |
 
 ## How to treat a duplicate
@@ -52,24 +52,50 @@ Good: Hidden files are listed under `:hidden` in `logseq/config.edn`
 Identical copies are easy: `git grep -F "distinctive phrase"`.
 
 Copies that have already drifted are the dangerous ones - they no longer match, so grep misses them.
-Scan for near-duplicate lines across tracked text files:
+Scan for near-duplicate lines across tracked text files. Compare only the diff's *added* lines
+against the rest of the repo - comparing every line of a changed file (let alone the whole repo)
+against every other line is O(n²) and times out past a few hundred tracked files, even scoped to
+one file:
 
 ```bash
 python3 - <<'PY'
-import difflib, itertools, pathlib, subprocess
+import difflib, pathlib, subprocess
+diff = subprocess.run(["git","diff","-U0","HEAD"],capture_output=True,text=True).stdout \
+    or subprocess.run(["git","diff","-U0","--cached"],capture_output=True,text=True).stdout
+added, cur = [], None
+for line in diff.splitlines():
+    if line.startswith("+++ b/"):
+        cur = line[6:]
+    elif line.startswith("+") and not line.startswith("+++") and len(line[1:].strip()) > 40:
+        added.append((cur, line[1:].strip()))
+
 out = subprocess.run(["git","ls-files","-z"],capture_output=True,text=True).stdout
 files = [f for f in out.split("\0")
-         if f.endswith((".md",".edn",".json",".yml",".yaml",".sh",".toml"))]
+         if f.endswith((".md",".edn",".json",".yml",".yaml",".sh",".toml")) and f]
 lines = [(f,n,s.strip()) for f in files
          for n,s in enumerate(pathlib.Path(f).read_text(encoding="utf-8",errors="ignore").splitlines(),1)
          if len(s.strip()) > 40]
-for (fa,na,a),(fb,nb,b) in itertools.combinations(lines,2):
-    if fa == fb or a == b:
-        continue
-    if difflib.SequenceMatcher(None,a,b).ratio() > 0.75:
-        print(f"{fa}:{na}\n{fb}:{nb}\n  {a[:90]}\n  {b[:90]}\n")
+
+for cf, a in added:
+    la = len(a)
+    for fb, nb, b in lines:
+        if fb == cf and b == a:
+            continue
+        lb = len(b)
+        if min(la, lb) < 0.6 * max(la, lb):
+            continue  # can't reach ratio > 0.75 at this length gap - skip before the expensive part
+        if difflib.SequenceMatcher(None, a, b).ratio() > 0.75:
+            print(f"{cf} (new)\n{fb}:{nb}\n  {a[:90]}\n  {b[:90]}\n")
 PY
 ```
+
+Nothing staged or modified -> `added` is empty, the scan reports nothing. That is correct for a
+pre-commit check (nothing new to compare yet), not a sign the scan is broken.
+
+For a deliberate full-repo audit (not a pre-commit check) - a knowledge base you suspect has
+drifted for reasons the diff-scoped scan above can't see - drop the `git diff` step and replace
+`added` with every line in `lines`. That is a real O(n²) pass: expect minutes, not seconds, and
+run it once, not on every commit.
 
 Split on NUL, not whitespace: tracked paths contain spaces more often than you expect, and
 `git ls-files` without `-z` silently shreds them into paths that do not exist.
