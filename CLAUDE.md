@@ -60,9 +60,10 @@ checked against.
    npx skills add mattpocock/skills@resolving-merge-conflicts
    npx skills add mattpocock/skills@teach
    ```
-3. Skill installed mid-session via `npx skills add` is never invocable via Skill tool this session (roster fixed at session start - guaranteed, not "may not load"):
-   - If missing, say so.
-   - Read `.claude/skills/<name>/SKILL.md` directly and follow it manually instead of skipping it.
+3. A skill is unusable via the Skill tool this session in two cases - read its `SKILL.md` directly and follow it manually either way:
+   - Installed mid-session via `npx skills add` (roster fixed at session start - guaranteed, not "may not load"). Read `.claude/skills/<name>/SKILL.md`.
+   - `npx skills add` itself fails on transport (proxy blocks npm, git/curl still work) -> `git clone` the skill's repo instead, read its `SKILL.md` from that clone.
+   - Still unreachable after the fallback -> say so.
 
 ## Every turn
 1. Identify the task.
@@ -82,12 +83,14 @@ checked against.
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
 4. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
-5. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed") -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`; read-only skips).
-   - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
-   - Domain/data model involved -> also `domain-modeling`.
-   - New module/interface design -> also `codebase-design`.
-   - Unfamiliar domain needing primary sources -> also `research`.
-   - Design question needing a throwaway spike -> also `prototype`.
+5. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed"):
+   - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> state assumptions inline (`Non-negotiables` 1) and answer. No `grilling`.
+   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`).
+     - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
+     - Domain/data model involved -> also `domain-modeling`.
+     - New module/interface design -> also `codebase-design`.
+     - Unfamiliar domain needing primary sources -> also `research`.
+     - Design question needing a throwaway spike -> also `prototype`.
 6. Phase routing - the `SessionStart` hook injects `using-agent-skills`; its flowchart is the map, the skills are in `.claude/agent-skills/skills/<name>/SKILL.md`. Read them from disk: they are not in the Skill roster.
    - Enter when any holds: >=3 files to change, a new module/subsystem/public interface, work spanning sessions, a spec or a plan is asked for, or the user names a phase skill. Below those, steps 3-5 are enough.
    - User names a specific skill/methodology (e.g. write-skill) -> follow its own process directly, skip the flowchart.
@@ -129,10 +132,10 @@ checked against.
 - Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English + ASCII. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills; French quoted as an example - keeps its accents, unaccented French is misspelled French. Deliverables written for the user follow the user's language.
 - Any technical/code doc (README, manifests, comments, PR/commit bodies) -> Communication's word-cutting rule, applied on the first pass, not as a later tightening pass: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
-- Editing any CLAUDE.md -> `craft-prompt` first for structure and degrees-of-freedom guidance; write it under Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never ship a verbose draft to tighten later on request.
+- Editing any CLAUDE.md -> `craft-prompt` first for structure and degrees-of-freedom guidance; write it under Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never ship a verbose draft to tighten later on request. A rule that constrains what gets omitted or said is craft-prompt's Low-freedom case: write the exact trigger and its exceptions, not a discretionary standard.
 - Any edit to a doc/skill's worked examples or chained steps -> before delivery, check each example against the principle it illustrates and that each step's output still satisfies what the next step consumes. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
-- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Non-negotiables, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored. `CLAUDE.web.md` may hold extra sections outside this list (e.g. Web-only) - preserve them, never treat as derived from `CLAUDE.md`. Any `CLAUDE.web.md` edit -> tell the user to re-paste it into the claude.ai preferences, kept identical by hand.
+- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Non-negotiables, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored. `CLAUDE.web.md` may hold extra sections outside this list (e.g. Web-only) - preserve them, never treat as derived from `CLAUDE.md`. Any `CLAUDE.web.md` edit -> tell the user to re-paste it into the claude.ai preferences, kept identical by hand. Before committing, run `prevent-drift`'s check on the two files' matching sections.
 - Editing `CLAUDE.web.md`, or any skill `SKILLS.web.md` lists -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.
 
 ## PR lifecycle
