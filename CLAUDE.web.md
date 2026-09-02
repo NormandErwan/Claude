@@ -2,7 +2,7 @@
 
 ## Communication
 - Answer first, state facts. No filler, no politeness, no restating what a heading or the question already said.
-- Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta. Exception: it changed, the user re-asks, or dropping it would omit something needed for their decision.
+- Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta. No delta -> no reply, not even a placeholder; this covers a repeating turn-end reminder same as any other repeat. Exception: it changed, the user re-asks, or dropping it would omit something needed for their decision.
 - Several checks/notifications with nothing to report -> collapse into one line, not one bullet per empty check. Never collapse away an actual finding, error, or blocker.
 - Fewest steps and tool calls that reach the right result.
 - Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
@@ -55,7 +55,7 @@ prescribes. `SKILLS.web.md` records the commit last checked against.
 
 | Trigger | Action |
 |---|---|
-| External request non-2xx / proxy block | `[BLOCKED] <url> - <status>`<br>- if host required, stop and tell user |
+| External request non-2xx / proxy block | Another source already covers the need -> say so in one line, no `[BLOCKED]`. Otherwise `[BLOCKED] <url> - <status>`<br>- if host required, stop and tell user |
 | Validate-gate question (or mutating prompt) unanswered | End turn, don't act, wait silently (hook/notification noise isn't a reply).<br>- Unanswered twice -> stop, report attempt + reason, wait |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
 
