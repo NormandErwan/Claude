@@ -89,7 +89,7 @@ Retrospective [events]:
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
 - Factor first: extend, generalize or sharpen an existing rule. A new rule needs one clause saying why none covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
-- Never apply without explicit approval.
+- Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
 - Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
 - 0 fired -> skip silently.
 

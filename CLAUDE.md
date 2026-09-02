@@ -106,6 +106,7 @@ checked against.
 - Delegate to a subagent when the output is verbose and only the conclusion matters upstream - test runs, log sweeps, doc fetching. Simple task -> `model: haiku`.
 - Don't delegate work that needs context this session already holds: the subagent starts cold and re-derives it. Session forbids unasked spawns -> ask first.
 - Delegating with `isolation: worktree` -> tell the agent to check its base at start (`git log -1`, compare to the intended branch) and reposition if it drifted, before reading any context. Verifying its diff when the base is in doubt -> `git show <ref>:file | diff - file`, not `git diff <ref> -- file` (a stale base makes the latter show a false full-file delete).
+- A delegated sub-agent never marks a Retrospective proposal `applied` - it always returns it `pending` with its recommendation to the parent session, which alone can seek the user's approval.
 
 ## Error handling
 
@@ -178,6 +179,6 @@ Retrospective [events]:
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
 - Log every entry in `RETROSPECTIVE.md`, approved or not - the discards are what `find-cause` reads next time.
 - `RETROSPECTIVE.md` over ~50 entries -> compact: entries whose rule is applied and still stands collapse to one line per class; rejected and pending ones stay verbatim.
-- Never apply without explicit approval.
+- Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
 - Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
 - 0 fired -> skip silently.
