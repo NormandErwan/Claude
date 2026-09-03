@@ -85,7 +85,7 @@ checked against.
 4. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
 5. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed"):
    - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> state assumptions inline (`Non-negotiables` 1) and answer. No `grilling`.
-   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`).
+   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges - alternatives always weighs reusing/composing an existing solution before any implementation approach is fixed, not only among variants of one already chosen; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`).
      - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
      - Domain/data model involved -> also `domain-modeling`.
      - New module/interface design -> also `codebase-design`.
