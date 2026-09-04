@@ -14,7 +14,7 @@ Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUD
 | grill-with-docs | `mattpocock/skills@grill-with-docs` | `447ca70872` |
 | research | `mattpocock/skills@research` | `321658273c` |
 | handoff | `mattpocock/skills@handoff` | `d28dfdc39b` |
-| using-agent-skills | `addyosmani/agent-skills@using-agent-skills` | `d2c37ef622` |
+| using-agent-skills | `addyosmani/agent-skills@using-agent-skills` | `1c760d6434` |
 
 Last full pass: 2026-08-23, every row. The GitHub API returns 403 for
 `mattpocock/skills` through the proxy; a public blobless clone works and is
@@ -30,3 +30,13 @@ verify-sources (zip re-sent), using-agent-skills (pinned commit updated only -
 not an uploaded skill, see note above). craft-prompt, find-cause,
 guide-decision, guide-purchase, write-french, grilling, grill-with-docs,
 research, handoff unchanged.
+
+2026-09-04: full pass, triggered by this session's `CLAUDE.web.md` edits
+(Communication, Every turn, Retrospective). All local skills unchanged
+(`git log` matches the pinned commits above). mattpocock/skills moved to
+a category-based tree since the last pass (`skills/productivity/...`,
+`skills/engineering/...`) but grilling, grill-with-docs, research, handoff
+are at the same commits, unmoved. using-agent-skills: upstream HEAD moved,
+but `skills/using-agent-skills/SKILL.md` itself has no commits in the
+range - pin updated to record the check, no content changed, no zip
+re-send needed.

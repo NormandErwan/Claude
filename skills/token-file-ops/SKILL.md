@@ -1,7 +1,7 @@
 ---
 name: token-file-ops
 description: Use when reading, editing, creating, or manipulating files; or running commands with potentially large output. Provides generic bash-first patterns for any file type. For .NET/C# specific patterns, also load token-dotnet.
-version: 1.4.0
+version: 1.4.1
 allowed-tools: Bash, Read, Grep, Glob
 ---
 
@@ -116,8 +116,8 @@ as a valid substring under the word boundaries in use. If it can, don't run sepa
 use one substitution with a capture group covering every case in a single pass:
 
 ```bash
-# One pass, one capture group — no earlier output for a later pass to re-match
-sed -i.bak -E 's/\bP([1-9])\b/P\1.1/g' file.md && rm file.md.bak
+# One pass, one capture group — matches the P4 -> P1.4 case above in a single scan
+sed -i.bak -E 's/\bP([1-9])\b/P1.\1/g' file.md && rm file.md.bak
 ```
 
 If a single pass isn't possible (renumbering rules differ per identifier), protect
