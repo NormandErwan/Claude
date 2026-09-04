@@ -1,7 +1,7 @@
 ---
 name: token-file-ops
 description: Use when reading, editing, creating, or manipulating files; or running commands with potentially large output. Provides generic bash-first patterns for any file type. For .NET/C# specific patterns, also load token-dotnet.
-version: 1.3.0
+version: 1.4.1
 allowed-tools: Bash, Read, Grep, Glob
 ---
 
@@ -102,6 +102,30 @@ sed -i.bak 's/old/new/g' file.md && rm file.md.bak
 # Replace across multiple files
 find . -name "*.md" -exec sed -i.bak 's/old/new/g' {} + \
   && find . -name "*.md.bak" -delete
+```
+
+## Bulk-Renaming a Short Identifier: Check for Substring Collision
+
+Renaming a short identifier (`P1`, `E4`...) across many files via sequential passes — one
+`sed` run per identifier — corrupts the result when an earlier pass's output contains a later
+pass's search token as a word-bounded substring: `P4` -> `P1.4`, then the separate `P1` pass
+re-matches the `P1` inside `P1.4` -> `P1.1.4`.
+
+Before a bulk rename by script, check whether the output format can contain the input format
+as a valid substring under the word boundaries in use. If it can, don't run separate passes —
+use one substitution with a capture group covering every case in a single pass:
+
+```bash
+# One pass, one capture group — matches the P4 -> P1.4 case above in a single scan
+sed -i.bak -E 's/\bP([1-9])\b/P1.\1/g' file.md && rm file.md.bak
+```
+
+If a single pass isn't possible (renumbering rules differ per identifier), protect
+already-produced output with a negative lookahead instead of running blind:
+
+```bash
+# perl -pe supports lookahead; sed's basic/extended regex does not
+perl -i -pe 's/\bP([1-9])\b(?!\.\d)/"P".($1+3)/ge' file.md
 ```
 
 ## Editing With Edit/Write: Read With the Read Tool First

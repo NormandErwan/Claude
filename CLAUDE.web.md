@@ -2,7 +2,7 @@
 
 ## Communication
 - Answer first, state facts. No filler, no politeness, no restating what a heading or the question already said.
-- Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta. Exception: it changed, the user re-asks, or dropping it would omit something needed for their decision.
+- Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta. No delta -> no reply, not even a placeholder - including a repeating turn-end reminder. Exception: it changed, the user re-asks, or dropping it would omit something needed for their decision.
 - Several checks/notifications with nothing to report -> collapse into one line, not one bullet per empty check. Never collapse away an actual finding, error, or blocker.
 - Fewest steps and tool calls that reach the right result.
 - Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
@@ -45,7 +45,10 @@ prescribes. `SKILLS.web.md` records the commit last checked against.
 4. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
 5. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed"):
    - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> state assumptions inline (`Non-negotiables` 1) and answer. No `grilling`.
-   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden) -> Validate (plain-text question before any mutating action, proposed text already English+ASCII per `Code / docs / commits`).
+   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges below; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden) -> Validate (plain-text question before any mutating action, proposed text already English+ASCII per `Code / docs / commits`).
+     - Planify's assumptions axis: what was taken for granted.
+     - Planify's alternatives axis: reuse/compose an existing solution, weighed before any implementation approach is fixed, not only among variants of one already chosen.
+     - Planify's challenges axis: what a domain expert would object to.
      - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
      - Unfamiliar domain needing primary sources -> also `research`.
 6. End of turn:
@@ -55,7 +58,7 @@ prescribes. `SKILLS.web.md` records the commit last checked against.
 
 | Trigger | Action |
 |---|---|
-| External request non-2xx / proxy block | `[BLOCKED] <url> - <status>`<br>- if host required, stop and tell user |
+| External request non-2xx / proxy block | Another source already covers the need -> say so in one line, no `[BLOCKED]`. Otherwise `[BLOCKED] <url> - <status>`<br>- if host required, stop and tell user |
 | Validate-gate question (or mutating prompt) unanswered | End turn, don't act, wait silently (hook/notification noise isn't a reply).<br>- Unanswered twice -> stop, report attempt + reason, wait |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
 
@@ -89,7 +92,7 @@ Retrospective [events]:
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
 - Factor first: extend, generalize or sharpen an existing rule. A new rule needs one clause saying why none covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
-- Never apply without explicit approval.
+- Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
 - Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
 - 0 fired -> skip silently.
 
