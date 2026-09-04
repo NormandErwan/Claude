@@ -106,7 +106,6 @@ checked against.
 - Delegate to a subagent when the output is verbose and only the conclusion matters upstream - test runs, log sweeps, doc fetching. Simple task -> `model: haiku`.
 - Don't delegate work that needs context this session already holds: the subagent starts cold and re-derives it. Session forbids unasked spawns -> ask first.
 - Delegating with `isolation: worktree` -> tell the agent to check its base at start (`git log -1`, compare to the intended branch) and reposition if it drifted, before reading any context. Verifying its diff when the base is in doubt -> `git show <ref>:file | diff - file`, not `git diff <ref> -- file` (a stale base makes the latter show a false full-file delete).
-- A delegated sub-agent never marks a Retrospective proposal `applied` - it always returns it `pending` with its recommendation to the parent session, which alone can seek the user's approval.
 
 ## Error handling
 
