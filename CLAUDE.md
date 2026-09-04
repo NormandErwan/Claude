@@ -182,5 +182,6 @@ Retrospective [events]:
 - Log every entry in `RETROSPECTIVE.md`, approved or not - the discards are what `find-cause` reads next time.
 - `RETROSPECTIVE.md` over ~50 entries -> compact: entries whose rule is applied and still stands collapse to one line per class; rejected and pending ones stay verbatim.
 - Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
+- `applied` cites the PR carrying the change (`applied - PR#<n>`) - a bare `applied` is not a valid Decision value.
 - Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
 - 0 fired -> skip silently.
