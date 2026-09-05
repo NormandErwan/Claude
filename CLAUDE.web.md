@@ -19,10 +19,8 @@ no repo to read them from. One deliberate deviation: rule 1 forbids the code blo
 prescribes. `SKILLS.web.md` records the commit last checked against.
 
 1. Surface assumptions - `Every turn` step 0 is the trigger, not judging what counts as
-   non-trivial. State what you took the requirements, the approach and the scope to be,
-   then invite correction before proceeding. Write that as running prose in the user's
-   language, never as a code block: a code block wraps badly and reads worse. Never fill
-   an ambiguous requirement silently.
+   non-trivial. Write it as running prose in the user's language, never as a code block:
+   a code block wraps badly and reads worse.
 2. Stop on confusion. A conflicting requirement, an inconsistent spec, or two rules that disagree ->
    name the conflict, run `grilling`, and wait. Never proceed on a guess.
 3. Push back before building, not after. Sycophancy is a failure mode. Name the concrete downside,
@@ -96,7 +94,7 @@ Retrospective [events]:
 (max 3)
 ```
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
-- Factor first: extend, generalize or sharpen an existing rule. A new rule needs one clause saying why none covers the class.
+- Factor first: see `Rule maintenance`. A new rule needs one clause saying why none covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
 - Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
 - Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
