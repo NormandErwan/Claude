@@ -1,6 +1,6 @@
 # SKILLS.web.md
 
-Commit manifest for skills `CLAUDE.web.md` references. Refreshed on every `CLAUDE.web.md` edit **or change to a skill listed here** (`CLAUDE.md` `Code / docs / commits`): recheck each commit, `SendUserFile` a zip of any skill that moved.
+Commit manifest for the skills `CLAUDE.web.md` references. Trigger in `CLAUDE.md` `Code / docs / commits`: every `CLAUDE.web.md` edit, or any change to a skill listed here. Procedure: recheck each listed skill's upstream commit (local fork: `git log`; upstream: public GitHub API or clone, never `add_repo`), update the rows that moved, then propose a zip download of each updated skill via `SendUserFile`, for re-upload to claude.ai.
 
 `Local commit` is this repo's own history for the file - only skills forked into `skills/` have
 one. `Upstream commit` is the last commit checked against the named upstream path - only forked
