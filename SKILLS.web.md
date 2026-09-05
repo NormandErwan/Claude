@@ -15,10 +15,10 @@ npx-pulled skill (never vendored) carries `-` in Local commit.
 | guide-purchase | native | `0aabdbb41d` | - |
 | write-french | native | `34a05c4793` | - |
 | craft-prompt | fork of `neolabhq/context-engineering-kit@skills/prompt-engineering` | `7aa7d4762a` | `4da35f2209` |
-| grilling | fork of `mattpocock/skills@skills/productivity/grilling` | `709043faac` | `85f83d3fde` |
-| grill-with-docs | `mattpocock/skills@grill-with-docs` (npx) | - | `447ca70872` |
-| research | `mattpocock/skills@research` (npx) | - | `321658273c` |
-| handoff | `mattpocock/skills@handoff` (npx) | - | `d28dfdc39b` |
+| grilling | fork of `mattpocock/skills@skills/productivity/grilling` | `709043faac` | `3cca18b368` |
+| grill-with-docs | `mattpocock/skills@grill-with-docs` (npx) | - | `3cca18b368` |
+| research | `mattpocock/skills@research` (npx) | - | `3cca18b368` |
+| handoff | `mattpocock/skills@handoff` (npx) | - | `3cca18b368` |
 | using-agent-skills | `addyosmani/agent-skills@using-agent-skills` (cloned by hook) | - | `1c760d6434` |
 
 craft-prompt's `Source` was recorded as `local` until this pass - it is a straight copy of
@@ -61,3 +61,12 @@ npx-only, upstream commit unchanged at `85f83d3fde`) - zip sent. craft-prompt's
 - a fork mislabeled since before this file existed, found this pass; upstream
 commit `4da35f2209` pinned, zip re-sent. Not a full pass: only the two
 forked skills checked.
+
+2026-09-05 (same day, triggered by two further `CLAUDE.web.md` edits):
+rechecked all four mattpocock/skills entries. Upstream moved from
+`85f83d3fde` to `3cca18b368` (PR #1025, "stop linking misc/ into local
+skill directories") - a repo-mechanical change (each SKILL.md went from
+a symlink into a shared misc/ to a materialized file at the same path),
+diffed content identical apart from grilling's already-forked local
+addition. No zip re-send: content unchanged, only the pinned commit
+moved to record the recheck.
