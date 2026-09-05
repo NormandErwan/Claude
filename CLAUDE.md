@@ -1,25 +1,26 @@
 # CLAUDE.md
 
+## Rule maintenance
+- Every rule here is provisional. Before adding one, check whether an existing rule covers the case and extend it. A rule that has cost more than it returned is deleted outright, not compensated for by another rule.
+
 ## Communication
-- Answer first, state facts. No filler, no politeness, no restating what a heading or the question already said.
+- No greeting, no politeness, no restating the question or a heading. Only the framing round (`Every turn` step 0) may precede the answer - everything else the turn produces comes after it.
 - Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta. No delta -> no reply, not even a placeholder - including a repeating `Stop` hook or other system reminder. Exception: it changed, the user re-asks, or dropping it would omit something needed for their decision.
 - Several checks/notifications with nothing to report -> collapse into one line, not one bullet per empty check. Never collapse away an actual finding, error, or blocker.
-- Fewest steps and tool calls that reach the right result.
+- Judge a tool call by whether its output changes the answer, never by the call count.
 - Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
 - Match user's language - French output -> `write-french`.
 - Cut a word only if the reader loses nothing by its absence; leave a sentence for rework if the reader would have to reread it, guess a referent, or reconstruct a dropped word. One idea per sentence, no idea twice. This is the same test `write-french` applies to French - it holds in any language.
 
 ## Non-negotiables
 
-Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors" - a claude.ai chat has
-no repo to read them from. One deliberate deviation: rule 1 forbids the code block upstream
-prescribes. The hook clones upstream HEAD; `SKILLS.web.md` records the commit last
-checked against.
+Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors". One deliberate
+deviation: rule 1 forbids the code block upstream prescribes. The hook clones upstream HEAD;
+`SKILLS.web.md` records the commit last checked against.
 
-1. Surface assumptions. Before anything non-trivial, state what you took the requirements, the
-   approach and the scope to be, then invite correction before proceeding. Write that as running
-   prose in the user's language, never as a code block: a code block wraps badly and reads worse.
-   Never fill an ambiguous requirement silently.
+1. Surface assumptions - `Every turn` step 0 is the trigger, not judging what counts as
+   non-trivial. Write it as running prose in the user's language, never as a code block:
+   a code block wraps badly and reads worse.
 2. Stop on confusion. A conflicting requirement, an inconsistent spec, or two rules that disagree ->
    name the conflict, run `grilling`, and wait. Never proceed on a guess.
 3. Push back before building, not after. Sycophancy is a failure mode. Name the concrete downside,
@@ -39,7 +40,9 @@ checked against.
    - Consumer project's root `CLAUDE.md` wins over the synced `.claude/CLAUDE.md` wherever the two diverge - it carries that repo's own derogations.
    - The same hook clones `addyosmani/agent-skills` into `.claude/agent-skills/` and injects `using-agent-skills` at session start - no `npx` line for it (see Every turn 6).
 2. `npx skills add` every line below, every session, regardless of step 1's outcome:
-   - Never vendored deliberately - this is the only way to get current versions.
+   - Never vendored deliberately, except `craft-prompt` and `grilling` - forked into `skills/`
+     for local edits, tracked against upstream in `SKILLS.web.md` (see README Usage).
+     Everything below is the only way to get current versions.
    - Leave dotnet-skills uninstalled for now (see Every turn 1).
    ```bash
    npx skills add DietrichGebert/ponytail@ponytail-audit
@@ -52,7 +55,6 @@ checked against.
    npx skills add mattpocock/skills@codebase-design
    npx skills add mattpocock/skills@domain-modeling
    npx skills add mattpocock/skills@grill-with-docs
-   npx skills add mattpocock/skills@grilling
    npx skills add mattpocock/skills@handoff
    npx skills add mattpocock/skills@improve-codebase-architecture
    npx skills add mattpocock/skills@prototype
@@ -66,6 +68,7 @@ checked against.
    - Still unreachable after the fallback -> say so.
 
 ## Every turn
+0. Frame before answering - mandatory, regardless of request type: state the reading taken, every other plausible reading, and any checkable facts or figures not yet fetched, offered as a choice, never decided alone. Nothing surfaced would change the answer -> say so in one line and answer in the same turn. Otherwise ask the round in `grilling` format and wait. An empty round is a valid outcome; skipping the round is not.
 1. Identify the task.
    - Topic is .NET/C#/Blazor, or user asks -> `npx skills add aaronontheweb/dotnet-skills` (whole repo, if not already loaded this session) and `token-dotnet` (grep/search patterns).
    - Topic is web/frontend design, or user asks -> `npx skills add arvindrk/extract-design-system@extract-design-system` and `npx skills add vercel-labs/agent-skills@web-design-guidelines` (if not already loaded this session).
@@ -77,15 +80,15 @@ checked against.
    - Any file op or multi-file task -> `token-efficiency`, `token-file-ops`.
    - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
    - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
-   - Claim about the user's own setup, tooling or habits -> no source exists. Ask it, never state it as a recommendation.
-   - Output is French (chat reply or French markdown deliverable) -> `write-french`.
+   - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
 3. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
-4. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
-5. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed"):
+4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
+5. Otherwise - step 0 didn't close empty, or the content isn't literal - unless the user
+   delegated the judgment (e.g. "reformulate as needed"):
    - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> state assumptions inline (`Non-negotiables` 1) and answer. No `grilling`.
-   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges below; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`).
+   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges below; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden except one line per option considered and rejected, with the reason; an option that would change the deliverable, its cost, or its format is not rejected alone, it goes into step 0's framing as a choice) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`).
      - Planify's assumptions axis: what was taken for granted.
      - Planify's alternatives axis: reuse/compose an existing solution, weighed before any implementation approach is fixed, not only among variants of one already chosen.
      - Planify's challenges axis: what a domain expert would object to.
@@ -136,10 +139,10 @@ checked against.
 - Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English + ASCII. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills; French quoted as an example - keeps its accents, unaccented French is misspelled French. Deliverables written for the user follow the user's language.
 - Any technical/code doc (README, manifests, comments, PR/commit bodies) -> Communication's word-cutting rule, applied on the first pass, not as a later tightening pass: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
-- Editing any CLAUDE.md -> `craft-prompt` first for structure and degrees-of-freedom guidance; write it under Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never ship a verbose draft to tighten later on request. A rule that constrains what gets omitted or said is craft-prompt's Low-freedom case: write the exact trigger and its exceptions, not a discretionary standard.
+- Editing any CLAUDE.md -> `craft-prompt` first for structure and degrees-of-freedom guidance; write it under Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never ship a verbose draft to tighten later on request. A rule that constrains what gets omitted or said, or that gates whether to stop, ask, or escalate, is craft-prompt's Low-freedom case: write the exact trigger and its exceptions, not a discretionary standard.
 - Any edit to a doc/skill's worked examples or chained steps -> before delivery, check each example against the principle it illustrates and that each step's output still satisfies what the next step consumes. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
-- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Non-negotiables, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored. `CLAUDE.web.md` may hold extra sections outside this list (e.g. Web-only) - preserve them, never treat as derived from `CLAUDE.md`. Any `CLAUDE.web.md` edit -> tell the user to re-paste it into the claude.ai preferences, kept identical by hand. Before committing, run `prevent-drift`'s check on the two files' matching sections.
+- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Rule maintenance, Communication, Non-negotiables, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored. `CLAUDE.web.md` may hold extra sections outside this list (e.g. Web-only) - preserve them, never treat as derived from `CLAUDE.md`. Any `CLAUDE.web.md` edit -> tell the user to re-paste it into the claude.ai preferences, kept identical by hand. Before committing, run `prevent-drift`'s check on the two files' matching sections.
 - Editing `CLAUDE.web.md`, or any skill `SKILLS.web.md` lists -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.
 
 ## PR lifecycle
@@ -177,7 +180,7 @@ Retrospective [events]:
 (max 3)
 ```
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
-- Factor first: extend, generalize or sharpen an existing rule. A new rule needs one clause saying why none covers the class.
+- Factor first: see `Rule maintenance`. A new rule needs one clause saying why none covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
 - Log every entry in `RETROSPECTIVE.md`, approved or not - the discards are what `find-cause` reads next time.
 - `RETROSPECTIVE.md` over ~50 entries -> compact: entries whose rule is applied and still stands collapse to one line per class; rejected and pending ones stay verbatim.

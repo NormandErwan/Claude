@@ -4,16 +4,26 @@ Natively-authored skills library for Claude Code.
 
 ## Usage
 
-External skills are not vendored here. Two mechanisms bring them in:
+Most external skills are not vendored here. Three mechanisms bring skills in:
 
 | Source | Mechanism | Listed in |
 |---|---|---|
 | Most external skills | [`npx skills add`](https://skills.sh/), per session | `CLAUDE.md` `## Bootstrap` (always) and `## Every turn` (topic-gated) |
 | `addyosmani/agent-skills` | Cloned and injected by the `SessionStart` hook | `CLAUDE.md` `## Every turn` 6 |
+| `craft-prompt`, `grilling` | Forked into `skills/` for local edits, tracked against their upstream in `SKILLS.web.md` | `skills/craft-prompt/`, `skills/grilling/` |
 
 A skill of general scope belongs here (`NormandErwan/Claude`), English + ASCII (see `CLAUDE.md`
 `Code / docs / commits`). A skill specific to one consumer repo belongs in that repo's own
 `skills/` - its `SessionStart` hook never touches it.
+
+### Forked skills
+
+A skill forked into `skills/` (rather than pulled fresh every session via `npx skills add`)
+carries its upstream repo, path, and pinned commit as two columns in `SKILLS.web.md` - local
+commit (this repo's own history for the file) and upstream commit (last checked against). To
+pull an update: clone the upstream repo, diff the pinned commit against its current HEAD on
+that file's path, and apply the result to the fork by hand - no `git subtree`, no stored
+pristine copy. Fork only a skill you need to edit locally; everything else stays on `npx`.
 
 ## Adding this repo to another project
 
