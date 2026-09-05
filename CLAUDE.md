@@ -39,7 +39,9 @@ checked against.
    - Consumer project's root `CLAUDE.md` wins over the synced `.claude/CLAUDE.md` wherever the two diverge - it carries that repo's own derogations.
    - The same hook clones `addyosmani/agent-skills` into `.claude/agent-skills/` and injects `using-agent-skills` at session start - no `npx` line for it (see Every turn 6).
 2. `npx skills add` every line below, every session, regardless of step 1's outcome:
-   - Never vendored deliberately - this is the only way to get current versions.
+   - Never vendored deliberately, except `craft-prompt` and `grilling` - forked into `skills/`
+     for local edits, tracked against upstream in `SKILLS.web.md` (see README Usage).
+     Everything below is the only way to get current versions.
    - Leave dotnet-skills uninstalled for now (see Every turn 1).
    ```bash
    npx skills add DietrichGebert/ponytail@ponytail-audit
@@ -52,7 +54,6 @@ checked against.
    npx skills add mattpocock/skills@codebase-design
    npx skills add mattpocock/skills@domain-modeling
    npx skills add mattpocock/skills@grill-with-docs
-   npx skills add mattpocock/skills@grilling
    npx skills add mattpocock/skills@handoff
    npx skills add mattpocock/skills@improve-codebase-architecture
    npx skills add mattpocock/skills@prototype
