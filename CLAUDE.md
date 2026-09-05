@@ -1,10 +1,13 @@
 # CLAUDE.md
 
+## Rule maintenance
+- Every rule here is provisional. Before adding one, check whether an existing rule covers the case and extend it. A rule that has cost more than it returned is deleted outright, not compensated for by another rule.
+
 ## Communication
-- Answer first, state facts. No filler, no politeness, no restating what a heading or the question already said.
+- No greeting, no politeness, no restating the question or a heading. Skill announcements and the Retrospective block go after the answer, not before it. Only the framing round (`Every turn` step 0) may precede it.
 - Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta. No delta -> no reply, not even a placeholder - including a repeating `Stop` hook or other system reminder. Exception: it changed, the user re-asks, or dropping it would omit something needed for their decision.
 - Several checks/notifications with nothing to report -> collapse into one line, not one bullet per empty check. Never collapse away an actual finding, error, or blocker.
-- Fewest steps and tool calls that reach the right result.
+- Judge a tool call by whether its output changes the answer, never by the call count.
 - Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
 - Match user's language - French output -> `write-french`.
 - Cut a word only if the reader loses nothing by its absence; leave a sentence for rework if the reader would have to reread it, guess a referent, or reconstruct a dropped word. One idea per sentence, no idea twice. This is the same test `write-french` applies to French - it holds in any language.
@@ -67,6 +70,7 @@ checked against.
    - Still unreachable after the fallback -> say so.
 
 ## Every turn
+0. Frame before answering - mandatory, regardless of request type: state the reading taken, every other plausible reading, and any checkable facts or figures not yet fetched, offered as a choice, never decided alone. Nothing surfaced would change the answer -> say so in one line and answer in the same turn. Otherwise ask the round in `grilling` format and wait. An empty round is a valid outcome; skipping the round is not.
 1. Identify the task.
    - Topic is .NET/C#/Blazor, or user asks -> `npx skills add aaronontheweb/dotnet-skills` (whole repo, if not already loaded this session) and `token-dotnet` (grep/search patterns).
    - Topic is web/frontend design, or user asks -> `npx skills add arvindrk/extract-design-system@extract-design-system` and `npx skills add vercel-labs/agent-skills@web-design-guidelines` (if not already loaded this session).
@@ -78,15 +82,15 @@ checked against.
    - Any file op or multi-file task -> `token-efficiency`, `token-file-ops`.
    - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
    - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
-   - Claim about the user's own setup, tooling or habits -> no source exists. Ask it, never state it as a recommendation.
+   - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
    - Output is French (chat reply or French markdown deliverable) -> `write-french`.
 3. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
-4. Obvious? (literal content/command, or one unambiguous reading; one file touched, or one already-named location; zero design choice) -> act.
+4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
 5. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed"):
    - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> state assumptions inline (`Non-negotiables` 1) and answer. No `grilling`.
-   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges below; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`).
+   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges below; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden except one line per option considered and rejected, with the reason; an option that would change the deliverable, its cost, or its format is not rejected alone, it goes into step 0's framing as a choice) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`).
      - Planify's assumptions axis: what was taken for granted.
      - Planify's alternatives axis: reuse/compose an existing solution, weighed before any implementation approach is fixed, not only among variants of one already chosen.
      - Planify's challenges axis: what a domain expert would object to.
@@ -140,7 +144,7 @@ checked against.
 - Editing any CLAUDE.md -> `craft-prompt` first for structure and degrees-of-freedom guidance; write it under Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never ship a verbose draft to tighten later on request. A rule that constrains what gets omitted or said is craft-prompt's Low-freedom case: write the exact trigger and its exceptions, not a discretionary standard.
 - Any edit to a doc/skill's worked examples or chained steps -> before delivery, check each example against the principle it illustrates and that each step's output still satisfies what the next step consumes. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
-- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Communication, Non-negotiables, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored. `CLAUDE.web.md` may hold extra sections outside this list (e.g. Web-only) - preserve them, never treat as derived from `CLAUDE.md`. Any `CLAUDE.web.md` edit -> tell the user to re-paste it into the claude.ai preferences, kept identical by hand. Before committing, run `prevent-drift`'s check on the two files' matching sections.
+- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Rule maintenance, Communication, Non-negotiables, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored. `CLAUDE.web.md` may hold extra sections outside this list (e.g. Web-only) - preserve them, never treat as derived from `CLAUDE.md`. Any `CLAUDE.web.md` edit -> tell the user to re-paste it into the claude.ai preferences, kept identical by hand. Before committing, run `prevent-drift`'s check on the two files' matching sections.
 - Editing `CLAUDE.web.md`, or any skill `SKILLS.web.md` lists -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.
 
 ## PR lifecycle
