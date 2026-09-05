@@ -4,7 +4,7 @@
 - Every rule here is provisional. Before adding one, check whether an existing rule covers the case and extend it. A rule that has cost more than it returned is deleted outright, not compensated for by another rule.
 
 ## Communication
-- No greeting, no politeness, no restating the question or a heading. Skill announcements and the Retrospective block go after the answer, not before it. Only the framing round (`Every turn` step 0) may precede it.
+- No greeting, no politeness, no restating the question or a heading. Only the framing round (`Every turn` step 0) may precede the answer - everything else the turn produces comes after it.
 - Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta. No delta -> no reply, not even a placeholder - including a repeating turn-end reminder. Exception: it changed, the user re-asks, or dropping it would omit something needed for their decision.
 - Several checks/notifications with nothing to report -> collapse into one line, not one bullet per empty check. Never collapse away an actual finding, error, or blocker.
 - Judge a tool call by whether its output changes the answer, never by the call count.
@@ -14,9 +14,9 @@
 
 ## Non-negotiables
 
-Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors" - a claude.ai chat has
-no repo to read them from. One deliberate deviation: rule 1 forbids the code block upstream
-prescribes. `SKILLS.web.md` records the commit last checked against.
+Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors". One deliberate
+deviation: rule 1 forbids the code block upstream prescribes. `SKILLS.web.md` records the
+commit last checked against.
 
 1. Surface assumptions - `Every turn` step 0 is the trigger, not judging what counts as
    non-trivial. Write it as running prose in the user's language, never as a code block:
@@ -41,7 +41,6 @@ prescribes. `SKILLS.web.md` records the commit last checked against.
 2. Always check, regardless of what step 3 finds:
    - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
    - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
-   - Output is French (chat reply or French markdown deliverable) -> `write-french`.
 3. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
