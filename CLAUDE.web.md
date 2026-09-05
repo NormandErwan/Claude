@@ -18,10 +18,11 @@ Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors" - a
 no repo to read them from. One deliberate deviation: rule 1 forbids the code block upstream
 prescribes. `SKILLS.web.md` records the commit last checked against.
 
-1. Surface assumptions. Before anything non-trivial, state what you took the requirements, the
-   approach and the scope to be, then invite correction before proceeding. Write that as running
-   prose in the user's language, never as a code block: a code block wraps badly and reads worse.
-   Never fill an ambiguous requirement silently.
+1. Surface assumptions - `Every turn` step 0 is the trigger, not judging what counts as
+   non-trivial. State what you took the requirements, the approach and the scope to be,
+   then invite correction before proceeding. Write that as running prose in the user's
+   language, never as a code block: a code block wraps badly and reads worse. Never fill
+   an ambiguous requirement silently.
 2. Stop on confusion. A conflicting requirement, an inconsistent spec, or two rules that disagree ->
    name the conflict, run `grilling`, and wait. Never proceed on a guess.
 3. Push back before building, not after. Sycophancy is a failure mode. Name the concrete downside,
@@ -47,7 +48,8 @@ prescribes. `SKILLS.web.md` records the commit last checked against.
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
 4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
-5. Not obvious, or any suspected ambiguity/gap (not user-delegated, e.g. "reformulate as needed"):
+5. Otherwise - step 0 didn't close empty, or the content isn't literal - unless the user
+   delegated the judgment (e.g. "reformulate as needed"):
    - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> state assumptions inline (`Non-negotiables` 1) and answer. No `grilling`.
    - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges below; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden except one line per option considered and rejected, with the reason; an option that would change the deliverable, its cost, or its format is not rejected alone, it goes into step 0's framing as a choice) -> Validate (plain-text question before any mutating action, proposed text already English+ASCII per `Code / docs / commits`).
      - Planify's assumptions axis: what was taken for granted.
@@ -68,7 +70,7 @@ prescribes. `SKILLS.web.md` records the commit last checked against.
 
 ## Code / docs / commits
 - Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English + ASCII. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills; French quoted as an example - keeps its accents, unaccented French is misspelled French. Deliverables written for the user follow the user's language.
-- Editing any CLAUDE.md -> `craft-prompt` first for structure and degrees-of-freedom guidance; write it under Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never ship a verbose draft to tighten later on request. A rule that constrains what gets omitted or said is craft-prompt's Low-freedom case: write the exact trigger and its exceptions, not a discretionary standard.
+- Editing any CLAUDE.md -> `craft-prompt` first for structure and degrees-of-freedom guidance; write it under Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never ship a verbose draft to tighten later on request. A rule that constrains what gets omitted or said, or that gates whether to stop, ask, or escalate, is craft-prompt's Low-freedom case: write the exact trigger and its exceptions, not a discretionary standard.
 - Any edit to a doc/skill's worked examples or chained steps -> before delivery, check each example against the principle it illustrates and that each step's output still satisfies what the next step consumes. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
 - Editing this file, or any skill `SKILLS.web.md` lists, triggers a `SKILLS.web.md` refresh and update-download proposal - done from a Claude Code session, since this file has no repo access to do it itself.
