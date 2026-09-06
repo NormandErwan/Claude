@@ -14,12 +14,12 @@ npx-pulled skill (never vendored) carries `-` in Local commit.
 | guide-decision | native | `0aabdbb41d` | - |
 | guide-purchase | native | `0aabdbb41d` | - |
 | write-french | native | `34a05c4793` | - |
-| craft-prompt | fork of `neolabhq/context-engineering-kit@skills/prompt-engineering` | `7aa7d4762a` | `4da35f2209` |
+| craft-prompt | fork of `neolabhq/context-engineering-kit@skills/prompt-engineering` | `7aa7d4762a` | `23e2428e80` |
 | grilling | fork of `mattpocock/skills@skills/productivity/grilling` | `709043faac` | `3cca18b368` |
 | grill-with-docs | `mattpocock/skills@grill-with-docs` (npx) | - | `3cca18b368` |
 | research | `mattpocock/skills@research` (npx) | - | `3cca18b368` |
 | handoff | `mattpocock/skills@handoff` (npx) | - | `3cca18b368` |
-| using-agent-skills | `addyosmani/agent-skills@using-agent-skills` (cloned by hook) | - | `1c760d6434` |
+| using-agent-skills | `addyosmani/agent-skills@using-agent-skills` (cloned by hook) | - | `48cb1168ae` |
 
 craft-prompt's `Source` was recorded as `local` until this pass - it is a straight copy of
 `neolabhq/context-engineering-kit`'s `prompt-engineering` skill, renamed and forked before this
@@ -70,3 +70,16 @@ a symlink into a shared misc/ to a materialized file at the same path),
 diffed content identical apart from grilling's already-forked local
 addition. No zip re-send: content unchanged, only the pinned commit
 moved to record the recheck.
+
+2026-09-06: recheck triggered by this session's three `CLAUDE.web.md` edits
+(replaces field, six trigger fixes, PR-lifecycle/Retrospective-format
+changes). Local commits for all forked/native skills unchanged (no
+`skills/` file touched this session). Upstream: mattpocock/skills HEAD
+still `3cca18b368` (unchanged since the last pass) - grilling,
+grill-with-docs, research, handoff all current. craft-prompt and
+using-agent-skills: upstream HEAD moved on their paths, but the diff
+between the pinned commit and the new one is empty for both - same
+structural-move pattern as mattpocock's PR #1025 and the 2026-09-01
+using-agent-skills case. Pins updated to record the check
+(`4da35f2209` -> `23e2428e80`, `1c760d6434` -> `48cb1168ae`); no content
+changed, no zip re-send needed.
