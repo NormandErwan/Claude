@@ -41,7 +41,7 @@ commit last checked against.
 2. Always check, regardless of what step 3 finds:
    - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
    - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
-3. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
+3. Scan local skills; invoke and announce ("Using [skill] to [purpose]") any that could plausibly help - deliberately low bar, never skip one for seeming marginal.
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
 4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
@@ -96,7 +96,7 @@ Retrospective [events]:
 - Factor first: see `Rule maintenance`. The `replaces` field is never left blank - name the rule or clause the entry removes or subsumes, or write `nothing`. `nothing` on a Create needs one clause saying why no existing rule covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
 - Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
-- Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
+- Before filing, check `RETROSPECTIVE.md` for a prior entry of the same class -> found means `find-cause` instead of a second log line, not a re-extension of the same rule.
 - 0 fired -> skip silently.
 
 ## Web-only

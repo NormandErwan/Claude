@@ -81,7 +81,7 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
    - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
    - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
-3. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
+3. Scan local skills; invoke and announce ("Using [skill] to [purpose]") any that could plausibly help - deliberately low bar, never skip one for seeming marginal.
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
 4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
@@ -106,10 +106,10 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - Stamp the reply with local time (`date`); no clock available -> skip.
    - Harness exposes a token figure -> report it as `~<n>k tokens this session`, naming it a remaining budget when that is what it is. None exposed -> skip, never estimate.
    - Offer a `handoff` once per trigger, non-blocking: user signals a pause or a move elsewhere; topic no longer matches the accumulated history (suggest a fresh session).
-   - Gap since the previous stamp over the cache lifetime (1h subscription, 5 min on API/cloud or usage credits) -> say this turn reprocessed the whole history, then offer the handoff above.
+   - Gap since the previous stamp over the cache lifetime (1h) -> say this turn reprocessed the whole history, then offer the handoff above.
 
 ## Agents
-- Delegate to a subagent when the output is verbose and only the conclusion matters upstream - test runs, log sweeps, doc fetching. Simple task -> `model: haiku`.
+- Delegate to a subagent when the raw output would dump long logs or file contents into this context and only the conclusion matters upstream - test runs, log sweeps, doc fetching. A delegated task with no design decision - a fixed lookup, a mechanical transform, a single command - runs on `model: haiku`.
 - Don't delegate work that needs context this session already holds: the subagent starts cold and re-derives it. Session forbids unasked spawns -> ask first.
 - Delegating with `isolation: worktree` -> tell the agent to check its base at start (`git log -1`, compare to the intended branch) and reposition if it drifted, before reading any context. Verifying its diff when the base is in doubt -> `git show <ref>:file | diff - file`, not `git diff <ref> -- file` (a stale base makes the latter show a false full-file delete).
 
@@ -154,7 +154,7 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
 | Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then mattpocock `code-review`, no asking |
 | Turn would end with an unreviewed diff-changing push, otherwise | Plain-text question: review now or keep going.<br>- Ask once, wait until answered or PR merges/closes |
 | Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
-| >=2-3 turns since last rename, scope clear/shifted | Draft short title.<br>- Confirm via plain-text question.<br>- Rename PR + conversation title (if a rename tool exists) |
+| PR title still reads as a placeholder (branch name, "WIP", a generic verb) or no longer matches the diff's actual scope | Draft short title.<br>- Confirm via plain-text question.<br>- Rename PR + conversation title (if a rename tool exists) |
 | Nothing actionable (e.g. CI green or none configured, `mergeable_state: clean`, no unresolved comments) | Stop self re-arming (don't wait for merge/close) |
 | Merge conflict blocks the push | Resolve via mattpocock `resolving-merge-conflicts`, then push |
 | Anything still pending (CI running, changes requested, unresolved threads) | Keep polling |
@@ -186,5 +186,5 @@ Retrospective [events]:
 - `RETROSPECTIVE.md` over ~50 entries -> compact: entries whose rule is applied and still stands collapse to one line per class; rejected and pending ones stay verbatim.
 - Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
 - `applied` cites the PR carrying the change (`applied - PR#<n>`) - a bare `applied` is not a valid Decision value.
-- Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
+- Before filing, check `RETROSPECTIVE.md` for a prior entry of the same class -> found means `find-cause` instead of a second log line, not a re-extension of the same rule.
 - 0 fired -> skip silently.
