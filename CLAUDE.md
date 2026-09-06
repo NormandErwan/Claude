@@ -147,14 +147,15 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
 
 ## PR lifecycle
 
-Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
+Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`. Title or body updates (rename, description edit) never need confirmation - apply directly.
 
 | Trigger | Action |
 |---|---|
 | Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then mattpocock `code-review`, no asking |
-| Turn would end with an unreviewed diff-changing push, otherwise | Plain-text question: review now or keep going.<br>- Ask once, wait until answered or PR merges/closes |
+| Turn would end with an unreviewed diff-changing push, but open questions or unaddressed plan/audit items remain | Keep going, no question - the review question waits until nothing else is open |
+| Turn would end with an unreviewed diff-changing push, no open questions or plan/audit items remain, and it isn't the last task of an EnterPlanMode-approved plan | Plain-text question: review now or keep going.<br>- Ask once, wait until answered or PR merges/closes |
 | Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
-| PR title still reads as a placeholder (branch name, "WIP", a generic verb) or no longer matches the diff's actual scope | Draft short title.<br>- Confirm via plain-text question.<br>- Rename PR + conversation title (if a rename tool exists) |
+| PR title still reads as a placeholder (branch name, "WIP", a generic verb) or no longer matches the diff's actual scope | Draft short title, rename PR + conversation title (if a rename tool exists) |
 | Nothing actionable (e.g. CI green or none configured, `mergeable_state: clean`, no unresolved comments) | Stop self re-arming (don't wait for merge/close) |
 | Merge conflict blocks the push | Resolve via mattpocock `resolving-merge-conflicts`, then push |
 | Anything still pending (CI running, changes requested, unresolved threads) | Keep polling |
@@ -173,12 +174,7 @@ Immediately before ending a turn where >=1 fired:
 | tool-blocked | Tool error forced a different approach than planned |
 | new-preference | User gave an instruction/preference not yet captured anywhere |
 
->=1 fired -> emit before ending turn:
-```
-Retrospective [events]:
-- <class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>
-(max 3)
-```
+>=1 fired -> emit before ending turn, as plain text, never a code block (same reason as Non-negotiable 1): a line reading "Retrospective [events]:", followed by up to 3 bullets in the form "<class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>".
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
 - Factor first: see `Rule maintenance`. The `replaces` field is never left blank - name the rule or clause the entry removes or subsumes, or write `nothing`. `nothing` on a Create needs one clause saying why no existing rule covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
