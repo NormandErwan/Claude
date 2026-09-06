@@ -89,11 +89,11 @@ Immediately before ending a turn where >=1 fired:
 >=1 fired -> emit before ending turn:
 ```
 Retrospective [events]:
-- <class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class>
+- <class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>
 (max 3)
 ```
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
-- Factor first: see `Rule maintenance`. A new rule needs one clause saying why none covers the class.
+- Factor first: see `Rule maintenance`. The `replaces` field is never left blank - name the rule or clause the entry removes or subsumes, or write `nothing`. `nothing` on a Create needs one clause saying why no existing rule covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
 - Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
 - Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
