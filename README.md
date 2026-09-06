@@ -25,6 +25,26 @@ pull an update: clone the upstream repo, diff the pinned commit against its curr
 that file's path, and apply the result to the fork by hand - no `git subtree`, no stored
 pristine copy. Fork only a skill you need to edit locally; everything else stays on `npx`.
 
+## Maintaining `CLAUDE.web.md`
+
+`CLAUDE.web.md` is this repo's copy of `CLAUDE.md` for claude.ai sessions: pasted by hand into
+the project preferences, never synced by the `SessionStart` hook. `CLAUDE.md`
+`Code / docs / commits` carries the trigger and the list of mirrored sections; the procedure is
+here.
+
+- Update `CLAUDE.web.md` in the same commit as the `CLAUDE.md` edit.
+- Keep the wording identical, minus the dev/code-specific lines - npx installs, coding-phase
+  skills, git/PR references. Web sessions do non-coding work only. Omit those lines, never
+  reformulate them.
+- `CLAUDE.web.md` may hold sections outside the mirrored list (e.g. `Web-only`). Preserve them:
+  they are not derived from `CLAUDE.md`.
+- Run `prevent-drift`'s check on the two files' matching sections before committing.
+- Tell the user to re-paste the file into the claude.ai preferences afterwards - the two copies
+  stay identical by hand.
+
+`SKILLS.web.md`, the commit manifest for the skills `CLAUDE.web.md` references, carries its own
+refresh procedure in its header.
+
 ## Adding this repo to another project
 
 Consumer repos pull this repo's `CLAUDE.md` and `skills/` fresh at every

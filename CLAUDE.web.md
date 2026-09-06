@@ -41,7 +41,7 @@ commit last checked against.
 2. Always check, regardless of what step 3 finds:
    - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
    - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
-3. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
+3. Scan local skills; invoke and announce ("Using [skill] to [purpose]") any that could plausibly help - deliberately low bar, never skip one for seeming marginal.
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
 4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
@@ -68,7 +68,7 @@ commit last checked against.
 ## Code / docs / commits
 - Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English + ASCII. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills; French quoted as an example - keeps its accents, unaccented French is misspelled French. Deliverables written for the user follow the user's language.
 - Editing any CLAUDE.md -> `craft-prompt` first for structure and degrees-of-freedom guidance; write it under Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never ship a verbose draft to tighten later on request. A rule that constrains what gets omitted or said, or that gates whether to stop, ask, or escalate, is craft-prompt's Low-freedom case: write the exact trigger and its exceptions, not a discretionary standard.
-- Any edit to a doc/skill's worked examples or chained steps -> before delivery, check each example against the principle it illustrates and that each step's output still satisfies what the next step consumes. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
+- Any edit to a doc/skill's worked examples, chained steps, or output-format template -> before delivery, check each example against the principle it illustrates, that each step's output still satisfies what the next step consumes, and that a template does not itself violate the formatting rule it specifies. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
 - Editing this file, or any skill `SKILLS.web.md` lists, triggers a `SKILLS.web.md` refresh and update-download proposal - done from a Claude Code session, since this file has no repo access to do it itself.
 
@@ -86,17 +86,12 @@ Immediately before ending a turn where >=1 fired:
 | tool-blocked | Tool error forced a different approach than planned |
 | new-preference | User gave an instruction/preference not yet captured anywhere |
 
->=1 fired -> emit before ending turn:
-```
-Retrospective [events]:
-- <class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class>
-(max 3)
-```
+>=1 fired -> emit before ending turn, as plain text, never a code block (same reason as Non-negotiable 1): a line reading "Retrospective [events]:", followed by up to 3 bullets in the form "<class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>".
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
-- Factor first: see `Rule maintenance`. A new rule needs one clause saying why none covers the class.
+- Factor first: see `Rule maintenance`. The `replaces` field is never left blank - name the rule or clause the entry removes or subsumes, or write `nothing`. `nothing` on a Create needs one clause saying why no existing rule covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
 - Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
-- Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
+- Before filing, check `RETROSPECTIVE.md` for a prior entry of the same class -> found means `find-cause` instead of a second log line, not a re-extension of the same rule.
 - 0 fired -> skip silently.
 
 ## Web-only

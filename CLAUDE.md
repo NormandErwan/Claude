@@ -81,7 +81,7 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
    - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
    - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
-3. Scan local skills, >=1% relevant -> invoke + announce ("Using [skill] to [purpose]").
+3. Scan local skills; invoke and announce ("Using [skill] to [purpose]") any that could plausibly help - deliberately low bar, never skip one for seeming marginal.
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
 4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
@@ -106,10 +106,10 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - Stamp the reply with local time (`date`); no clock available -> skip.
    - Harness exposes a token figure -> report it as `~<n>k tokens this session`, naming it a remaining budget when that is what it is. None exposed -> skip, never estimate.
    - Offer a `handoff` once per trigger, non-blocking: user signals a pause or a move elsewhere; topic no longer matches the accumulated history (suggest a fresh session).
-   - Gap since the previous stamp over the cache lifetime (1h subscription, 5 min on API/cloud or usage credits) -> say this turn reprocessed the whole history, then offer the handoff above.
+   - Gap since the previous stamp over the cache lifetime (1h) -> say this turn reprocessed the whole history, then offer the handoff above.
 
 ## Agents
-- Delegate to a subagent when the output is verbose and only the conclusion matters upstream - test runs, log sweeps, doc fetching. Simple task -> `model: haiku`.
+- Delegate to a subagent when the raw output would dump long logs or file contents into this context and only the conclusion matters upstream - test runs, log sweeps, doc fetching. A delegated task with no design decision - a fixed lookup, a mechanical transform, a single command - runs on `model: haiku`.
 - Don't delegate work that needs context this session already holds: the subagent starts cold and re-derives it. Session forbids unasked spawns -> ask first.
 - Delegating with `isolation: worktree` -> tell the agent to check its base at start (`git log -1`, compare to the intended branch) and reposition if it drifted, before reading any context. Verifying its diff when the base is in doubt -> `git show <ref>:file | diff - file`, not `git diff <ref> -- file` (a stale base makes the latter show a false full-file delete).
 
@@ -140,21 +140,22 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
 - Any technical/code doc (README, manifests, comments, PR/commit bodies) -> Communication's word-cutting rule, applied on the first pass, not as a later tightening pass: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Editing any CLAUDE.md -> `craft-prompt` first for structure and degrees-of-freedom guidance; write it under Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never ship a verbose draft to tighten later on request. A rule that constrains what gets omitted or said, or that gates whether to stop, ask, or escalate, is craft-prompt's Low-freedom case: write the exact trigger and its exceptions, not a discretionary standard.
-- Any edit to a doc/skill's worked examples or chained steps -> before delivery, check each example against the principle it illustrates and that each step's output still satisfies what the next step consumes. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
+- Any edit to a doc/skill's worked examples, chained steps, or output-format template -> before delivery, check each example against the principle it illustrates, that each step's output still satisfies what the next step consumes, and that a template does not itself violate the formatting rule it specifies. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
 - Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
-- Editing CLAUDE.md sections mirrored in `CLAUDE.web.md` (Rule maintenance, Communication, Non-negotiables, Every turn, Error handling, Code/docs/commits, Retrospective) -> update `CLAUDE.web.md` in the same commit, wording identical except omitting dev/code-specific lines (web sessions do non-coding work only) - npx installs, coding-phase skills, git/PR references; omit, don't reformulate. Bootstrap is CLI/npx-only, not mirrored. `CLAUDE.web.md` may hold extra sections outside this list (e.g. Web-only) - preserve them, never treat as derived from `CLAUDE.md`. Any `CLAUDE.web.md` edit -> tell the user to re-paste it into the claude.ai preferences, kept identical by hand. Before committing, run `prevent-drift`'s check on the two files' matching sections.
-- Editing `CLAUDE.web.md`, or any skill `SKILLS.web.md` lists -> also refresh `SKILLS.web.md`: recheck each listed skill's upstream commit (local: `git log`; remote: public GitHub API/clone, no `add_repo`), update rows that moved, and propose a zip download per updated skill via `SendUserFile` for re-upload to claude.ai.
+- Editing a `CLAUDE.md` section mirrored in `CLAUDE.web.md` (Rule maintenance, Communication, Non-negotiables, Every turn, Error handling, Code/docs/commits, Retrospective) -> mirror the edit in the same commit, per `README.md` `Maintaining CLAUDE.web.md`. Bootstrap is CLI/npx-only, not mirrored.
+- Editing `CLAUDE.web.md`, or any skill `SKILLS.web.md` lists -> refresh `SKILLS.web.md`, per the procedure in its own header.
 
 ## PR lifecycle
 
-Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`.
+Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`. Title or body updates (rename, description edit) never need confirmation - apply directly.
 
 | Trigger | Action |
 |---|---|
 | Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then mattpocock `code-review`, no asking |
-| Turn would end with an unreviewed diff-changing push, otherwise | Plain-text question: review now or keep going.<br>- Ask once, wait until answered or PR merges/closes |
+| Turn would end with an unreviewed diff-changing push, but open questions or unaddressed plan/audit items remain | Keep going, no question - the review question waits until nothing else is open |
+| Turn would end with an unreviewed diff-changing push, no open questions or plan/audit items remain, and it isn't the last task of an EnterPlanMode-approved plan | Plain-text question: review now or keep going.<br>- Ask once, wait until answered or PR merges/closes |
 | Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
-| >=2-3 turns since last rename, scope clear/shifted | Draft short title.<br>- Confirm via plain-text question.<br>- Rename PR + conversation title (if a rename tool exists) |
+| PR title still reads as a placeholder (branch name, "WIP", a generic verb) or no longer matches the diff's actual scope | Draft short title, rename PR + conversation title (if a rename tool exists) |
 | Nothing actionable (e.g. CI green or none configured, `mergeable_state: clean`, no unresolved comments) | Stop self re-arming (don't wait for merge/close) |
 | Merge conflict blocks the push | Resolve via mattpocock `resolving-merge-conflicts`, then push |
 | Anything still pending (CI running, changes requested, unresolved threads) | Keep polling |
@@ -173,18 +174,13 @@ Immediately before ending a turn where >=1 fired:
 | tool-blocked | Tool error forced a different approach than planned |
 | new-preference | User gave an instruction/preference not yet captured anywhere |
 
->=1 fired -> emit before ending turn:
-```
-Retrospective [events]:
-- <class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class>
-(max 3)
-```
+>=1 fired -> emit before ending turn, as plain text, never a code block (same reason as Non-negotiable 1): a line reading "Retrospective [events]:", followed by up to 3 bullets in the form "<class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>".
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
-- Factor first: see `Rule maintenance`. A new rule needs one clause saying why none covers the class.
+- Factor first: see `Rule maintenance`. The `replaces` field is never left blank - name the rule or clause the entry removes or subsumes, or write `nothing`. `nothing` on a Create needs one clause saying why no existing rule covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
 - Log every entry in `RETROSPECTIVE.md`, approved or not - the discards are what `find-cause` reads next time.
 - `RETROSPECTIVE.md` over ~50 entries -> compact: entries whose rule is applied and still stands collapse to one line per class; rejected and pending ones stay verbatim.
 - Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
 - `applied` cites the PR carrying the change (`applied - PR#<n>`) - a bare `applied` is not a valid Decision value.
-- Same event fires again after a fix, or its cause isn't evident -> `find-cause` instead of a second log line.
+- Before filing, check `RETROSPECTIVE.md` for a prior entry of the same class -> found means `find-cause` instead of a second log line, not a re-extension of the same rule.
 - 0 fired -> skip silently.
