@@ -43,12 +43,10 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - Never vendored deliberately, except `craft-prompt` and `grilling` - forked into `skills/`
      for local edits, tracked against upstream in `SKILLS.web.md` (see README Usage).
      Everything below is the only way to get current versions.
-   - Leave dotnet-skills uninstalled for now (see Every turn 1).
    ```bash
    npx skills add DietrichGebert/ponytail@ponytail-audit
    npx skills add DietrichGebert/ponytail@ponytail-review
    npx skills add anthropics/skills@frontend-design
-   npx skills add homeassistant-ai/skills@home-assistant-best-practices
    npx skills add juliusbrussee/caveman@caveman
    npx skills add juliusbrussee/caveman@caveman-commit
    npx skills add mattpocock/skills@code-review
@@ -70,10 +68,6 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
 ## Every turn
 0. Frame before answering - mandatory, regardless of request type: state the reading taken, every other plausible reading, and any checkable facts or figures not yet fetched, offered as a choice, never decided alone. Nothing surfaced would change the answer -> say so in one line and answer in the same turn. Otherwise ask the round in `grilling` format and wait. An empty round is a valid outcome; skipping the round is not.
 1. Identify the task.
-   - Topic is .NET/C#/Blazor, or user asks -> `npx skills add aaronontheweb/dotnet-skills` (whole repo, if not already loaded this session) and `token-dotnet` (grep/search patterns).
-   - Topic is web/frontend design, or user asks -> `npx skills add arvindrk/extract-design-system@extract-design-system` and `npx skills add vercel-labs/agent-skills@web-design-guidelines` (if not already loaded this session).
-   - Test design with >=3 combinable parameters (matrix, config, API surface) -> `npx skills add omkamal/pypict-claude-skill@pict-test-designer` (if not already loaded this session).
-   - User explicitly asks for parallel/sub-agents -> `npx skills add obra/superpowers@dispatching-parallel-agents` and `npx skills add obra/superpowers@subagent-driven-development` (if not already loaded this session).
    - Failure/friction recurring after a fix -> `find-cause`.
    - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 5's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
 2. Always check, regardless of what step 3 finds:
@@ -104,9 +98,7 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - `grilling` stays step 5's gate: it runs before the flowchart, not instead of it.
 7. End of turn:
    - Stamp the reply with local time (`date`); no clock available -> skip.
-   - Harness exposes a token figure -> report it as `~<n>k tokens this session`, naming it a remaining budget when that is what it is. None exposed -> skip, never estimate.
    - Offer a `handoff` once per trigger, non-blocking: user signals a pause or a move elsewhere; topic no longer matches the accumulated history (suggest a fresh session).
-   - Gap since the previous stamp over the cache lifetime (1h) -> say this turn reprocessed the whole history, then offer the handoff above.
 
 ## Agents
 - Delegate to a subagent when the raw output would dump long logs or file contents into this context and only the conclusion matters upstream - test runs, log sweeps, doc fetching. A delegated task with no design decision - a fixed lookup, a mechanical transform, a single command - runs on `model: haiku`.
