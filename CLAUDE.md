@@ -104,7 +104,6 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - `grilling` stays step 5's gate: it runs before the flowchart, not instead of it.
 7. End of turn:
    - Stamp the reply with local time (`date`); no clock available -> skip.
-   - Harness exposes a token figure -> report it as `~<n>k tokens this session`, naming it a remaining budget when that is what it is. None exposed -> skip, never estimate.
    - Offer a `handoff` once per trigger, non-blocking: user signals a pause or a move elsewhere; topic no longer matches the accumulated history (suggest a fresh session).
    - Gap since the previous stamp over the cache lifetime (1h) -> say this turn reprocessed the whole history, then offer the handoff above.
 

@@ -29,7 +29,7 @@ in this repo's full history (root commit `115a3d1`, 2026-06-07).
 | 2026-07-18 | Every turn | Clarify -> Planify -> Validate pipeline (Clarify renamed grilling since) | `3088980` | Yes - same commit as the row above: moved a once-per-session plan-mode gate to a per-turn pipeline |
 | 2026-07-25 | Every turn | Phase routing via the SessionStart hook's injection | `097ac94` | Yes - gated on multi-session or explicitly-requested work so normal-sized tasks are unaffected |
 | 2026-08-23 | Every turn | Stamp the reply with local time | `5f0124b` | Yes - replaces a fabricated token estimate the old rule forced when the harness exposes none |
-| 2026-08-23 | Every turn | Report a token figure only when the harness exposes one | `5f0124b` | Yes - same commit as the row above |
+| 2026-08-23 | Every turn | Report a token figure only when the harness exposes one | `5f0124b` | Yes - same commit as the row above - retired (this commit, 2026-09-08): the exposed figure is a static remaining-budget number, not a live per-session usage count, so the rule either always skips or reports a misleading figure |
 | 2026-08-23 | Every turn | Offer a handoff once per trigger | `5f0124b` | Yes - the old trigger keyed to a 100k-token threshold the model cannot observe |
 | 2026-08-31 | Non-negotiables 2 | Stop on confusion | `783a3e3` | Yes (section-level) - "restated from agent-skills using-agent-skills... a claude.ai chat has no repo to read them from"; not justified individually per behavior |
 | 2026-08-31 | Non-negotiables 3 | Push back before building, not after | `783a3e3` | Yes (section-level) - same as row above |
