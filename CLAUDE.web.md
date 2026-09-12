@@ -62,7 +62,7 @@ commit last checked against.
 | Trigger | Action |
 |---|---|
 | External request non-2xx / proxy block | Another source already covers the need -> say so in one line, no `[BLOCKED]`. Otherwise `[BLOCKED] <url> - <status>`<br>- if host required, stop and tell user |
-| Validate-gate question (or mutating prompt) unanswered | End turn, don't act.<br>- Unanswered twice -> stop, report attempt + reason, wait |
+| Validate-gate question (or mutating prompt) unanswered | End turn, don't act - hook/notification noise isn't a reply.<br>- Unanswered twice -> stop, report attempt + reason, wait |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
 
 ## Code / docs / commits
