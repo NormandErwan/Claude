@@ -5,7 +5,7 @@
 
 ## Communication
 - No greeting, no politeness, no restating the question or a heading. Only the framing round (`Every turn` step 0) may precede the answer - everything else the turn produces comes after it.
-- Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta. No delta -> no reply, not even a placeholder - including a repeating turn-end reminder. Exception: it changed, the user re-asks, or dropping it would omit something needed for their decision.
+- Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta.
 - Several checks/notifications with nothing to report -> collapse into one line, not one bullet per empty check. Never collapse away an actual finding, error, or blocker.
 - Judge a tool call by whether its output changes the answer, never by the call count.
 - Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
@@ -62,7 +62,7 @@ commit last checked against.
 | Trigger | Action |
 |---|---|
 | External request non-2xx / proxy block | Another source already covers the need -> say so in one line, no `[BLOCKED]`. Otherwise `[BLOCKED] <url> - <status>`<br>- if host required, stop and tell user |
-| Validate-gate question (or mutating prompt) unanswered | End turn, don't act, wait silently (hook/notification noise isn't a reply).<br>- Unanswered twice -> stop, report attempt + reason, wait |
+| Validate-gate question (or mutating prompt) unanswered | End turn, don't act.<br>- Unanswered twice -> stop, report attempt + reason, wait |
 | Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
 
 ## Code / docs / commits
