@@ -16,7 +16,7 @@ NEVER read files unless you must.
 |---|---|---|
 | Copy file | Read + Write | `cp source dest` |
 | Append a line | Read + Write | `printf '\n## entry\n' >> file` |
-| Replace text (large doc) | Read + Edit | `sed -i.bak 's/old/new/g' file` |
+| Replace free text (large doc) | Read + Edit | `sed -i.bak 's/old/new/g' file` |
 | Delete matching lines | Read + Edit | `sed -i.bak '/pattern/d' file` |
 | Merge files | Read + Read + Write | `cat file1 file2 > merged.md` |
 | Count lines | Read file | `wc -l file` |
@@ -28,10 +28,8 @@ NEVER read files unless you must.
 |---|---|---|
 | New file | Write tool directly | Never wrap it in a bash heredoc script |
 | Modifying a code file | Read + Edit (.NET: see token-dotnet) | Bash text substitution cannot see code structure |
-| Replacing a term in a content document (.md, .yaml, .xml) | `sed -i.bak` if large and the term appears only in free text; Read + Edit if it appears in structured identifiers (IDs, cross-references) | The criterion is context type, not line count alone |
+| Term used in structured identifiers (IDs, cross-references) in a content document | Read + Edit | The criterion is context type, not line count alone |
 | 3+ searches planned on one file | Read the file instead | Each extra turn costs ~2K tokens of history overhead |
-
-Read a file in full only when: the user requests it, the grep match lacks needed context, or `wc -l` < 100.
 
 ## Cost Reference
 
@@ -42,7 +40,6 @@ Read a file in full only when: the user requests it, the grep match lacks needed
 | `head -50 file` | ~50 lines x 4 chars |
 | Read a 100-line file | ~350 tokens |
 | Read a 300-line document | ~1 000 tokens |
-| Each extra turn of clarification | ~2 000 tokens overhead |
 
 ## Appending: Always Use printf, Not echo
 
@@ -174,7 +171,9 @@ still prefer `sed -i.bak` — it needs no Read at all.
 
 ## Reading Selectively When You Must
 
-If you must Read a large file, limit scope first:
+Read a file in full only when: the user requests it, the grep match lacks needed context, `wc -l` < 100, or 3+ searches are planned on it.
+
+Otherwise, limit scope first:
 
 ```bash
 wc -l large-doc.md                    # check size before committing to a full read
