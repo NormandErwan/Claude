@@ -71,7 +71,7 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - Failure/friction recurring after a fix -> `find-cause`.
    - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 5's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
 2. Always check, regardless of what step 3 finds:
-   - Any file op or multi-file task -> `token-efficiency`, `token-file-ops`.
+   - Any file op or multi-file task -> `token-file-ops`.
    - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
    - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
    - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
@@ -100,7 +100,8 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - Offer a `handoff` once per trigger, non-blocking: user signals a pause or a move elsewhere; topic no longer matches the accumulated history (suggest a fresh session).
 
 ## Agents
-- Delegate to a subagent when the raw output would dump long logs or file contents into this context and only the conclusion matters upstream - test runs, log sweeps, doc fetching. A delegated task with no design decision - a fixed lookup, a mechanical transform, a single command - runs on `model: haiku`.
+- Delegate to a subagent when the raw output would dump long logs or file contents into this context and only the conclusion matters upstream - test runs, log sweeps, doc fetching. A delegated task with no design decision - a fixed lookup, a mechanical transform, a single command - runs on `model: haiku`; otherwise `model: sonnet` when a wrong answer is cheap to catch; `model: opus` for large-scale refactoring or migration, structurally novel design, or a costly/irreversible error. Current prices and limits -> `claude-api`, never memory.
+- Pick model and effort at session start: each model, and on most models each effort level, has its own prompt cache, so a mid-session switch re-reads the whole history uncached. Another model needed mid-task -> subagent (parent cache unaffected).
 - Don't delegate work that needs context this session already holds: the subagent starts cold and re-derives it. Session forbids unasked spawns -> ask first.
 - Delegating with `isolation: worktree` -> tell the agent to check its base at start (`git log -1`, compare to the intended branch) and reposition if it drifted, before reading any context. Verifying its diff when the base is in doubt -> `git show <ref>:file | diff - file`, not `git diff <ref> -- file` (a stale base makes the latter show a false full-file delete).
 
