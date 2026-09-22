@@ -73,7 +73,7 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
 2. Always check, regardless of what step 3 finds:
    - Any file op or multi-file task -> `token-file-ops`.
    - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
-   - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
+   - About to state an unverified factual/technical/procedural claim -> `verify-sources`. Unverified includes a premise inherited from a handoff or an earlier session, and a claim about a file's content recalled from an earlier read instead of reread.
    - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
 3. Scan local skills; invoke and announce ("Using [skill] to [purpose]") any that could plausibly help - deliberately low bar, never skip one for seeming marginal.
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
@@ -130,9 +130,10 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
 ## Code / docs / commits
 - Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills. Deliverables written for the user follow the user's language.
 - Any technical/code doc (README, manifests, comments, PR/commit bodies) -> Communication's word-cutting rule, applied on the first pass, not as a later tightening pass: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
+- Editing `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.web.md` or `PROVENANCE.md` in NormandErwan/Claude -> read its `CONTRIBUTING.md` first.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Any edit to a doc/skill's worked examples, chained steps, or output-format template -> before delivery, check each example against the principle it illustrates, that each step's output still satisfies what the next step consumes, and that a template does not itself violate the formatting rule it specifies. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
-- Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
+- Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), re-verify every factual claim in the rewritten section, kept lines included, independent review before merging, A/B if unsure which reads clearer.
 
 ## PR lifecycle
 
@@ -163,11 +164,10 @@ Immediately before ending a turn where >=1 fired:
 | tool-blocked | Tool error forced a different approach than planned |
 | new-preference | User gave an instruction/preference not yet captured anywhere |
 
->=1 fired -> emit before ending turn, as plain text, never a code block (same reason as Non-negotiable 1): a line reading "Retrospective [events]:", followed by up to 3 bullets in the form "<class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>".
+>=1 fired -> log each entry in `RETROSPECTIVE.md` (approved or not - the discards are what `find-cause` reads next time) and emit before ending turn, as plain text, never a code block (same reason as Non-negotiable 1): a line reading "Retrospective [events]:", followed by up to 3 bullets in the form "<class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>".
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
 - Factor first: see `Rule maintenance`. The `replaces` field is never left blank - name the rule or clause the entry removes or subsumes, or write `nothing`. `nothing` on a Create needs one clause saying why no existing rule covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
-- Log every entry in `RETROSPECTIVE.md`, approved or not - the discards are what `find-cause` reads next time.
 - `RETROSPECTIVE.md` over ~50 entries -> compact: entries whose rule is applied and still stands collapse to one line per class; rejected and pending ones stay verbatim.
 - Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
 - `applied` cites the PR carrying the change (`applied - PR#<n>`) - a bare `applied` is not a valid Decision value.
