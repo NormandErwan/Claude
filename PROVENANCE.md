@@ -1,9 +1,9 @@
 # PROVENANCE.md
 
-Ledger of why each `CLAUDE.md` rule exists. One row per rule, added or updated in the same
-commit that introduces, meaningfully changes, or retires it - procedure in `CONTRIBUTING.md`
-`Editing CLAUDE.md`. A pure rewording adds a note to the rule's existing row instead of a new
-one.
+Ledger of why each `CLAUDE.md` rule exists. One row per rule, added or updated in the commit
+right after the one that introduces, meaningfully changes, or retires it, in the same PR -
+procedure in `CONTRIBUTING.md` `Editing CLAUDE.md`. A pure rewording adds a note to the rule's
+existing row instead of a new one.
 
 Rows below predate this ledger: seeded once, 2026-09-07, from a git-archaeology audit
 (`git log -S` per rule, oldest matching commit, commit message read for a stated reason) - a
@@ -61,3 +61,8 @@ in this repo's full history (root commit `115a3d1`, 2026-06-07).
 | 2026-09-22 | Agents | Other delegated tasks: sonnet when a wrong answer is cheap to catch, opus for large-scale refactoring/migration, novel design, or costly/irreversible error; prices and limits from `claude-api` | `bff8e44` | Yes - subagent `model` is the only model choice the agent makes; moved from the deleted `token-efficiency`, rewritten against platform.claude.com choosing-a-model (2026-09-22) instead of hardcoded benchmark gaps - reworded (review fix, PR#81): merged into the haiku bullet as "otherwise sonnet ..." |
 | 2026-09-22 | Agents | Never recommend a mid-session model or effort switch; another model mid-task -> subagent | `bff8e44` | Yes - code.claude.com prompt-caching: each model (and on most models each effort level) has its own cache; replaces `token-efficiency`'s false "switching is free" - reworded (review fix, PR#81): now "Pick model and effort at session start", the wording approved in-session |
 | 2026-07-27 | Code / docs / commits | Code and its docs -> English + ASCII | `2c3eb5a` | No (origin not logged) - part of a larger unrelated rewrite, no reason given - retired (`6c296d3`, 2026-09-22): rarely honored in practice, fought `write-french`'s accent requirements for French text |
+| 2026-09-22 | Every turn | Unverified includes a premise inherited from a handoff or an earlier session, and a file's content recalled from an earlier read instead of reread | `d79c2b6` | Yes - RETROSPECTIVE.md 2026-09-22 (handoff premise nearly blocked the simplest option) and 2026-09-08 (`find-cause` on a recurrence of 2026-08-24: `verify-sources` only fired on claims that felt unverified, and a same-turn read felt verified) |
+| 2026-09-22 | Code / docs / commits | Full rewrite pass also re-verifies every factual claim, kept lines included | `d79c2b6` | Yes - RETROSPECTIVE.md 2026-09-22: a kept line carried a false claim; the rule-by-rule check verifies meaning only |
+| 2026-09-22 | Code / docs / commits | Editing this repo's governance files -> read `CONTRIBUTING.md` first | `d79c2b6` | Yes - RETROSPECTIVE.md 2026-09-22: `CONTRIBUTING.md` was never referenced from `CLAUDE.md` since PR#77 moved these rules there, so an edit skipped it |
+| 2026-09-22 | Retrospective | Logging each entry in `RETROSPECTIVE.md` is part of the emit sentence, not a separate bullet | `d79c2b6` | Yes - RETROSPECTIVE.md 2026-09-22: the separate bullet was skipped, third case of a split-off clause not firing (2026-08-24, 2026-09-05) |
+| 2026-09-22 | Retrospective | An entry filed from another repo's ledger gets its new state there too, in a PR on that repo | `d6cf235` | Yes - RETROSPECTIVE.md 2026-09-22: Intelligence's 2026-09-01 Planify entry still read "proposed" after PR#74 applied it |

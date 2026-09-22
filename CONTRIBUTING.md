@@ -12,11 +12,11 @@ never edits any of these directly.
   ship a verbose draft to tighten later on request. A rule that constrains what gets omitted or
   said, or that gates whether to stop, ask, or escalate, is craft-prompt's Low-freedom case:
   write the exact trigger and its exceptions, not a discretionary standard.
-- Add or meaningfully change a rule -> add or update its row in `PROVENANCE.md` in the same
-  commit: date, section, the rule's own wording, this commit's hash, and the rationale (stated
-  here or in the commit message). A pure rewording adds a note to the rule's existing row
-  instead of a new one. Removing a rule marks its row "retired (commit, date)" instead of
-  deleting it.
+- Add or meaningfully change a rule -> add or update its row in `PROVENANCE.md` in the next
+  commit of the same PR (a commit cannot cite its own hash): date, section, the rule's own
+  wording, the rule commit's hash, and the rationale (stated here or in the commit message).
+  A pure rewording adds a note to the rule's existing row instead of a new one. Removing a rule
+  marks its row "retired (commit, date)" instead of deleting it.
 - A section mirrored in `CLAUDE.web.md` (Rule maintenance, Communication, Non-negotiables,
   Every turn, Error handling, Code/docs/commits, Retrospective) -> mirror the edit in the same
   commit; see "Maintaining CLAUDE.web.md" below. Bootstrap is CLI/npx-only, not mirrored.

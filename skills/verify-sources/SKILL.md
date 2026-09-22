@@ -1,6 +1,6 @@
 ---
 name: verify-sources
-version: 1.2.0
+version: 1.3.0
 description: Use when about to state a factual, technical, historical, or procedural claim in ANY domain (software, DIY/craft, health, legal, finance...) - a version number, default value, statistic, API behavior, a legal deadline, a health claim, a manufacturer spec, "X always/never does Y", "the docs say", "best practice is" - that you have not verified against a source this turn, or when tempted to answer a factual question from memory under time pressure
 ---
 
@@ -14,9 +14,10 @@ right by luck is not the same as being right by evidence.
 **Core principle:** No factual claim without a source, or an explicit "unverified" label.
 
 A source includes any document already in context - a shared thread, a previously
-loaded guide - not only an external lookup. Citing from memory of it is the same
-violation as citing from memory of a web page: reread the actual current text
-before asserting what it says.
+loaded guide, a file read earlier this turn - not only an external lookup. Citing
+from memory of it is the same violation as citing from memory of a web page: reread
+the exact passage before asserting what it says or how two documents differ. A read
+earlier in the same turn is memory too, above all one of several files read in a batch.
 
 **Violating the letter of this rule is violating the spirit of this rule.**
 
@@ -218,6 +219,8 @@ before using it - do not trust the summary's framing.
 - "I'm pretty sure", "IIRC", "I think it's", "should be" - stated as if it were fact
 - Time pressure: "just tell me fast", "don't overthink it", "reviewer is waiting"
 - Reaching for memory because searching feels slow
+- About to say what a file says, or how two files differ, from an earlier read
+  instead of a fresh `Grep`/`Read` of the passage
 - Answering a NON-trivial factual question (version, number, default, date,
   absolute, "the docs say") with tool_uses still at 0
 - Citing an aggregator, mirror, or re-host as if it were the primary source

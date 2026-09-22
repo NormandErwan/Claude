@@ -39,7 +39,7 @@ commit last checked against.
    - Failure/friction recurring after a fix -> `find-cause`.
    - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 5's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
 2. Always check, regardless of what step 3 finds:
-   - About to state an unverified factual/technical/procedural claim -> `verify-sources`.
+   - About to state an unverified factual/technical/procedural claim -> `verify-sources`. Unverified includes a premise inherited from a handoff or an earlier session, and a claim about a file's content recalled from an earlier read instead of reread.
    - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
 3. Scan local skills; invoke and announce ("Using [skill] to [purpose]") any that could plausibly help - deliberately low bar, never skip one for seeming marginal.
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
@@ -68,7 +68,7 @@ commit last checked against.
 ## Code / docs / commits
 - Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills. Deliverables written for the user follow the user's language.
 - Any edit to a doc/skill's worked examples, chained steps, or output-format template -> before delivery, check each example against the principle it illustrates, that each step's output still satisfies what the next step consumes, and that a template does not itself violate the formatting rule it specifies. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
-- Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), independent review before merging, A/B if unsure which reads clearer.
+- Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), re-verify every factual claim in the rewritten section, kept lines included, independent review before merging, A/B if unsure which reads clearer.
 
 ## Retrospective
 
