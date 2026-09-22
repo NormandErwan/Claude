@@ -1,7 +1,7 @@
 ---
 name: token-file-ops
 description: Use when reading, editing, creating, or manipulating files; or running commands with potentially large output. Provides generic bash-first patterns for any file type. For .NET/C# specific patterns, also load token-dotnet.
-version: 1.4.1
+version: 1.5.0
 allowed-tools: Bash, Read, Grep, Glob
 ---
 
@@ -21,6 +21,28 @@ NEVER read files unless you must.
 | Merge files | Read + Read + Write | `cat file1 file2 > merged.md` |
 | Count lines | Read file | `wc -l file` |
 | Check if text exists | Read file | `grep -q "term" file && echo found` |
+
+## When Read + Edit or Write Wins
+
+| Case | Use | Why |
+|---|---|---|
+| New file | Write tool directly | Never wrap it in a bash heredoc script |
+| Modifying a code file | Read + Edit (.NET: see token-dotnet) | Bash text substitution cannot see code structure |
+| Replacing a term in a content document (.md, .yaml, .xml) | `sed -i.bak` if large and the term appears only in free text; Read + Edit if it appears in structured identifiers (IDs, cross-references) | The criterion is context type, not line count alone |
+| 3+ searches planned on one file | Read the file instead | Each extra turn costs ~2K tokens of history overhead |
+
+Read a file in full only when: the user requests it, the grep match lacks needed context, or `wc -l` < 100.
+
+## Cost Reference
+
+| Operation | Approx. token cost |
+|---|---|
+| `wc -l file` | ~5 tokens (output only) |
+| `grep -n "pattern" file` | ~5 + matched lines |
+| `head -50 file` | ~50 lines x 4 chars |
+| Read a 100-line file | ~350 tokens |
+| Read a 300-line document | ~1 000 tokens |
+| Each extra turn of clarification | ~2 000 tokens overhead |
 
 ## Appending: Always Use printf, Not echo
 

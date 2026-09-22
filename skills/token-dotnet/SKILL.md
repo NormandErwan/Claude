@@ -1,7 +1,7 @@
 ---
 name: token-dotnet
-description: Load when working on any C# or .NET project. Provides grep patterns with build directory exclusion, C# code structure search patterns, generated file handling, and .NET project exploration strategy. Complements token-efficiency (decision tree) and token-codebase-exploration (workflow).
-version: 1.0.0
+description: Load when working on any C# or .NET project. Provides grep patterns with build directory exclusion, C# code structure search patterns, generated file handling, and .NET project exploration strategy. Complements token-codebase-exploration (workflow).
+version: 1.0.1
 allowed-tools: Bash, Read, Grep, Glob
 ---
 
