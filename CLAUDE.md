@@ -170,6 +170,6 @@ Immediately before ending a turn where >=1 fired:
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
 - `RETROSPECTIVE.md` over ~50 entries -> compact: entries whose rule is applied and still stands collapse to one line per class; rejected and pending ones stay verbatim.
 - Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
-- `applied` cites the PR carrying the change (`applied - PR#<n>`) - a bare `applied` is not a valid Decision value.
+- `applied` cites the PR carrying the change (`applied - PR#<n>`) - a bare `applied` is not a valid Decision value. An entry filed from another repo's ledger gets its new state there too, in a PR on that repo.
 - Before filing, check `RETROSPECTIVE.md` for a prior entry of the same class -> found means `find-cause` instead of a second log line, not a re-extension of the same rule.
 - 0 fired -> skip silently.
