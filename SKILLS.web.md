@@ -10,7 +10,7 @@ npx-pulled skill (never vendored) carries `-` in Local commit.
 | Skill | Source | Local commit | Upstream commit |
 |---|---|---|---|
 | find-cause | native | `7aa7d4762a` | - |
-| verify-sources | native | `5879b06cae` | - |
+| verify-sources | native | `d79c2b6899` | - |
 | guide-decision | native | `0aabdbb41d` | - |
 | guide-purchase | native | `0aabdbb41d` | - |
 | write-french | native | `34a05c4793` | - |
@@ -19,7 +19,7 @@ npx-pulled skill (never vendored) carries `-` in Local commit.
 | grill-with-docs | `mattpocock/skills@grill-with-docs` (npx) | - | `3cca18b368` |
 | research | `mattpocock/skills@research` (npx) | - | `3cca18b368` |
 | handoff | `mattpocock/skills@handoff` (npx) | - | `3cca18b368` |
-| using-agent-skills | `addyosmani/agent-skills@using-agent-skills` (cloned by hook) | - | `48cb1168ae` |
+| using-agent-skills | `addyosmani/agent-skills@using-agent-skills` (cloned by hook) | - | `dc27a9c2e1` |
 
 craft-prompt's `Source` was recorded as `local` until this pass - it is a straight copy of
 `neolabhq/context-engineering-kit`'s `prompt-engineering` skill, renamed and forked before this
@@ -83,3 +83,8 @@ structural-move pattern as mattpocock's PR #1025 and the 2026-09-01
 using-agent-skills case. Pins updated to record the check
 (`4da35f2209` -> `23e2428e80`, `1c760d6434` -> `48cb1168ae`); no content
 changed, no zip re-send needed.
+
+2026-09-22: full pass, triggered by the `CLAUDE.web.md` edit in PR#82. Moved: verify-sources
+(v1.3.0, zip re-sent), using-agent-skills (description line only, `Core Operating Behaviors`
+unchanged - pin updated only). craft-prompt, find-cause, guide-decision, guide-purchase,
+write-french, grilling, grill-with-docs, research, handoff unchanged.
