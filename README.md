@@ -12,7 +12,7 @@ Most external skills are not vendored here. Three mechanisms bring skills in:
 | `addyosmani/agent-skills` | Cloned and injected by the `SessionStart` hook | `CLAUDE.md` `## Every turn` 6 |
 | `craft-prompt`, `grilling` | Forked into `skills/` for local edits, tracked against their upstream in `SKILLS.web.md` | `skills/craft-prompt/`, `skills/grilling/` |
 
-A skill of general scope belongs here (`NormandErwan/Claude`), English + ASCII (see `CLAUDE.md`
+A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLAUDE.md`
 `Code / docs / commits`). A skill specific to one consumer repo belongs in that repo's own
 `skills/` - its `SessionStart` hook never touches it.
 

@@ -82,7 +82,7 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
 5. Otherwise - step 0 didn't close empty, or the content isn't literal - unless the user
    delegated the judgment (e.g. "reformulate as needed"):
    - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> state assumptions inline (`Non-negotiables` 1) and answer. No `grilling`.
-   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges below; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden except one line per option considered and rejected, with the reason; an option that would change the deliverable, its cost, or its format is not rejected alone, it goes into step 0's framing as a choice) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English+ASCII per `Code / docs / commits`).
+   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, self-review vs assumptions/alternatives/challenges below; deliver the assumptions block of `Non-negotiables` 1, then the final analysis+plan - the draft stays hidden except one line per option considered and rejected, with the reason; an option that would change the deliverable, its cost, or its format is not rejected alone, it goes into step 0's framing as a choice) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English per `Code / docs / commits`).
      - Planify's assumptions axis: what was taken for granted.
      - Planify's alternatives axis: reuse/compose an existing solution, weighed before any implementation approach is fixed, not only among variants of one already chosen.
      - Planify's challenges axis: what a domain expert would object to.
@@ -97,7 +97,6 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - Where a step-5 skill and a flowchart skill cover the same ground, the step-5 one wins - `grilling`/`grill-with-docs` over `interview-me`, `code-review` + `ponytail-review` over `code-review-and-quality` (see `PR lifecycle`). Otherwise they compose, and everything the flowchart names is used as-is.
    - `grilling` stays step 5's gate: it runs before the flowchart, not instead of it.
 7. End of turn:
-   - Stamp the reply with local time (`date`); no clock available -> skip.
    - Offer a `handoff` once per trigger, non-blocking: user signals a pause or a move elsewhere; topic no longer matches the accumulated history (suggest a fresh session).
 
 ## Agents
@@ -130,7 +129,7 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
   - Run verification commands - evidence first.
 
 ## Code / docs / commits
-- Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English + ASCII. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills; French quoted as an example - keeps its accents, unaccented French is misspelled French. Deliverables written for the user follow the user's language.
+- Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills. Deliverables written for the user follow the user's language.
 - Any technical/code doc (README, manifests, comments, PR/commit bodies) -> Communication's word-cutting rule, applied on the first pass, not as a later tightening pass: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
 - `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
 - Any edit to a doc/skill's worked examples, chained steps, or output-format template -> before delivery, check each example against the principle it illustrates, that each step's output still satisfies what the next step consumes, and that a template does not itself violate the formatting rule it specifies. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
