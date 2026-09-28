@@ -10,7 +10,7 @@ npx-pulled skill (never vendored) carries `-` in Local commit.
 | Skill | Source | Local commit | Upstream commit |
 |---|---|---|---|
 | find-cause | native | `7aa7d4762a` | - |
-| verify-sources | native | `4cdac17a60` | - |
+| verify-sources | native | `a42ea18ee8` | - |
 | guide-decision | native | `0aabdbb41d` | - |
 | guide-purchase | native | `0aabdbb41d` | - |
 | write-french | native | `34a05c4793` | - |
@@ -89,5 +89,5 @@ changed, no zip re-send needed.
 unchanged - pin updated only). craft-prompt, find-cause, guide-decision, guide-purchase,
 write-french, grilling, grill-with-docs, research, handoff unchanged.
 
-2026-09-28: verify-sources only (v1.3.0 -> v1.4.0, zip re-sent), triggered by its own edit in PR#83,
+2026-09-28: verify-sources only (v1.3.0 -> v1.4.2, zip re-sent), triggered by its own edit in PR#83,
 not a full pass.
