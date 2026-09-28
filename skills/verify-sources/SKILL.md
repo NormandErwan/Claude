@@ -1,6 +1,6 @@
 ---
 name: verify-sources
-version: 1.3.0
+version: 1.4.0
 description: Use when about to state a factual, technical, historical, or procedural claim in ANY domain (software, DIY/craft, health, legal, finance...) - a version number, default value, statistic, API behavior, a legal deadline, a health claim, a manufacturer spec, "X always/never does Y", "the docs say", "best practice is" - that you have not verified against a source this turn, or when tempted to answer a factual question from memory under time pressure
 ---
 
@@ -40,6 +40,7 @@ Any assertion whose truth the reader will act on:
 - Absolutes: "always", "never", "unchanged across all versions", "not possible"
 - Statistics, benchmarks, percentages, "most people", "the standard is"
 - "The docs say", "the spec requires", "best practice is"
+- A code snippet presented as working - its source is compiling and running it this turn; otherwise label it "untested"
 
 Opinions, plans, and reasoning about the current code you can see are NOT claims
 needing an external source - but claims ABOUT what code does elsewhere are.
@@ -150,6 +151,8 @@ Judge each source (PARC):
 **Analogous is not the same.** A manual for a *similar* model (a different Tuya
 switch) supports a HYPOTHESIS about yours, never a verified fact. Say: "no primary
 source for model X; the near-identical model Y documents Z (hypothesis)".
+
+**A blocked route is not a blocked source.** When an API refuses (403/429, quota spent), reach the same primary data another way before downgrading - e.g. repository metrics (contributors, activity, tags): `git clone --filter=blob:none`, then `git log`/`git shortlog`, instead of the REST API.
 
 **If every primary source is network-blocked** (403/429/503, dead link), say so
 with the `[BLOCKED] <url> - <status>` status, and downgrade the whole answer to
