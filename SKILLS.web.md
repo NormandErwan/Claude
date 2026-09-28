@@ -10,7 +10,7 @@ npx-pulled skill (never vendored) carries `-` in Local commit.
 | Skill | Source | Local commit | Upstream commit |
 |---|---|---|---|
 | find-cause | native | `7aa7d4762a` | - |
-| verify-sources | native | `b91bb7eb19` | - |
+| verify-sources | native | `202fc6a797` | - |
 | guide-decision | native | `0aabdbb41d` | - |
 | guide-purchase | native | `0aabdbb41d` | - |
 | write-french | native | `34a05c4793` | - |
