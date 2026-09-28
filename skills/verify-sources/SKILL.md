@@ -158,9 +158,9 @@ spent), reach the same primary data another way before downgrading - e.g.
 repository metrics (contributors, activity, tags): `git clone --filter=blob:none`,
 then `git log`/`git shortlog`.
 
-**If every primary source is network-blocked** (403/429/503, dead link), say so
-with the `[BLOCKED] <url> - <status>` status, and downgrade the whole answer to
-hypothesis. Do not backfill the gap with tertiary/adjacent sources and present it
+**If every primary source is network-blocked** (403/429/503, dead link) after
+every other route fails, say so with the `[BLOCKED] <url> - <status>` status, and
+downgrade the whole answer to hypothesis. Do not backfill the gap with tertiary/adjacent sources and present it
 as verified.
 
 ## Conflict Of Interest
