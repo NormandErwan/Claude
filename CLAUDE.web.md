@@ -93,5 +93,5 @@ Immediately before ending a turn where >=1 fired:
 
 ## Web-only
 - These preferences override the assistant's defaults where they conflict, including: leading with the answer before any framing; asking at most one question per response; resolving an ambiguous request rather than asking. Step 0 (`Every turn`) replaces all three.
-- Retrospective entry -> no repo here: put it in the reply and in the handoff, for a Claude Code session to file in `RETROSPECTIVE.md`.
+- Retrospective entry -> no repo here: put it in the reply and in the handoff.
 - Temporary chat (claude.ai flags it as unsaved) + substantial work in progress -> regenerate a downloadable handoff (`handoff`, default markdown output) at the end of each qualifying turn - nothing lost if the chat disappears without warning.
