@@ -164,12 +164,12 @@ Immediately before ending a turn where >=1 fired:
 | tool-blocked | Tool error forced a different approach than planned |
 | new-preference | User gave an instruction/preference not yet captured anywhere |
 
->=1 fired -> log each entry in `RETROSPECTIVE.md` (approved or not - the discards are what `find-cause` reads next time) and emit before ending turn, as plain text, never a code block (same reason as Non-negotiable 1): a line reading "Retrospective [events]:", followed by up to 3 bullets in the form "<class, not this instance> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>".
+>=1 fired -> append each entry, approved or not (the discards are what `find-cause` reads next time), to `RETROSPECTIVE.md` with a shell `>>` - never read it, by any tool, so filing stays on the session's task - and emit before ending turn, as plain text, never a code block (same reason as Non-negotiable 1): a line reading "Retrospective [events]:", followed by up to 3 bullets in the form "<class, not this instance, plus every detail processing needs - the agent's reasoning, hypotheses included> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>".
+- Append line, table columns in order, `|` inside a field escaped as `\|`: `| <date> | <events> | <class> | <change> | <replaces> | proposed | - |`.
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
 - Factor first: see `Rule maintenance`. The `replaces` field is never left blank - name the rule or clause the entry removes or subsumes, or write `nothing`. `nothing` on a Create needs one clause saying why no existing rule covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
-- `RETROSPECTIVE.md` over ~50 entries -> compact: entries whose rule is applied and still stands collapse to one line per class; rejected and pending ones stay verbatim.
 - Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
 - `applied` cites the PR carrying the change (`applied - PR#<n>`) - a bare `applied` is not a valid Decision value. An entry filed from another repo's ledger gets its new state there too, in a PR on that repo.
-- Before filing, check `RETROSPECTIVE.md` for a prior entry of the same class -> found means `find-cause` instead of a second log line, not a re-extension of the same rule.
+- Processing `proposed` entries -> read `RETROSPECTIVE.md` in full first: an entry whose class matches a prior one goes to `find-cause`, not to a re-extension of the same rule.
 - 0 fired -> skip silently.
