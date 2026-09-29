@@ -1,6 +1,6 @@
 # RETROSPECTIVE.md
 
-Ledger of Retrospective entries. One row per entry, approved or not. `CLAUDE.md` `Retrospective` holds the rules for filing and compacting it. `Replaces` names the rule or clause an entry removes or subsumes; `-` marks a row filed before the field existed.
+Ledger of Retrospective entries. One row per entry, approved or not. `CLAUDE.md` `Retrospective` holds the rules for filing and processing it. `Replaces` names the rule or clause an entry removes or subsumes; `-` marks a row filed before the field existed.
 
 | Date | Events | Class | Proposed change | Replaces | Decision | Landed in |
 |---|---|---|---|---|---|---|
