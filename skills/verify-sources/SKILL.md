@@ -1,6 +1,6 @@
 ---
 name: verify-sources
-version: 1.4.2
+version: 1.5.0
 description: Use when about to state a factual, technical, historical, or procedural claim in ANY domain (software, DIY/craft, health, legal, finance...) - a version number, default value, statistic, API behavior, a legal deadline, a health claim, a manufacturer spec, "X always/never does Y", "the docs say", "best practice is" - that you have not verified against a source this turn, or when tempted to answer a factual question from memory under time pressure
 ---
 
@@ -72,7 +72,9 @@ BEFORE stating any factual/technical/historical/procedural claim:
 3. FOUND?
    - YES: State the claim WITH the source cited (source must support the
           EXACT claim - see "The source must actually support the exact claim")
-   - NO:  SEARCH ONCE MORE with different terms
+   - NO:  SEARCH ONCE MORE with different terms. If the brand shown differs
+          from whoever actually publishes for it (parent group, underwriter,
+          manufacturer behind the brand), this search MUST use that name
 4. STILL NOT FOUND?
    - State "no source found" explicitly
    - Give your best answer LABELED "hypothesis" - never as fact
@@ -132,7 +134,11 @@ Hierarchy (reach for the highest you can):
    release notes/changelog, the vendor's own manual, the real command output or
    API response.
 2. **Secondary** - a reputable description of the primary: maintainer posts, MDN,
-   an accepted answer that quotes the primary.
+   an accepted answer that quotes the primary. A summary of a binding text
+   (contract, terms, statute) - FAQ, brochure, a notice marked non-binding - is
+   secondary to that text, even from the same publisher: report what it says,
+   attributed to it; state the rule only from the binding text, otherwise label
+   it a hypothesis.
 3. **Tertiary** - aggregators, manual re-host/mirror sites, random blogs, forum
    guesses, AI summaries. Use ONLY as a lead to a primary source, never as the
    citation.
@@ -152,6 +158,11 @@ Judge each source (PARC):
 **Analogous is not the same.** A manual for a *similar* model (a different Tuya
 switch) supports a HYPOTHESIS about yours, never a verified fact. Say: "no primary
 source for model X; the near-identical model Y documents Z (hypothesis)".
+
+The same holds across parties. A document issued for one party (distributor,
+reseller, plan) supports another party's case only for terms of the common text
+both point to (a collective contract, a product spec). Terms each party sets on its own
+(claims handler, contacts, deadlines) need that party's own document.
 
 **A blocked route is not a blocked source.** When an API refuses (403/429, quota
 spent), reach the same primary data another way before downgrading - e.g.
@@ -234,6 +245,8 @@ before using it - do not trust the summary's framing.
 - Searching for a fact about a model/version/year the user never stated - pin
   the instance first, the search cannot fix an unidentified subject
 - Treating a similar-but-different model or version as if it documented yours
+- Citing a document issued for one party about another party because both share
+  a reference (contract number, product code)
 - Several results agree but share the same generic FAQ skeleton and no named
   author - that is syndication, not corroboration
 - Treating "a blog covers this topic" as authority when no standard,
