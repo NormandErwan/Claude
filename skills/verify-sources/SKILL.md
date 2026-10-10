@@ -1,6 +1,6 @@
 ---
 name: verify-sources
-version: 1.5.0
+version: 1.5.1
 description: Use when about to state a factual, technical, historical, or procedural claim in ANY domain (software, DIY/craft, health, legal, finance...) - a version number, default value, statistic, API behavior, a legal deadline, a health claim, a manufacturer spec, "X always/never does Y", "the docs say", "best practice is" - that you have not verified against a source this turn, or when tempted to answer a factual question from memory under time pressure
 ---
 
@@ -159,10 +159,11 @@ Judge each source (PARC):
 switch) supports a HYPOTHESIS about yours, never a verified fact. Say: "no primary
 source for model X; the near-identical model Y documents Z (hypothesis)".
 
-The same holds across parties. A document issued for one party (distributor,
-reseller, plan) supports another party's case only for terms of the common text
-both point to (a collective contract, a product spec). Terms each party sets on its own
-(claims handler, contacts, deadlines) need that party's own document.
+Across parties, only the shared text carries over. A document issued for one
+party (distributor, reseller, plan) supports another party's case only for terms
+of the common text both point to (a collective contract, a product spec). Terms
+each party sets on its own (claims handler, contacts, deadlines) need that
+party's own document; without it, label them a hypothesis.
 
 **A blocked route is not a blocked source.** When an API refuses (403/429, quota
 spent), reach the same primary data another way before downgrading - e.g.
@@ -245,8 +246,8 @@ before using it - do not trust the summary's framing.
 - Searching for a fact about a model/version/year the user never stated - pin
   the instance first, the search cannot fix an unidentified subject
 - Treating a similar-but-different model or version as if it documented yours
-- Citing a document issued for one party about another party because both share
-  a reference (contract number, product code)
+- Citing a document issued for one party about a term another party sets on its
+  own (claims handler, contacts, deadlines)
 - Several results agree but share the same generic FAQ skeleton and no named
   author - that is syndication, not corroboration
 - Treating "a blog covers this topic" as authority when no standard,
