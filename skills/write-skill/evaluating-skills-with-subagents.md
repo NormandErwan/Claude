@@ -68,6 +68,8 @@ For each eval, spawn two subagents with the same prompt:
 
 **Without-skill (baseline) subagent** — same prompt, no skill present. Documents default behavior.
 
+**Isolate the arms, then prove it before the full run.** A subagent spawned with the Agent tool inherits the parent session's project `CLAUDE.md` and whatever else its harness injects: when the change under test is a `CLAUDE.md` rule, or the parent's context already holds the treatment, both arms see it. Run each arm where only its own instructions load - headless `claude -p` with the arm's fixture copy, outside the repo and without its `.claude/`, as working directory. Before the full run, probe one run per arm: without reading files, it quotes a passage that differs between arms. The baseline quotes treatment text, or the treatment arm lacks it -> fix the setup; never score a contaminated run.
+
 Each subagent run should save:
 - `transcript.md` — full execution transcript
 - `outputs/` — all output files produced
