@@ -78,7 +78,7 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
 3. Scan local skills; invoke and announce ("Using [skill] to [purpose]") any that could plausibly help - deliberately low bar, never skip one for seeming marginal.
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
    - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
-4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
+4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act; a `CLAUDE.md` or skill edit applies step 5's test axis first.
 5. Otherwise - step 0 didn't close empty, or the content isn't literal - unless the user
    delegated the judgment (e.g. "reformulate as needed"):
    - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> state assumptions inline (`Non-negotiables` 1) and answer. No `grilling`. The answer recommends or proposes anything -> before sending it, run Planify's critical pass on it, revise the answer from it, and end it with the pass's closing paragraph.

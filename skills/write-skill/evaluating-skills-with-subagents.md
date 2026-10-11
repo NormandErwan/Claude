@@ -68,7 +68,12 @@ For each eval, spawn two subagents with the same prompt:
 
 **Without-skill (baseline) subagent** — same prompt, no skill present. Documents default behavior.
 
-**Isolate the arms, then pilot before the full run.** A subagent spawned with the Agent tool inherits the parent session's project `CLAUDE.md` and whatever else its harness injects: when the change under test is a `CLAUDE.md` rule, or the parent's context already holds the treatment, both arms see it. Run each arm where only its own instructions load - headless `claude -p` with the arm's fixture copy, outside the repo and without its `.claude/`, as working directory. Before the full run, probe one run per arm: without reading files, it quotes a passage that differs between arms. The baseline quotes treatment text, or the treatment arm lacks it -> fix the setup; never score a contaminated run. Then check the baseline can fail: run it on each eval, up to twice; it must show the defect the change targets at least once. It never does -> the eval cannot show a difference (e.g. the trap is stated in the user message): fix the eval before the full run. In the benchmark summary, report the pilot's baseline runs and whether each showed the defect.
+**Isolate the arms, then prove it before the full run.** A subagent spawned with the Agent tool inherits the parent session's project `CLAUDE.md` and whatever else its harness injects: when the change under test is a `CLAUDE.md` rule, or the parent's context already holds the treatment, both arms see it. Run each arm where only its own instructions load - headless `claude -p` with the arm's fixture copy, outside the repo and without its `.claude/`, as working directory. Before the full run, probe one run per arm: without reading files, it quotes a passage that differs between arms. The baseline quotes treatment text, or the treatment arm lacks it -> fix the setup; never score a contaminated run.
+
+**Pilot before the full run.**
+- For each eval, write the treatment arm's expected outcome and the one rule clause it follows from. Another clause or the user's request also bearing on that outcome -> rewrite the eval.
+- Run the baseline on each eval, up to twice; it must show the defect the change targets at least once. It never does -> fix the eval (e.g. the trap is stated in the user message).
+- In the benchmark summary, report the pilot's baseline runs and whether each showed the defect.
 
 Each subagent run should save:
 - `transcript.md` — full execution transcript
