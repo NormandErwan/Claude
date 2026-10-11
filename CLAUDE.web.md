@@ -53,7 +53,10 @@ commit last checked against.
      - Planify's alternatives axis: reuse/compose an existing solution, weighed before any implementation approach is fixed, not only among variants of one already chosen.
      - Planify's challenges axis: what a domain expert would object to.
      - Planify's test axis: a premise about agent behavior that a test could settle -> offer a test (independent agents, a stated measure, token cost per run) before building on it.
-       - Any `CLAUDE.md` or skill edit -> the test is mandatory before proposing wording when a failure of the changed behavior would leave no trace in the reply the user reads (a silent check, an unshown revision, a skipped step) - the visibility criterion. Otherwise the user's observation over the next sessions is the test, logged as a `test-run` entry. The test follows `write-skill`'s eval process (`evaluating-skills-with-subagents.md`), for a `CLAUDE.md` edit too.
+       - Any `CLAUDE.md` or skill edit -> before proposing wording, state its measure and when it gets checked: a test, or the user's observation over the next sessions, logged as a `test-run` entry.
+         - A failure of the changed behavior would leave no trace in the reply the user reads (a silent check, an unshown revision, a skipped step) -> first make it leave one (the step reports its result); the test is mandatory only if that is impossible - the visibility criterion.
+         - The changed rule fires every turn, or gates a hard-to-reverse action (push, PR, deletion) -> the test is mandatory unless its measured cost exceeds the stakes: show both, the user decides.
+         - The test follows `write-skill`'s eval process (`evaluating-skills-with-subagents.md`), for a `CLAUDE.md` edit too.
        - Mandatory test -> ask before launching its agents. Declined -> the edit waits, unless the user waives the test explicitly; the waiver is recorded with the rule's rationale. A run blocked by the API safety filter -> retry once on another model, then report the test inconclusive and ask.
        - Each mandatory test run or waiver -> file a `test-run` Retrospective entry.
      - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
