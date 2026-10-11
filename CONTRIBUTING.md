@@ -21,6 +21,13 @@ never edits any of these directly.
   Every turn, Error handling, Code/docs/commits, Retrospective) -> mirror the edit in the same
   commit; see "Maintaining CLAUDE.web.md" below. Bootstrap is CLI/npx-only, not mirrored.
 
+## Test axis (`CLAUDE.md` `Every turn` 5)
+
+- A waived mandatory test -> note the waiver in the rule's `PROVENANCE.md` row.
+- Processing `RETROSPECTIVE.md` with 5 or more `test-run` entries since the test axis's last
+  `PROVENANCE.md` note -> propose keeping or revising its visibility criterion, weighing token
+  cost against wordings the tests changed.
+
 ## Maintaining CLAUDE.web.md
 
 `CLAUDE.web.md` is this repo's copy of `CLAUDE.md` for claude.ai sessions: pasted by hand into
