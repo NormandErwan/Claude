@@ -87,8 +87,8 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
      - Planify's alternatives axis: reuse/compose an existing solution, weighed before any implementation approach is fixed, not only among variants of one already chosen.
      - Planify's challenges axis: what a domain expert would object to.
      - Planify's test axis: a premise about agent behavior that a test could settle -> offer a test (independent agents, a stated measure, token cost per run) before building on it.
-       - Any `CLAUDE.md` or skill edit -> the test is mandatory before proposing wording when a failure of the changed behavior would leave no trace in the reply the user reads (a silent check, an unshown revision, a skipped step). Otherwise the user's observation over the next sessions is the test, logged as a `test-run` entry. The test follows `write-skill`'s eval process (`evaluating-skills-with-subagents.md`), for a `CLAUDE.md` edit too.
-       - Mandatory test -> ask before launching its agents. Declined -> the edit waits, unless the user waives the test explicitly; the waiver goes in the rule's `PROVENANCE.md` row. A run blocked by the API safety filter -> retry once on another model, then report the test inconclusive and ask.
+       - Any `CLAUDE.md` or skill edit -> the test is mandatory before proposing wording when a failure of the changed behavior would leave no trace in the reply the user reads (a silent check, an unshown revision, a skipped step) - the visibility criterion. Otherwise the user's observation over the next sessions is the test, logged as a `test-run` entry. The test follows `write-skill`'s eval process (`evaluating-skills-with-subagents.md`), for a `CLAUDE.md` edit too.
+       - Mandatory test -> ask before launching its agents. Declined -> the edit waits, unless the user waives the test explicitly; the waiver is recorded with the rule's rationale. A run blocked by the API safety filter -> retry once on another model, then report the test inconclusive and ask.
        - Each mandatory test run or waiver -> file a `test-run` Retrospective entry.
      - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
      - Domain/data model involved -> also `domain-modeling`.
@@ -178,5 +178,4 @@ Immediately before ending a turn where >=1 fired:
 - `applied` cites the PR carrying the change (`applied - PR#<n>`) - a bare `applied` is not a valid Decision value. An entry filed from another repo's ledger gets its new state there too, in a PR on that repo.
 - Processing `proposed` entries -> read `RETROSPECTIVE.md` in full first: an entry whose class matches a prior one goes to `find-cause`, not to a re-extension of the same rule.
   - An entry's premise about its origin session that the ledger cannot confirm -> mark it `not checkable here`, never treat it as verified.
-  - 5 or more `test-run` entries since the test axis's last `PROVENANCE.md` note -> propose keeping or revising its visibility criterion, weighing token cost against wordings the tests changed.
 - 0 fired -> skip silently.
