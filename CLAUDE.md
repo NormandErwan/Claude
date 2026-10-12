@@ -152,6 +152,7 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`. T
 | Turn would end with an unreviewed diff-changing push, but open questions or unaddressed plan/audit items remain | Keep going, no question - the review question waits until nothing else is open |
 | Turn would end with an unreviewed diff-changing push, no open questions or plan/audit items remain, and it isn't the last task of an EnterPlanMode-approved plan | Plain-text question: review now or keep going.<br>- Ask once, wait until answered or PR merges/closes |
 | Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
+| Relaying a review's findings | Per finding: what was checked and what was found, then the verdict - judged only on whether the fix improves the deliverable; prior approval or passing tests never justify keeping it as is |
 | PR title still reads as a placeholder (branch name, "WIP", a generic verb) or no longer matches the diff's actual scope | Draft short title, rename PR + conversation title (if a rename tool exists) |
 | Nothing actionable (e.g. CI green or none configured, `mergeable_state: clean`, no unresolved comments) | Stop self re-arming (don't wait for merge/close) |
 | Merge conflict blocks the push | Resolve via mattpocock `resolving-merge-conflicts`, then push |
