@@ -77,7 +77,7 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
 3. Scan local skills; invoke and announce ("Using [skill] to [purpose]") any that could plausibly help - deliberately low bar, never skip one for seeming marginal.
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
-   - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context - unless its process spawns agents and `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` is 1 (check with `env`): then run it in the main context.
+   - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context - unless its process spawns agents and subagents cannot spawn here (`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` is 1, or nesting is otherwise off - check `env` and the settings files): then run it in the main context.
 4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
 5. Otherwise - step 0 didn't close empty, or the content isn't literal - unless the user
    delegated the judgment (e.g. "reformulate as needed"):
