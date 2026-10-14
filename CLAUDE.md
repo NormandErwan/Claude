@@ -77,7 +77,7 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
 3. Scan local skills; invoke and announce ("Using [skill] to [purpose]") any that could plausibly help - deliberately low bar, never skip one for seeming marginal.
    - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
-   - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context.
+   - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context - unless its process spawns agents and subagents cannot spawn here (`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` is 1, or nesting is otherwise off - check `env` and the settings files): then run it in the main context.
 4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
 5. Otherwise - step 0 didn't close empty, or the content isn't literal - unless the user
    delegated the judgment (e.g. "reformulate as needed"):
@@ -152,6 +152,7 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`. T
 | Turn would end with an unreviewed diff-changing push, but open questions or unaddressed plan/audit items remain | Keep going, no question - the review question waits until nothing else is open |
 | Turn would end with an unreviewed diff-changing push, no open questions or plan/audit items remain, and it isn't the last task of an EnterPlanMode-approved plan | Plain-text question: review now or keep going.<br>- Ask once, wait until answered or PR merges/closes |
 | Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
+| Relaying a review's findings | Per finding: what was checked and what was found, then the verdict - judged only on whether the fix improves the deliverable; prior approval or passing tests never justify keeping it as is |
 | PR title still reads as a placeholder (branch name, "WIP", a generic verb) or no longer matches the diff's actual scope | Draft short title, rename PR + conversation title (if a rename tool exists) |
 | Nothing actionable (e.g. CI green or none configured, `mergeable_state: clean`, no unresolved comments) | Stop self re-arming (don't wait for merge/close) |
 | Merge conflict blocks the push | Resolve via mattpocock `resolving-merge-conflicts`, then push |
