@@ -50,7 +50,7 @@ in this repo's full history (root commit `115a3d1`, 2026-06-07).
 | 2026-09-06 | PR lifecycle | Open questions remain -> keep going, no question | `a249037` | Yes - not actually pre-ledger (PR #76, same day): the old single row asked twice unanswered this session |
 | 2026-07-18 | PR lifecycle | Placeholder title -> rename | `5a5a218` | Yes - added while standardizing PR-lifecycle wording on "always", per a user request |
 | 2026-07-15 | PR lifecycle | Nothing actionable -> stop self re-arming | `4a7012e` | Yes - check-ins polled hourly for 5+ hours after CI had already passed, no exit condition existed |
-| 2026-07-27 | PR lifecycle | Merge conflict -> resolve via resolving-merge-conflicts | `f3b9bb6` | Yes - the skill was installed but never explicitly triggered |
+| 2026-07-27 | PR lifecycle | Merge conflict -> resolve via resolving-merge-conflicts | `f3b9bb6` | Yes - the skill was installed but never explicitly triggered - retired (`207e6e3`, 2026-10-18): upstream removed the skill (`mattpocock/skills` `daa01d8`, 2026-09-24, "No longer needed", no published evidence); no replacement upstream, none in `RETROSPECTIVE.md`; npx install line dropped with it. Mandatory test waived by the user (2026-10-18): the skill never fired |
 | 2026-07-15 | PR lifecycle | Anything still pending -> keep polling | `4a7012e` | Yes - same commit/rationale as the row above |
 | 2026-08-23 | Agents | Delegate when raw output would dump long logs into context | `5f0124b` | No (origin not logged) - new section explained by its own content, no prior incident cited |
 | 2026-08-23 | Agents | Don't delegate work that needs context already in hand | `5f0124b` | No (origin not logged) - same commit as the row above |
