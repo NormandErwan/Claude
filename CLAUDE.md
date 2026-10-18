@@ -57,7 +57,6 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    npx skills add mattpocock/skills@improve-codebase-architecture
    npx skills add mattpocock/skills@prototype
    npx skills add mattpocock/skills@research
-   npx skills add mattpocock/skills@resolving-merge-conflicts
    npx skills add mattpocock/skills@teach
    ```
 3. A skill is unusable via the Skill tool this session in two cases - read its `SKILL.md` directly and follow it manually either way:
@@ -155,7 +154,6 @@ Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`. T
 | Relaying a review's findings | Per finding: what was checked and what was found, then the verdict - judged only on whether the fix improves the deliverable; prior approval or passing tests never justify keeping it as is |
 | PR title still reads as a placeholder (branch name, "WIP", a generic verb) or no longer matches the diff's actual scope | Draft short title, rename PR + conversation title (if a rename tool exists) |
 | Nothing actionable (e.g. CI green or none configured, `mergeable_state: clean`, no unresolved comments) | Stop self re-arming (don't wait for merge/close) |
-| Merge conflict blocks the push | Resolve via mattpocock `resolving-merge-conflicts`, then push |
 | Anything still pending (CI running, changes requested, unresolved threads) | Keep polling |
 
 ## Retrospective
