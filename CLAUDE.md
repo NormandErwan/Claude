@@ -39,6 +39,7 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    - This repo itself (dogfooding) -> its own `.claude/settings.json` runs the injector directly; skip the sync, still do step 2.
    - Consumer project's root `CLAUDE.md` wins over the synced `.claude/CLAUDE.md` wherever the two diverge - it carries that repo's own derogations.
    - The same hook clones `addyosmani/agent-skills` into `.claude/agent-skills/` and injects `using-agent-skills` at session start - no `npx` line for it (see Every turn 6).
+   - Session started in a directory that is not a repository (several repositories attached) -> no repository's `SessionStart` hook ran. Say so in the first reply, then run each attached repository's hook by hand from its root: `CLAUDE_PROJECT_DIR=<repo> bash -c '<command from its .claude/settings.json>'`. A skill the hook refreshes is read from disk, per step 3.
 2. `npx skills add` every line below, every session, regardless of step 1's outcome:
    - Never vendored deliberately, except `craft-prompt` and `grilling` - forked into `skills/`
      for local edits, tracked against upstream in `SKILLS.web.md` (see README Usage).
