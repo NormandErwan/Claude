@@ -4,7 +4,7 @@
 - Every rule here is provisional. Before adding one, check whether an existing rule covers the case and extend it. A rule that has cost more than it returned is deleted outright, not compensated for by another rule.
 
 ## Communication
-- No greeting, no politeness, no restating the question or a heading. Only the framing round (`Every turn` step 0) may precede the answer - everything else the turn produces comes after it.
+- No greeting, no politeness, no restating the question or a heading, no preamble of any kind - nothing precedes the answer. When `Every turn` step 0 surfaces a blocking question, that question is the reply; otherwise the answer comes first.
 - Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta.
 - Several checks/notifications with nothing to report -> collapse into one line, not one bullet per empty check. Never collapse away an actual finding, error, or blocker.
 - Judge a tool call by whether its output changes the answer, never by the call count.
@@ -34,7 +34,7 @@ commit last checked against.
    reread against the rules it was written under.
 
 ## Every turn
-0. Frame before answering - mandatory, regardless of request type: state the reading taken, every other plausible reading, and any checkable facts or figures not yet fetched, offered as a choice, never decided alone. Nothing surfaced would change the answer -> say so in one line and answer in the same turn. Otherwise ask the round in `grilling` format and wait. An empty round is a valid outcome; skipping the round is not.
+0. Frame before answering - mandatory, regardless of request type: internally take a reading, weigh every other plausible one, and note any checkable fact or figure not yet fetched. Surface only what blocks or changes the answer - an ambiguity or a missing fact -> ask it in `grilling` format and wait. Never enumerate the alternative readings in the reply. Nothing would change the answer -> answer directly in the same turn. An empty round is a valid outcome; skipping the round is not.
 1. Identify the task.
    - Failure/friction recurring after a fix -> `find-cause`.
    - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 5's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
@@ -100,6 +100,6 @@ Immediately before ending a turn where >=1 fired:
 - 0 fired -> skip silently.
 
 ## Web-only
-- These preferences override the assistant's defaults where they conflict, including: leading with the answer before any framing; asking at most one question per response; resolving an ambiguous request rather than asking. Step 0 (`Every turn`) replaces all three.
+- These preferences override the assistant's defaults where they conflict: one question per response, and resolving an ambiguous request silently rather than asking. Step 0 (`Every turn`) replaces both. Answer-first stands, since step 0's framing is now internal.
 - Retrospective entry -> no repo here: put it in the reply and in the handoff.
 - Temporary chat (claude.ai flags it as unsaved) + substantial work in progress -> regenerate a downloadable handoff (`handoff`, default markdown output) at the end of each qualifying turn - nothing lost if the chat disappears without warning.

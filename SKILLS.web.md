@@ -94,3 +94,5 @@ not a full pass.
 
 2026-10-05: verify-sources only (v1.4.2 -> v1.5.1, zip re-sent), triggered by its own edit in PR#86,
 not a full pass.
+
+2026-10-22: triggered by the CLAUDE.web.md step-0 edit (web reasoning_extraction fix), PR on ccr-c4f2af15-fwusck. No skill added, removed, or changed - `grilling` already listed; no upstream re-pass, no zip re-send.
