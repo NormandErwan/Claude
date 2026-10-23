@@ -6,7 +6,7 @@
    - A consumer's root `CLAUDE.md` conflicts with `.claude/CLAUDE.md` -> the root one wins.
    - Session started outside a repository (several attached) -> no hook ran. Say so in the first reply, then from each repository's root run `CLAUDE_PROJECT_DIR=<repo> bash -c '<command from its .claude/settings.json>'`.
 2. `using-agent-skills`:
-   - >=3 files, a new module or public interface, work spanning sessions, or a spec or plan asked -> follow its flowchart. Its skills: `.claude/agent-skills/skills/<name>/SKILL.md`, read from disk.
+   - Three or more files, a new module or public interface, work spanning sessions, or a spec or plan asked -> follow its flowchart. Its skills: `.claude/agent-skills/skills/<name>/SKILL.md`, read from disk.
    - Its Core Operating Behaviors 1 (assumptions block) and 2 (stop and wait on confusion) -> don't apply; `Behavior` replaces them. Its other behaviors conflict with this file -> this file wins.
    - User names a specific skill or methodology -> follow its own process, skip the flowchart.
    - Overlaps: `grilling` over `interview-me`; `code-review` + `ponytail-review` over `code-review-and-quality`.
@@ -56,7 +56,6 @@
 - Code and its docs (README, comments, commits, PRs, skills) -> English, unless the skill is already in another language.
 - Code comments -> `caveman`. Commit messages -> `caveman-commit`. Neither anywhere else.
 - Branch or PR named (user, handoff, session setup) -> use its branch without confirmation, over the pre-assigned one.
-- Question for the user -> plain text, never `AskUserQuestion` (breaks on delayed replies, anthropics/claude-code#70648).
 - PR title or body edit -> apply directly.
 - PR title reads as a placeholder or no longer matches the diff -> rename it.
 - Editing `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.web.md`, `PROVENANCE.md`, or a skill in NormandErwan/Claude -> read its `CONTRIBUTING.md` first.
@@ -72,6 +71,5 @@
 ## Retrospective
 - A user correction, a rule or skill that failed to fire or to cover the case, a tool block that forced another approach, or a new user preference -> append one row to `RETROSPECTIVE.md` with `>>`, without reading the ledger:
   `| <date> | <events> | <class, not this instance> | <smallest change> | <rule it replaces, or nothing> | proposed | - |`
-  - The class carries what processing needs: the reasoning and hypotheses, and the user's decisions quoted and marked `user:`.
 - Row appended -> reply with one line: the count filed and their event classes.
 - Processing entries -> follow `CONTRIBUTING.md`.
