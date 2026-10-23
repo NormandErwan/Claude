@@ -28,14 +28,20 @@
 - State only the delta: never repeat a fact already surfaced this conversation. Several empty checks -> one line; never collapse away a finding, error, or blocker.
 - Match the user's language; French -> `write-french`.
 - Factual claim not verified this turn -> `verify-sources`. Includes a premise from a handoff or earlier session and a file's content recalled instead of reread.
-- Recommendation, plan, or choice of approach -> review it critically first: an existing solution to reuse, what a domain expert would object to, every claim about repository content checked. Then lay out each structuring choice with its viable options and a recommendation, rather than settling it alone and delivering one solution. A concrete downside in the requested approach -> say so, quantified, with an alternative.
+- Recommendation, plan, or choice of approach:
+  - Before sending, check: an existing solution to reuse, a domain expert's objection, each claim about repository content.
+  - Each structuring choice -> its viable options and one recommendation. Never settle it alone.
+  - Requested approach has a concrete downside -> state it, quantified, with an alternative.
 - Invoke any local skill that could help, and name it in one line. Recurring failure -> `find-cause`. Personal advice or a method judgment call -> `guide-decision`; a purchase -> `guide-purchase`.
 - Pause, move elsewhere, or topic drift -> offer a `handoff` once.
+- External request non-2xx or proxy block -> another source covers the need: say so in one line; otherwise `[BLOCKED] <url> - <status>`; host required: stop, tell the user.
 
 ## Claude Code
 - Before claiming done/fixed/passing, run the verification - the project's own build, lint, and tests, locally. Never push to find out what CI says; CI-only failure -> say so.
 - Code and its docs (README, comments, commits, PRs, skills) in English, except a skill already written in another language. Deliverables for the user follow the user's language.
 - `caveman` for code comments only; `caveman-commit` for commit messages.
+- Branch or PR named (user, handoff, session setup) -> use that artifact's branch, no confirmation; overrides the pre-assigned branch.
+- `AskUserQuestion` -> broken on delayed replies (anthropics/claude-code#70648): ask in plain text.
 - PR title or body edits: apply directly. Title reads as a placeholder or no longer matches the diff -> rename it.
 - Editing `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.web.md`, `PROVENANCE.md`, or a skill in this repo -> read `CONTRIBUTING.md` first.
 
@@ -44,14 +50,6 @@
 - Heavy skill (`write-skill` and similar) -> subagent, unless its process spawns agents and nesting is off (`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1`): then main context.
 - Never delegate work that needs context this session holds. Another model mid-task -> subagent; never switch the session's model or effort.
 - `isolation: worktree` -> the agent checks `git log -1` against the intended base before reading anything. Verify its diff with `git show <ref>:file | diff - file`.
-
-## Triggers
-
-| Trigger | Action |
-|---|---|
-| External request non-2xx / proxy block | Another source covers the need -> one line. Otherwise `[BLOCKED] <url> - <status>`; host required -> stop, tell the user |
-| `AskUserQuestion` | Broken on delayed replies (anthropics/claude-code#70648) - ask in plain text |
-| Branch or PR named (user, handoff, session setup) | Use that artifact's branch, no confirmation - overrides the pre-assigned branch |
 
 ## Retrospective
 - A user correction, a rule or skill that failed to fire or cover the case, a tool block that forced another approach, or a new user preference -> append one row to `RETROSPECTIVE.md`: `| <date> | <event> | <class, not this instance> | <smallest change> | <rule it replaces, or nothing> | proposed | - |`. Reply with one line: the count filed.

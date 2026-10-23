@@ -10,6 +10,7 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 - A rule earns its place with a logged incident (`PROVENANCE.md` or `RETROSPECTIVE.md`). A rule
   that costs more than it returns is deleted, not compensated by another rule.
 - A rule that makes the agent ask for permission or confirmation is deleted.
+- Every rule reads trigger -> action. It goes in the section of its domain: `Behavior` (every session, mirrored to the web copy), `Claude Code`, `Agents`, `Bootstrap`, `Retrospective` (code only).
 - Write under `craft-prompt`: exact trigger and action, fewest words a reader can follow. Cut a
   word only if the reader loses nothing; one idea per sentence.
 - A rule or example about phrasing is read against itself: does it break the rule it states?
@@ -51,7 +52,7 @@ project preferences.
 
 - Update it in the same commit as `CLAUDE.md`. Identical wording, minus code-only lines (npx,
   hooks, coding skills, git/PR, agents). Omit those lines, never reformulate them.
-- Keep its `Web-only` section: it is not derived from `CLAUDE.md`.
+- It holds `Behavior` plus its own `Web-only` section, which is not derived from `CLAUDE.md`.
 - Run `prevent-drift`'s check on the two files' matching sections before committing.
 - Remind the owner to re-paste it into claude.ai.
 - Editing it, or a skill it lists, refreshes `SKILLS.web.md` - procedure in that file's header.
