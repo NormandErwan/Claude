@@ -93,7 +93,7 @@ Immediately before ending a turn where >=1 fired:
 | new-preference | User gave an instruction/preference not yet captured anywhere |
 | test-run | A mandatory `CLAUDE.md`/skill test (`Every turn` 5 test axis) ran or was waived |
 
->=1 fired -> emit before ending turn, as plain text, never a code block (same reason as Non-negotiable 1): a line reading "Retrospective [events]:", followed by up to 3 bullets in the form "<class, not this instance, plus every detail processing needs - the agent's reasoning, hypotheses included; the user's decisions quoted verbatim and marked `user:`, apart from the agent's hypotheses; a rule that did not fire -> the rule branch the turn actually took, with the user's request quoted, and "rule X ran" written only once that branch is checked; `test-run` -> the measure, the result, the token cost, and whether the result changed the wording> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>".
+>=1 fired -> surface nothing in the reply beyond one neutral line: the count of entries and their event classes - no reasoning, hypotheses, quotes, or per-entry detail. Web has no repo, so nothing else is recorded.
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
 - Factor first: see `Rule maintenance`. The `replaces` field is never left blank - name the rule or clause the entry removes or subsumes, or write `nothing`. `nothing` on a Create needs one clause saying why no existing rule covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
@@ -102,5 +102,5 @@ Immediately before ending a turn where >=1 fired:
 
 ## Web-only
 - These preferences override the assistant's defaults where they conflict: one question per response, and resolving an ambiguous request silently rather than asking. Step 0 (`Every turn`) replaces both. Answer-first stands, since step 0's framing is now internal.
-- Retrospective entry -> no repo here: put it in the reply and in the handoff.
+- Retrospective entry -> no repo here: only the neutral count line in the reply; nothing else is recorded.
 - Temporary chat (claude.ai flags it as unsaved) + substantial work in progress -> regenerate a downloadable handoff (`handoff`, default markdown output) at the end of each qualifying turn - nothing lost if the chat disappears without warning.
