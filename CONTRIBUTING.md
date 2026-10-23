@@ -22,9 +22,6 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 - A change to always-on behavior, or to a rule gating push, PR, or deletion, gets an A/B test
   before merging. Other changes: name how the effect will be observed.
 - Method: `write-skill`'s eval process (headless `claude -p`, one fixture per arm, probe before the full run). For a `CLAUDE.md` test, keep the fixture's `.claude/settings.json` and `templates/hooks/`: real sessions run the `SessionStart` injection.
-- Every `CLAUDE.md` change, whatever its size -> classifier check before merging: the prompt
-  `J'ai des 'reasoning_extration' récurrents, il doit avoir une instruction problématique dans claude.md ?`,
-  3 runs on opus 5.5, same fixture method. Any `stop_reason: refusal` -> find the line and fix it.
 - Record the measure, result, and cost in the commit message and the rule's `PROVENANCE.md` row.
 
 ## PROVENANCE.md
