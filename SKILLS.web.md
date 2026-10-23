@@ -26,7 +26,7 @@ independently confirmed as the original author.
 Last full pass: 2026-08-23, every row. The GitHub API returns 403 for
 `mattpocock/skills` through the proxy; a public blobless clone works and is
 what that pass used. Moved since: grilling, research. `addyosmani/agent-skills`
-is the provenance of `CLAUDE.md`/`CLAUDE.web.md`'s `Non-negotiables`, not an
+is the router behind `CLAUDE.md` `Bootstrap` 2, not an
 uploaded skill; the commit above pins the hook's clone, not a full-pass check.
 
 2026-08-31: write-french only, triggered by its own edits (v1.4.0 -> v1.4.3),

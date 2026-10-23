@@ -9,7 +9,7 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 - Every rule is provisional. Before adding one, extend an existing rule that covers the case.
 - A rule earns its place with a logged incident (`PROVENANCE.md` or `RETROSPECTIVE.md`). A rule
   that costs more than it returns is deleted, not compensated by another rule.
-- A rule that makes the agent ask for permission or confirmation is deleted.
+- A rule that makes the agent ask for permission, confirmation, or clarification is deleted. Exception: `Behavior`'s structuring choices, laid out with options for the user to decide (owner: co-construct among the possibilities).
 - Every rule reads trigger -> action. It goes in the section of its domain: `Behavior` (every session, mirrored to the web copy), `Claude Code`, `Agents`, `Bootstrap`, `Retrospective` (code only).
 - Write under `craft-prompt`: exact trigger and action, fewest words a reader can follow. Cut a
   word only if the reader loses nothing; one idea per sentence.
@@ -21,12 +21,7 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 
 - A change to always-on behavior, or to a rule gating push, PR, or deletion, gets an A/B test
   before merging. Other changes: name how the effect will be observed.
-- Method: `write-skill`'s eval process. One headless `claude -p` per run, one fixture directory
-  per arm, the version under test as the fixture's `CLAUDE.md`.
-  - No `CLAUDE.md` in any ancestor of a fixture: Claude Code loads them all.
-  - Include `.claude/settings.json` and `templates/hooks/` so the `SessionStart` injection runs
-    as in a real session.
-  - Subagents inherit the parent's model and project `CLAUDE.md`: never use them as arms.
+- Method: `write-skill`'s eval process (headless `claude -p`, one fixture per arm, probe before the full run). For a `CLAUDE.md` test, keep the fixture's `.claude/settings.json` and `templates/hooks/`: real sessions run the `SessionStart` injection.
 - Record the measure, result, and cost in the commit message and the rule's `PROVENANCE.md` row.
 
 ## PROVENANCE.md

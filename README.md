@@ -8,12 +8,12 @@ Most external skills are not vendored here. Three mechanisms bring skills in:
 
 | Source | Mechanism | Listed in |
 |---|---|---|
-| Most external skills | [`npx skills add`](https://skills.sh/), per session | `CLAUDE.md` `## Bootstrap` (always) and `## Every turn` (topic-gated) |
-| `addyosmani/agent-skills` | Cloned and injected by the `SessionStart` hook | `CLAUDE.md` `## Every turn` 6 |
+| Most external skills | [`npx skills add`](https://skills.sh/), per session | `CLAUDE.md` `## Bootstrap` 3 |
+| `addyosmani/agent-skills` | Cloned and injected by the `SessionStart` hook | `CLAUDE.md` `## Bootstrap` 2 |
 | `craft-prompt`, `grilling` | Forked into `skills/` for local edits, tracked against their upstream in `SKILLS.web.md` | `skills/craft-prompt/`, `skills/grilling/` |
 
 A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLAUDE.md`
-`Code / docs / commits`). A skill specific to one consumer repo belongs in that repo's own
+`Claude Code`). A skill specific to one consumer repo belongs in that repo's own
 `skills/` - its `SessionStart` hook never touches it.
 
 ### Forked skills

@@ -2,7 +2,7 @@
 
 Ledger of why each `CLAUDE.md` rule exists. One row per rule, added or updated in the commit
 right after the one that introduces, meaningfully changes, or retires it, in the same PR -
-procedure in `CONTRIBUTING.md` `Editing CLAUDE.md`. A pure rewording adds a note to the rule's
+procedure in `CONTRIBUTING.md` `PROVENANCE.md`. A pure rewording adds a note to the rule's
 existing row instead of a new one.
 
 Rows below predate this ledger: seeded once, 2026-09-07, from a git-archaeology audit
