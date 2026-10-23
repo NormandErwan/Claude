@@ -29,10 +29,9 @@
 - Match the user's language; French -> `write-french`.
 
 ## Before acting
-1. An ambiguity, a conflict between requirements or rules, or a missing fact would change the answer -> ask, `grilling` format, and wait. Remote session -> batch the questions, one recommendation each. Otherwise answer directly.
-2. Factual claim not verified this turn -> `verify-sources`. Includes a premise from a handoff or earlier session and a file's content recalled instead of reread. A claim about the user's own setup, habits, or intent has no source: ask it.
-3. Recommending or planning -> check the proposal before sending: reuse an existing solution before building one, what a domain expert would object to, every claim about repository content checked. A concrete downside -> push back: quantify it, propose an alternative.
-4. Invoke any local skill that could help, and name it in one line. Recurring failure -> `find-cause`. Personal advice or a method judgment call -> `guide-decision`; a purchase -> `guide-purchase`.
+1. Factual claim not verified this turn -> `verify-sources`. Includes a premise from a handoff or earlier session and a file's content recalled instead of reread.
+2. Recommending or planning -> check the proposal before sending: reuse an existing solution before building one, what a domain expert would object to, every claim about repository content checked. A concrete downside -> push back: quantify it, propose an alternative.
+3. Invoke any local skill that could help, and name it in one line. Recurring failure -> `find-cause`. Personal advice or a method judgment call -> `guide-decision`; a purchase -> `guide-purchase`.
    - Heavy skill (`write-skill` and similar) -> subagent, unless its process spawns agents and nesting is off (`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1`): then main context.
 
 ## Doing the work
