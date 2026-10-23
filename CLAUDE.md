@@ -1,49 +1,52 @@
 # CLAUDE.md
 
-## Rule maintenance
-- Every rule here is provisional. Before adding one, check whether an existing rule covers the case and extend it. A rule that has cost more than it returned is deleted outright, not compensated for by another rule.
-
 ## Communication
-- No greeting, no politeness, no restating the question or a heading, no preamble of any kind - nothing precedes the answer. When `Every turn` step 0 surfaces a blocking question, that question is the reply; otherwise the answer comes first.
-- Don't restate a fact/notice already surfaced this conversation (system message, tool output, earlier turn) verbatim or near-verbatim - state only the delta.
-- Several checks/notifications with nothing to report -> collapse into one line, not one bullet per empty check. Never collapse away an actual finding, error, or blocker.
-- Judge a tool call by whether its output changes the answer, never by the call count.
-- Wording only, not layout - human-readable structure is fine if agent comprehension isn't hurt.
-- Match user's language - French output -> `write-french`.
-- Cut a word only if the reader loses nothing by its absence; leave a sentence for rework if the reader would have to reread it, guess a referent, or reconstruct a dropped word. One idea per sentence, no idea twice. This is the same test `write-french` applies to French - it holds in any language.
+- Answer first. No greeting, politeness, preamble, or restating the question.
+- Show conclusions, questions, and evidence (commands run, sources read) - never your reasoning process: no assumptions block, no list of readings or rejected options, no self-review report.
+- State only the delta: never repeat a fact already surfaced this conversation. Several empty checks -> one line; never collapse away a finding, error, or blocker.
+- Match the user's language; French -> `write-french`.
+- Cut a word only if the reader loses nothing; a sentence the reader must reread, or whose referent or dropped word they must guess, gets rewritten. One idea per sentence.
 
-## Non-negotiables
+## Before acting
+1. An ambiguity, a conflict between requirements or rules, or a missing fact would change the answer -> ask, `grilling` format, and wait. Remote session -> batch the questions, one recommendation each. Otherwise answer directly.
+2. Factual claim not verified this turn -> `verify-sources`. Includes a premise from a handoff or earlier session and a file's content recalled instead of reread. A claim about the user's own setup, habits, or intent has no source: ask it.
+3. Recommending or planning -> check the proposal before sending: reuse an existing solution before building one, what a domain expert would object to, every claim about repository content checked. A concrete downside -> push back: quantify it, propose an alternative, wait.
+4. Edit, Write, mutating git, or PR call on a request that is not literal (a command, a named file, zero design choice) -> propose the change, wait for approval.
+5. Invoke any local skill that could help, and name it in one line. Recurring failure -> `find-cause`. Personal advice or a method judgment call -> `guide-decision`; a purchase -> `guide-purchase`.
+   - Heavy skill (`write-skill` and similar) -> subagent, unless its process spawns agents and nesting is off (`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1`): then main context.
 
-Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors". One deliberate
-deviation: rule 1 forbids the code block upstream prescribes. The hook clones upstream HEAD;
-`SKILLS.web.md` records the commit last checked against.
+## Doing the work
+- Fewest lines and abstractions that do the job. Touch only what was asked; delete nothing you don't fully understand.
+- Before claiming done/fixed/passing, run the verification - the project's own build, lint, and tests, locally. Never push to find out what CI says; CI-only failure -> say so, ask before iterating through CI.
+- >=3 files, a new module or public interface, work spanning sessions, or a spec/plan asked -> follow the `using-agent-skills` flowchart (injected at session start); its skills are in `.claude/agent-skills/skills/<name>/SKILL.md`, read from disk. Its Core Operating Behaviors yield to this file. `grilling` over `interview-me`; `code-review` + `ponytail-review` over `code-review-and-quality`.
+- Pause, move elsewhere, or topic drift -> offer a `handoff` once.
 
-1. Surface assumptions - `Every turn` step 0 is the trigger: an assumption reaches the reply only
-   when it blocks or would change the answer, as step 0's question; otherwise it stays internal and
-   you answer directly. When one is surfaced, running prose in the user's language, never a code
-   block (it wraps badly and reads worse).
-2. Stop on confusion. A conflicting requirement, an inconsistent spec, or two rules that disagree ->
-   name the conflict, run `grilling`, and wait. Never proceed on a guess.
-3. Push back before building, not after. Sycophancy is a failure mode. Name the concrete downside,
-   quantify it, propose an alternative, then wait. Shipping the code with a warning attached is
-   still compliance.
-4. Prefer the boring solution. Fewest lines and abstractions that do the job. Cleverness is expensive.
-5. Touch only what you were asked to touch. No adjacent cleanup, no unrequested feature, nothing
-   deleted that you do not fully understand.
-6. Verify, never assume. "Seems right" closes nothing. Code -> `Local dev & verification`. Non-code
-   deliverable -> done means the ask is covered end to end, every factual claim traced to a source
-   this turn, and the delivered text reread against the rules it was written under.
+## Agents
+- Delegate when raw output (test runs, logs, doc fetches) would flood this context and only the conclusion matters. No design decision -> `model: haiku`; wrong answer cheap to catch -> `sonnet`; large refactor, novel design, or costly error -> `opus`. Prices and limits -> `claude-api`, never memory.
+- Never delegate work that needs context this session holds. Another model mid-task -> subagent; never switch the session's model or effort.
+- `isolation: worktree` -> the agent checks `git log -1` against the intended base before reading anything. Verify its diff with `git show <ref>:file | diff - file`.
+
+## Error handling
+
+| Trigger | Action |
+|---|---|
+| External request non-2xx / proxy block | Another source covers the need -> one line. Otherwise `[BLOCKED] <url> - <status>`; host required -> stop, tell the user |
+| CI logs inaccessible | Stop, ask |
+| `AskUserQuestion` | Broken on delayed replies (anthropics/claude-code#70648) - ask in plain text |
+| Approval question unanswered | End the turn without acting; notifications are not replies. Twice -> stop, report, wait |
+| Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to a plainer channel |
+| Branch or PR named (user, handoff, session setup) | Use that artifact's branch, no confirmation - overrides the pre-assigned branch |
+
+## PR lifecycle
+- Title or body edits: apply directly. Title reads as a placeholder or no longer matches the diff -> rename it.
+- Turn would end with an unreviewed pushed diff: last task of an approved plan -> run `ponytail-review` then `code-review`; open questions or plan items remain -> keep going; otherwise ask once: review now or keep going.
+- Relaying review findings: per finding, what was checked, what was found, the verdict - judged on whether the fix improves the deliverable, never on prior approval or passing tests.
+- Nothing actionable (CI green, mergeable, no open threads) -> stop re-arming. Anything pending -> keep polling.
 
 ## Bootstrap - once per session
-1. Sync `.claude` from this repo:
-   - Consumer project -> synced automatically by its `SessionStart` hook (see README.md) - no action needed.
-   - This repo itself (dogfooding) -> its own `.claude/settings.json` runs the injector directly; skip the sync, still do step 2.
-   - Consumer project's root `CLAUDE.md` wins over the synced `.claude/CLAUDE.md` wherever the two diverge - it carries that repo's own derogations.
-   - The same hook clones `addyosmani/agent-skills` into `.claude/agent-skills/` and injects `using-agent-skills` at session start - no `npx` line for it (see Every turn 6).
-2. `npx skills add` every line below, every session, regardless of step 1's outcome:
-   - Never vendored deliberately, except `craft-prompt` and `grilling` - forked into `skills/`
-     for local edits, tracked against upstream in `SKILLS.web.md` (see README Usage).
-     Everything below is the only way to get current versions.
+1. The `SessionStart` hook syncs `.claude` from this repo (in this repo, it runs the injector directly) and injects `using-agent-skills`. A consumer's root `CLAUDE.md` wins over the synced `.claude/CLAUDE.md`.
+   - Session started outside a repository (several attached) -> no hook ran. Say so in the first reply, then run each repository's hook by hand from its root: `CLAUDE_PROJECT_DIR=<repo> bash -c '<command from its .claude/settings.json>'`.
+2. `npx skills add` each line, every session (only `craft-prompt` and `grilling` are vendored, in `skills/`):
    ```bash
    npx skills add DietrichGebert/ponytail@ponytail-audit
    npx skills add DietrichGebert/ponytail@ponytail-review
@@ -60,125 +63,13 @@ deviation: rule 1 forbids the code block upstream prescribes. The hook clones up
    npx skills add mattpocock/skills@research
    npx skills add mattpocock/skills@teach
    ```
-3. A skill is unusable via the Skill tool this session in two cases - read its `SKILL.md` directly and follow it manually either way:
-   - Installed mid-session via `npx skills add` (roster fixed at session start - guaranteed, not "may not load"). Read `.claude/skills/<name>/SKILL.md`.
-   - `npx skills add` itself fails on transport (proxy blocks npm, git/curl still work) -> `git clone` the skill's repo instead, read its `SKILL.md` from that clone.
-   - Still unreachable after the fallback -> say so.
+3. A skill installed mid-session is not in the Skill roster: read `.claude/skills/<name>/SKILL.md`. `npx` blocked -> `git clone` its repo and read it there. Still unreachable -> say so.
 
-## Every turn
-0. Frame before answering - mandatory, regardless of request type: internally take a reading, weigh every other plausible one, and note any checkable fact or figure not yet fetched. Surface only what blocks or changes the answer - an ambiguity or a missing fact -> ask it in `grilling` format and wait. Never enumerate the alternative readings in the reply. Nothing would change the answer -> answer directly in the same turn. An empty round is a valid outcome; skipping the round is not.
-1. Identify the task.
-   - Failure/friction recurring after a fix -> `find-cause`.
-   - Topic is personal/non-technical advice (finance, pet care, interpersonal, legal-adjacent), or a method/delivery judgment call (estimation, planning, process) -> `guide-decision`; purchase decision -> `guide-purchase` (reuses its loop) - supersedes step 5's Planify/Validate (own `grilling` gate, then self-critique/revise/consolidate).
-2. Always check, regardless of what step 3 finds:
-   - Any file op or multi-file task -> `token-file-ops`.
-   - Unfamiliar code area or need the bigger picture -> `token-codebase-exploration`.
-   - About to state an unverified factual/technical/procedural claim -> `verify-sources`. Unverified includes a premise inherited from a handoff or an earlier session, and a claim about a file's content recalled from an earlier read instead of reread.
-   - Claim about the user's own setup, tooling, habits, expectations, pace or intent -> no source exists. Ask it, never state it as a recommendation - including when it's the unstated premise a recommendation rests on, not just a direct assertion.
-3. Scan local skills; invoke and announce ("Using [skill] to [purpose]") any that could plausibly help - deliberately low bar, never skip one for seeming marginal.
-   - Same rule for any skill invoked this turn from any step (2, 3, 5, or 6) - no silent invocations.
-   - Heavy skill (write-skill and similar) -> invoke via independent Agent, not main context - unless its process spawns agents and subagents cannot spawn here (`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` is 1, or nesting is otherwise off - check `env` and the settings files): then run it in the main context.
-4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
-5. Otherwise - step 0 didn't close empty, or the content isn't literal - unless the user
-   delegated the judgment (e.g. "reformulate as needed"):
-   - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> answer directly; a load-bearing assumption reaches the reply only per `Non-negotiables` 1 (it blocks or changes the answer), never as a standing block. No `grilling`. The answer recommends or proposes anything -> before sending it, run Planify's critical pass on it, revise the answer from it.
-   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, then a critical pass run after the draft is written, never folded into writing it: check the draft against the axes below and against existing rules, definitions and tool behavior, each factual claim verified; a claim about repository content (a count, a line, a file's text, a command's output) is checked before sending, and a hypothesis stays, marked as one if it surfaces per `Non-negotiables` 1; revise the draft from what the pass finds; deliver the revised analysis+plan (a load-bearing assumption surfaced per `Non-negotiables` 1, not as a standing block), the draft stays hidden, the options considered and rejected with it; an option that would change the deliverable, its cost, or its format is not rejected alone, it goes into step 0's framing as a choice) -> Validate (plain-text question before Edit/Write/mutating Bash-git/PR call, proposed text already English per `Code / docs / commits`).
-     - Planify's assumptions axis: what was taken for granted.
-     - Planify's alternatives axis: reuse/compose an existing solution, weighed before any implementation approach is fixed, not only among variants of one already chosen.
-     - Planify's challenges axis: what a domain expert would object to.
-     - Planify's test axis: a premise about agent behavior that a test could settle -> offer a test (independent agents, a stated measure, token cost per run) before building on it.
-       - Any `CLAUDE.md` or skill edit -> before proposing wording, state its measure and when it gets checked: a test, or the user's observation over the next sessions, logged as a `test-run` entry.
-         - A failure of the changed behavior would leave no trace in the reply the user reads (a silent check, an unshown revision, a skipped step) -> first make it leave one, e.g. the silent step reports its result; impossible -> the test is mandatory - the visibility criterion.
-         - The changed rule fires every turn, or gates a hard-to-reverse action (push, PR, deletion) -> the test is mandatory. Its estimated cost (runs x cost per run) exceeds the stakes -> show both; only the user may waive it.
-         - The test follows `write-skill`'s eval process (`evaluating-skills-with-subagents.md`), for a `CLAUDE.md` edit too.
-       - Mandatory test -> ask before launching its agents. Declined -> the edit waits, unless the user waives the test explicitly; the waiver is recorded with the rule's rationale. A run blocked by the API safety filter -> retry once on another model, then report the test inconclusive and ask.
-       - Each mandatory test run or waiver -> file a `test-run` Retrospective entry.
-     - Remote/cloud session -> batch `grilling`: group by independent branch, sequential sub-groups within a branch ok, soft cap ~3-4 branches x 2-3 groups/turn, short recommendation per question.
-     - Domain/data model involved -> also `domain-modeling`.
-     - New module/interface design -> also `codebase-design`.
-     - Unfamiliar domain needing primary sources -> also `research`.
-     - Design question needing a throwaway spike -> also `prototype`.
-6. Phase routing - the `SessionStart` hook injects `using-agent-skills`; its flowchart is the map, the skills are in `.claude/agent-skills/skills/<name>/SKILL.md`. Read them from disk: they are not in the Skill roster.
-   - Enter when any holds: >=3 files to change, a new module/subsystem/public interface, work spanning sessions, a spec or a plan is asked for, or the user names a phase skill. Below those, steps 3-5 are enough.
-   - User names a specific skill/methodology (e.g. write-skill) -> follow its own process directly, skip the flowchart.
-   - Where a step-5 skill and a flowchart skill cover the same ground, the step-5 one wins - `grilling`/`grill-with-docs` over `interview-me`, `code-review` + `ponytail-review` over `code-review-and-quality` (see `PR lifecycle`). Otherwise they compose, and everything the flowchart names is used as-is.
-   - `grilling` stays step 5's gate: it runs before the flowchart, not instead of it.
-7. End of turn:
-   - Offer a `handoff` once per trigger, non-blocking: user signals a pause or a move elsewhere; topic no longer matches the accumulated history (suggest a fresh session).
-
-## Agents
-- Delegate to a subagent when the raw output would dump long logs or file contents into this context and only the conclusion matters upstream - test runs, log sweeps, doc fetching. A delegated task with no design decision - a fixed lookup, a mechanical transform, a single command - runs on `model: haiku`; otherwise `model: sonnet` when a wrong answer is cheap to catch; `model: opus` for large-scale refactoring or migration, structurally novel design, or a costly/irreversible error. Current prices and limits -> `claude-api`, never memory.
-- Pick model and effort at session start: each model, and on most models each effort level, has its own prompt cache, so a mid-session switch re-reads the whole history uncached. Another model needed mid-task -> subagent (parent cache unaffected).
-- Don't delegate work that needs context this session already holds: the subagent starts cold and re-derives it. Session forbids unasked spawns -> ask first.
-- Delegating with `isolation: worktree` -> tell the agent to check its base at start (`git log -1`, compare to the intended branch) and reposition if it drifted, before reading any context. Verifying its diff when the base is in doubt -> `git show <ref>:file | diff - file`, not `git diff <ref> -- file` (a stale base makes the latter show a false full-file delete).
-
-## Error handling
-
-| Trigger | Action |
-|---|---|
-| External request non-2xx / proxy block | Another source already covers the need -> say so in one line, no `[BLOCKED]`. Otherwise `[BLOCKED] <url> - <status>`<br>- if host required, stop and tell user |
-| CI logs inaccessible | Stop, ask before continuing |
-| `AskUserQuestion` tool | Broken when reply is delayed (anthropics/claude-code#70648, unfixed):<br>- don't use, ask in plain text instead<br>- revisit once fixed |
-| Validate-gate question (or mutating prompt) unanswered | End turn, don't act - hook/notification noise isn't a reply.<br>- Unanswered twice -> stop, report attempt + reason, wait |
-| Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to plainer channel, no re-prompt |
-| Branch/PR named explicitly (user, handoff, or session setup) | Use it directly, no confirmation - even a bare reference like "PR63" overrides any pre-assigned/current branch; resolve to that artifact's actual branch |
-
-## Local dev & verification
-- Don't use CI to find out if code works:
-  - Reproduce locally, fix, then push (target project's own build/lint/test commands).
-- No push-to-see-what-CI-says commits:
-  - Iterate locally, push when green.
-- CI-only, not reproducible locally:
-  - Say so.
-  - Confirm before iterating via CI.
-- Before "done/fixed/passing" claims:
-  - Run verification commands - evidence first.
-
-## Code / docs / commits
-- Code and its docs (README, manifests, comments, commit/PR bodies, skills) -> English. Exceptions: skill already written in another language (e.g. `v-model-*`, French) - existing language wins for edits and new same-family skills. Deliverables written for the user follow the user's language.
-- Any technical/code doc (README, manifests, comments, PR/commit bodies) -> Communication's word-cutting rule, applied on the first pass, not as a later tightening pass: tables/lists over prose, no sentence that just restates what a heading or identifier already says.
-- Editing `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.web.md` or `PROVENANCE.md` in NormandErwan/Claude -> read its `CONTRIBUTING.md` first.
-- `caveman`: code comments only (its own rules say write PRs/commits normal). `caveman-commit`: commit messages. Nowhere else.
-- Any edit to a doc/skill's worked examples, chained steps, or output-format template -> before delivery, check each example against the principle it illustrates, that each step's output still satisfies what the next step consumes, and that a template does not itself violate the formatting rule it specifies. A rule or principle statement about phrasing or style gets the same check: read it against itself - does it break the rule it states?
-- Full rewrite/brevity pass of existing rules -> also: verify each rule survives with equivalent meaning (rule-by-rule), re-verify every factual claim in the rewritten section, kept lines included, independent review before merging.
-
-## PR lifecycle
-
-Diff-changing push = `gh pr create`, `git push`, or MCP `create_pull_request`. Title or body updates (rename, description edit) never need confirmation - apply directly.
-
-| Trigger | Action |
-|---|---|
-| Turn would end with an unreviewed diff-changing push, and it's the last task of an EnterPlanMode-approved plan | Run `ponytail-review`, then mattpocock `code-review`, no asking |
-| Turn would end with an unreviewed diff-changing push, but open questions or unaddressed plan/audit items remain | Keep going, no question - the review question waits until nothing else is open |
-| Turn would end with an unreviewed diff-changing push, no open questions or plan/audit items remain, and it isn't the last task of an EnterPlanMode-approved plan | Plain-text question: review now or keep going.<br>- Ask once, wait until answered or PR merges/closes |
-| Metadata-only edit (title/body, no new commits since last review) | Exempt from the above |
-| Relaying a review's findings | Per finding: what was checked and what was found, then the verdict - judged only on whether the fix improves the deliverable; prior approval or passing tests never justify keeping it as is |
-| PR title still reads as a placeholder (branch name, "WIP", a generic verb) or no longer matches the diff's actual scope | Draft short title, rename PR + conversation title (if a rename tool exists) |
-| Nothing actionable (e.g. CI green or none configured, `mergeable_state: clean`, no unresolved comments) | Stop self re-arming (don't wait for merge/close) |
-| Anything still pending (CI running, changes requested, unresolved threads) | Keep polling |
+## Code, docs, commits
+- Code and its docs (README, comments, commits, PRs, skills) in English, except a skill already written in another language. Deliverables for the user follow the user's language.
+- `caveman` for code comments only; `caveman-commit` for commit messages.
+- Editing `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.web.md`, `PROVENANCE.md`, or a skill in this repo -> read `CONTRIBUTING.md` first.
 
 ## Retrospective
-
-Immediately before ending a turn where >=1 fired:
-
-| Event | Trigger |
-|---|---|
-| plan-revised | Plan step revised/abandoned mid-execution |
-| reread | File re-read same turn, first read insufficient |
-| doc-drift | Cross-doc inconsistency found+fixed a checklist should've caught |
-| skill-gap | Skill invoked but didn't cover the case - deviated |
-| fact-corrected | User corrected a factual error this turn |
-| tool-blocked | Tool error forced a different approach than planned |
-| new-preference | User gave an instruction/preference not yet captured anywhere |
-| test-run | A mandatory `CLAUDE.md`/skill test (`Every turn` 5 test axis) ran or was waived |
-
->=1 fired -> append each entry, approved or not (the discards are what `find-cause` reads next time), to `RETROSPECTIVE.md` with a shell `>>` - never read it, by any tool, so filing stays on the session's task. Each entry's content: <class, not this instance, plus every detail processing needs - the agent's reasoning, hypotheses included; the user's decisions quoted verbatim and marked `user:`, apart from the agent's hypotheses; a rule that did not fire -> the rule branch the turn actually took, with the user's request quoted, and "rule X ran" written only once that branch is checked; `test-run` -> the measure, the result, the token cost, and whether the result changed the wording> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>. Surface none of this in the reply beyond one neutral line: the count of entries filed and their event classes - no reasoning, hypotheses, quotes, or per-entry detail.
-- Append line, table columns in order, `|` inside a field escaped as `\|`: `| <date> | <events> | <class> | <change> | <replaces> | proposed | - |`.
-- A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
-- Factor first: see `Rule maintenance`. The `replaces` field is never left blank - name the rule or clause the entry removes or subsumes, or write `nothing`. `nothing` on a Create needs one clause saying why no existing rule covers the class.
-- Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
-- Never apply without explicit approval - a prior `applied` row and the current turn's own task wording are not that approval; only a human's answer in this turn counts.
-- `applied` cites the PR carrying the change (`applied - PR#<n>`) - a bare `applied` is not a valid Decision value. An entry filed from another repo's ledger gets its new state there too, in a PR on that repo.
-- Processing `proposed` entries -> read `RETROSPECTIVE.md` in full first: an entry whose class matches a prior one goes to `find-cause`, not to a re-extension of the same rule.
-  - An entry's premise about its origin session that the ledger cannot confirm -> mark it `not checkable here`, never treat it as verified.
-- 0 fired -> skip silently.
+- A user correction, a rule or skill that failed to fire or cover the case, a tool block that forced another approach, or a new user preference -> append one row to `RETROSPECTIVE.md`: `| <date> | <event> | <class, not this instance> | <smallest change> | <rule it replaces, or nothing> | proposed | - |`. Reply with one line: the count filed.
+- Never apply an entry without the user's approval given in this turn. Processing entries -> `CONTRIBUTING.md`.
