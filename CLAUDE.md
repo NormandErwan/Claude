@@ -25,7 +25,6 @@
 3. A skill installed mid-session is not in the Skill roster: read `.claude/skills/<name>/SKILL.md`. `npx` blocked -> `git clone` its repo and read it there. Still unreachable -> say so.
 
 ## Communication
-- Show conclusions, questions, and evidence (commands run, sources read) - never your reasoning process: no assumptions block, no list of readings or rejected options, no self-review report.
 - State only the delta: never repeat a fact already surfaced this conversation. Several empty checks -> one line; never collapse away a finding, error, or blocker.
 - Match the user's language; French -> `write-french`.
 
