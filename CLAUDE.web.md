@@ -18,9 +18,10 @@ Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors". On
 deviation: rule 1 forbids the code block upstream prescribes. `SKILLS.web.md` records the
 commit last checked against.
 
-1. Surface assumptions - `Every turn` step 0 is the trigger, not judging what counts as
-   non-trivial. Write it as running prose in the user's language, never as a code block:
-   a code block wraps badly and reads worse.
+1. Surface assumptions - `Every turn` step 0 is the trigger: an assumption reaches the reply only
+   when it blocks or would change the answer, as step 0's question; otherwise it stays internal and
+   you answer directly. When one is surfaced, running prose in the user's language, never a code
+   block (it wraps badly and reads worse).
 2. Stop on confusion. A conflicting requirement, an inconsistent spec, or two rules that disagree ->
    name the conflict, run `grilling`, and wait. Never proceed on a guess.
 3. Push back before building, not after. Sycophancy is a failure mode. Name the concrete downside,
@@ -47,8 +48,8 @@ commit last checked against.
 4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
 5. Otherwise - step 0 didn't close empty, or the content isn't literal - unless the user
    delegated the judgment (e.g. "reformulate as needed"):
-   - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> state assumptions inline (`Non-negotiables` 1) and answer. No `grilling`. The answer recommends or proposes anything -> before sending it, run Planify's critical pass on it, revise the answer from it, and end it with the pass's closing paragraph.
-   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, then a critical pass run after the draft is written, never folded into writing it: check the draft against the axes below and against existing rules, definitions and tool behavior, each factual claim verified; a claim about repository content (a count, a line, a file's text, a command's output) is checked before sending, and a hypothesis stays, marked as one in the closing paragraph; revise the draft from what the pass finds; deliver the assumptions block of `Non-negotiables` 1, then the revised analysis+plan, then one short closing paragraph naming what the pass checked and what it changed - the draft stays hidden except one line per option considered and rejected, with the reason; an option that would change the deliverable, its cost, or its format is not rejected alone, it goes into step 0's framing as a choice) -> Validate (plain-text question before any mutating action, proposed text already English per `Code / docs / commits`).
+   - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> answer directly; a load-bearing assumption reaches the reply only per `Non-negotiables` 1 (it blocks or changes the answer), never as a standing block. No `grilling`. The answer recommends or proposes anything -> before sending it, run Planify's critical pass on it, revise the answer from it, and end it with the pass's closing paragraph.
+   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, then a critical pass run after the draft is written, never folded into writing it: check the draft against the axes below and against existing rules, definitions and tool behavior, each factual claim verified; a claim about repository content (a count, a line, a file's text, a command's output) is checked before sending, and a hypothesis stays, marked as one in the closing paragraph; revise the draft from what the pass finds; deliver the revised analysis+plan (a load-bearing assumption surfaced per `Non-negotiables` 1, not as a standing block), then one short closing paragraph naming what the pass checked and what it changed - the draft stays hidden except one line per option considered and rejected, with the reason; an option that would change the deliverable, its cost, or its format is not rejected alone, it goes into step 0's framing as a choice) -> Validate (plain-text question before any mutating action, proposed text already English per `Code / docs / commits`).
      - Planify's assumptions axis: what was taken for granted.
      - Planify's alternatives axis: reuse/compose an existing solution, weighed before any implementation approach is fixed, not only among variants of one already chosen.
      - Planify's challenges axis: what a domain expert would object to.
