@@ -96,3 +96,5 @@ not a full pass.
 not a full pass.
 
 2026-10-22: triggered by the CLAUDE.web.md step-0 edit (web reasoning_extraction fix), PR on ccr-c4f2af15-fwusck. No skill added, removed, or changed - `grilling` already listed; no upstream re-pass, no zip re-send.
+
+2026-10-23: triggered by the CLAUDE.web.md suspect A/B1/B2/C edits (web reasoning_extraction fix, all four always-on emissions), PR on ccr-ccd97583-wjrw2d. No skill added, removed, or changed; no upstream re-pass, no zip re-send.

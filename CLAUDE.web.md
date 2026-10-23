@@ -18,9 +18,10 @@ Restated from `agent-skills` `using-agent-skills` "Core Operating Behaviors". On
 deviation: rule 1 forbids the code block upstream prescribes. `SKILLS.web.md` records the
 commit last checked against.
 
-1. Surface assumptions - `Every turn` step 0 is the trigger, not judging what counts as
-   non-trivial. Write it as running prose in the user's language, never as a code block:
-   a code block wraps badly and reads worse.
+1. Surface assumptions - `Every turn` step 0 is the trigger: an assumption reaches the reply only
+   when it blocks or would change the answer, as step 0's question; otherwise it stays internal and
+   you answer directly. When one is surfaced, running prose in the user's language, never a code
+   block (it wraps badly and reads worse).
 2. Stop on confusion. A conflicting requirement, an inconsistent spec, or two rules that disagree ->
    name the conflict, run `grilling`, and wait. Never proceed on a guess.
 3. Push back before building, not after. Sycophancy is a failure mode. Name the concrete downside,
@@ -47,8 +48,8 @@ commit last checked against.
 4. Did step 0 close empty this turn, and is the content literal (a command, a file already named, a single lookup, zero design choice)? -> act.
 5. Otherwise - step 0 didn't close empty, or the content isn't literal - unless the user
    delegated the judgment (e.g. "reformulate as needed"):
-   - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> state assumptions inline (`Non-negotiables` 1) and answer. No `grilling`. The answer recommends or proposes anything -> before sending it, run Planify's critical pass on it, revise the answer from it, and end it with the pass's closing paragraph.
-   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, then a critical pass run after the draft is written, never folded into writing it: check the draft against the axes below and against existing rules, definitions and tool behavior, each factual claim verified; a claim about repository content (a count, a line, a file's text, a command's output) is checked before sending, and a hypothesis stays, marked as one in the closing paragraph; revise the draft from what the pass finds; deliver the assumptions block of `Non-negotiables` 1, then the revised analysis+plan, then one short closing paragraph naming what the pass checked and what it changed - the draft stays hidden except one line per option considered and rejected, with the reason; an option that would change the deliverable, its cost, or its format is not rejected alone, it goes into step 0's framing as a choice) -> Validate (plain-text question before any mutating action, proposed text already English per `Code / docs / commits`).
+   - Read-only request (analysis, comparison, explanation - no code, file, or mutating action) -> answer directly; a load-bearing assumption reaches the reply only per `Non-negotiables` 1 (it blocks or changes the answer), never as a standing block. No `grilling`. The answer recommends or proposes anything -> before sending it, run Planify's critical pass on it, revise the answer from it.
+   - Otherwise -> systematically `grilling` (docs involved -> `grill-with-docs`) to zero ambiguity -> Planify (draft, then a critical pass run after the draft is written, never folded into writing it: check the draft against the axes below and against existing rules, definitions and tool behavior, each factual claim verified; a claim about repository content (a count, a line, a file's text, a command's output) is checked before sending, and a hypothesis stays, marked as one if it surfaces per `Non-negotiables` 1; revise the draft from what the pass finds; deliver the revised analysis+plan (a load-bearing assumption surfaced per `Non-negotiables` 1, not as a standing block), the draft stays hidden, the options considered and rejected with it; an option that would change the deliverable, its cost, or its format is not rejected alone, it goes into step 0's framing as a choice) -> Validate (plain-text question before any mutating action, proposed text already English per `Code / docs / commits`).
      - Planify's assumptions axis: what was taken for granted.
      - Planify's alternatives axis: reuse/compose an existing solution, weighed before any implementation approach is fixed, not only among variants of one already chosen.
      - Planify's challenges axis: what a domain expert would object to.
@@ -92,7 +93,7 @@ Immediately before ending a turn where >=1 fired:
 | new-preference | User gave an instruction/preference not yet captured anywhere |
 | test-run | A mandatory `CLAUDE.md`/skill test (`Every turn` 5 test axis) ran or was waived |
 
->=1 fired -> emit before ending turn, as plain text, never a code block (same reason as Non-negotiable 1): a line reading "Retrospective [events]:", followed by up to 3 bullets in the form "<class, not this instance, plus every detail processing needs - the agent's reasoning, hypotheses included; the user's decisions quoted verbatim and marked `user:`, apart from the agent's hypotheses; a rule that did not fire -> the rule branch the turn actually took, with the user's request quoted, and "rule X ran" written only once that branch is checked; `test-run` -> the measure, the result, the token cost, and whether the result changed the wording> - [Extend/Modify/Create/Delete] <skill | CLAUDE.md section | preference> - <smallest change covering the class> - replaces: <rule or clause removed or subsumed, or `nothing`>".
+>=1 fired -> surface nothing in the reply beyond one neutral line: the count of entries and their event classes - no reasoning, hypotheses, quotes, or per-entry detail. Web has no repo, so nothing else is recorded.
 - A rule that only fires on this session's tool, file or wording is out of scope. One occurrence is enough to propose.
 - Factor first: see `Rule maintenance`. The `replaces` field is never left blank - name the rule or clause the entry removes or subsumes, or write `nothing`. `nothing` on a Create needs one clause saying why no existing rule covers the class.
 - Failure is in how a skill behaved -> fix that skill. Specialized instructions belong in a skill, not in always-loaded CLAUDE.md.
@@ -101,5 +102,5 @@ Immediately before ending a turn where >=1 fired:
 
 ## Web-only
 - These preferences override the assistant's defaults where they conflict: one question per response, and resolving an ambiguous request silently rather than asking. Step 0 (`Every turn`) replaces both. Answer-first stands, since step 0's framing is now internal.
-- Retrospective entry -> no repo here: put it in the reply and in the handoff.
+- Retrospective entry -> no repo here: only the neutral count line in the reply; nothing else is recorded.
 - Temporary chat (claude.ai flags it as unsaved) + substantial work in progress -> regenerate a downloadable handoff (`handoff`, default markdown output) at the end of each qualifying turn - nothing lost if the chat disappears without warning.
