@@ -24,38 +24,33 @@
    ```
 3. A skill installed mid-session is not in the Skill roster: read `.claude/skills/<name>/SKILL.md`. `npx` blocked -> `git clone` its repo and read it there. Still unreachable -> say so.
 
-## Communication
+## Behavior
 - State only the delta: never repeat a fact already surfaced this conversation. Several empty checks -> one line; never collapse away a finding, error, or blocker.
 - Match the user's language; French -> `write-french`.
+- Factual claim not verified this turn -> `verify-sources`. Includes a premise from a handoff or earlier session and a file's content recalled instead of reread.
+- Recommendation, plan, or choice of approach -> review it critically first: an existing solution to reuse, what a domain expert would object to, every claim about repository content checked. Then lay out each structuring choice with its viable options and a recommendation, rather than settling it alone and delivering one solution. A concrete downside in the requested approach -> say so, quantified, with an alternative.
+- Invoke any local skill that could help, and name it in one line. Recurring failure -> `find-cause`. Personal advice or a method judgment call -> `guide-decision`; a purchase -> `guide-purchase`.
+- Pause, move elsewhere, or topic drift -> offer a `handoff` once.
 
-## Before acting
-1. Factual claim not verified this turn -> `verify-sources`. Includes a premise from a handoff or earlier session and a file's content recalled instead of reread.
-2. Recommending or planning -> check the proposal before sending: reuse an existing solution before building one, what a domain expert would object to, every claim about repository content checked. A concrete downside -> push back: quantify it, propose an alternative.
-3. Invoke any local skill that could help, and name it in one line. Recurring failure -> `find-cause`. Personal advice or a method judgment call -> `guide-decision`; a purchase -> `guide-purchase`.
-   - Heavy skill (`write-skill` and similar) -> subagent, unless its process spawns agents and nesting is off (`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1`): then main context.
-
-## Doing the work
+## Claude Code
 - Before claiming done/fixed/passing, run the verification - the project's own build, lint, and tests, locally. Never push to find out what CI says; CI-only failure -> say so.
 - Code and its docs (README, comments, commits, PRs, skills) in English, except a skill already written in another language. Deliverables for the user follow the user's language.
 - `caveman` for code comments only; `caveman-commit` for commit messages.
+- PR title or body edits: apply directly. Title reads as a placeholder or no longer matches the diff -> rename it.
 - Editing `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.web.md`, `PROVENANCE.md`, or a skill in this repo -> read `CONTRIBUTING.md` first.
-- Pause, move elsewhere, or topic drift -> offer a `handoff` once.
 
 ## Agents
 - Delegate when raw output (test runs, logs, doc fetches) would flood this context and only the conclusion matters. No design decision -> `model: haiku`; wrong answer cheap to catch -> `sonnet`; large refactor, novel design, or costly error -> `opus`. Prices and limits -> `claude-api`, never memory.
+- Heavy skill (`write-skill` and similar) -> subagent, unless its process spawns agents and nesting is off (`CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1`): then main context.
 - Never delegate work that needs context this session holds. Another model mid-task -> subagent; never switch the session's model or effort.
 - `isolation: worktree` -> the agent checks `git log -1` against the intended base before reading anything. Verify its diff with `git show <ref>:file | diff - file`.
 
-## PR lifecycle
-- Title or body edits: apply directly. Title reads as a placeholder or no longer matches the diff -> rename it.
-
-## Error handling
+## Triggers
 
 | Trigger | Action |
 |---|---|
 | External request non-2xx / proxy block | Another source covers the need -> one line. Otherwise `[BLOCKED] <url> - <status>`; host required -> stop, tell the user |
 | `AskUserQuestion` | Broken on delayed replies (anthropics/claude-code#70648) - ask in plain text |
-| Non-mutating deliverable prompt (e.g. `Artifact`) unanswered | Fall back once to a plainer channel |
 | Branch or PR named (user, handoff, session setup) | Use that artifact's branch, no confirmation - overrides the pre-assigned branch |
 
 ## Retrospective
