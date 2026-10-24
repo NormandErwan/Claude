@@ -18,7 +18,12 @@ Procedure, on every `CLAUDE.web.md` edit or change to a listed skill:
    `Sent tree` in the same commit. Only skills `CLAUDE.web.md` cites get a zip.
 3. Recheck each row's upstream: public GitHub API or clone, never `add_repo`. The API returns
    403 for `mattpocock/skills` through the proxy; a public blobless clone works. Upstream moved
-   with an empty diff on the path -> update the pin only, no zip.
+   with an empty diff on the path -> update the pin only, no zip. Otherwise diff the pin against
+   upstream HEAD on that path and apply it to the fork by hand - no `git subtree`, no stored
+   pristine copy - then steps 1-2.
+
+Fork a skill only to edit it locally, or to drop its `disable-model-invocation: true` line
+(`CLAUDE.md` `Bootstrap` 3); everything else stays in `skills.txt`.
 
 The hook checks steps 1-2 and that the uploaded rows match the skills `CLAUDE.web.md` cites.
 Step 3 stays manual, helped by the session-start fork check. A re-send without a bump is caught
