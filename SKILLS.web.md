@@ -14,7 +14,8 @@ npx-pulled skill (never vendored) carries `-` in Local commit.
 | guide-decision | native | `0aabdbb41d` | - |
 | guide-purchase | native | `0aabdbb41d` | - |
 | write-french | native | `34a05c4793` | - |
-| handoff | `mattpocock/skills@handoff` (npx) | - | `0f5e033ebc` |
+| handoff | fork of `mattpocock/skills@skills/productivity/handoff` | `77fd9ede02` | `5beb35b040` |
+| grill-with-docs | fork of `mattpocock/skills@skills/engineering/grill-with-docs` | `77fd9ede02` | `5beb35b040` |
 | craft-prompt | fork of `neolabhq/context-engineering-kit@skills/prompt-engineering` | `7aa7d4762a` | `23e2428e80` |
 | grilling | fork of `mattpocock/skills@skills/productivity/grilling` | `709043faac` | `3cca18b368` |
 | using-agent-skills | `addyosmani/agent-skills@using-agent-skills` (cloned by hook) | - | `dc27a9c2e1` |
@@ -98,3 +99,5 @@ not a full pass.
 2026-10-23: triggered by the CLAUDE.web.md suspect A/B1/B2/C edits (web reasoning_extraction fix, all four always-on emissions), PR on ccr-ccd97583-wjrw2d. No skill added, removed, or changed; no upstream re-pass, no zip re-send.
 
 2026-10-23: full pass, triggered by the PR#94 rewrite. `CLAUDE.web.md` no longer references craft-prompt, grilling, grill-with-docs, research, or using-agent-skills: rows dropped, except the two forks and the hook pin, kept for upstream tracking. handoff moved upstream (`3cca18b368` -> `0f5e033ebc`, one-line change) - zip sent. Local skills unchanged.
+
+2026-10-24: handoff and grill-with-docs forked from `mattpocock/skills` (HEAD `5beb35b040`), their only divergence the dropped `disable-model-invocation: true` line, which hid them from the agent (`CLAUDE.md` `Bootstrap` 3). handoff zip re-sent; grill-with-docs is not referenced by `CLAUDE.web.md`, kept for upstream tracking. Fork rows are now checked against upstream at every session start in this repo (`templates/hooks/check-forks.sh`); its first run found grilling changed upstream since `3cca18b368` (`95249b0b49`, 2 added lines) - not applied in this pass.

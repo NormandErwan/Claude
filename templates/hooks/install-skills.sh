@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install skills.txt skills into <claude-dir>/skills before the Skill roster
 # freezes. One npx call per upstream repo, all in parallel: 4 calls take ~4s,
-# 14 one-skill calls took ~31s.
+# 14 one-skill calls took ~31s. Per-call cap stays under the 60s hook timeout.
 #
 # $1 - .claude directory to install into
 # $2 - skills.txt manifest
@@ -24,7 +24,7 @@ while read -r repo skills; do
   args=()
   for s in $skills; do args+=(-s "$s"); expected+=("$s"); done
   mkdir -p "$STAGING/$i"
-  (cd "$STAGING/$i" && timeout 120 npx -y skills add "$repo" "${args[@]}" -a claude-code -y </dev/null >/dev/null 2>&1) &
+  (cd "$STAGING/$i" && timeout 45 npx -y skills add "$repo" "${args[@]}" -a claude-code -y </dev/null >/dev/null 2>&1) &
   i=$((i + 1))
 done <"$MANIFEST"
 wait
