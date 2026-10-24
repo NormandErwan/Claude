@@ -1,6 +1,6 @@
 # SKILLS.web.md
 
-Commit manifest for the skills `CLAUDE.web.md` references. Trigger in `CLAUDE.md` `Code / docs / commits`: every `CLAUDE.web.md` edit, or any change to a skill listed here. Procedure: recheck each listed skill's upstream commit (local fork: `git log`; upstream: public GitHub API or clone, never `add_repo`), update the rows that moved, then propose a zip download of each updated skill via `SendUserFile`, for re-upload to claude.ai. A zip already sent is a release: any later edit to that skill bumps its version per `write-skill` semver before the next zip.
+Commit manifest for the skills `CLAUDE.web.md` references. Trigger in `CONTRIBUTING.md` `CLAUDE.web.md`: every `CLAUDE.web.md` edit, or any change to a skill listed here. Procedure: recheck each listed skill's upstream commit (local fork: `git log`; upstream: public GitHub API or clone, never `add_repo`), update the rows that moved, then propose a zip download of each updated skill via `SendUserFile`, for re-upload to claude.ai. A zip already sent is a release: any later edit to that skill bumps its version per `write-skill` semver before the next zip.
 
 `Local commit` is this repo's own history for the file - only skills forked into `skills/` have
 one. `Upstream commit` is the last commit checked against the named upstream path - only forked
@@ -14,11 +14,9 @@ npx-pulled skill (never vendored) carries `-` in Local commit.
 | guide-decision | native | `0aabdbb41d` | - |
 | guide-purchase | native | `0aabdbb41d` | - |
 | write-french | native | `34a05c4793` | - |
+| handoff | `mattpocock/skills@handoff` (npx) | - | `0f5e033ebc` |
 | craft-prompt | fork of `neolabhq/context-engineering-kit@skills/prompt-engineering` | `7aa7d4762a` | `23e2428e80` |
 | grilling | fork of `mattpocock/skills@skills/productivity/grilling` | `709043faac` | `3cca18b368` |
-| grill-with-docs | `mattpocock/skills@grill-with-docs` (npx) | - | `3cca18b368` |
-| research | `mattpocock/skills@research` (npx) | - | `3cca18b368` |
-| handoff | `mattpocock/skills@handoff` (npx) | - | `3cca18b368` |
 | using-agent-skills | `addyosmani/agent-skills@using-agent-skills` (cloned by hook) | - | `dc27a9c2e1` |
 
 craft-prompt's `Source` was recorded as `local` until this pass - it is a straight copy of
@@ -31,7 +29,7 @@ independently confirmed as the original author.
 Last full pass: 2026-08-23, every row. The GitHub API returns 403 for
 `mattpocock/skills` through the proxy; a public blobless clone works and is
 what that pass used. Moved since: grilling, research. `addyosmani/agent-skills`
-is the provenance of `CLAUDE.md`/`CLAUDE.web.md`'s `Non-negotiables`, not an
+is the router behind `CLAUDE.md` `Bootstrap` 2, not an
 uploaded skill; the commit above pins the hook's clone, not a full-pass check.
 
 2026-08-31: write-french only, triggered by its own edits (v1.4.0 -> v1.4.3),
@@ -98,3 +96,5 @@ not a full pass.
 2026-10-22: triggered by the CLAUDE.web.md step-0 edit (web reasoning_extraction fix), PR on ccr-c4f2af15-fwusck. No skill added, removed, or changed - `grilling` already listed; no upstream re-pass, no zip re-send.
 
 2026-10-23: triggered by the CLAUDE.web.md suspect A/B1/B2/C edits (web reasoning_extraction fix, all four always-on emissions), PR on ccr-ccd97583-wjrw2d. No skill added, removed, or changed; no upstream re-pass, no zip re-send.
+
+2026-10-23: full pass, triggered by the PR#94 rewrite. `CLAUDE.web.md` no longer references craft-prompt, grilling, grill-with-docs, research, or using-agent-skills: rows dropped, except the two forks and the hook pin, kept for upstream tracking. handoff moved upstream (`3cca18b368` -> `0f5e033ebc`, one-line change) - zip sent. Local skills unchanged.

@@ -1,49 +1,53 @@
 # Contributing
 
 Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.web.md`,
-`PROVENANCE.md`. Never relevant to a consumer repo - its `.claude/CLAUDE.md` is regenerated
-fresh from this repo's `CLAUDE.md` at every session (see `README.md`), so a consumer session
-never edits any of these directly.
+`PROVENANCE.md`, `RETROSPECTIVE.md`, and skills. A consumer repo never edits these: its
+`.claude/CLAUDE.md` is regenerated from this repo's at every session (see `README.md`).
 
-## Editing CLAUDE.md
+## Rule maintenance
 
-- `craft-prompt` first, for structure and degrees-of-freedom guidance; write under
-  Communication's word-cutting rule, not craft-prompt's Concise-is-key - no exceptions, never
-  ship a verbose draft to tighten later on request. A rule that constrains what gets omitted or
-  said, or that gates whether to stop, ask, or escalate, is craft-prompt's Low-freedom case:
-  write the exact trigger and its exceptions, not a discretionary standard.
-- Add or meaningfully change a rule -> add or update its row in `PROVENANCE.md` in the next
-  commit of the same PR (a commit cannot cite its own hash): date, section, the rule's own
-  wording, the rule commit's hash, and the rationale (stated here or in the commit message).
-  A pure rewording adds a note to the rule's existing row instead of a new one. Removing a rule
-  marks its row "retired (commit, date)" instead of deleting it.
-- A section mirrored in `CLAUDE.web.md` (Rule maintenance, Communication, Non-negotiables,
-  Every turn, Error handling, Code/docs/commits, Retrospective) -> mirror the edit in the same
-  commit; see "Maintaining CLAUDE.web.md" below. Bootstrap is CLI/npx-only, not mirrored.
+- Every rule is provisional. Before adding one, extend an existing rule that covers the case.
+- A rule earns its place with a logged incident (`PROVENANCE.md` or `RETROSPECTIVE.md`). A rule
+  that costs more than it returns is deleted, not compensated by another rule.
+- A rule that makes the agent ask for permission, confirmation, or clarification is deleted. Exception: `Behavior`'s structuring choices, laid out with options for the user to decide (owner: co-construct among the possibilities).
+- Every rule reads trigger -> action. It goes in the section of its domain: `Behavior` (every session, mirrored to the web copy), `Claude Code`, `Agents`, `Bootstrap`, `Retrospective` (code only).
+- Every `CLAUDE.md` change -> `craft-prompt` pass first: exact trigger and action, fewest words a
+  reader can follow. Cut a word only if the reader loses nothing; one idea per sentence.
+- A rule or example about phrasing is read against itself: does it break the rule it states?
+- A rewrite of existing rules -> check each rule survives with its meaning, re-verify every
+  factual claim in the rewritten text, and get an independent review before merging.
 
-## Test axis (`CLAUDE.md` `Every turn` 5)
+## Testing a rule change
 
-- A waived mandatory test -> note the waiver in the rule's `PROVENANCE.md` row.
-- Processing `RETROSPECTIVE.md` with 5 or more `test-run` entries since the test axis's last
-  `PROVENANCE.md` note -> propose keeping or revising its visibility criterion, weighing token
-  cost against wordings the tests changed.
+- A change to always-on behavior, or to a rule gating push, PR, or deletion, gets an A/B test
+  before merging. Other changes: name how the effect will be observed.
+- Method: `write-skill`'s eval process (headless `claude -p`, one fixture per arm, probe before the full run). For a `CLAUDE.md` test, keep the fixture's `.claude/settings.json` and `templates/hooks/`: real sessions run the `SessionStart` injection.
+- Record the measure, result, and cost in the commit message and the rule's `PROVENANCE.md` row.
 
-## Maintaining CLAUDE.web.md
+## PROVENANCE.md
 
-`CLAUDE.web.md` is this repo's copy of `CLAUDE.md` for claude.ai sessions: pasted by hand into
-the project preferences, never synced by the `SessionStart` hook.
+- Add or meaningfully change a rule -> add or update its row in the next commit of the same PR
+  (a commit cannot cite its own hash): date, section, wording, commit, rationale.
+- A rewording adds a note to the existing row. A removal marks the row
+  "retired (commit, date)".
 
-- Update `CLAUDE.web.md` in the same commit as the `CLAUDE.md` edit.
-- Keep the wording identical, minus the dev/code-specific lines - npx installs, coding-phase
-  skills, git/PR references. Web sessions do non-coding work only. Omit those lines, never
-  reformulate them.
-- `CLAUDE.web.md` may hold sections outside the mirrored list (e.g. `Web-only`). Preserve them:
-  they are not derived from `CLAUDE.md`.
+## RETROSPECTIVE.md
+
+- Processing `proposed` entries -> read the whole ledger first. An entry whose class matches a
+  prior one goes to `find-cause`, not to a re-extension of the same rule.
+- A premise about the origin session the ledger cannot confirm -> mark it `not checkable here`.
+- A rule that only fires on one session's tool, file, or wording is out of scope.
+- `applied` cites the PR carrying the change (`applied - PR#<n>`). An entry filed from another
+  repo's ledger gets its new state there too, in a PR on that repo.
+
+## CLAUDE.web.md
+
+`CLAUDE.web.md` is the copy of `CLAUDE.md` for claude.ai sessions, pasted by hand into the
+project preferences.
+
+- Update it in the same commit as `CLAUDE.md`. Identical wording, minus code-only lines (npx,
+  hooks, coding skills, git/PR, agents). Omit those lines, never reformulate them.
+- It holds `Behavior` plus its own `Web-only` section, which is not derived from `CLAUDE.md`.
 - Run `prevent-drift`'s check on the two files' matching sections before committing.
-- Tell the user to re-paste the file into the claude.ai preferences afterwards - the two copies
-  stay identical by hand.
-
-## Maintaining SKILLS.web.md
-
-Editing `CLAUDE.web.md`, or any skill it lists, refreshes `SKILLS.web.md` - procedure in its
-own header.
+- Remind the owner to re-paste it into claude.ai.
+- Editing it, or a skill it lists, refreshes `SKILLS.web.md` - procedure in that file's header.
