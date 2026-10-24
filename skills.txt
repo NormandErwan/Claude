@@ -1,8 +1,7 @@
 # Installed every session by templates/hooks/install-skills.sh: <upstream repo> <skill>...
 # A skill carrying `disable-model-invocation: true` is forked into skills/ instead
 # (see CLAUDE.md Bootstrap 3).
-# addyosmani/agent-skills is not listed: templates/hooks/inject-agent-skills.sh clones
-# the whole repo and injects its router (see SKILLS.md).
+# addyosmani/agent-skills is installed by templates/hooks/inject-agent-skills.sh instead.
 DietrichGebert/ponytail ponytail-audit ponytail-review
 anthropics/skills frontend-design
 juliusbrussee/caveman caveman caveman-commit
