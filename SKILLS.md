@@ -4,7 +4,7 @@ Inventory of every skill this repo provides: one row per `skills/` directory hol
 `SKILL.md`, per `skills.txt` skill, and for the hook-cloned router. It records which skills are
 uploaded to claude.ai and what was last sent, and pins each fork against its upstream.
 `.claude/hooks/check-skills.sh` blocks `git push` when this file drifts; run it by hand with
-`--check`. `templates/hooks/check-skill-forks.sh` checks the upstream pins at session start.
+`--check`. Its header lists what it checks; `.claude/hooks/test-check-skills.sh` tests it. `templates/hooks/check-skill-forks.sh` checks the upstream pins at session start.
 
 Columns:
 - `Source`: `native`; `fork of` `` `repo@path` ``; `skills.txt` `` `repo` `` (`` `repo@path` `` when
