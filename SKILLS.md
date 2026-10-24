@@ -65,7 +65,7 @@ slip through.
 | write-french | native | yes | 1.4.3 | `add4646196` | - |
 | write-guide | native | no | - | - | - |
 | write-hook | native | no | - | - | - |
-| write-skill | native | yes | 2.3.4 | `ed0996c345` | - |
+| write-skill | native | yes | 2.4.0 | `aa71eb6cb1` | - |
 | ponytail-audit | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
 | ponytail-review | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
 | frontend-design | skills.txt `anthropics/skills` | no | - | - | - |
