@@ -4,8 +4,9 @@
 # first turn, so injecting the text beats installing a skill the roster froze
 # before the session started.
 #
-# Also runs install-skills.sh on the repo's skills.txt, in parallel with the
-# clone, and prepends its status line to the envelope.
+# Also runs install-skills.sh on the repo's skills.txt, plus a consumer's own
+# $CLAUDE_PROJECT_DIR/skills.txt if any, in parallel with the clone, and
+# prepends its status line to the envelope.
 #
 # $1 - .claude directory to clone into
 #
@@ -21,6 +22,8 @@ META="$CLONE_DIR/skills/using-agent-skills/SKILL.md"
 
 HOOKS_DIR=$(dirname "$0")
 MANIFEST="$HOOKS_DIR/../../skills.txt"
+# CLAUDE_PROJECT_DIR unset -> no consumer manifest, never /skills.txt.
+CONSUMER_MANIFEST="${CLAUDE_PROJECT_DIR:+$CLAUDE_PROJECT_DIR/skills.txt}"
 
 emit() {
   # Run jq rather than merely finding it: a jq on PATH that fails to execute,
@@ -53,10 +56,20 @@ STAGING="$TARGET_DIR/.agent-skills.staging.$$"
 rm -rf "$STAGING"
 # skills.txt install runs alongside the clone; emit() reads its status line.
 SKILLS_OUT=$(mktemp)
-trap 'rm -rf "$STAGING" "$SKILLS_OUT"' EXIT
+# One merged manifest, one install run: forks still copied last, one status line.
+ALL_MANIFEST=$(mktemp)
+trap 'rm -rf "$STAGING" "$SKILLS_OUT" "$ALL_MANIFEST"' EXIT
+[ -f "$MANIFEST" ] && cat "$MANIFEST" >>"$ALL_MANIFEST"
+# This repo is its own consumer: same file, read once.
+if [ -f "$CONSUMER_MANIFEST" ] && ! [ "$CONSUMER_MANIFEST" -ef "$MANIFEST" ]; then
+  printf '\n' >>"$ALL_MANIFEST"
+  cat "$CONSUMER_MANIFEST" >>"$ALL_MANIFEST"
+  # read drops a last line with no newline.
+  printf '\n' >>"$ALL_MANIFEST"
+fi
 INSTALL_PID=""
-if [ -f "$MANIFEST" ]; then
-  bash "$HOOKS_DIR/install-skills.sh" "$TARGET_DIR" "$MANIFEST" "$HOOKS_DIR/../../skills" >"$SKILLS_OUT" 2>/dev/null &
+if [ -s "$ALL_MANIFEST" ]; then
+  bash "$HOOKS_DIR/install-skills.sh" "$TARGET_DIR" "$ALL_MANIFEST" "$HOOKS_DIR/../../skills" >"$SKILLS_OUT" 2>/dev/null &
   INSTALL_PID=$!
 fi
 CLONED=no

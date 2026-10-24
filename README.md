@@ -52,20 +52,20 @@ In the consumer repo:
       If the file cannot be read, stop and report the error before proceeding.
    ```
 
-5. Optionally add topic-specific skills to that same root `CLAUDE.md`, gated on the consumer
-   project's own stack. These used to auto-trigger from this repo's `CLAUDE.md`, but most
-   consumer projects never need any given one, so keeping them in the always-loaded file cost
-   every session regardless of relevance (see `PROVENANCE.md`'s 2026-09-08 rows). An install run
-   mid-session never reaches the Skill roster: the agent reads the installed `SKILL.md` from disk
-   (`CLAUDE.md` `Bootstrap` 4).
+5. Optionally list topic-specific skills in a root `skills.txt` in the consumer repo, same format
+   as this repo's (`<repo> <skill>...`, one upstream repo per line), gated on the consumer
+   project's own stack. The hook installs them with this repo's, before the Skill roster
+   freezes. They used to auto-trigger from this repo's `CLAUDE.md`, but most consumer projects
+   never need any given one, so keeping them in the always-loaded file cost every session
+   regardless of relevance (see `PROVENANCE.md`'s 2026-09-08 rows).
 
-   | Need | Add |
+   | Need | `skills.txt` line |
    |---|---|
-   | .NET/C#/Blazor work | `npx skills add aaronontheweb/dotnet-skills`; `token-dotnet` is already synced with `skills/`, just reference it for search patterns |
-   | Web/frontend design work | `npx skills add arvindrk/extract-design-system@extract-design-system`, `npx skills add vercel-labs/agent-skills@web-design-guidelines` |
-   | Test design with 3+ combinable parameters | `npx skills add omkamal/pypict-claude-skill@pict-test-designer` |
-   | Parallel/sub-agent orchestration | `npx skills add obra/superpowers@dispatching-parallel-agents`, `npx skills add obra/superpowers@subagent-driven-development` |
-   | Home Assistant config editing | `npx skills add homeassistant-ai/skills@home-assistant-best-practices` |
+   | .NET/C#/Blazor work | `aaronontheweb/dotnet-skills <skill>...` - name the skills you need (e.g. `csharp-coding-standards efcore-patterns`), a line with no skill name is skipped; `token-dotnet` is already synced with `skills/`, just reference it for search patterns |
+   | Web/frontend design work | `arvindrk/extract-design-system extract-design-system` and `vercel-labs/agent-skills web-design-guidelines` |
+   | Test design with 3+ combinable parameters | `omkamal/pypict-claude-skill pict-test-designer` |
+   | Parallel/sub-agent orchestration | `obra/superpowers dispatching-parallel-agents subagent-driven-development` |
+   | Home Assistant config editing | `homeassistant-ai/skills home-assistant-best-practices` |
 
 `.claude/settings.json` and `.claude/hooks/session-start.sh` are the whole
 consumer-side infra - nothing else from this repo belongs there. This

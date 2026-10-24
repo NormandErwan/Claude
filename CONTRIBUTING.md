@@ -20,7 +20,11 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 ## Testing a rule change
 
 - A change to always-on behavior, or to a rule gating push, PR, or deletion, gets an A/B test
-  before merging. Other changes: name how the effect will be observed.
+  before merging. Other changes: name how the effect will be observed. An observation counts only
+  when the owner can judge the outcome by reading the reply, without taking the case apart;
+  otherwise A/B test.
+- Before an A/B test, review the proposed wording (`ponytail-review`, then mattpocock
+  `code-review`), and test the reviewed version.
 - Method: `write-skill`'s eval process (headless `claude -p`, one fixture per arm, probe before the full run). For a `CLAUDE.md` test, keep the fixture's `.claude/settings.json` and `templates/hooks/`: real sessions run the `SessionStart` injection.
 - Record the measure, result, and cost in the commit message and the rule's `PROVENANCE.md` row.
 
