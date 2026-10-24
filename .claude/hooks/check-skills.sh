@@ -56,7 +56,7 @@ previous=$(git show "$base:$manifest" 2>/dev/null | rows)
 
 while IFS='|' read -r name web version tree; do
   # uploaded skills/ skills only; skills.txt ones are zipped from their upstream pin
-  [[ "$web" == yes && "$tree" != - ]] || continue
+  [[ "$web" == yes ]] && grep -qx "$name" <<<"$local" || continue
   # 3. row matches the skill as committed
   head_tree=$(git rev-parse -q --verify "HEAD:skills/$name" | cut -c1-10)
   head_version=$(git show "HEAD:skills/$name/SKILL.md" 2>/dev/null | sed -n 's/^version: *//p' | head -1)
