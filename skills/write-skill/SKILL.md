@@ -1,6 +1,6 @@
 ---
 name: write-skill
-version: 2.3.2
+version: 2.3.3
 description: Use when creating a new skill, editing an existing one, verifying a skill works
   before deployment, benchmarking whether it improves task quality, fixing unreliable
   triggering, or when an agent rationalizes around a skill's rules.
@@ -460,7 +460,7 @@ state the rule once at the level it actually applies, not as a growing list of e
 **Deployment:**
 - [ ] Every checklist item above re-verified against the finished file - drafting-time self-checks alone can miss gaps (e.g. a planned example that never made it in)
 - [ ] Native skill (this repo) -> add its 2 lines to `.gitignore`, verify with `git status`
-- [ ] Version bumped and skill listed in `SKILLS.web.md` -> update its commit hash there too (see `CONTRIBUTING.md` `CLAUDE.web.md`)
+- [ ] Version bumped and skill listed in `SKILLS.web.md` -> follow that file's procedure (zip, `Sent version`, `Sent tree`)
 - [ ] Commit skill to git and push to your fork (if configured)
 - [ ] Consider contributing back via PR (if broadly useful)
 

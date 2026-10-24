@@ -19,8 +19,8 @@ A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLA
 ### Forked skills
 
 A skill forked into `skills/` (rather than pulled fresh every session via `npx skills add`)
-carries its upstream repo, path, and pinned commit as two columns in `SKILLS.web.md` - local
-commit (this repo's own history for the file) and upstream commit (last checked against). To
+carries its upstream repo, path, and pinned commit (last checked against) in `SKILLS.web.md`;
+its local history is `git log -- skills/<name>`. To
 pull an update: clone the upstream repo, diff the pinned commit against its current HEAD on
 that file's path, and apply the result to the fork by hand - no `git subtree`, no stored
 pristine copy. Fork only a skill you need to edit locally; everything else stays on `npx`.

@@ -50,4 +50,4 @@ project preferences.
 - It holds `Behavior` plus its own `Web-only` section, which is not derived from `CLAUDE.md`.
 - Run `prevent-drift`'s check on the two files' matching sections before committing.
 - Remind the owner to re-paste it into claude.ai.
-- Editing it, or a skill it lists, refreshes `SKILLS.web.md` - procedure in that file's header.
+- Editing it, or a skill it lists, refreshes `SKILLS.web.md` - procedure in that file's header, checked on push by its hook.
