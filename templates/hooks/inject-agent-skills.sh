@@ -22,7 +22,8 @@ META="$CLONE_DIR/skills/using-agent-skills/SKILL.md"
 
 HOOKS_DIR=$(dirname "$0")
 MANIFEST="$HOOKS_DIR/../../skills.txt"
-CONSUMER_MANIFEST="${CLAUDE_PROJECT_DIR:-}/skills.txt"
+# Unset: no consumer, not /skills.txt.
+CONSUMER_MANIFEST="${CLAUDE_PROJECT_DIR:+$CLAUDE_PROJECT_DIR/skills.txt}"
 
 emit() {
   # Run jq rather than merely finding it: a jq on PATH that fails to execute,
