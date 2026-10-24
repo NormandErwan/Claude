@@ -89,7 +89,9 @@ renamed. Its one local divergence is a "Match structure to signal density" secti
 the only exact structural match found on skills.sh among several `prompt-engineering` variants,
 not independently confirmed as the original author.
 
-using-agent-skills is the router behind `CLAUDE.md` `Bootstrap` 2; its pin records the hook's
-clone.
+using-agent-skills is the router behind `CLAUDE.md` `Bootstrap` 2. Its row covers the whole
+`addyosmani/agent-skills` repo, installed by `templates/hooks/inject-agent-skills.sh` (see its
+header), and the pin records that clone. The phase skills stay out of `skills.txt`: in the roster
+their descriptions would load every turn and compete with the overlaps `Bootstrap` 2 settles.
 
 Pass history before 2026-10-24 lives in `git log -- SKILLS.web.md`.
