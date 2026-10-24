@@ -17,9 +17,11 @@ trap 'rm -rf "$WORK"' EXIT
 grep -E '^\| [^|]+ \| fork of `' "$ROOT/SKILLS.web.md" |
   sed -E 's/^\| ([^ ]+) \| fork of `([^@`]+)@([^`]+)` \| [^|]+ \| `([0-9a-f]+)` \|.*/\1 \2 \3 \4/' >"$WORK/forks"
 
+CAP=()
+command -v timeout >/dev/null 2>&1 && CAP=(timeout 20)
 # Commits and trees only: enough for `git log -- path`, a fraction of a full clone.
 for repo in $(cut -d' ' -f2 "$WORK/forks" | sort -u); do
-  git clone -q --bare --filter=blob:none "https://github.com/$repo.git" "$WORK/${repo//\//_}" 2>/dev/null &
+  ${CAP[@]+"${CAP[@]}"} git clone -q --bare --filter=blob:none "https://github.com/$repo.git" "$WORK/${repo//\//_}" 2>/dev/null &
 done
 wait
 
@@ -28,7 +30,8 @@ report=()
 while read -r name repo path pin; do
   total=$((total + 1))
   dir="$WORK/${repo//\//_}"
-  if [ ! -d "$dir" ]; then
+  # A clone cut by the timeout can leave a dir with no HEAD.
+  if ! git -C "$dir" rev-parse -q --verify HEAD >/dev/null 2>&1; then
     report+=("$name: clone of $repo failed, not checked.")
     continue
   fi

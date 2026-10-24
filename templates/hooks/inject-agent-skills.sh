@@ -56,7 +56,7 @@ SKILLS_OUT=$(mktemp)
 trap 'rm -rf "$STAGING" "$SKILLS_OUT"' EXIT
 INSTALL_PID=""
 if [ -f "$MANIFEST" ]; then
-  bash "$HOOKS_DIR/install-skills.sh" "$TARGET_DIR" "$MANIFEST" >"$SKILLS_OUT" 2>/dev/null &
+  bash "$HOOKS_DIR/install-skills.sh" "$TARGET_DIR" "$MANIFEST" "$HOOKS_DIR/../../skills" >"$SKILLS_OUT" 2>/dev/null &
   INSTALL_PID=$!
 fi
 CLONED=no
