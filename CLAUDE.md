@@ -5,7 +5,7 @@
    - It syncs `.claude` from this repo, installs the skills in `skills.txt` into the Skill roster, and injects `using-agent-skills`; in this repo, it runs the injector directly.
    - It reports a fork in `SKILLS.web.md` changed upstream (this repo only) -> update the fork per that file's procedure.
    - A consumer's root `CLAUDE.md` conflicts with `.claude/CLAUDE.md` -> the root one wins.
-   - Session started outside a repository (several attached) -> no hook ran. Say so in the first reply, then from each repository's root run `CLAUDE_PROJECT_DIR=<repo> bash -c '<command from its .claude/settings.json>'`.
+   - Session started outside a repository (several attached) -> no hook ran. Say so in the first reply, then from each repository's root run `CLAUDE_PROJECT_DIR=<repo> bash -c '<command>'` for each `SessionStart` command in its `.claude/settings.json`.
 2. `using-agent-skills`:
    - Three or more files, a new module or public interface, work spanning sessions, or a spec or plan asked -> follow its flowchart. Its skills: `.claude/agent-skills/skills/<name>/SKILL.md`, read from disk.
    - Its Core Operating Behaviors 1 (assumptions block) and 2 (stop and wait on confusion) -> don't apply; `Behavior` replaces them. Its other behaviors conflict with this file -> this file wins.

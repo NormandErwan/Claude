@@ -74,7 +74,9 @@ In the consumer repo:
 5. Optionally add topic-specific skills to that same root `CLAUDE.md`, gated on the consumer
    project's own stack. These used to auto-trigger from this repo's `CLAUDE.md`, but most
    consumer projects never need any given one, so keeping them in the always-loaded file cost
-   every session regardless of relevance (see `PROVENANCE.md`'s 2026-09-08 rows):
+   every session regardless of relevance (see `PROVENANCE.md`'s 2026-09-08 rows). An install run
+   mid-session never reaches the Skill roster: the agent reads the installed `SKILL.md` from disk
+   (`CLAUDE.md` `Bootstrap` 4).
 
    | Need | Add |
    |---|---|
