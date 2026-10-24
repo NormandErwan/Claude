@@ -1,6 +1,6 @@
 # Contributing
 
-Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.web.md`,
+Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.md`,
 `PROVENANCE.md`, `RETROSPECTIVE.md`, and skills. A consumer repo never edits these: its
 `.claude/CLAUDE.md` is regenerated from this repo's at every session (see `README.md`).
 
@@ -50,4 +50,4 @@ project preferences.
 - It holds `Behavior` plus its own `Web-only` section, which is not derived from `CLAUDE.md`.
 - Run `prevent-drift`'s check on the two files' matching sections before committing.
 - Remind the owner to re-paste it into claude.ai.
-- Editing it, or a skill it lists, refreshes `SKILLS.web.md` - procedure in that file's header, checked on push by its hook.
+- Editing it, or an uploaded skill, refreshes `SKILLS.md` - procedure in that file's header, checked on push by its hook.

@@ -1,5 +1,5 @@
 #!/bin/bash
-# PreToolUse(Bash): block git push on SKILLS.web.md drift or a skills/ dir ignored by git. Exit 2 blocks, stderr to Claude.
+# PreToolUse(Bash): block git push on SKILLS.md drift or a skills/ dir ignored by git. Exit 2 blocks, stderr to Claude.
 # Manual: --check
 set -uo pipefail
 
@@ -10,24 +10,39 @@ if [[ "${1:-}" != --check ]]; then
 fi
 
 cd "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}" || exit 0
-manifest=SKILLS.web.md
+manifest=SKILLS.md
 errors=()
 
-# rows: name|sent_version|sent_tree, from a manifest text on stdin
+# rows: name|web|sent_version|sent_tree, from a manifest text on stdin
 rows() {
-  awk -F'|' '/^\| *Skill *\|/ { ok = /Sent tree/; next }
-    ok && /^\| *[a-z]/ { for (i = 2; i <= 5; i++) gsub(/[ `]/, "", $i); print $2 "|" $4 "|" $5 }'
+  awk -F'|' '/^\| *Skill *\|/ { ok = /Web/; next }
+    ok && /^\| *[a-z]/ { for (i = 2; i <= 6; i++) gsub(/[ `]/, "", $i); print $2 "|" $4 "|" $5 "|" $6 }'
 }
 
 current=$(git show "HEAD:$manifest" | rows)
 cited=$(git show HEAD:CLAUDE.web.md | grep -o '`[a-z][a-z-]*`' | tr -d '`' | sort -u)
 # skills.txt line: <upstream repo> <skill>...
 npx=$(git show HEAD:skills.txt 2>/dev/null | grep -v '^#' | cut -d' ' -f2- | tr ' ' '\n')
+local=$(git ls-tree --name-only HEAD skills/ | while read -r d; do
+  git cat-file -e "HEAD:$d/SKILL.md" 2>/dev/null && echo "${d#skills/}"; done)
+hooked=$(git show "HEAD:$manifest" | grep '(cloned by hook)' | awk -F'|' '{gsub(/ /, "", $2); print $2}')
 
-# 1. every skill CLAUDE.web.md cites has an uploaded row
+# 1. one row per skills/ skill and skills.txt skill, none extra
+for name in $local $npx; do
+  grep -q "^$name|" <<<"$current" || errors+=("$name: no row - add it, decide Web")
+done
+while IFS='|' read -r name _; do
+  [[ -z "$name" ]] && continue
+  grep -qx "$name" <<<"$local
+$npx
+$hooked" || errors+=("$name: row for a skill neither in skills/ nor in skills.txt")
+done <<<"$current"
+
+# 2. every skill CLAUDE.web.md cites is uploaded
 for name in $cited; do
-  git cat-file -e "HEAD:skills/$name" 2>/dev/null || grep -qx "$name" <<<"$npx" || continue
-  grep -q "^$name|[^-]" <<<"$current" || errors+=("$name: cited in CLAUDE.web.md, no uploaded row")
+  grep -qx "$name" <<<"$local
+$npx" || continue
+  grep -q "^$name|yes|" <<<"$current" || errors+=("$name: cited in CLAUDE.web.md, Web not yes")
 done
 
 # skills/ dir missing its .gitignore allowlist lines = never committed
@@ -39,11 +54,9 @@ branch=$(git rev-parse --abbrev-ref HEAD)
 for base in '@{u}' "origin/$branch" origin/main; do git rev-parse -q --verify "$base" >/dev/null && break; done
 previous=$(git show "$base:$manifest" 2>/dev/null | rows)
 
-while IFS='|' read -r name version tree; do
-  [[ -z "$name" || "$version" == - ]] && continue
-  # 2. every uploaded row is still cited
-  grep -qx "$name" <<<"$cited" || errors+=("$name: uploaded row, no longer cited in CLAUDE.web.md")
-  [[ "$tree" == - ]] && continue
+while IFS='|' read -r name web version tree; do
+  # uploaded skills/ skills only; skills.txt ones are zipped from their upstream pin
+  [[ "$web" == yes && "$tree" != - ]] || continue
   # 3. row matches the skill as committed
   head_tree=$(git rev-parse -q --verify "HEAD:skills/$name" | cut -c1-10)
   head_version=$(git show "HEAD:skills/$name/SKILL.md" 2>/dev/null | sed -n 's/^version: *//p' | head -1)
@@ -59,7 +72,7 @@ while IFS='|' read -r name version tree; do
   fi
   # 4. a re-sent zip carries a new version
   prev=$(grep "^$name|" <<<"$previous")
-  if [[ -n "$prev" && "${prev##*|}" != "$tree" && "$(cut -d'|' -f2 <<<"$prev")" == "$version" ]]; then
+  if [[ -n "$prev" && "${prev##*|}" != "$tree" && "$(cut -d'|' -f3 <<<"$prev")" == "$version" ]]; then
     errors+=("$name: tree changed since $base with version still $version - bump before re-sending")
   fi
 done <<<"$current"

@@ -1,9 +1,9 @@
 #!/bin/bash
-# Check each fork in SKILLS.web.md against its upstream: last commit on the
-# upstream path vs the pinned `Upstream commit`. Catches upstream moves that no
-# local edit would trigger a recheck for. This repo only.
+# Check each fork in SKILLS.md, and each uploaded skills.txt skill, against its
+# upstream: last commit on the upstream path vs the pinned `Upstream commit`.
+# Catches upstream moves that no local edit would trigger a recheck for. This repo only.
 #
-# $1 - repo root holding SKILLS.web.md
+# $1 - repo root holding SKILLS.md
 #
 # Prints one line per fork that moved or could not be checked, or one line if
 # all are current. No `set -e`: a blocked clone must not abort startup.
@@ -13,9 +13,11 @@ ROOT="${1:?usage: check-skill-forks.sh <repo-root>}"
 WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
 
-# Rows: | name | fork of `owner/repo@path` | sent version | sent tree | `upstream` |
-grep -E '^\| [^|]+ \| fork of `' "$ROOT/SKILLS.web.md" |
-  sed -E 's/^\| ([^ ]+) \| fork of `([^@`]+)@([^`]+)` \| [^|]+ \| [^|]+ \| `([0-9a-f]+)` \|.*/\1 \2 \3 \4/' >"$WORK/forks"
+# Rows tracked upstream: forks, and uploaded skills.txt skills (`repo@path`).
+# Columns: | name | source | web | sent version | sent tree | upstream |
+awk -F'|' '$3 ~ /fork of `/ || ($3 ~ /skills\.txt `[^`]*@/ && $4 ~ /yes/) {
+    gsub(/ /, "", $2); split($3, src, "`"); split(src[2], rp, "@"); gsub(/[ `]/, "", $7)
+    print $2, rp[1], rp[2], $7 }' "$ROOT/SKILLS.md" >"$WORK/forks"
 
 CAP=()
 command -v timeout >/dev/null 2>&1 && CAP=(timeout 20)
@@ -43,7 +45,7 @@ while read -r name repo path pin; do
     report+=("$name: $path not found in $repo HEAD - upstream may have moved it.")
   else
     last=$(git -C "$dir" log -1 --format=%h --abbrev=10 "$pin..HEAD" -- "$path")
-    [ -n "$last" ] && report+=("$name: upstream changed $path since $pin (latest $last) - update it per SKILLS.web.md.")
+    [ -n "$last" ] && report+=("$name: upstream changed $path since $pin (latest $last) - update it per SKILLS.md.")
   fi
 done <"$WORK/forks"
 

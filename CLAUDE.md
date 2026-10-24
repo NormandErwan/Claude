@@ -3,7 +3,7 @@
 ## Bootstrap - once per session
 1. `SessionStart` hook:
    - It syncs `.claude` from this repo, installs the skills in `skills.txt` into the Skill roster, and injects `using-agent-skills`; in this repo, it runs the injector directly.
-   - It reports a fork in `SKILLS.web.md` changed upstream (this repo only) -> update the fork per that file's procedure.
+   - It reports a skill tracked in `SKILLS.md` changed upstream (this repo only) -> update it per that file's procedure.
    - A consumer's root `CLAUDE.md` conflicts with `.claude/CLAUDE.md` -> the root one wins.
    - Session started outside a repository (several attached) -> no hook ran. Say so in the first reply, then from each repository's root run `CLAUDE_PROJECT_DIR=<repo> bash -c '<command>'` for each `SessionStart` command in its `.claude/settings.json`.
 2. `using-agent-skills`:
@@ -43,7 +43,7 @@
 - Branch or PR named (user, handoff, session setup) -> use its branch without confirmation, over the pre-assigned one.
 - PR title or body edit -> apply directly.
 - PR title reads as a placeholder or no longer matches the diff -> rename it.
-- Editing `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.web.md`, `PROVENANCE.md`, or a skill in NormandErwan/Claude -> read its `CONTRIBUTING.md` first.
+- Editing `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.md`, `PROVENANCE.md`, or a skill in NormandErwan/Claude -> read its `CONTRIBUTING.md` first.
 
 ## Agents
 - Raw output (test runs, logs, doc fetches) would flood this context and only the conclusion matters -> delegate.
