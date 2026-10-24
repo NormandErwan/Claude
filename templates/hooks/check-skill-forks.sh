@@ -9,7 +9,7 @@
 # all are current. No `set -e`: a blocked clone must not abort startup.
 set -uo pipefail
 
-ROOT="${1:?usage: check-forks.sh <repo-root>}"
+ROOT="${1:?usage: check-skill-forks.sh <repo-root>}"
 WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
 
@@ -48,8 +48,8 @@ while read -r name repo path pin; do
 done <"$WORK/forks"
 
 if [ ${#report[@]} -eq 0 ]; then
-  echo "Forks: $total checked against upstream, all current."
+  echo "Skill forks: $total checked against upstream, all current."
 else
-  echo "Forks: ${#report[@]} of $total need attention."
+  echo "Skill forks: ${#report[@]} of $total need attention."
   printf '%s\n' "${report[@]}"
 fi

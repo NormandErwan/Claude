@@ -23,7 +23,7 @@ carries its upstream repo, path, and pinned commit as two columns in `SKILLS.web
 commit (this repo's own history for the file) and upstream commit (last checked against). To
 pull an update: clone the upstream repo, diff the pinned commit against its current HEAD on
 that file's path, and apply the result to the fork by hand - no `git subtree`, no stored
-pristine copy. In this repo, `templates/hooks/check-forks.sh` runs at session start and reports
+pristine copy. In this repo, `templates/hooks/check-skill-forks.sh` runs at session start and reports
 any fork whose upstream path changed since its pin. Fork only a skill you need to edit locally,
 or one carrying `disable-model-invocation: true` (that line hides it from the agent, see
 `CLAUDE.md` `Bootstrap` 3); everything else stays in `skills.txt`.

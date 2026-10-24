@@ -9,7 +9,7 @@
           },
           {
             "type": "command",
-            "command": "$CLAUDE_PROJECT_DIR/templates/hooks/check-forks.sh $CLAUDE_PROJECT_DIR"
+            "command": "$CLAUDE_PROJECT_DIR/templates/hooks/check-skill-forks.sh $CLAUDE_PROJECT_DIR"
           }
         ]
       }
