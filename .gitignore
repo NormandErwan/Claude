@@ -22,12 +22,12 @@
 !skills/craft-prompt/**
 !skills/find-cause/
 !skills/find-cause/**
-!skills/grilling/
-!skills/grilling/**
 !skills/grill-with-docs/
 !skills/grill-with-docs/**
 !skills/handoff/
 !skills/handoff/**
+!skills/improve-codebase-architecture/
+!skills/improve-codebase-architecture/**
 !skills/guide-decision/
 !skills/guide-decision/**
 !skills/guide-purchase/
@@ -40,6 +40,8 @@
 !skills/token-dotnet/**
 !skills/token-file-ops/
 !skills/token-file-ops/**
+!skills/teach/
+!skills/teach/**
 !skills/v-model/
 !skills/v-model/**
 !skills/v-model-documents/

@@ -12,7 +12,7 @@
    - User names a specific skill or methodology -> follow its own process, skip the flowchart.
    - Overlaps: `grilling` over `interview-me`; mattpocock `code-review` + `ponytail-review` over `code-review-and-quality`.
    - Turn would end with an unreviewed pushed diff and no open plan items -> run `ponytail-review`, then mattpocock `code-review`.
-3. A skill the rules tell the agent to invoke carries `disable-model-invocation: true` -> fork it into `skills/` without that line: the line hides the skill from the agent. Forked so far: `handoff`, `grill-with-docs`; `craft-prompt` and `grilling` are forked for local edits.
+3. A skill in `skills.txt` carries `disable-model-invocation: true` -> fork it into `skills/` without that line: the line hides the skill from the agent, and the user does not trigger skills by hand. Forked so far: `handoff`, `grill-with-docs`, `teach`, `improve-codebase-architecture`; `craft-prompt` is forked for local edits.
 4. Skill not in the Skill roster:
    - Installed mid-session -> read `.claude/skills/<name>/SKILL.md`.
    - Hook reported its install failed -> `git clone` the skill's repo, read its `SKILL.md` there.

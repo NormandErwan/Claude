@@ -10,7 +10,7 @@ Most external skills are not vendored here. Three mechanisms bring skills in:
 |---|---|---|
 | Most external skills | [`npx skills add`](https://skills.sh/), run by the `SessionStart` hook before the Skill roster freezes | `skills.txt` |
 | `addyosmani/agent-skills` | Cloned and injected by the `SessionStart` hook | `CLAUDE.md` `## Bootstrap` 2 |
-| `craft-prompt`, `grilling`, `handoff`, `grill-with-docs` | Forked into `skills/`, tracked against their upstream in `SKILLS.web.md` | `skills/<name>/` |
+| `craft-prompt`, `handoff`, `grill-with-docs`, `teach`, `improve-codebase-architecture` | Forked into `skills/`, tracked against their upstream in `SKILLS.web.md` | `skills/<name>/` |
 
 A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLAUDE.md`
 `Claude Code`). A skill specific to one consumer repo belongs in that repo's own
@@ -25,8 +25,8 @@ pull an update: clone the upstream repo, diff the pinned commit against its curr
 that file's path, and apply the result to the fork by hand - no `git subtree`, no stored
 pristine copy. In this repo, `templates/hooks/check-forks.sh` runs at session start and reports
 any fork whose upstream path changed since its pin. Fork only a skill you need to edit locally,
-or one carrying `disable-model-invocation: true` that the rules tell the agent to invoke (that
-line hides it from the agent, see `CLAUDE.md` `Bootstrap` 3); everything else stays in `skills.txt`.
+or one carrying `disable-model-invocation: true` (that line hides it from the agent, see
+`CLAUDE.md` `Bootstrap` 3); everything else stays in `skills.txt`.
 
 ## Adding this repo to another project
 
