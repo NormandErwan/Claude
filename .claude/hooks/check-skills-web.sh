@@ -1,5 +1,5 @@
 #!/bin/bash
-# PreToolUse(Bash): block git push on SKILLS.web.md drift. Exit 2 blocks, stderr to Claude.
+# PreToolUse(Bash): block git push on SKILLS.web.md drift or a skills/ dir ignored by git. Exit 2 blocks, stderr to Claude.
 # Manual: --check
 set -uo pipefail
 
@@ -29,6 +29,10 @@ for name in $cited; do
   git cat-file -e "HEAD:skills/$name" 2>/dev/null || grep -qx "$name" <<<"$npx" || continue
   grep -q "^$name|[^-]" <<<"$current" || errors+=("$name: cited in CLAUDE.web.md, no uploaded row")
 done
+
+# skills/ dir missing its .gitignore allowlist lines = never committed
+ignored=$(git ls-files --others --ignored --exclude-standard -- skills/ | cut -d/ -f2 | sort -u)
+for name in $ignored; do errors+=("skills/$name: ignored by git - add its two .gitignore lines"); done
 
 # last pushed state of this branch, else main
 branch=$(git rev-parse --abbrev-ref HEAD)
@@ -61,6 +65,6 @@ while IFS='|' read -r name version tree; do
 done <<<"$current"
 
 ((${#errors[@]})) || exit 0
-printf '%s drift (procedure in its header):\n' "$manifest" >&2
+printf 'push blocked (procedure: %s header):\n' "$manifest" >&2
 printf -- '- %s\n' "${errors[@]}" >&2
 exit 2
