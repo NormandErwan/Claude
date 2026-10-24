@@ -1,6 +1,6 @@
 ---
 name: prevent-drift
-version: 1.1.0
+version: 1.2.0
 description: Use when a fact is about to exist in two places - writing a rule into a CLAUDE.md, a skill, a README, a hook or a config file; adding a note that restates a setting; reviewing a diff that repeats something stated elsewhere; editing a rule that other files also state. Also when auditing a knowledge base, a docs tree or a config set for drift, or when two files already disagree about the same fact.
 ---
 
@@ -33,6 +33,7 @@ Good: Hidden files are listed under `:hidden` in `logseq/config.edn`
 |---|---|
 | Before writing any fact into a file | Does it already live somewhere? `git grep` a distinctive phrase of it |
 | When editing a rule | Hunt its copies before you finish. An edited rule with an unedited copy IS the drift |
+| When **changing** what a rule does or outputs | Hunt the lines elsewhere that describe its behavior or output, not only its verbatim copies: they still read as current, and they are now false |
 | When **moving** a fact to a new file | Hunt what read it at the old address. A move breaks references silently: the readers still run, they just read nothing, or the wrong thing |
 | Before opening or updating a PR | Run the scan below, scoped to the diff's files |
 | When a doc and a config disagree | Treat it as a bug report, not a formatting nit |
