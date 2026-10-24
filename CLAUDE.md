@@ -38,7 +38,8 @@
 ## Claude Code
 - About to claim done, fixed, or passing -> run the verification commands locally first (the project's own build, lint, tests).
 - Failure reproducible only in CI -> say so; never push to probe it.
-- Shell sequence whose later step changes git state (`add`, `commit`, `rebase --continue`, `push`) -> a failed step must stop the rest: `&&` in bash, `; if ($?) {...}` in PowerShell 5.1, never a bare `;`.
+- Shell command on Windows -> Git for Windows' bash, never PowerShell.
+- Shell sequence whose later step changes git state (`add`, `commit`, `rebase --continue`, `push`) -> chain with `&&`, never `;`.
 - Conflict resolved by script -> read its diff before `git add`; a whole-file diff means its line endings changed.
 - Code and its docs (README, comments, commits, PRs, skills) -> English, unless the skill is already in another language.
 - Code comments -> `caveman`. Commit messages -> `caveman-commit`. Neither anywhere else.
