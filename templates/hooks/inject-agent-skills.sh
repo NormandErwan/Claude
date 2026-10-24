@@ -22,7 +22,7 @@ META="$CLONE_DIR/skills/using-agent-skills/SKILL.md"
 
 HOOKS_DIR=$(dirname "$0")
 MANIFEST="$HOOKS_DIR/../../skills.txt"
-# Unset: no consumer, not /skills.txt.
+# CLAUDE_PROJECT_DIR unset -> no consumer manifest, never /skills.txt.
 CONSUMER_MANIFEST="${CLAUDE_PROJECT_DIR:+$CLAUDE_PROJECT_DIR/skills.txt}"
 
 emit() {
