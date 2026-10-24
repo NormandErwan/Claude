@@ -21,7 +21,8 @@ rows() {
 
 current=$(git show "HEAD:$manifest" | rows)
 cited=$(git show HEAD:CLAUDE.web.md | grep -o '`[a-z][a-z-]*`' | tr -d '`' | sort -u)
-npx=$(git show HEAD:CLAUDE.md | grep -o 'npx skills add [^ ]*@[a-z-]*' | sed 's/.*@//')
+# skills.txt line: <upstream repo> <skill>...
+npx=$(git show HEAD:skills.txt 2>/dev/null | grep -v '^#' | cut -d' ' -f2- | tr ' ' '\n')
 
 # 1. every skill CLAUDE.web.md cites has an uploaded row
 for name in $cited; do
@@ -42,6 +43,7 @@ while IFS='|' read -r name version tree; do
   # 3. row matches the skill as committed
   head_tree=$(git rev-parse -q --verify "HEAD:skills/$name" | cut -c1-10)
   head_version=$(git show "HEAD:skills/$name/SKILL.md" 2>/dev/null | sed -n 's/^version: *//p' | head -1)
+  head_version=${head_version:-none}
   if [[ "$head_tree" != "$tree" ]]; then
     if [[ "$head_version" == "$version" ]]; then
       errors+=("$name: changed since the zip of $version - bump version, send zip, update row")

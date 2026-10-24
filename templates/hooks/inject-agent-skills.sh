@@ -4,6 +4,9 @@
 # first turn, so injecting the text beats installing a skill the roster froze
 # before the session started.
 #
+# Also runs install-skills.sh on the repo's skills.txt, in parallel with the
+# clone, and prepends its status line to the envelope.
+#
 # $1 - .claude directory to clone into
 #
 # Past argument validation, every exit path prints the SessionStart envelope;
@@ -16,13 +19,19 @@ SKILLS_URL="https://github.com/addyosmani/agent-skills.git"
 CLONE_DIR="$TARGET_DIR/agent-skills"
 META="$CLONE_DIR/skills/using-agent-skills/SKILL.md"
 
+HOOKS_DIR=$(dirname "$0")
+MANIFEST="$HOOKS_DIR/../../skills.txt"
+
 emit() {
   # Run jq rather than merely finding it: a jq on PATH that fails to execute,
   # or that exits 0 with something that is not our envelope, must not decide
   # what this hook prints.
-  local out=""
+  local out="" status=""
+  [ -f "$SKILLS_OUT" ] && status=$(cat "$SKILLS_OUT")
   if command -v jq >/dev/null 2>&1; then
-    out=$(jq -cn --arg context "$1" \
+    out=$(jq -cn --arg context "${status:+$status
+
+}$1" \
       '{hookSpecificOutput: {hookEventName: "SessionStart", additionalContext: $context}}' 2>/dev/null)
   fi
   case "$out" in
@@ -42,7 +51,14 @@ emit() {
 mkdir -p "$TARGET_DIR" 2>/dev/null
 STAGING="$TARGET_DIR/.agent-skills.staging.$$"
 rm -rf "$STAGING"
-trap 'rm -rf "$STAGING"' EXIT
+# skills.txt install runs alongside the clone; emit() reads its status line.
+SKILLS_OUT=$(mktemp)
+trap 'rm -rf "$STAGING" "$SKILLS_OUT"' EXIT
+INSTALL_PID=""
+if [ -f "$MANIFEST" ]; then
+  bash "$HOOKS_DIR/install-skills.sh" "$TARGET_DIR" "$MANIFEST" "$HOOKS_DIR/../../skills" >"$SKILLS_OUT" 2>/dev/null &
+  INSTALL_PID=$!
+fi
 CLONED=no
 FRESH=no
 if git clone --depth 1 --quiet "$SKILLS_URL" "$STAGING" 2>/dev/null; then
@@ -55,6 +71,8 @@ if git clone --depth 1 --quiet "$SKILLS_URL" "$STAGING" 2>/dev/null; then
     FRESH=yes
   fi
 fi
+
+[ -n "$INSTALL_PID" ] && wait "$INSTALL_PID"
 
 # Read once. Testing the file and then reading it is a window another session's
 # swap can land in, which produced envelopes claiming success with no router.
