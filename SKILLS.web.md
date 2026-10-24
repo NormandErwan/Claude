@@ -31,7 +31,7 @@ against the last push only: two zips of one version between two pushes slip thro
 | guide-decision | native | 1.1.0 | `2ee6133ad3` | - |
 | guide-purchase | native | 1.1.0 | `8f10c06aa7` | - |
 | write-french | native | 1.4.3 | `add4646196` | - |
-| handoff | fork of `mattpocock/skills@skills/productivity/handoff` | none | `98dae23ccf` | `5beb35b040` |
+| handoff | fork of `mattpocock/skills@skills/productivity/handoff` | 1.0.0 | `0d8eeece5c` | `5beb35b040` |
 | grill-with-docs | fork of `mattpocock/skills@skills/engineering/grill-with-docs` | - | - | `5beb35b040` |
 | teach | fork of `mattpocock/skills@skills/productivity/teach` | - | - | `5beb35b040` |
 | improve-codebase-architecture | fork of `mattpocock/skills@skills/engineering/improve-codebase-architecture` | - | - | `5beb35b040` |
