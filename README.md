@@ -8,9 +8,9 @@ Most external skills are not vendored here. Three mechanisms bring skills in:
 
 | Source | Mechanism | Listed in |
 |---|---|---|
-| Most external skills | [`npx skills add`](https://skills.sh/), per session | `CLAUDE.md` `## Bootstrap` 3 |
+| Most external skills | [`npx skills add`](https://skills.sh/), run by the `SessionStart` hook before the Skill roster freezes | `skills.txt` |
 | `addyosmani/agent-skills` | Cloned and injected by the `SessionStart` hook | `CLAUDE.md` `## Bootstrap` 2 |
-| `craft-prompt`, `grilling` | Forked into `skills/` for local edits, tracked against their upstream in `SKILLS.web.md` | `skills/craft-prompt/`, `skills/grilling/` |
+| `craft-prompt`, `grilling`, `handoff`, `grill-with-docs` | Forked into `skills/`, tracked against their upstream in `SKILLS.web.md` | `skills/<name>/` |
 
 A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLAUDE.md`
 `Claude Code`). A skill specific to one consumer repo belongs in that repo's own
@@ -18,12 +18,15 @@ A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLA
 
 ### Forked skills
 
-A skill forked into `skills/` (rather than pulled fresh every session via `npx skills add`)
+A skill forked into `skills/` (rather than installed every session from `skills.txt`)
 carries its upstream repo, path, and pinned commit as two columns in `SKILLS.web.md` - local
 commit (this repo's own history for the file) and upstream commit (last checked against). To
 pull an update: clone the upstream repo, diff the pinned commit against its current HEAD on
 that file's path, and apply the result to the fork by hand - no `git subtree`, no stored
-pristine copy. Fork only a skill you need to edit locally; everything else stays on `npx`.
+pristine copy. In this repo, `templates/hooks/check-forks.sh` runs at session start and reports
+any fork whose upstream path changed since its pin. Fork only a skill you need to edit locally,
+or one carrying `disable-model-invocation: true` that the rules tell the agent to invoke (that
+line hides it from the agent, see `CLAUDE.md` `Bootstrap` 3); everything else stays in `skills.txt`.
 
 ## Adding this repo to another project
 
@@ -44,7 +47,7 @@ In the consumer repo:
 2. Copy `templates/hooks/session-start.sh` to `.claude/hooks/session-start.sh`
    (keep it executable) - clones this repo fresh each session, refreshes the
    generated files, then runs `templates/hooks/inject-agent-skills.sh` from
-   that fresh clone. Only the thin bootstrap is copied, so the injector
+   that fresh clone, which also installs the skills in `skills.txt`. Only the thin bootstrap is copied, so the injector
    updates itself afterwards without consumers re-copying anything. A repo set
    up before the injector existed needs this one re-copy to get a router at
    all - the synced `CLAUDE.md` assumes one is injected.

@@ -2,7 +2,8 @@
 
 ## Bootstrap - once per session
 1. `SessionStart` hook:
-   - It syncs `.claude` from this repo and injects `using-agent-skills`; in this repo, it runs the injector directly.
+   - It syncs `.claude` from this repo, installs the skills in `skills.txt` into the Skill roster, and injects `using-agent-skills`; in this repo, it runs the injector directly.
+   - It reports a fork in `SKILLS.web.md` changed upstream (this repo only) -> update the fork per that file's procedure.
    - A consumer's root `CLAUDE.md` conflicts with `.claude/CLAUDE.md` -> the root one wins.
    - Session started outside a repository (several attached) -> no hook ran. Say so in the first reply, then from each repository's root run `CLAUDE_PROJECT_DIR=<repo> bash -c '<command from its .claude/settings.json>'`.
 2. `using-agent-skills`:
@@ -11,26 +12,10 @@
    - User names a specific skill or methodology -> follow its own process, skip the flowchart.
    - Overlaps: `grilling` over `interview-me`; mattpocock `code-review` + `ponytail-review` over `code-review-and-quality`.
    - Turn would end with an unreviewed pushed diff and no open plan items -> run `ponytail-review`, then mattpocock `code-review`.
-3. Every session -> `npx skills add` each line below. `craft-prompt` and `grilling` are vendored in `skills/` instead.
-   ```bash
-   npx skills add DietrichGebert/ponytail@ponytail-audit
-   npx skills add DietrichGebert/ponytail@ponytail-review
-   npx skills add anthropics/skills@frontend-design
-   npx skills add juliusbrussee/caveman@caveman
-   npx skills add juliusbrussee/caveman@caveman-commit
-   npx skills add mattpocock/skills@code-review
-   npx skills add mattpocock/skills@codebase-design
-   npx skills add mattpocock/skills@domain-modeling
-   npx skills add mattpocock/skills@grill-with-docs
-   npx skills add mattpocock/skills@handoff
-   npx skills add mattpocock/skills@improve-codebase-architecture
-   npx skills add mattpocock/skills@prototype
-   npx skills add mattpocock/skills@research
-   npx skills add mattpocock/skills@teach
-   ```
+3. A skill the rules tell the agent to invoke carries `disable-model-invocation: true` -> fork it into `skills/` without that line: the line hides the skill from the agent. Forked so far: `handoff`, `grill-with-docs`; `craft-prompt` and `grilling` are forked for local edits.
 4. Skill not in the Skill roster:
    - Installed mid-session -> read `.claude/skills/<name>/SKILL.md`.
-   - `npx` blocked -> `git clone` the skill's repo, read its `SKILL.md` there.
+   - Hook reported its install failed -> `git clone` the skill's repo, read its `SKILL.md` there.
    - Still unreachable -> say so.
 
 ## Behavior
