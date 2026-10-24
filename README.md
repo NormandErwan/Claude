@@ -2,31 +2,12 @@
 
 Natively-authored skills library for Claude Code.
 
-## Usage
-
-Most external skills are not vendored here. Three mechanisms bring skills in:
-
-| Source | Mechanism | Listed in |
-|---|---|---|
-| Most external skills | [`npx skills add`](https://skills.sh/), run by the `SessionStart` hook before the Skill roster freezes | `skills.txt` |
-| `addyosmani/agent-skills` | Cloned and injected by the `SessionStart` hook | `CLAUDE.md` `## Bootstrap` 2 |
-| `craft-prompt`, `handoff`, `grill-with-docs`, `teach`, `improve-codebase-architecture` | Forked into `skills/`, tracked against their upstream in `SKILLS.web.md` | `skills/<name>/` |
+## Where a skill belongs
 
 A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLAUDE.md`
 `Claude Code`). A skill specific to one consumer repo belongs in that repo's own
-`skills/` - its `SessionStart` hook never touches it.
-
-### Forked skills
-
-A skill forked into `skills/` (rather than installed every session from `skills.txt`)
-carries its upstream repo, path, and pinned commit as two columns in `SKILLS.web.md` - local
-commit (this repo's own history for the file) and upstream commit (last checked against). To
-pull an update: clone the upstream repo, diff the pinned commit against its current HEAD on
-that file's path, and apply the result to the fork by hand - no `git subtree`, no stored
-pristine copy. In this repo, `templates/hooks/check-skill-forks.sh` runs at session start and reports
-any fork whose upstream path changed since its pin. Fork only a skill you need to edit locally,
-or one carrying `disable-model-invocation: true` (that line hides it from the agent, see
-`CLAUDE.md` `Bootstrap` 3); everything else stays in `skills.txt`.
+`skills/` - its `SessionStart` hook never touches it. Every skill, its source, and
+whether it is uploaded to claude.ai: `SKILLS.md`.
 
 ## Adding this repo to another project
 
@@ -88,7 +69,7 @@ In the consumer repo:
 
 `.claude/settings.json` and `.claude/hooks/session-start.sh` are the whole
 consumer-side infra - nothing else from this repo belongs there. This
-repo's own `README.md`, `CLAUDE.web.md`, and `SKILLS.web.md` stay here only
-(the `.web` ones are for manual upload to claude.ai projects).
+repo's own `README.md`, `CLAUDE.web.md`, and `SKILLS.md` stay here only
+(`CLAUDE.web.md` and the skills `SKILLS.md` marks `Web` are uploaded by hand to claude.ai).
 
 See `NormandErwan/Accounts` for a working example.

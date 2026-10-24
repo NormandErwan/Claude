@@ -12,10 +12,12 @@
 !.claude/
 .claude/*.md
 !.claude/settings.json
+!.claude/hooks/
+!.claude/hooks/**
 # Allowlist each native skill dir explicitly (not a blanket !skills/**).
 # When consumed as a .claude subtree, a blanket unignore here would also
 # unignore session-installed skill caches the consumer repo means to ignore.
-# Add two lines here for every new skill added under skills/.
+# Add two lines here for every new skill added under skills/ (push hook checks).
 !skills/write-hook/
 !skills/write-hook/**
 !skills/craft-prompt/
