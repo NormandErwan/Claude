@@ -20,7 +20,8 @@ Procedure, on every `CLAUDE.web.md` edit or change to a listed skill:
    with an empty diff on the path -> update the pin only, no zip.
 
 The hook checks steps 1-2 and that the uploaded rows match the skills `CLAUDE.web.md` cites.
-Step 3 stays manual.
+Step 3 stays manual. A re-send without a bump is caught against the last push only: two zips
+of one version between two pushes slip through.
 
 | Skill | Source | Sent version | Sent tree | Upstream commit |
 |---|---|---|---|---|

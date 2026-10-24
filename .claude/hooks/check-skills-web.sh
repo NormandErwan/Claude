@@ -1,12 +1,12 @@
 #!/bin/bash
-# PreToolUse(Bash) hook: block `git push` while SKILLS.web.md drifts from
-# CLAUDE.web.md or from skills/. Exit 2 = block, stderr goes to Claude.
-# Manual run: check-skills-web.sh --check
+# PreToolUse(Bash): block git push on SKILLS.web.md drift. Exit 2 blocks, stderr to Claude.
+# Manual: --check
 set -uo pipefail
 
 if [[ "${1:-}" != --check ]]; then
   cmd=$(jq -r '.tool_input.command // empty')
-  [[ "$cmd" =~ (^|[;&|][[:space:]]*)git[[:space:]]+push ]] || exit 0
+  # git, global opts (-C dir, -c k=v, --x), push
+  [[ "$cmd" =~ (^|[;&|][[:space:]]*)git([[:space:]]+-[Cc][[:space:]]+[^[:space:]]+|[[:space:]]+--[^[:space:]]+)*[[:space:]]+push ]] || exit 0
 fi
 
 cd "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}" || exit 0
