@@ -12,11 +12,8 @@ Systematizes the "search for existing solutions before implementing" workflow.
 
 ## Trigger
 
-Use this skill when:
-- Starting a new feature that likely has existing solutions
-- Adding a dependency or integration
-- The user asks "add X functionality" and you're about to write code
-- Before creating a new utility, helper, or abstraction
+Use this skill before writing any script, config, workflow or service that automates a
+task or connects two systems - even when a standard approach seems obvious.
 
 ## Workflow
 
