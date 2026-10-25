@@ -1,7 +1,7 @@
 ---
 name: search-first
 description: "Use before writing any script, config, workflow or service that automates a task or connects two systems - even when a standard approach seems obvious. Search for an existing tool, package, GitHub Action or service first, then adopt, extend, compose or build."
-version: 1.0.1
+version: 1.0.2
 metadata:
   origin: ECC
 ---
