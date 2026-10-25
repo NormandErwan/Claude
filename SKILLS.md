@@ -38,17 +38,17 @@ slip through.
 
 | Skill | Source | Web | Sent version | Sent tree | Upstream commit |
 |---|---|---|---|---|---|
-| craft-prompt | fork of `neolabhq/context-engineering-kit@skills/prompt-engineering` | yes | 1.0.0 | `f7a6ef3125` | `23e2428e80` |
+| craft-prompt | fork of `neolabhq/context-engineering-kit@skills/prompt-engineering` | yes | 1.1.0 | `cb18f541aa` | `23e2428e80` |
 | find-cause | native | yes | 1.0.0 | `d13e258ce6` | - |
 | grill-with-docs | fork of `mattpocock/skills@skills/engineering/grill-with-docs` | no | - | - | `5beb35b040` |
 | guide-decision | native | yes | 1.1.0 | `2ee6133ad3` | - |
 | guide-purchase | native | yes | 1.1.0 | `8f10c06aa7` | - |
-| handoff | fork of `mattpocock/skills@skills/productivity/handoff` | yes | 1.0.0 | `0d8eeece5c` | `5beb35b040` |
+| handoff | fork of `mattpocock/skills@skills/productivity/handoff` | yes | 1.1.0 | `73e03e2e30` | `5beb35b040` |
 | improve-codebase-architecture | fork of `mattpocock/skills@skills/engineering/improve-codebase-architecture` | no | - | - | `5beb35b040` |
 | prevent-drift | native | no | - | - | - |
 | search-first | fork of `affaan-m/ECC@skills/search-first` | yes | 1.0.2 | `1a31dd78a1` | `90606c8315` |
 | teach | fork of `mattpocock/skills@skills/productivity/teach` | yes | 1.0.1 | `63dda2ff4e` | `5beb35b040` |
-| token-codebase-exploration | native | yes | 1.2.0 | `41097126a8` | - |
+| token-codebase-exploration | native | yes | 1.3.0 | `e0d147006e` | - |
 | token-dotnet | native | no | - | - | - |
 | token-file-ops | native | yes | 1.5.0 | `9967313b04` | - |
 | v-model-documents | native | no | - | - | - |
@@ -82,11 +82,15 @@ slip through.
 
 On claude.ai but not provided by this repo: brainstorming, find-skills.
 
-The four mattpocock forks diverge from upstream only by the dropped `disable-model-invocation:
-true` line, plus a `version:` line on handoff and teach.
+The four mattpocock forks diverge from upstream by the dropped `disable-model-invocation:
+true` line, plus a `version:` line on handoff and teach. handoff also replaces the OS temp
+directory with a save location per surface (scratchpad, temp directory, or a download on
+claude.ai).
 
 craft-prompt: a straight copy of `neolabhq/context-engineering-kit`'s `prompt-engineering`,
-renamed. Its one local divergence is a "Match structure to signal density" section. Reservation:
+renamed. Local divergences: a "Match structure to signal density" section; the persuasion
+principles moved to `references/persuasion-principles.md` (500-line limit); no fixed context
+window size; TaskCreate in place of TodoWrite. Reservation:
 the only exact structural match found on skills.sh among several `prompt-engineering` variants,
 not independently confirmed as the original author.
 
