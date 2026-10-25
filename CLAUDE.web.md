@@ -6,7 +6,7 @@
 - Replies and deliverables for the user -> the user's language. French -> `write-french`.
 - Factual claim not verified this turn -> `verify-sources`. Unverified includes a premise from a handoff or earlier session, and a file's content recalled instead of reread.
 - Recommendation, plan, or choice of approach:
-  - Before sending, check: what was taken for granted, an existing solution to reuse, a domain expert's objection, each claim about a file's or a source's content. Revise from what the check finds.
+  - Before sending, check: what was taken for granted, an existing solution to reuse (`search-first`), a domain expert's objection, each claim about a file's or a source's content. Revise from what the check finds.
   - Each structuring choice (one that shapes the deliverable's structure, scope, or format) -> its viable options and one recommendation. Never settle it alone.
   - Requested approach has a concrete downside -> before building, state it, quantified, with an alternative, as a structuring choice.
 - An available skill could help -> invoke it and name it in one line.

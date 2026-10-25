@@ -36,6 +36,8 @@
 !skills/guide-purchase/**
 !skills/prevent-drift/
 !skills/prevent-drift/**
+!skills/search-first/
+!skills/search-first/**
 !skills/token-codebase-exploration/
 !skills/token-codebase-exploration/**
 !skills/token-dotnet/
