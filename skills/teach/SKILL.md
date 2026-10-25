@@ -1,6 +1,6 @@
 ---
 name: teach
-version: 1.0.0
+version: 1.0.1
 description: Teach the user a new skill or concept, within this workspace.
 argument-hint: "What would you like to learn about?"
 ---
@@ -17,6 +17,7 @@ Treat the current directory as a teaching workspace. Workspace paths (`./lessons
 - `./learning-records/*.md`: A directory of learning records, which capture what the user has learned. These are loosely equivalent to architectural decision records in software development - they capture non-obvious lessons and key insights that may need to be revised later, or drive future sessions. These should be used to calculate the zone of proximal development. They are titled `0001-<dash-case-name>.md`, where the number increments each time. Use the format in [LEARNING-RECORD-FORMAT.md](./LEARNING-RECORD-FORMAT.md).
 - `./lessons/*.html`: A directory of lessons. A **lesson** is a single, self-contained HTML output that teaches one tightly-scoped thing tied to the mission. This is the primary unit of teaching in this workspace.
 - `./assets/*`: Reusable **components** shared across lessons. See [Assets](#assets).
+- `GLOSSARY.md`: The canonical terms of this workspace, added once the user can use them. Use the format in [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md).
 - `NOTES.md`: A scratchpad for you to jot down user preferences, or working notes.
 
 ## Philosophy
