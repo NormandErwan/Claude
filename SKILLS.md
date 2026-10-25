@@ -46,7 +46,8 @@ slip through.
 | handoff | fork of `mattpocock/skills@skills/productivity/handoff` | yes | 1.0.0 | `0d8eeece5c` | `5beb35b040` |
 | improve-codebase-architecture | fork of `mattpocock/skills@skills/engineering/improve-codebase-architecture` | no | - | - | `5beb35b040` |
 | prevent-drift | native | no | - | - | - |
-| teach | fork of `mattpocock/skills@skills/productivity/teach` | yes | 1.0.0 | `66607bb4b8` | `5beb35b040` |
+| search-first | fork of `affaan-m/ECC@skills/search-first` | yes | 1.0.2 | `1a31dd78a1` | `90606c8315` |
+| teach | fork of `mattpocock/skills@skills/productivity/teach` | yes | 1.0.1 | `63dda2ff4e` | `5beb35b040` |
 | token-codebase-exploration | native | yes | 1.2.0 | `41097126a8` | - |
 | token-dotnet | native | no | - | - | - |
 | token-file-ops | native | yes | 1.5.0 | `9967313b04` | - |
@@ -61,11 +62,11 @@ slip through.
 | v-model-niveau-4 | native | no | - | - | - |
 | v-model-phase-amont | native | no | - | - | - |
 | v-model-tests | native | no | - | - | - |
-| verify-sources | native | yes | 1.5.1 | `9fe414fa87` | - |
+| verify-sources | native | yes | 1.5.2 | `b0f58f410a` | - |
 | write-french | native | yes | 1.4.3 | `add4646196` | - |
 | write-guide | native | no | - | - | - |
 | write-hook | native | no | - | - | - |
-| write-skill | native | yes | 2.4.0 | `aa71eb6cb1` | - |
+| write-skill | native | yes | 2.4.1 | `4c6468e651` | - |
 | ponytail-audit | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
 | ponytail-review | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
 | frontend-design | skills.txt `anthropics/skills` | no | - | - | - |

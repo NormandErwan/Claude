@@ -220,7 +220,7 @@ Reports per-query trigger rates. Aim for ≥ 80% on should-trigger, ≤ 10% on s
 python -m scripts.improve_description \
   --eval-results <results.json from run_eval> \
   --skill-path <path-to-skill> \
-  --model claude-sonnet-4-6
+  --model <model-id>
 ```
 
 Outputs an improved description candidate. Review it before applying.
@@ -233,7 +233,7 @@ Run the full optimize loop — eval → improve → eval, tracking history to av
 python -m scripts.run_loop \
   --eval-set eval-set.json \
   --skill-path <path-to-skill> \
-  --model claude-sonnet-4-6 \
+  --model <model-id> \
   --max-iterations 5 \
   --holdout 0.4 \
   --results-dir trigger-results/

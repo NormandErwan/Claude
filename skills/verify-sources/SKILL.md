@@ -1,6 +1,6 @@
 ---
 name: verify-sources
-version: 1.5.1
+version: 1.5.2
 description: Use when about to state a factual, technical, historical, or procedural claim in ANY domain (software, DIY/craft, health, legal, finance...) - a version number, default value, statistic, API behavior, a legal deadline, a health claim, a manufacturer spec, "X always/never does Y", "the docs say", "best practice is" - that you have not verified against a source this turn, or when tempted to answer a factual question from memory under time pressure
 ---
 
@@ -279,9 +279,9 @@ before using it - do not trust the summary's framing.
 
 ## Relationship To Other Skills
 
-- `verification-before-completion` covers claims that WORK is done (tests pass,
-  build green). This skill covers claims that FACTS are true. Both demand evidence
-  before assertion; apply both when a completion claim rests on a factual one.
+- A claim that WORK is done (tests pass, build green) needs the same evidence: run
+  the check before stating it. This skill covers claims that FACTS are true; apply
+  both when a completion claim rests on a factual one.
 
 ## The Bottom Line
 

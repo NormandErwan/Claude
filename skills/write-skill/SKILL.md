@@ -1,6 +1,6 @@
 ---
 name: write-skill
-version: 2.4.0
+version: 2.4.1
 description: Use when creating a new skill, editing an existing one, verifying a skill works
   before deployment, benchmarking whether it improves task quality, fixing unreliable
   triggering, or when an agent rationalizes around a skill's rules.
@@ -417,7 +417,7 @@ state the rule once at the level it actually applies, not as a growing list of e
 
 ## Skill Creation Checklist (TDD Adapted)
 
-**IMPORTANT: Use TodoWrite to create todos for EACH checklist item below.**
+**IMPORTANT: Use the task-tracking tool (TaskCreate in Claude Code) to create a task for EACH checklist item below.**
 
 **RED Phase - Write Failing Test:**
 - [ ] Create pressure scenarios (3+ combined pressures for discipline skills)
