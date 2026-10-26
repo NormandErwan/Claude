@@ -1,7 +1,7 @@
 ---
 name: teach
-version: 1.0.1
-description: Teach the user a new skill or concept, within this workspace.
+version: 1.1.0
+description: 'Use when the user sets learning a topic or skill as their own goal - "teach me X", "I want to learn X", "help me get good at X", a course or study plan for themselves. Not for a question one reply answers ("what is X", "explain X").'
 argument-hint: "What would you like to learn about?"
 ---
 
