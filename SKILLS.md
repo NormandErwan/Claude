@@ -47,7 +47,7 @@ slip through.
 | improve-codebase-architecture | fork of `mattpocock/skills@skills/engineering/improve-codebase-architecture` | no | - | - | `5beb35b040` |
 | prevent-drift | native | no | - | - | - |
 | search-first | fork of `affaan-m/ECC@skills/search-first` | yes | 1.0.2 | `1a31dd78a1` | `90606c8315` |
-| teach | fork of `mattpocock/skills@skills/productivity/teach` | yes | 1.0.1 | `63dda2ff4e` | `5beb35b040` |
+| teach | fork of `mattpocock/skills@skills/productivity/teach` | yes | 1.1.0 | `c6c8287ecf` | `5beb35b040` |
 | token-codebase-exploration | native | yes | 1.3.0 | `e0d147006e` | - |
 | token-dotnet | native | no | - | - | - |
 | token-file-ops | native | yes | 1.5.0 | `9967313b04` | - |
