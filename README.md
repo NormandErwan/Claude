@@ -2,6 +2,64 @@
 
 Natively-authored skills library for Claude Code.
 
+## New here? Start with this
+
+### What this repo is, in one paragraph
+
+This repo is one person's working setup for Claude Code: a rule file (`CLAUDE.md`) that shapes
+how the agent behaves, and a set of skills (step-by-step playbooks the agent loads when a task
+matches). Any other repo can plug into it with two small files. From then on, every Claude Code
+session in that repo starts with the latest rules and skills from here - nothing to copy,
+nothing to keep in sync by hand.
+
+### What makes it different
+
+Plenty of public repos share skills or a `CLAUDE.md` to copy. This one differs in five ways:
+
+1. **Live, not copied.** A `SessionStart` hook pulls the rules and skills fresh at every
+   session. That fits cloud sessions, where each container starts from a clean clone: a fix
+   made here reaches every connected repo at its next session.
+2. **Every rule has to earn its place.** `PROVENANCE.md` records, for each rule in `CLAUDE.md`,
+   the incident that justified it and the commit that added it. A rule that costs more than it
+   returns is deleted, not patched with another rule (`CONTRIBUTING.md`).
+3. **The agent reports its own failures.** When the user corrects it, or a rule failed to fire,
+   the agent appends one line to `RETROSPECTIVE.md` (about a hundred so far). Recurring classes
+   go to a root-cause analysis (`find-cause`) instead of one more rule.
+4. **Rule changes are tested like code.** A change to always-on behavior gets an A/B test with
+   headless `claude -p` runs before it merges, and the result is logged with the rule.
+5. **Drift is blocked by machines, not memory.** A hook refuses `git push` when the skill
+   inventory (`SKILLS.md`) no longer matches the files; another checks at session start whether
+   a forked skill's upstream moved.
+
+The skills follow the same logic: written here when nothing existing fit, forked when a small
+local change was needed (the diff is documented in `SKILLS.md`), installed from upstream
+otherwise. Overlaps between collections are settled in one place (`CLAUDE.md` `Bootstrap` 2).
+
+### Skills written here
+
+| Skill | What it does |
+|---|---|
+| `verify-sources` | Checks a factual claim against a source before stating it, in any domain |
+| `find-cause` | Root-cause analysis when the same failure keeps coming back |
+| `prevent-drift` | Stops one fact from living in two files that will disagree later |
+| `write-skill`, `write-hook`, `write-guide` | Write and test skills, hooks, and guides, with evals |
+| `write-french` | French that does not read as translated English |
+| `guide-decision`, `guide-purchase` | Structured help for personal, non-technical decisions |
+| `token-*` | Explore code and files without flooding the context window |
+| `v-model-*` | A full V-model software method, in French, from needs to acceptance tests |
+
+The full inventory, with forks and upstream skills: `SKILLS.md`.
+
+### Where to look next
+
+| You want to | Read |
+|---|---|
+| Use it in your repo | [Adding this repo to another project](#adding-this-repo-to-another-project) |
+| Know how the agent is told to behave | `CLAUDE.md` |
+| Know why a rule exists | `PROVENANCE.md` |
+| See what went wrong and what changed | `RETROSPECTIVE.md` |
+| Change a rule or a skill | `CONTRIBUTING.md` |
+
 ## Where a skill belongs
 
 A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLAUDE.md`
