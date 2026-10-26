@@ -4,28 +4,12 @@
 
 Natively-authored skills library for Claude Code.
 
-## Usage
-
-Most external skills are not vendored here. Three mechanisms bring skills in:
-
-| Source | Mechanism | Listed in |
-|---|---|---|
-| Most external skills | [`npx skills add`](https://skills.sh/), per session | `CLAUDE.md` `## Bootstrap` (always) and `## Every turn` (topic-gated) |
-| `addyosmani/agent-skills` | Cloned and injected by the `SessionStart` hook | `CLAUDE.md` `## Every turn` 6 |
-| `craft-prompt`, `grilling` | Forked into `skills/` for local edits, tracked against their upstream in `SKILLS.web.md` | `skills/craft-prompt/`, `skills/grilling/` |
+## Where a skill belongs
 
 A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLAUDE.md`
-`Code / docs / commits`). A skill specific to one consumer repo belongs in that repo's own
-`skills/` - its `SessionStart` hook never touches it.
-
-### Forked skills
-
-A skill forked into `skills/` (rather than pulled fresh every session via `npx skills add`)
-carries its upstream repo, path, and pinned commit as two columns in `SKILLS.web.md` - local
-commit (this repo's own history for the file) and upstream commit (last checked against). To
-pull an update: clone the upstream repo, diff the pinned commit against its current HEAD on
-that file's path, and apply the result to the fork by hand - no `git subtree`, no stored
-pristine copy. Fork only a skill you need to edit locally; everything else stays on `npx`.
+`Claude Code`). A skill specific to one consumer repo belongs in that repo's own
+`skills/` - its `SessionStart` hook never touches it. Every skill, its source, and
+whether it is uploaded to claude.ai: `SKILLS.md`.
 
 ## Adding this repo to another project
 
@@ -46,7 +30,7 @@ In the consumer repo:
 2. Copy `templates/hooks/session-start.sh` to `.claude/hooks/session-start.sh`
    (keep it executable) - clones this repo fresh each session, refreshes the
    generated files, then runs `templates/hooks/inject-agent-skills.sh` from
-   that fresh clone. Only the thin bootstrap is copied, so the injector
+   that fresh clone, which also installs the skills in `skills.txt`. Only the thin bootstrap is copied, so the injector
    updates itself afterwards without consumers re-copying anything. A repo set
    up before the injector existed needs this one re-copy to get a router at
    all - the synced `CLAUDE.md` assumes one is injected.
@@ -70,22 +54,24 @@ In the consumer repo:
       If the file cannot be read, stop and report the error before proceeding.
    ```
 
-5. Optionally add topic-specific skills to that same root `CLAUDE.md`, gated on the consumer
-   project's own stack. These used to auto-trigger from this repo's `CLAUDE.md`, but most
-   consumer projects never need any given one, so keeping them in the always-loaded file cost
-   every session regardless of relevance (see `PROVENANCE.md`'s 2026-09-08 rows):
+5. Optionally list topic-specific skills in a root `skills.txt` in the consumer repo, same format
+   as this repo's (`<repo> <skill>...`, one upstream repo per line), gated on the consumer
+   project's own stack. The hook installs them with this repo's, before the Skill roster
+   freezes. They used to auto-trigger from this repo's `CLAUDE.md`, but most consumer projects
+   never need any given one, so keeping them in the always-loaded file cost every session
+   regardless of relevance (see `PROVENANCE.md`'s 2026-09-08 rows).
 
-   | Need | Add |
+   | Need | `skills.txt` line |
    |---|---|
-   | .NET/C#/Blazor work | `npx skills add aaronontheweb/dotnet-skills`; `token-dotnet` is already synced with `skills/`, just reference it for search patterns |
-   | Web/frontend design work | `npx skills add arvindrk/extract-design-system@extract-design-system`, `npx skills add vercel-labs/agent-skills@web-design-guidelines` |
-   | Test design with 3+ combinable parameters | `npx skills add omkamal/pypict-claude-skill@pict-test-designer` |
-   | Parallel/sub-agent orchestration | `npx skills add obra/superpowers@dispatching-parallel-agents`, `npx skills add obra/superpowers@subagent-driven-development` |
-   | Home Assistant config editing | `npx skills add homeassistant-ai/skills@home-assistant-best-practices` |
+   | .NET/C#/Blazor work | `aaronontheweb/dotnet-skills <skill>...` - name the skills you need (e.g. `csharp-coding-standards efcore-patterns`), a line with no skill name is skipped; `token-dotnet` is already synced with `skills/`, just reference it for search patterns |
+   | Web/frontend design work | `arvindrk/extract-design-system extract-design-system` and `vercel-labs/agent-skills web-design-guidelines` |
+   | Test design with 3+ combinable parameters | `omkamal/pypict-claude-skill pict-test-designer` |
+   | Parallel/sub-agent orchestration | `obra/superpowers dispatching-parallel-agents subagent-driven-development` |
+   | Home Assistant config editing | `homeassistant-ai/skills home-assistant-best-practices` |
 
 `.claude/settings.json` and `.claude/hooks/session-start.sh` are the whole
 consumer-side infra - nothing else from this repo belongs there. This
-repo's own `README.md`, `CLAUDE.web.md`, and `SKILLS.web.md` stay here only
-(the `.web` ones are for manual upload to claude.ai projects).
+repo's own `README.md`, `CLAUDE.web.md`, and `SKILLS.md` stay here only
+(`CLAUDE.web.md` and the skills `SKILLS.md` marks `Web` are uploaded by hand to claude.ai).
 
 See `NormandErwan/Accounts` for a working example.
