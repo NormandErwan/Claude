@@ -226,7 +226,7 @@ The “context window” refers to the entirety of the amount of text a language
 
 - Progressive token accumulation: As the conversation advances through turns, each user message and assistant response accumulates within the context window. Previous turns are preserved completely.
 - Linear growth pattern: The context usage grows linearly with each turn, with previous turns preserved completely.
-- Fixed capacity: The context window size depends on the model; it caps conversation history plus generated output.
+- Capacity limit: The context window size depends on the model; it caps conversation history plus generated output.
 - Input-output flow: Each turn consists of:
   - Input phase: Contains all previous conversation history plus the current user message
   - Output phase: Generates a text response that becomes part of a future input

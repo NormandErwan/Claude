@@ -8,7 +8,7 @@ argument-hint: "What will the next session be used for?"
 Write a handoff document summarising the current conversation so a fresh agent can continue the work, as one Markdown file. Save it where the user can open it, never in the current workspace's tracked files:
 - Session lists a scratchpad directory -> save there and give the full path.
 - Otherwise, with a filesystem -> the OS temporary directory (`$TMPDIR`, else `/tmp`; `%TEMP%` on Windows).
-- No filesystem (claude.ai chat) -> a downloadable `.md` file.
+- No filesystem (claude.ai chat) -> create the `.md` as a file the user can download, not as chat text.
 
 Include a "suggested skills" section in the document, naming which skills the next agent should call the Skill tool for.
 
