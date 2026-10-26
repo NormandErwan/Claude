@@ -1,6 +1,7 @@
 *
 !*.md
 !LICENSE
+!.gitattributes
 !.github/
 !.github/**
 !skills/
