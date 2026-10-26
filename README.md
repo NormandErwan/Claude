@@ -4,84 +4,28 @@
 
 Natively-authored skills library for Claude Code.
 
-## New here? Start with this
+## Usage
 
-### What this repo is, in one paragraph
+Most external skills are not vendored here. Three mechanisms bring skills in:
 
-This repo is one person's working setup for Claude Code: a rule file (`CLAUDE.md`) that shapes
-how the agent behaves, and a set of skills (step-by-step playbooks the agent loads when a task
-matches). Any other repo can plug into it with two small files. From then on, every Claude Code
-session in that repo starts with the latest rules and skills from here - nothing to copy,
-nothing to keep in sync by hand.
-
-### What makes it different
-
-Plenty of public repos share skills or a `CLAUDE.md` to copy. This one differs in five ways:
-
-1. **Live, not copied.** A `SessionStart` hook pulls the rules and skills fresh at every
-   session. That fits cloud sessions, where each container starts from a clean clone: a fix
-   made here reaches every connected repo at its next session.
-2. **Every rule has to earn its place.** `PROVENANCE.md` records, for each rule in `CLAUDE.md`,
-   the incident that justified it and the commit that added it. A rule that costs more than it
-   returns is deleted, not patched with another rule (`CONTRIBUTING.md`).
-3. **The agent reports its own failures.** When the user corrects it, or a rule failed to fire,
-   the agent appends one line to `RETROSPECTIVE.md` (about a hundred so far). Recurring classes
-   go to a root-cause analysis (`find-cause`) instead of one more rule.
-4. **Rule changes are tested like code.** A change to always-on behavior gets an A/B test with
-   headless `claude -p` runs before it merges, and the result is logged with the rule.
-5. **Drift is blocked by machines, not memory.** A hook refuses `git push` when the skill
-   inventory (`SKILLS.md`) no longer matches the files; another checks at session start whether
-   a forked skill's upstream moved.
-
-The skills follow the same logic: written here when nothing existing fit, forked when a small
-local change was needed (the diff is documented in `SKILLS.md`), installed from upstream
-otherwise. Overlaps between collections are settled in one place (`CLAUDE.md` `Bootstrap` 2).
-
-### Skills written here
-
-| Skill | What it does |
-|---|---|
-| `verify-sources` | Checks a factual claim against a source before stating it, in any domain |
-| `find-cause` | Root-cause analysis when the same failure keeps coming back |
-| `prevent-drift` | Stops one fact from living in two files that will disagree later |
-| `write-skill`, `write-hook`, `write-guide` | Write and test skills, hooks, and guides, with evals |
-| `write-french` | French that does not read as translated English |
-| `guide-decision`, `guide-purchase` | Structured help for personal, non-technical decisions |
-| `token-*` | Explore code and files without flooding the context window |
-| `v-model-*` | A full V-model software method, in French, from needs to acceptance tests |
-
-The full inventory, with forks and upstream skills: `SKILLS.md`.
-
-### Related projects
-
-Each covers part of this ground. Descriptions are the projects' own, quoted from GitHub; the
-last column says where it overlaps with this repo (checked 2026-10-26).
-
-| Project | Its description | Overlap |
+| Source | Mechanism | Listed in |
 |---|---|---|
-| [affaan-m/ECC](https://github.com/affaan-m/ECC) | "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond." | Learns from sessions: hooks observe them and record "instincts" with a confidence score |
-| [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) | "380 Claude Code skills & agent skills & plugins [...]" | Evolves skills nightly from real sessions behind a gate; `CLAUDE.md` changes need a human adopt step |
-| [aviadr1/claude-meta](https://github.com/aviadr1/claude-meta) | "Self-improving AI: Transform CLAUDE.md into a learning system. One prompt makes Claude learn from every mistake. Meta-rules + reflection = continuous improvement." | Turns each mistake into a `CLAUDE.md` rule through a reflection prompt; no sync across repos |
-| [AJBcoding/claude-sync](https://github.com/AJBcoding/claude-sync) | "Automatic synchronization of Claude skills across project repositories" | Syncs skills into each repo, from a shell hook on `cd` |
-| [CTHua/dotai](https://github.com/CTHua/dotai) | No description; its README syncs one `AGENTS.md` and skills per machine through symlinks | One rules file and one skill set shared across machines and agents |
-| [anthropics/claude-code#50150](https://github.com/anthropics/claude-code/issues/50150) | Feature request: native session-start skill sync for Claude Code CLI and Cloud | Closed as not planned; the `SessionStart` hook here covers that case |
-
-### Where to look next
-
-| You want to | Read |
-|---|---|
-| Use it in your repo | [Adding this repo to another project](#adding-this-repo-to-another-project) |
-| Know how the agent is told to behave | `CLAUDE.md` |
-| Know why a rule exists | `PROVENANCE.md` |
-| See what went wrong and what changed | `RETROSPECTIVE.md` |
-| Change a rule or a skill | `CONTRIBUTING.md` |
-
-## Where a skill belongs
+| Most external skills | [`npx skills add`](https://skills.sh/), per session | `CLAUDE.md` `## Bootstrap` (always) and `## Every turn` (topic-gated) |
+| `addyosmani/agent-skills` | Cloned and injected by the `SessionStart` hook | `CLAUDE.md` `## Every turn` 6 |
+| `craft-prompt`, `grilling` | Forked into `skills/` for local edits, tracked against their upstream in `SKILLS.web.md` | `skills/craft-prompt/`, `skills/grilling/` |
 
 A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLAUDE.md`
-`Claude Code`). A skill specific to one consumer repo belongs in that repo's own
-`skills/` - its `SessionStart` hook never touches it. Every skill, its source, and
-whether it is uploaded to claude.ai: `SKILLS.md`.
+`Code / docs / commits`). A skill specific to one consumer repo belongs in that repo's own
+`skills/` - its `SessionStart` hook never touches it.
+
+### Forked skills
+
+A skill forked into `skills/` (rather than pulled fresh every session via `npx skills add`)
+carries its upstream repo, path, and pinned commit as two columns in `SKILLS.web.md` - local
+commit (this repo's own history for the file) and upstream commit (last checked against). To
+pull an update: clone the upstream repo, diff the pinned commit against its current HEAD on
+that file's path, and apply the result to the fork by hand - no `git subtree`, no stored
+pristine copy. Fork only a skill you need to edit locally; everything else stays on `npx`.
 
 ## Adding this repo to another project
 
@@ -102,7 +46,7 @@ In the consumer repo:
 2. Copy `templates/hooks/session-start.sh` to `.claude/hooks/session-start.sh`
    (keep it executable) - clones this repo fresh each session, refreshes the
    generated files, then runs `templates/hooks/inject-agent-skills.sh` from
-   that fresh clone, which also installs the skills in `skills.txt`. Only the thin bootstrap is copied, so the injector
+   that fresh clone. Only the thin bootstrap is copied, so the injector
    updates itself afterwards without consumers re-copying anything. A repo set
    up before the injector existed needs this one re-copy to get a router at
    all - the synced `CLAUDE.md` assumes one is injected.
@@ -126,24 +70,22 @@ In the consumer repo:
       If the file cannot be read, stop and report the error before proceeding.
    ```
 
-5. Optionally list topic-specific skills in a root `skills.txt` in the consumer repo, same format
-   as this repo's (`<repo> <skill>...`, one upstream repo per line), gated on the consumer
-   project's own stack. The hook installs them with this repo's, before the Skill roster
-   freezes. They used to auto-trigger from this repo's `CLAUDE.md`, but most consumer projects
-   never need any given one, so keeping them in the always-loaded file cost every session
-   regardless of relevance (see `PROVENANCE.md`'s 2026-09-08 rows).
+5. Optionally add topic-specific skills to that same root `CLAUDE.md`, gated on the consumer
+   project's own stack. These used to auto-trigger from this repo's `CLAUDE.md`, but most
+   consumer projects never need any given one, so keeping them in the always-loaded file cost
+   every session regardless of relevance (see `PROVENANCE.md`'s 2026-09-08 rows):
 
-   | Need | `skills.txt` line |
+   | Need | Add |
    |---|---|
-   | .NET/C#/Blazor work | `aaronontheweb/dotnet-skills <skill>...` - name the skills you need (e.g. `csharp-coding-standards efcore-patterns`), a line with no skill name is skipped; `token-dotnet` is already synced with `skills/`, just reference it for search patterns |
-   | Web/frontend design work | `arvindrk/extract-design-system extract-design-system` and `vercel-labs/agent-skills web-design-guidelines` |
-   | Test design with 3+ combinable parameters | `omkamal/pypict-claude-skill pict-test-designer` |
-   | Parallel/sub-agent orchestration | `obra/superpowers dispatching-parallel-agents subagent-driven-development` |
-   | Home Assistant config editing | `homeassistant-ai/skills home-assistant-best-practices` |
+   | .NET/C#/Blazor work | `npx skills add aaronontheweb/dotnet-skills`; `token-dotnet` is already synced with `skills/`, just reference it for search patterns |
+   | Web/frontend design work | `npx skills add arvindrk/extract-design-system@extract-design-system`, `npx skills add vercel-labs/agent-skills@web-design-guidelines` |
+   | Test design with 3+ combinable parameters | `npx skills add omkamal/pypict-claude-skill@pict-test-designer` |
+   | Parallel/sub-agent orchestration | `npx skills add obra/superpowers@dispatching-parallel-agents`, `npx skills add obra/superpowers@subagent-driven-development` |
+   | Home Assistant config editing | `npx skills add homeassistant-ai/skills@home-assistant-best-practices` |
 
 `.claude/settings.json` and `.claude/hooks/session-start.sh` are the whole
 consumer-side infra - nothing else from this repo belongs there. This
-repo's own `README.md`, `CLAUDE.web.md`, and `SKILLS.md` stay here only
-(`CLAUDE.web.md` and the skills `SKILLS.md` marks `Web` are uploaded by hand to claude.ai).
+repo's own `README.md`, `CLAUDE.web.md`, and `SKILLS.web.md` stay here only
+(the `.web` ones are for manual upload to claude.ai projects).
 
 See `NormandErwan/Accounts` for a working example.
