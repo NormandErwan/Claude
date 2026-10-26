@@ -1,5 +1,7 @@
 # Claude
 
+[![checks](https://github.com/NormandErwan/Claude/actions/workflows/checks.yml/badge.svg)](https://github.com/NormandErwan/Claude/actions/workflows/checks.yml)
+
 Natively-authored skills library for Claude Code.
 
 ## New here? Start with this

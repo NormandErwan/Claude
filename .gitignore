@@ -1,6 +1,8 @@
 *
 !*.md
 !LICENSE
+!.github/
+!.github/**
 !skills/
 !templates/
 !templates/**

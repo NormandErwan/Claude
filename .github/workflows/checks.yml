@@ -1,0 +1,20 @@
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  skills-inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Shell syntax
+        run: bash -n .claude/hooks/*.sh templates/hooks/*.sh
+      - name: SKILLS.md matches skills/ and skills.txt
+        run: bash .claude/hooks/check-skills.sh --check
+      - name: check-skills.sh regression tests
+        run: bash .claude/hooks/test-check-skills.sh -v
