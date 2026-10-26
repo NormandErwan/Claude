@@ -52,6 +52,20 @@ otherwise. Overlaps between collections are settled in one place (`CLAUDE.md` `B
 
 The full inventory, with forks and upstream skills: `SKILLS.md`.
 
+### Related projects
+
+Each covers part of this ground. Descriptions are the projects' own, quoted from GitHub; the
+last column says where it overlaps with this repo (checked 2026-10-26).
+
+| Project | Its description | Overlap |
+|---|---|---|
+| [affaan-m/ECC](https://github.com/affaan-m/ECC) | "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond." | Learns from sessions: hooks observe them and record "instincts" with a confidence score |
+| [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) | "380 Claude Code skills & agent skills & plugins [...]" | Evolves skills nightly from real sessions behind a gate; `CLAUDE.md` changes need a human adopt step |
+| [aviadr1/claude-meta](https://github.com/aviadr1/claude-meta) | "Self-improving AI: Transform CLAUDE.md into a learning system. One prompt makes Claude learn from every mistake. Meta-rules + reflection = continuous improvement." | Turns each mistake into a `CLAUDE.md` rule through a reflection prompt; no sync across repos |
+| [AJBcoding/claude-sync](https://github.com/AJBcoding/claude-sync) | "Automatic synchronization of Claude skills across project repositories" | Syncs skills into each repo, from a shell hook on `cd` |
+| [CTHua/dotai](https://github.com/CTHua/dotai) | No description; its README syncs one `AGENTS.md` and skills per machine through symlinks | One rules file and one skill set shared across machines and agents |
+| [anthropics/claude-code#50150](https://github.com/anthropics/claude-code/issues/50150) | Feature request: native session-start skill sync for Claude Code CLI and Cloud | Closed as not planned; the `SessionStart` hook here covers that case |
+
 ### Where to look next
 
 | You want to | Read |
