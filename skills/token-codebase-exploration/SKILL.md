@@ -1,7 +1,7 @@
 ---
 name: token-codebase-exploration
 description: Use when exploring an unfamiliar codebase, understanding how a specific feature or pattern works, or learning how components interact. Provides the exploration workflow and strategy. For .NET/C# specific search commands, also load token-dotnet.
-version: 1.2.0
+version: 1.3.0
 allowed-tools: Bash, Read, Grep, Glob
 ---
 
@@ -84,5 +84,5 @@ exists to force a consolidation step: reading without summarizing produces worse
 than reading 5 files, articulating what you now understand, and then reading 2 more
 with a specific question in mind.
 
-Summarize findings, state what you now understand, and ask the user which area to
-explore further before opening any additional file.
+Summarize findings and state what you now understand. Then read further only with a
+specific question that summary leaves open.
