@@ -83,7 +83,7 @@ slip through.
 On claude.ai but not provided by this repo: brainstorming, find-skills.
 
 The four mattpocock forks diverge from upstream by the dropped `disable-model-invocation:
-true` line, plus a `version:` line. handoff also replaces the OS temp
+true` line, plus a `version:` line on handoff and teach. handoff also replaces the OS temp
 directory with a save location per surface (scratchpad, temp directory, or a download on
 claude.ai).
 
