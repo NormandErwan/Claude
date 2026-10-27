@@ -43,7 +43,7 @@ slip through.
 | grill-with-docs | fork of `mattpocock/skills@skills/engineering/grill-with-docs` | no | - | - | `5beb35b040` |
 | guide-decision | native | yes | 1.1.0 | `2ee6133ad3` | - |
 | guide-purchase | native | yes | 1.1.0 | `8f10c06aa7` | - |
-| handoff | fork of `mattpocock/skills@skills/productivity/handoff` | yes | 1.1.0 | `4d42318e8e` | `5beb35b040` |
+| handoff | fork of `mattpocock/skills@skills/productivity/handoff` | yes | 1.2.0 | `e78ed79f8a` | `5beb35b040` |
 | improve-codebase-architecture | fork of `mattpocock/skills@skills/engineering/improve-codebase-architecture` | no | - | - | `5beb35b040` |
 | prevent-drift | native | no | - | - | - |
 | search-first | fork of `affaan-m/ECC@skills/search-first` | yes | 1.0.2 | `1a31dd78a1` | `90606c8315` |
@@ -63,7 +63,7 @@ slip through.
 | v-model-phase-amont | native | no | - | - | - |
 | v-model-tests | native | no | - | - | - |
 | verify-sources | native | yes | 1.5.2 | `b0f58f410a` | - |
-| write-french | native | yes | 1.4.3 | `add4646196` | - |
+| write-french | native | yes | 1.5.0 | `c26dfa53e6` | - |
 | write-guide | native | no | - | - | - |
 | write-hook | native | no | - | - | - |
 | write-skill | native | yes | 2.4.1 | `4c6468e651` | - |
