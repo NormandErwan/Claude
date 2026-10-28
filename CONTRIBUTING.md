@@ -23,8 +23,8 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 - A change to always-on behavior, or to a rule gating push, PR, or deletion, gets an A/B test
   before merging. Other changes: name how the effect will be observed. An observation counts only
   when the owner can judge the outcome by reading the reply, without taking the case apart;
-  otherwise A/B test. The owner can waive a test or accept an observation instead: record the
-  waiver and its reason in the rule's `PROVENANCE.md` row.
+  otherwise A/B test.
+- The owner waives a test -> record the waiver and its reason in the rule's `PROVENANCE.md` row.
 - An A/B test plan lists these steps, in this order:
   1. Review the proposed wording (`ponytail-review`, then mattpocock `code-review`); test the
      reviewed version.
