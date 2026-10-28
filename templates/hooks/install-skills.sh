@@ -46,7 +46,15 @@ while read -r repo skills; do
   (cd "$STAGING/$i" && ${CAP[@]+"${CAP[@]}"} npx -y skills add "$repo" "${args[@]}" -a claude-code -y </dev/null >/dev/null 2>&1) &
   i=$((i + 1))
 done <"$MANIFEST"
+# agent-skills skills link ../../references/*.md; npx copies skill dirs only
+# (upstream #361). Clone the pack's references/ beside skills/.
+(${CAP[@]+"${CAP[@]}"} git clone --depth 1 --quiet https://github.com/addyosmani/agent-skills.git "$STAGING/refs" </dev/null >/dev/null 2>&1) &
 wait
+if [ -d "$STAGING/refs/references" ]; then
+  rm -rf "$TARGET_DIR/references"
+  cp -r "$STAGING/refs/references" "$TARGET_DIR/references"
+  refs=ok
+fi
 
 mkdir -p "$TARGET_DIR/skills"
 for d in "$STAGING"/*/.claude/skills; do
@@ -73,4 +81,5 @@ if [ ${#missing[@]} -eq 0 ]; then
 else
   echo "skills.txt: ${#missing[@]} of ${#expected[@]} skills failed to install: ${missing[*]}. See CLAUDE.md Bootstrap 3."
 fi
+[ -n "${refs:-}" ] || echo "agent-skills references/ not cloned: skills' ../../references links are dead this session."
 [ ${#hidden[@]} -eq 0 ] || echo "skills.txt: hidden by disable-model-invocation: ${hidden[*]} - fork per CLAUDE.md Bootstrap 2."

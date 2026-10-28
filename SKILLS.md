@@ -90,6 +90,8 @@ slip through.
 | source-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | spec-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | test-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| code-review-and-quality | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| interview-me | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | ponytail-audit | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
 | ponytail-review | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
 | frontend-design | skills.txt `anthropics/skills` | no | - | - | - |
@@ -117,7 +119,10 @@ the only exact structural match found on skills.sh among several `prompt-enginee
 not independently confirmed as the original author.
 
 `addyosmani/agent-skills` is installed skill by skill, as its `docs/getting-started.md` asks
-for hosts that route skills natively: no `using-agent-skills` router, and no `interview-me` or
-`code-review-and-quality`, which `grilling`, `code-review` and `ponytail-review` cover.
+for hosts that route skills natively: no `using-agent-skills` router. `install-skills.sh` also
+clones the pack's `references/` into `.claude/references`, which per-skill installs skip
+(upstream #361). `interview-me` and `code-review-and-quality` overlap `grilling`, `code-review`
+and `ponytail-review`: all five stay installed until the evaluation row of 2026-10-28 in
+`RETROSPECTIVE.md` decides.
 
 Pass history before 2026-10-24 lives in `git log -- SKILLS.web.md`.
