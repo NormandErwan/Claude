@@ -1,9 +1,7 @@
 # Installed every session by templates/hooks/install-skills.sh: <upstream repo> <skill>...
 # A skill carrying `disable-model-invocation: true` is forked into skills/ instead
 # (see CLAUDE.md Bootstrap 2).
-# addyosmani/agent-skills: no using-agent-skills (Claude Code routes skills natively,
-# upstream docs/getting-started.md), no interview-me or code-review-and-quality (grilling,
-# code-review and ponytail-review cover them).
+# addyosmani/agent-skills: three skills left out, why in SKILLS.md.
 addyosmani/agent-skills api-and-interface-design browser-testing-with-devtools ci-cd-and-automation code-simplification constraint-driven-development context-engineering debugging-and-error-recovery deprecation-and-migration documentation-and-adrs doubt-driven-development frontend-ui-engineering git-workflow-and-versioning idea-refine incremental-implementation observability-and-instrumentation performance-optimization planning-and-task-breakdown security-and-hardening shipping-and-launch source-driven-development spec-driven-development test-driven-development
 DietrichGebert/ponytail ponytail-audit ponytail-review
 anthropics/skills frontend-design

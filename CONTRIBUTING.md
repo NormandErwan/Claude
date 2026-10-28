@@ -28,7 +28,7 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 - An A/B test plan lists these steps, in this order:
   1. Review the proposed wording (`ponytail-review`, then mattpocock `code-review`); test the
      reviewed version.
-  2. Run it with `write-skill`'s eval process (headless `claude -p`, one fixture per arm, probe before the full run). For a `CLAUDE.md` test, keep the fixture's `.claude/settings.json` and `templates/hooks/`: real sessions run the `SessionStart` injection.
+  2. Run it with `write-skill`'s eval process (headless `claude -p`, one fixture per arm, probe before the full run). For a `CLAUDE.md` test, keep the fixture's `.claude/settings.json` and `templates/hooks/`: real sessions run the `SessionStart` hook.
   3. Record the measure, result, and cost in the commit message and the rule's `PROVENANCE.md` row.
 
 ## PROVENANCE.md
