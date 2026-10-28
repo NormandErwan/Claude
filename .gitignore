@@ -8,8 +8,7 @@
 !templates/
 !templates/**
 !skills.txt
-# This repo's own hook (dogfooding). .claude/agent-skills/ is a session
-# clone of addyosmani/agent-skills and stays ignored. Re-ignore .md files
+# This repo's own hook (dogfooding). Re-ignore .md files
 # directly under .claude/ - the global !*.md above would otherwise unignore
 # any stray one (e.g. a reverted dogfooding skip regenerating CLAUDE.md).
 !.claude/

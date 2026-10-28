@@ -69,8 +69,6 @@ listed=$(git show HEAD:skills.txt 2>/dev/null | grep -v '^#' | cut -d' ' -f2- | 
 # skills/ entries holding a SKILL.md (skills/v-model holds only shared docs)
 dirs=$(git ls-tree --name-only HEAD skills/ | while read -r d; do
   git cat-file -e "HEAD:$d/SKILL.md" 2>/dev/null && echo "${d#skills/}"; done)
-# rows allowed outside skills/ and skills.txt: the router the SessionStart hook clones
-hooked=$(grep '(cloned by hook)' <<<"$table" | awk -F'|' '{gsub(/ /, "", $2); print $2}')
 
 in_list() { grep -qx "$1" <<<"$2"; }
 
@@ -89,8 +87,7 @@ done
 while IFS='|' read -r name _; do
   [[ -z "$name" ]] && continue
   in_list "$name" "$dirs
-$listed
-$hooked" || errors+=("$name: row for a skill neither in skills/ nor in skills.txt")
+$listed" || errors+=("$name: row for a skill neither in skills/ nor in skills.txt")
 done <<<"$current"
 
 # 2. Web value, then cited => uploaded

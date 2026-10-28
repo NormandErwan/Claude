@@ -1,14 +1,14 @@
 # SKILLS.md
 
 Inventory of every skill this repo provides: one row per `skills/` directory holding a
-`SKILL.md`, per `skills.txt` skill, and for the hook-cloned router. It records which skills are
+`SKILL.md` and per `skills.txt` skill. It records which skills are
 uploaded to claude.ai and what was last sent, and pins each fork against its upstream.
 `.claude/hooks/check-skills.sh` blocks `git push` when this file drifts; run it by hand with
 `--check`. Its header lists what it checks; `.claude/hooks/test-check-skills.sh` tests it. `templates/hooks/check-skill-forks.sh` checks the upstream pins at session start.
 
 Columns:
 - `Source`: `native` (written in this repo: the owner's own skills); `fork of` `` `repo@path` ``; `skills.txt` `` `repo` `` (`` `repo@path` `` when
-  uploaded, for the upstream check); or the hook-cloned router.
+  uploaded, for the upstream check).
 - `Web`: `yes` if uploaded to claude.ai. A skill `CLAUDE.web.md` cites must be `yes`.
 - `Sent version`, `Sent tree`: for an uploaded `skills/` skill, its `version:` and tree hash
   (`git rev-parse HEAD:skills/<name>`, 10 chars) at the last zip. For an uploaded `skills.txt`
@@ -31,7 +31,7 @@ Procedure:
    - Uploaded `skills.txt` skill -> zip it from upstream HEAD, update the pin.
 
 Fork a skill only to edit it locally, or to drop its `disable-model-invocation: true` line
-(`CLAUDE.md` `Bootstrap` 3); everything else stays in `skills.txt`.
+(`CLAUDE.md` `Bootstrap` 2); everything else stays in `skills.txt`.
 
 The hook checks steps 1-3, and that every skill `CLAUDE.web.md` cites is uploaded. A re-send
 without a bump is caught against the last push only: two zips of one version between two pushes
@@ -68,6 +68,28 @@ slip through.
 | write-guide | native | no | - | - | - |
 | write-hook | native | no | - | - | - |
 | write-skill | native | yes | 2.4.1 | `4c6468e651` | - |
+| api-and-interface-design | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| browser-testing-with-devtools | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| ci-cd-and-automation | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| code-simplification | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| constraint-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| context-engineering | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| debugging-and-error-recovery | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| deprecation-and-migration | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| documentation-and-adrs | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| doubt-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| frontend-ui-engineering | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| git-workflow-and-versioning | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| idea-refine | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| incremental-implementation | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| observability-and-instrumentation | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| performance-optimization | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| planning-and-task-breakdown | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| security-and-hardening | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| shipping-and-launch | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| source-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| spec-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| test-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | ponytail-audit | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
 | ponytail-review | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
 | frontend-design | skills.txt `anthropics/skills` | no | - | - | - |
@@ -79,7 +101,6 @@ slip through.
 | grilling | skills.txt `mattpocock/skills@skills/productivity/grilling` | yes | upstream | - | `5beb35b040` |
 | prototype | skills.txt `mattpocock/skills` | no | - | - | - |
 | research | skills.txt `mattpocock/skills@skills/engineering/research` | yes | upstream | - | `5beb35b040` |
-| using-agent-skills | `addyosmani/agent-skills@using-agent-skills` (cloned by hook) | no | - | - | `dc27a9c2e1` |
 
 On claude.ai but not provided by this repo: brainstorming, find-skills.
 
@@ -95,9 +116,8 @@ window size; TaskCreate in place of TodoWrite. Reservation:
 the only exact structural match found on skills.sh among several `prompt-engineering` variants,
 not independently confirmed as the original author.
 
-using-agent-skills is the router behind `CLAUDE.md` `Bootstrap` 2. Its row covers the whole
-`addyosmani/agent-skills` repo, installed by `templates/hooks/inject-agent-skills.sh` (see its
-header), and the pin records that clone. The phase skills stay out of `skills.txt`: in the roster
-their descriptions would load every turn and compete with the overlaps `Bootstrap` 2 settles.
+`addyosmani/agent-skills` is installed skill by skill, as its `docs/getting-started.md` asks
+for hosts that route skills natively: no `using-agent-skills` router, and no `interview-me` or
+`code-review-and-quality`, which `grilling`, `code-review` and `ponytail-review` cover.
 
 Pass history before 2026-10-24 lives in `git log -- SKILLS.web.md`.

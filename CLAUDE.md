@@ -2,18 +2,12 @@
 
 ## Bootstrap - once per session
 1. `SessionStart` hook:
-   - It syncs `.claude` from this repo, installs the skills in `skills.txt` into the Skill roster, and injects `using-agent-skills`; in this repo, it runs the injector directly.
+   - It syncs `.claude` from this repo and installs the skills in `skills.txt` into the Skill roster; in this repo, it runs the installer directly.
    - It reports a skill tracked in `SKILLS.md` changed upstream (this repo only) -> update it per that file's procedure.
    - A consumer's root `CLAUDE.md` conflicts with `.claude/CLAUDE.md` -> the root one wins.
    - Session started outside a repository (several attached) -> no hook ran. Say so in the first reply, then from each repository's root run `CLAUDE_PROJECT_DIR=<repo> bash -c '<command>'` for each `SessionStart` command in its `.claude/settings.json`.
-2. `using-agent-skills`:
-   - Three or more files, a new module or public interface, work spanning sessions, or a spec or plan asked -> follow its flowchart. Its skills: `.claude/agent-skills/skills/<name>/SKILL.md`, read from disk.
-   - Its Core Operating Behaviors 1 (assumptions block) and 2 (stop and wait on confusion) -> don't apply; `Behavior` replaces them. Its other behaviors conflict with this file -> this file wins.
-   - User names a specific skill or methodology -> follow its own process, skip the flowchart.
-   - Overlaps: `grilling` over `interview-me`; mattpocock `code-review` + `ponytail-review` over `code-review-and-quality`.
-   - Turn would end with an unreviewed pushed diff and no open plan items -> run `ponytail-review`, then mattpocock `code-review`.
-3. A skill in `skills.txt` carries `disable-model-invocation: true` -> fork it into `skills/` without that line: the line hides the skill from the agent, and the user does not trigger skills by hand.
-4. Skill not in the Skill roster:
+2. A skill in `skills.txt` carries `disable-model-invocation: true` -> fork it into `skills/` without that line: the line hides the skill from the agent, and the user does not trigger skills by hand.
+3. Skill not in the Skill roster:
    - Installed mid-session -> read `.claude/skills/<name>/SKILL.md`.
    - Hook reported its install failed -> `git clone` the skill's repo, read its `SKILL.md` there.
    - Still unreachable -> say so.
@@ -37,6 +31,7 @@
   - Otherwise -> `[BLOCKED] <url> - <status>`. Host required -> stop, tell the user.
 
 ## Claude Code
+- Turn would end with an unreviewed pushed diff and no open plan items -> run `ponytail-review`, then mattpocock `code-review`.
 - About to claim done, fixed, or passing -> run the verification commands locally first (the project's own build, lint, tests).
 - Failure reproducible only in CI -> say so; never push to probe it.
 - Code and its docs (README, comments, commits, PRs, skills) -> English, unless the skill is already in another language.
