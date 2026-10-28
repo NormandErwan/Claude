@@ -15,30 +15,24 @@ whether it is uploaded to claude.ai: `SKILLS.md`.
 
 Consumer repos pull this repo's `CLAUDE.md` and `skills/` fresh at every
 session start via a `SessionStart` hook - no subtree, no submodule, no
-manual sync. The same hook clones
-[`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills) and
-injects its `using-agent-skills` router into the session. A router has to be
-in context before the first turn: a skill installed mid-session is never
-invocable, because the roster froze at session start.
-
-Prerequisite: `jq` on `PATH`. Without it the clone still lands and the hook
-says so; the router is not injected.
+manual sync. The same hook installs the skills in `skills.txt` (among them
+[`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills)) before
+the first turn: a skill installed mid-session is never invocable, because the
+roster froze at session start.
 
 In the consumer repo:
 
 1. Copy `templates/settings.json` to `.claude/settings.json` - wires the hook.
 2. Copy `templates/hooks/session-start.sh` to `.claude/hooks/session-start.sh`
    (keep it executable) - clones this repo fresh each session, refreshes the
-   generated files, then runs `templates/hooks/inject-agent-skills.sh` from
-   that fresh clone, which also installs the skills in `skills.txt`. Only the thin bootstrap is copied, so the injector
+   generated files, then runs `templates/hooks/install-skills.sh` from
+   that fresh clone, which installs the skills in `skills.txt`. Only the thin bootstrap is copied, so the installer
    updates itself afterwards without consumers re-copying anything. A repo set
-   up before the injector existed needs this one re-copy to get a router at
-   all - the synced `CLAUDE.md` assumes one is injected.
+   up before it existed needs this one re-copy to get the skills at all.
 3. Add to `.gitignore` - the generated files are never committed:
    ```
    .claude/CLAUDE.md
    .claude/skills/
-   .claude/agent-skills/
    ```
 4. Add to the repo's own root `CLAUDE.md`:
    ```markdown
