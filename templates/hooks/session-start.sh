@@ -15,4 +15,4 @@ mv "$TARGET_DIR/CLAUDE.md.new" "$TARGET_DIR/CLAUDE.md"
 
 # Run the installer from the fresh clone, not from a copy in this repo: it stays
 # current without consumers ever re-copying a hook.
-bash "$TMP_DIR/templates/hooks/inject-agent-skills.sh" "$TARGET_DIR"
+bash "$TMP_DIR/templates/hooks/install-skills.sh" "$TARGET_DIR"

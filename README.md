@@ -20,15 +20,12 @@ manual sync. The same hook installs the skills in `skills.txt` (among them
 the first turn: a skill installed mid-session is never invocable, because the
 roster froze at session start.
 
-Prerequisite: `jq` on `PATH`. Without it the skills still install, but the hook
-cannot report their status.
-
 In the consumer repo:
 
 1. Copy `templates/settings.json` to `.claude/settings.json` - wires the hook.
 2. Copy `templates/hooks/session-start.sh` to `.claude/hooks/session-start.sh`
    (keep it executable) - clones this repo fresh each session, refreshes the
-   generated files, then runs `templates/hooks/inject-agent-skills.sh` from
+   generated files, then runs `templates/hooks/install-skills.sh` from
    that fresh clone, which installs the skills in `skills.txt`. Only the thin bootstrap is copied, so the installer
    updates itself afterwards without consumers re-copying anything. A repo set
    up before it existed needs this one re-copy to get the skills at all.
