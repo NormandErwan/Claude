@@ -7,7 +7,7 @@ uploaded to claude.ai and what was last sent, and pins each fork against its ups
 `--check`. Its header lists what it checks; `.claude/hooks/test-check-skills.sh` tests it. `templates/hooks/check-skill-forks.sh` checks the upstream pins at session start.
 
 Columns:
-- `Source`: `native`; `fork of` `` `repo@path` ``; `skills.txt` `` `repo` `` (`` `repo@path` `` when
+- `Source`: `native` (written in this repo: the owner's own skills); `fork of` `` `repo@path` ``; `skills.txt` `` `repo` `` (`` `repo@path` `` when
   uploaded, for the upstream check); or the hook-cloned router.
 - `Web`: `yes` if uploaded to claude.ai. A skill `CLAUDE.web.md` cites must be `yes`.
 - `Sent version`, `Sent tree`: for an uploaded `skills/` skill, its `version:` and tree hash
@@ -18,7 +18,8 @@ Columns:
 Procedure:
 1. New skill in `skills/` or `skills.txt` -> add its row and decide `Web`.
 2. Uploaded `skills/` skill changed -> bump its version per `write-skill` semver. A zip already
-   sent is a release: a later edit bumps again before the next zip.
+   sent is a release: a later edit bumps again before the next zip. Several edits to an
+   uploaded skill -> review them first, then one bump, zip and push.
 3. Send the zip via `SendUserFile`, for re-upload to claude.ai. Update `Sent version` and
    `Sent tree` in the same commit.
 4. Session-start check reports an upstream move, or a manual recheck (public GitHub API or
