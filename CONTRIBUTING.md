@@ -11,7 +11,6 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
   that costs more than it returns is deleted, not compensated by another rule.
 - An outside skill compared with a rule of the same intent -> the rule counts as coverage only
   if its `PROVENANCE.md` row records a test; otherwise the skill stays a test candidate.
-- A rule that makes the agent ask for permission, confirmation, or clarification is deleted. Exception: `Behavior`'s structuring choices, laid out with options for the user to decide (owner: co-construct among the possibilities).
 - Every rule reads trigger -> action. It goes in the section of its domain: `Behavior` (every session, mirrored to the web copy), `Claude Code`, `Agents`, `Bootstrap`, `Retrospective` (code only).
 - Every `CLAUDE.md` change -> `craft-prompt` pass first: exact trigger and action, fewest words a
   reader can follow. Cut a word only if the reader loses nothing; one idea per sentence.
