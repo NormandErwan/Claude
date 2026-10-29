@@ -7,3 +7,4 @@ DietrichGebert/ponytail ponytail-audit ponytail-review
 anthropics/skills frontend-design
 juliusbrussee/caveman caveman caveman-commit
 mattpocock/skills code-review codebase-design domain-modeling grilling prototype research
+NormandErwan/claude-casebook write-hook write-skill
