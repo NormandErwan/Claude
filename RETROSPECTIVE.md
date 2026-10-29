@@ -2,6 +2,8 @@
 
 Ledger of Retrospective entries. One row per entry, approved or not. Filing: `CLAUDE.md` `Retrospective`. Processing: `CONTRIBUTING.md`. `Replaces` names the rule or clause an entry removes or subsumes; `-` marks a row filed before the field existed.
 
+`write-skill` and `write-hook` moved to [NormandErwan/claude-casebook](https://github.com/NormandErwan/claude-casebook) on 2026-10-29, with their history: a `skills/write-skill/` or `skills/write-hook/` path below now lives there under `plugins/<name>/skills/<name>/`.
+
 | Date | Events | Class | Proposed change | Replaces | Decision | Landed in |
 |---|---|---|---|---|---|---|
 | 2026-08-23 | new-preference | Per-turn self-reporting states a figure the harness does not expose | Report a real token figure or none, and key the handoff to a pause or a topic change rather than a token threshold | - | applied | `CLAUDE.md` Every turn 7, `CLAUDE.web.md` Every turn 6 |
