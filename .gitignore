@@ -20,8 +20,6 @@
 # When consumed as a .claude subtree, a blanket unignore here would also
 # unignore session-installed skill caches the consumer repo means to ignore.
 # Add two lines here for every new skill added under skills/ (push hook checks).
-!skills/write-hook/
-!skills/write-hook/**
 !skills/craft-prompt/
 !skills/craft-prompt/**
 !skills/find-cause/
@@ -74,9 +72,3 @@
 !skills/v-model-tests/**
 !skills/verify-sources/
 !skills/verify-sources/**
-!skills/write-skill/
-!skills/write-skill/**
-!skills/write-french/
-!skills/write-french/**
-!skills/write-guide/
-!skills/write-guide/**

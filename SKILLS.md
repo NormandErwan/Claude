@@ -64,10 +64,6 @@ slip through.
 | v-model-phase-amont | native | no | - | - | - |
 | v-model-tests | native | no | - | - | - |
 | verify-sources | native | yes | 1.5.2 | `b0f58f410a` | - |
-| write-french | native | yes | 1.4.3 | `add4646196` | - |
-| write-guide | native | no | - | - | - |
-| write-hook | native | no | - | - | - |
-| write-skill | native | yes | 2.4.1 | `4c6468e651` | - |
 | api-and-interface-design | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | browser-testing-with-devtools | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | ci-cd-and-automation | skills.txt `addyosmani/agent-skills` | no | - | - | - |
@@ -103,6 +99,10 @@ slip through.
 | grilling | skills.txt `mattpocock/skills@skills/productivity/grilling` | yes | upstream | - | `5beb35b040` |
 | prototype | skills.txt `mattpocock/skills` | no | - | - | - |
 | research | skills.txt `mattpocock/skills@skills/engineering/research` | yes | upstream | - | `5beb35b040` |
+| write-french | skills.txt `NormandErwan/claude-casebook@plugins/write-french/skills/write-french` | yes | upstream | - | `b379b31ea5` |
+| write-guide | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
+| write-hook | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
+| write-skill | skills.txt `NormandErwan/claude-casebook@plugins/write-skill/skills/write-skill` | yes | upstream | - | `b379b31ea5` |
 
 On claude.ai but not provided by this repo: brainstorming, find-skills.
 

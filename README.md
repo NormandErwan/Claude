@@ -4,6 +4,9 @@
 
 Natively-authored skills library for Claude Code.
 
+The reusable part - the casebook method and the `write-*` skills - lives in
+[NormandErwan/claude-casebook](https://github.com/NormandErwan/claude-casebook).
+
 ## Where a skill belongs
 
 A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLAUDE.md`
