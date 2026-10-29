@@ -37,16 +37,16 @@ run "non-push command" 0 "echo git push"
 
 # --- uploaded skills/ skill: version, tree, re-send (checks 3, 4)
 case_on version
-row_tree() { git rev-parse --short=10 HEAD:skills/verify-sources; }
-echo x >>skills/verify-sources/SKILL.md && commit edit
+row_tree() { git rev-parse --short=10 HEAD:skills/write-french; }
+echo x >>skills/write-french/SKILL.md && commit edit
 run "edit without bump" 2
-sed -i 's/^version: 1.5.2/version: 1.5.3/' skills/verify-sources/SKILL.md && commit bump
+sed -i 's/^version: 1.4.3/version: 1.4.4/' skills/write-french/SKILL.md && commit bump
 run "bump, row not updated" 2
-sed -i "s/| 1.5.2 | \`b0f58f410a\`/| 1.5.3 | \`$(row_tree)\`/" SKILLS.md && commit row
+sed -i "s/| 1.4.3 | \`add4646196\`/| 1.4.4 | \`$(row_tree)\`/" SKILLS.md && commit row
 run "row updated" 0
 git update-ref refs/remotes/origin/version HEAD
-echo y >>skills/verify-sources/SKILL.md && commit edit2
-sed -i "s/| 1.5.3 | \`[0-9a-f]*\`/| 1.5.3 | \`$(row_tree)\`/" SKILLS.md && commit row2
+echo y >>skills/write-french/SKILL.md && commit edit2
+sed -i "s/| 1.4.4 | \`[0-9a-f]*\`/| 1.4.4 | \`$(row_tree)\`/" SKILLS.md && commit row2
 run "re-sent zip, same version" 2
 
 # --- rows (checks 0, 1)
@@ -79,7 +79,7 @@ case_on web-typo
 sed -i 's/^| teach | \(.*\) | yes |/| teach | \1 | Yes |/' SKILLS.md && commit web-typo
 run "Web typo on uncited upload" 2
 case_on uncite
-sed -i 's/`verify-sources`/verify-sources/g' CLAUDE.web.md && commit uncite
+sed -i 's/`write-french`/write-french/g' CLAUDE.web.md && commit uncite
 run "uploaded skill no longer cited (allowed)" 0
 case_on web-yes-unsent
 sed -i 's/^| prevent-drift | native | no |/| prevent-drift | native | yes |/' SKILLS.md && commit web-yes
