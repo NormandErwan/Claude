@@ -82,7 +82,7 @@ case_on uncite
 sed -i 's/`write-french`/write-french/g' CLAUDE.web.md && commit uncite
 run "uploaded skill no longer cited (allowed)" 0
 case_on web-yes-unsent
-sed -i 's/^| prevent-drift | native | no |/| prevent-drift | native | yes |/' SKILLS.md && commit web-yes
+sed -i 's/^| token-dotnet | native | no |/| token-dotnet | native | yes |/' SKILLS.md && commit web-yes
 run "Web yes, never sent" 2
 case_on npx-no-path
 sed -i 's/^| prototype | skills.txt `mattpocock\/skills` | no |/| prototype | skills.txt `mattpocock\/skills` | yes |/' SKILLS.md && commit npx-yes
