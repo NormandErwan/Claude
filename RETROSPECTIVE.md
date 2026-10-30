@@ -2,7 +2,7 @@
 
 Ledger of Retrospective entries. One row per entry, approved or not. Filing: `CLAUDE.md` `Retrospective`. Processing: `CONTRIBUTING.md`. `Replaces` names the rule or clause an entry removes or subsumes; `-` marks a row filed before the field existed.
 
-`write-skill` and `write-hook` moved to [NormandErwan/claude-casebook](https://github.com/NormandErwan/claude-casebook) on 2026-10-29, with their history: a `skills/write-skill/` or `skills/write-hook/` path below now lives there under `plugins/<name>/skills/<name>/`.
+`write-skill` and `write-hook` moved to [NormandErwan/claude-casebook](https://github.com/NormandErwan/claude-casebook) on 2026-10-29, `find-cause` and `prevent-drift` on 2026-10-30, with their history: a `skills/<name>/` path below for one of them now lives there under `plugins/<name>/skills/<name>/`.
 
 | Date | Events | Class | Proposed change | Replaces | Decision | Landed in |
 |---|---|---|---|---|---|---|
@@ -123,3 +123,5 @@ Ledger of Retrospective entries. One row per entry, approved or not. Filing: `CL
 | 2026-10-28 | tool-blocked | Splitting a PR whose branch was already pushed: the force-push that would reset the branch was denied as destructive; the split went through new branches and a base retarget instead, and a merge run in the same command as its follow-up edits committed and pushed conflict markers | Split a pushed PR by new branches + base retarget, never a reset; run a merge alone and check for conflicts before any edit or commit | nothing | proposed | - |
 | 2026-10-28 | fact-corrected | Effort of work the agent itself will do quoted in human time, inflating the cost of an option and skewing the recommendation | Effort estimate for agent-run work -> state it in agent terms (tool calls, minutes of session), human time only for steps the owner does | nothing | proposed | - |
 | 2026-10-28 | tool-blocked | Creating a new repository through the GitHub integration returns 403: the session token can push to attached repos but not create one | Plan steps that create a repository -> ask the owner to create it empty first, then attach it with add_repo | nothing | proposed | - |
+| 2026-10-30 | tool-blocked | A session-start installer reports every install as failed without the error, so a single shared cause (here a half-written `npx` cache entry; clearing it fixed all) reads as many unrelated failures | `install-skills.sh`: on failure, print the first error line of one failed call, so the cause shows in the hook report | nothing | proposed | - |
+| 2026-10-30 | skill-gap | History extracted or rewritten from a shallow clone silently loses every commit past the clone depth: the boundary becomes parentless commits, with no warning | Before extracting or rewriting history -> `git rev-parse --is-shallow-repository`; `true` -> `git fetch --unshallow` first | nothing | proposed | - |
