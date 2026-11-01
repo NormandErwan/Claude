@@ -1,6 +1,6 @@
 ---
 description: "Fragile sequence: exact commands, no latitude"
-tags: ["command"]
+tags: ["behaviour", "command"]
 runs: 3
 model: "claude-opus-5-5"
 max_turns: 10

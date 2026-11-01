@@ -1,6 +1,6 @@
 ---
 description: "Delegation prompt: self-contained goal, scope and return format"
-tags: ["subagent"]
+tags: ["behaviour", "subagent"]
 runs: 3
 model: "claude-opus-5-5"
 max_turns: 10

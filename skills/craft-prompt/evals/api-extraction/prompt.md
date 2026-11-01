@@ -1,6 +1,6 @@
 ---
 description: "API extraction prompt: examples, exact schema, ambiguity rule"
-tags: ["catalogue"]
+tags: ["behaviour", "catalogue"]
 runs: 3
 model: "claude-opus-5-5"
 max_turns: 10

@@ -1,6 +1,6 @@
 ---
 description: "Tightening: cut what the model knows, keep exact parts verbatim"
-tags: ["concise"]
+tags: ["behaviour", "concise"]
 runs: 3
 model: "claude-opus-5-5"
 max_turns: 10

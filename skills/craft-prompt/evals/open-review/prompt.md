@@ -1,6 +1,6 @@
 ---
 description: "Open-ended task: heuristics, not a rigid script"
-tags: ["freedom"]
+tags: ["behaviour", "freedom"]
 runs: 3
 model: "claude-opus-5-5"
 max_turns: 10

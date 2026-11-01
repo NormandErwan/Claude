@@ -1,6 +1,6 @@
 ---
 description: "Hook message: one trigger-action item per condition, no tool tutorial"
-tags: ["structure"]
+tags: ["behaviour", "structure"]
 runs: 3
 model: "claude-opus-5-5"
 max_turns: 10

@@ -1,6 +1,6 @@
 ---
 description: "Discipline skill: firm wording and named excuses"
-tags: ["skill"]
+tags: ["behaviour", "skill"]
 runs: 3
 model: "claude-opus-5-5"
 max_turns: 10
