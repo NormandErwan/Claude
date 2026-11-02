@@ -1,5 +1,5 @@
 ---
-version: 2.0.0
+version: 2.0.1
 name: craft-prompt
 description: Use when writing or revising text another model reads - a CLAUDE.md rule, a skill, a slash command, a hook message, a subagent prompt, a system prompt, a reusable prompt template, or a prompt sent through an LLM API - or when such a prompt gives inconsistent or wrong outputs.
 ---
@@ -30,10 +30,6 @@ lists over prose for rules, steps, or conditions.
 
 - **One item per condition**, each stating the trigger and the action, or what is blocked
   and what to do instead.
-- **Compression must track freedom.** Exact content (trigger conditions, commands,
-  checklists, sequences) stays exact: compressing it into vague bullets destroys the
-  precision that makes it reliable. Judgment-based guidance can stay as terse prose or a
-  short list: it doesn't need a rigid checklist to work.
 - **Don't restate what Claude already knows.** No explanation of what git, a branch, JSON or
   a tool Claude already understands is (e.g. what `AskUserQuestion` does): the reader is a
   model that knows them.
