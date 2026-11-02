@@ -6,12 +6,12 @@ description: Use when writing or revising text another model reads - a CLAUDE.md
 
 # Craft Prompt
 
-Covers only what evaluations showed Claude skips without this skill. Everything else about
-prompt writing, Claude already does: do not pad a prompt with it.
+Covers what Claude skips without this skill. Everything else about prompt writing, Claude
+already does: do not pad a prompt with it.
 
 ## Prompts run in production (LLM API, templates)
 
-A prompt that processes inputs nobody reviews one by one needs all four:
+A prompt that processes inputs nobody reviews one by one needs all three:
 
 - **A worked example.** At least one input with its exact expected output. Pick it from the
   hard cases (messy, multilingual, several items), never a clean one: "Show, Don't Tell:
@@ -22,8 +22,6 @@ A prompt that processes inputs nobody reviews one by one needs all four:
 - **A rule for each edge case the input can produce.** None, several, ambiguous, malformed:
   state the output for each, such as an empty list, one entry per item, or a review flag.
   "No error handling: Assuming outputs will always be well-formed" is a named pitfall [1].
-- **A test set.** Run it on diverse, representative inputs before shipping [1], then change
-  one thing at a time.
 
 ## Rules an agent reads (CLAUDE.md, hooks, skills, commands)
 

@@ -5,8 +5,9 @@ Licence texts are in `LICENSES/`. Everything not listed here is original to this
 
 Versions up to 1.1.0 were a renamed copy of NeoLabHQ/context-engineering-kit's
 `prompt-engineering` (GPL-3.0). 2.0.0 was rebuilt without that text: what it kept was chosen
-by evaluation (`evals/`), and no line of the NeoLab skill or of Anthropic's documentation is
-reproduced.
+by evaluation (`evals/`), and no text whose only source is the NeoLab skill or Anthropic's
+documentation is reproduced. The one line it shares with the NeoLab skill is wshobson's
+(MIT), cited below.
 
 ---
 
@@ -15,9 +16,9 @@ reproduced.
 - **URL:** https://github.com/wshobson/agents/tree/main/plugins/llm-application-dev/skills/prompt-engineering-patterns
   (`511f834`, 2026-07-07)
 - **License:** MIT, Copyright (c) 2024 Seth Hobson - `LICENSES/MIT-wshobson-agents.txt`
-- **Used for:** the four quoted phrases marked `[1]` in `SKILL.md` ("Show, Don't Tell",
-  "Example pollution", "No error handling", "Test Extensively"), from its Best Practices and
-  Common Pitfalls lists.
+- **Used for:** the three quoted phrases marked `[1]` in `SKILL.md` ("Show, Don't Tell",
+  "Example pollution", "No error handling"), from its Best Practices and Common Pitfalls
+  lists.
 
 ---
 
