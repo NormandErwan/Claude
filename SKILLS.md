@@ -39,7 +39,6 @@ slip through.
 
 | Skill | Source | Web | Sent version | Sent tree | Upstream commit |
 |---|---|---|---|---|---|
-| craft-prompt | native | yes | 2.0.1 | `358ca8776f` | - |
 | grill-with-docs | fork of `mattpocock/skills@skills/engineering/grill-with-docs` | no | - | - | `5beb35b040` |
 | guide-decision | native | yes | 1.1.0 | `2ee6133ad3` | - |
 | guide-purchase | native | yes | 1.1.0 | `8f10c06aa7` | - |
@@ -102,6 +101,7 @@ slip through.
 | find-cause | skills.txt `NormandErwan/claude-casebook@plugins/find-cause/skills/find-cause` | yes | upstream | - | `8515bfe53c` |
 | prevent-drift | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
 | write-hook | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
+| write-prompt | skills.txt `NormandErwan/claude-casebook@plugins/write-prompt/skills/write-prompt` | yes | upstream | - | `f0ae7f7a62` |
 | write-skill | skills.txt `NormandErwan/claude-casebook@plugins/write-skill/skills/write-skill` | yes | upstream | - | `304e76b7a0` |
 
 On claude.ai but not provided by this repo: brainstorming, find-skills.
@@ -111,11 +111,9 @@ true` line, plus a `version:` line on handoff and teach. handoff also replaces t
 directory with a save location per surface (scratchpad, temp directory, or a download on
 claude.ai).
 
-craft-prompt: native since 2.0.0, rebuilt from MIT sources (wshobson/agents
-`prompt-engineering-patterns`, obra/superpowers `persuasion-principles.md`) and the owner's own
-sections; its `SOURCES.md` lists what came from where. Up to 1.1.0 it was a fork of
-`neolabhq/context-engineering-kit`'s `prompt-engineering` (GPL-3.0). What 2.0.0 keeps was chosen
-by `evals/`: a section stays only where Opus fails without it.
+write-prompt: was `craft-prompt` here, a fork of `neolabhq/context-engineering-kit`'s
+`prompt-engineering` (GPL-3.0), up to 1.1.0. Rebuilt from MIT sources and evals (PR#110), then
+moved to NormandErwan/claude-casebook as the `write-prompt` plugin at 2.0.0.
 
 `addyosmani/agent-skills` is installed skill by skill, as its `docs/getting-started.md` asks
 for hosts that route skills natively: no `using-agent-skills` router. `install-skills.sh` also

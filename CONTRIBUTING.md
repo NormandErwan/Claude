@@ -12,7 +12,7 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 - An outside skill compared with a rule of the same intent -> the rule counts as coverage only
   if its `PROVENANCE.md` row records a test; otherwise the skill stays a test candidate.
 - Every rule reads trigger -> action. It goes in the section of its domain: `Behavior` (every session, mirrored to the web copy), `Claude Code`, `Agents`, `Bootstrap`, `Retrospective` (code only).
-- Every `CLAUDE.md` change -> `craft-prompt` pass first: exact trigger and action, fewest words a
+- Every `CLAUDE.md` change -> `write-prompt` pass first: exact trigger and action, fewest words a
   reader can follow. Cut a word only if the reader loses nothing; one idea per sentence.
 - A rule or example about phrasing is read against itself: does it break the rule it states?
 - A rewrite of existing rules -> check each rule survives with its meaning, re-verify every
