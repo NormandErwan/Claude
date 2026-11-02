@@ -39,7 +39,7 @@ slip through.
 
 | Skill | Source | Web | Sent version | Sent tree | Upstream commit |
 |---|---|---|---|---|---|
-| craft-prompt | native | yes | 2.0.0 | `842bd1f505` | - |
+| craft-prompt | native | yes | 2.0.1 | `358ca8776f` | - |
 | grill-with-docs | fork of `mattpocock/skills@skills/engineering/grill-with-docs` | no | - | - | `5beb35b040` |
 | guide-decision | native | yes | 1.1.0 | `2ee6133ad3` | - |
 | guide-purchase | native | yes | 1.1.0 | `8f10c06aa7` | - |
