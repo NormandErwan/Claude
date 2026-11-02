@@ -101,7 +101,7 @@ slip through.
 | find-cause | skills.txt `NormandErwan/claude-casebook@plugins/find-cause/skills/find-cause` | yes | upstream | - | `8515bfe53c` |
 | prevent-drift | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
 | write-hook | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
-| write-prompt | skills.txt `NormandErwan/claude-casebook@plugins/write-prompt/skills/write-prompt` | yes | upstream | - | `f0ae7f7a62` |
+| write-prompt | skills.txt `NormandErwan/claude-casebook@plugins/write-prompt/skills/write-prompt` | yes | upstream | - | `c8e39e8ab4` |
 | write-skill | skills.txt `NormandErwan/claude-casebook@plugins/write-skill/skills/write-skill` | yes | upstream | - | `304e76b7a0` |
 
 On claude.ai but not provided by this repo: brainstorming, find-skills.
