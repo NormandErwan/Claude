@@ -39,7 +39,7 @@ slip through.
 
 | Skill | Source | Web | Sent version | Sent tree | Upstream commit |
 |---|---|---|---|---|---|
-| craft-prompt | fork of `neolabhq/context-engineering-kit@skills/prompt-engineering` | yes | 1.1.0 | `0409d80892` | `23e2428e80` |
+| craft-prompt | native | yes | 2.0.0 | `842bd1f505` | - |
 | grill-with-docs | fork of `mattpocock/skills@skills/engineering/grill-with-docs` | no | - | - | `5beb35b040` |
 | guide-decision | native | yes | 1.1.0 | `2ee6133ad3` | - |
 | guide-purchase | native | yes | 1.1.0 | `8f10c06aa7` | - |
@@ -111,12 +111,11 @@ true` line, plus a `version:` line on handoff and teach. handoff also replaces t
 directory with a save location per surface (scratchpad, temp directory, or a download on
 claude.ai).
 
-craft-prompt: a straight copy of `neolabhq/context-engineering-kit`'s `prompt-engineering`,
-renamed. Local divergences: a "Match structure to signal density" section; the persuasion
-principles moved to `references/persuasion-principles.md` (500-line limit); no fixed context
-window size; TaskCreate in place of TodoWrite. Reservation:
-the only exact structural match found on skills.sh among several `prompt-engineering` variants,
-not independently confirmed as the original author.
+craft-prompt: native since 2.0.0, rebuilt from MIT sources (wshobson/agents
+`prompt-engineering-patterns`, obra/superpowers `persuasion-principles.md`) and the owner's own
+sections; its `SOURCES.md` lists what came from where. Up to 1.1.0 it was a fork of
+`neolabhq/context-engineering-kit`'s `prompt-engineering` (GPL-3.0). What 2.0.0 keeps was chosen
+by `evals/`: a section stays only where Opus fails without it.
 
 `addyosmani/agent-skills` is installed skill by skill, as its `docs/getting-started.md` asks
 for hosts that route skills natively: no `using-agent-skills` router. `install-skills.sh` also
