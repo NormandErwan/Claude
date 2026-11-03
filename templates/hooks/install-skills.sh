@@ -43,7 +43,10 @@ while read -r repo skills; do
   args=()
   for s in $skills; do args+=(-s "$s"); expected+=("$s"); done
   mkdir -p "$STAGING/$i"
-  (cd "$STAGING/$i" && ${CAP[@]+"${CAP[@]}"} npx -y skills add "$repo" "${args[@]}" -a claude-code -y </dev/null >/dev/null 2>&1) &
+  echo "$repo $skills" >"$STAGING/$i.call"
+  # Output kept: a failure must show its cause (one cache fault once read as many).
+  (cd "$STAGING/$i" && ${CAP[@]+"${CAP[@]}"} npx -y skills add "$repo" "${args[@]}" -a claude-code -y </dev/null >"$STAGING/$i.log" 2>&1
+    echo $? >"$STAGING/$i.rc") &
   i=$((i + 1))
 done <"$MANIFEST"
 # agent-skills skills link ../../references/*.md; npx copies skill dirs only
@@ -80,6 +83,25 @@ if [ ${#missing[@]} -eq 0 ]; then
   echo "skills.txt: ${#expected[@]} skills installed."
 else
   echo "skills.txt: ${#missing[@]} of ${#expected[@]} skills failed to install: ${missing[*]}. See CLAUDE.md Bootstrap 3."
+  # Per failed call: exit code + first error-looking line, else its last line.
+  for c in "$STAGING"/*.call; do
+    n=${c%.call}
+    read -r crepo cskills <"$c"
+    for s in $cskills; do
+      [ -f "$n/.claude/skills/$s/SKILL.md" ] && continue
+      rc=$(cat "$n.rc" 2>/dev/null || echo "?")
+      # npx redraws a spinner: strip escapes, split on redraws, keep real lines.
+      clean=$(sed 's/\x1b\[[0-9;?]*[a-zA-Z]//g; s/\r/\n/g' "$n.log" 2>/dev/null | grep -av '^[[:space:]|]*$')
+      if [ "$rc" = 124 ]; then
+        line="timed out after ${CAP[1]:-?}s"
+      else
+        line=$(grep -aiE -m1 'error|fail|ENOTFOUND|EAI_AGAIN|ECONN|no valid skills' <<<"$clean")
+        [ -n "$line" ] || line=$(tail -1 <<<"$clean")
+      fi
+      echo "Failed call: $crepo (exit $rc): ${line:-no output}" | cut -c1-300
+      break
+    done
+  done
 fi
 [ -n "${refs:-}" ] || echo "agent-skills references/ not cloned: skills' ../../references links are dead this session."
 [ ${#hidden[@]} -eq 0 ] || echo "skills.txt: hidden by disable-model-invocation: ${hidden[*]} - fork per CLAUDE.md Bootstrap 2."
