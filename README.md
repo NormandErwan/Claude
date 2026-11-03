@@ -61,7 +61,7 @@ In the consumer repo:
 
    | Need | `skills.txt` line |
    |---|---|
-   | .NET/C#/Blazor work | `aaronontheweb/dotnet-skills <skill>...` - name the skills you need (e.g. `csharp-coding-standards efcore-patterns`), a line with no skill name is skipped; `token-dotnet` is already synced with `skills/`, just reference it for search patterns |
+   | .NET/C#/Blazor work | `aaronontheweb/dotnet-skills <skill>...` - name the skills you need (e.g. `csharp-coding-standards efcore-patterns`), a line with no skill name is skipped |
    | Web/frontend design work | `anthropics/skills frontend-design`, `arvindrk/extract-design-system extract-design-system` and `vercel-labs/agent-skills web-design-guidelines` |
    | Test design with 3+ combinable parameters | `omkamal/pypict-claude-skill pict-test-designer` |
    | Parallel/sub-agent orchestration | `obra/superpowers dispatching-parallel-agents subagent-driven-development` |
