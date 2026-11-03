@@ -66,7 +66,7 @@ current=$(rows <<<"$table")
 cited=$(git show HEAD:CLAUDE.web.md | grep -o '`[a-z][a-z-]*`' | tr -d '`' | sort -u)
 # skills.txt line: <upstream repo> <skill>...
 listed=$(git show HEAD:skills.txt 2>/dev/null | grep -v '^#' | cut -d' ' -f2- | tr ' ' '\n')
-# skills/ entries holding a SKILL.md (skills/v-model holds only shared docs)
+# skills/ entries holding a SKILL.md
 dirs=$(git ls-tree --name-only HEAD skills/ | while read -r d; do
   git cat-file -e "HEAD:$d/SKILL.md" 2>/dev/null && echo "${d#skills/}"; done)
 

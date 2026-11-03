@@ -49,17 +49,6 @@ slip through.
 | token-codebase-exploration | native | yes | 1.3.0 | `e0d147006e` | - |
 | token-dotnet | native | no | - | - | - |
 | token-file-ops | native | yes | 1.5.0 | `9967313b04` | - |
-| v-model-documents | native | no | - | - | - |
-| v-model-equipe | native | no | - | - | - |
-| v-model-gestion | native | no | - | - | - |
-| v-model-guide | native | no | - | - | - |
-| v-model-implementation | native | no | - | - | - |
-| v-model-niveau-1 | native | no | - | - | - |
-| v-model-niveau-2 | native | no | - | - | - |
-| v-model-niveau-3 | native | no | - | - | - |
-| v-model-niveau-4 | native | no | - | - | - |
-| v-model-phase-amont | native | no | - | - | - |
-| v-model-tests | native | no | - | - | - |
 | verify-sources | native | yes | 1.5.2 | `b0f58f410a` | - |
 | write-french | native | yes | 1.4.3 | `add4646196` | - |
 | write-guide | native | no | - | - | - |
