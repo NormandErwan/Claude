@@ -88,7 +88,7 @@ case_on npx-no-path
 sed -i 's/^| prototype | skills.txt `mattpocock\/skills` | no |/| prototype | skills.txt `mattpocock\/skills` | yes |/' SKILLS.md && commit npx-yes
 run "uploaded skills.txt skill without repo@path" 2
 case_on not-uploaded
-echo x >>skills/token-dotnet/SKILL.md && commit not-uploaded
+echo x >>skills/write-guide/SKILL.md && commit not-uploaded
 run "edit to a Web no skill" 0
 
 # --- .gitignore (check 6)
