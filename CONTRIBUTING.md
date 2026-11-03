@@ -22,7 +22,8 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 ## Testing a rule change
 
 - A change to always-on behavior, or to a rule gating push, PR, or deletion, gets an A/B test
-  before merging. Other changes: name how the effect will be observed. An observation counts only
+  before merging. Other changes: name how the effect will be observed, and file a `test-run`
+  row in `RETROSPECTIVE.md` with the criterion and its horizon (e.g. next 5 sessions). An observation counts only
   when the owner can judge the outcome by reading the reply, without taking the case apart;
   otherwise A/B test.
 - The owner waives a test -> record the waiver and its reason in the rule's `PROVENANCE.md` row.
