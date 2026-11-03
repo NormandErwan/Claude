@@ -89,7 +89,6 @@ slip through.
 | interview-me | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | ponytail-audit | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
 | ponytail-review | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
-| frontend-design | skills.txt `anthropics/skills` | no | - | - | - |
 | caveman | skills.txt `juliusbrussee/caveman` | no | - | - | - |
 | caveman-commit | skills.txt `juliusbrussee/caveman` | no | - | - | - |
 | code-review | skills.txt `mattpocock/skills` | no | - | - | - |
