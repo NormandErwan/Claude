@@ -3,7 +3,8 @@
 # the Skill roster freezes, plus this repo's own skills/ (forks included).
 # Reads this repo's skills.txt and a consumer's $CLAUDE_PROJECT_DIR/skills.txt.
 # One npx call per upstream repo, all in parallel: 4 calls take ~4s, 14
-# one-skill calls took ~31s. Per-call cap stays under the hook timeout.
+# one-skill calls took ~31s. Per-call cap 45s: a 25s cap timed out shallow
+# clones on a slow proxy (2026-11-03); command hooks default to 600s.
 #
 # $1 - .claude directory to install into
 #
@@ -28,7 +29,7 @@ fi
 
 # No `timeout` on stock macOS: run uncapped there.
 CAP=()
-command -v timeout >/dev/null 2>&1 && CAP=(timeout 25)
+command -v timeout >/dev/null 2>&1 && CAP=(timeout 45)
 
 # npx writes skills-lock.json to its cwd: stage aside, copy skills only.
 STAGING=$(mktemp -d)
