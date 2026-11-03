@@ -48,17 +48,6 @@ slip through.
 | teach | fork of `mattpocock/skills@skills/productivity/teach` | yes | 1.1.0 | `c6c8287ecf` | `5beb35b040` |
 | token-codebase-exploration | native | no | - | - | - |
 | token-file-ops | native | no | - | - | - |
-| v-model-documents | native | no | - | - | - |
-| v-model-equipe | native | no | - | - | - |
-| v-model-gestion | native | no | - | - | - |
-| v-model-guide | native | no | - | - | - |
-| v-model-implementation | native | no | - | - | - |
-| v-model-niveau-1 | native | no | - | - | - |
-| v-model-niveau-2 | native | no | - | - | - |
-| v-model-niveau-3 | native | no | - | - | - |
-| v-model-niveau-4 | native | no | - | - | - |
-| v-model-phase-amont | native | no | - | - | - |
-| v-model-tests | native | no | - | - | - |
 | verify-sources | native | yes | 1.5.2 | `b0f58f410a` | - |
 | write-french | native | yes | 1.4.3 | `add4646196` | - |
 | write-guide | native | no | - | - | - |
@@ -88,7 +77,6 @@ slip through.
 | interview-me | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | ponytail-audit | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
 | ponytail-review | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
-| frontend-design | skills.txt `anthropics/skills` | no | - | - | - |
 | caveman | skills.txt `juliusbrussee/caveman` | no | - | - | - |
 | caveman-commit | skills.txt `juliusbrussee/caveman` | no | - | - | - |
 | code-review | skills.txt `mattpocock/skills` | no | - | - | - |
