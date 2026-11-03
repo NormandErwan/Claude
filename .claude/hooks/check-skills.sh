@@ -17,6 +17,7 @@
 #   4. uploaded skills/ skill: re-sent zip (tree moved since last push) has a new version
 #   5. uploaded skills.txt skill: row has `repo@path` + upstream pin
 #   6. no SKILL.md under skills/ ignored by .gitignore (would never be committed)
+#   7. no merge conflict markers in any committed file
 # Not checked: upstream moves (needs network) - templates/hooks/check-skill-forks.sh
 # reports them at session start.
 #
@@ -103,6 +104,11 @@ done
 # 6. SKILL.md ignored by git: its dir lacks the two .gitignore allowlist lines
 ignored=$(git ls-files --others --ignored --exclude-standard -- 'skills/*/SKILL.md' | cut -d/ -f2 | sort -u)
 for name in $ignored; do errors+=("skills/$name: ignored by git - add its two .gitignore lines"); done
+
+# 7. merge conflict markers committed (a merge chained with later edits pushed them once)
+for f in $(git grep -lE '^(<<<<<<<|>>>>>>>)( |$)' HEAD -- . 2>/dev/null | cut -d: -f2-); do
+  errors+=("$f: merge conflict markers - resolve the merge, commit, push again")
+done
 
 # baseline for check 4: last pushed state of this branch, else main
 branch=$(git rev-parse --abbrev-ref HEAD)
