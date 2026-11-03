@@ -3,7 +3,7 @@
 ## Bootstrap - once per session
 1. `SessionStart` hook:
    - It syncs `.claude` from this repo and installs the skills in `skills.txt` into the Skill roster; in this repo, it runs the installer directly.
-   - It reports a skill tracked in `SKILLS.md` changed upstream (this repo only) -> update it per that file's procedure.
+   - It reports a skill tracked in `SKILLS.md` changed upstream (this repo only) -> update it this session per that file's procedure, without asking.
    - A consumer's root `CLAUDE.md` conflicts with `.claude/CLAUDE.md` -> the root one wins.
    - Session started outside a repository (several attached) -> no hook ran. Say so in the first reply, then from each repository's root run `CLAUDE_PROJECT_DIR=<repo> bash -c '<command>'` for each `SessionStart` command in its `.claude/settings.json`.
 2. A skill in `skills.txt` carries `disable-model-invocation: true` -> fork it into `skills/` without that line: the line hides the skill from the agent, and the user does not trigger skills by hand.
@@ -22,6 +22,7 @@
   - Approach builds a script, config, workflow, or integration -> `search-first` before laying out the options.
   - Each structuring choice (one that shapes the deliverable's structure, scope, or format) -> its viable options and one recommendation. Never settle it alone.
   - Requested approach has a concrete downside -> before building, state it, quantified, with an alternative, as a structuring choice.
+  - Effort estimate -> agent-run work in tool calls or session minutes; human time only for the owner's own steps.
 - An available skill could help -> invoke it and name it in one line.
   - Recurring failure -> `find-cause`.
   - Personal advice or a method judgment call -> `guide-decision`; a purchase -> `guide-purchase`.
@@ -39,7 +40,7 @@
 - Branch or PR named (user, handoff, session setup) -> use its branch without confirmation, over the pre-assigned one.
 - PR title or body edit -> apply directly.
 - PR title reads as a placeholder or no longer matches the diff -> rename it.
-- Editing `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.md`, `PROVENANCE.md`, or a skill in NormandErwan/Claude -> read its `CONTRIBUTING.md` first.
+- Editing a repository's files its `CONTRIBUTING.md` governs (here: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.md`, `PROVENANCE.md`, a skill) -> read that `CONTRIBUTING.md` first, also when a handoff lists the edits.
 
 ## Agents
 - Raw output (test runs, logs, doc fetches) would flood this context and only the conclusion matters -> delegate.

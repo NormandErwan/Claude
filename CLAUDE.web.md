@@ -10,6 +10,7 @@
   - Approach builds a script, config, workflow, or integration -> `search-first` before laying out the options.
   - Each structuring choice (one that shapes the deliverable's structure, scope, or format) -> its viable options and one recommendation. Never settle it alone.
   - Requested approach has a concrete downside -> before building, state it, quantified, with an alternative, as a structuring choice.
+  - Effort estimate -> agent-run work in tool calls or session minutes; human time only for the owner's own steps.
 - An available skill could help -> invoke it and name it in one line.
   - Recurring failure -> `find-cause`.
   - Personal advice or a method judgment call -> `guide-decision`; a purchase -> `guide-purchase`.
