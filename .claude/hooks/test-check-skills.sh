@@ -62,10 +62,10 @@ mkdir -p skills/new-skill && printf -- '---\nname: new-skill\n---\n' >skills/new
 printf '!skills/new-skill/\n!skills/new-skill/**\n' >>.gitignore && commit new
 run "new skills/ skill without row" 2
 case_on new-npx
-sed -i 's/^anthropics\/skills frontend-design/& pdf/' skills.txt && commit npx-add
+sed -i 's/^DietrichGebert\/ponytail .*/& pdf/' skills.txt && commit npx-add
 run "new skills.txt skill without row" 2
 case_on rm-npx
-sed -i 's/^anthropics\/skills frontend-design$//' skills.txt && commit npx-rm
+sed -i 's/ ponytail-audit//' skills.txt && commit npx-rm
 run "row left for removed skills.txt skill" 2
 case_on header
 sed -i 's/| Sent tree |/| Tree |/' SKILLS.md && commit header
