@@ -35,6 +35,31 @@ command -v timeout >/dev/null 2>&1 && CAP=(timeout 45)
 STAGING=$(mktemp -d)
 trap 'rm -rf "$STAGING" "$MANIFEST"' EXIT
 
+# Fast path: skills.sh serves one skill as JSON {files: [{path, contents}]},
+# ~1s vs a 35-60s full clone through the session proxy. Undocumented (read in
+# the `skills` CLI source, which uses it for a few owners only): any failure
+# falls back to npx for the whole repo. SKILLS_DOWNLOAD_URL overrides the base
+# (same variable as the CLI).
+UNPACK='import json, os, sys
+d = json.load(open(sys.argv[1]))
+files = d.get("files") or []
+if not any(f.get("path") == "SKILL.md" for f in files): sys.exit(1)
+root = os.path.realpath(sys.argv[2])
+for f in files:
+    out = os.path.realpath(os.path.join(root, f["path"]))
+    if not out.startswith(root + os.sep): sys.exit(1)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    open(out, "w").write(f["contents"])'
+api_fetch() { # <repo> <dest skills dir> <skill>...
+  local repo=$1 dest=$2 s
+  mkdir -p "$dest"
+  shift 2
+  for s in "$@"; do
+    curl -fsS --retry 2 --max-time 20 "${SKILLS_DOWNLOAD_URL:-https://skills.sh}/api/download/$repo/$s" -o "$dest.$s.json" 2>/dev/null &&
+      python3 -I -c "$UNPACK" "$dest.$s.json" "$dest/$s" || return 1
+  done
+}
+
 expected=()
 i=0
 while read -r repo skills; do
@@ -46,14 +71,27 @@ while read -r repo skills; do
   mkdir -p "$STAGING/$i"
   echo "$repo $skills" >"$STAGING/$i.call"
   # Output kept: a failure must show its cause (one cache fault once read as many).
-  (cd "$STAGING/$i" && ${CAP[@]+"${CAP[@]}"} npx -y skills add "$repo" "${args[@]}" -a claude-code -y </dev/null >"$STAGING/$i.log" 2>&1
-    echo $? >"$STAGING/$i.rc") &
+  (if api_fetch "$repo" "$STAGING/$i/.claude/skills" $skills; then
+    echo 0 >"$STAGING/$i.rc"
+  else
+    rm -rf "$STAGING/$i/.claude"
+    cd "$STAGING/$i" && ${CAP[@]+"${CAP[@]}"} npx -y skills add "$repo" "${args[@]}" -a claude-code -y </dev/null >"$STAGING/$i.log" 2>&1
+    echo $? >"$STAGING/$i.rc"
+  fi) &
   i=$((i + 1))
 done <"$MANIFEST"
-# agent-skills skills link ../../references/*.md; npx copies skill dirs only
-# (upstream #361). Clone the pack's references/ beside skills/.
-(${CAP[@]+"${CAP[@]}"} git clone --depth 1 --quiet https://github.com/addyosmani/agent-skills.git "$STAGING/refs" </dev/null >/dev/null 2>&1) &
 wait
+# agent-skills skills link ../../references/*.md, which neither path copies
+# (upstream #361): fetch the linked files raw (404 = dead upstream link),
+# else clone the pack.
+refs_raw=$(cat "$STAGING"/*/.claude/skills/*/SKILL.md 2>/dev/null | grep -o 'references/[A-Za-z0-9._-]*\.md' | sort -u)
+for r in $refs_raw; do
+  mkdir -p "$STAGING/refs/references"
+  curl -fsS --retry 2 --max-time 20 "https://raw.githubusercontent.com/addyosmani/agent-skills/HEAD/$r" -o "$STAGING/refs/$r" 2>/dev/null &
+done
+wait
+ls "$STAGING"/refs/references/*.md >/dev/null 2>&1 ||
+  ${CAP[@]+"${CAP[@]}"} git clone --depth 1 --quiet https://github.com/addyosmani/agent-skills.git "$STAGING/refs" </dev/null >/dev/null 2>&1
 if [ -d "$STAGING/refs/references" ]; then
   rm -rf "$TARGET_DIR/references"
   cp -r "$STAGING/refs/references" "$TARGET_DIR/references"
