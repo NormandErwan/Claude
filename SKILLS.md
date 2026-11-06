@@ -49,7 +49,7 @@ slip through.
 | token-codebase-exploration | native | no | - | - | - |
 | token-file-ops | native | no | - | - | - |
 | verify-sources | native | yes | 1.5.2 | `b0f58f410a` | - |
-| write-french | native | yes | 1.4.3 | `add4646196` | - |
+| write-french | native | yes | 1.4.4 | `3458346f09` | - |
 | write-guide | native | no | - | - | - |
 | api-and-interface-design | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | browser-testing-with-devtools | skills.txt `addyosmani/agent-skills` | no | - | - | - |

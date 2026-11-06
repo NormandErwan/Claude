@@ -11,6 +11,7 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
   that costs more than it returns is deleted, not compensated by another rule.
 - An outside skill compared with a rule of the same intent -> the rule counts as coverage only
   if its `PROVENANCE.md` row records a test; otherwise the skill stays a test candidate.
+- An owner quote turned into a rule -> state whether it holds beyond the material it was said about. Unclear -> apply it to that material only, and offer the general rule as a structuring choice.
 - Every rule reads trigger -> action. It goes in the section of its domain: `Behavior` (every session, mirrored to the web copy), `Claude Code`, `Agents`, `Bootstrap`, `Retrospective` (code only).
 - Every `CLAUDE.md` change -> `write-prompt` pass first: exact trigger and action, fewest words a
   reader can follow. Cut a word only if the reader loses nothing; one idea per sentence.
@@ -21,7 +22,8 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 ## Testing a rule change
 
 - A change to always-on behavior, or to a rule gating push, PR, or deletion, gets an A/B test
-  before merging. Other changes: name how the effect will be observed. An observation counts only
+  before merging. Other changes: name how the effect will be observed, and file a `test-run`
+  row in `RETROSPECTIVE.md` with the criterion and its horizon (e.g. next 5 sessions). An observation counts only
   when the owner can judge the outcome by reading the reply, without taking the case apart;
   otherwise A/B test.
 - The owner waives a test -> record the waiver and its reason in the rule's `PROVENANCE.md` row.
@@ -42,6 +44,7 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 
 - Processing `proposed` entries -> read the whole ledger first. An entry whose class matches a
   prior one goes to `find-cause`, not to a re-extension of the same rule.
+- An entry needing an owner decision -> recall its incident and the rule in force, then its options and one recommendation.
 - A premise about the origin session the ledger cannot confirm -> mark it `not checkable here`.
 - A rule that only fires on one session's tool, file, or wording is out of scope.
 - `applied` cites the PR carrying the change (`applied - PR#<n>`). An entry filed from another
