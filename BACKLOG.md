@@ -1,37 +1,6 @@
 # Backlog
 
-Work not done yet. One task = one `###` section under `## Tasks`, written as a short handoff: a
-fresh session can start from it alone.
-
-## Rules
-
-- Add a task -> work deferred, discovered mid-session, or beyond the session's scope. Not for a
-  question or an edit done now.
-- Before adding -> search this file; a matching task gets extended, not duplicated.
-- Title -> imperative, unique: it is the task's key.
-- Size -> one task fits one PR. Larger -> several tasks linked by `Blocked by`.
-- Content -> behavior and decisions, not file paths or line numbers (they go stale). Link
-  artifacts (PR, doc, `RETROSPECTIVE.md` row) instead of copying them. No implementation plan:
-  the session doing the work writes it.
-- No task named -> take the first `ready` one, top to bottom, whose `Blocked by` tasks are gone.
-- Start a task -> set `Status: in progress (<branch>)`.
-- Task done -> delete its section in the PR that does the work; the PR body carries the summary.
-- Task dropped -> delete its section; the commit message gives the reason.
-- Any edit here -> commit it with the session's work: an uncommitted edit dies with a cloud
-  container.
-
-## Format
-
-```
-### <Imperative title>
-Status: ready | in progress (<branch>) | blocked: <reason> | needs owner: <decision>
-Blocked by: <task title>                 (omit when none)
-Context: why, what is settled, links. 2-4 lines.
-Next: the first concrete step.
-Done when:
-- [ ] <testable criterion>
-Out of scope: <what not to touch>        (omit when none)
-```
+Work not done yet, one `###` section per task. Format and rules: the `backlog` skill.
 
 ## Tasks
 

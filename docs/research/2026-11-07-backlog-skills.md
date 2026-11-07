@@ -171,23 +171,22 @@ todo.txt, a sectioned `BACKLOG.md` with an archive file):
 The Backlog.md pilot (PR #119, PR #120) proved too heavy for one owner: a file per task, a
 frontmatter often longer than the task, and a session per subtask. Replaced by one root
 `BACKLOG.md`, one section per task written as a short handoff, deleted once done (no archive:
-the PR and git history keep the trace). Format and rules live in the file's header; no rule
-creates the file in a repo that lacks it.
+the PR and git history keep the trace). Format and rules live in the native `backlog` skill: a
+consumer repo receives this repo's `CLAUDE.md` and `skills/`, never its `BACKLOG.md`.
 
 Kept from the pilot and from mattpocock's tracker skills (`to-tickets`, `triage` and its
-`AGENT-BRIEF.md`, `issue-tracker-local.md`), as header rules:
+`AGENT-BRIEF.md`, `issue-tracker-local.md`), as skill rules:
 - One task fits one PR; larger work splits into tasks linked by `Blocked by` (Backlog.md size
   test, Pocock blocking edges).
 - Search before adding; no implementation plan at creation (Backlog.md guides).
 - Behavior and decisions, not file paths or line numbers; testable done criteria; explicit out
   of scope (Pocock agent brief).
-- Next task: first `ready` one whose blockers are gone, top to bottom (Pocock frontier);
-  `needs owner` status (Pocock `ready-for-human`).
+- `needs owner` status (Pocock `ready-for-human`).
 - Commit task edits with the session's work (cloud containers are ephemeral; implication 10
   of `2026-11-07-backlog-md-usage.md`).
 
 Dropped: sequential ids (collided across sessions in the TASK-1.2 test; the title is the key),
 per-task definition of done (repo checks and reviews are already `CLAUDE.md` rules), claims
 pushed before work (cross-branch claims need a push per status change; the owner names the task
-instead), the tool install. Not adopted yet: Pocock's `.out-of-scope/` record of rejected
+instead), Pocock's frontier (take the first ready task: the owner names tasks), the tool install. Not adopted yet: Pocock's `.out-of-scope/` record of rejected
 requests; a dropped task's reason goes in the commit message.
