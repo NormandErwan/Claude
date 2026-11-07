@@ -4,7 +4,7 @@ title: Roll Backlog.md out to the owner's other repos
 status: To Do
 assignee: []
 created_date: '2026-11-07T21:31:00Z'
-updated_date: '2026-11-07T21:31:00Z'
+updated_date: '2026-11-07T21:32:00Z'
 labels: []
 dependencies:
   - TASK-1.1
@@ -29,5 +29,5 @@ After the pilot: install through templates/ for consumer repos, so the CLAUDE.md
 - [ ] #1 Repo checks pass: bash .claude/hooks/check-skills.sh --check and bash .claude/hooks/test-check-skills.sh
 - [ ] #2 backlog doctor reports no duplicate ID, on this branch or across branches
 - [ ] #3 Reviewed: ponytail-review, then mattpocock code-review
-- [ ] #4 PR URL added to the task with --ref
+- [ ] #4 PR URL added to the task with --add-ref
 <!-- DOD:END -->

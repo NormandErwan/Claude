@@ -4,6 +4,7 @@ title: Define the framing, breakdown and planning method
 status: To Do
 assignee: []
 created_date: '2026-11-07T21:31:00Z'
+updated_date: '2026-11-07T21:32:00Z'
 labels: []
 dependencies: []
 parent_task_id: TASK-1
@@ -27,5 +28,5 @@ Method to frame, decompose and plan work with the agent before building: intervi
 - [ ] #1 Repo checks pass: bash .claude/hooks/check-skills.sh --check and bash .claude/hooks/test-check-skills.sh
 - [ ] #2 backlog doctor reports no duplicate ID, on this branch or across branches
 - [ ] #3 Reviewed: ponytail-review, then mattpocock code-review
-- [ ] #4 PR URL added to the task with --ref
+- [ ] #4 PR URL added to the task with --add-ref
 <!-- DOD:END -->

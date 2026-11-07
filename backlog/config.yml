@@ -17,4 +17,4 @@ definition_of_done:
   - "Repo checks pass: bash .claude/hooks/check-skills.sh --check and bash .claude/hooks/test-check-skills.sh"
   - "backlog doctor reports no duplicate ID, on this branch or across branches"
   - "Reviewed: ponytail-review, then mattpocock code-review"
-  - "PR URL added to the task with --ref"
+  - "PR URL added to the task with --add-ref"
