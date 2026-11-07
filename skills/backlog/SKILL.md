@@ -1,7 +1,7 @@
 ---
 name: backlog
 version: 1.0.0
-description: Use when work is deferred, discovered mid-session, or beyond the session's scope (e.g. a plan's large steps), or when a backlog task is named, started, finished or dropped. Keeps the repo's root BACKLOG.md, one section per task written as a short handoff.
+description: Use when work is deferred, discovered mid-session, or beyond the session's scope (e.g. a plan's large steps), or when a task in the repo's BACKLOG.md is named, started, finished or dropped.
 ---
 
 # Backlog
@@ -30,12 +30,12 @@ short handoff a fresh session can start from alone.
 ```
 ### <Imperative title>
 Status: ready | in progress (<branch>) | blocked: <reason> | needs owner: <decision>
-Blocked by: <task title>
-Context: <why, what is settled, links>
+Blocked by: <task title>                 (omit when none)
+Context: <why, what is settled, links: 2-4 lines>
 Next: <first concrete step>
 Done when:
 - [ ] <testable criterion>
-Out of scope: <what not to touch>
+Out of scope: <what not to touch>        (omit when none)
 ```
 
 - Title: imperative, unique in the file. It is the task's key: no number, ids collide across

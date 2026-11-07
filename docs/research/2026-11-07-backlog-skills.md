@@ -185,8 +185,9 @@ Kept from the pilot and from mattpocock's tracker skills (`to-tickets`, `triage`
 - Commit task edits with the session's work (cloud containers are ephemeral; implication 10
   of `2026-11-07-backlog-md-usage.md`).
 
-Dropped: sequential ids (collided across sessions in the TASK-1.2 test; the title is the key),
-per-task definition of done (repo checks and reviews are already `CLAUDE.md` rules), claims
-pushed before work (cross-branch claims need a push per status change; the owner names the task
-instead), Pocock's frontier (take the first ready task: the owner names tasks), the tool install. Not adopted yet: Pocock's `.out-of-scope/` record of rejected
-requests; a dropped task's reason goes in the commit message.
+Dropped: sequential ids (collided across sessions in the TASK-1.2 test; the title is the key), per-
+task definition of done (repo checks and reviews are already `CLAUDE.md` rules), claims pushed
+before work (cross-branch claims need a push per status change; the owner names the task instead),
+Pocock's frontier (take the first ready task: the owner names tasks), the tool install. Not adopted
+yet: Pocock's `.out-of-scope/` record of rejected requests; a dropped task's reason goes in the
+commit message.
