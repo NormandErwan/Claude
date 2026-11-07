@@ -33,10 +33,10 @@ In the consumer repo:
    ```json
    "permissions": {
      "allow": ["Bash(git commit *)", "Bash(git push *)"],
-     "ask": ["Bash(git push --force *)", "Bash(git push -f *)", "Bash(git push --force-with-lease *)"]
+     "ask": ["Bash(git push *--force*)", "Bash(git push -f *)", "Bash(git push * -f)", "Bash(git push * -f *)"]
    }
    ```
-   Bash patterns are prefix matches: `git -C dir push --force` slips past `ask`. Protect
+   A `+branch` refspec force-pushes with no flag and slips past `ask`. Protect
    `main` on GitHub too, and turn on Settings > General > Pull Requests > "Automatically
    delete head branches".
 2. Copy `templates/hooks/session-start.sh` to `.claude/hooks/session-start.sh`
