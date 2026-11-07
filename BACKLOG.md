@@ -38,8 +38,8 @@ Out of scope: <what not to touch>        (omit when none)
 
 ### Process proposed RETROSPECTIVE.md entries
 Status: ready
-Context: 24 entries are `proposed`, among them the 2026-11-07 rows on task granularity, subtask
-scope, interview before a plan, and the switch from Backlog.md to this file. `CONTRIBUTING.md`
+Context: many entries are `proposed`, among them the 2026-11-07 rows on task granularity and
+subtask scope, written for Backlog.md and now to reread against this file. `CONTRIBUTING.md`
 (RETROSPECTIVE.md section) governs processing.
 Next: read the whole ledger, group `proposed` entries by class.
 Done when:
@@ -49,11 +49,9 @@ Out of scope: rule rewrites not tied to an entry.
 
 ### Define the framing, breakdown and planning method
 Status: blocked: wait until this file has been used for a few weeks
-Context: how to frame, split and plan work with the agent before building: `interview-me`
-(framing), `spec-driven-development` (requirements), `planning-and-task-breakdown` (tasks here).
-mattpocock `to-tickets` adds vertical slices, blocking edges, and asking the owner whether the
-granularity fits before filing. Related `RETROSPECTIVE.md` rows: 2026-11-07, interview before a
-plan, task granularity, subtask scope.
+Context: frame, split and plan work before building: `interview-me`, `spec-driven-development`,
+`planning-and-task-breakdown`. mattpocock `to-tickets` adds vertical slices and asking the owner
+whether the granularity fits before filing. Related `RETROSPECTIVE.md` rows: 2026-11-07.
 Next: list the tasks that turned out too big, too small or badly framed.
 Done when:
 - [ ] method written in `CLAUDE.md` or a skill, with its `PROVENANCE.md` row
