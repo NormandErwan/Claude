@@ -165,3 +165,29 @@ todo.txt, a sectioned `BACKLOG.md` with an archive file):
 3. Change `CONTRIBUTING.md` RETROSPECTIVE processing: an accepted entry -> a task; `Landed in`
    cites task and PR.
 4. Process the retrospective entry filed on 2026-11-07 (one task per session).
+
+## Decision revised (2026-11-07, after the pilot)
+
+The Backlog.md pilot (PR #119, PR #120) proved too heavy for one owner: a file per task, a
+frontmatter often longer than the task, and a session per subtask. Replaced by one root
+`BACKLOG.md`, one section per task written as a short handoff, deleted once done (no archive:
+the PR and git history keep the trace). The rule applies in every repo; the file is created on
+first need from this repo's header. Format and rules live in that header.
+
+Kept from the pilot and from mattpocock's tracker skills (`to-tickets`, `triage` and its
+`AGENT-BRIEF.md`, `issue-tracker-local.md`), as header rules:
+- One task fits one PR; larger work splits into tasks linked by `Blocked by` (Backlog.md size
+  test, Pocock blocking edges).
+- Search before adding; no implementation plan at creation (Backlog.md guides).
+- Behavior and decisions, not file paths or line numbers; testable done criteria; explicit out
+  of scope (Pocock agent brief).
+- Next task: first `ready` one whose blockers are gone, top to bottom (Pocock frontier);
+  `needs owner` status (Pocock `ready-for-human`).
+- Commit task edits with the session's work (cloud containers are ephemeral; implication 10
+  of `2026-11-07-backlog-md-usage.md`).
+
+Dropped: sequential ids (collided across sessions in the TASK-1.2 test; the title is the key),
+per-task definition of done (repo checks and reviews are already `CLAUDE.md` rules), claims
+pushed before work (cross-branch claims need a push per status change; the owner names the task
+instead), the tool install. Not adopted yet: Pocock's `.out-of-scope/` record of rejected
+requests; a dropped task's reason goes in the commit message.
