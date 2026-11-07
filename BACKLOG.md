@@ -1,8 +1,7 @@
 # Backlog
 
 Work not done yet. One task = one `###` section under `## Tasks`, written as a short handoff: a
-fresh session can start from it alone. A repo without this file gets a copy of everything above
-`## Tasks`, from https://raw.githubusercontent.com/NormandErwan/Claude/main/BACKLOG.md.
+fresh session can start from it alone.
 
 ## Rules
 

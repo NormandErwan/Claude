@@ -171,8 +171,8 @@ todo.txt, a sectioned `BACKLOG.md` with an archive file):
 The Backlog.md pilot (PR #119, PR #120) proved too heavy for one owner: a file per task, a
 frontmatter often longer than the task, and a session per subtask. Replaced by one root
 `BACKLOG.md`, one section per task written as a short handoff, deleted once done (no archive:
-the PR and git history keep the trace). The rule applies in every repo; the file is created on
-first need from this repo's header. Format and rules live in that header.
+the PR and git history keep the trace). Format and rules live in the file's header; no rule
+creates the file in a repo that lacks it.
 
 Kept from the pilot and from mattpocock's tracker skills (`to-tickets`, `triage` and its
 `AGENT-BRIEF.md`, `issue-tracker-local.md`), as header rules:
