@@ -48,6 +48,3 @@
 !skills/write-guide/**
 !docs/
 !docs/**
-# Backlog.md tasks (pilot, this repo only)
-!backlog/
-!backlog/**

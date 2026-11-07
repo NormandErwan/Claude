@@ -10,10 +10,6 @@
           {
             "type": "command",
             "command": "$CLAUDE_PROJECT_DIR/templates/hooks/check-skill-forks.sh $CLAUDE_PROJECT_DIR"
-          },
-          {
-            "type": "command",
-            "command": "npm i -g backlog.md@1.55.3 >/dev/null 2>&1 || echo 'backlog.md: install failed, run npm i -g backlog.md@1.55.3'"
           }
         ]
       }

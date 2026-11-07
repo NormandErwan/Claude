@@ -36,9 +36,9 @@
 - Failure reproducible only in CI -> say so; never push to probe it.
 - Code and its docs (README, comments, commits, PRs, skills) -> English, unless the skill is already in another language.
 - Code comments -> `caveman`. Commit messages -> `caveman-commit`. Neither anywhere else.
-- Repo has `backlog/`:
-  - Work deferred, discovered mid-session, or beyond this session's scope (e.g. a plan's large steps) -> create a task per `backlog instructions`, without asking first; reply with one line: its id and title.
-  - Task id named -> follow `backlog instructions`.
+- Work deferred, discovered mid-session, or beyond this session's scope (e.g. a plan's large steps) -> add a task to the repo's root `BACKLOG.md` per its header, without asking first; reply with one line: its title.
+  - No `BACKLOG.md` -> create it first, with the header of NormandErwan/Claude's `BACKLOG.md`.
+- Backlog task named or asked for -> follow `BACKLOG.md`'s header.
 - Branch or PR named (user, handoff, session setup) -> use its branch without confirmation, over the pre-assigned one.
 - On a trunk (`main`, `master`, `develop`) and about to commit, no branch named -> first create `<type>/<kebab-description>` (`feat`, `fix`, `docs`, `chore`, `refactor`), unless the user asked to commit on the trunk.
 - Work ready to commit or push -> do it without asking.
