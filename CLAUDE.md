@@ -36,6 +36,7 @@
 - Failure reproducible only in CI -> say so; never push to probe it.
 - Code and its docs (README, comments, commits, PRs, skills) -> English, unless the skill is already in another language.
 - Code comments -> `caveman`. Commit messages -> `caveman-commit`. Neither anywhere else.
+- Repo has `backlog/`, and work is deferred or discovered mid-session, or a task id is named -> follow `backlog instructions`.
 - Branch or PR named (user, handoff, session setup) -> use its branch without confirmation, over the pre-assigned one.
 - On a trunk (`main`, `master`, `develop`) and about to commit, no branch named -> first create `<type>/<kebab-description>` (`feat`, `fix`, `docs`, `chore`, `refactor`), unless the user asked to commit on the trunk.
 - Work ready to commit or push -> do it without asking.
