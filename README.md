@@ -27,17 +27,16 @@ roster froze at session start.
 In the consumer repo:
 
 1. Copy `templates/settings.json` to `.claude/settings.json` - wires the hook.
-   Then add this `permissions` block to it: `CLAUDE.md` says commit and push without
-   asking, but only a permission rule removes the CLI's prompt. Force pushes still prompt
-   (`ask` beats `allow`).
+   Then add this `permissions` block to it: the `CLAUDE.md` git rules cannot remove the
+   CLI's prompt, only a permission rule can. Force pushes still prompt (`ask` beats `allow`).
    ```json
    "permissions": {
-     "allow": ["Bash(git commit *)", "Bash(git push *)"],
+     "allow": ["Bash(git add *)", "Bash(git switch -c *)", "Bash(git checkout -b *)", "Bash(git commit *)", "Bash(git push *)"],
      "ask": ["Bash(git push *--force*)", "Bash(git push -f *)", "Bash(git push * -f)", "Bash(git push * -f *)"]
    }
    ```
    A `+branch` refspec force-pushes with no flag and slips past `ask`. Protect
-   `main` on GitHub too, and turn on Settings > General > Pull Requests > "Automatically
+   the trunk on GitHub too, and turn on Settings > General > Pull Requests > "Automatically
    delete head branches".
 2. Copy `templates/hooks/session-start.sh` to `.claude/hooks/session-start.sh`
    (keep it executable) - clones this repo fresh each session, refreshes the
