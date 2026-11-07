@@ -85,7 +85,6 @@ skillselion, lobehub, glama) were used only as leads; their claims are not cited
 ### 9. Claude Code built-in task tools (official docs)
 - `TaskCreate`, `TaskGet`, `TaskUpdate`, `TaskList` (and `TodoWrite` when `CLAUDE_CODE_ENABLE_TASKS=0`) are available by default only on Opus 4.7, Sonnet 4.6, Haiku 4.5 and earlier models; on other models the list stays empty unless `CLAUDE_CODE_ENABLE_TODO_TOOLS=1` (https://code.claude.com/docs/en/tools-reference, section "Task tool availability"; https://code.claude.com/docs/en/interactive-mode, section "Task list").
 - Persistence: tasks survive context compaction; sharing across sessions needs `CLAUDE_CODE_TASK_LIST_ID`, which uses a named directory in `~/.claude/tasks/` (interactive-mode page). So storage is outside the repo and not git-tracked. Session-scoped by default. Not a backlog.
-- On the model running this session (Sonnet 5.5) the docs say the tools are off by default: more reason not to depend on them.
 
 ### 10. eyaltoledano/claude-task-master
 - Source: https://github.com/eyaltoledano/claude-task-master. 28.3k stars; "MIT License with Commons Clause" (restricts selling it or hosting it) (https://github.com/eyaltoledano/claude-task-master/blob/main/LICENSE); last commit 2026-04-23 (https://github.com/eyaltoledano/claude-task-master/commits/main).
