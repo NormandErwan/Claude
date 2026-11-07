@@ -37,6 +37,8 @@
 - Code and its docs (README, comments, commits, PRs, skills) -> English, unless the skill is already in another language.
 - Code comments -> `caveman`. Commit messages -> `caveman-commit`. Neither anywhere else.
 - Branch or PR named (user, handoff, session setup) -> use its branch without confirmation, over the pre-assigned one.
+- On a trunk (`main`, `master`, `develop`) and about to commit, no branch named -> first create `<type>/<kebab-description>` (`feat`, `fix`, `docs`, `chore`, `refactor`), unless the user asked to commit on the trunk.
+- Commit and push without asking. Never force-push a trunk.
 - PR title or body edit -> apply directly.
 - PR title reads as a placeholder or no longer matches the diff -> rename it.
 - Editing `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.md`, `PROVENANCE.md`, or a skill in NormandErwan/Claude -> read its `CONTRIBUTING.md` first.
