@@ -11,8 +11,7 @@ short handoff a fresh session can start from alone.
 
 ## Add a task
 
-- Trigger: work deferred, discovered mid-session, or beyond the session's scope. Not for a
-  question, or an edit done now.
+- Not for: a question, or an edit done in this session.
 - Add it without asking first. Reply with one line: its title.
 - Search the file first. A matching task gets extended, not duplicated.
 - No `BACKLOG.md` -> create it with this header, then the task:
@@ -45,19 +44,33 @@ Out of scope: <what not to touch>        (omit when none)
   - `in progress (<branch>)`: a session works on it on that branch.
   - `blocked: <reason>`: waits on something outside the backlog (time, access, an event).
   - `needs owner: <decision>`: waits on a decision only the owner can make.
-- `Blocked by`: titles of the tasks that must be done first. Omit when none. A title no longer
-  in the file means that task is done.
+- `Blocked by`: titles of the tasks that must be done first. A title no longer in the file
+  means that task is done or dropped.
 - `Context`: 2-4 lines. Why the task exists and what is already decided. Link artifacts (PR,
   doc, `RETROSPECTIVE.md` row) instead of copying them.
 - `Next`: the first concrete step. No implementation plan: the session doing the work writes it.
 - `Done when`: testable criteria, each checkable on its own. "Works correctly" is not one.
-- `Out of scope`: what the task must not touch. Omit when none.
-- Whole section: behavior and decisions, not file paths or line numbers (they go stale).
+- `Out of scope`: what the task must not touch.
+- Whole section: behavior and decisions, not code paths or line numbers (they go stale). Links
+  to PRs and docs are fine.
 
 ## Work a task
 
+- Task named -> read its section, start from `Next`, respect `Out of scope`. A `Blocked by`
+  title still in the file -> tell the user, don't start.
 - Start -> set `Status: in progress (<branch>)`.
+- Session ends unfinished -> rewrite `Next` to where the work stopped. Stuck -> set `Status` to
+  `blocked` or `needs owner`.
 - Done -> delete its section in the PR that does the work. The PR body carries the summary.
-- Dropped -> delete its section. The commit message gives the reason.
+- Dropped -> delete its section. The commit message gives the reason. Tasks it blocked -> re-check
+  their `Status`.
+- Title changed -> update every `Blocked by` that names it.
 - Any edit to `BACKLOG.md` -> commit it with the session's work: an uncommitted edit dies with
   a cloud container.
+
+## Red flags
+
+- Asking "add this to the backlog?" -> add it, reply with its title.
+- Ticking every box, or moving a done task to a "Done" list -> delete the section.
+- Adding an id or a number to a title.
+- `BACKLOG.md` edited but not committed.
