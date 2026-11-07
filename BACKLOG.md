@@ -23,3 +23,14 @@ whether the granularity fits before filing. Related `RETROSPECTIVE.md` rows: 202
 Next: list the tasks that turned out too big, too small or badly framed.
 Done when:
 - [ ] method written in `CLAUDE.md` or a skill, with its `PROVENANCE.md` row
+
+### Make the backlog trigger reliable on Haiku
+Status: ready
+Context: the `backlog` skill fired on 5/10 should-fire cases with Haiku 5.5, against 10/10 with
+Sonnet and Opus. The misses were mostly work mentioned beside a main request
+(`docs/research/2026-11-07-backlog-skill-trigger-test.md`).
+Next: rerun the missed cases a few times on Haiku to tell a weak `CLAUDE.md` rule from a weak
+skill description.
+Done when:
+- [ ] Haiku fires on at least 8/10 of the same should-fire cases, with no new false fire
+Out of scope: Sonnet and Opus behavior, already reliable.
