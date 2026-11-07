@@ -5,8 +5,8 @@ decision, not repeated here). Scope: how Backlog.md 1.55.3 is configured and run
 agents, and what that implies for the pilot on this repo.
 
 Method and limits:
-- CLI facts were checked by running the installed `backlog` 1.55.3 in a scratch git repo
-  (`/tmp/claude-0/-home-user-Claude/f1de5c08-7489-557c-b7f8-06e469855f15/scratchpad/bl`). They are cited as
+- CLI facts were checked by running the installed `backlog` 1.55.3 in a throwaway git repo.
+  They are cited as
   "CLI: `<command>`".
 - GitHub tools were scoped to this repo, so upstream files came through WebFetch of github.com and
   raw.githubusercontent.com pages. WebFetch summarizes pages with a small model; wording below is
@@ -235,7 +235,7 @@ installed per container (README: npm, Bun, Homebrew, Nix).
 6. ID collisions are the real risk and are unresolved upstream (#937, #1063, #1146). Mitigate: wide-refspec
    clones, `backlog doctor` as a check at session start or in review, create tasks on `main` rather than on
    feature branches, push the new task promptly, and avoid two cloud sessions creating tasks concurrently.
-   The planned collision test (next task 2) is justified; add `doctor` to what it checks.
+   The planned collision test (TASK-1.2) is justified; add `doctor` to what it checks.
 7. Defaults are fine as piloted: statuses stock, labels empty (the author does the same), types are built in
    (`bug, feature, enhancement, task, chore, docs, spike`), `auto_commit: false`, prefix `task`.
    Decide zero-padding now, before the first task, because I did not test how existing ids behave when

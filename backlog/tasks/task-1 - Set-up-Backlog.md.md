@@ -4,12 +4,13 @@ title: Set up Backlog.md
 status: To Do
 assignee: []
 created_date: '2026-11-07T21:31:00Z'
-updated_date: '2026-11-07T21:32:00Z'
+updated_date: '2026-11-07T21:33:00Z'
 labels: []
 dependencies: []
 references:
   - docs/research/2026-11-07-backlog-skills.md
   - docs/research/2026-11-07-backlog-md-usage.md
+  - https://github.com/NormandErwan/Claude/pull/120
 ordinal: 1000
 ---
 
