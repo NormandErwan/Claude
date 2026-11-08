@@ -41,10 +41,10 @@ Out of scope: Sonnet and Opus behavior, already reliable.
 
 ### Review the rules dropped as asking or low-value on 2026-10-23
 Status: ready
-Context: `b0238a9` and `34fa2e3` applied the owner quote "si une règle impose de demander, la
-supprimer" beyond its scope (`RETROSPECTIVE.md` 2026-10-28 fact-corrected). PR#122 restored the
-clarification rule. Not covered today: owner approval before applying a ledger entry, and
-"touch only what was asked; delete nothing you don't fully understand".
+Context: `b0238a9` dropped the asking rules under an owner quote later scoped to the pre-PR#94
+rules (`RETROSPECTIVE.md` 2026-10-28 fact-corrected), plus four rules judged low-value. Not in
+`CLAUDE.md` today: "touch only what was asked; delete nothing you don't fully understand", and
+owner approval before applying a ledger entry (PR#114's `CONTRIBUTING.md` covers decision entries).
 Next: for each rule `b0238a9` removed, find what in the current `CLAUDE.md` or a skill covers it.
 Done when:
 - [ ] each removed rule is marked covered (by what), restored with its `PROVENANCE.md` row, or
