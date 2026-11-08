@@ -94,3 +94,18 @@ Done when:
 - [ ] `find-cause` trace recorded in the three rows
 - [ ] a fix proposed with its measure, or the owner's reason to leave it
 Out of scope: the skills the agent-skills task covers.
+
+### Find or build a reusable harness for rule and skill A/B tests
+Status: ready
+Context: each A/B test rebuilds its own `claude -p` setup and loses its first runs to config
+errors (2026-11-08 skill-scan probe: untrusted workspace ignored its settings, open stdin, Bash
+allowlist too narrow; see `docs/research/2026-11-08-skill-scan-cases.md`). Claude Code 2.1.319
+ships `claude plugin eval` (cases, graders incl. `tool_used: Skill`, no-plugin baseline arm);
+unknown whether it can compare `CLAUDE.md` arms. Latest harness: `docs/evidence/skill-scan/`.
+Next: `search-first`: what `claude plugin eval` and published skills cover (arm isolation,
+`SessionStart` hook, trust, permissions, cost capture), against `docs/evidence/skill-scan/`.
+Done when:
+- [ ] a tool or skill adopted or built, whose setup check catches the probe's three errors
+  before any scored run
+- [ ] `CONTRIBUTING.md`'s A/B steps point to it
+Out of scope: `write-skill`'s quality evals of a skill's output.
