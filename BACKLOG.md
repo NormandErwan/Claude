@@ -4,24 +4,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ## Tasks
 
-### Replace named skill rules with a skill scan
-Status: needs owner: go to land the scan
-Context: owner, 2026-11-08: rules naming one skill each make `CLAUDE.md` heavy and may rank named
-skills above the others; a check "before sending" comes too late, on web too. The pre-`98492a1`
-low-bar scan was removed in a rewrite, untested (`RETROSPECTIVE.md` 2026-11-03 skill-gap).
-Candidate wording and the cases reviews found: `docs/research/2026-11-08-agent-skills-coverage.md`.
-Next: replace the general skill line and its two sub-rules by the frozen scan, and remove the
-debugging rule, in `CLAUDE.md` and `CLAUDE.web.md` (case doc, "Runs on the frozen wording").
-Done when:
-- [ ] the case set is written down before the wording is drafted
-- [ ] the wording had one `write-prompt` pass and one review, then a pilot; after that it changes
-  only if a case fails
-- [ ] A/B/C run per `CONTRIBUTING.md`: A current, B the scan without the rules that only name a
-  skill by trigger, C no skill rule (control); arm B's removed rules listed
-- [ ] `CLAUDE.md` and `CLAUDE.web.md` changed together if B wins, or the owner's reason recorded
-Out of scope: rules fixing an order or a surface (`caveman-commit`, `write-french`,
-`verify-sources`, `backlog`).
-
 ### A/B test code-review-and-quality against the named reviewers
 Status: ready
 Context: `code-review-and-quality` never fired in use (`RETROSPECTIVE.md` 2026-10-28 test-run);
