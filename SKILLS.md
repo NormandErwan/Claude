@@ -44,7 +44,7 @@ slip through.
 | guide-decision | native | yes | 1.1.0 | `2ee6133ad3` | - |
 | guide-purchase | native | yes | 1.1.0 | `8f10c06aa7` | - |
 | handoff | fork of `mattpocock/skills@skills/productivity/handoff` | yes | 1.2.0 | `e78ed79f8a` | `5beb35b040` |
-| improve-codebase-architecture | fork of `mattpocock/skills@skills/engineering/improve-codebase-architecture` | no | - | - | `5beb35b040` |
+| improve-codebase-architecture | fork of `mattpocock/skills@skills/engineering/improve-codebase-architecture` | no | - | - | `7739eaed7f` |
 | search-first | fork of `affaan-m/ECC@skills/search-first` | yes | 1.0.2 | `1a31dd78a1` | `90606c8315` |
 | teach | fork of `mattpocock/skills@skills/productivity/teach` | yes | 1.1.0 | `c6c8287ecf` | `5beb35b040` |
 | token-codebase-exploration | native | no | - | - | - |
@@ -83,14 +83,14 @@ slip through.
 | code-review | skills.txt `mattpocock/skills` | no | - | - | - |
 | codebase-design | skills.txt `mattpocock/skills` | no | - | - | - |
 | domain-modeling | skills.txt `mattpocock/skills` | no | - | - | - |
-| grilling | skills.txt `mattpocock/skills@skills/productivity/grilling` | yes | upstream | - | `5beb35b040` |
+| grilling | skills.txt `mattpocock/skills@skills/productivity/grilling` | yes | upstream | - | `7739eaed7f` |
 | prototype | skills.txt `mattpocock/skills` | no | - | - | - |
-| research | skills.txt `mattpocock/skills@skills/engineering/research` | yes | upstream | - | `5beb35b040` |
-| find-cause | skills.txt `NormandErwan/claude-casebook@plugins/find-cause/skills/find-cause` | yes | upstream | - | `8515bfe53c` |
+| research | skills.txt `mattpocock/skills@skills/engineering/research` | yes | upstream | - | `7739eaed7f` |
+| find-cause | skills.txt `NormandErwan/claude-casebook@plugins/find-cause/skills/find-cause` | yes | upstream | - | `aa1d7bbaeb` |
 | prevent-drift | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
 | write-hook | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
 | write-prompt | skills.txt `NormandErwan/claude-casebook@plugins/write-prompt/skills/write-prompt` | yes | upstream | - | `c8e39e8ab4` |
-| write-skill | skills.txt `NormandErwan/claude-casebook@plugins/write-skill/skills/write-skill` | yes | upstream | - | `304e76b7a0` |
+| write-skill | skills.txt `NormandErwan/claude-casebook@plugins/write-skill/skills/write-skill` | yes | upstream | - | `aad740ef1a` |
 
 On claude.ai but not provided by this repo: brainstorming, find-skills.
 
