@@ -17,6 +17,7 @@
 - Several checks with nothing to report -> one line. Never collapse away a finding, error, or blocker.
 - Replies and deliverables for the user -> the user's language. French -> `write-french`.
 - Factual claim not verified this turn -> `verify-sources`. Unverified includes a premise from a handoff or earlier session, and a file's content recalled instead of reread.
+- Request carries any ambiguity, unstated requirement, contradiction, or assumption to make -> interview the user before planning or building (skill: this file's `Claude Code` or `Web-only` section).
 - Recommendation, plan, or choice of approach:
   - Before sending, check: what was taken for granted, an existing solution to reuse, a domain expert's objection, each claim about a file's or a source's content. Revise from what the check finds.
   - Approach builds a script, config, workflow, or integration -> `search-first` before laying out the options.
@@ -32,12 +33,25 @@
   - Otherwise -> `[BLOCKED] <url> - <status>`. Host required -> stop, tell the user.
 
 ## Claude Code
+- Interview the user (`Behavior`) -> `interview-me`.
+- After the interview:
+  - Feature or significant change with no spec -> `spec-driven-development`.
+  - Spec ready, work to split into tasks -> `planning-and-task-breakdown`.
+  - Next task of a plan, a new module, or code spanning several modules -> `incremental-implementation`.
 - Turn would end with an unreviewed pushed diff and no open plan items -> run `ponytail-review`, then mattpocock `code-review`.
 - About to claim done, fixed, or passing -> run the verification commands locally first (the project's own build, lint, tests).
 - Failure reproducible only in CI -> say so; never push to probe it.
+- Shell command on Windows -> Git for Windows' bash, never PowerShell.
+- Shell sequence whose later step changes git state (`add`, `commit`, `rebase --continue`, `push`) -> chain with `&&`, never `;`.
+- Conflict resolved by script -> read its diff before `git add`; a whole-file diff means its line endings changed.
 - Code and its docs (README, comments, commits, PRs, skills) -> English, unless the skill is already in another language.
 - Code comments -> `caveman`. Commit messages -> `caveman-commit`. Neither anywhere else.
+- Work deferred, discovered mid-session, or beyond this session's scope (e.g. a plan's large steps) -> `backlog`.
+- Backlog task named -> `backlog`.
 - Branch or PR named (user, handoff, session setup) -> use its branch without confirmation, over the pre-assigned one.
+- On a trunk (`main`, `master`, `develop`) and about to commit, no branch named -> first create `<type>/<kebab-description>` (`feat`, `fix`, `docs`, `chore`, `refactor`), unless the user asked to commit on the trunk.
+- Work ready to commit or push -> do it without asking.
+- About to force-push a trunk -> don't.
 - PR title or body edit -> apply directly.
 - PR title reads as a placeholder or no longer matches the diff -> rename it.
 - Editing a repository's files its `CONTRIBUTING.md` governs (here: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.md`, `PROVENANCE.md`, a skill) -> read that `CONTRIBUTING.md` first, also when a handoff lists the edits.
