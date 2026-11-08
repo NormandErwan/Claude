@@ -1,7 +1,7 @@
 ---
 name: token-codebase-exploration
-description: Use when exploring an unfamiliar codebase, understanding how a specific feature or pattern works, or learning how components interact. Provides the exploration workflow and strategy. For .NET/C# specific search commands, also load token-dotnet.
-version: 1.2.0
+description: Use when exploring an unfamiliar codebase, understanding how a specific feature or pattern works, or learning how components interact. Provides the exploration workflow and strategy.
+version: 1.3.1
 allowed-tools: Bash, Read, Grep, Glob
 ---
 
@@ -30,8 +30,7 @@ Follow these 5 steps in order. Do not skip ahead to reading.
 or terms to search for.
 
 **Step 2: Search — do not read files yet.** Use grep and find to locate candidates.
-Anchor grep patterns to exclude comment lines. For .NET/C# projects, load token-dotnet
-for the language-specific search patterns and directory exclusions.
+Anchor grep patterns to exclude comment lines.
 
 **Step 3: Rank examples** — prefer files with self-documenting names and explicit variable
 names over short, dense files. A 35-line file with clear names teaches a pattern better
@@ -61,7 +60,7 @@ cat README.md   # this is the legitimate first Read
 ```
 
 **Phase 2 — Entry point:** identify the main executable or initialization file for this
-language and framework. For .NET, load token-dotnet for the specific commands.
+language and framework.
 Read the entry point — this is file 1.
 
 **Phase 3 — Core abstractions:** search for interface definitions and abstract base classes
@@ -84,5 +83,5 @@ exists to force a consolidation step: reading without summarizing produces worse
 than reading 5 files, articulating what you now understand, and then reading 2 more
 with a specific question in mind.
 
-Summarize findings, state what you now understand, and ask the user which area to
-explore further before opening any additional file.
+Summarize findings and state what you now understand. Then read further only with a
+specific question that summary leaves open.

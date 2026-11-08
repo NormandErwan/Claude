@@ -9,9 +9,10 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 - Every rule is provisional. Before adding one, extend an existing rule that covers the case.
 - A rule earns its place with a logged incident (`PROVENANCE.md` or `RETROSPECTIVE.md`). A rule
   that costs more than it returns is deleted, not compensated by another rule.
-- A rule that makes the agent ask for permission, confirmation, or clarification is deleted. Exception: `Behavior`'s structuring choices, laid out with options for the user to decide (owner: co-construct among the possibilities).
+- An outside skill compared with a rule of the same intent -> the rule counts as coverage only
+  if its `PROVENANCE.md` row records a test; otherwise the skill stays a test candidate.
 - Every rule reads trigger -> action. It goes in the section of its domain: `Behavior` (every session, mirrored to the web copy), `Claude Code`, `Agents`, `Bootstrap`, `Retrospective` (code only).
-- Every `CLAUDE.md` change -> `craft-prompt` pass first: exact trigger and action, fewest words a
+- Every `CLAUDE.md` change -> `write-prompt` pass first: exact trigger and action, fewest words a
   reader can follow. Cut a word only if the reader loses nothing; one idea per sentence.
 - A rule or example about phrasing is read against itself: does it break the rule it states?
 - A rewrite of existing rules -> check each rule survives with its meaning, re-verify every
@@ -23,10 +24,12 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
   before merging. Other changes: name how the effect will be observed. An observation counts only
   when the owner can judge the outcome by reading the reply, without taking the case apart;
   otherwise A/B test.
-- Before an A/B test, review the proposed wording (`ponytail-review`, then mattpocock
-  `code-review`), and test the reviewed version.
-- Method: `write-skill`'s eval process (headless `claude -p`, one fixture per arm, probe before the full run). For a `CLAUDE.md` test, keep the fixture's `.claude/settings.json` and `templates/hooks/`: real sessions run the `SessionStart` injection.
-- Record the measure, result, and cost in the commit message and the rule's `PROVENANCE.md` row.
+- The owner waives a test -> record the waiver and its reason in the rule's `PROVENANCE.md` row.
+- An A/B test plan lists these steps, in this order:
+  1. Review the proposed wording (`ponytail-review`, then mattpocock `code-review`); test the
+     reviewed version.
+  2. Run it with `write-skill`'s eval process (headless `claude -p`, one fixture per arm, probe before the full run). For a `CLAUDE.md` test, keep the fixture's `.claude/settings.json` and `templates/hooks/`: real sessions run the `SessionStart` hook.
+  3. Record the measure, result, and cost in the commit message and the rule's `PROVENANCE.md` row.
 
 ## PROVENANCE.md
 
@@ -41,6 +44,8 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
   prior one goes to `find-cause`, not to a re-extension of the same rule.
 - A premise about the origin session the ledger cannot confirm -> mark it `not checkable here`.
 - A rule that only fires on one session's tool, file, or wording is out of scope.
+- Entry accepted -> add a `BACKLOG.md` task for its change; `Landed in` reads `BACKLOG.md`, then
+  the PR once it exists.
 - `applied` cites the PR carrying the change (`applied - PR#<n>`). An entry filed from another
   repo's ledger gets its new state there too, in a PR on that repo.
 

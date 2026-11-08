@@ -1,7 +1,7 @@
 ---
 name: token-file-ops
-description: Use when reading, editing, creating, or manipulating files; or running commands with potentially large output. Provides generic bash-first patterns for any file type. For .NET/C# specific patterns, also load token-dotnet.
-version: 1.5.0
+description: Use when reading, editing, creating, or manipulating files; or running commands with potentially large output. Provides generic bash-first patterns for any file type.
+version: 1.5.1
 allowed-tools: Bash, Read, Grep, Glob
 ---
 
@@ -27,7 +27,7 @@ NEVER read files unless you must.
 | Case | Use | Why |
 |---|---|---|
 | New file | Write tool directly | Never wrap it in a bash heredoc script |
-| Modifying a code file | Read + Edit (.NET: see token-dotnet) | Bash text substitution cannot see code structure |
+| Modifying a code file | Read + Edit | Bash text substitution cannot see code structure |
 | Term used in structured identifiers (IDs, cross-references) in a content document | Read + Edit | The criterion is context type, not line count alone |
 | 3+ searches planned on one file | Read the file instead | Each extra turn costs ~2K tokens of history overhead |
 
@@ -87,8 +87,6 @@ grep -rl "pattern" src/ | head -20
 # Search with context lines (5 before, 5 after)
 grep -rn -A5 -B5 "pattern" src/ | head -60
 ```
-
-For language-specific search patterns (.NET, C#), load token-dotnet.
 
 ## Filter Large Command Output — Always Cap It
 

@@ -62,10 +62,10 @@ mkdir -p skills/new-skill && printf -- '---\nname: new-skill\n---\n' >skills/new
 printf '!skills/new-skill/\n!skills/new-skill/**\n' >>.gitignore && commit new
 run "new skills/ skill without row" 2
 case_on new-npx
-sed -i 's/^anthropics\/skills frontend-design/& pdf/' skills.txt && commit npx-add
+sed -i 's/^DietrichGebert\/ponytail .*/& pdf/' skills.txt && commit npx-add
 run "new skills.txt skill without row" 2
 case_on rm-npx
-sed -i 's/^anthropics\/skills frontend-design$//' skills.txt && commit npx-rm
+sed -i 's/ ponytail-audit//' skills.txt && commit npx-rm
 run "row left for removed skills.txt skill" 2
 case_on header
 sed -i 's/| Sent tree |/| Tree |/' SKILLS.md && commit header
@@ -82,13 +82,13 @@ case_on uncite
 sed -i 's/`write-french`/write-french/g' CLAUDE.web.md && commit uncite
 run "uploaded skill no longer cited (allowed)" 0
 case_on web-yes-unsent
-sed -i 's/^| prevent-drift | native | no |/| prevent-drift | native | yes |/' SKILLS.md && commit web-yes
+sed -i 's/^| write-guide | native | no |/| write-guide | native | yes |/' SKILLS.md && commit web-yes
 run "Web yes, never sent" 2
 case_on npx-no-path
 sed -i 's/^| prototype | skills.txt `mattpocock\/skills` | no |/| prototype | skills.txt `mattpocock\/skills` | yes |/' SKILLS.md && commit npx-yes
 run "uploaded skills.txt skill without repo@path" 2
 case_on not-uploaded
-echo x >>skills/v-model-guide/SKILL.md && commit not-uploaded
+echo x >>skills/write-guide/SKILL.md && commit not-uploaded
 run "edit to a Web no skill" 0
 
 # --- .gitignore (check 6)
