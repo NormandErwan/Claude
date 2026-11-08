@@ -4,6 +4,10 @@
 
 Natively-authored skills library for Claude Code.
 
+The reusable part - the casebook method, `write-skill`, `write-hook`, `find-cause` and
+`prevent-drift` - lives in
+[NormandErwan/claude-casebook](https://github.com/NormandErwan/claude-casebook).
+
 ## Where a skill belongs
 
 A skill of general scope belongs here (`NormandErwan/Claude`), English (see `CLAUDE.md`
@@ -15,30 +19,35 @@ whether it is uploaded to claude.ai: `SKILLS.md`.
 
 Consumer repos pull this repo's `CLAUDE.md` and `skills/` fresh at every
 session start via a `SessionStart` hook - no subtree, no submodule, no
-manual sync. The same hook clones
-[`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills) and
-injects its `using-agent-skills` router into the session. A router has to be
-in context before the first turn: a skill installed mid-session is never
-invocable, because the roster froze at session start.
-
-Prerequisite: `jq` on `PATH`. Without it the clone still lands and the hook
-says so; the router is not injected.
+manual sync. The same hook installs the skills in `skills.txt` (among them
+[`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills)) before
+the first turn: a skill installed mid-session is never invocable, because the
+roster froze at session start.
 
 In the consumer repo:
 
 1. Copy `templates/settings.json` to `.claude/settings.json` - wires the hook.
+   Then add this `permissions` block to it: the `CLAUDE.md` git rules cannot remove the
+   CLI's prompt, only a permission rule can. Force pushes still prompt (`ask` beats `allow`).
+   ```json
+   "permissions": {
+     "allow": ["Bash(git add *)", "Bash(git switch -c *)", "Bash(git checkout -b *)", "Bash(git commit *)", "Bash(git push *)"],
+     "ask": ["Bash(git push *--force*)", "Bash(git push -f *)", "Bash(git push * -f)", "Bash(git push * -f *)"]
+   }
+   ```
+   A `+branch` refspec force-pushes with no flag and slips past `ask`. Protect
+   the trunk on GitHub too, and turn on Settings > General > Pull Requests > "Automatically
+   delete head branches".
 2. Copy `templates/hooks/session-start.sh` to `.claude/hooks/session-start.sh`
    (keep it executable) - clones this repo fresh each session, refreshes the
-   generated files, then runs `templates/hooks/inject-agent-skills.sh` from
-   that fresh clone, which also installs the skills in `skills.txt`. Only the thin bootstrap is copied, so the injector
+   generated files, then runs `templates/hooks/install-skills.sh` from
+   that fresh clone, which installs the skills in `skills.txt`. Only the thin bootstrap is copied, so the installer
    updates itself afterwards without consumers re-copying anything. A repo set
-   up before the injector existed needs this one re-copy to get a router at
-   all - the synced `CLAUDE.md` assumes one is injected.
+   up before it existed needs this one re-copy to get the skills at all.
 3. Add to `.gitignore` - the generated files are never committed:
    ```
    .claude/CLAUDE.md
    .claude/skills/
-   .claude/agent-skills/
    ```
 4. Add to the repo's own root `CLAUDE.md`:
    ```markdown
@@ -63,8 +72,8 @@ In the consumer repo:
 
    | Need | `skills.txt` line |
    |---|---|
-   | .NET/C#/Blazor work | `aaronontheweb/dotnet-skills <skill>...` - name the skills you need (e.g. `csharp-coding-standards efcore-patterns`), a line with no skill name is skipped; `token-dotnet` is already synced with `skills/`, just reference it for search patterns |
-   | Web/frontend design work | `arvindrk/extract-design-system extract-design-system` and `vercel-labs/agent-skills web-design-guidelines` |
+   | .NET/C#/Blazor work | `aaronontheweb/dotnet-skills <skill>...` - name the skills you need (e.g. `csharp-coding-standards efcore-patterns`), a line with no skill name is skipped |
+   | Web/frontend design work | `anthropics/skills frontend-design`, `arvindrk/extract-design-system extract-design-system` and `vercel-labs/agent-skills web-design-guidelines` |
    | Test design with 3+ combinable parameters | `omkamal/pypict-claude-skill pict-test-designer` |
    | Parallel/sub-agent orchestration | `obra/superpowers dispatching-parallel-agents subagent-driven-development` |
    | Home Assistant config editing | `homeassistant-ai/skills home-assistant-best-practices` |

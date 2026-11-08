@@ -8,8 +8,7 @@
 !templates/
 !templates/**
 !skills.txt
-# This repo's own hook (dogfooding). .claude/agent-skills/ is a session
-# clone of addyosmani/agent-skills and stays ignored. Re-ignore .md files
+# This repo's own hook (dogfooding). Re-ignore .md files
 # directly under .claude/ - the global !*.md above would otherwise unignore
 # any stray one (e.g. a reverted dogfooding skip regenerating CLAUDE.md).
 !.claude/
@@ -21,12 +20,8 @@
 # When consumed as a .claude subtree, a blanket unignore here would also
 # unignore session-installed skill caches the consumer repo means to ignore.
 # Add two lines here for every new skill added under skills/ (push hook checks).
-!skills/write-hook/
-!skills/write-hook/**
 !skills/craft-prompt/
 !skills/craft-prompt/**
-!skills/find-cause/
-!skills/find-cause/**
 !skills/grill-with-docs/
 !skills/grill-with-docs/**
 !skills/handoff/
@@ -37,47 +32,21 @@
 !skills/guide-decision/**
 !skills/guide-purchase/
 !skills/guide-purchase/**
-!skills/prevent-drift/
-!skills/prevent-drift/**
 !skills/search-first/
 !skills/search-first/**
 !skills/token-codebase-exploration/
 !skills/token-codebase-exploration/**
-!skills/token-dotnet/
-!skills/token-dotnet/**
 !skills/token-file-ops/
 !skills/token-file-ops/**
 !skills/teach/
 !skills/teach/**
-!skills/v-model/
-!skills/v-model/**
-!skills/v-model-documents/
-!skills/v-model-documents/**
-!skills/v-model-equipe/
-!skills/v-model-equipe/**
-!skills/v-model-gestion/
-!skills/v-model-gestion/**
-!skills/v-model-guide/
-!skills/v-model-guide/**
-!skills/v-model-implementation/
-!skills/v-model-implementation/**
-!skills/v-model-niveau-1/
-!skills/v-model-niveau-1/**
-!skills/v-model-niveau-2/
-!skills/v-model-niveau-2/**
-!skills/v-model-niveau-3/
-!skills/v-model-niveau-3/**
-!skills/v-model-niveau-4/
-!skills/v-model-niveau-4/**
-!skills/v-model-phase-amont/
-!skills/v-model-phase-amont/**
-!skills/v-model-tests/
-!skills/v-model-tests/**
 !skills/verify-sources/
 !skills/verify-sources/**
-!skills/write-skill/
-!skills/write-skill/**
 !skills/write-french/
 !skills/write-french/**
 !skills/write-guide/
 !skills/write-guide/**
+!skills/backlog/
+!skills/backlog/**
+!docs/
+!docs/**

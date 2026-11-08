@@ -113,7 +113,8 @@ else's, labelling rules, a second guide joining a first - and the negatives that
 (a note, API reference documentation, a skill, a tutorial, release notes, a summary, tests).
 
 It was not run. The `write-skill` harness simulates a skill as a `.claude/commands/` entry, and
-`write-hook`'s record in this repo documents that this surface yields 0/12 positives in this
+`write-hook`'s record (now in NormandErwan/claude-casebook,
+`plugins/write-hook/skills/write-hook/evals/`) documents that this surface yields 0/12 positives in this
 environment regardless of description quality - a measurement of the harness, not of the
 description. **The description's recall is UNVERIFIED.** To close it: run the 12 positive queries
 as fresh sessions with the skill really installed, one query per session, and check whether it
