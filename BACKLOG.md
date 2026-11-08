@@ -4,19 +4,42 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ## Tasks
 
-### Reference the remaining agent-skills in CLAUDE.md
+### Replace named skill rules with a skill scan
 Status: ready
-Context: situation-triggered skills do not fire under native routing (`RETROSPECTIVE.md`
-2026-11-03 skill-gap). PR#122 named the framing set; the other agent-skills in `skills.txt`
-stay unnamed in `CLAUDE.md`. Owner, 2026-11-08: `code-review-and-quality` never fired in use
-(`RETROSPECTIVE.md` 2026-10-28 test-run).
-Next: list the `skills.txt` agent-skills that `CLAUDE.md` never names, and how each overlaps a
-skill it already names.
+Context: owner, 2026-11-08: rules naming one skill each make `CLAUDE.md` heavy and may rank named
+skills above the others; a check "before sending" comes too late, on web too. The pre-`98492a1`
+low-bar scan was removed in a rewrite, untested (`RETROSPECTIVE.md` 2026-11-03 skill-gap).
+Candidate wording and the cases reviews found: `docs/research/2026-11-08-agent-skills-coverage.md`.
+Next: fix the case set before any drafting: must fire (request start, mid-task, marginal fit),
+must not fire (a "not for" exclusion, an off-topic skill).
 Done when:
-- [ ] each listed skill has a trigger rule with its `PROVENANCE.md` row, or a recorded reason to
-  leave it to native routing
-- [ ] the 2026-11-03 skill-gap row's A/B has run, or the owner waived it
-Out of scope: the framing set, and mattpocock `to-tickets` (granularity question before filing).
+- [ ] the case set is written down before the wording is drafted
+- [ ] the wording had one `write-prompt` pass and one review, then a pilot; after that it changes
+  only if a case fails
+- [ ] A/B run per `CONTRIBUTING.md`: A current, B the scan without the rules that only name a
+  skill by trigger, arm B's removed rules listed
+- [ ] `CLAUDE.md` and `CLAUDE.web.md` changed together if B wins, or the owner's reason recorded
+Out of scope: rules fixing an order or a surface (`caveman-commit`, `write-french`,
+`verify-sources`, `backlog`).
+
+### A/B test code-review-and-quality against the named reviewers
+Status: ready
+Context: `code-review-and-quality` never fired in use (`RETROSPECTIVE.md` 2026-10-28 test-run);
+`ponytail-review` + mattpocock `code-review` already run on a pushed diff. Owner, 2026-11-08
+(PR#125): A/B on two cases replayed from recent sessions, before keeping or removing it.
+Next: pick two recent reviewed diffs whose later fixes give a known-defect list.
+Done when:
+- [ ] A/B run per `CONTRIBUTING.md`, measure and cost recorded
+- [ ] skill kept with a `CLAUDE.md` trigger, or removed from `skills.txt` and `SKILLS.md`
+
+### Test the overlapping agent-skills before reinstalling them
+Status: ready
+Context: `code-simplification`, `context-engineering`, `doubt-driven-development` overlap a named
+rule or a built-in skill (`docs/research/2026-11-08-agent-skills-coverage.md` group C). Owner,
+2026-11-08 (PR#125): removed from `skills.txt` until tested.
+Next: for each skill, name the case where it would beat what covers it, or drop it.
+Done when:
+- [ ] each skill reinstalled with its test result, or dropped with the reason in the commit
 
 ### Make the backlog trigger reliable on Haiku
 Status: ready

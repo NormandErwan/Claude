@@ -55,13 +55,10 @@ slip through.
 | api-and-interface-design | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | browser-testing-with-devtools | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | ci-cd-and-automation | skills.txt `addyosmani/agent-skills` | no | - | - | - |
-| code-simplification | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | constraint-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
-| context-engineering | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | debugging-and-error-recovery | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | deprecation-and-migration | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | documentation-and-adrs | skills.txt `addyosmani/agent-skills` | no | - | - | - |
-| doubt-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | frontend-ui-engineering | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | git-workflow-and-versioning | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | idea-refine | skills.txt `addyosmani/agent-skills` | no | - | - | - |
