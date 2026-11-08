@@ -10,8 +10,8 @@ Context: owner, 2026-11-08: rules naming one skill each make `CLAUDE.md` heavy a
 skills above the others; a check "before sending" comes too late, on web too. The pre-`98492a1`
 low-bar scan was removed in a rewrite, untested (`RETROSPECTIVE.md` 2026-11-03 skill-gap).
 Candidate wording and the cases reviews found: `docs/research/2026-11-08-agent-skills-coverage.md`.
-Next: `write-prompt` pass on the scan, then one review; merge both once, freeze, then the
-runs listed in the case doc's "Next runs" (owner go needed before running).
+Next: wording frozen after pass and review (case doc). Run the case doc's "Next runs" once the
+owner gives the go; L3 and N4 await the owner's yes.
 Done when:
 - [ ] the case set is written down before the wording is drafted
 - [ ] the wording had one `write-prompt` pass and one review, then a pilot; after that it changes
