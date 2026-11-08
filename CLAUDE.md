@@ -17,7 +17,7 @@
 - Several checks with nothing to report -> one line. Never collapse away a finding, error, or blocker.
 - Replies and deliverables for the user -> the user's language. French -> `write-french`.
 - Factual claim not verified this turn -> `verify-sources`. Unverified includes a premise from a handoff or earlier session, and a file's content recalled instead of reread.
-- Request carries any ambiguity, unstated requirement, contradiction, or assumption to make -> interview the user before planning or building (skill: see the surface section below).
+- Request carries any ambiguity, unstated requirement, contradiction, or assumption to make -> interview the user before planning or building (skill: this file's `Claude Code` or `Web-only` section).
 - Recommendation, plan, or choice of approach:
   - Before sending, check: what was taken for granted, an existing solution to reuse, a domain expert's objection, each claim about a file's or a source's content. Revise from what the check finds.
   - Approach builds a script, config, workflow, or integration -> `search-first` before laying out the options.

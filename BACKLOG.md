@@ -18,10 +18,8 @@ Out of scope: rule rewrites not tied to an entry.
 ### Reference the remaining agent-skills in CLAUDE.md
 Status: ready
 Context: situation-triggered skills do not fire under native routing (`RETROSPECTIVE.md`
-2026-11-03 skill-gap). The framing set (`interview-me`, `spec-driven-development`,
-`planning-and-task-breakdown`, `incremental-implementation`) got rules in the PR that removed
-the framing-method task. Others stay unnamed: `test-driven-development`,
-`debugging-and-error-recovery`, `doubt-driven-development`, `idea-refine` and more.
+2026-11-03 skill-gap). PR#122 named the framing set; the other agent-skills in `skills.txt`
+stay unnamed in `CLAUDE.md`.
 Next: list the `skills.txt` agent-skills that `CLAUDE.md` never names, and how each overlaps a
 skill it already names.
 Done when:
