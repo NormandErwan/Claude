@@ -50,7 +50,7 @@ slip through.
 | token-codebase-exploration | native | no | - | - | - |
 | token-file-ops | native | no | - | - | - |
 | verify-sources | native | yes | 1.5.2 | `b0f58f410a` | - |
-| write-french | native | yes | 1.5.0 | `c26dfa53e6` | - |
+| write-french | native | yes | 1.6.0 | `af353cc994` | - |
 | write-guide | native | no | - | - | - |
 | api-and-interface-design | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | browser-testing-with-devtools | skills.txt `addyosmani/agent-skills` | no | - | - | - |

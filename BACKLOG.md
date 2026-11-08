@@ -41,27 +41,6 @@ Done when:
   dropped with the owner's reason
 Out of scope: the clarification rule, already restored.
 
-### Show the cause of a failed skill install in the hook report
-Status: ready
-Context: the `SessionStart` installer lists failed skills without any error, so one shared cause
-reads as many failures (`RETROSPECTIVE.md` 2026-10-30 tool-blocked). Recurred 2026-11-08:
-`write-prompt` failed, cause not shown.
-Next: make one install fail on purpose and see what error output the installer drops.
-Done when:
-- [ ] a failed install prints the first error line of one failed call in the hook report
-- [ ] a run with no failure prints nothing new
-
-### Read a repo's CONTRIBUTING.md before editing its guarded files
-Status: ready
-Context: the `CLAUDE.md` rule to read `CONTRIBUTING.md` first covers only NormandErwan/Claude;
-a handoff led to ledger edits in another repo without reading its own (`RETROSPECTIVE.md`
-2026-11-02 skill-gap). Recurrence of the 2026-09-22 skill-gap row, so `find-cause` first.
-Next: run `find-cause` on the two rows, then propose the wording.
-Done when:
-- [ ] `find-cause` trace recorded in the 2026-11-02 row
-- [ ] rule covers any attached repo with a `CONTRIBUTING.md`
-- [ ] its `PROVENANCE.md` row added
-
 ### State the strongest objection to the owner's hypothesis first
 Status: ready
 Context: owner wants critical answers that map the problem, not ones that confirm their framing
@@ -71,26 +50,6 @@ Next: draft the extension of the existing `Behavior` check, then the A/B plan, r
 Done when:
 - [ ] A/B run and recorded, or waived by the owner with a reason in `PROVENANCE.md`
 - [ ] `CLAUDE.md` and `CLAUDE.web.md` updated together if the A/B favors the change
-
-### Estimate agent-run effort in session terms
-Status: ready
-Context: effort of work the agent does was quoted in human time, inflating an option's cost
-(`RETROSPECTIVE.md` 2026-10-28 fact-corrected). Likely home: the `Behavior` clause that states
-a downside "quantified". Always-on: A/B mandatory.
-Next: draft the clause extension and the A/B plan, review first.
-Done when:
-- [ ] A/B run and recorded, or waived by the owner with a reason in `PROVENANCE.md`
-- [ ] agent work estimated in tool calls or session minutes, owner steps in human time
-
-### Use French words for repo terms in French replies
-Status: ready
-Context: French replies kept English repo terms the owner does not know ("ledger")
-(`RETROSPECTIVE.md` 2026-10-28 new-preference). Change goes in `write-french`, a native skill.
-Next: find the `write-french` defect or check this extends, before adding a new one.
-Done when:
-- [ ] `write-french` says: repo term with a plain French equivalent -> French word, English
-  name only for a file path
-- [ ] version bumped, `SKILLS.md` updated per its procedure
 
 ### Date-prefix handoff and docs file names
 Status: ready

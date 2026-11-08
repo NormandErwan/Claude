@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.5.0
+version: 1.6.0
 description: "Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase."
 ---
 
@@ -110,12 +110,17 @@ read-through; a reader does not arrive at paragraph three having already read th
 annex, and does not carry a professional certification just because the writer
 does.
 
+A repository's own English term (a file's nickname, a process name: ledger,
+handoff, hook) is a reference too. It has a plain French equivalent -> write the
+French word in prose; keep the English name only as a file path or a command.
+
 | Instead of | Write |
 |---|---|
 | « Tu as maintenant un pouvoir asymétrique » | « Tu évalues les autres, ils ne t'évaluent pas : la même remarque n'a plus le même poids » |
 | « un comportement toxique » | « des remarques qui humilient quelqu'un devant les autres » |
 | « le squelette ambulant de Cockburn, les tranches de release de Patton » | « le squelette ambulant d'Alistair Cockburn - une version minimale de l'application, qui prouve que l'architecture tient - et les tranches de release de Jeff Patton - des regroupements d'éléments assez complets pour être démontrés » |
 | « le critère testable d'INVEST » | « le critère testable d'INVEST - la grille en six critères (Independent, Negotiable, Valuable, Estimable, Small, Testable) qui évalue une user story » |
+| « Le ledger compte 17 entrées » | « Le registre des rétrospectives (`RETROSPECTIVE.md`) compte 17 entrées » |
 | « Écrire cette frontière avant le premier raffinage » | « Décider par écrit, avant le premier raffinage, ce qui relève du raffinage interne ou de l'avenant contractuel » |
 | « Le reste s'appuie sur des auteurs identifiés — Nygard, Brown, Fowler, Klein, Cockburn, Fairbanks, Poppendieck — et sur des compositions assumées » | « Le reste s'appuie sur des auteurs identifiés — Nygard, Brown, Fowler et Fairbanks — et sur des compositions assumées. Ces quatre noms sont cités et glosés plus loin dans le texte. La liste complète des sources est en annexe E. » |
 
