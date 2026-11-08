@@ -15,14 +15,18 @@ Done when:
 - [ ] every accepted entry has a task here or a PR
 Out of scope: rule rewrites not tied to an entry.
 
-### Define the framing, breakdown and planning method
-Status: blocked: wait until this file has been used for a few weeks
-Context: frame, split and plan work before building: `interview-me`, `spec-driven-development`,
-`planning-and-task-breakdown`. mattpocock `to-tickets` adds vertical slices and asking the owner
-whether the granularity fits before filing. Related `RETROSPECTIVE.md` rows: 2026-11-07.
-Next: list the tasks that turned out too big, too small or badly framed.
+### Reference the remaining agent-skills in CLAUDE.md
+Status: ready
+Context: situation-triggered skills do not fire under native routing (`RETROSPECTIVE.md`
+2026-11-03 skill-gap). PR#122 named the framing set; the other agent-skills in `skills.txt`
+stay unnamed in `CLAUDE.md`.
+Next: list the `skills.txt` agent-skills that `CLAUDE.md` never names, and how each overlaps a
+skill it already names.
 Done when:
-- [ ] method written in `CLAUDE.md` or a skill, with its `PROVENANCE.md` row
+- [ ] each listed skill has a trigger rule with its `PROVENANCE.md` row, or a recorded reason to
+  leave it to native routing
+- [ ] the 2026-11-03 skill-gap row's A/B has run, or the owner waived it
+Out of scope: the framing set, and mattpocock `to-tickets` (granularity question before filing).
 
 ### Make the backlog trigger reliable on Haiku
 Status: ready
@@ -34,3 +38,15 @@ skill description.
 Done when:
 - [ ] Haiku fires on at least 8/10 of the same should-fire cases, with no new false fire
 Out of scope: Sonnet and Opus behavior, already reliable.
+
+### Review the rules dropped as asking or low-value on 2026-10-23
+Status: ready
+Context: `b0238a9` dropped the asking rules under an owner quote later scoped to the pre-PR#94
+rules (`RETROSPECTIVE.md` 2026-10-28 fact-corrected), plus four rules judged low-value. Not in
+`CLAUDE.md` today: "touch only what was asked; delete nothing you don't fully understand", and
+owner approval before applying a ledger entry (PR#114's `CONTRIBUTING.md` covers decision entries).
+Next: for each rule `b0238a9` removed, find what in the current `CLAUDE.md` or a skill covers it.
+Done when:
+- [ ] each removed rule is marked covered (by what), restored with its `PROVENANCE.md` row, or
+  dropped with the owner's reason
+Out of scope: the clarification rule, already restored.
