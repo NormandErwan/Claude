@@ -59,7 +59,8 @@ a handoff led to ledger edits in another repo without reading its own (`RETROSPE
 Next: run `find-cause` on the two rows, then propose the wording.
 Done when:
 - [ ] `find-cause` trace recorded in the 2026-11-02 row
-- [ ] rule covers any attached repo with a `CONTRIBUTING.md`, `PROVENANCE.md` row added
+- [ ] rule covers any attached repo with a `CONTRIBUTING.md`
+- [ ] its `PROVENANCE.md` row added
 
 ### State the strongest objection to the owner's hypothesis first
 Status: ready
@@ -103,11 +104,9 @@ Done when:
 
 ### Find why verify-sources does not fire on unverified claims
 Status: ready
-Context: three claims went out unchecked though `CLAUDE.md` `Behavior` names `verify-sources`
-for them: an inline review called equal to the prescribed one, an outside measurement used
-without its sample, a count stated without counting (`RETROSPECTIVE.md` 2026-10-28 and
-2026-11-03 fact-corrected). Owner: the skill was likely never loaded. Same class as the
-2026-11-03 skill-gap row (situation-triggered skills do not fire).
+Context: three unchecked claims though `Behavior` names `verify-sources` (`RETROSPECTIVE.md`
+2026-10-28 and 2026-11-03 fact-corrected, three rows). Owner: the skill was likely never loaded.
+Same class as the 2026-11-03 skill-gap row (situation-triggered skills do not fire).
 Next: run `find-cause` on the three rows and the 2026-11-03 skill-gap row.
 Done when:
 - [ ] `find-cause` trace recorded in the three rows
