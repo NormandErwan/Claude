@@ -4,22 +4,12 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ## Tasks
 
-### Process proposed RETROSPECTIVE.md entries
-Status: ready
-Context: many entries are `proposed`, among them the 2026-11-07 rows on task granularity and
-subtask scope, written for Backlog.md and now to reread against this file. `CONTRIBUTING.md`
-(RETROSPECTIVE.md section) governs processing.
-Next: read the whole ledger, group `proposed` entries by class.
-Done when:
-- [ ] every `proposed` entry is accepted, rejected, or marked `not checkable here`
-- [ ] every accepted entry has a task here or a PR
-Out of scope: rule rewrites not tied to an entry.
-
 ### Reference the remaining agent-skills in CLAUDE.md
 Status: ready
 Context: situation-triggered skills do not fire under native routing (`RETROSPECTIVE.md`
 2026-11-03 skill-gap). PR#122 named the framing set; the other agent-skills in `skills.txt`
-stay unnamed in `CLAUDE.md`.
+stay unnamed in `CLAUDE.md`. Owner, 2026-11-08: `code-review-and-quality` never fired in use
+(`RETROSPECTIVE.md` 2026-10-28 test-run).
 Next: list the `skills.txt` agent-skills that `CLAUDE.md` never names, and how each overlaps a
 skill it already names.
 Done when:
@@ -50,3 +40,75 @@ Done when:
 - [ ] each removed rule is marked covered (by what), restored with its `PROVENANCE.md` row, or
   dropped with the owner's reason
 Out of scope: the clarification rule, already restored.
+
+### Show the cause of a failed skill install in the hook report
+Status: ready
+Context: the `SessionStart` installer lists failed skills without any error, so one shared cause
+reads as many failures (`RETROSPECTIVE.md` 2026-10-30 tool-blocked). Recurred 2026-11-08:
+`write-prompt` failed, cause not shown.
+Next: make one install fail on purpose and see what error output the installer drops.
+Done when:
+- [ ] a failed install prints the first error line of one failed call in the hook report
+- [ ] a run with no failure prints nothing new
+
+### Read a repo's CONTRIBUTING.md before editing its guarded files
+Status: ready
+Context: the `CLAUDE.md` rule to read `CONTRIBUTING.md` first covers only NormandErwan/Claude;
+a handoff led to ledger edits in another repo without reading its own (`RETROSPECTIVE.md`
+2026-11-02 skill-gap). Recurrence of the 2026-09-22 skill-gap row, so `find-cause` first.
+Next: run `find-cause` on the two rows, then propose the wording.
+Done when:
+- [ ] `find-cause` trace recorded in the 2026-11-02 row
+- [ ] rule covers any attached repo with a `CONTRIBUTING.md`
+- [ ] its `PROVENANCE.md` row added
+
+### State the strongest objection to the owner's hypothesis first
+Status: ready
+Context: owner wants critical answers that map the problem, not ones that confirm their framing
+(`RETROSPECTIVE.md` 2026-11-03 new-preference). `Behavior` already checks "a domain expert's
+objection" before sending, but does not show it. Always-on: A/B mandatory (`CONTRIBUTING.md`).
+Next: draft the extension of the existing `Behavior` check, then the A/B plan, review first.
+Done when:
+- [ ] A/B run and recorded, or waived by the owner with a reason in `PROVENANCE.md`
+- [ ] `CLAUDE.md` and `CLAUDE.web.md` updated together if the A/B favors the change
+
+### Estimate agent-run effort in session terms
+Status: ready
+Context: effort of work the agent does was quoted in human time, inflating an option's cost
+(`RETROSPECTIVE.md` 2026-10-28 fact-corrected). Likely home: the `Behavior` clause that states
+a downside "quantified". Always-on: A/B mandatory.
+Next: draft the clause extension and the A/B plan, review first.
+Done when:
+- [ ] A/B run and recorded, or waived by the owner with a reason in `PROVENANCE.md`
+- [ ] agent work estimated in tool calls or session minutes, owner steps in human time
+
+### Use French words for repo terms in French replies
+Status: ready
+Context: French replies kept English repo terms the owner does not know ("ledger")
+(`RETROSPECTIVE.md` 2026-10-28 new-preference). Change goes in `write-french`, a native skill.
+Next: find the `write-french` defect or check this extends, before adding a new one.
+Done when:
+- [ ] `write-french` says: repo term with a plain French equivalent -> French word, English
+  name only for a file path
+- [ ] version bumped, `SKILLS.md` updated per its procedure
+
+### Date-prefix handoff and docs file names
+Status: ready
+Context: handoff files and `docs/` notes named without a date cannot be ordered
+(`RETROSPECTIVE.md` 2026-11-07 new-preference, two rows). `docs/research/` already follows
+`YYYY-MM-DD-<slug>.md` by habit; no rule states it.
+Next: check whether `v-model-documents` or `research` already names files, before writing a rule.
+Done when:
+- [ ] `handoff` names its file `YYYY-MM-DD-<slug>.md`
+- [ ] a rule makes new `docs/` files take the same prefix, with its `PROVENANCE.md` row
+
+### Find why verify-sources does not fire on unverified claims
+Status: ready
+Context: three unchecked claims though `Behavior` names `verify-sources` (`RETROSPECTIVE.md`
+2026-10-28 and 2026-11-03 fact-corrected, three rows). Owner: the skill was likely never loaded.
+Same class as the 2026-11-03 skill-gap row (situation-triggered skills do not fire).
+Next: run `find-cause` on the three rows and the 2026-11-03 skill-gap row.
+Done when:
+- [ ] `find-cause` trace recorded in the three rows
+- [ ] a fix proposed with its measure, or the owner's reason to leave it
+Out of scope: the skills the agent-skills task covers.
