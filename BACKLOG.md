@@ -5,13 +5,13 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 ## Tasks
 
 ### Reference the remaining agent-skills in CLAUDE.md
-Status: ready
+Status: needs owner: which group-A skills get a rule, group-C removals, the 2026-11-03 A/B
 Context: situation-triggered skills do not fire under native routing (`RETROSPECTIVE.md`
 2026-11-03 skill-gap). PR#122 named the framing set; the other agent-skills in `skills.txt`
 stay unnamed in `CLAUDE.md`. Owner, 2026-11-08: `code-review-and-quality` never fired in use
-(`RETROSPECTIVE.md` 2026-10-28 test-run).
-Next: list the `skills.txt` agent-skills that `CLAUDE.md` never names, and how each overlaps a
-skill it already names.
+(`RETROSPECTIVE.md` 2026-10-28 test-run). Inventory of the 20 unnamed skills, grouped:
+`docs/research/2026-11-08-agent-skills-coverage.md`.
+Next: owner decides groups A and C of the inventory; then draft the rules (`write-prompt` pass).
 Done when:
 - [ ] each listed skill has a trigger rule with its `PROVENANCE.md` row, or a recorded reason to
   leave it to native routing
