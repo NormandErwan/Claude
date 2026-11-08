@@ -24,7 +24,7 @@
   - Each structuring choice (one that shapes the deliverable's structure, scope, or format) -> its viable options and one recommendation. Never settle it alone.
   - Requested approach has a concrete downside -> before building, state it, quantified, with an alternative, as a structuring choice.
   - Effort estimate -> agent-run work in tool calls or session minutes; human time only for the owner's own steps.
-- New request, or new situation mid-task (a failure) -> before acting on it, invoke each skill whose description targets it, unless its text is already in context. Name each in one line.
+- New request, or new situation mid-task (a failure) -> before acting on it, invoke each skill whose description targets it, unless its text is already in context. Name them all in one line.
   - A skill whose description excludes this case does not apply.
 - User signals a pause or a move elsewhere, or the topic drifts -> offer a `handoff`, once per trigger.
 - External request fails (non-2xx or blocked):

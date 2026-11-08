@@ -176,7 +176,7 @@ then frozen: after the runs, it changes only if a case fails.
   ~$1.80). A fires them by construction. A skill fired 3/3 -> its rule goes; otherwise it stays.
 - S15 and S5 on B again with the frozen wording, 3 runs each (6 runs, ~$0.80), since the
   reduced test used the starting wording.
-- Proposed after review, awaiting owner: L3 (marginal fit) and N4 (many marginal fits) on B,
+- Owner-approved after review: L3 (marginal fit) and N4 (many marginal fits) on B,
   3 runs each (6 runs, ~$0.80), since "targets" is the new bar against long lists.
 
 ## Wording pass and review (2026-11-08)
@@ -202,10 +202,11 @@ Review (`ponytail-review`, then mattpocock `code-review` on both axes), merged o
 | `source-driven-development` triggers on a belief (code from memory), not a request or failure | standards, spec | no wording change: S16 decides whether its rule stays |
 | `CLAUDE.web.md` mirror, `PROVENANCE.md` retirement rows, A/B record | standards | at landing, if B wins |
 
-Frozen wording (arm B); after the runs it changes only if a case fails:
+Frozen wording (arm B); after the runs it changes only if a case fails. Owner edit before the
+runs: "Name each in one line" -> "Name them all in one line".
 
 ```
-- New request, or new situation mid-task (a failure) -> before acting on it, invoke each skill whose description targets it, unless its text is already in context. Name each in one line.
+- New request, or new situation mid-task (a failure) -> before acting on it, invoke each skill whose description targets it, unless its text is already in context. Name them all in one line.
   - A skill whose description excludes this case does not apply.
 ```
 

@@ -5,6 +5,8 @@ ARM=$1; ID=$2; PROMPT=$3
 R=$S/runs/$ID-$ARM; rm -rf $R; mkdir -p $R
 cp -r $S/template $R/w; cp $S/arms/$ARM.md $R/w/.claude/CLAUDE.md
 git init -q --bare $R/origin.git
+CASE=${ID%%-r*}; HERE=$(cd "$(dirname "$0")" && pwd)
+[ -f "$HERE/cases/$CASE.sh" ] && (cd $R/w && bash "$HERE/cases/$CASE.sh")
 cd $R/w && git init -q -b main && git add -A && git -c user.name=t -c user.email=t@t commit -qm init && git remote add origin $R/origin.git && git push -q origin main 2>/dev/null
 mkdir -p $R/cfg
 printf '{"projects":{"%s":{"hasTrustDialogAccepted":true}}}' "$R/w" > $R/cfg/.claude.json
