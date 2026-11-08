@@ -1,0 +1,72 @@
+{"batch": "reduced-starting-wording", "case": "S15", "run": "r1", "arm": "A", "skills": [[1, "debugging-and-error-recovery"]], "first_write": 5, "tool_calls": 8, "cost_usd": 0.12805720000000004, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S15", "run": "r1", "arm": "B", "skills": [[1, "debugging-and-error-recovery"]], "first_write": 6, "tool_calls": 9, "cost_usd": 0.13685430000000004, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S15", "run": "r1", "arm": "C", "skills": [], "first_write": 5, "tool_calls": 8, "cost_usd": 0.11126299999999999, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S15", "run": "r2", "arm": "A", "skills": [[1, "debugging-and-error-recovery"]], "first_write": 6, "tool_calls": 9, "cost_usd": 0.1311353, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S15", "run": "r2", "arm": "B", "skills": [[1, "debugging-and-error-recovery"]], "first_write": 6, "tool_calls": 7, "cost_usd": 0.11839590000000001, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S15", "run": "r2", "arm": "C", "skills": [], "first_write": 5, "tool_calls": 7, "cost_usd": 0.10153700000000002, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S15", "run": "r3", "arm": "A", "skills": [[1, "debugging-and-error-recovery"]], "first_write": 6, "tool_calls": 9, "cost_usd": 0.1383773, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S15", "run": "r3", "arm": "B", "skills": [[1, "debugging-and-error-recovery"]], "first_write": 6, "tool_calls": 7, "cost_usd": 0.1173541, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S15", "run": "r3", "arm": "C", "skills": [], "first_write": 5, "tool_calls": 8, "cost_usd": 0.1114744, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S5", "run": "r1", "arm": "A", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.0862672, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S5", "run": "r1", "arm": "B", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.08514089999999999, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S5", "run": "r1", "arm": "C", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.0839005, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S5", "run": "r2", "arm": "A", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.0853674, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S5", "run": "r2", "arm": "B", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.0848765, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S5", "run": "r2", "arm": "C", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.0819378, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S5", "run": "r3", "arm": "A", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.0859949, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S5", "run": "r3", "arm": "B", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.0916891, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "S5", "run": "r3", "arm": "C", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.08379249999999999, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "U2", "run": "r1", "arm": "A", "skills": [], "first_write": 5, "tool_calls": 8, "cost_usd": 0.13050669999999998, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "U2", "run": "r1", "arm": "B", "skills": [[2, "observability-and-instrumentation"]], "first_write": 6, "tool_calls": 8, "cost_usd": 0.1491145, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "U2", "run": "r1", "arm": "C", "skills": [], "first_write": null, "tool_calls": 3, "cost_usd": 0.08300969999999999, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "U2", "run": "r2", "arm": "A", "skills": [], "first_write": 5, "tool_calls": 12, "cost_usd": 0.1453717, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "U2", "run": "r2", "arm": "B", "skills": [[2, "interview-me"]], "first_write": null, "tool_calls": 3, "cost_usd": 0.10325109999999998, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "U2", "run": "r2", "arm": "C", "skills": [], "first_write": 5, "tool_calls": 6, "cost_usd": 0.1074265, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "U2", "run": "r3", "arm": "A", "skills": [], "first_write": 6, "tool_calls": 11, "cost_usd": 0.16224159999999999, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "U2", "run": "r3", "arm": "B", "skills": [[2, "interview-me"]], "first_write": null, "tool_calls": 3, "cost_usd": 0.10277170000000001, "denials": 0}
+{"batch": "reduced-starting-wording", "case": "U2", "run": "r3", "arm": "C", "skills": [], "first_write": null, "tool_calls": 3, "cost_usd": 0.08126049999999999, "denials": 0}
+{"batch": "frozen-wording", "case": "L3", "run": "r1", "arm": "B", "skills": [], "first_write": 3, "tool_calls": 5, "cost_usd": 0.0987952, "denials": 0}
+{"batch": "frozen-wording", "case": "L3", "run": "r2", "arm": "B", "skills": [], "first_write": 3, "tool_calls": 3, "cost_usd": 0.08180190000000001, "denials": 0}
+{"batch": "frozen-wording", "case": "L3", "run": "r3", "arm": "B", "skills": [], "first_write": 4, "tool_calls": 5, "cost_usd": 0.09255329999999999, "denials": 0}
+{"batch": "frozen-wording", "case": "N4", "run": "r1", "arm": "B", "skills": [[1, "interview-me"], [2, "frontend-ui-engineering"], [3, "incremental-implementation"]], "first_write": 9, "tool_calls": 11, "cost_usd": 0.2042546, "denials": 0}
+{"batch": "frozen-wording", "case": "N4", "run": "r2", "arm": "B", "skills": [[8, "backlog"]], "first_write": 5, "tool_calls": 10, "cost_usd": 0.1629707, "denials": 0}
+{"batch": "frozen-wording", "case": "N4", "run": "r3", "arm": "B", "skills": [[3, "interview-me"]], "first_write": null, "tool_calls": 3, "cost_usd": 0.1100744, "denials": 0}
+{"batch": "frozen-wording", "case": "S14", "run": "r1", "arm": "B", "skills": [[6, "backlog"], [7, "caveman-commit"]], "first_write": 3, "tool_calls": 8, "cost_usd": 0.1318863, "denials": 0}
+{"batch": "frozen-wording", "case": "S14", "run": "r2", "arm": "B", "skills": [], "first_write": 3, "tool_calls": 5, "cost_usd": 0.10849719999999999, "denials": 0}
+{"batch": "frozen-wording", "case": "S14", "run": "r3", "arm": "B", "skills": [], "first_write": 3, "tool_calls": 5, "cost_usd": 0.10600029999999999, "denials": 0}
+{"batch": "frozen-wording", "case": "S15", "run": "r1", "arm": "B", "skills": [[1, "debugging-and-error-recovery"], [2, "test-driven-development"]], "first_write": 7, "tool_calls": 10, "cost_usd": 0.1684951, "denials": 0}
+{"batch": "frozen-wording", "case": "S15", "run": "r2", "arm": "B", "skills": [[1, "debugging-and-error-recovery"], [2, "test-driven-development"]], "first_write": 7, "tool_calls": 10, "cost_usd": 0.16460510000000006, "denials": 0}
+{"batch": "frozen-wording", "case": "S15", "run": "r3", "arm": "B", "skills": [[1, "debugging-and-error-recovery"], [2, "test-driven-development"]], "first_write": 7, "tool_calls": 10, "cost_usd": 0.1638437, "denials": 0}
+{"batch": "frozen-wording", "case": "S16", "run": "r1", "arm": "B", "skills": [[1, "interview-me"]], "first_write": null, "tool_calls": 2, "cost_usd": 0.0955403, "denials": 0}
+{"batch": "frozen-wording", "case": "S16", "run": "r2", "arm": "B", "skills": [[1, "interview-me"], [2, "search-first"]], "first_write": null, "tool_calls": 3, "cost_usd": 0.109181, "denials": 0}
+{"batch": "frozen-wording", "case": "S16", "run": "r3", "arm": "B", "skills": [[2, "interview-me"], [3, "search-first"]], "first_write": null, "tool_calls": 3, "cost_usd": 0.1098601, "denials": 0}
+{"batch": "frozen-wording", "case": "S4", "run": "r1", "arm": "B", "skills": [[1, "find-cause"], [2, "debugging-and-error-recovery"]], "first_write": null, "tool_calls": 5, "cost_usd": 0.13776750000000001, "denials": 0}
+{"batch": "frozen-wording", "case": "S4", "run": "r2", "arm": "B", "skills": [[1, "find-cause"]], "first_write": null, "tool_calls": 5, "cost_usd": 0.1263798, "denials": 0}
+{"batch": "frozen-wording", "case": "S4", "run": "r3", "arm": "B", "skills": [[1, "find-cause"]], "first_write": null, "tool_calls": 4, "cost_usd": 0.1287483, "denials": 0}
+{"batch": "frozen-wording", "case": "S5", "run": "r1", "arm": "B", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.09213659999999999, "denials": 0}
+{"batch": "frozen-wording", "case": "S5", "run": "r2", "arm": "B", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.0852429, "denials": 0}
+{"batch": "frozen-wording", "case": "S5", "run": "r3", "arm": "B", "skills": [[1, "guide-decision"]], "first_write": null, "tool_calls": 1, "cost_usd": 0.085645, "denials": 0}
+{"batch": "frozen-wording", "case": "S6", "run": "r1", "arm": "B", "skills": [[1, "guide-purchase"], [2, "interview-me"]], "first_write": null, "tool_calls": 2, "cost_usd": 0.10496349999999999, "denials": 0}
+{"batch": "frozen-wording", "case": "S6", "run": "r2", "arm": "B", "skills": [[1, "guide-purchase"], [2, "verify-sources"]], "first_write": null, "tool_calls": 2, "cost_usd": 0.1059353, "denials": 0}
+{"batch": "frozen-wording", "case": "S6", "run": "r3", "arm": "B", "skills": [[1, "guide-purchase"], [2, "verify-sources"]], "first_write": null, "tool_calls": 2, "cost_usd": 0.10815079999999999, "denials": 0}
+{"batch": "frozen-wording", "case": "U2b", "run": "r1", "arm": "A", "skills": [], "first_write": 4, "tool_calls": 9, "cost_usd": 0.1304571, "denials": 0}
+{"batch": "frozen-wording", "case": "U2b", "run": "r1", "arm": "B", "skills": [[3, "observability-and-instrumentation"]], "first_write": 4, "tool_calls": 5, "cost_usd": 0.1152812, "denials": 0}
+{"batch": "frozen-wording", "case": "U2b", "run": "r1", "arm": "C", "skills": [], "first_write": 3, "tool_calls": 6, "cost_usd": 0.1033945, "denials": 0}
+{"batch": "frozen-wording", "case": "U2b", "run": "r2", "arm": "A", "skills": [], "first_write": 4, "tool_calls": 13, "cost_usd": 0.18848200000000004, "denials": 1}
+{"batch": "frozen-wording", "case": "U2b", "run": "r2", "arm": "B", "skills": [], "first_write": 3, "tool_calls": 5, "cost_usd": 0.10085140000000002, "denials": 0}
+{"batch": "frozen-wording", "case": "U2b", "run": "r2", "arm": "C", "skills": [], "first_write": 3, "tool_calls": 7, "cost_usd": 0.11658650000000001, "denials": 0}
+{"batch": "frozen-wording", "case": "U2b", "run": "r3", "arm": "A", "skills": [], "first_write": 4, "tool_calls": 11, "cost_usd": 0.14752469999999998, "denials": 0}
+{"batch": "frozen-wording", "case": "U2b", "run": "r3", "arm": "B", "skills": [], "first_write": 3, "tool_calls": 7, "cost_usd": 0.1182156, "denials": 0}
+{"batch": "frozen-wording", "case": "U2b", "run": "r3", "arm": "C", "skills": [], "first_write": 3, "tool_calls": 7, "cost_usd": 0.1094422, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r1", "arm": "A", "skills": [], "first_write": 3, "tool_calls": 4, "cost_usd": 0.0931443, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r1", "arm": "B", "skills": [], "first_write": 3, "tool_calls": 4, "cost_usd": 0.09203139999999999, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r2", "arm": "A", "skills": [], "first_write": 2, "tool_calls": 3, "cost_usd": 0.11378500000000003, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r2", "arm": "B", "skills": [], "first_write": 2, "tool_calls": 3, "cost_usd": 0.0904128, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r3", "arm": "A", "skills": [], "first_write": 3, "tool_calls": 4, "cost_usd": 0.09218459999999999, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r3", "arm": "B", "skills": [], "first_write": 2, "tool_calls": 3, "cost_usd": 0.10231649999999999, "denials": 0}
+{"batch": "frozen-wording-N3", "case": "N3", "run": "r1", "arm": "B", "turn": 1, "skills": [[1, "debugging-and-error-recovery"], [2, "test-driven-development"]], "first_write": 7, "tool_calls": 8, "cost_usd": 0.14360750000000003, "denials": 0}
+{"batch": "frozen-wording-N3", "case": "N3", "run": "r1", "arm": "B", "turn": 2, "skills": [], "first_write": 1, "tool_calls": 4, "cost_usd": 0.17735990000000004, "denials": 0}
+{"batch": "frozen-wording-N3", "case": "N3", "run": "r2", "arm": "B", "turn": 1, "skills": [[1, "debugging-and-error-recovery"], [2, "test-driven-development"]], "first_write": 7, "tool_calls": 8, "cost_usd": 0.1483889, "denials": 0}
+{"batch": "frozen-wording-N3", "case": "N3", "run": "r2", "arm": "B", "turn": 2, "skills": [], "first_write": 1, "tool_calls": 2, "cost_usd": 0.1676119, "denials": 0}
+{"batch": "frozen-wording-N3", "case": "N3", "run": "r3", "arm": "B", "turn": 1, "skills": [[1, "debugging-and-error-recovery"], [2, "test-driven-development"]], "first_write": 7, "tool_calls": 8, "cost_usd": 0.14612380000000003, "denials": 0}
+{"batch": "frozen-wording-N3", "case": "N3", "run": "r3", "arm": "B", "turn": 2, "skills": [], "first_write": 1, "tool_calls": 2, "cost_usd": 0.16430450000000005, "denials": 0}

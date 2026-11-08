@@ -4,24 +4,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ## Tasks
 
-### Replace named skill rules with a skill scan
-Status: ready
-Context: owner, 2026-11-08: rules naming one skill each make `CLAUDE.md` heavy and may rank named
-skills above the others; a check "before sending" comes too late, on web too. The pre-`98492a1`
-low-bar scan was removed in a rewrite, untested (`RETROSPECTIVE.md` 2026-11-03 skill-gap).
-Candidate wording and the cases reviews found: `docs/research/2026-11-08-agent-skills-coverage.md`.
-Next: fix the case set before any drafting: must fire (request start, mid-task, marginal fit),
-must not fire (a "not for" exclusion, an off-topic skill).
-Done when:
-- [ ] the case set is written down before the wording is drafted
-- [ ] the wording had one `write-prompt` pass and one review, then a pilot; after that it changes
-  only if a case fails
-- [ ] A/B run per `CONTRIBUTING.md`: A current, B the scan without the rules that only name a
-  skill by trigger, arm B's removed rules listed
-- [ ] `CLAUDE.md` and `CLAUDE.web.md` changed together if B wins, or the owner's reason recorded
-Out of scope: rules fixing an order or a surface (`caveman-commit`, `write-french`,
-`verify-sources`, `backlog`).
-
 ### A/B test code-review-and-quality against the named reviewers
 Status: ready
 Context: `code-review-and-quality` never fired in use (`RETROSPECTIVE.md` 2026-10-28 test-run);
@@ -94,3 +76,17 @@ Done when:
 - [ ] `find-cause` trace recorded in the three rows
 - [ ] a fix proposed with its measure, or the owner's reason to leave it
 Out of scope: the skills the agent-skills task covers.
+
+### Find or build a reusable harness for rule and skill A/B tests
+Status: ready
+Context: each A/B test rebuilds its own `claude -p` setup and loses runs to avoidable errors:
+15 listed in `docs/research/2026-11-08-ab-test-avoidable-errors.md`. Claude Code 2.1.319 ships
+`claude plugin eval` (graders incl. `tool_used: Skill`, no-plugin baseline arm); unknown whether
+it compares `CLAUDE.md` arms. Latest harness: `docs/evidence/skill-scan/`.
+Next: `search-first`: what `claude plugin eval` and published skills cover (arm isolation,
+`SessionStart` hook, trust, permissions, cost capture), against `docs/evidence/skill-scan/`.
+Done when:
+- [ ] a tool or skill adopted or built that prevents, or catches before any scored run, each
+  error in the avoidable-errors list
+- [ ] `CONTRIBUTING.md`'s A/B steps point to it
+Out of scope: `write-skill`'s quality evals of a skill's output.

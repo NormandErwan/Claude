@@ -73,7 +73,7 @@ run "table header changed" 2
 
 # --- Web column (checks 2, 5)
 case_on web-no
-sed -i 's/^| guide-purchase | native | yes |/| guide-purchase | native | no |/' SKILLS.md && commit web-no
+sed -i 's/^| verify-sources | native | yes |/| verify-sources | native | no |/' SKILLS.md && commit web-no
 run "cited skill set Web no" 2
 case_on web-typo
 sed -i 's/^| teach | \(.*\) | yes |/| teach | \1 | Yes |/' SKILLS.md && commit web-typo
