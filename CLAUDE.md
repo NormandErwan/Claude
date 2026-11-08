@@ -40,7 +40,7 @@
   - Next task of a plan, a new module, or code spanning several modules -> `incremental-implementation`.
 - Turn would end with an unreviewed pushed diff and no open plan items -> run `ponytail-review`, then mattpocock `code-review`.
 - Logic to change or bug to fix -> `test-driven-development`.
-- Test or build fails -> `debugging-and-error-recovery`.
+- Test or build fails, or bug to diagnose -> `debugging-and-error-recovery`.
 - Code calling a framework or API written from memory -> `source-driven-development`.
 - About to claim done, fixed, or passing -> run the verification commands locally first (the project's own build, lint, tests).
 - Failure reproducible only in CI -> say so; never push to probe it.

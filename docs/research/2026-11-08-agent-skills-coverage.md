@@ -48,6 +48,8 @@ built-in `security-review`.
 
 - Group A: rules for `test-driven-development`, `debugging-and-error-recovery`,
   `source-driven-development`.
+- Not picked: `idea-refine`, covered by the Behavior interview rule (`interview-me`);
+  `constraint-driven-development`, not picked by the owner.
 - Group B: native routing.
 - `code-review-and-quality`: A/B on two replayed cases (`BACKLOG.md`).
 - Group C: removed from `skills.txt` until tested (`BACKLOG.md`).
