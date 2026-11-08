@@ -40,13 +40,13 @@ case_on version
 row_tree() { git rev-parse --short=10 HEAD:skills/write-french; }
 echo x >>skills/write-french/SKILL.md && commit edit
 run "edit without bump" 2
-sed -i 's/^version: 1.4.3/version: 1.4.4/' skills/write-french/SKILL.md && commit bump
+sed -i 's/^version: .*/version: 9.9.9/' skills/write-french/SKILL.md && commit bump
 run "bump, row not updated" 2
-sed -i "s/| 1.4.3 | \`add4646196\`/| 1.4.4 | \`$(row_tree)\`/" SKILLS.md && commit row
+sed -i "/^| write-french /s/| [0-9.]* | \`[0-9a-f]*\`/| 9.9.9 | \`$(row_tree)\`/" SKILLS.md && commit row
 run "row updated" 0
 git update-ref refs/remotes/origin/version HEAD
 echo y >>skills/write-french/SKILL.md && commit edit2
-sed -i "s/| 1.4.4 | \`[0-9a-f]*\`/| 1.4.4 | \`$(row_tree)\`/" SKILLS.md && commit row2
+sed -i "s/| 9.9.9 | \`[0-9a-f]*\`/| 9.9.9 | \`$(row_tree)\`/" SKILLS.md && commit row2
 run "re-sent zip, same version" 2
 
 # --- rows (checks 0, 1)

@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.4.3
+version: 1.5.0
 description: "Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase."
 ---
 
@@ -23,8 +23,8 @@ example proves nothing about French.
 - Any French output: chat replies, guides, reports, syntheses
 - The user writes in French, so the reply is French
 
-**Not for:** skills, handoffs, commit messages, PR bodies, code, code
-comments, README files and manifests - English by repo rule.
+**Not for:** skills, commit messages, PR bodies, code, code comments,
+README files and manifests - English by repo rule.
 
 ## Concision Has A Floor
 
