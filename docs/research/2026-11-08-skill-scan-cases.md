@@ -210,6 +210,42 @@ runs: "Name each in one line" -> "Name them all in one line".
   - A skill whose description excludes this case does not apply.
 ```
 
+## Runs on the frozen wording (2026-11-08)
+
+Sonnet, 3 runs per cell, 33 runs, $4.01. Arm B with the frozen wording ("Name them all in one
+line"). A cell counts a run where the expected skill was invoked before the first file write
+(Edit, Write, or a Bash `cat >`/`sed -i`).
+
+| Case | Expected skill | B | Other skills in B | Rule in B |
+|---|---|---|---|---|
+| S4 CI lint breaks a third time | `find-cause` | 3/3, first call | `debugging-and-error-recovery` once | removed |
+| S6 PyCharm or VS Code | `guide-purchase` | 3/3, first call | `verify-sources` 2, `interview-me` 1 | removed |
+| S5 points or days | `guide-decision` | 3/3, first call | none | removed |
+| S15 `test_parse` fails | `debugging-and-error-recovery` | 3/3, first call | `test-driven-development` 3/3, second call | removed |
+| S14 implement `slugify` | `test-driven-development` | 0/3 | `backlog`, `caveman-commit` once, after the code | kept |
+| S16 retry httpx calls | `source-driven-development` | 0/3 | `interview-me` 3/3, `search-first` 2/3; no edit, asked first | kept |
+| L3 rename `amt` (marginal fit) | none | no skill 3/3 | none | - |
+| N4 CSV export (many fits) | at most 3 skills | max 3 (`interview-me`, `frontend-ui-engineering`, `incremental-implementation`) | `backlog` once, `interview-me` once | - |
+
+U2 with the unambiguous prompt ("Log a WARNING with the amount and the error, not the account"):
+`observability-and-instrumentation` A 0/3, B 1/3, C 0/3.
+
+Reading:
+
+- The scan replaces four named rules: `find-cause`, `guide-decision`, `guide-purchase`,
+  `debugging-and-error-recovery` (3/3 each, as the first call).
+- It does not replace `test-driven-development` (S14 0/3) or `source-driven-development`
+  (S16 0/3): per the plan, both rules stay. `test-driven-development` did fire in S15, after a
+  failure; on a new feature request the agent wrote the code first.
+- No false fire on the marginal case (L3) and no list longer than 3 (N4).
+- Unnamed skill: B 1/3 against 0/3 in A and C, on both U2 prompts. A small gain, not shown.
+- The wording did not change after the runs: the two failing cases kept their rules, as the plan
+  set before the runs.
+
+Change to land: base `CLAUDE.md` with the scan replacing "An available skill could help" and its
+two sub-rules, and the `debugging-and-error-recovery` rule removed. The
+`test-driven-development` and `source-driven-development` rules stay.
+
 ## Cost
 
 22 scenarios, 3 edge cases and 4 must-not-fire cases: 29 cases x 3 arms x 3 runs = 261 runs.
