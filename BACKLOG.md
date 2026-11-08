@@ -5,18 +5,38 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 ## Tasks
 
 ### Reference the remaining agent-skills in CLAUDE.md
-Status: needs owner: run or waive the 2026-11-03 skill-gap A/B
-Context: situation-triggered skills do not fire under native routing (`RETROSPECTIVE.md`
-2026-11-03 skill-gap). Inventory of the 20 unnamed skills, grouped:
-`docs/research/2026-11-08-agent-skills-coverage.md`. Owner, 2026-11-08 (PR#125): rules for
-`test-driven-development`, `debugging-and-error-recovery`, `source-driven-development`; group B
-left to native routing; `code-review-and-quality` and group C go to their own test tasks.
-Next: owner decides on the A/B once it is explained.
+Status: in progress (ccr-4d4c5335-tqbl4e, PR#125)
+Context: owner decisions and review findings: `docs/research/2026-11-08-agent-skills-coverage.md`.
+The rules, removals and new test tasks are pushed. The 2026-11-03 A/B moved to the task "Replace
+named skill rules with a skill scan". Finish in a new session.
+Next: merge `CONTRIBUTING.md`'s two new bullets into one trigger -> action rule, scoped to
+"before any test" (owner's ask), and file its `test-run` row.
 Done when:
-- [ ] each listed skill has a trigger rule with its `PROVENANCE.md` row, or a recorded reason to
-  leave it to native routing
-- [ ] the 2026-11-03 skill-gap row's A/B has run, or the owner waived it
-Out of scope: the framing set, and mattpocock `to-tickets` (granularity question before filing).
+- [ ] `idea-refine` (covered by `interview-me`) and `constraint-driven-development` (not picked by
+  the owner) carry their reason in the inventory doc
+- [ ] the `debugging-and-error-recovery` trigger also covers a bug to diagnose with no failing test
+- [ ] the `CONTRIBUTING.md` rule and its `test-run` row are in
+- [ ] `ponytail-review` and mattpocock `code-review` rerun on the final diff, PR#125 merged, this
+  section deleted
+Out of scope: the skill scan; the framing set; mattpocock `to-tickets`.
+
+### Replace named skill rules with a skill scan
+Status: ready
+Context: owner, 2026-11-08: rules naming one skill each make `CLAUDE.md` heavy and may rank named
+skills above the others; a check "before sending" comes too late, on web too. The pre-`98492a1`
+low-bar scan was removed in a rewrite, untested (`RETROSPECTIVE.md` 2026-11-03 skill-gap).
+Candidate wording and the cases reviews found: `docs/research/2026-11-08-agent-skills-coverage.md`.
+Next: fix the case set before any drafting: must fire (request start, mid-task, marginal fit),
+must not fire (a "not for" exclusion, an off-topic skill).
+Done when:
+- [ ] the case set is written down before the wording is drafted
+- [ ] the wording had one `write-prompt` pass and one review, then a pilot; after that it changes
+  only if a case fails
+- [ ] A/B run per `CONTRIBUTING.md`: A current, B the scan without the rules that only name a
+  skill by trigger, arm B's removed rules listed
+- [ ] `CLAUDE.md` and `CLAUDE.web.md` changed together if B wins, or the owner's reason recorded
+Out of scope: rules fixing an order or a surface (`caveman-commit`, `write-french`,
+`verify-sources`, `backlog`).
 
 ### A/B test code-review-and-quality against the named reviewers
 Status: ready

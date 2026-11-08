@@ -43,3 +43,31 @@ built-in `security-review`.
 | `context-engineering` | `CLAUDE.md` itself, `write-prompt` |
 | `doubt-driven-development` | Behavior "before sending, check ... a domain expert's objection"; `BACKLOG.md` task "State the strongest objection to the owner's hypothesis first" |
 | `code-review-and-quality` | see group A: rule or removal |
+
+## Owner decisions (2026-11-08, PR#125)
+
+- Group A: rules for `test-driven-development`, `debugging-and-error-recovery`,
+  `source-driven-development`.
+- Group B: native routing.
+- `code-review-and-quality`: A/B on two replayed cases (`BACKLOG.md`).
+- Group C: removed from `skills.txt` until tested (`BACKLOG.md`).
+
+## Skill scan: starting point, not a frozen wording
+
+For the `BACKLOG.md` task "Replace named skill rules with a skill scan". Last candidate, replacing
+the `Behavior` line "An available skill could help -> invoke it and name it in one line":
+
+```
+- New request, or a new situation mid-task (a failure, a finished diff) -> before acting, invoke each fitting skill not yet invoked this conversation; name each in one line.
+  - A skill whose description says "not for" this case does not fit.
+```
+
+Cases the reviews found (`ponytail-review`, mattpocock `code-review`), to put in the case set:
+
+- A situation that arises mid-task (a test fails, a diff is pushed): a scan run only before the
+  first tool call misses it.
+- A skill already invoked this conversation: re-invoking it each turn reloads its text.
+- A skill whose description excludes the case (`find-cause` on a single live bug).
+- A request that fits many skills marginally: "even marginally" gives long lists.
+- Rules that fix an order or a surface (`ponytail-review` at turn end, `write-french`): arm B must
+  state which rules it removes, or the comparison mixes two changes.
