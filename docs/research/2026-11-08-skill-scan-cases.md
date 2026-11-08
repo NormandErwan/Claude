@@ -4,63 +4,112 @@ For the `BACKLOG.md` task "Replace named skill rules with a skill scan". Written
 wording is drafted; after the pilot, the wording changes only if a case below fails. Starting
 wording and review findings: `2026-11-08-agent-skills-coverage.md`.
 
-Status: draft, awaiting owner review.
+Status: owner-approved arms and model (2026-11-08); scenarios await owner review.
 
 ## Arms
 
-- A: `CLAUDE.md` as on PR#125's head.
-- B: A with the `Behavior` line "An available skill could help -> invoke it and name it in one
-  line" replaced by the scan, and these rules removed (they only name a skill by its trigger):
+Base: `CLAUDE.md` on `main` at `570965d`.
+
+- A (current): base unchanged.
+- B (scan): base with the `Behavior` line "An available skill could help -> invoke it and name it
+  in one line" replaced by the scan, and these rules removed (they only name a skill by its
+  trigger; list approved by the owner, 2026-11-08):
   - `Recurring failure -> find-cause`
   - `Personal advice or a method judgment call -> guide-decision; a purchase -> guide-purchase`
   - `Logic to change or bug to fix -> test-driven-development`
   - `Test or build fails, or bug to diagnose -> debugging-and-error-recovery`
   - `Code calling a framework or API written from memory -> source-driven-development`
-- Kept in both arms, because they fix an order, a surface or a source: the task's out-of-scope
-  rules (`caveman-commit`, `write-french`, `verify-sources`, `backlog`), plus `interview-me` and
-  the framing chain (before planning), `search-first` (before the options), `ponytail-review` then
-  `code-review` (turn end), `handoff` (offer, once per trigger), `caveman` (code comments),
-  `claude-api` (source for prices and limits).
+- C (control, owner, 2026-11-08): base with no skill rule at all: neither the scan nor "An
+  available skill could help", and no rule naming a skill. A rule whose action is only a skill is
+  removed; a rule that also states an order or a constraint keeps it without the name (e.g. "Code
+  comments -> caveman" is removed; "Heavy skill (`write-skill` and similar) -> subagent" keeps
+  "Heavy skill -> subagent"). The exact C file is written with the B wording, before the pilot.
+
+What each comparison answers:
+
+- B vs A: does the scan replace the named rules without losing recall or adding noise?
+- A vs C: what the named rules add over native routing.
+- Unnamed skills, A vs C: do named rules make the unnamed skills look optional? Hypothesis
+  supported if unnamed skills (U1-U3) fire more often in C than in A.
+
+## Protocol
+
+- Model: Sonnet only (owner, 2026-11-08).
+- Runner: `write-skill`'s eval process, headless `claude -p --output-format stream-json`, one
+  fixture per arm, probe run before the full run (`CONTRIBUTING.md`).
+- Fixture: a small Python package (`src/`, `tests/` with pytest, `README.md`), a git repo whose
+  `origin` is a local bare repo, the arm's `CLAUDE.md`, and this repo's `.claude/settings.json`
+  and `templates/hooks/` so the `SessionStart` hook runs. Each scenario adds the state it lists.
+- Prompts in English except W1, so `write-french` does not fire in every run and blur the
+  counts.
+- 3 runs per scenario per arm. Multi-turn scenarios chain turns with `--resume`.
 
 ## Measure
 
-Each case lists E (must fire) and A (may fire). Read from the `claude -p` stream-json transcript:
+Each scenario lists E (must fire, by the moment given) and A (may fire). Read from the
+transcript:
 
-- Recall: share of E skills invoked, before the step named in the case.
+- Recall: share of E skills invoked by the moment given.
 - False fire: a skill invoked outside E and A.
-- Count: skills invoked in the turn. More than 3 counts as a long list.
+- Long list: more than 3 skills invoked in one turn.
 - Re-invoke: a skill invoked again after an earlier turn already invoked it.
-- Cost: input tokens per run (a scan that loads many skills costs context).
+- Cost: input tokens per run.
 
-B wins if its recall is at least A's on the removed-rule cases (F4-F7) and higher elsewhere, with
-no more false fires, long lists or re-invokes than A. 3 runs per case per arm.
+B wins if its recall is at least A's on every scenario of a removed rule (S4, S5, S6, S14-S16)
+and at least A's overall, with no more false fires, long lists or re-invokes than A.
 
-## Must fire
+## One scenario per tested skill
 
-| Id | Kind | Fixture state | Prompt | E | A |
+Tested: each skill a rule of the base names (arm C removes them all), plus three unnamed skills
+for the hypothesis. "Removed in B" marks the rules B drops.
+
+| Id | Skill | Removed in B | Fixture state | Turn(s) | E fires | A |
+|---|---|---|---|---|---|---|
+| S1 | `verify-sources` | no | none | "Which Python version made `dict` keep insertion order?" | before the answer | none |
+| S2 | `search-first` | no | none | "Write a script that posts a Slack message when CI on `main` fails." | before laying out options | `ci-cd-and-automation` |
+| S3 | `handoff` (offered) | no | none | turn 1: "Add type hints to `src/util.py`." turn 2: "I have to stop here, I'll pick this up tomorrow." | offered in turn 2 (offer read from the reply, not a Skill call) | `incremental-implementation` |
+| S4 | `find-cause` | yes | `RETROSPECTIVE.md` with two rows on the same flake8 break in CI | "CI broke on flake8 again, third time this week." | before the first edit | `debugging-and-error-recovery` |
+| S5 | `guide-decision` | yes | none | "Should my team estimate in story points or in days?" | before the answer | none |
+| S6 | `guide-purchase` | yes | none | "Should I pay for PyCharm Professional or stay on VS Code?" | before the answer | `guide-decision` |
+| S7 | `interview-me` | no | none | "Build me a dashboard." | before any plan or edit | `frontend-ui-engineering` |
+| S8 | `spec-driven-development` | no | none | turn 1: "Add user accounts with login." turn 2 answers the interview: "Email and password, one role, sessions in cookies, no reset flow." | in turn 2, before any edit | `interview-me`, `security-and-hardening`, `api-and-interface-design` |
+| S9 | `planning-and-task-breakdown` | no | `SPEC.md` complete for an export feature | "The spec in SPEC.md is approved, split it into tasks." | before the task list | `spec-driven-development` |
+| S10 | `incremental-implementation` | no | `SPEC.md` and `PLAN.md`, task 1 done | "Do the next task of PLAN.md." | before the first edit | `test-driven-development` |
+| S11 | `ponytail-review` then `code-review` | no | none | "Fix the typo 'recieve' in README.md, commit and push." | after the push, before the turn ends, in that order | `caveman-commit` |
+| S12 | `caveman` | no | none | "Add a docstring-free helper `clamp(x, lo, hi)` to `src/util.py` with a comment on the edge case." | before writing the comment | `test-driven-development` |
+| S13 | `caveman-commit` | no | uncommitted change in `src/util.py` | "Commit this change." | before the commit | none |
+| S14 | `test-driven-development` | yes | `SPEC.md` describes `slugify`, no code | "Implement `slugify` per SPEC.md." | before the first edit | `incremental-implementation` |
+| S15 | `debugging-and-error-recovery` | yes | `tests/test_parse.py` fails | "`test_parse` fails, fix it." | before the first edit | `test-driven-development` |
+| S16 | `source-driven-development` | yes | package calls `httpx` | "Add exponential retry to the httpx calls." | before the first edit | `test-driven-development` |
+| S17 | `backlog` | no | `BACKLOG.md` present | "Rename `parse` to `parse_line`. Also, we should drop Python 3.8 support someday." | in the same turn | `test-driven-development` |
+| S18 | `claude-api` | no | none | "How much does a million input tokens cost on Claude Haiku?" | before the answer | `verify-sources` |
+| W1 | `write-french` | no | none | "Explique en deux phrases ce que fait `src/util.py`." | before the answer | `token-codebase-exploration` |
+| U1 | `api-and-interface-design` (unnamed) | - | small Flask app | "Add a paginated `/users` endpoint." | before the first edit | `test-driven-development`, `incremental-implementation` |
+| U2 | `observability-and-instrumentation` (unnamed) | - | `src/payment.py` | "Log when a payment fails." | before the first edit | `test-driven-development` |
+| U3 | `security-and-hardening` (unnamed) | - | Flask app with a raw SQL query | "Add a search box that filters users by name." | before the first edit | `api-and-interface-design`, `test-driven-development`, `frontend-ui-engineering` |
+
+## Edge cases
+
+From the reviews of the starting wording (`2026-11-08-agent-skills-coverage.md`).
+
+| Id | Edge | Fixture state | Turn(s) | Expected | A |
 |---|---|---|---|---|---|
-| F1 | request start, situation | `test_parse` fails | "Le test `test_parse` échoue, corrige-le." | `debugging-and-error-recovery`, before the first edit | `test-driven-development`, `write-french` |
-| F2 | request start, topic | small HTTP API | "Ajoute un endpoint `/users` paginé." | `api-and-interface-design`, before the first edit | `test-driven-development`, `incremental-implementation`, `write-french` |
-| F3 | mid-task, a failure | build script breaks on an unrelated missing import once `npm test` runs | "Renomme `parseDate` en `parseIsoDate` partout, puis lance les tests." | `debugging-and-error-recovery`, after the failure and before the fix | `write-french` |
-| F4 | removed rule, recurring | `RETROSPECTIVE.md` with two rows on the same lint break | "La CI casse encore sur ce lint, 3e fois cette semaine." | `find-cause` | `debugging-and-error-recovery`, `write-french` |
-| F5 | removed rule, personal | none | "Je dois choisir entre deux mutuelles, aide-moi à trancher." | `guide-decision` | `write-french` |
-| F6 | removed rule, logic | `slugify` spec in `SPEC.md`, no code | "Implémente `slugify` selon SPEC.md." | `test-driven-development`, before the first edit | `incremental-implementation`, `write-french` |
-| F7 | removed rule, from memory | Python repo using `httpx` | "Ajoute un retry exponentiel aux appels httpx." | `source-driven-development`, before the first edit | `test-driven-development`, `write-french` |
-| F8 | marginal fit | payment module | "Ajoute un log quand un paiement échoue." | `observability-and-instrumentation` | `test-driven-development`, `write-french` |
+| L1 | situation arises mid-task | an unrelated import in `src/report.py` breaks once tests run | "Rename `parse_date` to `parse_iso_date` everywhere, then run the tests." | `debugging-and-error-recovery` after the failure, before the fix | `test-driven-development` |
+| L2 | finished diff mid-task | none | "Add a `--verbose` flag to the CLI, push, then update the README." | `ponytail-review` after the push, before the turn ends | `caveman-commit`, `test-driven-development` |
+| L3 | marginal fit | `src/payment.py` | "Rename the variable `amt` to `amount` in `src/payment.py`." | no skill required; any skill outside A is a false fire | `test-driven-development` |
 
 ## Must not fire
 
-| Id | Kind | Fixture state | Prompt | Must not fire | A |
+| Id | Case | Fixture state | Turn(s) | Must not happen | A |
 |---|---|---|---|---|---|
-| N1 | "not for" exclusion | as F1 | as F1 | `find-cause` (excludes a single live bug) | as F1 |
-| N2 | off-topic | small repo | "Que fait `parse` dans `src/parser.py` ?" | any skill outside A | `token-codebase-exploration`, `write-french` |
-| N3 | already invoked | F1, then a second turn with `--resume` | turn 2: "Il en reste un, `test_format`." | `debugging-and-error-recovery` again in turn 2 | `write-french` |
-| N4 | many marginal fits | web app with a report page | "Ajoute un bouton d'export CSV à la page rapport." | a list of more than 3 skills | `frontend-ui-engineering`, `test-driven-development`, `incremental-implementation`, `api-and-interface-design`, `write-french` |
+| N1 | "not for" exclusion | as S15 | as S15 | `find-cause` (excludes a single live bug) | as S15 |
+| N2 | off-topic skill | none | "What does `parse` in `src/parser.py` return?" | any skill outside A, e.g. `security-and-hardening`, `performance-optimization` | `token-codebase-exploration` |
+| N3 | already invoked | as S15 | S15, then turn 2: "One more fails, `test_format`." | `debugging-and-error-recovery` again in turn 2 | `test-driven-development` |
+| N4 | many marginal fits | Flask app with a report page | "Add a CSV export button to the report page." | more than 3 skills in the turn | `frontend-ui-engineering`, `test-driven-development`, `incremental-implementation`, `api-and-interface-design` |
 
-## Open points for the owner
+## Cost
 
-- Arm B's removed-rule list above: confirm, or move a rule between "removed" and "kept".
-- Model: Sonnet only, or Sonnet and Haiku (Haiku missed half the `backlog` triggers,
-  `2026-11-07-backlog-skill-trigger-test.md`).
-- Prompts in French on purpose: `write-french` sits in every A set, so a French reply never
-  counts as a false fire.
+22 scenarios, 3 edge cases and 4 must-not-fire cases: 29 cases x 3 arms x 3 runs = 261 runs, plus
+the probe. Alternative if that is too much: 3 runs on the scenarios removed in B, the unnamed
+ones and the edge and must-not-fire cases (16 cases, 144 runs), 1 run on the 13 others (39 runs):
+183 runs.
