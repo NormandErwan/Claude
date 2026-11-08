@@ -100,6 +100,14 @@ touch skills/.DS_Store
 run "stray ignored file under skills/ (allowed)" 0
 rm -f skills/.DS_Store
 
+# --- conflict markers (check 7)
+case_on conflict
+printf 'a\n<<<<<<< HEAD\nb\n=======\nc\n>>>>>>> main\n' >>README.md && commit conflict
+run "committed conflict markers" 2
+case_on marker-quoted
+printf 'see `<<<<<<<` in a sentence\n' >>README.md && commit quoted
+run "marker quoted mid-line (allowed)" 0
+
 # --- scope
 case_on other-repo
 sed -i '/^| guide-purchase/d' SKILLS.md && commit drop
