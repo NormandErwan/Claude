@@ -47,6 +47,8 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 - An entry needing an owner decision -> recall its incident and the rule in force, then its options and one recommendation.
 - A premise about the origin session the ledger cannot confirm -> mark it `not checkable here`.
 - A rule that only fires on one session's tool, file, or wording is out of scope.
+- Entry accepted -> add a `BACKLOG.md` task for its change; `Landed in` reads `BACKLOG.md`, then
+  the PR once it exists.
 - `applied` cites the PR carrying the change (`applied - PR#<n>`). An entry filed from another
   repo's ledger gets its new state there too, in a PR on that repo.
 

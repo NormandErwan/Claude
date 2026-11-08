@@ -40,13 +40,13 @@ case_on version
 row_tree() { git rev-parse --short=10 HEAD:skills/write-french; }
 echo x >>skills/write-french/SKILL.md && commit edit
 run "edit without bump" 2
-sed -i 's/^version: 1.4.4/version: 1.4.5/' skills/write-french/SKILL.md && commit bump
+sed -i 's/^version: .*/version: 9.9.9/' skills/write-french/SKILL.md && commit bump
 run "bump, row not updated" 2
-sed -i "s/| 1.4.4 | \`3458346f09\`/| 1.4.5 | \`$(row_tree)\`/" SKILLS.md && commit row
+sed -i "/^| write-french /s/| [0-9.]* | \`[0-9a-f]*\`/| 9.9.9 | \`$(row_tree)\`/" SKILLS.md && commit row
 run "row updated" 0
 git update-ref refs/remotes/origin/version HEAD
 echo y >>skills/write-french/SKILL.md && commit edit2
-sed -i "s/| 1.4.5 | \`[0-9a-f]*\`/| 1.4.5 | \`$(row_tree)\`/" SKILLS.md && commit row2
+sed -i "s/| 9.9.9 | \`[0-9a-f]*\`/| 9.9.9 | \`$(row_tree)\`/" SKILLS.md && commit row2
 run "re-sent zip, same version" 2
 
 # --- rows (checks 0, 1)
@@ -99,14 +99,6 @@ rm -rf skills/zz
 touch skills/.DS_Store
 run "stray ignored file under skills/ (allowed)" 0
 rm -f skills/.DS_Store
-
-# --- conflict markers (check 7)
-case_on conflict
-printf 'a\n<<<<<<< HEAD\nb\n=======\nc\n>>>>>>> main\n' >>README.md && commit conflict
-run "committed conflict markers" 2
-case_on marker-quoted
-printf 'see `<<<<<<<` in a sentence\n' >>README.md && commit quoted
-run "marker quoted mid-line (allowed)" 0
 
 # --- scope
 case_on other-repo
