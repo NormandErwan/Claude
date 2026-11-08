@@ -4,20 +4,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ## Tasks
 
-### Reference the remaining agent-skills in CLAUDE.md
-Status: needs owner: merge PR#125
-Context: owner decisions and review findings: `docs/research/2026-11-08-agent-skills-coverage.md`.
-All edits are pushed (ccr-4d4c5335-tqbl4e). The 2026-11-03 A/B moved to the task "Replace named
-skill rules with a skill scan".
-Next: owner merges PR#125, then this section is deleted.
-Done when:
-- [x] `idea-refine` and `constraint-driven-development` carry their reason in the inventory doc
-- [x] the `debugging-and-error-recovery` trigger also covers a bug to diagnose with no failing test
-- [x] the `CONTRIBUTING.md` rule and its `test-run` row are in
-- [ ] `ponytail-review` and mattpocock `code-review` rerun on the final diff, PR#125 merged, this
-  section deleted
-Out of scope: the skill scan; the framing set; mattpocock `to-tickets`.
-
 ### Replace named skill rules with a skill scan
 Status: ready
 Context: owner, 2026-11-08: rules naming one skill each make `CLAUDE.md` heavy and may rank named
