@@ -15,6 +15,8 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 - Every rule reads trigger -> action. It goes in the section of its domain: `Behavior` (every session, mirrored to the web copy), `Claude Code`, `Agents`, `Bootstrap`, `Retrospective` (code only).
 - Every `CLAUDE.md` change -> `write-prompt` pass first: exact trigger and action, fewest words a
   reader can follow. Cut a word only if the reader loses nothing; one idea per sentence.
+- Every skill change -> `write-skill` first, which runs the `write-prompt` pass.
+- Both passes come before any review or test of the wording.
 - A rule or example about phrasing is read against itself: does it break the rule it states?
 - A rewrite of existing rules -> check each rule survives with its meaning, re-verify every
   factual claim in the rewritten text, and get an independent review before merging.
