@@ -107,9 +107,46 @@ From the reviews of the starting wording (`2026-11-08-agent-skills-coverage.md`)
 | N3 | already invoked | as S15 | S15, then turn 2: "One more fails, `test_format`." | `debugging-and-error-recovery` again in turn 2 | `test-driven-development` |
 | N4 | many marginal fits | Flask app with a report page | "Add a CSV export button to the report page." | more than 3 skills in the turn | `frontend-ui-engineering`, `test-driven-development`, `incremental-implementation`, `api-and-interface-design` |
 
+## Setup probe (2026-11-08)
+
+Scripts and fixture: `docs/evidence/skill-scan/` (`setup.sh`, `run.sh`, `score.py`). Arm B used
+the starting wording, not yet through `write-prompt` or review: this probe checks the setup only
+and scores nothing.
+
+- Isolation: asked to quote, without reading files, its general skill rule, A quoted A's line, B
+  quoted the scan, C found none and quoted the Skill tool's own description. No leak from this
+  repo's `CLAUDE.md`.
+- Hook: `install-skills.sh` ran at `SessionStart` (36 skills installed, 102 in the roster).
+  The consumer `session-start.sh` is not used: it reclones this repo and would overwrite the
+  arm's `CLAUDE.md`.
+- Fixes found by the probe: the fixture's config marks the workspace trusted (else its settings
+  are ignored), stdin is closed, all of Bash is allowed (the agent ran `python`, pipes and `ls`;
+  the first S15 runs hit 2-3 denials and could not run the tests). Two env vars that load extra
+  `CLAUDE.md` files are unset.
+- S15 once per arm, after fixes: no denial, tests pass in all three. A and B invoked
+  `debugging-and-error-recovery` first; C invoked no skill. One run each: not a result.
+
+| Run | Cost (USD, `total_cost_usd`) | Duration |
+|---|---|---|
+| quote probe, per arm | 0.07 | 5-8 s |
+| S15, per arm | 0.10-0.13 | 18-23 s |
+
+Total spent on the probe, failed attempt included: about $0.90.
+
 ## Cost
 
-22 scenarios, 3 edge cases and 4 must-not-fire cases: 29 cases x 3 arms x 3 runs = 261 runs, plus
-the probe. Alternative if that is too much: 3 runs on the scenarios removed in B, the unnamed
-ones and the edge and must-not-fire cases (16 cases, 144 runs), 1 run on the 13 others (39 runs):
-183 runs.
+22 scenarios, 3 edge cases and 4 must-not-fire cases: 29 cases x 3 arms x 3 runs = 261 runs.
+Alternative: 3 runs on the scenarios removed in B, the unnamed ones and the edge and
+must-not-fire cases (16 cases, 144 runs), 1 run on the 13 others (39 runs): 183 runs.
+
+Estimate from the probe. Answer-only cases (S1, S5, S6, S18, W1, N2) cost about $0.07 a run,
+single-edit cases like S15 about $0.12, and multi-turn or multi-file cases (S3, S8-S10, S14,
+S16, U1, U3, L1, L2, N3, N4) an assumed $0.20-0.40: about $0.15 a run on average.
+
+| Plan | Runs | Estimate | Range | Wall time, 3 runs in parallel |
+|---|---|---|---|---|
+| full | 261 | ~$39 | $28-65 | ~1-2 h |
+| split | 183 | ~$27 | $20-45 | ~45-90 min |
+
+The range's top assumes the heavy cases cost $0.40. The pilot (one run per case and arm, 87 runs,
+~$13) replaces the assumption with measured costs before the full run.
