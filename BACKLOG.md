@@ -5,13 +5,13 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 ## Tasks
 
 ### Replace named skill rules with a skill scan
-Status: ready
+Status: in progress (ccr-765781a6-3jf1ca)
 Context: owner, 2026-11-08: rules naming one skill each make `CLAUDE.md` heavy and may rank named
 skills above the others; a check "before sending" comes too late, on web too. The pre-`98492a1`
 low-bar scan was removed in a rewrite, untested (`RETROSPECTIVE.md` 2026-11-03 skill-gap).
 Candidate wording and the cases reviews found: `docs/research/2026-11-08-agent-skills-coverage.md`.
-Next: fix the case set before any drafting: must fire (request start, mid-task, marginal fit),
-must not fire (a "not for" exclusion, an off-topic skill).
+Next: owner reviews the draft case set (`docs/research/2026-11-08-skill-scan-cases.md`):
+arm B's removed rules, model choice. Then draft the wording against it.
 Done when:
 - [ ] the case set is written down before the wording is drafted
 - [ ] the wording had one `write-prompt` pass and one review, then a pilot; after that it changes
