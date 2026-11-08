@@ -1,3 +1,0 @@
-skills.txt: 2 of 41 skills failed to install: write-prompt nonexistent-skill-xyz. See CLAUDE.md Bootstrap 3.
-Failed call: NormandErwan/claude-casebook (exit 0): ⚠ Skipped /tmp/skills-N9WVuA/plugins/write-prompt/skills/write-prompt/SKILL.md — YAML parse error: Nested mappings are not allowed in compact mappings at line 3, column 14:
-Failed call: juliusbrussee/caveman (exit 0): —  Done!  Review skills before use; they run with full agent permissions.

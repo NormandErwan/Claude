@@ -1,2 +1,0 @@
-skills.txt: 1 of 39 skills failed to install: write-prompt. See CLAUDE.md Bootstrap 3.
-Failed call: NormandErwan/claude-casebook (exit 0): ⚠ Skipped /tmp/skills-qIKdxQ/plugins/write-prompt/skills/write-prompt/SKILL.md — YAML parse error: Nested mappings are not allowed in compact mappings at line 3, column 14:
