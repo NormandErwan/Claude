@@ -10,8 +10,8 @@ Context: owner, 2026-11-08: rules naming one skill each make `CLAUDE.md` heavy a
 skills above the others; a check "before sending" comes too late, on web too. The pre-`98492a1`
 low-bar scan was removed in a rewrite, untested (`RETROSPECTIVE.md` 2026-11-03 skill-gap).
 Candidate wording and the cases reviews found: `docs/research/2026-11-08-agent-skills-coverage.md`.
-Next: owner reviews the scenarios and the run count in
-`docs/research/2026-11-08-skill-scan-cases.md` (arms and model approved). Then draft the B wording.
+Next: reduced test done (case doc): the scan matched or beat A on S5, S15, U2. Owner picks how to
+freeze the wording.
 Done when:
 - [ ] the case set is written down before the wording is drafted
 - [ ] the wording had one `write-prompt` pass and one review, then a pilot; after that it changes

@@ -4,7 +4,8 @@ For the `BACKLOG.md` task "Replace named skill rules with a skill scan". Written
 wording is drafted; after the pilot, the wording changes only if a case below fails. Starting
 wording and review findings: `2026-11-08-agent-skills-coverage.md`.
 
-Status: owner-approved arms and model (2026-11-08); scenarios await owner review.
+Status: owner-approved arms and model (2026-11-08). The full set is on hold: the owner chose a
+reduced test of the principle first (S5, S15, U2; results below).
 
 ## Arms
 
@@ -133,7 +134,34 @@ and scores nothing.
 
 Total spent on the probe, failed attempt included: about $0.90.
 
-## Cost
+## Reduced test (2026-11-08)
+
+Owner, 2026-11-08: the full set costs too much for the plan; test the general rule on a few
+skills first, and fix the wording only if it works and beats the current file. Arm B kept the
+starting wording unchanged, without a `write-prompt` pass or review. Sonnet, 3 runs per case and
+arm, 27 runs, $2.93.
+
+| Case | Expected skill | A (named rules) | B (scan) | C (no skill rule) |
+|---|---|---|---|---|
+| S15 `test_parse` fails | `debugging-and-error-recovery` (rule removed in B) | 3/3, first call | 3/3, first call | 0/3 |
+| S5 points or days | `guide-decision` (rule removed in B) | 3/3 | 3/3 | 3/3 |
+| U2 log a failed payment | `observability-and-instrumentation` (unnamed) | 0/3 | 1/3 | 0/3 |
+
+- No permission denial; `find-cause` never fired on S15 (N1 holds in every arm).
+- U2, B: the two other runs invoked `interview-me` and asked about log level and personal data
+  before editing. Not in U2's A set, but the base's interview rule (kept in B) calls for it on
+  an ambiguous request. A edited without asking in all 3 runs; C asked in 2 of 3 without a skill.
+- Cost per run: B within A's range (S15 $0.12-0.14, S5 $0.09, U2 $0.10-0.16).
+
+Reading, with 3 runs per cell:
+
+- The scan replaces the `debugging-and-error-recovery` rule: B 3/3 without it, C 0/3. Native
+  routing alone misses this situation-triggered skill.
+- `guide-decision` fires natively (C 3/3): its named rule adds nothing.
+- An unnamed skill: B invoked a skill on U2 in 3/3 runs, A and C in 0/3, but the expected one
+  only once. The hypothesis "named rules make unnamed skills look optional" is not supported:
+  A and C are equal at 0/3.
+
 
 22 scenarios, 3 edge cases and 4 must-not-fire cases: 29 cases x 3 arms x 3 runs = 261 runs.
 Alternative: 3 runs on the scenarios removed in B, the unnamed ones and the edge and
