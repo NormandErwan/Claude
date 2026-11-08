@@ -4,8 +4,9 @@ For the `BACKLOG.md` task "Replace named skill rules with a skill scan". Written
 wording is drafted; after the pilot, the wording changes only if a case below fails. Starting
 wording and review findings: `2026-11-08-agent-skills-coverage.md`.
 
-Status: owner-approved arms and model (2026-11-08). The full set is on hold: the owner chose a
-reduced test of the principle first (S5, S15, U2; results below).
+Status: done (2026-11-08). The owner chose a reduced test (S5, S15, U2, then one case per
+removed rule) over the full set below, which was never run. Per-run data:
+`docs/evidence/skill-scan/runs-2026-11-08.jsonl` (`summarize.py`).
 
 ## Arms
 
@@ -162,7 +163,7 @@ Reading, with 3 runs per cell:
   only once. The hypothesis "named rules make unnamed skills look optional" is not supported:
   A and C are equal at 0/3.
 
-## Next runs (owner-approved 2026-11-08, not started)
+## Next runs (owner-approved 2026-11-08, done: see "Runs on the frozen wording")
 
 Order, per `CONTRIBUTING.md`: `write-prompt` pass on the scan, then one review (`ponytail-review`,
 then mattpocock `code-review`). Findings from both are merged once into one wording, which is
@@ -242,11 +243,15 @@ Reading:
 - The wording did not change after the runs: the two failing cases kept their rules, as the plan
   set before the runs.
 
+Arm A was not rerun on S4, S6, S14, S16, L3 or N4: its rules name those skills, so their firing
+in A was assumed, not measured. Verdict: B wins on the four rules it fires 3/3; it loses on
+`test-driven-development` and `source-driven-development`, whose rules stay.
+
 Change to land: base `CLAUDE.md` with the scan replacing "An available skill could help" and its
 two sub-rules, and the `debugging-and-error-recovery` rule removed. The
 `test-driven-development` and `source-driven-development` rules stay.
 
-## Cost
+## Cost (full set, not run)
 
 22 scenarios, 3 edge cases and 4 must-not-fire cases: 29 cases x 3 arms x 3 runs = 261 runs.
 Alternative: 3 runs on the scenarios removed in B, the unnamed ones and the edge and

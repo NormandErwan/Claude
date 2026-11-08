@@ -5,13 +5,13 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 ## Tasks
 
 ### Replace named skill rules with a skill scan
-Status: in progress (ccr-765781a6-3jf1ca)
+Status: needs owner: go to land the scan
 Context: owner, 2026-11-08: rules naming one skill each make `CLAUDE.md` heavy and may rank named
 skills above the others; a check "before sending" comes too late, on web too. The pre-`98492a1`
 low-bar scan was removed in a rewrite, untested (`RETROSPECTIVE.md` 2026-11-03 skill-gap).
 Candidate wording and the cases reviews found: `docs/research/2026-11-08-agent-skills-coverage.md`.
-Next: runs done (case doc, "Runs on the frozen wording"). Owner go to land the scan in
-`CLAUDE.md` and `CLAUDE.web.md`, keeping the tdd and source-driven rules.
+Next: replace the general skill line and its two sub-rules by the frozen scan, and remove the
+debugging rule, in `CLAUDE.md` and `CLAUDE.web.md` (case doc, "Runs on the frozen wording").
 Done when:
 - [ ] the case set is written down before the wording is drafted
 - [ ] the wording had one `write-prompt` pass and one review, then a pilot; after that it changes
@@ -97,15 +97,14 @@ Out of scope: the skills the agent-skills task covers.
 
 ### Find or build a reusable harness for rule and skill A/B tests
 Status: ready
-Context: each A/B test rebuilds its own `claude -p` setup and loses its first runs to config
-errors (2026-11-08 skill-scan probe: untrusted workspace ignored its settings, open stdin, Bash
-allowlist too narrow; see `docs/research/2026-11-08-skill-scan-cases.md`). Claude Code 2.1.319
-ships `claude plugin eval` (cases, graders incl. `tool_used: Skill`, no-plugin baseline arm);
-unknown whether it can compare `CLAUDE.md` arms. Latest harness: `docs/evidence/skill-scan/`.
+Context: each A/B test rebuilds its own `claude -p` setup and loses runs to avoidable errors:
+15 listed in `docs/research/2026-11-08-ab-test-avoidable-errors.md`. Claude Code 2.1.319 ships
+`claude plugin eval` (graders incl. `tool_used: Skill`, no-plugin baseline arm); unknown whether
+it compares `CLAUDE.md` arms. Latest harness: `docs/evidence/skill-scan/`.
 Next: `search-first`: what `claude plugin eval` and published skills cover (arm isolation,
 `SessionStart` hook, trust, permissions, cost capture), against `docs/evidence/skill-scan/`.
 Done when:
-- [ ] a tool or skill adopted or built, whose setup check catches the probe's three errors
-  before any scored run
+- [ ] a tool or skill adopted or built that prevents, or catches before any scored run, each
+  error in the avoidable-errors list
 - [ ] `CONTRIBUTING.md`'s A/B steps point to it
 Out of scope: `write-skill`'s quality evals of a skill's output.
