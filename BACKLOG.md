@@ -5,17 +5,15 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 ## Tasks
 
 ### Reference the remaining agent-skills in CLAUDE.md
-Status: in progress (ccr-4d4c5335-tqbl4e, PR#125)
+Status: needs owner: merge PR#125
 Context: owner decisions and review findings: `docs/research/2026-11-08-agent-skills-coverage.md`.
-The rules, removals and new test tasks are pushed. The 2026-11-03 A/B moved to the task "Replace
-named skill rules with a skill scan". Finish in a new session.
-Next: merge `CONTRIBUTING.md`'s two new bullets into one trigger -> action rule, scoped to
-"before any test" (owner's ask), and file its `test-run` row.
+All edits are pushed (ccr-4d4c5335-tqbl4e). The 2026-11-03 A/B moved to the task "Replace named
+skill rules with a skill scan".
+Next: owner merges PR#125, then this section is deleted.
 Done when:
-- [ ] `idea-refine` (covered by `interview-me`) and `constraint-driven-development` (not picked by
-  the owner) carry their reason in the inventory doc
-- [ ] the `debugging-and-error-recovery` trigger also covers a bug to diagnose with no failing test
-- [ ] the `CONTRIBUTING.md` rule and its `test-run` row are in
+- [x] `idea-refine` and `constraint-driven-development` carry their reason in the inventory doc
+- [x] the `debugging-and-error-recovery` trigger also covers a bug to diagnose with no failing test
+- [x] the `CONTRIBUTING.md` rule and its `test-run` row are in
 - [ ] `ponytail-review` and mattpocock `code-review` rerun on the final diff, PR#125 merged, this
   section deleted
 Out of scope: the skill scan; the framing set; mattpocock `to-tickets`.
