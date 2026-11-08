@@ -4,23 +4,12 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ## Tasks
 
-### Process proposed RETROSPECTIVE.md entries
-Status: in progress (ccr-8857f434-wa6pon)
-Context: many entries are `proposed`, among them the 2026-11-07 rows on task granularity and
-subtask scope, written for Backlog.md and now to reread against this file. `CONTRIBUTING.md`
-(RETROSPECTIVE.md section) governs processing.
-Next: owner decided 8 entries (7 accepted, 2026-10-30 to 2026-11-07; 141 no change); the 16
-closures proposed for the rest and the 2026-10-28 `test-run` row await the owner's verdict.
-Done when:
-- [ ] every `proposed` entry is accepted, rejected, or marked `not checkable here`
-- [ ] every accepted entry has a task here or a PR
-Out of scope: rule rewrites not tied to an entry.
-
 ### Reference the remaining agent-skills in CLAUDE.md
 Status: ready
 Context: situation-triggered skills do not fire under native routing (`RETROSPECTIVE.md`
 2026-11-03 skill-gap). PR#122 named the framing set; the other agent-skills in `skills.txt`
-stay unnamed in `CLAUDE.md`.
+stay unnamed in `CLAUDE.md`. Owner, 2026-11-08: `code-review-and-quality` never fired in use
+(`RETROSPECTIVE.md` 2026-10-28 test-run).
 Next: list the `skills.txt` agent-skills that `CLAUDE.md` never names, and how each overlaps a
 skill it already names.
 Done when:
@@ -111,3 +100,16 @@ Next: check whether `v-model-documents` or `research` already names files, befor
 Done when:
 - [ ] `handoff` names its file `YYYY-MM-DD-<slug>.md`
 - [ ] a rule makes new `docs/` files take the same prefix, with its `PROVENANCE.md` row
+
+### Find why verify-sources does not fire on unverified claims
+Status: ready
+Context: three claims went out unchecked though `CLAUDE.md` `Behavior` names `verify-sources`
+for them: an inline review called equal to the prescribed one, an outside measurement used
+without its sample, a count stated without counting (`RETROSPECTIVE.md` 2026-10-28 and
+2026-11-03 fact-corrected). Owner: the skill was likely never loaded. Same class as the
+2026-11-03 skill-gap row (situation-triggered skills do not fire).
+Next: run `find-cause` on the three rows and the 2026-11-03 skill-gap row.
+Done when:
+- [ ] `find-cause` trace recorded in the three rows
+- [ ] a fix proposed with its measure, or the owner's reason to leave it
+Out of scope: the skills the agent-skills task covers.
