@@ -17,6 +17,7 @@
 - Several checks with nothing to report -> one line. Never collapse away a finding, error, or blocker.
 - Replies and deliverables for the user -> the user's language. French -> `write-french`.
 - Factual claim not verified this turn -> `verify-sources`. Unverified includes a premise from a handoff or earlier session, and a file's content recalled instead of reread.
+- Request carries any ambiguity, unstated requirement, contradiction, or assumption to make -> interview the user before planning or building (skill: see the surface section below).
 - Recommendation, plan, or choice of approach:
   - Before sending, check: what was taken for granted, an existing solution to reuse, a domain expert's objection, each claim about a file's or a source's content. Revise from what the check finds.
   - Approach builds a script, config, workflow, or integration -> `search-first` before laying out the options.
@@ -31,6 +32,11 @@
   - Otherwise -> `[BLOCKED] <url> - <status>`. Host required -> stop, tell the user.
 
 ## Claude Code
+- Interview the user (`Behavior`) -> `interview-me`.
+- After the interview:
+  - Feature or significant change with no spec -> `spec-driven-development`.
+  - Spec ready, work to split into tasks -> `planning-and-task-breakdown`.
+  - Implementation touches more than one file -> `incremental-implementation`.
 - Turn would end with an unreviewed pushed diff and no open plan items -> run `ponytail-review`, then mattpocock `code-review`.
 - About to claim done, fixed, or passing -> run the verification commands locally first (the project's own build, lint, tests).
 - Failure reproducible only in CI -> say so; never push to probe it.

@@ -15,14 +15,20 @@ Done when:
 - [ ] every accepted entry has a task here or a PR
 Out of scope: rule rewrites not tied to an entry.
 
-### Define the framing, breakdown and planning method
-Status: blocked: wait until this file has been used for a few weeks
-Context: frame, split and plan work before building: `interview-me`, `spec-driven-development`,
-`planning-and-task-breakdown`. mattpocock `to-tickets` adds vertical slices and asking the owner
-whether the granularity fits before filing. Related `RETROSPECTIVE.md` rows: 2026-11-07.
-Next: list the tasks that turned out too big, too small or badly framed.
+### Reference the remaining agent-skills in CLAUDE.md
+Status: ready
+Context: situation-triggered skills do not fire under native routing (`RETROSPECTIVE.md`
+2026-11-03 skill-gap). The framing set (`interview-me`, `spec-driven-development`,
+`planning-and-task-breakdown`, `incremental-implementation`) got rules in the PR that removed
+the framing-method task. Others stay unnamed: `test-driven-development`,
+`debugging-and-error-recovery`, `doubt-driven-development`, `idea-refine` and more.
+Next: list the `skills.txt` agent-skills that `CLAUDE.md` never names, and how each overlaps a
+skill it already names.
 Done when:
-- [ ] method written in `CLAUDE.md` or a skill, with its `PROVENANCE.md` row
+- [ ] each listed skill has a trigger rule with its `PROVENANCE.md` row, or a recorded reason to
+  leave it to native routing
+- [ ] the 2026-11-03 skill-gap row's A/B has run, or the owner waived it
+Out of scope: the framing set, and mattpocock `to-tickets` (granularity question before filing).
 
 ### Make the backlog trigger reliable on Haiku
 Status: ready
