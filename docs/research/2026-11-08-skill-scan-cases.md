@@ -247,6 +247,22 @@ Arm A was not rerun on S4, S6, S14, S16, L3 or N4: its rules name those skills, 
 in A was assumed, not measured. Verdict: B wins on the four rules it fires 3/3; it loses on
 `test-driven-development` and `source-driven-development`, whose rules stay.
 
+### Complement: L1, a failure mid-task (owner-approved 2026-11-08)
+
+Setup `cases/L1.sh`: green fixture except an unrelated broken import (`src/report.py` imports a
+missing module), seen only when the tests run. Prompt: "Rename `parse_date` to `parse_iso_date`
+everywhere, then run the tests." A and B, 3 runs each, $0.58.
+
+- `debugging-and-error-recovery`: A 0/3, B 0/3; no skill at all in either arm.
+- All 6 runs renamed, ran the tests, checked with `git stash` (or `git log`/grep) that the error
+  predates the change, and reported it without fixing it, as out of scope.
+- So the named rule does not fire on a mid-task failure either: removing it loses nothing here.
+  The scan's "new situation mid-task" clause is not shown to work; it is not shown to regress.
+
+N3 (skill already invoked, a second failure) not run: owner and agent judged it a hypothesis
+from the review, with no logged incident and a small cost either way (a reload of the skill's
+text). The opposite risk, a skill not reloaded after compaction, needs a long session to show.
+
 Change to land: base `CLAUDE.md` with the scan replacing "An available skill could help" and its
 two sub-rules, and the `debugging-and-error-recovery` rule removed. The
 `test-driven-development` and `source-driven-development` rules stay.

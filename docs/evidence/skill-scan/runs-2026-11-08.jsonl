@@ -58,3 +58,9 @@
 {"batch": "frozen-wording", "case": "U2b", "run": "r3", "arm": "A", "skills": [], "first_write": 4, "tool_calls": 11, "cost_usd": 0.14752469999999998, "denials": 0}
 {"batch": "frozen-wording", "case": "U2b", "run": "r3", "arm": "B", "skills": [], "first_write": 3, "tool_calls": 7, "cost_usd": 0.1182156, "denials": 0}
 {"batch": "frozen-wording", "case": "U2b", "run": "r3", "arm": "C", "skills": [], "first_write": 3, "tool_calls": 7, "cost_usd": 0.1094422, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r1", "arm": "A", "skills": [], "first_write": 3, "tool_calls": 4, "cost_usd": 0.0931443, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r1", "arm": "B", "skills": [], "first_write": 3, "tool_calls": 4, "cost_usd": 0.09203139999999999, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r2", "arm": "A", "skills": [], "first_write": 2, "tool_calls": 3, "cost_usd": 0.11378500000000003, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r2", "arm": "B", "skills": [], "first_write": 2, "tool_calls": 3, "cost_usd": 0.0904128, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r3", "arm": "A", "skills": [], "first_write": 3, "tool_calls": 4, "cost_usd": 0.09218459999999999, "denials": 0}
+{"batch": "frozen-wording-L1", "case": "L1", "run": "r3", "arm": "B", "skills": [], "first_write": 2, "tool_calls": 3, "cost_usd": 0.10231649999999999, "denials": 0}
