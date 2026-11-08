@@ -7,6 +7,8 @@
 !skills/
 !templates/
 !templates/**
+!docs/
+!docs/**
 !skills.txt
 # This repo's own hook (dogfooding). Re-ignore .md files
 # directly under .claude/ - the global !*.md above would otherwise unignore
