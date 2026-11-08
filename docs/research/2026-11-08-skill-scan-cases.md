@@ -162,6 +162,54 @@ Reading, with 3 runs per cell:
   only once. The hypothesis "named rules make unnamed skills look optional" is not supported:
   A and C are equal at 0/3.
 
+## Next runs (owner-approved 2026-11-08, not started)
+
+Order, per `CONTRIBUTING.md`: `write-prompt` pass on the scan, then one review (`ponytail-review`,
+then mattpocock `code-review`). Findings from both are merged once into one wording, which is
+then frozen: after the runs, it changes only if a case fails.
+
+- U2 prompt made unambiguous, so the interview rule no longer applies: "Log a WARNING with the
+  amount and the error, not the account, when a payment fails." Rerun on A, B and C, 3 runs each
+  (9 runs, ~$1.20).
+- One case per remaining removed rule, on B only, 3 runs each: S4 `find-cause`, S6
+  `guide-purchase`, S14 `test-driven-development`, S16 `source-driven-development` (12 runs,
+  ~$1.80). A fires them by construction. A skill fired 3/3 -> its rule goes; otherwise it stays.
+- S15 and S5 on B again with the frozen wording, 3 runs each (6 runs, ~$0.80), since the
+  reduced test used the starting wording.
+- Proposed after review, awaiting owner: L3 (marginal fit) and N4 (many marginal fits) on B,
+  3 runs each (6 runs, ~$0.80), since "targets" is the new bar against long lists.
+
+## Wording pass and review (2026-11-08)
+
+Starting wording (tested in the reduced test):
+
+```
+- New request, or a new situation mid-task (a failure, a finished diff) -> before acting, invoke each fitting skill not yet invoked this conversation; name each in one line.
+  - A skill whose description says "not for" this case does not fit.
+```
+
+`write-prompt` pass: "fitting" made explicit as the skill's description; the not-yet-invoked
+condition stated; the announce step split into its own sentence.
+
+Review (`ponytail-review`, then mattpocock `code-review` on both axes), merged once:
+
+| Finding | Source | Outcome |
+|---|---|---|
+| "a finished diff" fires reviews at commit time; "not invoked yet" then blocks the kept turn-end `ponytail-review` -> `code-review` pass on the pushed diff | ponytail, spec | example dropped; the turn-end rule keeps the diff case |
+| "not invoked this conversation" blocks the skill on a later, unrelated failure, and after compaction when its text is gone | ponytail, standards, spec | "unless its text is already in context" |
+| exclusions phrased "Do NOT invoke", "SKIP only when", not only "not for" | standards, spec | "a skill whose description excludes this case does not apply" |
+| "covers" reads as a keyword match: broad descriptions ("any code change") fire on every task, long lists (L3, N4) | standards, spec | "targets it"; L3 and N4 proposed for the next runs |
+| `source-driven-development` triggers on a belief (code from memory), not a request or failure | standards, spec | no wording change: S16 decides whether its rule stays |
+| `CLAUDE.web.md` mirror, `PROVENANCE.md` retirement rows, A/B record | standards | at landing, if B wins |
+
+Frozen wording (arm B); after the runs it changes only if a case fails:
+
+```
+- New request, or new situation mid-task (a failure) -> before acting on it, invoke each skill whose description targets it, unless its text is already in context. Name each in one line.
+  - A skill whose description excludes this case does not apply.
+```
+
+## Cost
 
 22 scenarios, 3 edge cases and 4 must-not-fire cases: 29 cases x 3 arms x 3 runs = 261 runs.
 Alternative: 3 runs on the scenarios removed in B, the unnamed ones and the edge and
