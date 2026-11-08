@@ -259,9 +259,16 @@ everywhere, then run the tests." A and B, 3 runs each, $0.58.
 - So the named rule does not fire on a mid-task failure either: removing it loses nothing here.
   The scan's "new situation mid-task" clause is not shown to work; it is not shown to regress.
 
-N3 (skill already invoked, a second failure) not run: owner and agent judged it a hypothesis
-from the review, with no logged incident and a small cost either way (a reload of the skill's
-text). The opposite risk, a skill not reloaded after compaction, needs a long session to show.
+### Complement: N3, skill already invoked (owner-approved 2026-11-08)
+
+Setup `cases/N3.sh`: `test_parse` and `test_format` both fail. Two turns with `run2.sh`
+(`--resume`): "`test_parse` fails, fix it.", then "One more fails, `test_format`." B only, 3 runs,
+$0.95.
+
+- Turn 1: `debugging-and-error-recovery` first call, then `test-driven-development`, 3/3.
+- Turn 2: no skill re-invoked, 3/3; each run fixed `format_pair` and reran the suite.
+- The "unless its text is already in context" clause holds in a short session. The opposite risk,
+  a skill not reloaded after compaction, needs a long session to show; untested.
 
 Change to land: base `CLAUDE.md` with the scan replacing "An available skill could help" and its
 two sub-rules, and the `debugging-and-error-recovery` rule removed. The
