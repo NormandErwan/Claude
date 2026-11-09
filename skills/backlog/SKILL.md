@@ -49,7 +49,7 @@ short handoff a fresh session can start from alone.
   - `in progress (<branch>)`: a session works on it on that branch.
   - `blocked: <reason>`: waits on something outside the backlog (time, access, an event).
   - `needs owner: <decision>`: waits on a decision only the owner can make.
-  - `owner steps pending`: the agent's part is merged; waits on the owner running `Owner steps`.
+  - `owner steps pending`: the agent's part is done; waits on the owner running `Owner steps`.
 - `Blocked by`: titles of the tasks that must be done first. A title no longer in the file
   means that task is done or dropped.
 - `Context`: 2-4 lines. Why the task exists and what is already decided. Link artifacts (PR,
@@ -68,17 +68,19 @@ short handoff a fresh session can start from alone.
 
 ## Work a task
 
-- Task named -> read its section, start from `Next`, respect `Out of scope`. Status
-  `owner steps pending` -> give the owner its `Owner steps` and ask whether they worked. A `Blocked by`
+- Task named -> read its section, start from `Next`, respect `Out of scope`. A `Blocked by`
   title still in the file -> tell the user, don't start.
+- Task named with `Status: owner steps pending` -> give the owner its `Owner steps`, ask
+  whether they worked.
 - Start -> set `Status: in progress (<branch>)`.
 - Session ends unfinished -> rewrite `Next` to where the work stopped. Stuck -> set `Status` to
   `blocked` or `needs owner`.
 - Agent's part done, `Owner steps` left -> in the PR that does the work, set
   `Status: owner steps pending` and tick the criteria the agent could check. End the reply with
   the `Owner steps`, numbered, as written in the task.
-- Owner confirms the `Owner steps` worked -> delete the section.
-- Done, no `Owner steps` left -> delete its section in the PR that does the work. The PR body carries the summary.
+- Owner confirms the `Owner steps` worked -> delete the section, unless the owner already did.
+- Done, no `Owner steps` left -> delete its section in the PR that does the work. The PR body
+  carries the summary.
 - Dropped -> delete its section. The commit message gives the reason. Tasks it blocked -> re-check
   their `Status`.
 - Title changed -> update every `Blocked by` that names it.
