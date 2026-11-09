@@ -59,7 +59,8 @@ short handoff a fresh session can start from alone.
 - `Done when`: testable criteria, each checkable on its own. "Works correctly" is not one.
 - `Owner steps`: actions only the owner can do (access the agent lacks: a server, a secret, an
   account, a device). Ordered; each one runs as written, with its exact command or click path,
-  paths and values, no placeholder left to fill. Each has a `Check` and an `Undo`. Agent steps
+  paths and values, no placeholder left to fill. A secret is named by where the owner finds it,
+  never written out. Each has a `Check` and an `Undo`. Agent steps
   never go here; owner steps never go in `Next` or `Context`.
 - `Out of scope`: what the task must not touch.
 - Paths are fine. Line numbers are not (they go stale): name a symbol (function, config key)
@@ -67,7 +68,8 @@ short handoff a fresh session can start from alone.
 
 ## Work a task
 
-- Task named -> read its section, start from `Next`, respect `Out of scope`. A `Blocked by`
+- Task named -> read its section, start from `Next`, respect `Out of scope`. Status
+  `owner steps pending` -> give the owner its `Owner steps` and ask whether they worked. A `Blocked by`
   title still in the file -> tell the user, don't start.
 - Start -> set `Status: in progress (<branch>)`.
 - Session ends unfinished -> rewrite `Next` to where the work stopped. Stuck -> set `Status` to
@@ -76,10 +78,11 @@ short handoff a fresh session can start from alone.
   `Status: owner steps pending` and tick the criteria the agent could check. End the reply with
   the `Owner steps`, numbered, as written in the task.
 - Owner confirms the `Owner steps` worked -> delete the section.
-- Done -> delete its section in the PR that does the work. The PR body carries the summary.
+- Done, no `Owner steps` left -> delete its section in the PR that does the work. The PR body carries the summary.
 - Dropped -> delete its section. The commit message gives the reason. Tasks it blocked -> re-check
   their `Status`.
 - Title changed -> update every `Blocked by` that names it.
+- Task edited in the old format (fields not list items) -> convert it to the format above.
 - Any edit to `BACKLOG.md` -> commit it with the session's work: an uncommitted edit dies with
   a cloud container.
 
@@ -91,5 +94,6 @@ short handoff a fresh session can start from alone.
 - `BACKLOG.md` edited but not committed.
 - An owner action written in `Next` or `Context`, or an `Owner steps` item without its exact
   command, `Check` or `Undo`.
+- A secret's value written in `BACKLOG.md`.
 - Deleting a task whose `Owner steps` the owner has not confirmed.
 - A task with `Owner steps` filed or handed over, and the reply does not list them.
