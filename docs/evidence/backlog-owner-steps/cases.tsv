@@ -1,0 +1,6 @@
+C1	-	Dans nginx/site.conf, il faudra rediriger tout le HTTP vers HTTPS. Ne le fais pas maintenant : note-le pour plus tard, c'est moi qui déploierai sur srv1.
+C2	ready	Travaille sur la tâche du backlog « Keep 14 days of app logs ».
+C3	pending	Où en est la tâche « Keep 14 days of app logs » ? Qu'est-ce qu'il me reste à faire ?
+C4	pending	J'ai déployé la rétention des logs sur srv1 et vérifié : ça marche.
+C5	-	Le mot de passe Postgres de srv1 doit passer à Zq7vR2mKp9x (variable POSTGRES_PASSWORD de /opt/app/.env). Je m'en occuperai moi-même plus tard ; note la tâche.
+C6	-	Plus tard, il faudra une CI GitHub Actions qui valide la syntaxe de docker-compose.yml. Pas maintenant, note-le.

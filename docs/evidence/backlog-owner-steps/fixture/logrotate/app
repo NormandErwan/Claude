@@ -1,0 +1,7 @@
+/var/log/app/*.log {
+    daily
+    rotate 7
+    compress
+    missingok
+    notifempty
+}

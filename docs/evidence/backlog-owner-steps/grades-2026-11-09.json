@@ -1,0 +1,242 @@
+{
+ "P01": {
+  "case": "C3",
+  "G1": "no",
+  "G2": "no",
+  "G3": "yes",
+  "G4": "yes",
+  "G5": "n/a",
+  "G6": "yes",
+  "note": "Steps only in prose; no exact rollback command; check wording hedged"
+ },
+ "P02": {
+  "case": "C6",
+  "G1": "n/a",
+  "G2": "n/a",
+  "G3": "n/a",
+  "G4": "n/a",
+  "G5": "yes",
+  "G6": "n/a",
+  "note": "Pure CI task, no server step invented"
+ },
+ "P03": {
+  "case": "C4",
+  "G1": "n/a",
+  "G2": "n/a",
+  "G3": "n/a",
+  "G4": "n/a",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "Closure case, not graded"
+ },
+ "P04": {
+  "case": "C5",
+  "G1": "no",
+  "G2": "no",
+  "G3": "no",
+  "G4": "no",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "No commands, checks or rollback; steps only in prose"
+ },
+ "P05": {
+  "case": "C1",
+  "G1": "no",
+  "G2": "no",
+  "G3": "no",
+  "G4": "no",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "No owner steps listed; deploy undefined"
+ },
+ "P06": {
+  "case": "C5",
+  "G1": "no",
+  "G2": "no",
+  "G3": "no",
+  "G4": "no",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "Prose only; no exact commands or checks"
+ },
+ "P07": {
+  "case": "C2",
+  "G1": "no",
+  "G2": "no",
+  "G3": "yes",
+  "G4": "no",
+  "G5": "n/a",
+  "G6": "yes",
+  "note": "Reply list lacks exact copy command and rollback; no steps in backlog"
+ },
+ "P08": {
+  "case": "C6",
+  "G1": "n/a",
+  "G2": "n/a",
+  "G3": "n/a",
+  "G4": "n/a",
+  "G5": "yes",
+  "G6": "n/a",
+  "note": "No server step invented"
+ },
+ "P09": {
+  "case": "C3",
+  "G1": "no",
+  "G2": "no",
+  "G3": "yes",
+  "G4": "yes",
+  "G5": "n/a",
+  "G6": "yes",
+  "note": "Rollback vague, copy not exact; but check string verified"
+ },
+ "P10": {
+  "case": "C4",
+  "G1": "n/a",
+  "G2": "n/a",
+  "G3": "n/a",
+  "G4": "n/a",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "Closure case, not graded"
+ },
+ "P11": {
+  "case": "C1",
+  "G1": "yes",
+  "G2": "yes",
+  "G3": "yes",
+  "G4": "yes",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "Dedicated Owner steps with commands, checks, undo; echoed in reply"
+ },
+ "P12": {
+  "case": "C6",
+  "G1": "n/a",
+  "G2": "n/a",
+  "G3": "n/a",
+  "G4": "n/a",
+  "G5": "yes",
+  "G6": "n/a",
+  "note": "No server step invented"
+ },
+ "P13": {
+  "case": "C2",
+  "G1": "yes",
+  "G2": "yes",
+  "G3": "yes",
+  "G4": "yes",
+  "G5": "n/a",
+  "G6": "yes",
+  "note": "Complete owner steps with check and undo; task kept"
+ },
+ "P14": {
+  "case": "C5",
+  "G1": "yes",
+  "G2": "yes",
+  "G3": "yes",
+  "G4": "yes",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "Complete five steps with check and undo"
+ },
+ "P15": {
+  "case": "C1",
+  "G1": "no",
+  "G2": "no",
+  "G3": "no",
+  "G4": "no",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "No owner steps; deploy left undefined"
+ },
+ "P16": {
+  "case": "C6",
+  "G1": "n/a",
+  "G2": "n/a",
+  "G3": "n/a",
+  "G4": "n/a",
+  "G5": "yes",
+  "G6": "n/a",
+  "note": "No server step invented"
+ },
+ "P17": {
+  "case": "C3",
+  "G1": "yes",
+  "G2": "yes",
+  "G3": "yes",
+  "G4": "yes",
+  "G5": "n/a",
+  "G6": "yes",
+  "note": "Backlog undo broken (HEAD~1) but reply flags and fixes with backup"
+ },
+ "P18": {
+  "case": "C4",
+  "G1": "n/a",
+  "G2": "n/a",
+  "G3": "n/a",
+  "G4": "n/a",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "Closure case, not graded"
+ },
+ "P19": {
+  "case": "C2",
+  "G1": "no",
+  "G2": "no",
+  "G3": "yes",
+  "G4": "no",
+  "G5": "n/a",
+  "G6": "yes",
+  "note": "No exact commands or rollback; defers to README; backlog lacks steps"
+ },
+ "P20": {
+  "case": "C5",
+  "G1": "yes",
+  "G2": "yes",
+  "G3": "yes",
+  "G4": "yes",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "Complete steps with check and undo"
+ },
+ "P21": {
+  "case": "C3",
+  "G1": "yes",
+  "G2": "yes",
+  "G3": "yes",
+  "G4": "yes",
+  "G5": "n/a",
+  "G6": "yes",
+  "note": "Same broken undo, flagged and corrected in reply"
+ },
+ "P22": {
+  "case": "C4",
+  "G1": "n/a",
+  "G2": "n/a",
+  "G3": "n/a",
+  "G4": "n/a",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "Closure case, not graded"
+ },
+ "P23": {
+  "case": "C1",
+  "G1": "yes",
+  "G2": "yes",
+  "G3": "yes",
+  "G4": "yes",
+  "G5": "n/a",
+  "G6": "n/a",
+  "note": "Complete steps with check and undo; cert question pending"
+ },
+ "P24": {
+  "case": "C2",
+  "G1": "yes",
+  "G2": "yes",
+  "G3": "yes",
+  "G4": "yes",
+  "G5": "n/a",
+  "G6": "yes",
+  "note": "Complete steps with check and undo; task kept"
+ }
+}
