@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.6.0
+version: 1.6.2
 description: "Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase."
 ---
 
@@ -113,6 +113,10 @@ does.
 A repository's own English term (a file's nickname, a process name: ledger,
 handoff, hook) is a reference too. It has a plain French equivalent -> write the
 French word in prose; keep the English name only as a file path or a command.
+The same holds for any English technical term with an established French
+equivalent: write the French term, with the English one in parentheses at first
+use if the reader may know it under that name. A borrowing already established in
+French stays (« le Web »).
 
 | Instead of | Write |
 |---|---|
@@ -120,6 +124,7 @@ French word in prose; keep the English name only as a file path or a command.
 | « un comportement toxique » | « des remarques qui humilient quelqu'un devant les autres » |
 | « le squelette ambulant de Cockburn, les tranches de release de Patton » | « le squelette ambulant d'Alistair Cockburn - une version minimale de l'application, qui prouve que l'architecture tient - et les tranches de release de Jeff Patton - des regroupements d'éléments assez complets pour être démontrés » |
 | « le critère testable d'INVEST » | « le critère testable d'INVEST - la grille en six critères (Independent, Negotiable, Valuable, Estimable, Small, Testable) qui évalue une user story » |
+| « le slicing des tâches » | « le découpage des tâches » |
 | « Le ledger compte 17 entrées » | « Le registre des rétrospectives (`RETROSPECTIVE.md`) compte 17 entrées » |
 | « Écrire cette frontière avant le premier raffinage » | « Décider par écrit, avant le premier raffinage, ce qui relève du raffinage interne ou de l'avenant contractuel » |
 | « Le reste s'appuie sur des auteurs identifiés — Nygard, Brown, Fowler, Klein, Cockburn, Fairbanks, Poppendieck — et sur des compositions assumées » | « Le reste s'appuie sur des auteurs identifiés — Nygard, Brown, Fowler et Fairbanks — et sur des compositions assumées. Ces quatre noms sont cités et glosés plus loin dans le texte. La liste complète des sources est en annexe E. » |
@@ -186,8 +191,8 @@ chat replies: applying the rules while writing is enough there.
 3. Rewrite each hit, then re-check the rewrite against all six. Removing a
    calque by compressing further moves the defect into category 2, it does not
    remove it.
-4. Last check on the whole text: every jargon term defined at first use, every
-   sentence has a subject and a verb.
+4. Last check on the whole text: every jargon term defined at first use, no English
+   term that has an established French one, every sentence has a subject and a verb.
 5. Grill the sentences you found yourself admiring. A sentence that struck you
    as tight, elegant or well-turned while writing it is exactly the one to
    interrogate - the same way a design decision gets questioned before it is

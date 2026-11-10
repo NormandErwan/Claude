@@ -32,7 +32,7 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 - An A/B test plan lists these steps, in this order:
   1. Review the proposed wording (`ponytail-review`, then mattpocock `code-review`); test the
      reviewed version.
-  2. Run it with `write-skill`'s eval process (headless `claude -p`, one fixture per arm, probe before the full run). For a `CLAUDE.md` test, keep the fixture's `.claude/settings.json` and `templates/hooks/`: real sessions run the `SessionStart` hook.
+  2. Run it with `write-skill`'s eval process (headless `claude -p`, one fixture per arm, probe before the full run). Start with a principle test on 2-3 cases, with its cost estimate; run the full set only if the owner asks. For a `CLAUDE.md` test, keep the fixture's `.claude/settings.json` and `templates/hooks/`: real sessions run the `SessionStart` hook.
   3. Record the measure, result, and cost in the commit message and the rule's `PROVENANCE.md` row.
 
 ## PROVENANCE.md
@@ -49,8 +49,14 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 - An entry needing an owner decision -> recall its incident and the rule in force, then its options and one recommendation.
 - A premise about the origin session the ledger cannot confirm -> mark it `not checkable here`.
 - A rule that only fires on one session's tool, file, or wording is out of scope.
-- Entry accepted -> add a `BACKLOG.md` task for its change; `Landed in` reads `BACKLOG.md`, then
-  the PR once it exists.
+- Entry already covered by a rule or skill, checked against its current text -> `no change`,
+  naming what covers it.
+- One occurrence whose change would need an A/B test -> `no change` until the class recurs.
+- Entry accepted -> apply it in the processing session if the change fits in a few lines of
+  existing files, needs no A/B test, and leaves no owner decision open. Otherwise add a
+  `BACKLOG.md` task; `Landed in` reads `BACKLOG.md`, then the PR once it exists.
+- Several entries needing a plan -> one independent agent per plan, given the context and the
+  owner's decisions but not the draft; then compare with the draft.
 - `applied` cites the PR carrying the change (`applied - PR#<n>`). An entry filed from another
   repo's ledger gets its new state there too, in a PR on that repo.
 
