@@ -90,3 +90,23 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     error in the avoidable-errors list
   - [ ] `CONTRIBUTING.md`'s A/B steps point to it
 - **Out of scope:** `write-skill`'s quality evals of a skill's output.
+
+### Warn at push when the branch base is behind its remote
+- **Status:** ready
+- **Context:** branches cut from a base cloned at session start and never re-fetched: the PR then conflicts, and GitHub runs no `pull_request` workflow on a conflicted PR (`RETROSPECTIVE.md` 2026-10-18 plan-revised row; same class in NormandErwan/Intelligence, 2026-10-26). Owner, 2026-11-10: a mechanical check in the push hook, not a `CLAUDE.md` rule.
+- **Next:** in `.claude/hooks/check-skills.sh` (or a sibling hook if a skills-only gate is the wrong home), on `git push`: `git fetch origin <base>`, and if the branch does not contain `origin/<base>`, print the commits it lacks and block or warn.
+- **Done when:**
+  - [ ] a push from a branch missing commits of `origin/main` gets the message with the missing commits
+  - [ ] a push from an up-to-date branch passes with no output
+  - [ ] the hook's own tests cover both cases
+  - [ ] a consumer repo gets the check through `templates/hooks/`, or the commit says why not
+- **Out of scope:** rebasing automatically.
+
+### Add an explaining-to-others section to write-guide
+- **Status:** ready
+- **Context:** two NormandErwan/Intelligence retrospective rows (2026-11-09). A scientific section of a guide meant to be explained to colleagues or clients should go intuition, then analogy, then formulas. `teach` targets personal learning over several sessions; its light version was judged excellent: glossary, one worked example end to end, check questions in the page, and an interactive HTML page versioned beside it. Owner, 2026-11-10: a `write-guide` section, not a `teach` mode nor a new skill.
+- **Next:** read `skills/write-guide/SKILL.md` and draft the section with `write-skill`, using the Intelligence Gaussian splatting guide as test case.
+- **Done when:**
+  - [ ] `write-guide` has the section: intuition -> analogy -> formalism, glossary, worked example, check questions
+  - [ ] it says when to produce the interactive HTML page and where to version it
+  - [ ] both Intelligence rows read `applied` with this PR
