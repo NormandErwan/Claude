@@ -1,6 +1,6 @@
 ---
 name: write-french
-version: 1.6.1
+version: 1.6.2
 description: "Use when the output is French - a chat reply in French, or a French markdown deliverable such as a guide, a report or a synthesis - including when the user writes in French and expects French back. Prevents French that reads as translated English: word-for-word calques, sentences compressed until the meaning is gone, jargon used before it is defined, invented turns of phrase."
 ---
 
@@ -116,7 +116,7 @@ French word in prose; keep the English name only as a file path or a command.
 The same holds for any English technical term with an established French
 equivalent: write the French term, with the English one in parentheses at first
 use if the reader may know it under that name. A borrowing already established in
-French stays (« le pipeline de rendu »).
+French stays (« le Web »).
 
 | Instead of | Write |
 |---|---|
