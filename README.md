@@ -4,8 +4,8 @@
 
 Natively-authored skills library for Claude Code.
 
-The reusable part - the casebook method, `write-skill`, `write-hook`, `find-cause` and
-`prevent-drift` - lives in
+The reusable part - the casebook method, `write-skill`, `write-hook`, `find-cause`,
+`prevent-drift` and `backlog` - lives in
 [NormandErwan/claude-casebook](https://github.com/NormandErwan/claude-casebook).
 
 ## Where a skill belongs

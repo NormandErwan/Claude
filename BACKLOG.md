@@ -2,6 +2,13 @@
 
 Work not done yet, one `###` section per task. Format and rules: the `backlog` skill.
 
+## Conventions
+
+- Tracker: BACKLOG.md
+- New tasks: add without asking
+- Finished task: delete its section
+- Owner steps: on
+
 ## Tasks
 
 ### A/B test code-review-and-quality against the named reviewers
@@ -25,13 +32,17 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ### Make the backlog trigger reliable on Haiku
 - **Status:** ready
-- **Context:** the `backlog` skill fired on 5/10 should-fire cases with Haiku 5.5, against 10/10 with
-  Sonnet and Opus. The misses were mostly work mentioned beside a main request
-  (`docs/research/2026-11-07-backlog-skill-trigger-test.md`).
-- **Next:** rerun the missed cases a few times on Haiku to tell a weak `CLAUDE.md` rule from a weak
-  skill description.
+- **Context:** Haiku 5.5 misses the `backlog` skill on work mentioned beside a main request and on a
+  task reported done: 2.0.0 20/30, casebook 0.1.1 23/30, Sonnet and Opus reliable
+  (`docs/research/2026-11-15-backlog-haiku-trigger.md`). Owner, 2026-11-15: keep both `CLAUDE.md`
+  `backlog` lines unchanged until this A/B.
+- **Next:** A/B on Haiku, same fixture: the deferral line reworded with the deferral words and a task
+  reported done (F1, F2, F3, F6); an arm without "Backlog task named", which 0.1.1's description
+  covers (F5-F7).
 - **Done when:**
   - [ ] Haiku fires on at least 8/10 of the same should-fire cases, with no new false fire
+  - [ ] each `CLAUDE.md` `backlog` line kept, reworded or dropped per the A/B, with its
+    `PROVENANCE.md` note
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
 
 ### Review the rules dropped as asking or low-value on 2026-10-23
