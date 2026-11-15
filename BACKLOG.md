@@ -32,18 +32,13 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ### Make the backlog trigger reliable on Haiku
 - **Status:** ready
-- **Context:** the `backlog` skill fired on 5/10 should-fire cases with Haiku 5.5, against 10/10 with
-  Sonnet and Opus. The misses were mostly work mentioned beside a main request
-  (`docs/research/2026-11-07-backlog-skill-trigger-test.md`). The skill now lives in
-  NormandErwan/claude-casebook (`plugins/backlog`); its 0.1.1 description names the user's deferral
-  words (Sonnet 0/5 -> 5/5 on such a case). On Haiku, 0.1.1 fires 23/30 against 20/30 for 2.0.0,
-  misses on F1, F2, F3, F6 (`docs/research/2026-11-15-backlog-haiku-trigger.md`).
-  Owner, 2026-11-15: keep both `CLAUDE.md` `backlog` lines unchanged until this test. Options left
-  open: drop "Backlog task named" (the 0.1.1 description covers a named task), or reword the
-  deferral line with the deferral words and a task reported done.
-- **Next:** test a `CLAUDE.md` wording that names work mentioned beside the main request and a task
-  reported done, on F1, F2, F3, F6 only; in the same fixture, an arm without "Backlog task named"
-  on F5-F7.
+- **Context:** Haiku 5.5 misses the `backlog` skill on work mentioned beside a main request and on a
+  task reported done: 2.0.0 20/30, casebook 0.1.1 23/30, Sonnet and Opus reliable
+  (`docs/research/2026-11-15-backlog-haiku-trigger.md`). Owner, 2026-11-15: keep both `CLAUDE.md`
+  `backlog` lines unchanged until this A/B.
+- **Next:** A/B on Haiku, same fixture: the deferral line reworded with the deferral words and a task
+  reported done (F1, F2, F3, F6); an arm without "Backlog task named", which 0.1.1's description
+  covers (F5-F7).
 - **Done when:**
   - [ ] Haiku fires on at least 8/10 of the same should-fire cases, with no new false fire
   - [ ] each `CLAUDE.md` `backlog` line kept, reworded or dropped per the A/B, with its
