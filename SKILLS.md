@@ -39,7 +39,6 @@ slip through.
 
 | Skill | Source | Web | Sent version | Sent tree | Upstream commit |
 |---|---|---|---|---|---|
-| backlog | native | no | - | - | - |
 | grill-with-docs | fork of `mattpocock/skills@skills/engineering/grill-with-docs` | no | - | - | `5beb35b040` |
 | guide-decision | native | yes | 1.1.0 | `2ee6133ad3` | - |
 | guide-purchase | native | yes | 1.1.0 | `8f10c06aa7` | - |
@@ -83,6 +82,7 @@ slip through.
 | grilling | skills.txt `mattpocock/skills@skills/productivity/grilling` | yes | upstream | - | `7739eaed7f` |
 | prototype | skills.txt `mattpocock/skills` | no | - | - | - |
 | research | skills.txt `mattpocock/skills@skills/engineering/research` | yes | upstream | - | `7739eaed7f` |
+| backlog | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
 | find-cause | skills.txt `NormandErwan/claude-casebook@plugins/find-cause/skills/find-cause` | yes | upstream | - | `aa1d7bbaeb` |
 | prevent-drift | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
 | write-hook | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
@@ -99,6 +99,9 @@ claude.ai).
 write-prompt: was `craft-prompt` here, a fork of `neolabhq/context-engineering-kit`'s
 `prompt-engineering` (GPL-3.0), up to 1.1.0. Rebuilt from MIT sources and evals (PR#110), then
 moved to NormandErwan/claude-casebook as the `write-prompt` plugin at 2.0.0.
+
+backlog: native here up to 2.0.0, then moved to NormandErwan/claude-casebook as the `backlog`
+plugin at 0.1.1. Its defaults match 2.0.0; this repo's choices sit in `BACKLOG.md` `## Conventions`.
 
 `addyosmani/agent-skills` is installed skill by skill, as its `docs/getting-started.md` asks
 for hosts that route skills natively: no `using-agent-skills` router. `install-skills.sh` also
