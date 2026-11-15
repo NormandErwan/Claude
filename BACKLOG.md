@@ -36,9 +36,10 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   Sonnet and Opus. The misses were mostly work mentioned beside a main request
   (`docs/research/2026-11-07-backlog-skill-trigger-test.md`). The skill now lives in
   NormandErwan/claude-casebook (`plugins/backlog`); its 0.1.1 description names the user's deferral
-  words (Sonnet 0/5 -> 5/5 on such a case), not yet measured on Haiku.
-- **Next:** rerun the missed cases a few times on Haiku to tell a weak `CLAUDE.md` rule from a weak
-  skill description.
+  words (Sonnet 0/5 -> 5/5 on such a case). On Haiku, 0.1.1 fires 23/30 against 20/30 for 2.0.0,
+  misses on F1, F2, F3, F6 (`docs/research/2026-11-15-backlog-haiku-trigger.md`).
+- **Next:** test a `CLAUDE.md` wording that names work mentioned beside the main request and a task
+  reported done, on F1, F2, F3, F6 only.
 - **Done when:**
   - [ ] Haiku fires on at least 8/10 of the same should-fire cases, with no new false fire
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
