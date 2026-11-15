@@ -38,10 +38,16 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   NormandErwan/claude-casebook (`plugins/backlog`); its 0.1.1 description names the user's deferral
   words (Sonnet 0/5 -> 5/5 on such a case). On Haiku, 0.1.1 fires 23/30 against 20/30 for 2.0.0,
   misses on F1, F2, F3, F6 (`docs/research/2026-11-15-backlog-haiku-trigger.md`).
+  Owner, 2026-11-15: keep both `CLAUDE.md` `backlog` lines unchanged until this test. Options left
+  open: drop "Backlog task named" (the 0.1.1 description covers a named task), or reword the
+  deferral line with the deferral words and a task reported done.
 - **Next:** test a `CLAUDE.md` wording that names work mentioned beside the main request and a task
-  reported done, on F1, F2, F3, F6 only.
+  reported done, on F1, F2, F3, F6 only; in the same fixture, an arm without "Backlog task named"
+  on F5-F7.
 - **Done when:**
   - [ ] Haiku fires on at least 8/10 of the same should-fire cases, with no new false fire
+  - [ ] each `CLAUDE.md` `backlog` line kept, reworded or dropped per the A/B, with its
+    `PROVENANCE.md` note
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
 
 ### Review the rules dropped as asking or low-value on 2026-10-23
