@@ -11,10 +11,10 @@ printed by a plugin `SessionStart` hook) reproduce a known `claude -p` result:
   `max: 0`, so a pass there means "did not fire".
 - Arms: `CLAUDE.md` at `336ef9f`; skills from `templates/hooks/install-skills.sh` (current
   `skills.txt`); `backlog-200` adds `skills/backlog` at `336ef9f`; `backlog-cb` keeps casebook
-  `backlog` 0.1.1. `diff-arms.sh`: arms differ only in `skills/backlog`.
+  `backlog` 0.1.1. `test-rule-change.py diff`: arms differ only in `skills/backlog`.
 - Claude Code 2.1.325, `claude-haiku-5-5`, 3 runs per case, tools Read, Write, Edit, Glob, Grep,
-  Skill. No Bash: `bwrap` and `socat` are not installable in this container, so `plugin eval`
-  refuses Bash. The reference runs allowed `git`/`ls`/`cat`.
+  Skill. No Bash: `bwrap` and `socat` were not installed (they install after `apt-get update`),
+  so `plugin eval` refused Bash. The reference runs allowed `git`/`ls`/`cat`.
 
 ## Results
 
@@ -24,7 +24,7 @@ printed by a plugin `SessionStart` hook) reproduce a known `claude -p` result:
 | 2.0.0 (`backlog-200.json`) | 19/30 | 20/30 | 0/15 |
 | casebook 0.1.1 (`backlog-cb.json`) | 17/30 | 23/30 | 0/15 |
 
-Per case: `2026-11-16-compare.md` (written by `compare.py`). Misses fall on the same cases as the
-reference (F1, F2, F3, F6). 2.0.0 reproduces; 0.1.1 lands 6 runs lower, unexplained (framing,
+Per case: `2026-11-16-compare.md` (written by `test-rule-change.py compare`). Misses fall on the same cases as
+the reference (F1, F2, F3, F6), plus F7 once on 0.1.1 (2/3). 2.0.0 reproduces; 0.1.1 lands 6 runs lower, unexplained (framing,
 no Bash, or noise at 3 runs). Both methods find no clear gap between the two versions.
 Cost: $0.21 (calibration) + $0.42 (A/B) + about $0.03 of pilots.

@@ -140,9 +140,11 @@ script may install `bubblewrap` and `socat`, needed for any Bash-granting case.
 
 Owner chose A. Calibration: hook-injected 2.0.0 fired 18/30 and 19/30 vs 20/30 by `claude -p`,
 casebook 0.1.1 17/30 vs 23/30 (`docs/evidence/ab-harness-calibration/`). Scripts built in
-casebook `test-rule-change` 0.6.0 (`plugins/casebook/skills/test-rule-change/scripts/`):
-`build-arm.sh`, `edit-once.py`, `diff-arms.sh`, `preflight.py`, `run-arm.sh`, `compare.py`,
-`test.sh`. `CONTRIBUTING.md` step 2 points to them.
+casebook `test-rule-change` 0.6.0 as one tool,
+`plugins/casebook/skills/test-rule-change/scripts/test-rule-change.py` (`edit`, `build`, `diff`,
+`preflight`, `run`, `compare`; the separate scripts named in the plan above were folded into it),
+tested by `test_cli.py`. `CONTRIBUTING.md` step 2 points to it. `bubblewrap` and `socat` install
+after `apt-get update`; with them, Bash runs sandboxed (`ls`/`cat` work, writes to `.git` are blocked).
 
 ## Sources
 

@@ -93,13 +93,14 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ### Find or build a reusable harness for rule and skill A/B tests
 - **Status:** blocked: NormandErwan/claude-casebook#11 not merged
-- **Context:** option A built (`docs/research/2026-11-16-ab-test-harness.md`, "Outcome"): scripts
-  in casebook `test-rule-change` 0.6.0, calibrated in `docs/evidence/ab-harness-calibration/`;
-  `CONTRIBUTING.md` step 2 points to them (this repo's PR#134).
+- **Context:** option A built (`docs/research/2026-11-16-ab-test-harness.md`, "Outcome"): one
+  tool, casebook `test-rule-change` 0.6.0 `scripts/test-rule-change.py`, calibrated in
+  `docs/evidence/ab-harness-calibration/`; `CONTRIBUTING.md` step 2 points to it (PR#134).
 - **Next:** once claude-casebook#11 is merged, delete this task.
 - **Done when:**
   - [x] a tool or skill adopted or built that prevents, or catches before any scored run, each
-    error in the avoidable-errors list (10-12 as `test-rule-change` Common Mistakes)
+    error in the avoidable-errors list (10-11 as `test-rule-change` Common Mistakes, 12 by its
+    step 1)
   - [x] `CONTRIBUTING.md`'s A/B steps point to it
   - [ ] claude-casebook#11 merged
 - **Out of scope:** `write-skill`'s quality evals of a skill's output.
@@ -107,18 +108,13 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 ### Rerun the dated-notes cases with the casebook A/B scripts
 - **Status:** blocked: NormandErwan/claude-casebook#11 not merged
 - **Blocked by:** Find or build a reusable harness for rule and skill A/B tests
-- **Context:** owner, 2026-11-16: reuse the PR#133 dated-notes cases (`docs/evidence/dated-notes/`)
-  as a second harness test; its setup errors were all in `grade.py` (counted `.claude/` skills as
-  new notes, missed committed files, counted fixture files), plus latent ones: ungranted
-  `ToolSearch`/`WebFetch` never checked, transcripts not kept. The scripts cover the latter, not
-  grader errors. P3 writes a handoff outside the workspace (`$TMPDIR`): `plugin eval` file
-  graders may not see it.
-- **Next:** port the 8 cases of `prompts.tsv` to `plugin eval` cases (`cases/*.sh` as
-  scaffolds, `regex` graders on written file names), run each grader once by hand on a known
-  pass and fail, then `preflight.py` and one run per case on Sonnet.
+- **Context:** owner, 2026-11-16: reuse the PR#133 cases (`docs/evidence/dated-notes/`) as a
+  second harness test. Their setup errors were in `grade.py` (counted skills, fixture files; missed
+  commits): `test-rule-change.py` does not check graders. P3's handoff lands outside the workspace.
+- **Next:** port the 8 cases of `prompts.tsv` to `plugin eval` cases.
 - **Done when:**
-  - [ ] 8 cases run through `run-arm.sh` and match the 8/8 of `PROVENANCE.md`'s dated-note row, or
-    each gap is explained
+  - [ ] 8 cases run through `test-rule-change.py run` and match the 8/8 of `PROVENANCE.md`'s
+    dated-note row, or each gap is explained
   - [ ] a grader check (known pass/fail) added to `test-rule-change` if a grader error recurs
 
 ### Warn at push when the branch base is behind its remote
