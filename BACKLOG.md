@@ -68,14 +68,15 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] `CLAUDE.md` and `CLAUDE.web.md` updated together if the A/B favors the change
 
 ### Date-prefix handoff and docs file names
-- **Status:** ready
+- **Status:** in progress (ccr-14422158-y8smi9)
 - **Context:** handoff files and `docs/` notes named without a date cannot be ordered
-  (`RETROSPECTIVE.md` 2026-11-07 new-preference, two rows). `docs/research/` already follows
-  `YYYY-MM-DD-<slug>.md` by habit; no rule states it.
-- **Next:** check whether `v-model-documents` or `research` already names files, before writing a rule.
+  (`RETROSPECTIVE.md` 2026-11-07 new-preference, two rows). Owner, 2026-11-16 (PR#133): one
+  `Behavior` rule covers handoffs too (fork untouched); a skill's or directory's scheme (ADR) wins;
+  trigger test on the new wording only, no baseline arm.
+- **Next:** wording reviewed; propose then run the 6-case trigger test once the owner agrees.
 - **Done when:**
-  - [ ] `handoff` names its file `YYYY-MM-DD-<slug>.md`
-  - [ ] a rule makes new `docs/` files take the same prefix, with its `PROVENANCE.md` row
+  - [ ] a handoff file is named `YYYY-MM-DD-<slug>.md` under the rule
+  - [ ] new dated notes take the prefix, ADRs keep their numbering, with the rule's `PROVENANCE.md` row
 
 ### Find why verify-sources does not fire on unverified claims
 - **Status:** ready
