@@ -97,8 +97,10 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   15 listed in `docs/research/2026-11-08-ab-test-avoidable-errors.md`. Claude Code 2.1.319 ships
   `claude plugin eval` (graders incl. `tool_used: Skill`, no-plugin baseline arm); unknown whether
   it compares `CLAUDE.md` arms. Latest harness: `docs/evidence/skill-scan/`.
-- **Next:** `search-first`: what `claude plugin eval` and published skills cover (arm isolation,
-  `SessionStart` hook, trust, permissions, cost capture), against `docs/evidence/skill-scan/`.
+- **Next:** research done: `docs/research/2026-11-16-ab-test-harness.md` (option A recommended,
+  owner to confirm). Calibrate first: rerun the backlog Haiku case (known 20/30 fired) as
+  hook-injected `CLAUDE.md` plugins under `claude plugin eval`; same range -> build the wrapper
+  in casebook `test-rule-change`, else option B.
 - **Done when:**
   - [ ] a tool or skill adopted or built that prevents, or catches before any scored run, each
     error in the avoidable-errors list
