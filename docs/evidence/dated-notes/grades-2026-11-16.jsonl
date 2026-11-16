@@ -1,0 +1,8 @@
+{"case": "D1", "run": "D1-r1", "expect": "cart-load-test.md", "pass": true, "files": ["docs/reports/cart-load-test.md"], "cost_usd": 0.12576790000000002}
+{"case": "N1", "run": "N1-r1", "expect": "003", "pass": true, "files": ["docs/postmortems/003-redis-memory-saturation.md"], "cost_usd": 0.1731905}
+{"case": "N2", "run": "N2-r1", "expect": "undated", "pass": true, "files": ["docs/installation.md"], "cost_usd": 0.19886479999999998}
+{"case": "N3", "run": "N3-r1", "expect": "0001", "pass": true, "files": ["docs/adr/0001-redis-for-cart-cache.md"], "cost_usd": 0.1782567}
+{"case": "N4", "run": "N4-r1", "expect": "dated", "pass": true, "files": ["docs/notes/2026-11-16-reunion-paniers-index-remboursements.md"], "cost_usd": 0.1256365}
+{"case": "P1", "run": "P1-r1", "expect": "dated", "pass": true, "files": ["docs/2026-11-16-rate-limiting-flask.md"], "cost_usd": 0.23758250000000003}
+{"case": "P2", "run": "P2-r1", "expect": "dated", "pass": true, "files": ["docs/2026-11-16-rapport-test-de-charge.md"], "cost_usd": 0.1283243}
+{"case": "P3", "run": "P3-r1", "expect": "dated", "pass": true, "files": ["$TMPDIR/.../scratchpad/2026-11-16-handoff-cache-paniers-redis.md"], "cost_usd": 0.154316}
