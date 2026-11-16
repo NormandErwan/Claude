@@ -33,6 +33,7 @@
 
 ## Claude Code
 - Interview the user (`Behavior`) -> `interview-me`.
+- Question to the user -> ask it in the reply text, never through a question tool (`AskUserQuestion`).
 - After the interview:
   - Feature or significant change with no spec -> `spec-driven-development`.
   - Spec ready, work to split into tasks -> `planning-and-task-breakdown`.
