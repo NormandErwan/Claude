@@ -1,12 +1,12 @@
 ---
 name: handoff
-version: 1.2.0
+version: 1.3.0
 description: Compact the current conversation into a handoff document for another agent to pick up.
 argument-hint: "What will the next session be used for?"
 ---
 
 Write a handoff document summarising the current conversation so a fresh agent can continue the work, as one Markdown file. Save it where the user can open it, never in the current workspace's tracked files:
-- Session lists a scratchpad directory -> save there and give the full path.
+- Session lists a scratchpad directory -> save there and give the full path. In a cloud session the container, scratchpad included, is reclaimed when the session ends: also send the file to the user (`SendUserFile`) and say it will not survive the container.
 - Otherwise, with a filesystem -> the OS temporary directory (`$TMPDIR`, else `/tmp`; `%TEMP%` on Windows).
 
 Include a "suggested skills" section in the document, naming which skills the next agent should call the Skill tool for.
