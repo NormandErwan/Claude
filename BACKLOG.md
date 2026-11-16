@@ -92,7 +92,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 - **Out of scope:** the skills the agent-skills task covers.
 
 ### Find or build a reusable harness for rule and skill A/B tests
-- **Status:** ready
+- **Status:** in progress (ccr-78f7b75d-5x36gd)
 - **Context:** each A/B test rebuilds its own `claude -p` setup and loses runs to avoidable errors:
   15 listed in `docs/research/2026-11-08-ab-test-avoidable-errors.md`. Claude Code 2.1.319 ships
   `claude plugin eval` (graders incl. `tool_used: Skill`, no-plugin baseline arm); unknown whether
