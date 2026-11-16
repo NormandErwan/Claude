@@ -46,7 +46,7 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 
 - Processing `proposed` entries -> read the whole ledger first. An entry whose class matches a
   prior one goes to `find-cause`, not to a re-extension of the same rule.
-- An entry needing an owner decision -> recall its incident and the rule in force, then its options and one recommendation.
+- An entry needing an owner decision -> ask in the reply text, never through a question tool: recall its incident and the rule in force, then its options and one recommendation. A question about several entries lists each one with its decision and reason.
 - A premise about the origin session the ledger cannot confirm -> mark it `not checkable here`.
 - A rule that only fires on one session's tool, file, or wording is out of scope.
 - Entry already covered by a rule or skill, checked against its current text -> `no change`,
