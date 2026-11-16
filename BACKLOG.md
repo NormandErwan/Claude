@@ -11,6 +11,18 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ## Tasks
 
+### Decide whether handoffs go in docs/handoffs/
+- **Status:** needs owner: options 1-3 below
+- **Context:** owner asked (PR#133) for handoffs in `docs/handoffs/`, then deferred it. The `handoff`
+  fork keeps them out of tracked files today; names are already dated by the `Behavior` rule. Costs:
+  a folder and a commit per handoff in every consumer repo, stale files piling up, no repo on claude.ai.
+  Options: (1) in a repo, commit `docs/handoffs/`, the session that picks one up deletes it; no repo,
+  current behavior; (2) same, kept as an archive; (3) no change.
+- **Next:** ask the owner which option.
+- **Done when:**
+  - [ ] option chosen; if 1 or 2, `handoff` 1.4.0 zipped for claude.ai and the P3 case of
+    `docs/evidence/dated-notes/` rerun, expecting `docs/handoffs/YYYY-MM-DD-<slug>.md` committed
+
 ### A/B test code-review-and-quality against the named reviewers
 - **Status:** ready
 - **Context:** `code-review-and-quality` never fired in use (`RETROSPECTIVE.md` 2026-10-28 test-run);
