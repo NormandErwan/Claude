@@ -136,6 +136,14 @@ arm; Haiku probe cost suggests well under $1). If the firing rates land in the s
 the wrapper; if not, option B. In parallel, ask the owner whether the cloud environment's setup
 script may install `bubblewrap` and `socat`, needed for any Bash-granting case.
 
+## Outcome (2026-11-16)
+
+Owner chose A. Calibration: hook-injected 2.0.0 fired 18/30 and 19/30 vs 20/30 by `claude -p`,
+casebook 0.1.1 17/30 vs 23/30 (`docs/evidence/ab-harness-calibration/`). Scripts built in
+casebook `test-rule-change` 0.6.0 (`plugins/casebook/skills/test-rule-change/scripts/`):
+`build-arm.sh`, `edit-once.py`, `diff-arms.sh`, `preflight.py`, `run-arm.sh`, `compare.py`,
+`test.sh`. `CONTRIBUTING.md` step 2 points to them.
+
 ## Sources
 
 - [D-ref] https://code.claude.com/docs/en/plugin-evals, "Eval suite reference" (prompt.md
