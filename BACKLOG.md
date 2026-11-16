@@ -92,20 +92,34 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 - **Out of scope:** the skills the agent-skills task covers.
 
 ### Find or build a reusable harness for rule and skill A/B tests
-- **Status:** in progress (ccr-78f7b75d-5x36gd; casebook `feat/ab-harness`)
-- **Context:** each A/B test rebuilds its own `claude -p` setup and loses runs to avoidable errors:
-  15 listed in `docs/research/2026-11-08-ab-test-avoidable-errors.md`. Claude Code 2.1.319 ships
-  `claude plugin eval` (graders incl. `tool_used: Skill`, no-plugin baseline arm); unknown whether
-  it compares `CLAUDE.md` arms. Latest harness: `docs/evidence/skill-scan/`.
-- **Next:** research done: `docs/research/2026-11-16-ab-test-harness.md` (option A recommended,
-  owner to confirm). Calibrate first: rerun the backlog Haiku case (known 20/30 fired) as
-  hook-injected `CLAUDE.md` plugins under `claude plugin eval`; same range -> build the wrapper
-  in casebook `test-rule-change`, else option B.
+- **Status:** blocked: NormandErwan/claude-casebook#11 not merged
+- **Context:** option A built (`docs/research/2026-11-16-ab-test-harness.md`, "Outcome"): scripts
+  in casebook `test-rule-change` 0.6.0, calibrated in `docs/evidence/ab-harness-calibration/`;
+  `CONTRIBUTING.md` step 2 points to them (this repo's PR#134).
+- **Next:** once claude-casebook#11 is merged, delete this task.
 - **Done when:**
-  - [ ] a tool or skill adopted or built that prevents, or catches before any scored run, each
-    error in the avoidable-errors list
-  - [ ] `CONTRIBUTING.md`'s A/B steps point to it
+  - [x] a tool or skill adopted or built that prevents, or catches before any scored run, each
+    error in the avoidable-errors list (10-12 as `test-rule-change` Common Mistakes)
+  - [x] `CONTRIBUTING.md`'s A/B steps point to it
+  - [ ] claude-casebook#11 merged
 - **Out of scope:** `write-skill`'s quality evals of a skill's output.
+
+### Rerun the dated-notes cases with the casebook A/B scripts
+- **Status:** blocked: NormandErwan/claude-casebook#11 not merged
+- **Blocked by:** Find or build a reusable harness for rule and skill A/B tests
+- **Context:** owner, 2026-11-16: reuse the PR#133 dated-notes cases (`docs/evidence/dated-notes/`)
+  as a second harness test; its setup errors were all in `grade.py` (counted `.claude/` skills as
+  new notes, missed committed files, counted fixture files), plus latent ones: ungranted
+  `ToolSearch`/`WebFetch` never checked, transcripts not kept. The scripts cover the latter, not
+  grader errors. P3 writes a handoff outside the workspace (`$TMPDIR`): `plugin eval` file
+  graders may not see it.
+- **Next:** port the 8 cases of `prompts.tsv` to `plugin eval` cases (`cases/*.sh` as
+  scaffolds, `regex` graders on written file names), run each grader once by hand on a known
+  pass and fail, then `preflight.py` and one run per case on Sonnet.
+- **Done when:**
+  - [ ] 8 cases run through `run-arm.sh` and match the 8/8 of `PROVENANCE.md`'s dated-note row, or
+    each gap is explained
+  - [ ] a grader check (known pass/fail) added to `test-rule-change` if a grader error recurs
 
 ### Warn at push when the branch base is behind its remote
 - **Status:** ready
