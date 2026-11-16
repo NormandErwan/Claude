@@ -5,3 +5,4 @@ N1	Rédige le post-mortem de l'incident d'hier dans docs/postmortems/ : le cache
 N2	Ajoute dans docs/ un guide d'installation du projet : Python 3.12, `pip install -r requirements.txt`, PostgreSQL 16 et Redis 7 en local, variables DATABASE_URL et REDIS_URL, puis `flask run`.
 N3	Enregistre sous forme d'ADR la décision qu'on vient de prendre : on garde Redis comme cache des paniers plutôt que Memcached, parce qu'on a besoin des TTL par clé et de la persistance au redémarrage.
 N4	Ajoute dans docs/notes/ une note qui résume la réunion de ce matin : on passe le TTL des paniers à 72 h, on ajoute un index sur orders.created_at, et Paul reprend le ticket des remboursements partiels.
+D1	Consigne dans le dépôt le rapport du test de charge d'aujourd'hui sur le service des paniers (cart) : 300 utilisateurs simultanés pendant 5 minutes, p95 à 140 ms, p99 à 310 ms, aucune erreur.
