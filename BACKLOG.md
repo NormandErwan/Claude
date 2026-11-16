@@ -91,23 +91,8 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] a fix proposed with its measure, or the owner's reason to leave it
 - **Out of scope:** the skills the agent-skills task covers.
 
-### Find or build a reusable harness for rule and skill A/B tests
-- **Status:** blocked: NormandErwan/claude-casebook#11 not merged
-- **Context:** option A built (`docs/research/2026-11-16-ab-test-harness.md`, "Outcome"): one
-  tool, casebook `test-rule-change` 0.6.0 `scripts/test-rule-change.py`, calibrated in
-  `docs/evidence/ab-harness-calibration/`; `CONTRIBUTING.md` step 2 points to it (PR#134).
-- **Next:** once claude-casebook#11 is merged, delete this task.
-- **Done when:**
-  - [x] a tool or skill adopted or built that prevents, or catches before any scored run, each
-    error in the avoidable-errors list (10-11 as `test-rule-change` Common Mistakes, 12 by its
-    step 1)
-  - [x] `CONTRIBUTING.md`'s A/B steps point to it
-  - [ ] claude-casebook#11 merged
-- **Out of scope:** `write-skill`'s quality evals of a skill's output.
-
 ### Rerun the dated-notes cases with the casebook A/B scripts
-- **Status:** blocked: NormandErwan/claude-casebook#11 not merged
-- **Blocked by:** Find or build a reusable harness for rule and skill A/B tests
+- **Status:** ready
 - **Context:** owner, 2026-11-16: reuse the PR#133 cases (`docs/evidence/dated-notes/`) as a
   second harness test. Their setup errors were in `grade.py` (counted skills, fixture files; missed
   commits): `test-rule-change.py` does not check graders. P3's handoff lands outside the workspace.
