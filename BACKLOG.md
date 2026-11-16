@@ -91,19 +91,16 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] a fix proposed with its measure, or the owner's reason to leave it
 - **Out of scope:** the skills the agent-skills task covers.
 
-### Find or build a reusable harness for rule and skill A/B tests
+### Rerun the dated-notes cases with the casebook A/B scripts
 - **Status:** ready
-- **Context:** each A/B test rebuilds its own `claude -p` setup and loses runs to avoidable errors:
-  15 listed in `docs/research/2026-11-08-ab-test-avoidable-errors.md`. Claude Code 2.1.319 ships
-  `claude plugin eval` (graders incl. `tool_used: Skill`, no-plugin baseline arm); unknown whether
-  it compares `CLAUDE.md` arms. Latest harness: `docs/evidence/skill-scan/`.
-- **Next:** `search-first`: what `claude plugin eval` and published skills cover (arm isolation,
-  `SessionStart` hook, trust, permissions, cost capture), against `docs/evidence/skill-scan/`.
+- **Context:** owner, 2026-11-16: reuse the PR#133 cases (`docs/evidence/dated-notes/`) as a
+  second harness test. Their setup errors were in `grade.py` (counted skills, fixture files; missed
+  commits): `test-rule-change.py` does not check graders. P3's handoff lands outside the workspace.
+- **Next:** port the 8 cases of `prompts.tsv` to `plugin eval` cases.
 - **Done when:**
-  - [ ] a tool or skill adopted or built that prevents, or catches before any scored run, each
-    error in the avoidable-errors list
-  - [ ] `CONTRIBUTING.md`'s A/B steps point to it
-- **Out of scope:** `write-skill`'s quality evals of a skill's output.
+  - [ ] 8 cases run through `test-rule-change.py run` and match the 8/8 of `PROVENANCE.md`'s
+    dated-note row, or each gap is explained
+  - [ ] a grader check (known pass/fail) added to `test-rule-change` if a grader error recurs
 
 ### Warn at push when the branch base is behind its remote
 - **Status:** ready
