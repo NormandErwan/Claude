@@ -23,16 +23,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] option chosen; if 1 or 2, `handoff` 1.4.0 zipped for claude.ai and the P3 case of
     `docs/evidence/dated-notes/` rerun, expecting `docs/handoffs/YYYY-MM-DD-<slug>.md` committed
 
-### A/B test code-review-and-quality against the named reviewers
-- **Status:** ready
-- **Context:** `code-review-and-quality` never fired in use (`RETROSPECTIVE.md` 2026-10-28 test-run);
-  `ponytail-review` + mattpocock `code-review` already run on a pushed diff. Owner, 2026-11-08
-  (PR#125): A/B on two cases replayed from recent sessions, before keeping or removing it.
-- **Next:** pick two recent reviewed diffs whose later fixes give a known-defect list.
-- **Done when:**
-  - [ ] A/B run per `CONTRIBUTING.md`, measure and cost recorded
-  - [ ] skill kept with a `CLAUDE.md` trigger, or removed from `skills.txt` and `SKILLS.md`
-
 ### Test the overlapping agent-skills before reinstalling them
 - **Status:** ready
 - **Context:** `code-simplification`, `context-engineering`, `doubt-driven-development` overlap a named
