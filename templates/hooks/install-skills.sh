@@ -105,6 +105,18 @@ done
 # Last, so a fork wins over an upstream copy of the same name.
 [ -d "$LOCAL_SKILLS" ] && cp -r "$LOCAL_SKILLS/." "$TARGET_DIR/skills/"
 
+# Target skills/ is hook-owned (session-start.sh wipes it in consumers): drop
+# dirs neither manifest nor fork names. A listed skill that failed this run
+# keeps its old copy.
+keep=" ${expected[*]-} $(ls "$LOCAL_SKILLS" 2>/dev/null | tr '\n' ' ') "
+pruned=()
+for d in "$TARGET_DIR/skills"/*/; do
+  [ -d "$d" ] || continue
+  s=$(basename "$d")
+  case "$keep" in *" $s "*) continue ;; esac
+  rm -rf "$d" && pruned+=("$s")
+done
+
 # Judge by what this run staged, not exit codes (npx can exit 0 having
 # installed nothing) nor the target (a previous session's copy hides a failure).
 missing=()
@@ -142,5 +154,6 @@ else
     done
   done
 fi
+[ ${#pruned[@]} -eq 0 ] || echo "skills.txt: removed ${#pruned[@]} skill(s) no longer listed: ${pruned[*]}."
 [ -n "${refs:-}" ] || echo "agent-skills references/ not cloned: skills' ../../references links are dead this session."
 [ ${#hidden[@]} -eq 0 ] || echo "skills.txt: hidden by disable-model-invocation: ${hidden[*]} - fork per CLAUDE.md Bootstrap 2."

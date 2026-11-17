@@ -40,7 +40,6 @@
   - Feature or significant change with no spec -> `spec-driven-development`.
   - Spec ready, work to split into tasks -> `planning-and-task-breakdown`.
   - Next task of a plan, a new module, or code spanning several modules -> `incremental-implementation`.
-- Turn would end with an unreviewed pushed diff and no open plan items -> run `code-review-and-quality`.
 - Logic to change or bug to fix -> `test-driven-development`.
 - Code calling a framework or API written from memory -> `source-driven-development`.
 - About to claim done, fixed, or passing -> run the verification commands locally first (the project's own build, lint, tests).
@@ -49,7 +48,6 @@
 - Shell sequence whose later step changes git state (`add`, `commit`, `rebase --continue`, `push`) -> chain with `&&`, never `;`.
 - Conflict resolved by script -> read its diff before `git add`; a whole-file diff means its line endings changed.
 - Code and its docs (README, comments, commits, PRs, skills) -> English, unless the skill is already in another language.
-- Commit message to write -> `git-workflow-and-versioning`.
 - Work deferred, discovered mid-session, or beyond this session's scope (e.g. a plan's large steps) -> `backlog`.
 - Backlog task named -> `backlog`.
 - Branch or PR named (user, handoff, session setup) -> use its branch without confirmation, over the pre-assigned one.
