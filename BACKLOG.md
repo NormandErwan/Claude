@@ -11,6 +11,18 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ## Tasks
 
+### Prune skills dropped from skills.txt on persistent machines
+- **Status:** needs owner: options below
+- **Context:** `templates/hooks/install-skills.sh` only copies into `.claude/skills`; a skill removed
+  from `skills.txt` (PR#135: `caveman`, `ponytail-review`...) stays in the roster on a machine that
+  keeps `.claude/` between sessions, so the in-use trial of 2026-11-17 is not clean there. Cloud
+  sessions start from a fresh clone and are not affected. A naive prune would also delete a
+  consumer repo's own skills in `.claude/skills`. Options: (1) the hook records what it installed
+  and removes only those entries no longer listed; (2) say in `README.md` to delete them by hand.
+- **Next:** ask the owner which option.
+- **Done when:**
+  - [ ] a skill removed from `skills.txt` is gone from the roster at the next local session start
+
 ### Decide whether handoffs go in docs/handoffs/
 - **Status:** needs owner: options 1-3 below
 - **Context:** owner asked (PR#133) for handoffs in `docs/handoffs/`, then deferred it. The `handoff`
