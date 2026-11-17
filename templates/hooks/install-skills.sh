@@ -114,7 +114,8 @@ for d in "$TARGET_DIR/skills"/*/; do
   [ -d "$d" ] || continue
   s=$(basename "$d")
   case "$keep" in *" $s "*) continue ;; esac
-  rm -rf "$d" && pruned+=("$s")
+  # No trailing slash: rm on link/ would empty the link's target.
+  rm -rf "${d%/}" && pruned+=("$s")
 done
 
 # Judge by what this run staged, not exit codes (npx can exit 0 having

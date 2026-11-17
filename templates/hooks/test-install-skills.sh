@@ -31,6 +31,9 @@ for s in dropped listed myfork; do
   mkdir -p "$T/claude/skills/$s" && echo "---" >"$T/claude/skills/$s/SKILL.md"
 done
 touch "$T/claude/skills/stray-file"
+# Dropped skill linked to a dir outside target: unlink only, never empty it.
+mkdir -p "$T/outside/linked" && echo "---" >"$T/outside/linked/SKILL.md"
+ln -s "$T/outside/linked" "$T/claude/skills/linked"
 
 PATH="$T/bin:$PATH" SKILLS_DOWNLOAD_URL=http://127.0.0.1:9 CLAUDE_PROJECT_DIR= \
   bash "$T/repo/templates/hooks/install-skills.sh" "$T/claude" >"$T/out" 2>&1
@@ -39,7 +42,9 @@ check "skill dropped from skills.txt is removed" test ! -e "$T/claude/skills/dro
 check "listed skill that failed to install keeps last session's copy" test -f "$T/claude/skills/listed/SKILL.md"
 check "local fork is kept" test -f "$T/claude/skills/myfork/SKILL.md"
 check "non-directory entry left alone" test -e "$T/claude/skills/stray-file"
-check "prune reported in status output" grep -q "removed 1 skill(s) no longer listed: dropped" "$T/out"
+check "dropped symlinked skill is unlinked" test ! -L "$T/claude/skills/linked"
+check "symlink target outside skills/ is untouched" test -f "$T/outside/linked/SKILL.md"
+check "prune reported in status output" grep -q "removed 2 skill(s) no longer listed: dropped linked" "$T/out"
 
 echo "pass=$pass fail=$fail"
 [ "$fail" -eq 0 ]
