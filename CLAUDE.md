@@ -40,6 +40,7 @@
   - Feature or significant change with no spec -> `spec-driven-development`.
   - Spec ready, work to split into tasks -> `planning-and-task-breakdown`.
   - Next task of a plan, a new module, or code spanning several modules -> `incremental-implementation`.
+- Turn would end with an unreviewed pushed diff and no open plan items -> run `code-review-and-quality`.
 - Logic to change or bug to fix -> `test-driven-development`.
 - Code calling a framework or API written from memory -> `source-driven-development`.
 - About to claim done, fixed, or passing -> run the verification commands locally first (the project's own build, lint, tests).
