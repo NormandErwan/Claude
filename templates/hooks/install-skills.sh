@@ -60,12 +60,27 @@ api_fetch() { # <repo> <dest skills dir> <skill>...
   done
 }
 
+# `*` = every dir under the repo's skills/. Tree-only clone, ~1s: the cloud
+# proxy blocks api.github.com (403, 2026-11-19). SKILLS_GIT_BASE overrides the
+# host (tests).
+list_skills() { # <repo>
+  local d="$STAGING/tree-${1//\//_}"
+  ${CAP[@]+"${CAP[@]}"} git clone -q --depth 1 --filter=blob:none --no-checkout \
+    "${SKILLS_GIT_BASE:-https://github.com}/$1" "$d" </dev/null >/dev/null 2>&1 &&
+    git -C "$d" ls-tree -d --name-only HEAD skills/ | sed 's#^skills/##'
+}
+
 expected=()
+unlisted=()
 i=0
 while read -r repo skills; do
   case "$repo" in '' | '#'*) continue ;; esac
   # No skill names would install the whole repo, over the forks.
   [ -n "$skills" ] || continue
+  if [ "$skills" = "*" ]; then
+    skills=$(list_skills "$repo" | tr '\n' ' ')
+    [ -n "${skills// /}" ] || { unlisted+=("$repo"); continue; }
+  fi
   args=()
   for s in $skills; do args+=(-s "$s"); expected+=("$s"); done
   mkdir -p "$STAGING/$i"
@@ -105,6 +120,20 @@ done
 # Last, so a fork wins over an upstream copy of the same name.
 [ -d "$LOCAL_SKILLS" ] && cp -r "$LOCAL_SKILLS/." "$TARGET_DIR/skills/"
 
+# Target skills/ is hook-owned (session-start.sh wipes it in consumers): drop
+# dirs neither manifest nor fork names. A listed skill that failed this run
+# keeps its old copy.
+keep=" ${expected[*]-} $(ls "$LOCAL_SKILLS" 2>/dev/null | tr '\n' ' ') "
+pruned=()
+# A `*` repo left unlisted: its skills are unknown, prune nothing this run.
+[ ${#unlisted[@]} -eq 0 ] && for d in "$TARGET_DIR/skills"/*/; do
+  [ -d "$d" ] || continue
+  s=$(basename "$d")
+  case "$keep" in *" $s "*) continue ;; esac
+  # No trailing slash: rm on link/ would empty the link's target.
+  rm -rf "${d%/}" && pruned+=("$s")
+done
+
 # Judge by what this run staged, not exit codes (npx can exit 0 having
 # installed nothing) nor the target (a previous session's copy hides a failure).
 missing=()
@@ -142,5 +171,7 @@ else
     done
   done
 fi
+[ ${#unlisted[@]} -eq 0 ] || echo "skills.txt: could not list ${unlisted[*]} (\`*\`): last session's copies kept, none pruned. See CLAUDE.md Bootstrap 3."
+[ ${#pruned[@]} -eq 0 ] || echo "skills.txt: removed ${#pruned[@]} skill(s) no longer listed: ${pruned[*]}."
 [ -n "${refs:-}" ] || echo "agent-skills references/ not cloned: skills' ../../references links are dead this session."
 [ ${#hidden[@]} -eq 0 ] || echo "skills.txt: hidden by disable-model-invocation: ${hidden[*]} - fork per CLAUDE.md Bootstrap 2."

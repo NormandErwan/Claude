@@ -64,7 +64,7 @@ In the consumer repo:
    ```
 
 5. Optionally list topic-specific skills in a root `skills.txt` in the consumer repo, same format
-   as this repo's (`<repo> <skill>...`, one upstream repo per line), gated on the consumer
+   as this repo's (`<repo> <skill>...`, or `<repo> *` for every skill under its `skills/`; one upstream repo per line), gated on the consumer
    project's own stack. The hook installs them with this repo's, before the Skill roster
    freezes. They used to auto-trigger from this repo's `CLAUDE.md`, but most consumer projects
    never need any given one, so keeping them in the always-loaded file cost every session

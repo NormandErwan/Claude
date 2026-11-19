@@ -39,11 +39,9 @@ slip through.
 
 | Skill | Source | Web | Sent version | Sent tree | Upstream commit |
 |---|---|---|---|---|---|
-| grill-with-docs | fork of `mattpocock/skills@skills/engineering/grill-with-docs` | no | - | - | `5beb35b040` |
 | guide-decision | native | yes | 1.1.0 | `2ee6133ad3` | - |
 | guide-purchase | native | yes | 1.1.0 | `8f10c06aa7` | - |
 | handoff | fork of `mattpocock/skills@skills/productivity/handoff` | yes | 1.3.0 | `50e22524e5` | `5beb35b040` |
-| improve-codebase-architecture | fork of `mattpocock/skills@skills/engineering/improve-codebase-architecture` | no | - | - | `7739eaed7f` |
 | search-first | fork of `affaan-m/ECC@skills/search-first` | yes | 1.0.2 | `1a31dd78a1` | `90606c8315` |
 | teach | fork of `mattpocock/skills@skills/productivity/teach` | yes | 1.1.0 | `c6c8287ecf` | `5beb35b040` |
 | token-codebase-exploration | native | no | - | - | - |
@@ -72,15 +70,12 @@ slip through.
 | test-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | code-review-and-quality | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | interview-me | skills.txt `addyosmani/agent-skills` | no | - | - | - |
-| ponytail-audit | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
-| ponytail-review | skills.txt `DietrichGebert/ponytail` | no | - | - | - |
-| caveman | skills.txt `juliusbrussee/caveman` | no | - | - | - |
-| caveman-commit | skills.txt `juliusbrussee/caveman` | no | - | - | - |
-| code-review | skills.txt `mattpocock/skills` | no | - | - | - |
-| codebase-design | skills.txt `mattpocock/skills` | no | - | - | - |
-| domain-modeling | skills.txt `mattpocock/skills` | no | - | - | - |
+| accessibility-engineering | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| code-simplification | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| context-engineering | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| doubt-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| using-agent-skills | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | grilling | skills.txt `mattpocock/skills@skills/productivity/grilling` | yes | upstream | - | `7739eaed7f` |
-| prototype | skills.txt `mattpocock/skills` | no | - | - | - |
 | research | skills.txt `mattpocock/skills@skills/engineering/research` | yes | upstream | - | `7739eaed7f` |
 | backlog | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
 | find-cause | skills.txt `NormandErwan/claude-casebook@plugins/find-cause/skills/find-cause` | yes | upstream | - | `aa1d7bbaeb` |
@@ -91,8 +86,8 @@ slip through.
 
 On claude.ai but not provided by this repo: brainstorming, find-skills.
 
-The four mattpocock forks diverge from upstream by the dropped `disable-model-invocation:
-true` line, plus a `version:` line on handoff and teach. handoff also replaces the OS temp
+The two mattpocock forks diverge from upstream by the dropped `disable-model-invocation:
+true` line and an added `version:` line. handoff also replaces the OS temp
 directory with a save location per surface (scratchpad, temp directory, or a download on
 claude.ai).
 
@@ -103,11 +98,19 @@ moved to NormandErwan/claude-casebook as the `write-prompt` plugin at 2.0.0.
 backlog: native here up to 2.0.0, then moved to NormandErwan/claude-casebook as the `backlog`
 plugin at 0.1.1. Its defaults match 2.0.0; this repo's choices sit in `BACKLOG.md` `## Conventions`.
 
-`addyosmani/agent-skills` is installed skill by skill, as its `docs/getting-started.md` asks
-for hosts that route skills natively: no `using-agent-skills` router. `install-skills.sh` also
+`addyosmani/agent-skills` is installed whole (`*` in `skills.txt`, owner 2026-11-19), its
+`using-agent-skills` router included as a plain skill: `CLAUDE.md` neither injects nor names it,
+as its `docs/getting-started.md` asks for hosts that route skills natively. A `*` repo's new
+upstream skill installs without a row here: `check-skills.sh` cannot list it offline, add the
+row when the session-start install reports a new count. `install-skills.sh` also
 clones the pack's `references/` into `.claude/references`, which per-skill installs skip
-(upstream #361). `interview-me` and `code-review-and-quality` overlap `grilling`, `code-review`
-and `ponytail-review`: all five stay installed until the evaluation row of 2026-10-28 in
-`RETROSPECTIVE.md` decides.
+(upstream #361).
+
+Split, owner 2026-11-17: `addyosmani/agent-skills` for code, mattpocock for documentation work
+(`grilling`, `research`, `handoff`, `teach`). Removed then: `caveman`, `caveman-commit`,
+`ponytail-review`, mattpocock `code-review` (on trial: `git-workflow-and-versioning` and
+`code-review-and-quality` replace them, evaluation row of 2026-11-17 in `RETROSPECTIVE.md`);
+`ponytail-audit`, `codebase-design`, `domain-modeling`, `prototype`,
+`improve-codebase-architecture`, `grill-with-docs` (never fired).
 
 Pass history before 2026-10-24 lives in `git log -- SKILLS.web.md`.

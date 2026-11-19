@@ -19,3 +19,5 @@ jobs:
         run: bash .claude/hooks/check-skills.sh --check
       - name: check-skills.sh regression tests
         run: bash .claude/hooks/test-check-skills.sh -v
+      - name: install-skills.sh pruning tests
+        run: bash templates/hooks/test-install-skills.sh

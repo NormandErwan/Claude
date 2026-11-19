@@ -30,7 +30,7 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
   otherwise A/B test.
 - The owner waives a test -> record the waiver and its reason in the rule's `PROVENANCE.md` row.
 - An A/B test plan lists these steps, in this order:
-  1. Review the proposed wording (`ponytail-review`, then mattpocock `code-review`); test the
+  1. Review the proposed wording (`code-review-and-quality`); test the
      reviewed version.
   2. Run it with casebook `test-rule-change`'s `scripts/test-rule-change.py` (`claude plugin eval`; each arm's `CLAUDE.md` injected by a plugin `SessionStart` hook; `test-rule-change.py preflight` before any scored run). Start with a principle test on 2-3 cases, with its cost estimate; run the full set only if the owner asks. Testing how a real `CLAUDE.md` is framed, or a case needing Bash where `bwrap`/`socat` are missing -> headless `claude -p` instead, keeping the fixture's `.claude/settings.json` and `templates/hooks/`.
   3. Record the measure, result, and cost in the commit message and the rule's `PROVENANCE.md` row.

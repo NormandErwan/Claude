@@ -24,12 +24,8 @@
 # Add two lines here for every new skill added under skills/ (push hook checks).
 !skills/craft-prompt/
 !skills/craft-prompt/**
-!skills/grill-with-docs/
-!skills/grill-with-docs/**
 !skills/handoff/
 !skills/handoff/**
-!skills/improve-codebase-architecture/
-!skills/improve-codebase-architecture/**
 !skills/guide-decision/
 !skills/guide-decision/**
 !skills/guide-purchase/
