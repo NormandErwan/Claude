@@ -70,6 +70,11 @@ slip through.
 | test-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | code-review-and-quality | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | interview-me | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| accessibility-engineering | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| code-simplification | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| context-engineering | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| doubt-driven-development | skills.txt `addyosmani/agent-skills` | no | - | - | - |
+| using-agent-skills | skills.txt `addyosmani/agent-skills` | no | - | - | - |
 | grilling | skills.txt `mattpocock/skills@skills/productivity/grilling` | yes | upstream | - | `7739eaed7f` |
 | research | skills.txt `mattpocock/skills@skills/engineering/research` | yes | upstream | - | `7739eaed7f` |
 | backlog | skills.txt `NormandErwan/claude-casebook` | no | - | - | - |
@@ -93,8 +98,11 @@ moved to NormandErwan/claude-casebook as the `write-prompt` plugin at 2.0.0.
 backlog: native here up to 2.0.0, then moved to NormandErwan/claude-casebook as the `backlog`
 plugin at 0.1.1. Its defaults match 2.0.0; this repo's choices sit in `BACKLOG.md` `## Conventions`.
 
-`addyosmani/agent-skills` is installed skill by skill, as its `docs/getting-started.md` asks
-for hosts that route skills natively: no `using-agent-skills` router. `install-skills.sh` also
+`addyosmani/agent-skills` is installed whole (`*` in `skills.txt`, owner 2026-11-19), its
+`using-agent-skills` router included as a plain skill: `CLAUDE.md` neither injects nor names it,
+as its `docs/getting-started.md` asks for hosts that route skills natively. A `*` repo's new
+upstream skill installs without a row here: `check-skills.sh` cannot list it offline, add the
+row when the session-start install reports a new count. `install-skills.sh` also
 clones the pack's `references/` into `.claude/references`, which per-skill installs skip
 (upstream #361).
 

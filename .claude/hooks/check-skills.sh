@@ -65,8 +65,11 @@ rows() {
 table=$(git show "HEAD:$manifest" 2>/dev/null)
 current=$(rows <<<"$table")
 cited=$(git show HEAD:CLAUDE.web.md | grep -o '`[a-z][a-z-]*`' | tr -d '`' | sort -u)
-# skills.txt line: <upstream repo> <skill>...
-listed=$(git show HEAD:skills.txt 2>/dev/null | grep -v '^#' | cut -d' ' -f2- | tr ' ' '\n')
+# skills.txt line: <upstream repo> <skill>... | <upstream repo> *
+manifest_lines=$(git show HEAD:skills.txt 2>/dev/null | grep -v '^#')
+listed=$(grep -v ' \*$' <<<"$manifest_lines" | cut -s -d' ' -f2- | tr ' ' '\n')
+# `*` repos: skill names need the network, so any row sourced from them counts.
+wild=$(grep ' \*$' <<<"$manifest_lines" | cut -d' ' -f1)
 # skills/ entries holding a SKILL.md
 dirs=$(git ls-tree --name-only HEAD skills/ | while read -r d; do
   git cat-file -e "HEAD:$d/SKILL.md" 2>/dev/null && echo "${d#skills/}"; done)
@@ -85,8 +88,9 @@ fi
 for name in $dirs $listed; do
   grep -q "^$name|" <<<"$current" || errors+=("$name: no row - add it, decide Web")
 done
-while IFS='|' read -r name _; do
+while IFS='|' read -r name source _; do
   [[ -z "$name" ]] && continue
+  for w in $wild; do [[ "$source" == "skills.txt\`$w"[\`@]* ]] && continue 2; done
   in_list "$name" "$dirs
 $listed" || errors+=("$name: row for a skill neither in skills/ nor in skills.txt")
 done <<<"$current"

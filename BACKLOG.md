@@ -23,15 +23,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] option chosen; if 1 or 2, `handoff` 1.4.0 zipped for claude.ai and the P3 case of
     `docs/evidence/dated-notes/` rerun, expecting `docs/handoffs/YYYY-MM-DD-<slug>.md` committed
 
-### Test the overlapping agent-skills before reinstalling them
-- **Status:** ready
-- **Context:** `code-simplification`, `context-engineering`, `doubt-driven-development` overlap a named
-  rule or a built-in skill (`docs/research/2026-11-08-agent-skills-coverage.md` group C). Owner,
-  2026-11-08 (PR#125): removed from `skills.txt` until tested.
-- **Next:** for each skill, name the case where it would beat what covers it, or drop it.
-- **Done when:**
-  - [ ] each skill reinstalled with its test result, or dropped with the reason in the commit
-
 ### Make the backlog trigger reliable on Haiku
 - **Status:** ready
 - **Context:** Haiku 5.5 misses the `backlog` skill on work mentioned beside a main request and on a
@@ -79,7 +70,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 - **Done when:**
   - [ ] `find-cause` trace recorded in the four rows
   - [ ] a fix proposed with its measure, or the owner's reason to leave it
-- **Out of scope:** the skills the agent-skills task covers.
 
 ### Rerun the dated-notes cases with the casebook A/B scripts
 - **Status:** ready
