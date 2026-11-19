@@ -69,7 +69,7 @@ sed -i 's/ prevent-drift//' skills.txt && commit npx-rm
 run "row left for removed skills.txt skill" 2
 case_on rm-wild
 sed -i '/^addyosmani\/agent-skills /d' skills.txt && commit wild-rm
-run "rows left for a removed `*` repo" 2
+run "rows left for a removed wildcard repo" 2
 case_on header
 sed -i 's/| Sent tree |/| Tree |/' SKILLS.md && commit header
 run "table header changed" 2
