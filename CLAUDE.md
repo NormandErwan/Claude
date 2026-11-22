@@ -37,6 +37,7 @@
 - Interview the user (`Behavior`) -> `interview-me`.
 - Question to the user -> ask it in the reply text, never through a question tool (`AskUserQuestion`).
 - Turn would end with an unreviewed pushed diff and no open plan items -> run `code-review-and-quality`.
+- Relaying review findings -> per finding, what was checked and what was found, then the verdict: judged only on whether the fix improves the deliverable, never on prior approval or passing tests.
 - About to claim done, fixed, or passing -> run the verification commands locally first (the project's own build, lint, tests).
 - Failure reproducible only in CI -> say so; never push to probe it.
 - Shell command on Windows -> Git for Windows' bash, never PowerShell.
