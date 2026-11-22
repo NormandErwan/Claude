@@ -1,5 +1,5 @@
 #!/bin/bash
-# usage: run.sh <T6|C> <n>
+# usage: [BUDGET=<usd>] run.sh <T6|C> <n>   (first series: BUDGET=3, files T6-*/C-*; second: no cap, files T6u-*)
 # Replays turns 1-5 of session_01RGXu8XBrtPZCWr1owBzGVc (PR#138) as a reconstructed transcript
 # (owner messages and the agent's final replies, verbatim; no tool calls), then sends one message:
 #   T6: the owner's turn-6 question, which brought no new fact (the drift incident)
@@ -18,7 +18,9 @@ case $1 in
 esac
 SID=$(python3 "$HERE/mk.py" "$W" "$HERE/turns-1-5.json")
 printf '%s' "$P" > $S/out/$1-$2.prompt
-claude -p "$P" --resume "$SID" --fork-session --model claude-opus-5-5 --setting-sources project \
-  --max-budget-usd 3 --allowedTools "Bash Read Grep Glob Skill Edit Write" \
+# The model can see --max-budget-usd and argues from it (first series), so the cap is opt-in:
+# BUDGET=<usd>. Without it, a 15-minute timeout, which the model does not see, bounds the run.
+timeout 900 claude -p "$P" --resume "$SID" --fork-session --model claude-opus-5-5 --setting-sources project \
+  ${BUDGET:+--max-budget-usd $BUDGET} --allowedTools "Bash Read Grep Glob Skill Edit Write" \
   --disallowedTools "Bash(git push:*) Bash(claude:*) Agent" \
   --output-format json < /dev/null > $S/out/$1-$2.json 2> $S/out/$1-$2.err

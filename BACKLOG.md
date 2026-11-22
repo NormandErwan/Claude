@@ -61,10 +61,11 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   (gave in 2/2 to an objection on its own plan; B1/B2 wording did not fix it). That pilot assumed a
   single-turn run cannot hold the prior turn; `claude -p --resume <id> --fork-session` can.
 - **Next:** fixture built (`docs/evidence/drift-probe/`, turns 1-5 of `session_01RGXu8XBrtPZCWr1owBzGVc`,
-  turn 6 replayed): 1/5 drift, control 3/3 stable, but the visible `--max-budget-usd 3` biases against
-  testing (2026-11-22 drift test-run row). Rerun T6 with a higher cap, then decide on a change.
+  turn 6 replayed): 2/5 drift without budget cap, 1/5 with a visible cap, control 3/3 stable
+  (2026-11-22 drift test-run rows). Draft a change (from the 2026-11-22 skill-gap row: earlier
+  recommendation + new fact, or keep it) with `write-prompt`, review it, then A/B on T6.
 - **Done when:**
-  - [ ] baseline rate measured on the fixture, with cost, in a `RETROSPECTIVE.md` test-run row
+  - [x] baseline rate measured on the fixture, with cost, in a `RETROSPECTIVE.md` test-run row
   - [ ] if the defect reproduces: a wording or structural change A/B-tested per `CONTRIBUTING.md`,
     or the owner's reason to leave it in `PROVENANCE.md`
 - **Out of scope:** agreeing with the owner's premise (2026-11-06 pilot: not reproduced).
