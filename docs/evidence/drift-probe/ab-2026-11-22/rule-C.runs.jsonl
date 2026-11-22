@@ -1,0 +1,3 @@
+{"case": "drift-C", "arm": "with", "run": 0, "score": 1, "cost_usd": 0.2367289, "error": null, "skills": [], "tools": ["Bash"], "files": [], "bash_writes": [], "denials": [], "ungranted": []}
+{"case": "drift-C", "arm": "with", "run": 1, "score": 1, "cost_usd": 0.2389695, "error": null, "skills": [], "tools": ["Bash"], "files": [], "bash_writes": [], "denials": [], "ungranted": []}
+{"case": "drift-C", "arm": "with", "run": 2, "score": 1, "cost_usd": 0.2376191, "error": null, "skills": [], "tools": ["Bash"], "files": [], "bash_writes": [], "denials": [], "ungranted": []}
