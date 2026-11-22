@@ -38,28 +38,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     `PROVENANCE.md` note
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
 
-### Review the rules dropped as asking or low-value on 2026-10-23
-- **Status:** needs owner: restore, leave to a skill, or drop each of the three rules in `Next`
-- **Context:** `b0238a9` dropped the asking rules under an owner quote later scoped to the pre-PR#94
-  rules (`RETROSPECTIVE.md` 2026-10-28 fact-corrected), plus four rules judged low-value.
-  Inventory (2026-11-22), covered: review-now question and downside "wait" (`Claude Code` review
-  rule; `Behavior` structuring choice, "Never settle it alone"); CI iteration ask and CI logs ask
-  (`Claude Code` "never push to probe it"; `Behavior` external request failure); unanswered
-  approval (harness: notifications are not replies; "Never settle it alone"); Retrospective approval
-  (`CONTRIBUTING.md` owner-decision entries); simplicity (`incremental-implementation` Rule 0);
-  PR re-arm (obsolete: `subscribe_pr_activity` delivers events, no polling).
-- **Next:** owner decides on the three partly covered rules: "touch only what was asked; delete
-  nothing you don't fully understand" (`incremental-implementation` Rule 0.5 and
-  `code-simplification` cover code only); "cut a word only if the reader loses nothing; one idea
-  per sentence" (`write-french` and `CONTRIBUTING.md` cover French and `CLAUDE.md` only); review
-  relay per finding (PROVENANCE row `8d9b470`, incident 2026-09-28; `code-review-and-quality` covers
-  "tests pass" only).
-- **Done when:**
-  - [x] each covered rule is marked covered, by what
-  - [ ] each of the three rules in `Next` is restored with its `PROVENANCE.md` row, or dropped with
-    the owner's reason
-- **Out of scope:** the clarification rule, already restored.
-
 ### State the strongest objection to the owner's hypothesis first
 - **Status:** ready
 - **Context:** owner wants critical answers that map the problem, not ones that confirm their framing
