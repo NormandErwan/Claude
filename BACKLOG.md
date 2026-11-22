@@ -104,6 +104,8 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 - **Done when:**
   - [x] a fresh session has `bwrap` and `socat` without a manual install
   - [ ] `test-rule-change.py preflight` passes on a case that grants Bash
+  - [ ] casebook's README (where `test-rule-change` lives) says a cloud environment needs `bwrap` and
+    `socat` for Bash cases, with the setup-script line; filed upstream in `NormandErwan/claude-casebook`
 
 ### Find why verify-sources does not fire on unverified claims
 - **Status:** ready
