@@ -38,18 +38,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     `PROVENANCE.md` note
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
 
-### Review the rules dropped as asking or low-value on 2026-10-23
-- **Status:** ready
-- **Context:** `b0238a9` dropped the asking rules under an owner quote later scoped to the pre-PR#94
-  rules (`RETROSPECTIVE.md` 2026-10-28 fact-corrected), plus four rules judged low-value. Not in
-  `CLAUDE.md` today: "touch only what was asked; delete nothing you don't fully understand", and
-  owner approval before applying a ledger entry (PR#114's `CONTRIBUTING.md` covers decision entries).
-- **Next:** for each rule `b0238a9` removed, find what in the current `CLAUDE.md` or a skill covers it.
-- **Done when:**
-  - [ ] each removed rule is marked covered (by what), restored with its `PROVENANCE.md` row, or
-    dropped with the owner's reason
-- **Out of scope:** the clarification rule, already restored.
-
 ### State the strongest objection to the owner's hypothesis first
 - **Status:** ready
 - **Context:** owner wants critical answers that map the problem, not ones that confirm their framing
