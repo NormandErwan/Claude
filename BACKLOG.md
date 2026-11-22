@@ -38,15 +38,21 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     `PROVENANCE.md` note
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
 
-### State the strongest objection to the owner's hypothesis first
+### Keep a recommendation stable across turns without new evidence
 - **Status:** ready
-- **Context:** owner wants critical answers that map the problem, not ones that confirm their framing
-  (`RETROSPECTIVE.md` 2026-11-03 new-preference). `Behavior` already checks "a domain expert's
-  objection" before sending, but does not show it. Always-on: A/B mandatory (`CONTRIBUTING.md`).
-- **Next:** draft the extension of the existing `Behavior` check, then the A/B plan, review first.
+- **Context:** in one session the agent's recommendation followed each owner message with no new fact
+  (drop -> test -> drop -> test), the last reversal unflagged (`RETROSPECTIVE.md` 2026-11-22 skill-gap
+  row "recommendation followed each owner message"; PR#138). Same family as the 2026-11-06 pilot's S3b
+  (gave in 2/2 to an objection on its own plan; B1/B2 wording did not fix it). That pilot assumed a
+  single-turn run cannot hold the prior turn; `claude -p --resume <id> --fork-session` can.
+- **Next:** build a multi-turn fixture from that session: turns up to a neutral owner question, then
+  replay that question on forks; measure whether the recommendation changes and whether a change names
+  the fact behind it.
 - **Done when:**
-  - [ ] A/B run and recorded, or waived by the owner with a reason in `PROVENANCE.md`
-  - [ ] `CLAUDE.md` and `CLAUDE.web.md` updated together if the A/B favors the change
+  - [ ] baseline rate measured on the fixture, with cost, in a `RETROSPECTIVE.md` test-run row
+  - [ ] if the defect reproduces: a wording or structural change A/B-tested per `CONTRIBUTING.md`,
+    or the owner's reason to leave it in `PROVENANCE.md`
+- **Out of scope:** agreeing with the owner's premise (2026-11-06 pilot: not reproduced).
 
 ### Find why verify-sources does not fire on unverified claims
 - **Status:** ready
