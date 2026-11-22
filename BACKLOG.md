@@ -29,7 +29,9 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   resume soon after (cache about to expire, session drifted or too big); a task may wait weeks.
   Possible gap: approaches tried and rejected, absent from the format, so a later session retries
   them. Settled 2026-11-22: handoffs stay out of tracked files and reference backlog tasks
-  (`handoff` 1.4.0).
+  (`handoff` 1.4.0). Example gap, 2026-11-22: the multi-turn drift task said "that session" without
+  its id (found only in PR#138's merge-commit trailer), the turn, or the commit at that turn; recovering
+  them took a subagent over the session transcript.
 - **Next:** list what the handoffs and tasks written so far carry that the other lacks.
 - **Done when:**
   - [ ] each gap found is listed with an example, or none is found
@@ -51,22 +53,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     `PROVENANCE.md` note
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
 
-### Keep a recommendation stable across turns without new evidence
-- **Status:** ready
-- **Context:** in one session the agent's recommendation followed each owner message with no new fact
-  (drop -> test -> drop -> test), the last reversal unflagged (`RETROSPECTIVE.md` 2026-11-22 skill-gap
-  row "recommendation followed each owner message"; PR#138). Same family as the 2026-11-06 pilot's S3b
-  (gave in 2/2 to an objection on its own plan; B1/B2 wording did not fix it). That pilot assumed a
-  single-turn run cannot hold the prior turn; `claude -p --resume <id> --fork-session` can.
-- **Next:** build a multi-turn fixture from that session: turns up to a neutral owner question, then
-  replay that question on forks; measure whether the recommendation changes and whether a change names
-  the fact behind it.
-- **Done when:**
-  - [ ] baseline rate measured on the fixture, with cost, in a `RETROSPECTIVE.md` test-run row
-  - [ ] if the defect reproduces: a wording or structural change A/B-tested per `CONTRIBUTING.md`,
-    or the owner's reason to leave it in `PROVENANCE.md`
-- **Out of scope:** agreeing with the owner's premise (2026-11-06 pilot: not reproduced).
-
 ### Keep the evidence-based recommendation when the owner states an opinion without a reason
 - **Status:** ready
 - **Context:** owner wants answers that do not go their way by default (`RETROSPECTIVE.md` 2026-11-03
@@ -76,10 +62,18 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   first did not stop it. Always-on: A/B mandatory (`CONTRIBUTING.md`).
 - **Next:** draft the rule (owner opinion without a reason -> keep the recommendation the evidence
   supports, ask the reason, say what would change it) with `write-prompt`, review it, then A/B.
-  Runner: `test-rule-change.py` (`claude plugin eval`) first. The probes used headless `claude -p`
-  because they measured the real `CLAUDE.md` and the cases need Bash (`git log`), which `plugin eval`
-  sandboxes with `bwrap` and `socat`, absent from the container image (`CONTRIBUTING.md` fallback).
-  Recheck both and name the condition that applies.
+  Runner: `test-rule-change.py` (`claude plugin eval`); `bwrap`/`socat` are now installed. Reuse the
+  drift A/B layout (`docs/evidence/drift-probe/evals/`: scaffold symlinked into each case, arms built
+  under the gitignored `arms/`), with the scaffold at `60189f5` and no `history_file` (single turn).
+  The probe's visible `--max-budget-usd 3` did not leak: no reply in `opinion-probe/*.md` cites it.
+  Estimate cost from a pilot on `plugin eval` (about $0.33 per run on drift, vs $0.49-0.60 under
+  `claude -p` here), and pass the reviewed wording through `write-prompt` again before testing.
+- **Done when:**
+  - [ ] A/B on V0 and Vp of `docs/evidence/opinion-probe/run.sh` (current vs drafted `CLAUDE.md`),
+    recorded with cost in a `RETROSPECTIVE.md` test-run row and the commit
+  - [ ] if it holds (Vp keeps option 3, V0 unchanged): `CLAUDE.md` and `CLAUDE.web.md` updated together,
+    with the `PROVENANCE.md` row; otherwise the owner's decision recorded
+- **Out of scope:** an owner opinion that gives a reason or a new fact; drift across turns (rule landed in PR#139).
 
 ### Install bubblewrap and socat in the cloud environment setup
 - **Status:** ready
@@ -88,17 +82,15 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   The container image lacks both, so a case needing Bash falls back to `claude -p` (opinion probe,
   PR#138). `apt-get update && apt-get install -y bubblewrap socat` worked in that session (2026-11-22);
   the environment has no setup script carrying it.
-- **Next:** `get_environment`, then propose that command as the setup script with `update_environment`
-  (or `create_environment` if the Default is the wrong home), naming why in the message.
+  2026-11-22 later: the owner set that command as the "Complet" environment's setup script; a fresh
+  session had both tools.
+- **Next:** clone casebook's `test-rule-change` and run `test-rule-change.py preflight` on a case that
+  grants Bash.
 - **Done when:**
-  - [ ] a fresh session has `bwrap` and `socat` without a manual install
+  - [x] a fresh session has `bwrap` and `socat` without a manual install
   - [ ] `test-rule-change.py preflight` passes on a case that grants Bash
-- **Done when:**
-  - [ ] A/B on V0 and Vp of `docs/evidence/opinion-probe/run.sh` (current vs drafted `CLAUDE.md`),
-    recorded with cost in a `RETROSPECTIVE.md` test-run row and the commit
-  - [ ] if it holds (Vp keeps option 3, V0 unchanged): `CLAUDE.md` and `CLAUDE.web.md` updated together,
-    with the `PROVENANCE.md` row; otherwise the owner's decision recorded
-- **Out of scope:** an owner opinion that gives a reason or a new fact; the multi-turn drift task.
+  - [ ] casebook's README (where `test-rule-change` lives) says a cloud environment needs `bwrap` and
+    `socat` for Bash cases, with the setup-script line; filed upstream in `NormandErwan/claude-casebook`
 
 ### Find why verify-sources does not fire on unverified claims
 - **Status:** ready

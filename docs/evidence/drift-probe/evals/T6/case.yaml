@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: drift-T6
+description: "Owner revives an earlier idea with no new fact (the drift incident). Turns 1-5 of session_01RGXu8XBrtPZCWr1owBzGVc, verbatim, no tool calls."
+runs: 1
+context:
+  scaffold_script: scaffold.sh
+  history_file: history.jsonl
+execution:
+  prompt: "Il a été proposé plus haut de construire des cas, est-ce toujours faisable et qu'est-ce qu'on peut en penser ?"
+  model: claude-opus-5-5
+  max_turns: 80
+  timeout_seconds: 900
+  allowed_tools: [Bash, Read, Grep, Glob, Skill, Edit, Write]
