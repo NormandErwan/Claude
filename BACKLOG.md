@@ -38,15 +38,54 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     `PROVENANCE.md` note
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
 
-### State the strongest objection to the owner's hypothesis first
+### Keep a recommendation stable across turns without new evidence
 - **Status:** ready
-- **Context:** owner wants critical answers that map the problem, not ones that confirm their framing
-  (`RETROSPECTIVE.md` 2026-11-03 new-preference). `Behavior` already checks "a domain expert's
-  objection" before sending, but does not show it. Always-on: A/B mandatory (`CONTRIBUTING.md`).
-- **Next:** draft the extension of the existing `Behavior` check, then the A/B plan, review first.
+- **Context:** in one session the agent's recommendation followed each owner message with no new fact
+  (drop -> test -> drop -> test), the last reversal unflagged (`RETROSPECTIVE.md` 2026-11-22 skill-gap
+  row "recommendation followed each owner message"; PR#138). Same family as the 2026-11-06 pilot's S3b
+  (gave in 2/2 to an objection on its own plan; B1/B2 wording did not fix it). That pilot assumed a
+  single-turn run cannot hold the prior turn; `claude -p --resume <id> --fork-session` can.
+- **Next:** build a multi-turn fixture from that session: turns up to a neutral owner question, then
+  replay that question on forks; measure whether the recommendation changes and whether a change names
+  the fact behind it.
 - **Done when:**
-  - [ ] A/B run and recorded, or waived by the owner with a reason in `PROVENANCE.md`
-  - [ ] `CLAUDE.md` and `CLAUDE.web.md` updated together if the A/B favors the change
+  - [ ] baseline rate measured on the fixture, with cost, in a `RETROSPECTIVE.md` test-run row
+  - [ ] if the defect reproduces: a wording or structural change A/B-tested per `CONTRIBUTING.md`,
+    or the owner's reason to leave it in `PROVENANCE.md`
+- **Out of scope:** agreeing with the owner's premise (2026-11-06 pilot: not reproduced).
+
+### Keep the evidence-based recommendation when the owner states an opinion without a reason
+- **Status:** ready
+- **Context:** owner wants answers that do not go their way by default (`RETROSPECTIVE.md` 2026-11-03
+  new-preference). Opinion probe (`docs/evidence/opinion-probe/`, two 2026-11-22 test-run rows): handoff
+  task, no opinion -> option 3 6/6; "Je pense que commiter les handoffs est une bonne idée." -> never
+  option 3, 6/6, same objections cited, reason never asked; a critique request and an objection shown
+  first did not stop it. Always-on: A/B mandatory (`CONTRIBUTING.md`).
+- **Next:** draft the rule (owner opinion without a reason -> keep the recommendation the evidence
+  supports, ask the reason, say what would change it) with `write-prompt`, review it, then A/B.
+  Runner: `test-rule-change.py` (`claude plugin eval`) first. The probes used headless `claude -p`
+  because they measured the real `CLAUDE.md` and the cases need Bash (`git log`), which `plugin eval`
+  sandboxes with `bwrap` and `socat`, absent from the container image (`CONTRIBUTING.md` fallback).
+  Recheck both and name the condition that applies.
+
+### Install bubblewrap and socat in the cloud environment setup
+- **Status:** ready
+- **Context:** `claude plugin eval` (casebook `test-rule-change.py`) runs Bash only under the OS
+  sandbox, which needs `bwrap` and `socat` (`docs/research/2026-11-16-ab-test-harness.md`, Outcome).
+  The container image lacks both, so a case needing Bash falls back to `claude -p` (opinion probe,
+  PR#138). `apt-get update && apt-get install -y bubblewrap socat` worked in that session (2026-11-22);
+  the environment has no setup script carrying it.
+- **Next:** `get_environment`, then propose that command as the setup script with `update_environment`
+  (or `create_environment` if the Default is the wrong home), naming why in the message.
+- **Done when:**
+  - [ ] a fresh session has `bwrap` and `socat` without a manual install
+  - [ ] `test-rule-change.py preflight` passes on a case that grants Bash
+- **Done when:**
+  - [ ] A/B on V0 and Vp of `docs/evidence/opinion-probe/run.sh` (current vs drafted `CLAUDE.md`),
+    recorded with cost in a `RETROSPECTIVE.md` test-run row and the commit
+  - [ ] if it holds (Vp keeps option 3, V0 unchanged): `CLAUDE.md` and `CLAUDE.web.md` updated together,
+    with the `PROVENANCE.md` row; otherwise the owner's decision recorded
+- **Out of scope:** an owner opinion that gives a reason or a new fact; the multi-turn drift task.
 
 ### Find why verify-sources does not fire on unverified claims
 - **Status:** ready
