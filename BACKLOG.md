@@ -11,17 +11,30 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ## Tasks
 
-### Decide whether handoffs go in docs/handoffs/
-- **Status:** needs owner: options 1-3 below
-- **Context:** owner asked (PR#133) for handoffs in `docs/handoffs/`, then deferred it. The `handoff`
-  fork keeps them out of tracked files today; names are already dated by the `Behavior` rule. Costs:
-  a folder and a commit per handoff in every consumer repo, stale files piling up, no repo on claude.ai.
-  Options: (1) in a repo, commit `docs/handoffs/`, the session that picks one up deletes it; no repo,
-  current behavior; (2) same, kept as an archive; (3) no change.
-- **Next:** ask the owner which option.
+### Make dated names fire on handoffs and on notes beside undated ones
+- **Status:** ready
+- **Context:** the `Behavior` dated-names rule passed 8/8 on 2026-11-16 (`docs/evidence/dated-notes/`).
+  Rerun 2026-11-22 (Sonnet 5.5, old and new wording alike): P3 handoff saved as
+  `handoff-<slug>.md` in the scratchpad, N4 meeting note as `reunion-2026-11-22.md` beside undated
+  notes. Owner chose one `Behavior` rule over editing `handoff` (PR#133); this evidence reopens it.
+- **Next:** rerun the 8 cases with 3 runs each on the current `CLAUDE.md` to measure the miss rate.
 - **Done when:**
-  - [ ] option chosen; if 1 or 2, `handoff` 1.4.0 zipped for claude.ai and the P3 case of
-    `docs/evidence/dated-notes/` rerun, expecting `docs/handoffs/YYYY-MM-DD-<slug>.md` committed
+  - [ ] miss rate measured on all 8 cases
+  - [ ] a fix chosen by the owner (rule wording, a naming line in `handoff`, or no change)
+  - [ ] if fixed: P3 and N4 pass 3/3, the other 6 cases do not regress
+
+### Check what a backlog task loses against a handoff
+- **Status:** ready
+- **Context:** the `backlog` skill describes a task as "a short handoff". A handoff serves one
+  resume soon after (cache about to expire, session drifted or too big); a task may wait weeks.
+  Possible gap: approaches tried and rejected, absent from the format, so a later session retries
+  them. Settled 2026-11-22: handoffs stay out of tracked files and reference backlog tasks
+  (`handoff` 1.4.0).
+- **Next:** list what the handoffs and tasks written so far carry that the other lacks.
+- **Done when:**
+  - [ ] each gap found is listed with an example, or none is found
+  - [ ] for each gap kept: a proposed change to the `backlog` format, filed upstream in
+    `NormandErwan/claude-casebook` (the skill lives there)
 
 ### Make the backlog trigger reliable on Haiku
 - **Status:** ready
