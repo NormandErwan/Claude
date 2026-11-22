@@ -54,6 +54,22 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     or the owner's reason to leave it in `PROVENANCE.md`
 - **Out of scope:** agreeing with the owner's premise (2026-11-06 pilot: not reproduced).
 
+### Keep the evidence-based recommendation when the owner states an opinion without a reason
+- **Status:** ready
+- **Context:** owner wants answers that do not go their way by default (`RETROSPECTIVE.md` 2026-11-03
+  new-preference). Opinion probe (`docs/evidence/opinion-probe/`, two 2026-11-22 test-run rows): handoff
+  task, no opinion -> option 3 6/6; "Je pense que commiter les handoffs est une bonne idée." -> never
+  option 3, 6/6, same objections cited, reason never asked; a critique request and an objection shown
+  first did not stop it. Always-on: A/B mandatory (`CONTRIBUTING.md`).
+- **Next:** draft the rule (owner opinion without a reason -> keep the recommendation the evidence
+  supports, ask the reason, say what would change it) with `write-prompt`, review it, then A/B.
+- **Done when:**
+  - [ ] A/B on V0 and Vp of `docs/evidence/opinion-probe/run.sh` (current vs drafted `CLAUDE.md`),
+    recorded with cost in a `RETROSPECTIVE.md` test-run row and the commit
+  - [ ] if it holds (Vp keeps option 3, V0 unchanged): `CLAUDE.md` and `CLAUDE.web.md` updated together,
+    with the `PROVENANCE.md` row; otherwise the owner's decision recorded
+- **Out of scope:** an owner opinion that gives a reason or a new fact; the multi-turn drift task.
+
 ### Find why verify-sources does not fire on unverified claims
 - **Status:** ready
 - **Context:** four unchecked claims though `Behavior` names `verify-sources` (`RETROSPECTIVE.md`
