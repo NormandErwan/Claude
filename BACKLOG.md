@@ -54,7 +54,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
 
 ### Keep a recommendation stable across turns without new evidence
-- **Status:** ready
+- **Status:** in progress (ccr-17d0af9e-f1k3uw)
 - **Context:** in one session the agent's recommendation followed each owner message with no new fact
   (drop -> test -> drop -> test), the last reversal unflagged (`RETROSPECTIVE.md` 2026-11-22 skill-gap
   row "recommendation followed each owner message"; PR#138). Same family as the 2026-11-06 pilot's S3b
@@ -62,8 +62,9 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   single-turn run cannot hold the prior turn; `claude -p --resume <id> --fork-session` can.
 - **Next:** fixture built (`docs/evidence/drift-probe/`, turns 1-5 of `session_01RGXu8XBrtPZCWr1owBzGVc`,
   turn 6 replayed): 2/5 drift without budget cap, 1/5 with a visible cap, control 3/3 stable
-  (2026-11-22 drift test-run rows). Draft a change (from the 2026-11-22 skill-gap row: earlier
-  recommendation + new fact, or keep it) with `write-prompt`, review it, then A/B on T6.
+  (2026-11-22 drift test-run rows). Rule drafted and reviewed (owner chose the drift-only scope).
+  The same fixture is now a `claude plugin eval` case (`docs/evidence/drift-probe/evals/`, `history_file`).
+  Pilot 1 run per arm, then 10 per arm on T6 and 3 on C with the rule.
 - **Done when:**
   - [x] baseline rate measured on the fixture, with cost, in a `RETROSPECTIVE.md` test-run row
   - [ ] if the defect reproduces: a wording or structural change A/B-tested per `CONTRIBUTING.md`,
