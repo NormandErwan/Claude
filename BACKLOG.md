@@ -60,10 +60,9 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   row "recommendation followed each owner message"; PR#138). Same family as the 2026-11-06 pilot's S3b
   (gave in 2/2 to an objection on its own plan; B1/B2 wording did not fix it). That pilot assumed a
   single-turn run cannot hold the prior turn; `claude -p --resume <id> --fork-session` can.
-- **Next:** build a multi-turn fixture from that session (`session_01RGXu8XBrtPZCWr1owBzGVc`): turns 1-5
-  (option 1 "drop the task" recommended, repo at `ca3bd64`), then replay turn 6 ("Il a été proposé plus
-  haut de construire des cas, est-ce toujours faisable [...] ?", no new fact) on forks; measure whether
-  the recommendation changes and whether a change names the fact behind it.
+- **Next:** fixture built (`docs/evidence/drift-probe/`, turns 1-5 of `session_01RGXu8XBrtPZCWr1owBzGVc`,
+  turn 6 replayed): 1/5 drift, control 3/3 stable, but the visible `--max-budget-usd 3` biases against
+  testing (2026-11-22 drift test-run row). Rerun T6 with a higher cap, then decide on a change.
 - **Done when:**
   - [ ] baseline rate measured on the fixture, with cost, in a `RETROSPECTIVE.md` test-run row
   - [ ] if the defect reproduces: a wording or structural change A/B-tested per `CONTRIBUTING.md`,
