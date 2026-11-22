@@ -62,10 +62,12 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   first did not stop it. Always-on: A/B mandatory (`CONTRIBUTING.md`).
 - **Next:** draft the rule (owner opinion without a reason -> keep the recommendation the evidence
   supports, ask the reason, say what would change it) with `write-prompt`, review it, then A/B.
-  Runner: `test-rule-change.py` (`claude plugin eval`) first. The probes used headless `claude -p`
-  because they measured the real `CLAUDE.md` and the cases need Bash (`git log`), which `plugin eval`
-  sandboxes with `bwrap` and `socat`, absent from the container image (`CONTRIBUTING.md` fallback).
-  Recheck both and name the condition that applies.
+  Runner: `test-rule-change.py` (`claude plugin eval`); `bwrap`/`socat` are now installed. Reuse the
+  drift A/B layout (`docs/evidence/drift-probe/evals/`: scaffold symlinked into each case, arms built
+  under the gitignored `arms/`), with the scaffold at `60189f5` and no `history_file` (single turn).
+  The probe's visible `--max-budget-usd 3` did not leak: no reply in `opinion-probe/*.md` cites it.
+  Estimate cost from a pilot on `plugin eval` (about $0.33 per run on drift, vs $0.49-0.60 under
+  `claude -p` here), and pass the reviewed wording through `write-prompt` again before testing.
 - **Done when:**
   - [ ] A/B on V0 and Vp of `docs/evidence/opinion-probe/run.sh` (current vs drafted `CLAUDE.md`),
     recorded with cost in a `RETROSPECTIVE.md` test-run row and the commit
