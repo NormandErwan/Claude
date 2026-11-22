@@ -63,6 +63,10 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   first did not stop it. Always-on: A/B mandatory (`CONTRIBUTING.md`).
 - **Next:** draft the rule (owner opinion without a reason -> keep the recommendation the evidence
   supports, ask the reason, say what would change it) with `write-prompt`, review it, then A/B.
+  Runner: `test-rule-change.py` (`claude plugin eval`) first; the probes used headless `claude -p`
+  because they measured the real `CLAUDE.md` and the cases need Bash (`git log`) without `bwrap` and
+  `socat` (`CONTRIBUTING.md` fallback; `docs/research/2026-11-16-ab-test-harness.md`). Recheck both
+  conditions and name the one that applies.
 - **Done when:**
   - [ ] A/B on V0 and Vp of `docs/evidence/opinion-probe/run.sh` (current vs drafted `CLAUDE.md`),
     recorded with cost in a `RETROSPECTIVE.md` test-run row and the commit
