@@ -54,7 +54,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
 
 ### Keep a recommendation stable across turns without new evidence
-- **Status:** in progress (ccr-17d0af9e-f1k3uw)
+- **Status:** ready
 - **Context:** in one session the agent's recommendation followed each owner message with no new fact
   (drop -> test -> drop -> test), the last reversal unflagged (`RETROSPECTIVE.md` 2026-11-22 skill-gap
   row "recommendation followed each owner message"; PR#138). Same family as the 2026-11-06 pilot's S3b
