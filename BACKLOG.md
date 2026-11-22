@@ -63,10 +63,23 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   first did not stop it. Always-on: A/B mandatory (`CONTRIBUTING.md`).
 - **Next:** draft the rule (owner opinion without a reason -> keep the recommendation the evidence
   supports, ask the reason, say what would change it) with `write-prompt`, review it, then A/B.
-  Runner: `test-rule-change.py` (`claude plugin eval`) first; the probes used headless `claude -p`
-  because they measured the real `CLAUDE.md` and the cases need Bash (`git log`) without `bwrap` and
-  `socat` (`CONTRIBUTING.md` fallback; `docs/research/2026-11-16-ab-test-harness.md`). Recheck both
-  conditions and name the one that applies.
+  Runner: `test-rule-change.py` (`claude plugin eval`) first. The probes used headless `claude -p`
+  because they measured the real `CLAUDE.md` and the cases need Bash (`git log`), which `plugin eval`
+  sandboxes with `bwrap` and `socat`, absent from the container image (`CONTRIBUTING.md` fallback).
+  Recheck both and name the condition that applies.
+
+### Install bubblewrap and socat in the cloud environment setup
+- **Status:** ready
+- **Context:** `claude plugin eval` (casebook `test-rule-change.py`) runs Bash only under the OS
+  sandbox, which needs `bwrap` and `socat` (`docs/research/2026-11-16-ab-test-harness.md`, Outcome).
+  The container image lacks both, so a case needing Bash falls back to `claude -p` (opinion probe,
+  PR#138). `apt-get update && apt-get install -y bubblewrap socat` worked in that session (2026-11-22);
+  the environment has no setup script carrying it.
+- **Next:** `get_environment`, then propose that command as the setup script with `update_environment`
+  (or `create_environment` if the Default is the wrong home), naming why in the message.
+- **Done when:**
+  - [ ] a fresh session has `bwrap` and `socat` without a manual install
+  - [ ] `test-rule-change.py preflight` passes on a case that grants Bash
 - **Done when:**
   - [ ] A/B on V0 and Vp of `docs/evidence/opinion-probe/run.sh` (current vs drafted `CLAUDE.md`),
     recorded with cost in a `RETROSPECTIVE.md` test-run row and the commit
