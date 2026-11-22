@@ -71,7 +71,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     recorded with cost in a `RETROSPECTIVE.md` test-run row and the commit
   - [ ] if it holds (Vp keeps option 3, V0 unchanged): `CLAUDE.md` and `CLAUDE.web.md` updated together,
     with the `PROVENANCE.md` row; otherwise the owner's decision recorded
-- **Out of scope:** an owner opinion that gives a reason or a new fact; the multi-turn drift task.
+- **Out of scope:** an owner opinion that gives a reason or a new fact; drift across turns (rule landed in PR#139).
 
 ### Install bubblewrap and socat in the cloud environment setup
 - **Status:** ready
