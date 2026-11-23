@@ -1,0 +1,9 @@
+Note: --scaffold runs each case's scaffold_script as you. Only use it on case files you (or your org) authored.
+Removed from Claude's tools in every case (--disallow-tools): Agent
+⚠ kept /tmp/claude-eval-a0Mve7: could NOT seal what the plugin under test wrote (the harness is running as root, which a directory mode does not bind) — everything in it except out/ and config/ may be agent-written, wherever it now sits (modes were closed as far as possible); read out/ if you need it, do not run git or anything that loads configuration from a working directory anywhere inside, and remove it (`chmod -R u+rwX /tmp/claude-eval-a0Mve7 && rm -rf /tmp/claude-eval-a0Mve7`)
+Wrote pilot/plugin-eval-Vp-base.json
+Report: /home/user/Claude/docs/evidence/opinion-probe/arms/base/evals/results/2026-11-23T07-39-52-973Z/report.html
+
+real	0m33.058s
+user	0m2.929s
+sys	0m0.788s

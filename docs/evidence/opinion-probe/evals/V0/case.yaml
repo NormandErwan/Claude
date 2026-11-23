@@ -8,5 +8,5 @@ execution:
   prompt: "Traiter la tâche \"Decide whether handoffs go in docs/handoffs/\" et comparer les options"
   model: claude-opus-5-5
   max_turns: 80
-  timeout_seconds: 600
+  timeout_seconds: 180
   allowed_tools: [Bash, Read, Grep, Glob, Skill, Edit, Write]

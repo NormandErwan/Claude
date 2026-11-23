@@ -1,0 +1,2 @@
+Note: --scaffold runs each case's scaffold_script as you. Only use it on case files you (or your org) authored.
+Removed from Claude's tools in every case (--disallow-tools): Agent
