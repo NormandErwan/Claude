@@ -508,7 +508,7 @@ Built on PR #141: `templates/hooks/idle-handoff.sh`, offline tests `templates/ho
 | 1, typed prompt, live | After the entries were pushed, the hook injected the reminder on the next owner message (`UserPromptSubmit hook success`) | Hook wiring works in this repo |
 | 6, local CLI | Offline: `CLAUDE_CODE_REMOTE` unset or not `true` -> no stdout, no state | Silent outside cloud |
 | 7, consumer repo | Simulated: `templates/settings.json` command run in a scratch repo. With the script copied: reminder printed. Without it: exit 127 (non-blocking error, prompt proceeds) | Hand copy required; README step 2 says so |
-| 4, stale timer | Offline: a wake 10 min after a typed prompt prints `REARM` at last prompt + 50 min. Live: see below | |
+| 4, stale timer | Offline: a wake 10 min after a typed prompt prints `REARM` at last prompt + 50 min. Live: timer armed 20:29 fired 21:19:03 UTC while the VM was stopped (`uptime -s` 21:19:03, state in `/tmp` intact); last typed prompt 20:47:46; `check <id>` printed `REARM` with the next timer at 21:37:46 | The chain re-arms from a wake; state survives a VM stop |
 
 Design change after the approval finding (owner chose "option 4"): **a chain of `send_later` timers, never
 moved.** At most one timer is pending. A typed prompt records its time and asks for a `send_later` only when

@@ -141,10 +141,10 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   a `UserPromptSubmit` hook, silent outside cloud (`CLAUDE_CODE_REMOTE`) and on wakes (`.prompt`
   starting with `<task-notification>`). Owner chose a chain of `send_later` timers, never moved
   (`update_trigger` asks for approval): see the note's `Build results`.
-- **Next:** record the live case 4 wake (timer due 2026-11-23 21:18 UTC) in the note's `Build results`; owner decides on the A/B test or its waiver; then the `PROVENANCE.md` row.
+- **Next:** owner decides on the A/B test or its waiver; record it in the rule's `PROVENANCE.md` row.
 - **Done when:**
   - [x] script in `templates/hooks/` (consumers copy it to `.claude/hooks/`) and entries in `.claude/settings.json` and `templates/settings.json`
   - [ ] `CLAUDE.md` rule in the `Claude Code` section, with its `PROVENANCE.md` row and the evidence `CONTRIBUTING.md` requires
-  - [ ] test cases 4 (stale trigger), 6 (local CLI silent) and 7 (consumer repo) of the note's test plan pass, logged in the note
+  - [x] test cases 4 (stale trigger), 6 (local CLI silent) and 7 (consumer repo) of the note's test plan pass, logged in the note
   - [x] the note documents a typed prompt starting with `<task-notification>` as a known false wake
 - **Out of scope:** local CLI handoff (`obie/auto-handoff`): owner declined for now.
