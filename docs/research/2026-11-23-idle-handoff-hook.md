@@ -473,3 +473,24 @@ Docs fetched 2026-11-23 as `<url>.md` (changelog top entry 2.1.330).
   `/home/user/Claude/CONTRIBUTING.md`, `/home/user/Claude/CLAUDE.md`, `/home/user/Claude/CLAUDE.web.md`
 - [R4] `/home/user/Claude/.gitignore`
 - Prior note: `/home/user/Claude/docs/research/2026-11-23-idle-handoff.md`
+
+## Smoke test results (2026-11-23)
+
+Run in this cloud session with two temporary logging hooks (`UserPromptSubmit` and `Stop`, both
+appending stdin and `CLAUDE_CODE_REMOTE` to a scratchpad log; removed after the test, never committed).
+
+| Case | Observed | Settles |
+|---|---|---|
+| Wake by `send_later` (2 min, 18:06 -> 18:09 UTC) | `UserPromptSubmit` fired. `.prompt` was a generic `<task-notification>` block (`queued-remote-notifications`, summary "scheduled trigger ..."), not the stored message: the `[idle-handoff]` marker never reached the hook | Q1, Q5: the hook cannot see the marker, but a `.prompt` starting with `<task-notification>` identifies any queued wake (scheduled message or GitHub PR event) |
+| Wake after idle (PR check-in, 18:10 -> 18:22 UTC) | `uptime -s` = 18:22:41, the exact fire time: the VM had been stopped and was booted by the message. Scratchpad files written at 18:10 were intact. `UserPromptSubmit` fired with the same `<task-notification>` prompt | Q4: a `send_later` message wakes a paused VM and reaches the model; files survive |
+| Typed prompt (19:31 UTC) | `UserPromptSubmit` fired; `.prompt` held the raw typed text. Same keys as a wake (`session_id`, `transcript_path`, `cwd`, `scratchpad_dir`, `prompt_id`, `permission_mode`, `hook_event_name`, `prompt`); no `origin` or `source` field | Q1: discrimination works on the `.prompt` prefix only |
+| Hook environment | `CLAUDE_CODE_REMOTE=true` in every hook process | Q2 |
+| `Stop` stdin | Has `background_tasks`, `session_crons` (empty), `last_assistant_message`, `stop_hook_active`; nothing about `send_later` triggers | `Stop` cannot see pending triggers |
+| Environment `Stop` hook | A second, environment-provided `Stop` hook asks to commit and push whenever the tree is dirty | A handoff written on wake will be pushed |
+
+Design changes implied:
+- The script skips when `.prompt` starts with `<task-notification>`, instead of matching `[idle-handoff]`.
+  Keep the marker in the `send_later` message: Claude reads it after `ReadNotifications` to know the wake
+  is the idle handoff.
+- Not covered: a typed prompt that itself starts with `<task-notification>` (pasted text), cases 4
+  (stale trigger), 6 (local CLI), 7 (consumer repo) and 8 (`update_trigger` on a fired one-shot).
