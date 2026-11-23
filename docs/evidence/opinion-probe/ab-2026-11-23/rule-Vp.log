@@ -1,2 +1,3 @@
 Note: --scaffold runs each case's scaffold_script as you. Only use it on case files you (or your org) authored.
 Removed from Claude's tools in every case (--disallow-tools): Agent
+⚠ kept /tmp/claude-eval-ikbyHu: could NOT seal what the plugin under test wrote (the harness is running as root, which a directory mode does not bind) — everything in it except out/ and config/ may be agent-written, wherever it now sits (modes were closed as far as possible); read out/ if you need it, do not run git or anything that loads configuration from a working directory anywhere inside, and remove it (`chmod -R u+rwX /tmp/claude-eval-ikbyHu && rm -rf /tmp/claude-eval-ikbyHu`)
