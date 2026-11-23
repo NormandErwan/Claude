@@ -48,12 +48,13 @@ case "$prompt" in "<task-notification>"*) exit 0 ;; esac
 mkdir -p "$STATE" || exit 0
 date +%s >"$STATE/last"
 rm -f "$STATE/done"
-pending=$(cat "$STATE/trigger" 2>/dev/null)
+trigger=$(cat "$STATE/trigger" 2>/dev/null)
+fire_at=$(date -u -d "+$DELAY minutes" +%Y-%m-%dT%H:%M:%SZ)
 
+# update_trigger re-enables a fired one-shot (test case 8 of the design note),
+# so one trigger per session is moved on each typed prompt.
 cat <<EOF
-Idle handoff (CLAUDE.md, Claude Code section). This turn starts from a user message. Pending idle trigger: ${pending:-none}.
-Re-arm, as the last tool calls of this turn:
-1. delete_trigger ${pending:-(skip: none pending)}
-2. send_later, delay_minutes $DELAY, name "Idle handoff", message: "[idle-handoff] Timer, not a user message. Run \`bash $SELF check\`. IDLE -> write a handoff with the handoff skill, commit and push it. STALE -> stop. Create, move or delete no trigger on this turn."
-3. \`bash $SELF arm <trigger_id returned>\`
+Idle handoff (CLAUDE.md, Claude Code section). This turn starts from a user message. Idle timer: ${trigger:-none}. It moves to $fire_at with the last tool calls of this turn:
+- Timer named -> update_trigger ${trigger:-<id>}, run_once_at $fire_at, enabled true.
+- None, or that call fails -> send_later at $fire_at, name "Idle handoff", message: "[idle-handoff] Timer, not a user message. Run \`bash $SELF check\`. IDLE -> write a handoff with the handoff skill, commit and push it. STALE -> stop. Create, move or delete no trigger on this turn." Then \`bash $SELF arm <trigger_id returned>\`.
 EOF

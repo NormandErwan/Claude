@@ -50,8 +50,9 @@ check "bad json: no stdout" [ -z "$out" ]
 hook true "$typed"
 check "typed: exit 0" [ "$rc" -eq 0 ]
 check "typed: reminder printed" grep -q '^Idle handoff' <<<"$out"
-check "typed: no pending trigger" grep -q 'Pending idle trigger: none' <<<"$out"
-check "typed: delay 50" grep -q 'delay_minutes 50' <<<"$out"
+check "typed: no pending trigger" grep -q 'Idle timer: none' <<<"$out"
+fire50=$(date -u -d '+50 minutes' +%Y-%m-%dT%H:%M)
+check "typed: fires in 50 min" grep -q "send_later at $fire50" <<<"$out"
 check "typed: check command names this script" grep -q "bash $SRC check" <<<"$out"
 check "typed: timestamp written" [ -s "$T/state/last" ]
 check "typed: under 1000 chars" [ "${#out}" -lt 1000 ]
@@ -61,8 +62,8 @@ check "typed: plain text, not JSON" [ "${out:0:1}" != "{" ]
 bash "$SRC" arm trig_abc
 check "arm: id stored" grep -qx trig_abc "$T/state/trigger"
 hook true "$typed"
-check "typed: pending id shown" grep -q 'Pending idle trigger: trig_abc' <<<"$out"
-check "typed: delete names id" grep -q 'delete_trigger trig_abc' <<<"$out"
+check "typed: pending id shown" grep -q 'Idle timer: trig_abc' <<<"$out"
+check "typed: update names id" grep -q "update_trigger trig_abc, run_once_at $fire50" <<<"$out"
 bash "$SRC" arm 2>/dev/null
 check "arm without id: fails" [ $? -ne 0 ]
 
@@ -83,7 +84,7 @@ check "check: no state -> IDLE" [ "$(bash "$SRC" check)" = IDLE ]
 # Delay override (smoke tests): window follows the delay.
 rm -rf "$T/state"
 out=$(printf '%s' "$typed" | CLAUDE_CODE_REMOTE=true IDLE_HANDOFF_DELAY=2 IDLE_HANDOFF_IDLE_SECONDS=90 bash "$SRC")
-check "override: delay 2" grep -q 'delay_minutes 2,' <<<"$out"
+check "override: delay 2" grep -q "send_later at $(date -u -d '+2 minutes' +%Y-%m-%dT%H:%M)" <<<"$out"
 
 echo "$pass passed, $fail failed"
 [ "$fail" -eq 0 ]
