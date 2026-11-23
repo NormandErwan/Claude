@@ -133,3 +133,28 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] `write-guide` has the section: intuition -> analogy -> formalism, glossary, worked example, check questions
   - [ ] it says when to produce the interactive HTML page and where to version it
   - [ ] both Intelligence rows read `applied` with this PR
+
+### Build the idle-handoff reminder hook for cloud sessions
+- **Status:** ready
+- **Context:** goal: a handoff is written and pushed after 50 min without a user message in a cloud
+  session. Design and smoke-test results: `docs/research/2026-11-23-idle-handoff-hook.md` (PR #141):
+  a `UserPromptSubmit` hook, silent outside cloud (`CLAUDE_CODE_REMOTE`) and on wakes (`.prompt`
+  starting with `<task-notification>`), reminds Claude to cancel the pending `send_later` and arm a
+  new one at +50 min; a `CLAUDE.md` rule says the same. `send_later` waking a paused VM is verified.
+- **Next:** read `CONTRIBUTING.md`, then draft the script and the rule with `write-hook` and `write-prompt`.
+- **Done when:**
+  - [ ] script in `.claude/hooks/` and entries in `.claude/settings.json` and `templates/settings.json`
+  - [ ] `CLAUDE.md` rule in the `Claude Code` section, with its `PROVENANCE.md` row and the evidence `CONTRIBUTING.md` requires
+  - [ ] test cases 4 (stale trigger), 6 (local CLI silent) and 7 (consumer repo) of the note's test plan pass, logged in the note
+  - [ ] the note documents a typed prompt starting with `<task-notification>` as a known false wake
+- **Out of scope:** local CLI handoff (`obie/auto-handoff`): owner declined for now.
+
+### Test moving one idle-handoff trigger with update_trigger
+- **Status:** ready
+- **Context:** cheaper variant of the idle-handoff re-arm: one trigger moved per turn instead of
+  delete + create (1 call instead of 2, one list row). Unverified: whether `update_trigger` re-enables
+  a fired one-shot. Test case 8 of `docs/research/2026-11-23-idle-handoff-hook.md`.
+- **Next:** in a cloud session, `send_later` 1 min, let it fire, then `update_trigger` it with `run_once_at` +2 min and `enabled: true`.
+- **Done when:**
+  - [ ] the note records whether the fired trigger fires again
+  - [ ] the hook's reminder text uses the variant if it works, delete + create otherwise
