@@ -494,3 +494,35 @@ Design changes implied:
   is the idle handoff.
 - Not covered: a typed prompt that itself starts with `<task-notification>` (pasted text), cases 4
   (stale trigger), 6 (local CLI), 7 (consumer repo) and 8 (`update_trigger` on a fired one-shot).
+
+## Build results (2026-11-23, second session)
+
+Built on PR #141: `templates/hooks/idle-handoff.sh`, offline tests `templates/hooks/test-idle-handoff.sh`,
+`UserPromptSubmit` entries in `.claude/settings.json` (this repo, script run from `templates/hooks/`) and
+`templates/settings.json` (consumers, script copied to `.claude/hooks/`), rule in `CLAUDE.md` `Claude Code`.
+
+| Case | Observed | Settles |
+|---|---|---|
+| 8, `update_trigger` on a fired one-shot | `send_later` 1 min fired 19:54:24 UTC; `update_trigger` with `run_once_at` 19:57 and `enabled: true` cleared `ended_reason`; it fired again 19:57:53 | Gate 4: yes, a fired one-shot can be moved |
+| `update_trigger` approval | The owner got an approval prompt for that `update_trigger` call; none for `send_later` (re-run 20:29 UTC, owner: "pas de demande reçue") | A move per turn blocks the turn while the owner is away; a pending prompt also holds back every queued wake, so no handoff ever fires |
+| 1, typed prompt, live | After the entries were pushed, the hook injected the reminder on the next owner message (`UserPromptSubmit hook success`) | Hook wiring works in this repo |
+| 6, local CLI | Offline: `CLAUDE_CODE_REMOTE` unset or not `true` -> no stdout, no state | Silent outside cloud |
+| 7, consumer repo | Simulated: `templates/settings.json` command run in a scratch repo. With the script copied: reminder printed. Without it: exit 127 (non-blocking error, prompt proceeds) | Hand copy required; README step 2 says so |
+| 4, stale timer | Offline: a wake 10 min after a typed prompt prints `REARM` at last prompt + 50 min. Live: see below | |
+
+Design change after the approval finding (owner chose "option 4"): **a chain of `send_later` timers, never
+moved.** At most one timer is pending. A typed prompt records its time and asks for a `send_later` only when
+none is pending; otherwise the hook is silent (no reminder, no tool call). The wake runs `check <trigger_id>`:
+`IDLE` (no typed prompt for 45 min) -> handoff, commit, push, no new timer; `REARM` (the user wrote since)
+-> a new `send_later` at last prompt + 50 min; `STOP` -> the wake is not the pending timer (duplicate), or a
+handoff was already written. Cost: one short wake turn per ~50 min while the owner is active. The arming
+text lives only in the script; the hook and `check` both print it.
+
+Known limits:
+- **False wake:** a typed prompt that starts with `<task-notification>` (pasted text) is taken for a queued
+  wake: the hook stays silent and does not record the time. The next typed prompt corrects it.
+- State lives in `${TMPDIR:-/tmp}/idle-handoff`. A reclaimed container loses it. Old timer wakes first ->
+  no timestamp, `IDLE`, handoff (right: the container was reclaimed for inactivity). A typed prompt comes
+  first -> it arms a new timer, and the old one's wake gets `STOP` (id mismatch). No double chain either way.
+- The PR-subscription check-ins keep their own `send_later` timers; they never run the hook (queued wake)
+  and the rule restricts idle-timer changes to the hook's and `check`'s steps.

@@ -44,6 +44,10 @@ In the consumer repo:
    that fresh clone, which installs the skills in `skills.txt`. Only the thin bootstrap is copied, so the installer
    updates itself afterwards without consumers re-copying anything. A repo set
    up before it existed needs this one re-copy to get the skills at all.
+   Also copy `templates/hooks/idle-handoff.sh` to `.claude/hooks/idle-handoff.sh` (keep it
+   executable): in cloud sessions, it has Claude write and push a handoff after 50 minutes
+   without a user message (`UserPromptSubmit` entry in `templates/settings.json`). Not
+   self-updating: re-copy it when it changes. Without it, the matching `CLAUDE.md` rule stays inert.
 3. Add to `.gitignore` - the generated files are never committed:
    ```
    .claude/CLAUDE.md
@@ -78,8 +82,8 @@ In the consumer repo:
    | Parallel/sub-agent orchestration | `obra/superpowers dispatching-parallel-agents subagent-driven-development` |
    | Home Assistant config editing | `homeassistant-ai/skills home-assistant-best-practices` |
 
-`.claude/settings.json` and `.claude/hooks/session-start.sh` are the whole
-consumer-side infra - nothing else from this repo belongs there. This
+`.claude/settings.json`, `.claude/hooks/session-start.sh` and `.claude/hooks/idle-handoff.sh`
+are the whole consumer-side infra - nothing else from this repo belongs there. This
 repo's own `README.md`, `CLAUDE.web.md`, and `SKILLS.md` stay here only
 (`CLAUDE.web.md` and the skills `SKILLS.md` marks `Web` are uploaded by hand to claude.ai).
 
