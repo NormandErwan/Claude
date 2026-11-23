@@ -27,8 +27,9 @@ IDLE_SECONDS=${IDLE_HANDOFF_IDLE_SECONDS:-$(((DELAY - 5) * 60))}
 STATE=${IDLE_HANDOFF_STATE:-${TMPDIR:-/tmp}/idle-handoff}     # one container = one session
 SELF=$(cd "$(dirname "$0")" && pwd)/$(basename "$0")
 
-arm_instructions() { # <epoch to fire at>
+arm_next() { # <epoch to fire at>: records it, prints the arming steps
   local at
+  mkdir -p "$STATE" && echo "$1" >"$STATE/due"
   at=$(date -u -d "@$1" +%Y-%m-%dT%H:%M:%SZ)
   cat <<EOF
 Arm the idle timer with the last tool calls of this turn:
@@ -63,7 +64,7 @@ check)
     echo "REARM: the user wrote since this timer was armed."
     at=$((last + DELAY * 60))
     [ "$at" -ge $(($(date +%s) + 120)) ] || at=$(($(date +%s) + 120))   # send_later minimum is 1 min
-    arm_instructions "$at"
+    arm_next "$at"
   fi
   exit 0
   ;;
@@ -76,7 +77,11 @@ case "$prompt" in "<task-notification>"*) exit 0 ;; esac
 mkdir -p "$STATE" || exit 0
 date +%s >"$STATE/last"
 rm -f "$STATE/done"
-[ -s "$STATE/trigger" ] && exit 0      # a timer is pending: the wake re-arms it
+# A timer is pending: its wake re-arms it. One overdue by 10 min never ran
+# check (wake missed or skipped): arm a new one, or the chain ends silently.
+due=$(cat "$STATE/due" 2>/dev/null || echo 0)
+[ -s "$STATE/trigger" ] && [ "$(date +%s)" -lt $((due + 600)) ] && exit 0
+rm -f "$STATE/trigger"
 
 echo "Idle handoff (CLAUDE.md, Claude Code section). No idle timer is pending in this cloud session."
-arm_instructions $(($(date +%s) + DELAY * 60))
+arm_next $(($(date +%s) + DELAY * 60))

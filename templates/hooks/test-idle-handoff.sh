@@ -57,6 +57,7 @@ check "typed: wake runs this script's check" grep -q "bash $SRC check <trigger_i
 check "typed: arm step" grep -q "bash $SRC arm <trigger_id returned>" <<<"$out"
 check "typed: no update_trigger" bash -c '! grep -q update_trigger <<<"$1"' _ "$out"
 check "typed: timestamp written" [ -s "$T/state/last" ]
+check "typed: due time written" [ "$(cat "$T/state/due")" -ge $(($(now) + 2990)) ]
 check "typed: under 1000 chars" [ "${#out}" -lt 1000 ]
 check "typed: plain text, not JSON" [ "${out:0:1}" != "{" ]
 
@@ -67,6 +68,12 @@ echo 1 >"$T/state/last"
 hook true "$typed"
 check "pending: no stdout" [ -z "$out" ]
 check "pending: timestamp refreshed" [ "$(cat "$T/state/last")" -gt 1 ]
+bash "$SRC" arm trig_a
+echo $(($(now) - 11 * 60)) >"$T/state/due"
+hook true "$typed"
+check "overdue timer: arms again" grep -q '^Idle handoff' <<<"$out"
+check "overdue timer: pending cleared" [ ! -e "$T/state/trigger" ]
+bash "$SRC" arm trig_a
 bash "$SRC" arm 2>/dev/null
 check "arm without id: fails" [ $? -ne 0 ]
 

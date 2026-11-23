@@ -515,7 +515,9 @@ moved.** At most one timer is pending. A typed prompt records its time and asks 
 none is pending; otherwise the hook is silent (no reminder, no tool call). The wake runs `check <trigger_id>`:
 `IDLE` (no typed prompt for 45 min) -> handoff, commit, push, no new timer; `REARM` (the user wrote since)
 -> a new `send_later` at last prompt + 50 min; `STOP` -> the wake is not the pending timer (duplicate), or a
-handoff was already written. Cost: one short wake turn per ~50 min while the owner is active. The arming
+handoff was already written. A pending timer 10 min past its due time never ran `check` (wake missed or
+skipped): the next typed prompt arms a new one, else the chain would end silently (found in review; its
+late wake, if any, gets `STOP`). Cost: one short wake turn per ~50 min while the owner is active. The arming
 text lives only in the script; the hook and `check` both print it.
 
 Known limits:
