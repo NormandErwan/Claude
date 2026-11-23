@@ -54,7 +54,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
 
 ### Keep the evidence-based recommendation when the owner states an opinion without a reason
-- **Status:** ready
+- **Status:** in progress (claude/new-session-yionc2)
 - **Context:** owner wants answers that do not go their way by default (`RETROSPECTIVE.md` 2026-11-03
   new-preference). Opinion probe (`docs/evidence/opinion-probe/`, two 2026-11-22 test-run rows): handoff
   task, no opinion -> option 3 6/6; "Je pense que commiter les handoffs est une bonne idée." -> never
