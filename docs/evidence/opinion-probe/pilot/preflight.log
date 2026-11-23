@@ -1,0 +1,13 @@
+test-rule-change preflight: ok   Bash sandbox backends present
+test-rule-change preflight: ok   2 scaffolds green
+test-rule-change preflight: ok   load check: no case warning
+test-rule-change preflight: ok   arm CLAUDE.md reached the session, whole
+test-rule-change preflight: ok   44 arm skills in roster
+test-rule-change preflight: ok   no foreign memory or extra dir
+test-rule-change preflight: ok   no permission denial
+test-rule-change preflight: pilot cost $0.2791; skills called: ['base:backlog', 'base:write-french']
+test-rule-change preflight: all checks passed
+
+real	0m26.503s
+user	0m3.706s
+sys	0m1.056s
