@@ -30,9 +30,9 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
   otherwise A/B test.
 - The owner waives a test -> record the waiver and its reason in the rule's `PROVENANCE.md` row.
 - An A/B test plan lists these steps, in this order:
-  1. Review the proposed wording (`code-review-and-quality`); test the
-     reviewed version.
-  2. Run it with casebook `test-rule-change`'s `scripts/test-rule-change.py` (`claude plugin eval`; each arm's `CLAUDE.md` injected by a plugin `SessionStart` hook; `test-rule-change.py preflight` before any scored run). Start with a principle test on 2-3 cases, with its cost estimate; run the full set only if the owner asks. Testing how a real `CLAUDE.md` is framed, or a case needing Bash where `bwrap`/`socat` are missing -> headless `claude -p` instead, keeping the fixture's `.claude/settings.json` and `templates/hooks/`.
+  1. Review the proposed wording (`code-review-and-quality`). Review changed it -> run its
+     wording pass again. Test that version.
+  2. Run it with casebook `test-rule-change`'s `scripts/test-rule-change.py` (`claude plugin eval`; each arm's `CLAUDE.md` injected by a plugin `SessionStart` hook; `test-rule-change.py preflight` before any scored run). Start with a principle test on 2-3 cases; run the full set only if the owner asks. The plan gives each parameter (cases, arms, runs per arm) with the reason for its value, and its cost estimated from a pilot on the same runner. Testing how a real `CLAUDE.md` is framed, or a case needing Bash where `bwrap`/`socat` are missing -> headless `claude -p` instead, keeping the fixture's `.claude/settings.json` and `templates/hooks/`; the plan names which condition applies. Runner facts: `docs/research/2026-11-16-ab-test-harness.md`.
   3. Record the measure, result, and cost in the commit message and the rule's `PROVENANCE.md` row.
 
 ## PROVENANCE.md
@@ -46,6 +46,8 @@ Governs changes to this repo's own files: `CLAUDE.md`, `CLAUDE.web.md`, `SKILLS.
 
 - Processing `proposed` entries -> read the whole ledger first. An entry whose class matches a
   prior one goes to `find-cause`, not to a re-extension of the same rule.
+- Each decision cites the other rows on the same subject (grep the ledger for its date and
+  subject), or says there are none.
 - An entry needing an owner decision -> recall its incident and the rule in force, then its options and one recommendation. A question about several entries lists each one with its decision and reason.
 - A premise about the origin session the ledger cannot confirm -> mark it `not checkable here`.
 - A rule that only fires on one session's tool, file, or wording is out of scope.
