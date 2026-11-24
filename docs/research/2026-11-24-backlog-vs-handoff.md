@@ -84,3 +84,36 @@ Each is a skill change, so it goes through casebook's `test-rule-change` before 
 | G3 | `Context`: a session counts as an artifact (its id), a state as one (its commit) |
 | G4 | Commands and environment gotchas go in a repo doc linked from `Context`; `Next` stays one step |
 | G5 | `Session ends unfinished` -> also add owner decisions made this session to `Context` |
+
+## Owner decision, 2026-11-24
+
+- G1 dropped: branches merge soon, and restarting a task from `main` is the owner's call.
+- No per-task files (duplication), no committed handoffs (a handoff resumes work, a task describes
+  new work). G4: no change, the skill already says "No implementation plan".
+- Option A kept for G2, G3, G5, with the `Context` limit loosened from "2-4 lines" to "short".
+  Filed as casebook task "Carry ruled-out approaches, origins and owner decisions in backlog tasks".
+
+### Before / after, owner-opinion task as on PR #140's branch
+
+Before: `Status` says the owner must pick a next approach, but the approaches are only in the
+handoff; the owner's run constraints and the A/B's session and commit are nowhere in the task.
+
+After:
+
+```markdown
+- **Context:** [...] A/B 2026-11-23 in `session_01RGXu8XvDKrWALLQRun5A8X`, commit `7273896`.
+  Owner, 2026-11-23: a separate bullet, not an extension of the drift rule; one pilot before scored
+  runs; no cost cap visible to the agent. Always-on: A/B mandatory (`CONTRIBUTING.md`).
+- **Next:** owner picks: (1) a subagent that never sees the opinion compares the options, the main
+  agent relays it and asks the reason (recommended, ~$6-8); (2) keep the rule for the reason-asking
+  alone; (3) drop the task.
+- **Ruled out:**
+  - Critique request or objection shown first, in the prompt -> option 3 kept 0/3 (2026-11-22 test-run row)
+  - Rule "recommend what you would have recommended without that opinion" -> option 3 kept 0/5, reason
+    asked 5/5 (`docs/evidence/opinion-probe/ab-2026-11-23/compare.md`)
+  - Haiku LLM grader alone -> 5 false passes; hand-read every reply (same file)
+```
+
+Skill edits: `Ruled out:` field after `Next` (omit when none); `Context` links a session by its id
+and a state by its commit; "Session ends unfinished" also fills `Ruled out` and adds the owner's
+decisions to `Context`.
