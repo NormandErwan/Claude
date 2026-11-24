@@ -47,6 +47,7 @@
 - Code and its docs (README, comments, commits, PRs, skills) -> English, unless the skill is already in another language.
 - Work deferred, discovered mid-session, or beyond this session's scope (e.g. a plan's large steps) -> `backlog`.
 - Backlog task named -> `backlog`.
+- Cloud idle timer: hook reminder `Idle handoff`, or a message starting `[idle-handoff]` -> run its steps as the turn's last tool calls. Arm or delete the idle timer only through them.
 - Branch or PR named (user, handoff, session setup) -> use its branch without confirmation, over the pre-assigned one.
 - On a trunk (`main`, `master`, `develop`) and about to commit, no branch named -> first create `<type>/<kebab-description>` (`feat`, `fix`, `docs`, `chore`, `refactor`), unless the user asked to commit on the trunk.
 - Work ready to commit or push -> do it without asking.
