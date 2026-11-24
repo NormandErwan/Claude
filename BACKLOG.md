@@ -141,7 +141,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   a `UserPromptSubmit` hook, silent outside cloud (`CLAUDE_CODE_REMOTE`) and on wakes (`.prompt`
   starting with `<task-notification>`). Owner chose a chain of `send_later` timers, never moved
   (`update_trigger` asks for approval): see the note's `Build results`.
-- **Next:** owner decides on the A/B test or its waiver; record it in the rule's `PROVENANCE.md` row.
+- **Next:** A/B test waived by the owner (2026-11-24), recorded in the rule's `PROVENANCE.md` row; test live in the PR session, then merge.
 - **Done when:**
   - [x] script in `templates/hooks/` (consumers copy it to `.claude/hooks/`) and entries in `.claude/settings.json` and `templates/settings.json`
   - [ ] `CLAUDE.md` rule in the `Claude Code` section, with its `PROVENANCE.md` row and the evidence `CONTRIBUTING.md` requires
