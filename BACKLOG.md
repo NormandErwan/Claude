@@ -24,7 +24,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] if fixed: P3 and N4 pass 3/3, the other 6 cases do not regress
 
 ### Check what a backlog task loses against a handoff
-- **Status:** in progress (ccr-33201c76-e10dvh)
+- **Status:** needs owner: which gaps of `docs/research/2026-11-24-backlog-vs-handoff.md` to file in casebook
 - **Context:** the `backlog` skill describes a task as "a short handoff". A handoff serves one
   resume soon after (cache about to expire, session drifted or too big); a task may wait weeks.
   Possible gap: approaches tried and rejected, absent from the format, so a later session retries
@@ -32,9 +32,10 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   (`handoff` 1.4.0). Example gap, 2026-11-22: the multi-turn drift task said "that session" without
   its id (found only in PR#138's merge-commit trailer), the turn, or the commit at that turn; recovering
   them took a subagent over the session transcript.
-- **Next:** list what the handoffs and tasks written so far carry that the other lacks.
+- **Next:** five gaps listed (G1-G5, PR#143's research note); file the ones the owner keeps as
+  casebook `BACKLOG.md` tasks.
 - **Done when:**
-  - [ ] each gap found is listed with an example, or none is found
+  - [x] each gap found is listed with an example, or none is found
   - [ ] for each gap kept: a proposed change to the `backlog` format, filed upstream in
     `NormandErwan/claude-casebook` (the skill lives there)
 
