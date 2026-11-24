@@ -32,8 +32,10 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   (`handoff` 1.4.0). Example gap, 2026-11-22: the multi-turn drift task said "that session" without
   its id (found only in PR#138's merge-commit trailer), the turn, or the commit at that turn; recovering
   them took a subagent over the session transcript.
-- **Next:** five gaps listed (G1-G5, PR#143's research note); file the ones the owner keeps as
-  casebook `BACKLOG.md` tasks.
+  Owner, 2026-11-24: G1 dropped (rare; restarting from `main` is the owner's call); no per-task
+  files (duplication) and no committed handoffs (a handoff resumes work, a task describes new work).
+- **Next:** owner reviews option A's before/after (G2, G3, G5 in the format; G4 no change); then
+  file it as one casebook `BACKLOG.md` task.
 - **Done when:**
   - [x] each gap found is listed with an example, or none is found
   - [ ] for each gap kept: a proposed change to the `backlog` format, filed upstream in
