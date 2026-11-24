@@ -136,7 +136,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 
 ### Build the idle-handoff reminder hook for cloud sessions
 - **Status:** in progress (ccr-87f6dab6-aq5h35)
-- **Context:** goal: a handoff is written and pushed after 50 min without a user message in a cloud
+- **Context:** goal: a handoff is written and sent to the owner after 50 min without a user message in a cloud
   session. Design and smoke-test results: `docs/research/2026-11-23-idle-handoff-hook.md` (PR #141):
   a `UserPromptSubmit` hook, silent outside cloud (`CLAUDE_CODE_REMOTE`) and on wakes (`.prompt`
   starting with `<task-notification>`). Owner chose a chain of `send_later` timers, never moved

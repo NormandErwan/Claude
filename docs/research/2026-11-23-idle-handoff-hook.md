@@ -13,7 +13,7 @@ Montage 1: a `UserPromptSubmit` command hook committed in `.claude/settings.json
 reminder on stdout. The reminder asks Claude to end each turn by cancelling the pending idle-handoff
 reminder (`delete_trigger`) and scheduling a new one with `send_later` (claude-code-remote MCP
 server), 50 minutes ahead. If that scheduled message fires, 50 minutes passed with no user message:
-Claude writes a handoff, commits and pushes it. The script is silent outside cloud sessions
+Claude writes a handoff and sends it to the owner. The script is silent outside cloud sessions
 (`CLAUDE_CODE_REMOTE`); a `CLAUDE.md` rule states the same. Does it work, what are the limits, and
 what does it take in this repo?
 
@@ -173,7 +173,7 @@ paused cloud VM". Treat as the first smoke-test gate.
 - **`Stop`:** documented as firing when Claude finishes responding [H11]; nothing excludes a wake turn.
   Hypothesis: it fires.
 - **Loop mechanism:** wake turn -> hook fires -> reminder says "arm a new trigger" -> Claude arms -> 50
-  minutes later the wake fires again: a handoff every 50 minutes forever, with commits and pushes. A
+  minutes later the wake fires again: a handoff every 50 minutes forever, with a handoff sent each time. A
   second variant: PR check-in turns re-arming the idle trigger [O4], so no handoff ever fires.
 - **Defences, in order of strength:**
   1. The hook script exits silently when `.prompt` starts with the wake marker (deterministic, no
@@ -185,7 +185,7 @@ paused cloud VM". Treat as the first smoke-test gate.
 - **Recommended wake wording** (factual, so it does not trip the injection defences [H9]):
   `[idle-handoff] The idle timer armed at <epoch> has fired. Project rule "Idle handoff" applies: run
   `bash .claude/hooks/idle-handoff.sh check <epoch>`; on STALE write nothing and stop; on IDLE use the
-  handoff skill, commit and push. This message is a timer, not a user message: no timer is created, moved
+  handoff skill. This message is a timer, not a user message: no timer is created, moved
   or deleted on this turn.`
 - **Residual risk:** a user message arriving during the handoff turn; the wake waits for the running turn
   [T1], so handoff and prompt never overlap, but a handoff commit may land after the user has started a
@@ -329,7 +329,7 @@ For this turn the rule is: as the last tool calls before the final answer, call 
 that trigger_id (skip if none), then send_later with delay_minutes=$DELAY and the message
 "[idle-handoff] The idle timer armed at $armed has fired. Project rule \"Idle handoff\" applies: run
 \`bash .claude/hooks/idle-handoff.sh check $armed\`; on STALE write nothing and stop; on IDLE use the
-handoff skill, commit and push. This message is a timer, not a user message: no timer is created,
+handoff skill. This message is a timer, not a user message: no timer is created,
 moved or deleted on this turn.", then store the returned trigger_id in $STATE/$sid.trigger.
 EOF
 ```
@@ -354,7 +354,7 @@ unverified (gate 4 below).
 
 ```markdown
 - Cloud session (`CLAUDE_CODE_REMOTE=true`), turn started by a user message, reminder `Idle-handoff timer` in context -> as the last tool calls before the final answer, `delete_trigger` the pending trigger, then `send_later` in 50 minutes with the reminder's message.
-- Message starting `[idle-handoff]` -> run the check it names; `IDLE` -> `handoff`, commit, push. Create, move or delete no trigger on that turn.
+- Message starting `[idle-handoff]` -> run the check it names; `IDLE` -> `handoff`. Create, move or delete no trigger on that turn.
 ```
 
 Counted: 2 rules, 3 triggers. The first line alone makes the rule inert in a consumer without the hook
@@ -370,7 +370,7 @@ a consumer repo first.
 | # | Case | Steps | Pass criterion |
 |---|---|---|---|
 | 1 | Cloud, typed prompt | Send a prompt; read the debug log and the next turn | Hook ran; reminder visible to Claude as a system reminder (Claude names the rule); Claude calls `send_later` as its last tool call; `list_triggers` shows one pending trigger for this session; state files written |
-| 2 | Cloud, wake turn | Send no message for 3 minutes (let the VM pause: "a few minutes" [C2]) | The message arrives; hook either does not fire or fires silently (log shows exit with no stdout); Claude runs `check`, gets IDLE, writes the handoff, commits, pushes; **no new trigger created** (`list_triggers` count unchanged) |
+| 2 | Cloud, wake turn | Send no message for 3 minutes (let the VM pause: "a few minutes" [C2]) | The message arrives; hook either does not fire or fires silently (log shows exit with no stdout); Claude runs `check`, gets IDLE, writes the handoff and sends it (`SendUserFile`); **no new trigger created** (`list_triggers` count unchanged) |
 | 3 | Cloud, wake after a real pause | Same as 2, but wait 15 minutes and, if possible, until the session's VM is paused or reclaimed | Message delivered into the paused or reclaimed VM, the session resumes, `check` returns IDLE; this is the gate for Q4 "survives pause / reclaim" |
 | 4 | Cloud, forgotten re-arm / early wake | Type a prompt at minute 1, tell Claude to skip arming for it; let the earlier trigger fire at minute 2 | `check` returns STALE; no handoff, no commit |
 | 5 | Cloud, PR wake interplay | Subscribe to a draft PR, let CI wake the session | Hook is silent or does not re-arm; no idle trigger moved by the PR turn; log shows what stdin `.prompt` held |
@@ -486,7 +486,7 @@ appending stdin and `CLAUDE_CODE_REMOTE` to a scratchpad log; removed after the 
 | Typed prompt (19:31 UTC) | `UserPromptSubmit` fired; `.prompt` held the raw typed text. Same keys as a wake (`session_id`, `transcript_path`, `cwd`, `scratchpad_dir`, `prompt_id`, `permission_mode`, `hook_event_name`, `prompt`); no `origin` or `source` field | Q1: discrimination works on the `.prompt` prefix only |
 | Hook environment | `CLAUDE_CODE_REMOTE=true` in every hook process | Q2 |
 | `Stop` stdin | Has `background_tasks`, `session_crons` (empty), `last_assistant_message`, `stop_hook_active`; nothing about `send_later` triggers | `Stop` cannot see pending triggers |
-| Environment `Stop` hook | A second, environment-provided `Stop` hook asks to commit and push whenever the tree is dirty | A handoff written on wake will be pushed |
+| Environment `Stop` hook | A second, environment-provided `Stop` hook asks to commit and push whenever the tree is dirty | Moot: the handoff is saved outside the tree and delivered with `SendUserFile` |
 
 Design changes implied:
 - The script skips when `.prompt` starts with `<task-notification>`, instead of matching `[idle-handoff]`.
@@ -513,7 +513,7 @@ Built on PR #141: `templates/hooks/idle-handoff.sh`, offline tests `templates/ho
 Design change after the approval finding (owner chose "option 4"): **a chain of `send_later` timers, never
 moved.** At most one timer is pending. A typed prompt records its time and asks for a `send_later` only when
 none is pending; otherwise the hook is silent (no reminder, no tool call). The wake runs `check <trigger_id>`:
-`IDLE` (no typed prompt for 45 min) -> handoff, commit, push, no new timer; `REARM` (the user wrote since)
+`IDLE` (no typed prompt for 45 min) -> handoff (sent to the owner), no new timer; `REARM` (the user wrote since)
 -> a new `send_later` at last prompt + 50 min; `STOP` -> the wake is not the pending timer (duplicate), or a
 handoff was already written. A pending timer 10 min past its due time never ran `check` (wake missed or
 skipped): the next typed prompt arms a new one, else the chain would end silently (found in review; its

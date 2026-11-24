@@ -1,6 +1,6 @@
 #!/bin/bash
 # Idle handoff for cloud sessions: after IDLE_HANDOFF_DELAY minutes without a
-# user message, Claude writes a handoff, commits and pushes it.
+# user message, Claude writes a handoff and sends it to the owner.
 #
 # One timer (a send_later message) is pending at a time. It is never moved:
 # update_trigger asks the user for approval, send_later does not. Instead the
@@ -59,7 +59,7 @@ check)
   last=$(cat "$STATE/last" 2>/dev/null || echo 0)
   if [ $(($(date +%s) - last)) -ge "$IDLE_SECONDS" ]; then
     mkdir -p "$STATE" && touch "$STATE/done"
-    echo "IDLE: write a handoff with the handoff skill, commit and push it. Arm no timer."
+    echo "IDLE: write a handoff with the handoff skill (it sends the file to the owner). Arm no timer."
   else
     echo "REARM: the user wrote since this timer was armed."
     at=$((last + DELAY * 60))
