@@ -89,8 +89,20 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
 - **Done when:**
   - [x] a fresh session has `bwrap` and `socat` without a manual install
   - [ ] `test-rule-change.py preflight` passes on a case that grants Bash
-  - [ ] casebook's README (where `test-rule-change` lives) says a cloud environment needs `bwrap` and
+  - [x] casebook's README (where `test-rule-change` lives) says a cloud environment needs `bwrap` and
     `socat` for Bash cases, with the setup-script line; filed upstream in `NormandErwan/claude-casebook`
+
+### Find why GitHub search is refused in cloud sessions
+- **Status:** ready
+- **Context:** `gh api search/...` returns 403 in some cloud sessions, often per the owner
+  (`RETROSPECTIVE.md` 2026-11-23 tool-blocked: research agents fell back to web search with partial
+  coverage). It answered on 2026-11-24 in a session holding three repositories. Session
+  instructions say search reaches only the repositories the session's GitHub access grants.
+- **Next:** read the `github.access` page of `read_documentation`, then run the same
+  `search/code` query in sessions with different attached repositories and record each status.
+- **Done when:**
+  - [ ] the condition that yields 403 is named, with the runs that show it
+  - [ ] a workaround or a rule proposed with its measure, or the owner's reason to leave it
 
 ### Find why verify-sources does not fire on unverified claims
 - **Status:** ready
@@ -98,6 +110,10 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   2026-10-28, 2026-11-03 and 2026-11-16 fact-corrected, four rows; the 2026-11-16 one fell under the
   skill's own Red Flag "how two files differ, from an earlier read", and the file was never read). Owner: the skill was likely never loaded.
   Same class as the 2026-11-03 skill-gap row (situation-triggered skills do not fire).
+  Added 2026-11-24: `RETROSPECTIVE.md` 2026-11-22 fact-corrected (a past reply judged off-scope from
+  an excerpt) and skill-gap (a handoff premise on a tool checked against `--help` only), and
+  NormandErwan/Intelligence `RETROSPECTIVE.md` 2026-11-21 fact-corrected (an absence in a
+  third party's summary stated as a gap of the method).
 - **Next:** run `find-cause` on the four rows and the 2026-11-03 skill-gap row.
 - **Done when:**
   - [ ] `find-cause` trace recorded in the four rows
