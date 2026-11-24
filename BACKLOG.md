@@ -78,15 +78,19 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     `socat` for Bash cases, with the setup-script line; filed upstream in `NormandErwan/claude-casebook`
 
 ### Find why GitHub search is refused in cloud sessions
-- **Status:** ready
-- **Context:** `gh api search/...` returns 403 in some cloud sessions, often per the owner
-  (`RETROSPECTIVE.md` 2026-11-23 tool-blocked: research agents fell back to web search with partial
-  coverage). It answered on 2026-11-24 in a session holding three repositories. Session
-  instructions say search reaches only the repositories the session's GitHub access grants.
-- **Next:** read the `github.access` page of `read_documentation`, then run the same
-  `search/code` query in sessions with different attached repositories and record each status.
+- **Status:** needs owner: which countermeasure (hook, rule, or both)
+- **Context:** Cause found 2026-11-24, not tied to attached repositories. The cloud proxy allows
+  search only as REST GET. `gh api search/... -f q=...` without `-X GET` sends a POST -> 403 "This
+  GitHub API path is not available: sessions are bound to their configured repositories" (the
+  2026-11-23 failure, in a `general-purpose` subagent). `gh search issues|prs` use GraphQL -> 403
+  "GitHub GraphQL is not available". Same session, 200: `gh api -X GET search/code|issues`,
+  `gh api 'search/code?q=...'`, `gh search code|repos|commits`, any owner. The misleading message
+  makes agents conclude search is banned. The `-X GET` hint sits in the main session's system
+  prompt only. Unrelated 403s: `repos/<owner>/<repo>` outside scope, `github.com` HTML pages.
+- **Next:** build the countermeasure the owner picks, e.g. a `PreToolUse` Bash hook that denies
+  `gh api ...search/` without GET and `gh search issues|prs`, its reason giving the working form.
 - **Done when:**
-  - [ ] the condition that yields 403 is named, with the runs that show it
+  - [x] the condition that yields 403 is named, with the runs that show it
   - [ ] a workaround or a rule proposed with its measure, or the owner's reason to leave it
 
 ### Find why verify-sources does not fire on unverified claims
