@@ -134,17 +134,12 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] it says when to produce the interactive HTML page and where to version it
   - [ ] both Intelligence rows read `applied` with this PR
 
-### Build the idle-handoff reminder hook for cloud sessions
-- **Status:** in progress (ccr-87f6dab6-aq5h35)
-- **Context:** goal: a handoff is written and sent to the owner after 50 min without a user message in a cloud
-  session. Design and smoke-test results: `docs/research/2026-11-23-idle-handoff-hook.md` (PR #141):
-  a `UserPromptSubmit` hook, silent outside cloud (`CLAUDE_CODE_REMOTE`) and on wakes (`.prompt`
-  starting with `<task-notification>`). Owner chose a chain of `send_later` timers, never moved
-  (`update_trigger` asks for approval): see the note's `Build results`.
-- **Next:** A/B test waived by the owner (2026-11-24), recorded in the rule's `PROVENANCE.md` row; test live in the PR session, then merge.
+### Feature the idle handoff in the README for other repositories
+- **Status:** ready
+- **Context:** the owner finds the idle handoff worth showcasing: after 50 min without a user message, a cloud session writes a handoff and sends it to the owner's phone. Built in PR #141 (`templates/hooks/idle-handoff.sh`, `docs/research/2026-11-23-idle-handoff-hook.md`). Consumers must copy the script by hand today (README step 2); other projects are a possible audience.
+- **Next:** read `README.md`, then draft a short section: what it does, the cloud-only condition, the `send_later` chain in two lines, how to enable it, and a link to the research note. Offer where it sits (README section or separate page) as a structuring choice.
 - **Done when:**
-  - [x] script in `templates/hooks/` (consumers copy it to `.claude/hooks/`) and entries in `.claude/settings.json` and `templates/settings.json`
-  - [ ] `CLAUDE.md` rule in the `Claude Code` section, with its `PROVENANCE.md` row and the evidence `CONTRIBUTING.md` requires
-  - [x] test cases 4 (stale trigger), 6 (local CLI silent) and 7 (consumer repo) of the note's test plan pass, logged in the note
-  - [x] the note documents a typed prompt starting with `<task-notification>` as a known false wake
-- **Out of scope:** local CLI handoff (`obie/auto-handoff`): owner declined for now.
+  - [ ] `README.md` has a section that a reader outside this repo can follow to enable the mechanism
+  - [ ] it links the design note instead of restating it
+  - [ ] the install steps match `templates/settings.json` and the README's consumer steps
+- **Out of scope:** local CLI handoff (`obie/auto-handoff`); changing the hook.
