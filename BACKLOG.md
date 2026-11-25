@@ -77,18 +77,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [x] casebook's README (where `test-rule-change` lives) says a cloud environment needs `bwrap` and
     `socat` for Bash cases, with the setup-script line; filed upstream in `NormandErwan/claude-casebook`
 
-### Find why GitHub search is refused in cloud sessions
-- **Status:** ready
-- **Context:** `gh api search/...` returns 403 in some cloud sessions, often per the owner
-  (`RETROSPECTIVE.md` 2026-11-23 tool-blocked: research agents fell back to web search with partial
-  coverage). It answered on 2026-11-24 in a session holding three repositories. Session
-  instructions say search reaches only the repositories the session's GitHub access grants.
-- **Next:** read the `github.access` page of `read_documentation`, then run the same
-  `search/code` query in sessions with different attached repositories and record each status.
-- **Done when:**
-  - [ ] the condition that yields 403 is named, with the runs that show it
-  - [ ] a workaround or a rule proposed with its measure, or the owner's reason to leave it
-
 ### Find why verify-sources does not fire on unverified claims
 - **Status:** ready
 - **Context:** four unchecked claims though `Behavior` names `verify-sources` (`RETROSPECTIVE.md`
