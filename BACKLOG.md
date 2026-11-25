@@ -47,7 +47,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   first did not stop it. Always-on: A/B mandatory (`CONTRIBUTING.md`).
 - **Next:** draft the rule (owner opinion without a reason -> keep the recommendation the evidence
   supports, ask the reason, say what would change it) with `write-prompt`, review it, then A/B.
-  Runner: `test-rule-change.py` (`claude plugin eval`); `bwrap`/`socat` are now installed. Reuse the
+  Runner: `test-rule-change.py` (`claude plugin eval`); `bwrap`/`socat` are installed, and Bash writes need casebook PR#17 (runs rooted outside `/tmp`). Reuse the
   drift A/B layout (`docs/evidence/drift-probe/evals/`: scaffold symlinked into each case, arms built
   under the gitignored `arms/`), with the scaffold at `60189f5` and no `history_file` (single turn).
   The probe's visible `--max-budget-usd 3` did not leak: no reply in `opinion-probe/*.md` cites it.
@@ -60,22 +60,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     with the `PROVENANCE.md` row; otherwise the owner's decision recorded
 - **Out of scope:** an owner opinion that gives a reason or a new fact; drift across turns (rule landed in PR#139).
 
-### Install bubblewrap and socat in the cloud environment setup
-- **Status:** ready
-- **Context:** `claude plugin eval` (casebook `test-rule-change.py`) runs Bash only under the OS
-  sandbox, which needs `bwrap` and `socat` (`docs/research/2026-11-16-ab-test-harness.md`, Outcome).
-  The container image lacks both, so a case needing Bash falls back to `claude -p` (opinion probe,
-  PR#138). `apt-get update && apt-get install -y bubblewrap socat` worked in that session (2026-11-22);
-  the environment has no setup script carrying it.
-  2026-11-22 later: the owner set that command as the "Complet" environment's setup script; a fresh
-  session had both tools.
-- **Next:** clone casebook's `test-rule-change` and run `test-rule-change.py preflight` on a case that
-  grants Bash.
-- **Done when:**
-  - [x] a fresh session has `bwrap` and `socat` without a manual install
-  - [ ] `test-rule-change.py preflight` passes on a case that grants Bash
-  - [x] casebook's README (where `test-rule-change` lives) says a cloud environment needs `bwrap` and
-    `socat` for Bash cases, with the setup-script line; filed upstream in `NormandErwan/claude-casebook`
 
 ### Find why verify-sources does not fire on unverified claims
 - **Status:** ready
