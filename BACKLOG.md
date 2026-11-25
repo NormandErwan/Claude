@@ -23,21 +23,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] a fix chosen by the owner (rule wording, a naming line in `handoff`, or no change)
   - [ ] if fixed: P3 and N4 pass 3/3, the other 6 cases do not regress
 
-### Check what a backlog task loses against a handoff
-- **Status:** ready
-- **Context:** the `backlog` skill describes a task as "a short handoff". A handoff serves one
-  resume soon after (cache about to expire, session drifted or too big); a task may wait weeks.
-  Possible gap: approaches tried and rejected, absent from the format, so a later session retries
-  them. Settled 2026-11-22: handoffs stay out of tracked files and reference backlog tasks
-  (`handoff` 1.4.0). Example gap, 2026-11-22: the multi-turn drift task said "that session" without
-  its id (found only in PR#138's merge-commit trailer), the turn, or the commit at that turn; recovering
-  them took a subagent over the session transcript.
-- **Next:** list what the handoffs and tasks written so far carry that the other lacks.
-- **Done when:**
-  - [ ] each gap found is listed with an example, or none is found
-  - [ ] for each gap kept: a proposed change to the `backlog` format, filed upstream in
-    `NormandErwan/claude-casebook` (the skill lives there)
-
 ### Make the backlog trigger reliable on Haiku
 - **Status:** ready
 - **Context:** Haiku 5.5 misses the `backlog` skill on work mentioned beside a main request and on a
@@ -75,17 +60,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     with the `PROVENANCE.md` row; otherwise the owner's decision recorded
 - **Out of scope:** an owner opinion that gives a reason or a new fact; drift across turns (rule landed in PR#139).
 
-### Find why GitHub search is refused in cloud sessions
-- **Status:** ready
-- **Context:** `gh api search/...` returns 403 in some cloud sessions, often per the owner
-  (`RETROSPECTIVE.md` 2026-11-23 tool-blocked: research agents fell back to web search with partial
-  coverage). It answered on 2026-11-24 in a session holding three repositories. Session
-  instructions say search reaches only the repositories the session's GitHub access grants.
-- **Next:** read the `github.access` page of `read_documentation`, then run the same
-  `search/code` query in sessions with different attached repositories and record each status.
-- **Done when:**
-  - [ ] the condition that yields 403 is named, with the runs that show it
-  - [ ] a workaround or a rule proposed with its measure, or the owner's reason to leave it
 
 ### Find why verify-sources does not fire on unverified claims
 - **Status:** ready
