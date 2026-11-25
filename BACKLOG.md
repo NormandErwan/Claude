@@ -77,22 +77,6 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [x] casebook's README (where `test-rule-change` lives) says a cloud environment needs `bwrap` and
     `socat` for Bash cases, with the setup-script line; filed upstream in `NormandErwan/claude-casebook`
 
-### Find why GitHub search is refused in cloud sessions
-- **Status:** needs owner: which countermeasure (hook, rule, or both)
-- **Context:** Cause found 2026-11-24, not tied to attached repositories. The cloud proxy allows
-  search only as REST GET. `gh api search/... -f q=...` without `-X GET` sends a POST -> 403 "This
-  GitHub API path is not available: sessions are bound to their configured repositories" (the
-  2026-11-23 failure, in a `general-purpose` subagent). `gh search issues|prs` use GraphQL -> 403
-  "GitHub GraphQL is not available". Same session, 200: `gh api -X GET search/code|issues`,
-  `gh api 'search/code?q=...'`, `gh search code|repos|commits`, any owner. The misleading message
-  makes agents conclude search is banned. The `-X GET` hint sits in the main session's system
-  prompt only. Unrelated 403s: `repos/<owner>/<repo>` outside scope, `github.com` HTML pages.
-- **Next:** build the countermeasure the owner picks, e.g. a `PreToolUse` Bash hook that denies
-  `gh api ...search/` without GET and `gh search issues|prs`, its reason giving the working form.
-- **Done when:**
-  - [x] the condition that yields 403 is named, with the runs that show it
-  - [ ] a workaround or a rule proposed with its measure, or the owner's reason to leave it
-
 ### Find why verify-sources does not fire on unverified claims
 - **Status:** ready
 - **Context:** four unchecked claims though `Behavior` names `verify-sources` (`RETROSPECTIVE.md`
