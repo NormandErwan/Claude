@@ -17,13 +17,15 @@ REPO_DIR="$(dirname "$0")/../.."
 LOCAL_SKILLS="$REPO_DIR/skills"
 
 # Merge both manifests. This repo is its own consumer: same file, read once.
+# CR stripped: a Windows checkout (`text=auto`) ends lines with CRLF, and a
+# skill name ending in \r is reported failed, then pruned.
 MANIFEST=$(mktemp)
-cat "$REPO_DIR/skills.txt" >"$MANIFEST" 2>/dev/null
+tr -d '\r' <"$REPO_DIR/skills.txt" >"$MANIFEST" 2>/dev/null
 CONSUMER="${CLAUDE_PROJECT_DIR:+$CLAUDE_PROJECT_DIR/skills.txt}"
 if [ -f "$CONSUMER" ] && ! [ "$CONSUMER" -ef "$REPO_DIR/skills.txt" ]; then
   # read drops a last line with no newline.
   printf '\n' >>"$MANIFEST"
-  cat "$CONSUMER" >>"$MANIFEST"
+  tr -d '\r' <"$CONSUMER" >>"$MANIFEST"
   printf '\n' >>"$MANIFEST"
 fi
 
@@ -50,13 +52,16 @@ for f in files:
     if not out.startswith(root + os.sep): sys.exit(1)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, "w").write(f["contents"])'
+# Git for Windows ships no python3: try python, else skip to npx quietly.
+PY=$(command -v python3 || command -v python)
 api_fetch() { # <repo> <dest skills dir> <skill>...
   local repo=$1 dest=$2 s
+  [ -n "$PY" ] || return 1
   mkdir -p "$dest"
   shift 2
   for s in "$@"; do
     curl -fsS --retry 2 --max-time 20 "${SKILLS_DOWNLOAD_URL:-https://skills.sh}/api/download/$repo/$s" -o "$dest.$s.json" 2>/dev/null &&
-      python3 -I -c "$UNPACK" "$dest.$s.json" "$dest/$s" || return 1
+      "$PY" -I -c "$UNPACK" "$dest.$s.json" "$dest/$s" || return 1
   done
 }
 
