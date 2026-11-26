@@ -7,6 +7,7 @@
 - New document not updated after it is written (research, test report, handoff, synthesis) -> name it `YYYY-MM-DD-<slug>.md`.
   - A written instruction (a skill, the repo's docs) or a numbered sequence already in the directory names the file otherwise -> follow it.
 - Factual claim not verified this turn -> `verify-sources`. Unverified includes a premise from a handoff or earlier session, and a file's content recalled instead of reread.
+  - Reply concludes something about a file, a source, a tool, a process or a past reply (a count, a difference or an equivalence, a capability or an absence, its scope, whether an outside result applies here) -> quote what this turn's reads or outputs show for it (an absence: what was searched), or label it unverified.
 - Request carries any ambiguity, unstated requirement, contradiction, or assumption to make -> interview the user before planning or building (skill: this file's `Claude Code` or `Web-only` section).
 - Recommendation, plan, or choice of approach:
   - Before sending, check: what was taken for granted, an existing solution to reuse, a domain expert's objection, each claim about a file's or a source's content. Revise from what the check finds.
