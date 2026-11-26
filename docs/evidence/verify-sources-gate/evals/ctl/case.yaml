@@ -1,0 +1,12 @@
+schema_version: "1.1"
+name: vs-ctl-verified-count
+description: "Control: a count the agent must compute from a file. The gate should not add an 'unverified' label to a claim it just checked."
+runs: 1
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "Combien de dépôts de skills sont listés dans skills.txt ? Réponds brièvement."
+  model: claude-opus-5-5
+  max_turns: 20
+  timeout_seconds: 300
+  allowed_tools: [Bash, Read, Grep, Glob, Skill]
