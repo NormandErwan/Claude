@@ -1,17 +1,19 @@
 # Backlog
 
-Work not done yet, one `###` section per task. Format and rules: the `backlog` skill.
+Work not done yet, one `###` section per plan or task. Format and rules: the `backlog` skill.
 
 ## Conventions
 
 - Tracker: BACKLOG.md
 - New tasks: add without asking
 - Finished task: delete its section
+- Finished plan: delete its section
 - Owner steps: on
+- Extra fields: none
 
 ## Tasks
 
-### Make dated names fire on handoffs and on notes beside undated ones
+### dated-names-on-handoffs: Make dated names fire on handoffs and on notes beside undated ones
 - **Status:** ready
 - **Context:** the `Behavior` dated-names rule passed 8/8 on 2026-11-16 (`docs/evidence/dated-notes/`).
   Rerun 2026-11-22 (Sonnet 5.5, old and new wording alike): P3 handoff saved as
@@ -23,7 +25,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] a fix chosen by the owner (rule wording, a naming line in `handoff`, or no change)
   - [ ] if fixed: P3 and N4 pass 3/3, the other 6 cases do not regress
 
-### Make the backlog trigger reliable on Haiku
+### backlog-trigger-haiku: Make the backlog trigger reliable on Haiku
 - **Status:** ready
 - **Context:** Haiku 5.5 misses the `backlog` skill on work mentioned beside a main request and on a
   task reported done: 2.0.0 20/30, casebook 0.1.1 23/30, Sonnet and Opus reliable
@@ -38,7 +40,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     `PROVENANCE.md` note
 - **Out of scope:** Sonnet and Opus behavior, already reliable.
 
-### Keep the evidence-based recommendation when the owner states an opinion without a reason
+### keep-evidence-recommendation: Keep the evidence-based recommendation when the owner states an opinion without a reason
 - **Status:** ready
 - **Context:** owner wants answers that do not go their way by default (`RETROSPECTIVE.md` 2026-11-03
   new-preference). Opinion probe (`docs/evidence/opinion-probe/`, two 2026-11-22 test-run rows): handoff
@@ -60,8 +62,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     with the `PROVENANCE.md` row; otherwise the owner's decision recorded
 - **Out of scope:** an owner opinion that gives a reason or a new fact; drift across turns (rule landed in PR#139).
 
-
-### Find why verify-sources does not fire on unverified claims
+### verify-sources-not-firing: Find why verify-sources does not fire on unverified claims
 - **Status:** ready
 - **Context:** four unchecked claims though `Behavior` names `verify-sources` (`RETROSPECTIVE.md`
   2026-10-28, 2026-11-03 and 2026-11-16 fact-corrected, four rows; the 2026-11-16 one fell under the
@@ -76,7 +77,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] `find-cause` trace recorded in the four rows
   - [ ] a fix proposed with its measure, or the owner's reason to leave it
 
-### Rerun the dated-notes cases with the casebook A/B scripts
+### rerun-dated-notes-cases: Rerun the dated-notes cases with the casebook A/B scripts
 - **Status:** ready
 - **Context:** owner, 2026-11-16: reuse the PR#133 cases (`docs/evidence/dated-notes/`) as a
   second harness test. Their setup errors were in `grade.py` (counted skills, fixture files; missed
@@ -87,7 +88,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
     dated-note row, or each gap is explained
   - [ ] a grader check (known pass/fail) added to `test-rule-change` if a grader error recurs
 
-### Warn at push when the branch base is behind its remote
+### warn-push-base-behind: Warn at push when the branch base is behind its remote
 - **Status:** ready
 - **Context:** branches cut from a base cloned at session start and never re-fetched: the PR then conflicts, and GitHub runs no `pull_request` workflow on a conflicted PR (`RETROSPECTIVE.md` 2026-10-18 plan-revised row; same class in NormandErwan/Intelligence, 2026-10-26). Owner, 2026-11-10: a mechanical check in the push hook, not a `CLAUDE.md` rule.
 - **Next:** in `.claude/hooks/check-skills.sh` (or a sibling hook if a skills-only gate is the wrong home), on `git push`: `git fetch origin <base>`, and if the branch does not contain `origin/<base>`, print the commits it lacks and block or warn.
@@ -98,7 +99,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] a consumer repo gets the check through `templates/hooks/`, or the commit says why not
 - **Out of scope:** rebasing automatically.
 
-### Add an explaining-to-others section to write-guide
+### write-guide-explaining-section: Add an explaining-to-others section to write-guide
 - **Status:** ready
 - **Context:** two NormandErwan/Intelligence retrospective rows (2026-11-09). A scientific section of a guide meant to be explained to colleagues or clients should go intuition, then analogy, then formulas. `teach` targets personal learning over several sessions; its light version was judged excellent: glossary, one worked example end to end, check questions in the page, and an interactive HTML page versioned beside it. Owner, 2026-11-10: a `write-guide` section, not a `teach` mode nor a new skill.
 - **Next:** read `skills/write-guide/SKILL.md` and draft the section with `write-skill`, using the Intelligence Gaussian splatting guide as test case.
@@ -107,7 +108,7 @@ Work not done yet, one `###` section per task. Format and rules: the `backlog` s
   - [ ] it says when to produce the interactive HTML page and where to version it
   - [ ] both Intelligence rows read `applied` with this PR
 
-### Feature the idle handoff in the README for other repositories
+### readme-idle-handoff: Feature the idle handoff in the README for other repositories
 - **Status:** ready
 - **Context:** the owner finds the idle handoff worth showcasing: after 50 min without a user message, a cloud session writes a handoff and sends it to the owner's phone. Built in PR #141 (`templates/hooks/idle-handoff.sh`, `docs/research/2026-11-23-idle-handoff-hook.md`). Consumers must copy the script by hand today (README step 2); other projects are a possible audience.
 - **Next:** read `README.md`, then draft a short section: what it does, the cloud-only condition, the `send_later` chain in two lines, how to enable it, and a link to the research note. Offer where it sits (README section or separate page) as a structuring choice.
