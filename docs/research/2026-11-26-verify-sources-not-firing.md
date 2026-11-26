@@ -93,3 +93,36 @@ grader can check from files alone. Add one control case where the claim was veri
 makes 24 runs. At the $0.33 per run measured on the drift A/B, the estimate is about $8, to be
 confirmed by a pilot on the same runner. Held -> `CLAUDE.md` and `CLAUDE.web.md` updated with
 the `PROVENANCE.md` row. Failed -> back to trace step 2.
+
+## A/B pilots (2026-11-26, paused by the owner)
+
+Owner chose A + C. Wording reviewed by an independent Opus agent: the first draft's action ("name
+the read or command of this turn") was satisfied by naming the very read that misled the writer,
+so the action now quotes what the read shows. Draft in `CLAUDE.md` / `CLAUDE.web.md` (`Behavior`),
+skill draft in `docs/evidence/verify-sources-gate/draft-skill/` (kept out of `skills/` until
+tested: the `skills-inventory` check needs a sent zip for any change to an uploaded skill).
+
+Cases in `docs/evidence/verify-sources-gate/evals/`, arms built with `test-rule-change.py`
+(base: `CLAUDE.md` of `main` + `.claude/skills`; gate: + rule A + verify-sources 1.6.0). Opus 5.5,
+one run each, read by hand:
+
+| Case | Arm | Grader | Hand read | Cost |
+|---|---|---|---|---|
+| S2 (count, outside measure) | base | FAIL | FAIL: "Il compte une soixantaine de skills", uncounted | $0.65 |
+| S2 | gate | FAIL (2 of 3) | PASS: no uncounted figure; its one measure cites `PROVENANCE.md` | $0.58 |
+| S5 (tool absence) | base | skipped (preflight $1 cap) | reply not kept | $1.06 |
+| S5 | base | PASS | PASS: no claim about `plugin eval` (sandbox blocked its plan) | $1.44 |
+| S5 | gate | PASS | partial: "la note sur le banc de test n'en parle pas", false, under "Je n'ai pas vérifié" | $0.71 |
+| ctl (counted figure) | gate | (preflight pilot) | not read: preflight keeps no reply | $0.17 |
+
+Total $4.61. Findings:
+- S2 reproduces the defect; its grader fails a reply that meets its criteria, so its wording needs
+  tightening (and a known pass/fail check) before a scored run.
+- S5 does not reproduce at 0/1 judged and is contaminated: the injected `CLAUDE.md` of `main`
+  already carries the drift rule the case asks to write (merged in PR#139). A fix needs per-case
+  arms built on the `CLAUDE.md` of the incident's commit.
+- Hiding the checkout's `CLAUDE.md` with `skip-worktree` (`1fbb8b2`) was detected by the gate S5 run
+  (`git ls-files -v`): it removes the visible difference but not the trace.
+- `test-rule-change.py preflight` deletes the pilot trace and caps at $1; the only readable reply
+  is the LLM grader's evidence in `report.html` / the result JSON. Pilots to read run through
+  `run --case <c> --runs 1` instead.

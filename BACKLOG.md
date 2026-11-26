@@ -91,19 +91,25 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
 - **Out of scope:** an owner opinion that gives a reason or a new fact; drift across turns (rule landed in PR#139).
 
 ### verify-sources-not-firing: Find why verify-sources does not fire on unverified claims
-- **Status:** needs owner: countermeasure A, B or C of `docs/research/2026-11-26-verify-sources-not-firing.md`
-- **Context:** `find-cause` done 2026-11-26 (`docs/research/2026-11-26-verify-sources-not-firing.md`,
-  PR#147): in the five sessions of the six fact-corrected and skill-gap rows, `verify-sources` was
-  never loaded before the claim, and one session named it in its opening line without invoking it.
-  Cause: the trigger is the writer's own belief that a claim is unverified, and every earlier fix
-  widened that class without changing the trigger. Recommended: A (gate in `Behavior` with
-  observable sentence types) plus C (widen the skill's `description`). NormandErwan/Intelligence
-  2026-11-21 row not checked (repository not attached).
-- **Next:** once the owner picks, draft the wording with `write-prompt`, then the A/B planned in
-  the note (3 cases + 1 control, 2 arms, 3 runs, about $8 before a pilot).
+- **Status:** needs owner: A/B plan 1 (S2 + control, about $7) or 2 (also repair S5, about $14)
+- **Context:** `find-cause` done 2026-11-26: the trigger is the writer's own belief that a claim is
+  unverified (`docs/research/2026-11-26-verify-sources-not-firing.md`). Owner chose countermeasures
+  A (`Behavior` sub-bullet, drafted on PR#147) and C (verify-sources 1.6.0 description, drafted in
+  `docs/evidence/verify-sources-gate/draft-skill/`). Pilots and their findings: the note's "A/B
+  pilots" section. Owner paused the task on 2026-11-26 before the scored run; handoff in PR#147's
+  description. NormandErwan/Intelligence 2026-11-21 row not checked (repository not attached).
+- **Next:** get the owner's plan choice; tighten the S2 grader and check it on the two pilot
+  replies quoted in the note; then the scored run with `test-rule-change.py run` (`--scaffold
+  --allow-tools Bash Edit Write WebSearch WebFetch`, arms rebuilt under the gitignored `arms/`).
+- **Ruled out:**
+  - S5 case on `main`'s `CLAUDE.md` -> contaminated (the drift rule it asks to write is already
+    injected) and no reproduction in 1 judged base run, research note "A/B pilots"
+  - `preflight` as the pilot to read -> deletes the trace, $1 cap skipped the S5 judge, same section
 - **Done when:**
   - [x] `find-cause` trace recorded in the four rows
   - [ ] a fix proposed with its measure, or the owner's reason to leave it
+  - [ ] if the A/B holds: rule A in `CLAUDE.md` and `CLAUDE.web.md` with its `PROVENANCE.md` row,
+    verify-sources 1.6.0 moved into `skills/` with its zip sent (`SKILLS.md` steps 2-3)
 
 ### rerun-dated-notes-cases: Rerun the dated-notes cases with the casebook A/B scripts
 - **Status:** ready
