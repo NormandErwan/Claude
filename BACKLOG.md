@@ -11,10 +11,38 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
 - Owner steps: on
 - Extra fields: none
 
+## Plans
+
+### rules-fire-reliably: Make the skills CLAUDE.md names fire when their situation arises
+- **Goal:** a skill or rule that `CLAUDE.md` names loads in the situation it targets, on every model the owner uses.
+- **Done when:**
+  - [ ] the miss rate of `verify-sources`, dated names and `backlog` on Haiku is measured, and each is fixed or left with the owner's reason in `PROVENANCE.md`
+- **Tasks:**
+  - [ ] verify-sources-not-firing
+  - [ ] rerun-dated-notes-cases
+  - [ ] dated-names-on-handoffs
+  - [ ] backlog-trigger-haiku
+
+### session-safety: Start cloud sessions from up-to-date versions
+- **Goal:** a cloud session works from an up-to-date branch base and up-to-date skills.
+- **Done when:**
+  - [ ] a push from a branch behind its base lists the commits it lacks before it reaches GitHub
+- **Tasks:**
+  - [ ] warn-push-base-behind
+
+### consumer-setup: Let another repository adopt this repository's hooks
+- **Goal:** a consumer repository gets the useful hooks and can enable them by following the README.
+- **Done when:**
+  - [ ] each hook under `templates/hooks/` has its enabling steps in `README.md`, matching `templates/settings.json`
+- **Tasks:**
+  - [ ] warn-push-base-behind
+  - [ ] readme-idle-handoff
+
 ## Tasks
 
 ### dated-names-on-handoffs: Make dated names fire on handoffs and on notes beside undated ones
 - **Status:** ready
+- **Blocked by:** rerun-dated-notes-cases
 - **Context:** the `Behavior` dated-names rule passed 8/8 on 2026-11-16 (`docs/evidence/dated-notes/`).
   Rerun 2026-11-22 (Sonnet 5.5, old and new wording alike): P3 handoff saved as
   `handoff-<slug>.md` in the scratchpad, N4 meeting note as `reunion-2026-11-22.md` beside undated
@@ -117,3 +145,11 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   - [ ] it links the design note instead of restating it
   - [ ] the install steps match `templates/settings.json` and the README's consumer steps
 - **Out of scope:** local CLI handoff (`obie/auto-handoff`); changing the hook.
+
+### process-open-retrospective-rows: Process the open tool-blocked rows of RETROSPECTIVE.md
+- **Status:** ready
+- **Context:** three `tool-blocked` rows stay `proposed`: 2026-11-24 (a cloud session cannot push a git tag), 2026-11-25 (a hook added mid-session does not run in that session), 2026-11-25 (no comment on a third-party repository issue). The first row's change, a CI workflow that tags on merge, looks landed: NormandErwan/claude-casebook `CLAUDE.md` "Releasing" gives the job to the `tag` job of `validate.yml`; not checked against a run.
+- **Next:** check that the last `validate.yml` run on claude-casebook `main` pushed its tags, then process the three rows per `CONTRIBUTING.md` "RETROSPECTIVE.md".
+- **Done when:**
+  - [ ] each of the three rows has a decision other than `proposed`, an applied one with its PR
+- **Out of scope:** the `test-run` observation rows, decided at their own criterion.
