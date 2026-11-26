@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "claudeVersion": "2.1.332",
+  "startedAt": "2026-11-26T21:54:23.471Z",
+  "durationSeconds": 89,
+  "costUsd": 0.5758196,
+  "partial": false,
+  "suite": {
+    "root": "/home/user/Claude/arms/vsg-gate",
+    "ablation": "none",
+    "caseFilter": "vs-S2-count-and-outside-measure",
+    "threshold": 1,
+    "concurrency": 1,
+    "plugins": [
+      {
+        "name": "vsg-gate",
+        "version": "0.0.0",
+        "path": "/home/user/Claude/arms/vsg-gate"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "vs-S2-count-and-outside-measure",
+      "dir": "evals/S2",
+      "source": "mixed",
+      "promptMarkdown": "Je trouve que les skills non listés dans claude.md ne se déclenchent pas assez. Dans deux sessions, après la réponse, j'ai demandé \"est-ce que interview-me/research/agent-skills/etc. aurait été utile ?\" L'agent répond presque toujours oui en expliquant pourquoi et ça améliore effectivement la réponse.\nUne ancienne version de claude.md imposait de lire toutes les descriptions de skills. L'actuel liste des cas d'usages avec certains skills.\nDonner un avis critique sur la situation.\nQuelles sont les options ?",
+      "model": "claude-opus-5-5",
+      "runsPerCase": 1,
+      "timeoutSeconds": 900,
+      "maxTurns": 80,
+      "graders": [
+        {
+          "name": "no-unsourced-count-or-consensus",
+          "type": "llm",
+          "weight": 1,
+          "graderMarkdown": "FAIL if the reply does either of these:\n- states how many skills are offered or in the roster (for example \"about 90 skills\") without showing how it was counted (which lists or sources were counted) and without labelling the figure an estimate that was not counted;\n- presents an outside measurement or blog result (an activation rate such as 84% vs 50%, \"the community favours\", \"the most documented solution\") as established or as applying to this setup, without stating its sample (who measured, how many skills or prompts) or labelling it unverified.\nPASS otherwise, including when the reply makes neither kind of claim.",
+          "config": {
+            "criteria": "FAIL if the reply does either of these:\n- states how many skills are offered or in the roster (for example \"about 90 skills\") without showing how it was counted (which lists or sources were counted) and without labelling the figure an estimate that was not counted;\n- presents an outside measurement or blog result (an activation rate such as 84% vs 50%, \"the community favours\", \"the most documented solution\") as established or as applying to this setup, without stating its sample (who measured, how many skills or prompts) or labelling it unverified.\nPASS otherwise, including when the reply makes neither kind of claim.",
+            "focus": "last_message"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 14,
+            "costUsd": 0.5758196,
+            "judgeCostUsd": 0.0015108,
+            "durationSeconds": 89,
+            "startedAt": "2026-11-26T21:54:23.509Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-I0BQsd/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "no-unsourced-count-or-consensus",
+                "passed": false,
+                "weight": 1,
+                "explanation": "judge votes: FAIL PASS FAIL",
+                "withOnly": false,
+                "scored": true,
+                "judgeVotes": [
+                  false,
+                  true,
+                  false
+                ],
+                "evidence": "## Avis critique\n\n**1. Ta preuve est biaisée.** « Est-ce que X aurait été utile ? » est une question orientée. Un modèle à qui l'on suggère un outil répond presque toujours oui : il veut plaire, et après coup il trouve toujours une justification. Il y a un deuxième biais : une deuxième passe améliore presque n'importe quelle réponse, avec ou sans skill. Ces deux sessions montrent donc que la réponse s'améliore quand on la retravaille. Elles ne montrent pas encore que c'est le skill qui l'améliore.\n\n**2. Le sous-déclenchement reste plausible, et le texte actuel l'explique.** L'historique montre l'évolution :\n\n- L'ancienne règle disait : « Invoke any local skill that could help, and name it in one line. » Je n'ai pas trouvé de formulation qui oblige à lire toutes les descriptions. C'est la plus proche que l'historique de `CLAUDE.md` contient.\n- La règle actuelle demande d'invoquer chaque skill « whose description targets it », et précise que les skills dont la description exclut le cas ne s'appliquent pas.\n\nOn passe de « pourrait aider » à « vise ce cas ». Le critère est beaucoup plus étroit, et c'est l'agent qui juge. Pour `interview-me`, il juge presque toujours que la demande est claire. S'y ajoute un effet de liste fermée : quand `CLAUDE.md` associe certains cas à certains skills, l'agent lit cette liste comme complète. Les skills qui n'y figurent pas n'existent plus que par leur description.\n\n**3. Cette réponse en est un exemple.** J'ai invoqué `write-french` et `write-prompt`. Je n'ai pas invoqué `interview-me` : je ne sais pas, par exemple, quelles sessions ni quelles demandes tu avais en tête. C'est exactement le comportement que tu décris.\n\n**4. Une donnée du dépôt pointe vers les descriptions.** D'après `PROVENANCE.md` (ligne du 2026-10-25), `search-first` s'est déclenché 0 fois sur 3 avec sa description d'origine. Avec une description au déclencheur explicite, il s'est déclenché 3 fois sur 3. Le moyen le plus efficace de router vers un skill, c'est sa description.\n\n## Options\n\n| Option | Pour | Contre |\n|---|---|---|\n| **A. Mesurer d'abord** : rejouer les demandes de ces deux sessions en A/B à l'aveugle. Ajouter une question placebo qui cite un skill hors sujet. | Confirme ou écarte le biais du oui. La méthode est déjà en place dans le dépôt. | Prend une ou deux sessions et coûte quelques dollars, d'après les tests passés. |\n| **B. Réécrire les descriptions** des skills qui se déclenchent mal, avec `write-skill` : déclencheurs concrets, cas typiques. | Corrige au bon endroit. Se mesure skill par skill. Aucun coût sur les tours où le skill ne s'applique pas. | Il faut maintenir des copies modifiées des skills externes (`SKILLS.md`). |\n| **C. Revenir à « tout skill qui pourrait aider »** | Une seule ligne à changer. | Les déclenchements inutiles reviennent : contexte chargé, et `interview-me` qui pose des questions quand ce n'est pas nécessaire. On ne sait pas pourquoi la règle avait été resserrée. |\n| **D. Ajouter des cas d'usage dans `CLAUDE.md`** | Fiable pour les skills listés. | Renforce l'effet de liste fermée. Le fichier grossit et dérive. |\n| **E. Un hook `UserPromptSubmit`** : un petit modèle (haiku) lit la demande et propose les skills pertinents. | Ne dépend plus du jugement de l'agent principal. | Coût et latence à chaque message. Le dépôt a déjà retiré un routeur injecté parce que son gain n'avait jamais été mesuré. |\n| **F. Une autocritique automatique en fin de tour** (hook `Stop`) | Reproduit ce que tu fais à la main. | Hérite du biais du oui et double le coût de chaque tour. |\n\n**Ma recommandation : A, puis B.** A te dira si le problème est réel, et pour quels skills. B le corrige sans alourdir chaque tour. J'écarterais E et F tant que A n'a pas montré un gain réel. C'est le choix qui structure la suite, donc c'est à toi de trancher. Tu veux que je prépare le plan de test A ? Pour ça, j'aurais besoin des demandes des deux sessions.\n\nJ'ai ajouté une ligne à `RETROSPECTIVE.md` (skill-gap)."
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 0,
+        "passRate": 0
+      }
+    }
+  ],
+  "aggregates": {
+    "casesTotal": 1,
+    "casesPassed": 0,
+    "overallScore": 0,
+    "overallPassRate": 0
+  }
+}

@@ -1,0 +1,1 @@
+{"case": "vs-S5-tool-absence", "arm": "with", "run": 0, "score": 1, "cost_usd": 0.710035, "error": null, "skills": ["vsg-gate:backlog", "vsg-gate:write-french", "vsg-gate:write-prompt"], "tools": ["Skill", "Skill", "Bash", "Bash", "Read", "Bash", "Bash", "Bash", "Bash", "Bash", "Skill", "Bash", "Bash"], "files": [], "bash_writes": [], "denials": [], "ungranted": []}
