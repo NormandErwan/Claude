@@ -91,18 +91,18 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
 - **Out of scope:** an owner opinion that gives a reason or a new fact; drift across turns (rule landed in PR#139).
 
 ### verify-sources-not-firing: Find why verify-sources does not fire on unverified claims
-- **Status:** in progress (ccr-c24f5ec8-1lr3rn)
-- **Context:** four unchecked claims though `Behavior` names `verify-sources` (`RETROSPECTIVE.md`
-  2026-10-28, 2026-11-03 and 2026-11-16 fact-corrected, four rows; the 2026-11-16 one fell under the
-  skill's own Red Flag "how two files differ, from an earlier read", and the file was never read). Owner: the skill was likely never loaded.
-  Same class as the 2026-11-03 skill-gap row (situation-triggered skills do not fire).
-  Added 2026-11-24: `RETROSPECTIVE.md` 2026-11-22 fact-corrected (a past reply judged off-scope from
-  an excerpt) and skill-gap (a handoff premise on a tool checked against `--help` only), and
-  NormandErwan/Intelligence `RETROSPECTIVE.md` 2026-11-21 fact-corrected (an absence in a
-  third party's summary stated as a gap of the method).
-- **Next:** run `find-cause` on the four rows and the 2026-11-03 skill-gap row.
+- **Status:** needs owner: countermeasure A, B or C of `docs/research/2026-11-26-verify-sources-not-firing.md`
+- **Context:** `find-cause` done 2026-11-26 (`docs/research/2026-11-26-verify-sources-not-firing.md`,
+  PR#147): in the five sessions of the six fact-corrected and skill-gap rows, `verify-sources` was
+  never loaded before the claim, and one session named it in its opening line without invoking it.
+  Cause: the trigger is the writer's own belief that a claim is unverified, and every earlier fix
+  widened that class without changing the trigger. Recommended: A (gate in `Behavior` with
+  observable sentence types) plus C (widen the skill's `description`). NormandErwan/Intelligence
+  2026-11-21 row not checked (repository not attached).
+- **Next:** once the owner picks, draft the wording with `write-prompt`, then the A/B planned in
+  the note (3 cases + 1 control, 2 arms, 3 runs, about $8 before a pilot).
 - **Done when:**
-  - [ ] `find-cause` trace recorded in the four rows
+  - [x] `find-cause` trace recorded in the four rows
   - [ ] a fix proposed with its measure, or the owner's reason to leave it
 
 ### rerun-dated-notes-cases: Rerun the dated-notes cases with the casebook A/B scripts
