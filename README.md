@@ -96,9 +96,7 @@ See `NormandErwan/Accounts` for a working example.
 A cloud session left alone for 50 minutes writes a handoff and sends it to you, so the work
 survives the container being reclaimed. Cloud sessions only: the hook is silent elsewhere.
 
-How: on each typed prompt, the hook asks Claude to schedule a `send_later` message 50 minutes
-ahead, unless one is pending. When it fires, the script checks the last prompt's time: idle ->
-handoff; active -> schedule the next one. Design and limits:
+Design and limits:
 [`docs/research/2026-11-23-idle-handoff-hook.md`](docs/research/2026-11-23-idle-handoff-hook.md).
 
 To enable it in another repo:
