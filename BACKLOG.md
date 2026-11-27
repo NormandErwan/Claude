@@ -91,11 +91,15 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   - [ ] a fix proposed with its measure, or the owner's reason to leave it
 
 ### rerun-dated-notes-cases: Rerun the dated-notes cases with the casebook A/B scripts
-- **Status:** ready
+- **Status:** needs owner: arms and runs per case for the scored run
 - **Context:** owner, 2026-11-16: reuse the PR#133 cases (`docs/evidence/dated-notes/`) as a
   second harness test. Their setup errors were in `grade.py` (counted skills, fixture files; missed
   commits): `test-rule-change.py` does not check graders. P3's handoff lands outside the workspace.
-- **Next:** port the 8 cases of `prompts.tsv` to `plugin eval` cases.
+  2026-11-27: cases ported by `docs/evidence/dated-notes/make-cases.sh` (graders on the created-files
+  list; P3 on Write calls). Arm `CLAUDE.md` at `0226e4f` + its skills (49): `preflight` all green,
+  P3 pilot Sonnet 5.5 $0.15 (called `handoff`, `write-french`).
+- **Next:** with the owner's choice, `test-rule-change.py run` the arm(s), then read each reply and
+  check P3's Write path by hand (graders unchecked).
 - **Done when:**
   - [ ] 8 cases run through `test-rule-change.py run` and match the 8/8 of `PROVENANCE.md`'s
     dated-note row, or each gap is explained
