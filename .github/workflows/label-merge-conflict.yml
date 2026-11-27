@@ -1,0 +1,39 @@
+# Labels and comments on a PR that conflicts with its base. GitHub runs no
+# `pull_request` workflow on a conflicted PR, so its checks stay at zero and an
+# agent can read that as "CI starting" (RETROSPECTIVE.md 2026-10-18 plan-revised).
+# `pull_request_target` runs despite the conflict; `push` catches a PR that a
+# later push to its base made conflict. A Claude session subscribed to the PR is
+# woken by the comment (probe: PR #149).
+#
+# Safe under pull_request_target: nothing checks out or runs the PR's code; the
+# action only reads mergeable states and writes labels and comments.
+# Action pinned to v3.1.0 after reading its source (sources/main.ts).
+name: label-merge-conflict
+
+# push is limited to the default branch (rename it if yours differs): unfiltered,
+# a push to a PR branch would also fire with pull_request_target, and the two
+# runs, both seeing no label yet, would comment twice. No concurrency group: its
+# single pending slot would let a run of narrower scope replace a queued one.
+on:
+  push:
+    branches: [main]
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions: {}
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: eps1lon/actions-label-merge-conflict@0273be72a0bbd58fcd71d0d6c02c209b50d1e5e1 # v3.1.0
+        with:
+          dirtyLabel: "merge conflict"
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          commentOnDirty: >-
+            This branch conflicts with its base. GitHub runs no `pull_request`
+            workflow on a conflicted PR, so no checks here does not mean CI is
+            starting. Merge the base into this branch, resolve, and push.

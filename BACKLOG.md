@@ -26,7 +26,7 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
 ### session-safety: Start cloud sessions from up-to-date versions
 - **Goal:** a cloud session works from an up-to-date branch base and up-to-date skills.
 - **Done when:**
-  - [ ] a push from a branch behind its base lists the commits it lacks before it reaches GitHub
+  - [ ] a PR that conflicts with its base gets a label and a comment saying so, and the comment wakes a session subscribed to the PR
 - **Tasks:**
   - [ ] warn-push-base-behind
 
@@ -122,16 +122,21 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
     dated-note row, or each gap is explained
   - [ ] a grader check (known pass/fail) added to `test-rule-change` if a grader error recurs
 
-### warn-push-base-behind: Warn at push when the branch base is behind its remote
-- **Status:** ready
-- **Context:** branches cut from a base cloned at session start and never re-fetched: the PR then conflicts, and GitHub runs no `pull_request` workflow on a conflicted PR (`RETROSPECTIVE.md` 2026-10-18 plan-revised row; same class in NormandErwan/Intelligence, 2026-10-26). Owner, 2026-11-10: a mechanical check in the push hook, not a `CLAUDE.md` rule.
-- **Next:** in `.claude/hooks/check-skills.sh` (or a sibling hook if a skills-only gate is the wrong home), on `git push`: `git fetch origin <base>`, and if the branch does not contain `origin/<base>`, print the commits it lacks and block or warn.
+### warn-push-base-behind: Label and comment on PRs that conflict with their base
+- **Status:** owner steps pending
+- **Context:** branches cut from a base cloned at session start and never re-fetched: the PR then conflicts, and GitHub runs no `pull_request` workflow on a conflicted PR, which the agent read as "CI starting" (`RETROSPECTIVE.md` 2026-10-18 plan-revised row; same class reported in NormandErwan/Intelligence, 2026-10-26, not reread). Owner, 2026-11-10: a mechanical check, not a `CLAUDE.md` rule. Owner, 2026-11-27: a GitHub workflow alone, not a push hook: GitHub already refuses to merge a conflicted PR, and `pull_request_target` runs despite the conflict. Built as `.github/workflows/label-merge-conflict.yml` with `eps1lon/actions-label-merge-conflict` pinned to v3.1.0 (`sources/main.ts` read; `dist/index.js` not compared with it). A `github-actions[bot]` comment wakes a subscribed session in about 5 s (PR #149).
+- **Next:** once merged, open a test PR that conflicts with `main` and check the label, the comment and the wake; then resolve it and check the label goes. If the run fails with `error adding "merge conflict"`, the label must exist first: say so to the owner.
+- **Ruled out:**
+  - PreToolUse push hook (block or warn) -> covers only Claude Code sessions, misses a base that moves after the PR opens, and its warn path reaches Claude only after the push (this session, 2026-11-27)
 - **Done when:**
-  - [ ] a push from a branch missing commits of `origin/main` gets the message with the missing commits
-  - [ ] a push from an up-to-date branch passes with no output
-  - [ ] the hook's own tests cover both cases
-  - [ ] a consumer repo gets the check through `templates/hooks/`, or the commit says why not
-- **Out of scope:** rebasing automatically.
+  - [ ] a PR conflicting with `main` gets the `merge conflict` label and one comment, and a subscribed session is woken by it
+  - [ ] resolving the conflict removes the label
+  - [x] `README.md` tells a consumer repo to copy the workflow
+- **Owner steps:** before the agent's check
+  1. Review and merge the PR that adds `.github/workflows/label-merge-conflict.yml`.
+     - Check: Actions lists a `label-merge-conflict` run on the merge commit's `push`, green.
+     - Undo: revert the merge commit.
+- **Out of scope:** rebasing or merging the base automatically; a failing check on the PR (whether a `pull_request_target` run shows in a PR's checks is untested).
 
 ### write-guide-explaining-section: Add an explaining-to-others section to write-guide
 - **Status:** ready
