@@ -19,24 +19,45 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   - [ ] the miss rate of `verify-sources`, dated names and `backlog` on Haiku is measured, and each is fixed or left with the owner's reason in `PROVENANCE.md`
 - **Tasks:**
   - [ ] verify-sources-not-firing
-  - [ ] rerun-dated-notes-cases
-  - [ ] dated-names-on-handoffs
+  - [ ] plugin-eval-fidelity-gap
   - [ ] backlog-trigger-haiku
 
 ## Tasks
 
-### dated-names-on-handoffs: Make dated names fire on handoffs and on notes beside undated ones
+### plugin-eval-fidelity-gap: Find which test runner matches real sessions
 - **Status:** ready
-- **Blocked by:** rerun-dated-notes-cases
-- **Context:** the `Behavior` dated-names rule passed 8/8 on 2026-11-16 (`docs/evidence/dated-notes/`).
-  Rerun 2026-11-22 (Sonnet 5.5, old and new wording alike): P3 handoff saved as
-  `handoff-<slug>.md` in the scratchpad, N4 meeting note as `reunion-2026-11-22.md` beside undated
-  notes. Owner chose one `Behavior` rule over editing `handoff` (PR#133); this evidence reopens it.
-- **Next:** rerun the 8 cases with 3 runs each on the current `CLAUDE.md` to measure the miss rate.
+- **Context:** `CONTRIBUTING.md` makes `test-rule-change.py` (`claude plugin eval`, `CLAUDE.md`
+  injected by a hook) the default runner for rule tests. 2026-11-27, same day, version, model and
+  rule: dated-notes P3 and N4 pass 6/6 under `plugin eval`, 0/6 under `claude -p`, 4/4 in real
+  cloud sessions started with `create_session`, 4/4 again on the exact `claude -p` workspace
+  (`docs/evidence/dated-notes/ab-2026-11-27/README.md`): `claude -p`, the fallback `CONTRIBUTING.md`
+  keeps for a real `CLAUDE.md`'s framing, is the outlier, from how `run.sh` launches it. First calibration (2026-11-16,
+  `docs/evidence/ab-harness-calibration/`) left an unexplained 17/30 vs 23/30. Candidates: the cloud
+  system prompt the `claude -p` child inherits (scratchpad, `SendUserFile`), absent in `plugin eval`;
+  the hook-injected framing of `CLAUDE.md`. Results resting on `plugin eval`: drift rule 10/10
+  (`PROVENANCE.md` 2026-11-22 Behavior row). Synthesis: `docs/research/2026-11-27-test-runner-fidelity.md`.
+- **Next:** rerun P3 under `claude -p` dropping one `run.sh` difference at a time (fresh
+  `CLAUDE_CONFIG_DIR`, unset session variables, `--allowedTools`/`acceptEdits`); then one drift case
+  in real sessions vs `plugin eval`.
 - **Done when:**
-  - [ ] miss rate measured on all 8 cases
-  - [ ] a fix chosen by the owner (rule wording, a naming line in `handoff`, or no change)
-  - [ ] if fixed: P3 and N4 pass 3/3, the other 6 cases do not regress
+  - [ ] the runner whose results match real sessions on these cases named, with its runs
+  - [ ] once the `run.sh` difference that flips P3 is found: a draft issue for anthropics/claude-code
+    (minimal repro on the dated-notes fixture, nothing personal) handed to the owner to file
+  - [ ] `CONTRIBUTING.md`'s runner choice kept or changed by the owner, and the drift rule's result
+    re-checked if the cause bears on it
+
+### runner-rules-real-sessions: Make real sessions the reference in the test procedures
+- **Status:** ready
+- **Blocked by:** plugin-eval-fidelity-gap
+- **Context:** `docs/research/2026-11-27-test-runner-fidelity.md`: `claude -p` was the reference
+  for real-session behavior in `CONTRIBUTING.md` step 2, casebook `test-rule-change` and
+  `write-skill`, and disagreed with real sessions on dated-notes P3 and N4. Owner, 2026-11-27: ideally
+  yes, but weigh the cost (real sessions $0.19-0.27 each, graded by hand); wait for the cause.
+- **Next:** with the cause known, draft the change (which runner is the default, when a check
+  against 2-3 real sessions is required) with its cost per test, for the owner.
+- **Done when:**
+  - [ ] the owner chose the procedure, and `CONTRIBUTING.md` and the casebook files say the same
+- **Out of scope:** re-running past tests.
 
 ### backlog-trigger-haiku: Make the backlog trigger reliable on Haiku
 - **Status:** ready
@@ -89,17 +110,6 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
 - **Done when:**
   - [ ] `find-cause` trace recorded in the four rows
   - [ ] a fix proposed with its measure, or the owner's reason to leave it
-
-### rerun-dated-notes-cases: Rerun the dated-notes cases with the casebook A/B scripts
-- **Status:** ready
-- **Context:** owner, 2026-11-16: reuse the PR#133 cases (`docs/evidence/dated-notes/`) as a
-  second harness test. Their setup errors were in `grade.py` (counted skills, fixture files; missed
-  commits): `test-rule-change.py` does not check graders. P3's handoff lands outside the workspace.
-- **Next:** port the 8 cases of `prompts.tsv` to `plugin eval` cases.
-- **Done when:**
-  - [ ] 8 cases run through `test-rule-change.py run` and match the 8/8 of `PROVENANCE.md`'s
-    dated-note row, or each gap is explained
-  - [ ] a grader check (known pass/fail) added to `test-rule-change` if a grader error recurs
 
 ### write-guide-explaining-section: Add an explaining-to-others section to write-guide
 - **Status:** ready

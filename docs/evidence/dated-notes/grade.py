@@ -2,7 +2,7 @@
 # usage: grade.py <runs-dir>
 import json, os, re, subprocess, sys, glob
 DATED = re.compile(r"^\d{4}-\d{2}-\d{2}-")
-EXPECT = {"P1": "dated", "P2": "dated", "P3": "dated", "N1": "003", "N2": "undated", "N3": "0001", "N4": "dated", "D1": "cart-load-test.md"}
+EXPECT = {"P1": "dated", "P2": "dated", "P3": "dated", "N1": "003", "N2": "undated", "N3": "numbered", "N4": "dated", "D1": "cart-load-test.md"}
 for r in sorted(glob.glob(os.path.join(sys.argv[1], "*"))):
     case = os.path.basename(r).split("-r")[0]
     git = lambda *a: subprocess.run(["git", "-C", f"{r}/w", *a], capture_output=True, text=True).stdout
@@ -19,5 +19,6 @@ for r in sorted(glob.glob(os.path.join(sys.argv[1], "*"))):
     if exp == "dated": ok = any(DATED.match(n) for n in names)
     elif exp == "undated": ok = bool(names) and not any(DATED.match(n) for n in names)
     elif exp.endswith(".md"): ok = exp in names  # exact name set by a repo doc
+    elif exp == "numbered": ok = any(re.match(r"(ADR-)?\d{3,4}-", n) for n in names) and not any(DATED.match(n) for n in names)  # any ADR numbering, undated
     else: ok = any(n.startswith(exp) and not DATED.match(n) for n in names)
     print(json.dumps({"case": case, "run": os.path.basename(r), "expect": exp, "pass": ok, "files": new, "cost_usd": cost}, ensure_ascii=False))
