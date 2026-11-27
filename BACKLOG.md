@@ -19,20 +19,22 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   - [ ] the miss rate of `verify-sources`, dated names and `backlog` on Haiku is measured, and each is fixed or left with the owner's reason in `PROVENANCE.md`
 - **Tasks:**
   - [ ] verify-sources-not-firing
-  - [ ] rerun-dated-notes-cases
   - [ ] dated-names-on-handoffs
   - [ ] backlog-trigger-haiku
 
 ## Tasks
 
 ### dated-names-on-handoffs: Make dated names fire on handoffs and on notes beside undated ones
-- **Status:** ready
-- **Blocked by:** rerun-dated-notes-cases
+- **Status:** in progress (ccr-16754c36-i64v4m)
 - **Context:** the `Behavior` dated-names rule passed 8/8 on 2026-11-16 (`docs/evidence/dated-notes/`).
   Rerun 2026-11-22 (Sonnet 5.5, old and new wording alike): P3 handoff saved as
   `handoff-<slug>.md` in the scratchpad, N4 meeting note as `reunion-2026-11-22.md` beside undated
   notes. Owner chose one `Behavior` rule over editing `handoff` (PR#133); this evidence reopens it.
-- **Next:** rerun the 8 cases with 3 runs each on the current `CLAUDE.md` to measure the miss rate.
+  Owner, 2026-11-27 (PR#154): task `rerun-dated-notes-cases` (calibrate `plugin eval` on these cases)
+  merged here, its calibration demoted to a by-product: the `claude -p` reference on the current
+  wording is 5 runs on 3 cases (P3 0/2, N2 1/1, N4 0/2), enough to catch a gross gap only. Cases as
+  `plugin eval` cases: `docs/evidence/dated-notes/make-cases.sh` (graders unchecked: read P3's Write path by hand).
+- **Next:** `test-rule-change.py` preflight and run on the current `CLAUDE.md`, Sonnet 5.5, 3 runs per case.
 - **Done when:**
   - [ ] miss rate measured on all 8 cases
   - [ ] a fix chosen by the owner (rule wording, a naming line in `handoff`, or no change)
@@ -89,21 +91,6 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
 - **Done when:**
   - [ ] `find-cause` trace recorded in the four rows
   - [ ] a fix proposed with its measure, or the owner's reason to leave it
-
-### rerun-dated-notes-cases: Rerun the dated-notes cases with the casebook A/B scripts
-- **Status:** needs owner: arms and runs per case for the scored run
-- **Context:** owner, 2026-11-16: reuse the PR#133 cases (`docs/evidence/dated-notes/`) as a
-  second harness test. Their setup errors were in `grade.py` (counted skills, fixture files; missed
-  commits): `test-rule-change.py` does not check graders. P3's handoff lands outside the workspace.
-  2026-11-27: cases ported by `docs/evidence/dated-notes/make-cases.sh` (graders on the created-files
-  list; P3 on Write calls). Arm `CLAUDE.md` at `0226e4f` + its skills (49): `preflight` all green,
-  P3 pilot Sonnet 5.5 $0.15 (called `handoff`, `write-french`).
-- **Next:** with the owner's choice, `test-rule-change.py run` the arm(s), then read each reply and
-  check P3's Write path by hand (graders unchecked).
-- **Done when:**
-  - [ ] 8 cases run through `test-rule-change.py run` and match the 8/8 of `PROVENANCE.md`'s
-    dated-note row, or each gap is explained
-  - [ ] a grader check (known pass/fail) added to `test-rule-change` if a grader error recurs
 
 ### write-guide-explaining-section: Add an explaining-to-others section to write-guide
 - **Status:** ready
