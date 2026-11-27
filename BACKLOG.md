@@ -35,7 +35,7 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   `docs/evidence/ab-harness-calibration/`) left an unexplained 17/30 vs 23/30. Candidates: the cloud
   system prompt the `claude -p` child inherits (scratchpad, `SendUserFile`), absent in `plugin eval`;
   the hook-injected framing of `CLAUDE.md`. Results resting on `plugin eval`: drift rule 10/10
-  (`PROVENANCE.md` 2026-11-22 Behavior row).
+  (`PROVENANCE.md` 2026-11-22 Behavior row). Synthesis: `docs/research/2026-11-27-test-runner-fidelity.md`.
 - **Next:** rerun P3 under `claude -p` dropping one `run.sh` difference at a time (fresh
   `CLAUDE_CONFIG_DIR`, unset session variables, `--allowedTools`/`acceptEdits`); then one drift case
   in real sessions vs `plugin eval`.
@@ -43,6 +43,19 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   - [ ] the runner whose results match real sessions on these cases named, with its runs
   - [ ] `CONTRIBUTING.md`'s runner choice kept or changed by the owner, and the drift rule's result
     re-checked if the cause bears on it
+
+### runner-rules-real-sessions: Make real sessions the reference in the test procedures
+- **Status:** ready
+- **Blocked by:** plugin-eval-fidelity-gap
+- **Context:** `docs/research/2026-11-27-test-runner-fidelity.md`: `claude -p` was the reference
+  for real-session behavior in `CONTRIBUTING.md` step 2, casebook `test-rule-change` and
+  `write-skill`, and disagreed with real sessions on dated-notes P3 and N4. Owner, 2026-11-27: ideally
+  yes, but weigh the cost (real sessions $0.19-0.27 each, graded by hand); wait for the cause.
+- **Next:** with the cause known, draft the change (which runner is the default, when a check
+  against 2-3 real sessions is required) with its cost per test, for the owner.
+- **Done when:**
+  - [ ] the owner chose the procedure, and `CONTRIBUTING.md` and the casebook files say the same
+- **Out of scope:** re-running past tests.
 
 ### backlog-trigger-haiku: Make the backlog trigger reliable on Haiku
 - **Status:** ready
