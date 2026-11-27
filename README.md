@@ -82,8 +82,13 @@ In the consumer repo:
    | Parallel/sub-agent orchestration | `obra/superpowers dispatching-parallel-agents subagent-driven-development` |
    | Home Assistant config editing | `homeassistant-ai/skills home-assistant-best-practices` |
 
-`.claude/settings.json`, `.claude/hooks/session-start.sh` and `.claude/hooks/idle-handoff.sh`
-are the whole consumer-side infra (conflict probe) - nothing else from this repo belongs there. This
+6. Optionally copy `.github/workflows/label-merge-conflict.yml` to the same path: it labels and
+   comments on a PR that conflicts with its base. GitHub runs no `pull_request` workflow on a
+   conflicted PR, so its checks stay at zero; the comment says why and wakes a cloud session
+   subscribed to the PR. Not self-updating: re-copy it when it changes.
+
+`.claude/settings.json`, `.claude/hooks/session-start.sh`, `.claude/hooks/idle-handoff.sh` and
+`.github/workflows/label-merge-conflict.yml` are the whole consumer-side infra - nothing else from this repo belongs there. This
 repo's own `README.md`, `CLAUDE.web.md`, and `SKILLS.md` stay here only
 (`CLAUDE.web.md` and the skills `SKILLS.md` marks `Web` are uploaded by hand to claude.ai).
 
