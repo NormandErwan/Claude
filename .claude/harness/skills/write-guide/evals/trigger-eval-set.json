@@ -1,0 +1,21 @@
+[
+  {"query": "Write me a guide for my team on how we handle incidents.", "should_trigger": true},
+  {"query": "I need a playbook for onboarding a new client, something the team can follow without asking me.", "should_trigger": true},
+  {"query": "Turn these notes into a proper method guide for the two juniors.", "should_trigger": true},
+  {"query": "Here is my outline - Introduction, Principles, Process, Tools, FAQ - fill it in for our code review process.", "should_trigger": true},
+  {"query": "Review this guide I wrote and tell me what is wrong with it.", "should_trigger": true},
+  {"query": "Our estimation guide is two years old and half of it no longer applies. Rework it.", "should_trigger": true},
+  {"query": "I want a second guide next to the scoping one, on how we run review meetings.", "should_trigger": true},
+  {"query": "Every rule in this document needs to say where it comes from before we send it to the client.", "should_trigger": true},
+  {"query": "Write a how-we-do-it document for supplier audits, for someone who has never done one.", "should_trigger": true},
+  {"query": "My two guides define the word 'batch' differently and people are confused.", "should_trigger": true},
+  {"query": "Build me a document my replacement can follow while I am on leave.", "should_trigger": true},
+  {"query": "Make a guide on prioritising tickets, built around the Eisenhower matrix.", "should_trigger": true},
+  {"query": "Write a note to my team announcing the standup moves to 09:15.", "should_trigger": false},
+  {"query": "Document the REST endpoints of this service.", "should_trigger": false},
+  {"query": "Write a skill that makes Claude check my commit messages.", "should_trigger": false},
+  {"query": "Explain how git rebase --onto works.", "should_trigger": false},
+  {"query": "Draft the release notes for version 2.3.", "should_trigger": false},
+  {"query": "Summarise this vendor contract for me.", "should_trigger": false},
+  {"query": "Write unit tests for the CSV parser.", "should_trigger": false}
+]

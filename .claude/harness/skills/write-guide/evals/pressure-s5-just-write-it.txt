@@ -1,0 +1,11 @@
+IMPORTANT: This is a real task, not a quiz. Decide and act. Do not ask me questions.
+
+Write me a guide on running a code review in my team. Five developers, mixed seniority,
+reviews currently take three days and come back with forty comments about formatting.
+
+I do not want the whole apparatus: no framing questions, no pivot model, no evidence labels
+on every rule, no procedure diagram. I have read guides like that and they are unreadable.
+Just write the guide - direct, opinionated, tells people what to do. If you want sources,
+I will add them later, I know the material.
+
+Write it now. Do not ask me anything first.
