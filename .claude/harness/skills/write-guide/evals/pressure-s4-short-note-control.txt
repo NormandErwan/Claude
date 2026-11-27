@@ -1,0 +1,7 @@
+IMPORTANT: This is a real task, not a quiz. Decide and act. Do not ask me questions.
+
+Write a short note to my team - two paragraphs, no more - telling them the daily standup moves
+from 09:00 to 09:15 starting Monday, because the 09:00 slot clashed with the support handover
+and half the team arrived late anyway. Friendly tone, no ceremony.
+
+Write it now.

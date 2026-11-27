@@ -1,0 +1,182 @@
+#!/bin/bash
+# SessionStart hook: install skills.txt skills into <claude-dir>/skills before
+# the Skill roster freezes, plus this repo's own skills/ (forks included).
+# Reads this repo's skills.txt and a consumer's $CLAUDE_PROJECT_DIR/skills.txt.
+# One npx call per upstream repo, all in parallel: 4 calls take ~4s, 14
+# one-skill calls took ~31s. Per-call cap 45s: a 25s cap timed out shallow
+# clones on a slow proxy (2026-11-03); command hooks default to 600s.
+#
+# $1 - .claude directory to install into
+#
+# Prints one status line; SessionStart stdout goes to the session context.
+# No `set -e`: a blocked install must degrade the session, not abort startup.
+set -uo pipefail
+
+TARGET_DIR="${1:?usage: install-skills.sh <claude-dir>}"
+REPO_DIR="$(dirname "$0")/../.."
+LOCAL_SKILLS="$REPO_DIR/skills"
+
+# Merge both manifests. This repo is its own consumer: same file, read once.
+# CR stripped: a Windows checkout (`text=auto`) ends lines with CRLF, and a
+# skill name ending in \r is reported failed, then pruned.
+MANIFEST=$(mktemp)
+tr -d '\r' <"$REPO_DIR/skills.txt" >"$MANIFEST" 2>/dev/null
+CONSUMER="${CLAUDE_PROJECT_DIR:+$CLAUDE_PROJECT_DIR/skills.txt}"
+if [ -f "$CONSUMER" ] && ! [ "$CONSUMER" -ef "$REPO_DIR/skills.txt" ]; then
+  # read drops a last line with no newline.
+  printf '\n' >>"$MANIFEST"
+  tr -d '\r' <"$CONSUMER" >>"$MANIFEST"
+  printf '\n' >>"$MANIFEST"
+fi
+
+# No `timeout` on stock macOS: run uncapped there.
+CAP=()
+command -v timeout >/dev/null 2>&1 && CAP=(timeout 45)
+
+# npx writes skills-lock.json to its cwd: stage aside, copy skills only.
+STAGING=$(mktemp -d)
+trap 'rm -rf "$STAGING" "$MANIFEST"' EXIT
+
+# Fast path: skills.sh serves one skill as JSON {files: [{path, contents}]},
+# ~1s vs a 35-60s full clone through the session proxy. Undocumented (read in
+# the `skills` CLI source, which uses it for a few owners only): any failure
+# falls back to npx for the whole repo. SKILLS_DOWNLOAD_URL overrides the base
+# (same variable as the CLI).
+UNPACK='import json, os, sys
+d = json.load(open(sys.argv[1]))
+files = d.get("files") or []
+if not any(f.get("path") == "SKILL.md" for f in files): sys.exit(1)
+root = os.path.realpath(sys.argv[2])
+for f in files:
+    out = os.path.realpath(os.path.join(root, f["path"]))
+    if not out.startswith(root + os.sep): sys.exit(1)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    open(out, "w").write(f["contents"])'
+# Git for Windows ships no python3: try python, else skip to npx quietly.
+PY=$(command -v python3 || command -v python)
+api_fetch() { # <repo> <dest skills dir> <skill>...
+  local repo=$1 dest=$2 s
+  [ -n "$PY" ] || return 1
+  mkdir -p "$dest"
+  shift 2
+  for s in "$@"; do
+    curl -fsS --retry 2 --max-time 20 "${SKILLS_DOWNLOAD_URL:-https://skills.sh}/api/download/$repo/$s" -o "$dest.$s.json" 2>/dev/null &&
+      "$PY" -I -c "$UNPACK" "$dest.$s.json" "$dest/$s" || return 1
+  done
+}
+
+# `*` = every dir under the repo's skills/. Tree-only clone, ~1s: the cloud
+# proxy blocks api.github.com (403, 2026-11-19). SKILLS_GIT_BASE overrides the
+# host (tests).
+list_skills() { # <repo>
+  local d="$STAGING/tree-${1//\//_}"
+  ${CAP[@]+"${CAP[@]}"} git clone -q --depth 1 --filter=blob:none --no-checkout \
+    "${SKILLS_GIT_BASE:-https://github.com}/$1" "$d" </dev/null >/dev/null 2>&1 &&
+    git -C "$d" ls-tree -d --name-only HEAD skills/ | sed 's#^skills/##'
+}
+
+expected=()
+unlisted=()
+i=0
+while read -r repo skills; do
+  case "$repo" in '' | '#'*) continue ;; esac
+  # No skill names would install the whole repo, over the forks.
+  [ -n "$skills" ] || continue
+  if [ "$skills" = "*" ]; then
+    skills=$(list_skills "$repo" | tr '\n' ' ')
+    [ -n "${skills// /}" ] || { unlisted+=("$repo"); continue; }
+  fi
+  args=()
+  for s in $skills; do args+=(-s "$s"); expected+=("$s"); done
+  mkdir -p "$STAGING/$i"
+  echo "$repo $skills" >"$STAGING/$i.call"
+  # Output kept: a failure must show its cause (one cache fault once read as many).
+  (if api_fetch "$repo" "$STAGING/$i/.claude/skills" $skills; then
+    echo 0 >"$STAGING/$i.rc"
+  else
+    rm -rf "$STAGING/$i/.claude"
+    cd "$STAGING/$i" && ${CAP[@]+"${CAP[@]}"} npx -y skills add "$repo" "${args[@]}" -a claude-code -y </dev/null >"$STAGING/$i.log" 2>&1
+    echo $? >"$STAGING/$i.rc"
+  fi) &
+  i=$((i + 1))
+done <"$MANIFEST"
+wait
+# agent-skills skills link ../../references/*.md, which neither path copies
+# (upstream #361): fetch the linked files raw (404 = dead upstream link),
+# else clone the pack.
+refs_raw=$(cat "$STAGING"/*/.claude/skills/*/SKILL.md 2>/dev/null | grep -o 'references/[A-Za-z0-9._-]*\.md' | sort -u)
+for r in $refs_raw; do
+  mkdir -p "$STAGING/refs/references"
+  curl -fsS --retry 2 --max-time 20 "https://raw.githubusercontent.com/addyosmani/agent-skills/HEAD/$r" -o "$STAGING/refs/$r" 2>/dev/null &
+done
+wait
+ls "$STAGING"/refs/references/*.md >/dev/null 2>&1 ||
+  ${CAP[@]+"${CAP[@]}"} git clone --depth 1 --quiet https://github.com/addyosmani/agent-skills.git "$STAGING/refs" </dev/null >/dev/null 2>&1
+if [ -d "$STAGING/refs/references" ]; then
+  rm -rf "$TARGET_DIR/references"
+  cp -r "$STAGING/refs/references" "$TARGET_DIR/references"
+  refs=ok
+fi
+
+mkdir -p "$TARGET_DIR/skills"
+for d in "$STAGING"/*/.claude/skills; do
+  [ -d "$d" ] && cp -r "$d/." "$TARGET_DIR/skills/"
+done
+# Last, so a fork wins over an upstream copy of the same name.
+[ -d "$LOCAL_SKILLS" ] && cp -r "$LOCAL_SKILLS/." "$TARGET_DIR/skills/"
+
+# Target skills/ is hook-owned (session-start.sh wipes it in consumers): drop
+# dirs neither manifest nor fork names. A listed skill that failed this run
+# keeps its old copy.
+keep=" ${expected[*]-} $(ls "$LOCAL_SKILLS" 2>/dev/null | tr '\n' ' ') "
+pruned=()
+# A `*` repo left unlisted: its skills are unknown, prune nothing this run.
+[ ${#unlisted[@]} -eq 0 ] && for d in "$TARGET_DIR/skills"/*/; do
+  [ -d "$d" ] || continue
+  s=$(basename "$d")
+  case "$keep" in *" $s "*) continue ;; esac
+  # No trailing slash: rm on link/ would empty the link's target.
+  rm -rf "${d%/}" && pruned+=("$s")
+done
+
+# Judge by what this run staged, not exit codes (npx can exit 0 having
+# installed nothing) nor the target (a previous session's copy hides a failure).
+missing=()
+for s in ${expected[@]+"${expected[@]}"}; do
+  ls "$STAGING"/*/.claude/skills/"$s"/SKILL.md >/dev/null 2>&1 || missing+=("$s")
+done
+
+# Upstream may add the flag later: hidden skills must be named, the agent cannot see them.
+hidden=()
+for s in ${expected[@]+"${expected[@]}"}; do
+  grep -qs '^disable-model-invocation: *true' "$STAGING"/*/.claude/skills/"$s"/SKILL.md && hidden+=("$s")
+done
+
+if [ ${#missing[@]} -eq 0 ]; then
+  echo "skills.txt: ${#expected[@]} skills installed."
+else
+  echo "skills.txt: ${#missing[@]} of ${#expected[@]} skills failed to install: ${missing[*]}. See CLAUDE.md Bootstrap 3."
+  # Per failed call: exit code + first error-looking line, else its last line.
+  for c in "$STAGING"/*.call; do
+    n=${c%.call}
+    read -r crepo cskills <"$c"
+    for s in $cskills; do
+      [ -f "$n/.claude/skills/$s/SKILL.md" ] && continue
+      rc=$(cat "$n.rc" 2>/dev/null || echo "?")
+      # npx redraws a spinner: strip escapes, split on redraws, keep real lines.
+      clean=$(sed 's/\x1b\[[0-9;?]*[a-zA-Z]//g; s/\r/\n/g' "$n.log" 2>/dev/null | grep -av '^[[:space:]|]*$')
+      if [ "$rc" = 124 ]; then
+        line="timed out after ${CAP[1]:-?}s"
+      else
+        line=$(grep -aiE -m1 'error|fail|ENOTFOUND|EAI_AGAIN|ECONN|no valid skills' <<<"$clean")
+        [ -n "$line" ] || line=$(tail -1 <<<"$clean")
+      fi
+      echo "Failed call: $crepo (exit $rc): ${line:-no output}" | cut -c1-300
+      break
+    done
+  done
+fi
+[ ${#unlisted[@]} -eq 0 ] || echo "skills.txt: could not list ${unlisted[*]} (\`*\`): last session's copies kept, none pruned. See CLAUDE.md Bootstrap 3."
+[ ${#pruned[@]} -eq 0 ] || echo "skills.txt: removed ${#pruned[@]} skill(s) no longer listed: ${pruned[*]}."
+[ -n "${refs:-}" ] || echo "agent-skills references/ not cloned: skills' ../../references links are dead this session."
+[ ${#hidden[@]} -eq 0 ] || echo "skills.txt: hidden by disable-model-invocation: ${hidden[*]} - fork per CLAUDE.md Bootstrap 2."
