@@ -20,35 +20,9 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
 - **Tasks:**
   - [ ] verify-sources-not-firing
   - [ ] plugin-eval-fidelity-gap
-  - [ ] dated-names-on-handoffs
   - [ ] backlog-trigger-haiku
 
 ## Tasks
-
-### dated-names-on-handoffs: Make dated names fire on handoffs and on notes beside undated ones
-- **Status:** needs owner: close with no change? (real sessions pass)
-- **Context:** the `Behavior` dated-names rule passed 8/8 on 2026-11-16 (`docs/evidence/dated-notes/`).
-  Rerun 2026-11-22 (Sonnet 5.5, old and new wording alike): P3 handoff saved as
-  `handoff-<slug>.md` in the scratchpad, N4 meeting note as `reunion-2026-11-22.md` beside undated
-  notes. Owner chose one `Behavior` rule over editing `handoff` (PR#133); this evidence reopens it.
-  Owner, 2026-11-27 (PR#154): task `rerun-dated-notes-cases` (calibrate `plugin eval` on these cases)
-  merged here, its calibration demoted to a by-product: the `claude -p` reference on the current
-  wording is 5 runs on 3 cases (P3 0/2, N2 1/1, N4 0/2), enough to catch a gross gap only. Cases as
-  `plugin eval` cases: `docs/evidence/dated-notes/make-cases.sh` (graders unchecked: read P3's Write path by hand).
-  2026-11-27 `plugin eval` run, current `CLAUDE.md`, 3 runs per case
-  (`docs/evidence/dated-notes/ab-2026-11-27/`): 7 cases 3/3, N3 0/3 on a stale expectation (`0001-`
-  came from `domain-modeling`, no longer installed; ADRs still numbered, undated). P3 and N4 6/6
-  vs 0/4 under `claude -p` on 2026-11-22. Same-day `claude -p` rerun (2.1.332): P3 0/3 (undated
-  handoff in the scratchpad), N4 0/3 (`reunion-2026-11-27.md`: dated as a suffix): the miss holds
-  in real sessions; `plugin eval` misses it (task `plugin-eval-fidelity-gap`). N3 expectation now
-  any undated numbering. Real cloud sessions (`create_session`, Sonnet 5.5), 2026-11-27: P3 2/2,
-  N4 2/2 dated, in this repo; then on orphan branches holding exactly the `claude -p` workspace,
-  P3 2/2, N4 2/2. Both misses come from `claude -p` only.
-- **Next:** owner decides whether to close with no change (real sessions 8/8, `plugin eval` 6/6).
-- **Done when:**
-  - [ ] miss rate measured on all 8 cases (P3, N4 under `claude -p`; the other 6 only under `plugin eval`)
-  - [ ] a fix chosen by the owner (rule wording, a naming line in `handoff`, or no change)
-  - [ ] if fixed: P3 and N4 pass 3/3, the other 6 cases do not regress
 
 ### plugin-eval-fidelity-gap: Find which test runner matches real sessions
 - **Status:** ready
