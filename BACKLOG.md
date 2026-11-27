@@ -26,7 +26,7 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
 ## Tasks
 
 ### dated-names-on-handoffs: Make dated names fire on handoffs and on notes beside undated ones
-- **Status:** needs owner: which fix (rule wording, `handoff` naming line, or none)
+- **Status:** needs owner: close with no change? (real sessions pass)
 - **Context:** the `Behavior` dated-names rule passed 8/8 on 2026-11-16 (`docs/evidence/dated-notes/`).
   Rerun 2026-11-22 (Sonnet 5.5, old and new wording alike): P3 handoff saved as
   `handoff-<slug>.md` in the scratchpad, N4 meeting note as `reunion-2026-11-22.md` beside undated
@@ -41,28 +41,30 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   vs 0/4 under `claude -p` on 2026-11-22. Same-day `claude -p` rerun (2.1.332): P3 0/3 (undated
   handoff in the scratchpad), N4 0/3 (`reunion-2026-11-27.md`: dated as a suffix): the miss holds
   in real sessions; `plugin eval` misses it (task `plugin-eval-fidelity-gap`). N3 expectation now
-  any undated numbering. Graders for fix tests: `claude -p` (`run.sh`, `grade.py`) until that task closes.
-- **Next:** give the owner the fix options with the evidence (rule wording stating the date prefix,
-  a naming line in `handoff`, or no change).
+  any undated numbering. Real cloud sessions (`create_session`, Sonnet 5.5), 2026-11-27: P3 2/2,
+  N4 2/2 dated, in this repo rather than the fixture. Both misses come from `claude -p` only.
+- **Next:** owner decides: close with no change (real sessions and `plugin eval` pass), or more real
+  sessions on the fixture itself first.
 - **Done when:**
   - [ ] miss rate measured on all 8 cases (P3, N4 under `claude -p`; the other 6 only under `plugin eval`)
   - [ ] a fix chosen by the owner (rule wording, a naming line in `handoff`, or no change)
   - [ ] if fixed: P3 and N4 pass 3/3, the other 6 cases do not regress
 
-### plugin-eval-fidelity-gap: Find why plugin eval passes cases that claude -p fails
+### plugin-eval-fidelity-gap: Find which test runner matches real sessions
 - **Status:** ready
 - **Context:** `CONTRIBUTING.md` makes `test-rule-change.py` (`claude plugin eval`, `CLAUDE.md`
   injected by a hook) the default runner for rule tests. 2026-11-27, same day, version, model and
-  rule: dated-notes P3 and N4 pass 6/6 under `plugin eval`, 0/6 under `claude -p`
-  (`docs/evidence/dated-notes/ab-2026-11-27/README.md`). First calibration (2026-11-16,
+  rule: dated-notes P3 and N4 pass 6/6 under `plugin eval`, 0/6 under `claude -p`, 4/4 in real
+  cloud sessions started with `create_session` (`docs/evidence/dated-notes/ab-2026-11-27/README.md`):
+  `claude -p`, the fallback `CONTRIBUTING.md` keeps for a real `CLAUDE.md`'s framing, is the outlier. First calibration (2026-11-16,
   `docs/evidence/ab-harness-calibration/`) left an unexplained 17/30 vs 23/30. Candidates: the cloud
   system prompt the `claude -p` child inherits (scratchpad, `SendUserFile`), absent in `plugin eval`;
   the hook-injected framing of `CLAUDE.md`. Results resting on `plugin eval`: drift rule 10/10
   (`PROVENANCE.md` 2026-11-22 Behavior row).
-- **Next:** isolate the cause on P3 and N4: `claude -p` with the remote-session env unset (no
-  scratchpad), and `claude -p` with `CLAUDE.md` printed by a hook instead of loaded as a file.
+- **Next:** real sessions on the dated-notes fixture itself (a throwaway branch holding only it),
+  to tell the runner from the repo; then the same on one drift case.
 - **Done when:**
-  - [ ] the variable that flips P3 and N4 named, with its runs
+  - [ ] the runner whose results match real sessions on these cases named, with its runs
   - [ ] `CONTRIBUTING.md`'s runner choice kept or changed by the owner, and the drift rule's result
     re-checked if the cause bears on it
 

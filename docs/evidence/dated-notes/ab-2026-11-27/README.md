@@ -59,3 +59,24 @@ Cost: $3.77 for 24 runs, plus $0.30 of pilots.
   `YYYY-MM-DD-<slug>.md` prefix is the part missed.
 
 Cost: $0.59.
+
+## Real cloud sessions of P3 and N4
+
+Four sessions started with `create_session` (same environment as the owner's, `claude-sonnet-5-5`,
+Claude Code 2.1.332), prompt verbatim from `../prompts.tsv`, graded by hand from `list_events`:
+P3 on `main` (`8fe92c8`), N4 on a throwaway branch adding the two undated notes of `../cases/N4.sh`
+to `docs/notes/`.
+
+| Case | Real sessions | Files |
+|---|---|---|
+| P3 | 2/2 | `<scratchpad>/2026-11-27-handoff-cache-paniers-redis.md` (x2), sent with `SendUserFile` |
+| N4 | 2/2 | `docs/notes/2026-11-27-reunion-ttl-paniers-index-remboursements.md`, `docs/notes/2026-11-27-reunion-paniers-orders.md` |
+
+- Real sessions agree with `plugin eval` (6/6), not with `claude -p` (0/6): `claude -p` is the
+  outlier on these cases, though it loads the real `CLAUDE.md` and gets the cloud system prompt.
+- Not the same as the fixture: the sessions ran in this repo (many dated files under `docs/`, `CLAUDE.md`
+  at the root), not in `../fixture/`. The prompt arrives flagged `text_not_typed` (origin
+  `mcp_create_session`).
+- Side effects: both N4 sessions committed to the throwaway branch, one pushed; three asked for
+  permission to arm their idle timer and stalled on it. Cost seen: $0.19 for one P3 session
+  (`get_session` `usage.cost_usd`; the others were archived before finishing their turn).
