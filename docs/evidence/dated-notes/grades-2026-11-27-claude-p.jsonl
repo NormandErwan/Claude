@@ -1,0 +1,6 @@
+{"case": "N4", "run": "N4-r1", "expect": "dated", "pass": false, "files": ["docs/notes/reunion-2026-11-27.md"], "cost_usd": 0.0713531}
+{"case": "N4", "run": "N4-r2", "expect": "dated", "pass": false, "files": ["docs/notes/reunion-2026-11-27.md"], "cost_usd": 0.07409560000000001}
+{"case": "N4", "run": "N4-r3", "expect": "dated", "pass": false, "files": ["docs/notes/reunion-2026-11-27.md"], "cost_usd": 0.10511789999999999}
+{"case": "P3", "run": "P3-r1", "expect": "dated", "pass": false, "files": ["$TMPDIR/.../scratchpad/handoff-redis-cart-cache.md"], "cost_usd": 0.11542149999999998}
+{"case": "P3", "run": "P3-r2", "expect": "dated", "pass": false, "files": ["$TMPDIR/.../scratchpad/handoff-redis-cart-cache.md"], "cost_usd": 0.1074139}
+{"case": "P3", "run": "P3-r3", "expect": "dated", "pass": false, "files": ["$TMPDIR/.../scratchpad/handoff-redis-cart-cache.md"], "cost_usd": 0.113445}

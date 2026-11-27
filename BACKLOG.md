@@ -19,13 +19,14 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   - [ ] the miss rate of `verify-sources`, dated names and `backlog` on Haiku is measured, and each is fixed or left with the owner's reason in `PROVENANCE.md`
 - **Tasks:**
   - [ ] verify-sources-not-firing
+  - [ ] plugin-eval-fidelity-gap
   - [ ] dated-names-on-handoffs
   - [ ] backlog-trigger-haiku
 
 ## Tasks
 
 ### dated-names-on-handoffs: Make dated names fire on handoffs and on notes beside undated ones
-- **Status:** needs owner: rerun P3 and N4 under `claude -p`?
+- **Status:** needs owner: which fix (rule wording, `handoff` naming line, or none)
 - **Context:** the `Behavior` dated-names rule passed 8/8 on 2026-11-16 (`docs/evidence/dated-notes/`).
   Rerun 2026-11-22 (Sonnet 5.5, old and new wording alike): P3 handoff saved as
   `handoff-<slug>.md` in the scratchpad, N4 meeting note as `reunion-2026-11-22.md` beside undated
@@ -37,13 +38,33 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   2026-11-27 `plugin eval` run, current `CLAUDE.md`, 3 runs per case
   (`docs/evidence/dated-notes/ab-2026-11-27/`): 7 cases 3/3, N3 0/3 on a stale expectation (`0001-`
   came from `domain-modeling`, no longer installed; ADRs still numbered, undated). P3 and N4 6/6
-  vs 0/4 under `claude -p` on 2026-11-22: harness, version or scratchpad, unexplained.
-- **Next:** owner decides whether to rerun P3 and N4 under `claude -p` today (`run.sh`, 3 runs each)
-  to tell a harness gap from a change since 2026-11-22.
+  vs 0/4 under `claude -p` on 2026-11-22. Same-day `claude -p` rerun (2.1.332): P3 0/3 (undated
+  handoff in the scratchpad), N4 0/3 (`reunion-2026-11-27.md`: dated as a suffix): the miss holds
+  in real sessions; `plugin eval` misses it (task `plugin-eval-fidelity-gap`). N3 expectation now
+  any undated numbering. Graders for fix tests: `claude -p` (`run.sh`, `grade.py`) until that task closes.
+- **Next:** give the owner the fix options with the evidence (rule wording stating the date prefix,
+  a naming line in `handoff`, or no change).
 - **Done when:**
-  - [ ] miss rate measured on all 8 cases
+  - [ ] miss rate measured on all 8 cases (P3, N4 under `claude -p`; the other 6 only under `plugin eval`)
   - [ ] a fix chosen by the owner (rule wording, a naming line in `handoff`, or no change)
   - [ ] if fixed: P3 and N4 pass 3/3, the other 6 cases do not regress
+
+### plugin-eval-fidelity-gap: Find why plugin eval passes cases that claude -p fails
+- **Status:** ready
+- **Context:** `CONTRIBUTING.md` makes `test-rule-change.py` (`claude plugin eval`, `CLAUDE.md`
+  injected by a hook) the default runner for rule tests. 2026-11-27, same day, version, model and
+  rule: dated-notes P3 and N4 pass 6/6 under `plugin eval`, 0/6 under `claude -p`
+  (`docs/evidence/dated-notes/ab-2026-11-27/README.md`). First calibration (2026-11-16,
+  `docs/evidence/ab-harness-calibration/`) left an unexplained 17/30 vs 23/30. Candidates: the cloud
+  system prompt the `claude -p` child inherits (scratchpad, `SendUserFile`), absent in `plugin eval`;
+  the hook-injected framing of `CLAUDE.md`. Results resting on `plugin eval`: drift rule 10/10
+  (`PROVENANCE.md` 2026-11-22 Behavior row).
+- **Next:** isolate the cause on P3 and N4: `claude -p` with the remote-session env unset (no
+  scratchpad), and `claude -p` with `CLAUDE.md` printed by a hook instead of loaded as a file.
+- **Done when:**
+  - [ ] the variable that flips P3 and N4 named, with its runs
+  - [ ] `CONTRIBUTING.md`'s runner choice kept or changed by the owner, and the drift rule's result
+    re-checked if the cause bears on it
 
 ### backlog-trigger-haiku: Make the backlog trigger reliable on Haiku
 - **Status:** ready

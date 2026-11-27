@@ -38,3 +38,24 @@ Write calls and Bash heredocs): all 24 agree.
   undated) are all possible.
 
 Cost: $3.77 for 24 runs, plus $0.30 of pilots.
+
+## Same-day `claude -p` rerun of P3 and N4
+
+`../run.sh` on `setup.sh HEAD` (same `CLAUDE.md`, real file + SessionStart hook), Claude Code
+2.1.332, Sonnet 5.5, 3 runs each, graded by `../grade.py` (`../grades-2026-11-27-claude-p.jsonl`).
+
+| Case | `plugin eval` | `claude -p` | `claude -p` files |
+|---|---|---|---|
+| P3 | 3/3 | 0/3 | `$TMPDIR/.../scratchpad/handoff-redis-cart-cache.md` (x3) |
+| N4 | 3/3 | 0/3 | `docs/notes/reunion-2026-11-27.md` (x3) |
+
+- Same day, version, model and rule text: 6/6 vs 0/6 is a harness gap, not a change since
+  2026-11-22 (which also gave 0/4 under `claude -p`).
+- The `claude -p` child runs in this cloud session's mode: its system prompt lists a scratchpad,
+  and P3 saved there and sent the file (`SendUserFile`), as the `handoff` skill asks for a cloud
+  session. The `plugin eval` child had no scratchpad and saved to `$TMPDIR/claude-0/`. Which
+  difference flips the name (that system prompt, or the hook-injected `CLAUDE.md`) is not isolated.
+- N4 under `claude -p` dates the note, as a suffix: each reply says it dated the file. The rule's
+  `YYYY-MM-DD-<slug>.md` prefix is the part missed.
+
+Cost: $0.59.
