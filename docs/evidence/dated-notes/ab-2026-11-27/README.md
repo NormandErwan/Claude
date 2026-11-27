@@ -24,13 +24,14 @@ Write calls and Bash heredocs): all 24 agree.
 | P3 handoff | dated | 3/3 | `$TMPDIR/claude-0/2026-11-27-handoff-cache-paniers-redis.md` |
 | N1 numbered postmortems | `003-` | 3/3 | `docs/postmortems/003-redis-memory-saturation.md` |
 | N2 install guide | undated | 3/3 | `docs/installation.md` |
-| N3 ADR | `0001-` | 0/3 | `docs/decisions/001-...md`, `ADR-001-...md` (x2) |
+| N3 ADR | numbered, undated | 3/3 (0/3 as run on `0001-`) | `docs/decisions/001-...md`, `ADR-001-...md` (x2) |
 | N4 note beside undated notes | dated | 3/3 | `docs/notes/2026-11-27-reunion-...md` |
 | D1 name set by `docs/README.md` | `cart-load-test.md` | 3/3 | `docs/reports/cart-load-test.md` |
 
 - N3 is not a miss of the rule: every ADR is numbered and undated, as the rule asks. `0001-` was
   `domain-modeling`'s convention; current `skills.txt` no longer installs it, and
-  `documentation-and-adrs` numbers `001-`.
+  `documentation-and-adrs` numbers `001-`. Expectation changed after the run, in `make-cases.sh`
+  and `grade.py`, to any `NNN-`/`NNNN-`/`ADR-NNN-` name with no date; the 3 runs re-graded by hand.
 - P3 and N4 pass 6/6 here, against 0/4 under `claude -p` on 2026-11-22 (same wording, Sonnet 5.5).
   Unexplained: hook-injected `CLAUDE.md` framing, the Claude Code version, or the absence of the
   cloud session's scratchpad in `plugin eval` runs (the 2026-11-22 P3 handoff went to the scratchpad

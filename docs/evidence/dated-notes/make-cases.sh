@@ -40,7 +40,7 @@ MD
     ;;
     N1) files N1 numbered '(^|/)003-[^/]*\.md$' ;;
     N2) files N2 wrote-md '\.md$'; files N2 undated "$DATED" not ;;
-    N3) files N3 numbered '(^|/)0001-[^/]*\.md$' ;;
+    N3) files N3 numbered '(^|/)(ADR-)?\d{3,4}-[^/]*\.md$'; files N3 undated "$DATED" not ;;
     D1) files D1 doc-name '(^|/)cart-load-test\.md$' ;;
   esac
 done <"$HERE/prompts.tsv"
