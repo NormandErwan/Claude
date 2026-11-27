@@ -41,6 +41,8 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   in real sessions vs `plugin eval`.
 - **Done when:**
   - [ ] the runner whose results match real sessions on these cases named, with its runs
+  - [ ] once the `run.sh` difference that flips P3 is found: a draft issue for anthropics/claude-code
+    (minimal repro on the dated-notes fixture, nothing personal) handed to the owner to file
   - [ ] `CONTRIBUTING.md`'s runner choice kept or changed by the owner, and the drift rule's result
     re-checked if the cause bears on it
 
