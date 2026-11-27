@@ -44,10 +44,7 @@ In the consumer repo:
    that fresh clone, which installs the skills in `skills.txt`. Only the thin bootstrap is copied, so the installer
    updates itself afterwards without consumers re-copying anything. A repo set
    up before it existed needs this one re-copy to get the skills at all.
-   Also copy `templates/hooks/idle-handoff.sh` to `.claude/hooks/idle-handoff.sh` (keep it
-   executable): in cloud sessions, it has Claude write and push a handoff after 50 minutes
-   without a user message (`UserPromptSubmit` entry in `templates/settings.json`). Not
-   self-updating: re-copy it when it changes. Without it, the matching `CLAUDE.md` rule stays inert.
+   Also copy `templates/hooks/idle-handoff.sh` - see [Idle handoff](#idle-handoff).
 3. Add to `.gitignore` - the generated files are never committed:
    ```
    .claude/CLAUDE.md
@@ -93,3 +90,21 @@ repo's own `README.md`, `CLAUDE.web.md`, and `SKILLS.md` stay here only
 (`CLAUDE.web.md` and the skills `SKILLS.md` marks `Web` are uploaded by hand to claude.ai).
 
 See `NormandErwan/Accounts` for a working example.
+
+## Idle handoff
+
+A cloud session left alone for 50 minutes writes a handoff and sends it to you, so the work
+survives the container being reclaimed. Cloud sessions only: the hook is silent elsewhere.
+
+How: on each typed prompt, the hook asks Claude to schedule a `send_later` message 50 minutes
+ahead, unless one is pending. When it fires, the script checks the last prompt's time: idle ->
+handoff; active -> schedule the next one. Design and limits:
+[`docs/research/2026-11-23-idle-handoff-hook.md`](docs/research/2026-11-23-idle-handoff-hook.md).
+
+To enable it in another repo:
+
+1. Copy `templates/hooks/idle-handoff.sh` to `.claude/hooks/idle-handoff.sh`, executable. Not
+   self-updating: re-copy it when it changes.
+2. Keep the `UserPromptSubmit` entry of `templates/settings.json` in `.claude/settings.json`.
+3. Keep the `Cloud idle timer` rule of `CLAUDE.md` loaded (step 4 above does it). Without it, Claude
+   ignores the hook's reminder.

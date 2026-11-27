@@ -23,14 +23,6 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   - [ ] dated-names-on-handoffs
   - [ ] backlog-trigger-haiku
 
-### consumer-setup: Let another repository adopt this repository's hooks
-- **Goal:** a consumer repository gets the useful hooks and can enable them by following the README.
-- **Done when:**
-  - [ ] each hook under `templates/hooks/` has its enabling steps in `README.md`, matching `templates/settings.json`
-- **Tasks:**
-  - [x] warn-push-base-behind
-  - [ ] readme-idle-handoff
-
 ## Tasks
 
 ### dated-names-on-handoffs: Make dated names fire on handoffs and on notes beside undated ones
@@ -117,16 +109,6 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   - [ ] `write-guide` has the section: intuition -> analogy -> formalism, glossary, worked example, check questions
   - [ ] it says when to produce the interactive HTML page and where to version it
   - [ ] both Intelligence rows read `applied` with this PR
-
-### readme-idle-handoff: Feature the idle handoff in the README for other repositories
-- **Status:** ready
-- **Context:** the owner finds the idle handoff worth showcasing: after 50 min without a user message, a cloud session writes a handoff and sends it to the owner's phone. Built in PR #141 (`templates/hooks/idle-handoff.sh`, `docs/research/2026-11-23-idle-handoff-hook.md`). Consumers must copy the script by hand today (README step 2); other projects are a possible audience.
-- **Next:** read `README.md`, then draft a short section: what it does, the cloud-only condition, the `send_later` chain in two lines, how to enable it, and a link to the research note. Offer where it sits (README section or separate page) as a structuring choice.
-- **Done when:**
-  - [ ] `README.md` has a section that a reader outside this repo can follow to enable the mechanism
-  - [ ] it links the design note instead of restating it
-  - [ ] the install steps match `templates/settings.json` and the README's consumer steps
-- **Out of scope:** local CLI handoff (`obie/auto-handoff`); changing the hook.
 
 ### process-open-retrospective-rows: Process the open tool-blocked rows of RETROSPECTIVE.md
 - **Status:** ready
