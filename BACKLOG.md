@@ -25,7 +25,7 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
 ## Tasks
 
 ### dated-names-on-handoffs: Make dated names fire on handoffs and on notes beside undated ones
-- **Status:** in progress (ccr-16754c36-i64v4m)
+- **Status:** needs owner: rerun P3 and N4 under `claude -p`?
 - **Context:** the `Behavior` dated-names rule passed 8/8 on 2026-11-16 (`docs/evidence/dated-notes/`).
   Rerun 2026-11-22 (Sonnet 5.5, old and new wording alike): P3 handoff saved as
   `handoff-<slug>.md` in the scratchpad, N4 meeting note as `reunion-2026-11-22.md` beside undated
@@ -34,7 +34,12 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   merged here, its calibration demoted to a by-product: the `claude -p` reference on the current
   wording is 5 runs on 3 cases (P3 0/2, N2 1/1, N4 0/2), enough to catch a gross gap only. Cases as
   `plugin eval` cases: `docs/evidence/dated-notes/make-cases.sh` (graders unchecked: read P3's Write path by hand).
-- **Next:** `test-rule-change.py` preflight and run on the current `CLAUDE.md`, Sonnet 5.5, 3 runs per case.
+  2026-11-27 `plugin eval` run, current `CLAUDE.md`, 3 runs per case
+  (`docs/evidence/dated-notes/ab-2026-11-27/`): 7 cases 3/3, N3 0/3 on a stale expectation (`0001-`
+  came from `domain-modeling`, no longer installed; ADRs still numbered, undated). P3 and N4 6/6
+  vs 0/4 under `claude -p` on 2026-11-22: harness, version or scratchpad, unexplained.
+- **Next:** owner decides whether to rerun P3 and N4 under `claude -p` today (`run.sh`, 3 runs each)
+  to tell a harness gap from a change since 2026-11-22.
 - **Done when:**
   - [ ] miss rate measured on all 8 cases
   - [ ] a fix chosen by the owner (rule wording, a naming line in `handoff`, or no change)

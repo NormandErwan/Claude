@@ -1,0 +1,831 @@
+{
+  "schemaVersion": 1,
+  "claudeVersion": "2.1.332",
+  "startedAt": "2026-11-27T18:13:59.942Z",
+  "durationSeconds": 167,
+  "costUsd": 3.7722453,
+  "partial": false,
+  "suite": {
+    "root": "/tmp/claude-0/-home-user-Claude/c0fb7b46-4420-5fee-b4cc-6d6c7dca13b5/scratchpad/dn/arms/current",
+    "ablation": "none",
+    "modelOverride": "claude-sonnet-5-5",
+    "threshold": 1,
+    "concurrency": 3,
+    "plugins": [
+      {
+        "name": "current",
+        "version": "0.0.0",
+        "path": "/tmp/claude-0/-home-user-Claude/c0fb7b46-4420-5fee-b4cc-6d6c7dca13b5/scratchpad/dn/arms/current"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "D1",
+      "dir": "evals/D1",
+      "source": "mixed",
+      "promptMarkdown": "Consigne dans le dépôt le rapport du test de charge d'aujourd'hui sur le service des paniers (cart) : 300 utilisateurs simultanés pendant 5 minutes, p95 à 140 ms, p99 à 310 ms, aucune erreur.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 40,
+      "graders": [
+        {
+          "name": "doc-name",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "files",
+            "pattern": "(^|/)cart-load-test\\.md$",
+            "flags": "m",
+            "match": "contains"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 8,
+            "costUsd": 0.15487830000000002,
+            "judgeCostUsd": 0,
+            "durationSeconds": 15,
+            "startedAt": "2026-11-27T18:14:00.009Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-1iIAvy/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "doc-name",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)cart-load-test\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 10,
+            "costUsd": 0.1623802,
+            "judgeCostUsd": 0,
+            "durationSeconds": 16,
+            "startedAt": "2026-11-27T18:14:00.010Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-0KKRz2/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "doc-name",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)cart-load-test\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 6,
+            "costUsd": 0.1344694,
+            "judgeCostUsd": 0,
+            "durationSeconds": 14,
+            "startedAt": "2026-11-27T18:14:00.010Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-02j0IJ/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "doc-name",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)cart-load-test\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1
+      }
+    },
+    {
+      "name": "N1",
+      "dir": "evals/N1",
+      "source": "mixed",
+      "promptMarkdown": "Rédige le post-mortem de l'incident d'hier dans docs/postmortems/ : le cache Redis a saturé sa mémoire (maxmemory atteint, politique noeviction), les ajouts au panier ont échoué pendant 25 minutes, corrigé en passant à allkeys-lru.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 40,
+      "graders": [
+        {
+          "name": "numbered",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "files",
+            "pattern": "(^|/)003-[^/]*\\.md$",
+            "flags": "m",
+            "match": "contains"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 6,
+            "costUsd": 0.1484479,
+            "judgeCostUsd": 0,
+            "durationSeconds": 22,
+            "startedAt": "2026-11-27T18:14:13.839Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-cpawuR/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "numbered",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)003-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 6,
+            "costUsd": 0.14506929999999998,
+            "judgeCostUsd": 0,
+            "durationSeconds": 19,
+            "startedAt": "2026-11-27T18:14:14.769Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-8NymnL/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "numbered",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)003-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 6,
+            "costUsd": 0.1551763,
+            "judgeCostUsd": 0,
+            "durationSeconds": 24,
+            "startedAt": "2026-11-27T18:14:16.111Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-Xe9QsW/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "numbered",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)003-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1
+      }
+    },
+    {
+      "name": "N2",
+      "dir": "evals/N2",
+      "source": "mixed",
+      "promptMarkdown": "Ajoute dans docs/ un guide d'installation du projet : Python 3.12, `pip install -r requirements.txt`, PostgreSQL 16 et Redis 7 en local, variables DATABASE_URL et REDIS_URL, puis `flask run`.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 40,
+      "graders": [
+        {
+          "name": "undated",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "files",
+            "pattern": "(^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+            "flags": "m",
+            "match": "not_contains"
+          }
+        },
+        {
+          "name": "wrote-md",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "files",
+            "pattern": "\\.md$",
+            "flags": "m",
+            "match": "contains"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 5,
+            "costUsd": 0.11765789999999998,
+            "judgeCostUsd": 0,
+            "durationSeconds": 17,
+            "startedAt": "2026-11-27T18:14:34.121Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-1KmL0o/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "undated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "pattern absent as expected",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "wrote-md",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 10,
+            "costUsd": 0.1935367,
+            "judgeCostUsd": 0,
+            "durationSeconds": 26,
+            "startedAt": "2026-11-27T18:14:35.714Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-2ipotu/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "undated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "pattern absent as expected",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "wrote-md",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 7,
+            "costUsd": 0.1410591,
+            "judgeCostUsd": 0,
+            "durationSeconds": 20,
+            "startedAt": "2026-11-27T18:14:39.891Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-EsIX34/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "undated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "pattern absent as expected",
+                "withOnly": false,
+                "scored": true
+              },
+              {
+                "name": "wrote-md",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched \\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1
+      }
+    },
+    {
+      "name": "N3",
+      "dir": "evals/N3",
+      "source": "mixed",
+      "promptMarkdown": "Enregistre sous forme d'ADR la décision qu'on vient de prendre : on garde Redis comme cache des paniers plutôt que Memcached, parce qu'on a besoin des TTL par clé et de la persistance au redémarrage.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 40,
+      "graders": [
+        {
+          "name": "numbered",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "files",
+            "pattern": "(^|/)0001-[^/]*\\.md$",
+            "flags": "m",
+            "match": "contains"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 8,
+            "costUsd": 0.1612394,
+            "judgeCostUsd": 0,
+            "durationSeconds": 20,
+            "startedAt": "2026-11-27T18:14:50.931Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-aBZNv1/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "numbered",
+                "passed": false,
+                "weight": 1,
+                "explanation": "pattern not found in files",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 11,
+            "costUsd": 0.17299279999999997,
+            "judgeCostUsd": 0,
+            "durationSeconds": 23,
+            "startedAt": "2026-11-27T18:15:00.057Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-4tfgZx/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "numbered",
+                "passed": false,
+                "weight": 1,
+                "explanation": "pattern not found in files",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 9,
+            "costUsd": 0.16739410000000002,
+            "judgeCostUsd": 0,
+            "durationSeconds": 23,
+            "startedAt": "2026-11-27T18:15:01.458Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-wStiSt/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "numbered",
+                "passed": false,
+                "weight": 1,
+                "explanation": "pattern not found in files",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 0,
+        "passRate": 0
+      }
+    },
+    {
+      "name": "N4",
+      "dir": "evals/N4",
+      "source": "mixed",
+      "promptMarkdown": "Ajoute dans docs/notes/ une note qui résume la réunion de ce matin : on passe le TTL des paniers à 72 h, on ajoute un index sur orders.created_at, et Paul reprend le ticket des remboursements partiels.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 40,
+      "graders": [
+        {
+          "name": "dated",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "files",
+            "pattern": "(^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+            "flags": "m",
+            "match": "contains"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 6,
+            "costUsd": 0.13556630000000003,
+            "judgeCostUsd": 0,
+            "durationSeconds": 16,
+            "startedAt": "2026-11-27T18:15:10.542Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-gQb9a8/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 7,
+            "costUsd": 0.14490509999999998,
+            "judgeCostUsd": 0,
+            "durationSeconds": 18,
+            "startedAt": "2026-11-27T18:15:22.689Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-WAZj5E/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 7,
+            "costUsd": 0.1424451,
+            "judgeCostUsd": 0,
+            "durationSeconds": 17,
+            "startedAt": "2026-11-27T18:15:24.319Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-dUVPCw/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1
+      }
+    },
+    {
+      "name": "P1",
+      "dir": "evals/P1",
+      "source": "mixed",
+      "promptMarkdown": "Écris dans docs/ une note de recherche qui résume ce qu'on a trouvé sur les bibliothèques de rate limiting pour Flask : flask-limiter est maintenu et gère Redis comme stockage ; slowapi ne vise que FastAPI ; une implémentation maison avec INCR et EXPIRE sur Redis tient en 30 lignes. Notre recommandation : flask-limiter.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 40,
+      "graders": [
+        {
+          "name": "dated",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "files",
+            "pattern": "(^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+            "flags": "m",
+            "match": "contains"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 9,
+            "costUsd": 0.18475439999999999,
+            "judgeCostUsd": 0,
+            "durationSeconds": 25,
+            "startedAt": "2026-11-27T18:15:26.693Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-bGPEnC/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 10,
+            "costUsd": 0.17248349999999998,
+            "judgeCostUsd": 0,
+            "durationSeconds": 23,
+            "startedAt": "2026-11-27T18:15:40.380Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-77x2s8/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 14,
+            "costUsd": 0.2153844,
+            "judgeCostUsd": 0,
+            "durationSeconds": 29,
+            "startedAt": "2026-11-27T18:15:41.783Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-NciURC/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1
+      }
+    },
+    {
+      "name": "P2",
+      "dir": "evals/P2",
+      "source": "mixed",
+      "promptMarkdown": "Consigne dans le dépôt le rapport du test de charge d'aujourd'hui : 500 utilisateurs simultanés pendant 10 minutes, p95 à 180 ms, p99 à 420 ms, 0,2 % d'erreurs 502 toutes pendant le redémarrage de Redis à la minute 6.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 40,
+      "graders": [
+        {
+          "name": "dated",
+          "type": "regex",
+          "weight": 1,
+          "config": {
+            "target": "files",
+            "pattern": "(^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+            "flags": "m",
+            "match": "contains"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 7,
+            "costUsd": 0.13841779999999998,
+            "judgeCostUsd": 0,
+            "durationSeconds": 16,
+            "startedAt": "2026-11-27T18:15:51.845Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-OUMHkN/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 10,
+            "costUsd": 0.16823280000000002,
+            "judgeCostUsd": 0,
+            "durationSeconds": 19,
+            "startedAt": "2026-11-27T18:16:03.307Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-Wg86Ed/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 9,
+            "costUsd": 0.1675682,
+            "judgeCostUsd": 0,
+            "durationSeconds": 19,
+            "startedAt": "2026-11-27T18:16:07.681Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-pIC1o0/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "matched (^|/)\\d{4}-\\d{2}-\\d{2}-[^/]*\\.md$",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1
+      }
+    },
+    {
+      "name": "P3",
+      "dir": "evals/P3",
+      "source": "mixed",
+      "promptMarkdown": "On a fini de migrer le cache des paniers vers Redis et les tests unitaires passent. Il reste à écrire les tests de charge et à documenter la configuration. Fais un handoff, je reprends demain.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 40,
+      "graders": [
+        {
+          "name": "dated",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Write",
+            "input_match": "\"file_path\"\\s*:\\s*\"[^\"]*/\\d{4}-\\d{2}-\\d{2}-[^\"/]*\\.md\""
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 8,
+            "costUsd": 0.1453606,
+            "judgeCostUsd": 0,
+            "durationSeconds": 18,
+            "startedAt": "2026-11-27T18:16:10.677Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-w3m04z/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Write called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 8,
+            "costUsd": 0.15328000000000003,
+            "judgeCostUsd": 0,
+            "durationSeconds": 21,
+            "startedAt": "2026-11-27T18:16:21.900Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-GaELLJ/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Write called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 8,
+            "costUsd": 0.1495457,
+            "judgeCostUsd": 0,
+            "durationSeconds": 21,
+            "startedAt": "2026-11-27T18:16:26.308Z",
+            "error": null,
+            "tracePath": "/root/.cache/claude-eval-tmp/claude-eval-KLXpEP/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "dated",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Write called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1
+      }
+    }
+  ],
+  "aggregates": {
+    "casesTotal": 8,
+    "casesPassed": 7,
+    "overallScore": 0.875,
+    "overallPassRate": 0.875
+  }
+}
