@@ -83,7 +83,7 @@ In the consumer repo:
    | Home Assistant config editing | `homeassistant-ai/skills home-assistant-best-practices` |
 
 `.claude/settings.json`, `.claude/hooks/session-start.sh` and `.claude/hooks/idle-handoff.sh`
-are the whole consumer-side infra - nothing else from this repo belongs there. This
+are the whole consumer-side infra (conflict probe) - nothing else from this repo belongs there. This
 repo's own `README.md`, `CLAUDE.web.md`, and `SKILLS.md` stay here only
 (`CLAUDE.web.md` and the skills `SKILLS.md` marks `Web` are uploaded by hand to claude.ai).
 
