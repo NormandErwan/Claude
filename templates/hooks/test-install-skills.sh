@@ -70,5 +70,17 @@ PATH="$T/bin:$PATH" SKILLS_DOWNLOAD_URL=http://127.0.0.1:9 SKILLS_GIT_BASE="file
 check "\`*\` unlisted: reported" grep -q "could not list example/missing" "$T/out3"
 check "\`*\` unlisted: nothing pruned" test -f "$T/claude/skills/stale/SKILL.md"
 
+# Both manifests with CRLF (Windows checkout): names lose the \r.
+for s in crlf crlfrepo; do
+  mkdir -p "$T/proj" "$T/claude/skills/$s" && echo "---" >"$T/claude/skills/$s/SKILL.md"
+done
+printf 'example/repo crlfrepo\r\n' >"$T/repo/skills.txt"
+printf '# comment\r\nexample/other crlf\r\n' >"$T/proj/skills.txt"
+PATH="$T/bin:$PATH" SKILLS_DOWNLOAD_URL=http://127.0.0.1:9 CLAUDE_PROJECT_DIR="$T/proj" \
+  bash "$T/repo/templates/hooks/install-skills.sh" "$T/claude" >"$T/out4" 2>&1
+check "CRLF consumer manifest: failed skill keeps last session's copy" test -f "$T/claude/skills/crlf/SKILL.md"
+check "CRLF repo manifest: failed skill keeps last session's copy" test -f "$T/claude/skills/crlfrepo/SKILL.md"
+check "CRLF manifests: names reported without CR" grep -q "failed to install: crlfrepo crlf\. See" "$T/out4"
+
 echo "pass=$pass fail=$fail"
 [ "$fail" -eq 0 ]
