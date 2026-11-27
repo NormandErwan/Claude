@@ -80,3 +80,22 @@ to `docs/notes/`.
 - Side effects: both N4 sessions committed to the throwaway branch, one pushed; three asked for
   permission to arm their idle timer and stalled on it. Cost seen: $0.19 for one P3 session
   (`get_session` `usage.cost_usd`; the others were archived before finishing their turn).
+
+## Real cloud sessions on the fixture itself
+
+Same as above, but each session started on an orphan branch holding exactly the `claude -p` workspace:
+`../fixture/` plus the case setup, `.claude/CLAUDE.md` (this repo's at `836e797`), a
+`.claude/settings.json` whose only hook runs the skills installer, kept under `.claude/harness/`
+(`test/dn-real-p3` `19b9016`, `test/dn-real-n4` `53e8f32`). File names read by a subagent from
+`list_events`.
+
+| Case | Fixture sessions | Files |
+|---|---|---|
+| P3 | 2/2 | `<scratchpad>/2026-11-27-handoff-cache-paniers-redis.md` (x2) |
+| N4 | 2/2 | `docs/notes/2026-11-27-reunion-decisions.md` (x2, Write and Bash heredoc) |
+
+- Same workspace as `claude -p`, opposite result (4/4 vs 0/6): the repo content was not what made
+  real sessions pass. The gap sits in how `claude -p` is run (`run.sh`: `-p`, fresh
+  `CLAUDE_CONFIG_DIR`, unset session variables, `--allowedTools`, `acceptEdits`), not yet isolated.
+- Cost: $0.93 for the four sessions ($0.20-0.27 each). Both N4 sessions committed and pushed to their
+  branch; one asked for a PR base, one reset its own local commit after a rebase conflict.

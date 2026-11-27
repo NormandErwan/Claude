@@ -42,9 +42,9 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
   handoff in the scratchpad), N4 0/3 (`reunion-2026-11-27.md`: dated as a suffix): the miss holds
   in real sessions; `plugin eval` misses it (task `plugin-eval-fidelity-gap`). N3 expectation now
   any undated numbering. Real cloud sessions (`create_session`, Sonnet 5.5), 2026-11-27: P3 2/2,
-  N4 2/2 dated, in this repo rather than the fixture. Both misses come from `claude -p` only.
-- **Next:** owner decides: close with no change (real sessions and `plugin eval` pass), or more real
-  sessions on the fixture itself first.
+  N4 2/2 dated, in this repo; then on orphan branches holding exactly the `claude -p` workspace,
+  P3 2/2, N4 2/2. Both misses come from `claude -p` only.
+- **Next:** owner decides whether to close with no change (real sessions 8/8, `plugin eval` 6/6).
 - **Done when:**
   - [ ] miss rate measured on all 8 cases (P3, N4 under `claude -p`; the other 6 only under `plugin eval`)
   - [ ] a fix chosen by the owner (rule wording, a naming line in `handoff`, or no change)
@@ -55,14 +55,16 @@ Work not done yet, one `###` section per plan or task. Format and rules: the `ba
 - **Context:** `CONTRIBUTING.md` makes `test-rule-change.py` (`claude plugin eval`, `CLAUDE.md`
   injected by a hook) the default runner for rule tests. 2026-11-27, same day, version, model and
   rule: dated-notes P3 and N4 pass 6/6 under `plugin eval`, 0/6 under `claude -p`, 4/4 in real
-  cloud sessions started with `create_session` (`docs/evidence/dated-notes/ab-2026-11-27/README.md`):
-  `claude -p`, the fallback `CONTRIBUTING.md` keeps for a real `CLAUDE.md`'s framing, is the outlier. First calibration (2026-11-16,
+  cloud sessions started with `create_session`, 4/4 again on the exact `claude -p` workspace
+  (`docs/evidence/dated-notes/ab-2026-11-27/README.md`): `claude -p`, the fallback `CONTRIBUTING.md`
+  keeps for a real `CLAUDE.md`'s framing, is the outlier, from how `run.sh` launches it. First calibration (2026-11-16,
   `docs/evidence/ab-harness-calibration/`) left an unexplained 17/30 vs 23/30. Candidates: the cloud
   system prompt the `claude -p` child inherits (scratchpad, `SendUserFile`), absent in `plugin eval`;
   the hook-injected framing of `CLAUDE.md`. Results resting on `plugin eval`: drift rule 10/10
   (`PROVENANCE.md` 2026-11-22 Behavior row).
-- **Next:** real sessions on the dated-notes fixture itself (a throwaway branch holding only it),
-  to tell the runner from the repo; then the same on one drift case.
+- **Next:** rerun P3 under `claude -p` dropping one `run.sh` difference at a time (fresh
+  `CLAUDE_CONFIG_DIR`, unset session variables, `--allowedTools`/`acceptEdits`); then one drift case
+  in real sessions vs `plugin eval`.
 - **Done when:**
   - [ ] the runner whose results match real sessions on these cases named, with its runs
   - [ ] `CONTRIBUTING.md`'s runner choice kept or changed by the owner, and the drift rule's result
