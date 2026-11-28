@@ -74,6 +74,15 @@ These come from style guides, or from the completeness sweep (the research file'
 
 The "avoid / write" pair of each rule is written from the baseline pilot's outputs: a real defect, then its fix.
 
+Clauses borrowed from existing skills (see "Existing skills" below), under the same condition:
+
+- A PR body does not restate what the tool already shows (commit list, file list); an empty section becomes one line, such as "Nothing to run." (`zh10only1/pr-description`) -> `nothing-extra`.
+- State each fact once and link to it; no recap at the end (`tomdale/inside-mac`) -> `nothing-extra`.
+- Name the source or cut the claim (`surendranb/writing-skills`, `de-ai`) -> `provenance`.
+- The outside reviewer first predicts the reader's 5 to 10 questions, then checks the document answers them (`anthropics/skills`, `doc-coauthoring`) -> `outside-reviewer`.
+- Over-editing is a failure too: a rewrite keeps every sentence that breaks no rule (`tw93/Waza`, `write`) -> `recheck-rewrites`.
+- Do not open with a count of points ("Two cautions.") (`docwriter-org/plain-writing-skill`, rule 25) -> `answer-first`.
+
 ### Moves out of this skill
 
 - Code shown as working but never run is labelled "untested": already in `verify-sources`.
@@ -138,6 +147,20 @@ A separate set of prompts checks that the skill loads when an agent is asked for
 
 1. **Baseline pilot, before the skill is written:** each task without the skill, twice, judged against success criterion 1. The pilot also gives the cost of a run.
 2. **Full run, once the skill is written:** 4 tasks x 2 arms x 3 runs = 24 outputs. The pilot's cost decides whether more runs per arm are affordable.
+
+## Existing skills
+
+A search on 2026-11-28 (installed skills, the claude.ai skill search, skills.sh, `anthropics/skills`, GitHub, the Web) found no skill covering these rules, so this skill is built rather than adopted. The closest ones each cover one layer:
+
+| Skill | Covers | Why not adopted |
+|---|---|---|
+| `docwriter-org/plain-writing-skill` | prose style, 25 rules with before/after pairs | its rule 12 ("prefer long, explanatory sentences") contradicts `one-idea`; its eval (67 tasks, skill won 65) grades against its own rules with the same model as writer and judge |
+| `daniel-p-green/nbj-write-clearly` | developer docs after the Google style guide | sentence level only; tested on 3 requests with no no-skill arm |
+| `surendranb/writing-skills` | 21 style and voice skills | style frameworks, no structure or decision rules; no eval results |
+| `anthropics/skills` `doc-coauthoring` | a workflow for specs and decision documents | a co-writing process, not rules for every genre |
+| `tomdale/inside-mac` | developer documentation books | one genre |
+
+The clauses worth borrowing are listed under "Candidate clauses".
 
 ## Project structure
 
