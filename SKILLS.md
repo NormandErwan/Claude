@@ -47,6 +47,7 @@ slip through.
 | token-codebase-exploration | native | no | - | - | - |
 | token-file-ops | native | no | - | - | - |
 | verify-sources | native | yes | 1.5.2 | `b0f58f410a` | - |
+| write-documents | native | no | - | - | - |
 | write-french | native | yes | 1.6.2 | `4819020894` | - |
 | write-guide | native | no | - | - | - |
 | api-and-interface-design | skills.txt `addyosmani/agent-skills` | no | - | - | - |
