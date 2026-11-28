@@ -7,7 +7,7 @@ Evidence and full citations: `2026-11-28-principles-research.md` in this folder.
 ## Objective
 
 - **What:** a foundation skill for writing output documents - PR bodies, GitHub comments, READMEs, documentation, guides, research reports, handoffs, knowledge-base pages. "Genre" below means one of these kinds of document.
-- **Why:** these documents run too long for what they deliver, and their text is poorly structured. Chat replies work well and are out of scope. A cut-words rule lost 2 of 4 evals in a blind A/B test, because writers stacked a second claim onto a sentence instead of cutting (`RETROSPECTIVE.md` 2026-08-30).
+- **Why:** these documents run too long for what they deliver, and their text is poorly structured. Chat replies work well and are out of scope. A reader-clarity rule ("don't cut a word the reader needs") lost 2 of 4 evals in a blind A/B test and tied a third. It never forbade fusing a second claim onto a sentence, and writers did (`RETROSPECTIVE.md` 2026-08-30).
 - **Reader of the skill:** an agent about to write a document of one of these genres.
 - **Goal for the document's reader**, after the four principles of ISO 24495-1 (plain language): they get what they need, find it, understand it and can use it.
 
@@ -25,7 +25,7 @@ Each rule has a short id, used by the grid below. The four groups follow the ord
 
 | Id | Rule | Source |
 |---|---|---|
-| `answer-first` | Name the document's one question and its one reader. Lead with the answer or the conclusion. Give reasoning only where it changes the reader's decision. | `write-guide` gates 1-2; Google Technical Writing One, "Documents"; Microsoft top 10 tips, "Get to the point fast" |
+| `answer-first` | Name the document's one question and its one reader. Lead with the answer or the conclusion; in a guide or a README, the answer is what the thing does and what the reader does first. Give reasoning only where it changes the reader's decision. | `write-guide` gates 1-2; Google Technical Writing One, "Documents"; Microsoft top 10 tips, "Get to the point fast" |
 | `scope` | A guide or a design document states what it covers and what it does not. | Google Technical Writing One, "Documents"; `write-guide` |
 
 ### 2. Content and form
@@ -33,8 +33,8 @@ Each rule has a short id, used by the grid below. The four groups follow the ord
 | Id | Rule | Source |
 |---|---|---|
 | `self-contained` | The document holds what the reader needs to understand it and act on it. What to do goes in the document; how a mechanism works goes behind a link. Test: reread the document ignoring every link; a sentence that stops making sense is rewritten. A pure reference page (a command cheat sheet, a service inventory) is exempt. | Google style guide, cross-references; Diátaxis; `capturer-connaissance` "Page autoporteuse"; `RETROSPECTIVE.md` 2026-11-27 |
-| `nothing-extra` | Cut what does not serve the document's question, and no commentary on the research or the writing. A document kept current (README, docs, knowledge-base page, skill) holds no history, past incident or snapshot of the day; a dated document may. Never cut a word a sentence needs: concision is counted in ideas, not words. | Mayer, coherence principle; Intelligence `RETROSPECTIVE.md` 2026-09-19, 2026-10-24, 2026-10-27; `RETROSPECTIVE.md` 2026-08-30 |
-| `provenance` | A number, or a claim that supports a decision or a recommendation, carries its provenance as a half-sentence in place ("measured on one excerpt"), which also says why it has that strength. Keep a source's strength and give sample sizes. A number that will age keeps what the reader needs in the text, such as its order of magnitude, with the date it was read and a link to its live source. A choice that departs from the project's default says why. | `write-guide`, provenance in place; `RETROSPECTIVE.md` 2026-08-24, 2026-09-22, 2026-11-03, 2026-11-22; owner decisions |
+| `nothing-extra` | Cut what does not serve the document's question. Leave out commentary on the research or the writing; a provenance half-sentence is not commentary. A document kept current (README, docs, knowledge-base page, skill) holds no history, past incident or snapshot of the day; a dated document may. Never cut a word a sentence needs: concision is counted in ideas, not words. | Mayer, coherence principle; Intelligence `RETROSPECTIVE.md` 2026-09-19, 2026-10-24, 2026-10-27; `RETROSPECTIVE.md` 2026-08-30 |
+| `provenance` | A number the document keeps, or a claim that supports a decision or a recommendation, carries its provenance as a half-sentence in place ("measured on one excerpt"), which also says why it has that strength. Keep a source's strength, give sample sizes, and claim nothing beyond the evidence. A number that will age keeps what the reader needs in the text, such as its order of magnitude, with the date it was read and a link to its live source. A choice that departs from the project's default says why. | `write-guide`, provenance in place; `RETROSPECTIVE.md` 2026-08-24, 2026-09-22, 2026-11-03, 2026-11-22; owner decisions |
 | `decision-context` | A document asking for a decision opens with one line giving the question and the recommendation, then recalls the context - incident, goal, stake, history, rule in force - then gives the options. | `RETROSPECTIVE.md` 2026-11-03, 2026-11-27; owner decision |
 | `examples` | An abstract rule or notion is followed by a short concrete example. A rule about writing or behavior gets an "avoid / write" pair. An explanation shows one case worked end to end: key terms, then intuition, then the formal statement. | Microsoft top 10 tips (each tip has a "Replace this / With this" pair); Write the Docs, "Exemplary"; `write-guide`; owner decision |
 | `form-by-use` | Choose the form by what the reader must do with the content. Prose carries an argument read in order. When the reader must compare items, see a trend or a distribution, follow a sequence, see how parts connect or recognize something visual, a table or a figure shows it at once. Examples: exact values -> table; data, raw or aggregated, whose shape matters -> chart; steps -> numbered list or flowchart; architecture -> diagram; interface -> screenshot or mock-up. Labels sit on the figure itself. A figure goes when it distracts from the point. | Mayer, multimedia, spatial contiguity and coherence principles; Bateman et al. 2010; owner decision |
@@ -51,26 +51,28 @@ Each rule has a short id, used by the grid below. The four groups follow the ord
 | Id | Rule | Source |
 |---|---|---|
 | `obey-own-rules` | A document that states rules obeys them, its examples and format included. | `RETROSPECTIVE.md` 2026-08-24, 2026-08-30 |
-| `dated-names` | A document whose content no longer changes (research, test report, handoff, synthesis) is named `YYYY-MM-DD-<slug>.md`, unless a written instruction or a numbered sequence in the directory names it otherwise. Moved here from `CLAUDE.md` (owner decision). | `CLAUDE.md` Behavior |
+| `dated-names` | A document whose content no longer changes (research, test report, handoff, synthesis) is named `YYYY-MM-DD-<slug>.md`, unless a written instruction or a numbered sequence in the directory names it otherwise. | `CLAUDE.md` Behavior |
 | `recheck-rewrites` | After any rewrite, re-check the rewritten text against every rule. | `RETROSPECTIVE.md` 2026-08-25, 2026-08-30 |
-| `outside-reviewer` | Before delivery, a reader who did not write the text reviews it, because a writer cannot see its own jargon. With no way to start a reviewer, say the review was not done. | `write-french/evidence.md`, known limit; Google Technical Writing One, "Audience" |
+| `outside-reviewer` | Before delivery, a reader who did not write the text reviews it, because a writer cannot see its own jargon. With no way to start a reviewer, say so in the reply, not in the document. | `write-french/evidence.md`, known limit; Google Technical Writing One, "Audience" |
 
 ### Priority
 
-- **Between rule sources:** the repo's own rules (`CLAUDE.md`, `CONTRIBUTING.md`) first, then the genre's skill (`write-french`, `write-guide`, `capturer-connaissance`), then this skill. The more specific rule wins.
-- **Inside this skill:** a rule that keeps the reader able to understand or act wins over a rule that shortens the text. Example: a gloss stays even when it lengthens the sentence.
+- **Between rule sources:** the repo's own rules (`CLAUDE.md`, `CONTRIBUTING.md`) first, then the genre's skill (`write-french`, `write-guide`, `capturer-connaissance`), then this skill. The order decides; it never yields to how specific a rule is.
+- **Inside this skill:** a rule that keeps the reader able to understand or act wins over a rule that shortens the text. The rules that shorten are `nothing-extra` and the "no idea twice" part of `one-idea`. Example: a gloss stays even when it lengthens the sentence.
 
 ### Candidate clauses
 
-These come from style guides and no logged incident backs them. One joins the skill only if the baseline run shows an agent making that mistake (`CONTRIBUTING.md`: a rule earns its place with a logged incident).
+These come from style guides, or from the completeness sweep (the research file's mapping of every principle of six style guides to a rule), and no logged incident backs them. One joins the skill only if the baseline run shows an agent making that mistake (`CONTRIBUTING.md`: a rule earns its place with a logged incident).
 
 - Headings and lists, used sparingly (Mayer, signaling) -> `answer-first`.
-- One Diátaxis type per document: tutorial, how-to guide, reference or explanation (Diátaxis) -> `scope`.
+- One type per document, in the sense of Diátaxis (a documentation framework that keeps tutorials, how-to guides, reference and explanation apart) -> `scope`.
 - Link text that makes sense alone (Google) -> `self-contained`.
 - Known information before new; say who acts (Gopen & Swan; completeness sweep) -> `one-idea`.
 - One term per concept (Google) -> `define-terms`.
 - Alt text for every image (completeness sweep) -> `form-by-use`.
 - Code, commands and paths in code formatting; fixed words for obligation (must, should, can); the condition before the instruction; unambiguous dates (completeness sweep).
+
+The "avoid / write" pair of each rule is written from the baseline pilot's outputs: a real defect, then its fix.
 
 ### Moves out of this skill
 
@@ -84,15 +86,22 @@ A blind A/B benchmark: the same tasks run with and without the skill, and a grad
 
 ### Runner
 
-`claude plugin eval`, as `CONTRIBUTING.md` requires. Its `with-without` mode compares a plugin holding the skill against no plugin, and it isolates every run from `CLAUDE.md` and from the user's own skills (`docs/research/2026-11-16-ab-test-harness.md`). Not headless `claude -p`: it disagreed with real sessions on the same workspace (`docs/research/2026-11-27-test-runner-fidelity.md`). Before the scored runs, one probe run per arm checks that only the treatment arm sees the skill. Model: Opus, the model real sessions use here. Graders: `plugin eval`'s `llm` graders (2 of 3 votes) read only the output file, never the transcript.
+`claude plugin eval`, the runner `CONTRIBUTING.md` names. Its wrapper `test-rule-change.py` is not used: it exists to inject a `CLAUDE.md` arm, and this benchmark has none.
+
+- **Packaging:** a plugin folder holding the skill under `skills/write-documents/`, and one case per task under `evals/<task>/`: a `prompt.md` and one file per grader in `graders/`.
+- **Arms:** `--ablation with-without` compares the plugin with no plugin. The baseline pilot runs before the skill exists, with the same plugin minus its `skills/` folder and `--ablation none`.
+- **Isolation:** `plugin eval` isolates every run from `CLAUDE.md` and from the user's own skills (`docs/research/2026-11-16-ab-test-harness.md`). One probe run per arm checks that only the treatment arm sees the skill.
+- **Flags:** `--allow-tools Write` (an ungranted tool is removed from the run), `--keep-temp` (keeps each run's files and `trace.jsonl`), `--judge-model sonnet` (the default judge is Haiku, which failed correct outputs in an earlier run, same harness note). The cases do not grant the `Agent` tool.
+- **Model under test:** Opus.
+- **Why not headless `claude -p`:** it disagreed with real sessions on the same workspace (`docs/research/2026-11-27-test-runner-fidelity.md`).
 
 ### Grid
 
-Per task, `evals.json` lists which criteria apply; applicability never depends on the output. Each applying criterion passes or fails.
+Each task's case lists which criteria apply; applicability never depends on the output. Each applying criterion is one `llm` grader (2 of 3 votes, reading only the output file), whose rubric embeds the task's own facts as concrete pass and fail conditions. A check a pattern can decide, such as a table present, uses a `regex` grader instead.
 
 | Criterion | Passes when | Applies to |
 |---|---|---|
-| `completeness` | Every point of the task's checklist is present | all tasks |
+| `completeness` | Each point of the task's checklist is present; one grader per point | all tasks |
 | `answer-first` | The opening gives the answer or the conclusion | all tasks |
 | `scope` | Coverage and non-coverage are stated | t3 |
 | `self-contained` | Read ignoring every link, the document still makes sense; it does not restate how a linked mechanism works | all tasks |
@@ -101,19 +110,18 @@ Per task, `evals.json` lists which criteria apply; applicability never depends o
 | `decision-context` | One line with the question and the recommendation, then the context, then the options | t4 |
 | `examples` | Each abstract rule or notion has a concrete example; an explanation has one case worked end to end | t3 |
 | `form-by-use` | A table or a figure wherever the reader compares, follows or recognizes; labels on the figure | t3 |
-| `obey-own-rules` | The rules the document states are obeyed by the document | t3 |
 
-**Counted per 1000 words, not passed or failed:** sentences carrying several ideas (`one-idea`), as in `write-french/evidence.md`; references with no gloss at first use (`define-terms`).
+**Counted per 1000 words, not passed or failed:** sentences carrying several ideas (`one-idea`) and references with no gloss at first use (`define-terms`). An independent agent that does not know the arm counts them, as in `write-french/evidence.md`.
 
-**Length:** words per checklist point present. Example: a PR body of 600 words covering all 6 points gives 100; one of 360 words covering all 6 gives 60; one of 240 words covering 4 fails `completeness`.
+**Length:** words (`wc -w`) per checklist point present. Example: a PR body of 600 words covering all 6 points gives 100; one of 360 words covering all 6 gives 60; one of 240 words covering 4 fails `completeness`.
 
 **Checked in the transcript, reported apart, not blind:** `recheck-rewrites`, `outside-reviewer`.
 
-**Not benchmarked:** `dated-names` (checked by the dated-notes test, success criterion 5).
+**Not benchmarked:** `dated-names`, checked by the dated-notes test instead (the repo's test of that rule, in `docs/evidence/dated-notes/`); `obey-own-rules`, since no task's document states writing rules.
 
 ### Tasks
 
-Each prompt in `evals/tasks/` carries all its context inline, because an agent missing context describes the gap instead of writing (`RETROSPECTIVE.md` 2026-08-30). No prompt states the behavior the target criterion checks. Each task names one target criterion, the rule clause it follows from, and its `completeness` checklist in `evals.json` before any run.
+Each prompt in `evals/tasks/` carries all its context inline, because an agent missing context describes the gap instead of writing (`RETROSPECTIVE.md` 2026-08-30). No prompt states the behavior the target criterion checks. Before any run, each case names its target criterion, the rule clause it follows from, and its `completeness` checklist.
 
 | Task | Prompt | Source case | Target criterion |
 |---|---|---|---|
@@ -124,12 +132,12 @@ Each prompt in `evals/tasks/` carries all its context inline, because an agent m
 
 ### Trigger test
 
-A separate set of prompts checks that the skill loads when an agent is asked for a document of one of the genres above, and does not load for a chat reply. `plugin eval`'s `tool_used: Skill` grader records whether it fired. Method: `write-skill`, "Track 3 - Description Optimization".
+A separate set of prompts checks that the skill loads when an agent is asked for a document of one of the genres above, and does not load for a chat reply. `plugin eval`'s `tool_used: Skill` grader records whether it fired. The mix of should-load and should-not-load prompts follows `write-skill`'s trigger evals ("Track 3").
 
 ### Runs
 
-1. **Baseline pilot, before the skill is written:** each task without the skill, twice. Each task must fail its target criterion at least once; a task that never fails it is rewritten. The pilot also gives the cost of a run.
-2. **Full run, once the skill is written:** 4 tasks x 2 arms x 3 runs = 24 outputs. 3 runs per arm detects a shift from 0 or 1 of 3 to 3 of 3 on a target criterion, not a smaller effect; the pilot's cost decides whether more runs are affordable.
+1. **Baseline pilot, before the skill is written:** each task without the skill, twice, judged against success criterion 1. The pilot also gives the cost of a run.
+2. **Full run, once the skill is written:** 4 tasks x 2 arms x 3 runs = 24 outputs. The pilot's cost decides whether more runs per arm are affordable.
 
 ## Project structure
 
@@ -140,7 +148,7 @@ skills/write-documents/
   spec.md                                this file, deleted once SKILL.md and evidence.md hold its content
   2026-11-28-principles-research.md      research and owner decisions
   evals/tasks/                           benchmark prompts
-  evals/evals.json                       targets, applicable criteria, checklists
+  evals/<task>/                          plugin eval cases: prompt.md, graders/
 ```
 
 Benchmark runs go to the session's scratchpad; only aggregated results go in `evidence.md`.
@@ -148,7 +156,7 @@ Benchmark runs go to the session's scratchpad; only aggregated results go in `ev
 ## Boundaries
 
 - **Always:** follow `CONTRIBUTING.md` and `write-skill`; English for the skill and its files; French for replies to the owner; run the baseline pilot before writing the skill.
-- **Ask first:** changing a rule's meaning; moving content out of another skill beyond what this spec lists. Rewording a rule after the baseline pilot, to fix a failure it showed, needs no approval (`write-skill`, GREEN phase).
+- **Ask first:** changing a rule's meaning; moving content out of another skill beyond what this spec lists. Rewording a rule after the baseline pilot, to fix a failure it showed, needs no approval (owner decision).
 - **Never:** write `SKILL.md` before the owner approves this spec; score a run whose arm saw the other arm's instructions; give the grader the transcript.
 
 ## Success criteria
@@ -157,7 +165,7 @@ Benchmark runs go to the session's scratchpad; only aggregated results go in `ev
 2. On the full run, each task's target criterion passes at least 2 more times out of 3 with the skill than without it, and no other applying criterion loses more than 1 pass.
 3. On each task, words per checklist point fall with the skill, and no checklist point is lost.
 4. Sentences carrying several ideas and unglossed references, per 1000 words, do not rise with the skill.
-5. Once `dated-names` leaves `CLAUDE.md`, the dated-notes test passes in real sessions as often as before (2 of 2, `docs/research/2026-11-27-test-runner-fidelity.md`). An A/B test may confirm it; what counts is that the rule is followed with the skill (owner decision).
+5. `dated-names` leaves `CLAUDE.md` only once the trigger test shows the skill loads on research reports and handoffs. Then the dated-notes test, run in real sessions with the rule removed from `CLAUDE.md` and the skill installed, passes as often as before: 4 of 4 on each of its two cases, P3 and N4 (`docs/research/2026-11-27-test-runner-fidelity.md`). The owner allows an A/B test; what counts is that the rule is followed with the skill.
 6. The trigger test loads the skill on at least 8 of 10 document requests and on at most 1 of 10 chat requests. These thresholds are a first proposal, to confirm with the owner after the test is designed.
 7. `write-french`, `write-guide` and `capturer-connaissance` cite `write-documents` and keep only what is specific to them; `write-guide` writes provenance as a half-sentence and gains the rule on the reader's actions.
 8. After merge, a `test-run` row in `RETROSPECTIVE.md` tracks the owner's hand corrections for length or structure on the next 5 output documents. It passes with at most 1 such correction.

@@ -1,11 +1,19 @@
 I'm opening a pull request on our internal Python library `fetchkit` and need the PR description. Write it to `outputs/pr-body.md`.
 
 Background from my notes:
-- Last week the nightly `catalog-sync` job failed 4 times out of 7. Each time, the supplier API answered HTTP 429 (too many requests) during the burst at 02:00 and `fetchkit` raised immediately.
-- The supplier's status page, https://status.supplier.example/limits, gave the limit as 600 requests per minute when I looked on 2026-11-26.
-- I picked 3 retries because the 429 bursts in the logs never lasted more than about 2 seconds, and 0.5 s base delay doubling gives 0.5 + 1 + 2 = 3.5 s of total wait, which covers that.
-- Retrying a POST could create duplicate orders on the supplier side, so I left POST alone on purpose.
-- Tests pass locally (`pytest`, 41 passed).
+- Nightly `catalog-sync` runs last week: failed Mon, Tue, Thu, Sat; passed Wed, Fri, Sun.
+- Log excerpt from Tuesday's failure:
+  ```
+  02:00:03.112 GET /v2/items?page=41 -> 429
+  02:00:03.598 GET /v2/items?page=42 -> 429
+  02:00:04.870 GET /v2/items?page=43 -> 429
+  02:00:05.031 GET /v2/items?page=44 -> 200
+  02:00:05.032 catalog-sync aborted: HTTPError 429 on page 41
+  ```
+- Supplier rate limit: 600/min.
+- A retried POST could create a duplicate order on the supplier side.
+- `pytest`: 41 passed.
+- Supplier status page: https://status.supplier.example/limits (checked 2026-11-26).
 
 The diff:
 
