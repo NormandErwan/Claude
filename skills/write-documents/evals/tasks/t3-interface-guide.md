@@ -1,4 +1,4 @@
-Write a user guide for the "Run planner" screen of our internal lab tool, in English, to `outputs/run-planner-guide.md`. The readers are lab technicians who start using the tool next week. They know their instruments and their samples well. They have never planned a designed experiment, and they will use the guide alone at the bench, without anyone to ask.
+Write a user guide for the "Run planner" screen of our internal lab tool, to `outputs/run-planner-guide.md`. The readers are lab technicians who start using the tool next week. They know their instruments and their samples well. They have never planned a designed experiment.
 
 What the screen does: a technician lists the factors they want to vary (for example temperature, pressure, catalyst amount), gives each factor its low and high value, and the tool generates the list of runs to perform. The technician then runs them on the instrument, types each result into the table, and the tool shows which factors matter.
 
@@ -16,5 +16,6 @@ Number of runs each design generates, for k factors:
 
 Notes from the statistician who built it:
 - Randomize the run order unless the instrument physically cannot change a factor between runs (for example an oven that takes an hour to change temperature). A fixed order lets instrument drift during the day pass for a factor effect.
-- An "effect" is the average result at the high value minus the average result at the low value. Example from her test data, 3 factors full factorial, yield in %: the 4 runs at high temperature averaged 78 %, the 4 at low temperature 66 %, so the temperature effect is +12 points.
+- An "effect" is the average result at the high value minus the average result at the low value.
+- Her test data, 3 factors, full factorial, yield in %: (temperature, pressure, catalyst) = (low, low, low) 64; (high, low, low) 77; (low, high, low) 67; (high, high, low) 80; (low, low, high) 65; (high, low, high) 76; (low, high, high) 68; (high, high, high) 79.
 - Start with Screening when there are 5 or more factors and runs are expensive, then rerun a Full factorial on the 2 or 3 factors that came out above the threshold.

@@ -54,6 +54,17 @@ The owner validated the list above with these changes:
 - **Skill name:** `write-documents`.
 - **Unread books** (Williams & Bizup, Minto, Pinker, Tufte): the owner found only excerpts. No verdict rests on them: Gopen & Swan, Google, Microsoft, Mayer, the local measurements and the two retrospective ledgers back every kept or reworded item.
 
+- **Later the same day, after the completeness sweep and an independent review of the spec:**
+  - Rules are grouped in the order the writer uses them, under a priority rule: repo rules, then the genre's skill, then this skill; inside this skill, what keeps the reader able to understand or act wins over what shortens.
+  - E8: a decision request opens with one line giving the question and the recommendation, then the context, then the options.
+  - E4: an ageing number keeps its order of magnitude in the text, with the date it was read and a link to its live source.
+  - E7: the general explanation rule (one case end to end; terms, intuition, formal statement) belongs to this skill; the analogy, check questions and interactive page stay in `write-guide`.
+  - New rule `examples`: an abstract rule or notion is followed by a concrete example, an "avoid / write" pair for a writing rule (owner's suggestion, after Microsoft's top 10 tips).
+  - Fewer rules: 12 rules and 2 delivery checks. Style-guide clauses without a logged incident join only if the baseline run shows the defect.
+  - Out of this skill: "untested" code (in `verify-sources`), state-the-class (in `write-prompt`), the reader's own steps (to `write-guide`). No reference to the `backlog` skill.
+  - `dated-names` moves from `CLAUDE.md` to this skill, once the trigger test shows the skill loads on research reports and handoffs.
+  - Benchmark: `claude plugin eval`, no `CLAUDE.md` on purpose, one target criterion per task, length measured as words per checklist point.
+
 ## Owner principles
 
 ### P1. Self-contained

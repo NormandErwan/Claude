@@ -1,8 +1,8 @@
-I'm opening a pull request on our internal Python library `fetchkit` and need the PR description. Write it to `outputs/pr-body.md`. Our repo writes docs and PRs in English. Reviewers like a short usage example in the PR so they can try the change.
+I'm opening a pull request on our internal Python library `fetchkit` and need the PR description. Write it to `outputs/pr-body.md`.
 
 Background from my notes:
 - Last week the nightly `catalog-sync` job failed 4 times out of 7. Each time, the supplier API answered HTTP 429 (too many requests) during the burst at 02:00 and `fetchkit` raised immediately.
-- The supplier's status page says the current limit is 600 requests per minute (I read it this morning).
+- The supplier's status page, https://status.supplier.example/limits, gave the limit as 600 requests per minute when I looked on 2026-11-26.
 - I picked 3 retries because the 429 bursts in the logs never lasted more than about 2 seconds, and 0.5 s base delay doubling gives 0.5 + 1 + 2 = 3.5 s of total wait, which covers that.
 - Retrying a POST could create duplicate orders on the supplier side, so I left POST alone on purpose.
 - Tests pass locally (`pytest`, 41 passed).

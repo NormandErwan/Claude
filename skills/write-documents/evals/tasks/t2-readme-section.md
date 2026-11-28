@@ -1,4 +1,4 @@
-Our repo `shared-config` gets a new mechanism, and its README needs a section for it. Write only that section, in English, to `outputs/readme-section.md`. The design note below will live in the repo at `docs/design/2026-11-20-config-sync.md`. Readers of the README are developers in the consumer repositories who want to turn the feature on.
+Our repo `shared-config` gets a new mechanism, and its README needs a section for it. Write only that section, to `outputs/readme-section.md`. The design note below will live in the repo at `docs/design/2026-11-20-config-sync.md`. Readers of the README are developers in the consumer repositories who want to turn the feature on.
 
 The design note:
 
@@ -41,5 +41,3 @@ Pilot on `billing-api` and `search-ui` in week 48, then the other ten repos. Pin
 - Should exit code 3 offer an `--accept-local` flag that keeps the local file and records it in the lock?
 
 ---
-
-For the README section: the repo's convention is that a README says what a mechanism does and how to turn it on, and links to the design notes for how it works.
