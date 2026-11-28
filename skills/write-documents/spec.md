@@ -86,6 +86,19 @@ Clauses borrowed from existing skills (see "Existing skills" below), under the s
 - A diagram in a Markdown document is written as Mermaid source, with its accessible title and description, so it renders on GitHub and stays versioned (`markdown-mermaid-writing`) -> `form-by-use`.
 - A figure does not rely on color alone (`scientific-writing`, step 10) -> `form-by-use`.
 
+### Clauses that joined after the baseline pilot
+
+The baseline pilot (2026-11-28, 8 runs, results under "Runs" below) showed six of the candidate clauses' mistakes; the owner approved adding them:
+
+- A PR body does not restate what the tool already shows -> `nothing-extra`. Both t1 runs listed every file change and every test one by one, and pasted the logs whole.
+- No recap at the end -> `nothing-extra`. Both t3 runs closed on a checklist repeating the steps; one also described the designs twice.
+- Name the source or cut the claim -> `provenance`. t3 runs added advice absent from the input ("Talk to the statistician if you are unsure", how to choose low and high values); t1 runs added caveats absent from the notes.
+- One term per concept -> `define-terms`. A t3 run called factors "settings" in its opening.
+- A diagram in Markdown is Mermaid source with its accessible title and description -> `form-by-use`. Neither t3 run drew the screen or the Effects chart.
+- A figure does not rely on color alone -> `form-by-use`, with the Mermaid clause.
+
+The other candidate clauses stay out: the pilot showed none of their mistakes.
+
 ### Moves out of this skill
 
 - Code shown as working but never run is labelled "untested": already in `verify-sources`.
@@ -150,6 +163,8 @@ A separate set of prompts checks that the skill loads when an agent is asked for
 
 1. **Baseline pilot, before the skill is written:** each task without the skill, twice, judged against success criterion 1. The pilot also gives the cost of a run.
 2. **Full run, once the skill is written:** 4 tasks x 2 arms x 3 runs = 24 outputs. The pilot's cost decides whether more runs per arm are affordable.
+
+**Baseline pilot result (2026-11-28):** success criterion 1 holds. Target criterion failed: t1 `provenance` 1 of 2, t2 `self-contained` 2 of 2, t3 `form-by-use` 2 of 2, t4 `decision-context` 2 of 2. Words per checklist point: t1 105-119, t2 70-82, t3 264-310, t4 70 (one complete run). Cost: $4.18 for the agent runs plus $2.98 for the judges, about $0.90 per graded output; the full run is estimated at about $21.50 and keeps 3 runs per arm (owner-approved budget). After reading every output, two graders were judged too strict and fixed before the full run (owner decision): t4 `completeness-options` now accepts the as-written option rejected with its reason; t3 `answer-first` now asks for what the screen does and the first action. The t1 `answer-first` grader gave opposite verdicts on two openings of the same form: judge noise, kept as is.
 
 ## Existing skills
 
