@@ -190,6 +190,7 @@ skills/write-documents/
   spec.md                                this file, deleted once SKILL.md and evidence.md hold its content
   2026-11-28-principles-research.md      research and owner decisions
   evals/<task>/                          plugin eval cases: prompt.md (the task prompt), graders/
+  evals/trigger/<case>/                  trigger-test cases: load-* must load the skill, skip-* must not
 ```
 
 Benchmark runs go to the session's scratchpad; only aggregated results go in `evidence.md`.
