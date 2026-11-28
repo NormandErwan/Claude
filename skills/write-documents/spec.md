@@ -83,6 +83,9 @@ Clauses borrowed from existing skills (see "Existing skills" below), under the s
 - Over-editing is a failure too: a rewrite keeps every sentence that breaks no rule (`tw93/Waza`, `write`) -> `recheck-rewrites`.
 - Do not open with a count of points ("Two cautions.") (`docwriter-org/plain-writing-skill`, rule 25) -> `answer-first`.
 
+- A diagram in a Markdown document is written as Mermaid source, with its accessible title and description, so it renders on GitHub and stays versioned (`markdown-mermaid-writing`) -> `form-by-use`.
+- A figure does not rely on color alone (`scientific-writing`, step 10) -> `form-by-use`.
+
 ### Moves out of this skill
 
 - Code shown as working but never run is labelled "untested": already in `verify-sources`.
@@ -159,15 +162,16 @@ A search on 2026-11-28 (installed skills, the claude.ai skill search, skills.sh,
 | `surendranb/writing-skills` | 21 style and voice skills | style frameworks, no structure or decision rules; no eval results |
 | `anthropics/skills` `doc-coauthoring` | a workflow for specs and decision documents | a co-writing process, not rules for every genre |
 | `tomdale/inside-mac` | developer documentation books | one genre |
+| `K-Dense-AI/scientific-agent-skills`: `scientific-writing`, `markdown-mermaid-writing`, `peer-review` | scientific manuscripts with evidence IDs checked by a human verifier; Markdown documents with Mermaid diagrams; review drafts | one genre (manuscripts), about 1,800 words of rules plus references; its tests check its scripts, not the quality of the prose |
 
-The clauses worth borrowing are listed under "Candidate clauses".
+The clauses worth borrowing are listed under "Candidate clauses". `evidence.md` gets a section "Prior art and the gap" from this table: what each skill covers, and what none of them does - rules for every genre of output document, with a measured effect on length and structure.
 
 ## Project structure
 
 ```
 skills/write-documents/
   SKILL.md                               the skill, written after the baseline pilot
-  evidence.md                            sources and benchmark history
+  evidence.md                            sources, prior art and the gap, benchmark history
   spec.md                                this file, deleted once SKILL.md and evidence.md hold its content
   2026-11-28-principles-research.md      research and owner decisions
   evals/tasks/                           benchmark prompts
