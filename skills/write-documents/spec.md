@@ -44,7 +44,7 @@ Each rule has a short id, used by the grid below. The four groups follow the ord
 | Id | Rule | Source |
 |---|---|---|
 | `one-idea` | One idea per sentence, one point per paragraph and per section, no idea twice. | Gopen & Swan 1990; Google Technical Writing One, "Short sentences"; `write-french/evidence.md` v1.3.0 |
-| `define-terms` | Every reference - term, acronym, named person or framework, internal shorthand - gets a gloss at its first use, even when specialists know it. The gloss is a clause, not a second claim. In a list of names, a name glossed elsewhere in the document stays bare; a name glossed nowhere leaves the list. | `write-french` defect 3 and its measured limit |
+| `define-terms` | Every reference - term, acronym, named person or framework, internal shorthand - gets a gloss at its first use, even when specialists know it, unless the document's named reader works with it every day (judged by that reader, not by the writer's sense of it). The gloss is a clause, not a second claim. In a list of names, a name glossed elsewhere in the document stays bare; a name glossed nowhere leaves the list. | `write-french` defect 3 and its measured limit |
 
 ### 4. Before delivering
 
@@ -132,7 +132,7 @@ Each prompt in `evals/tasks/` carries all its context inline, because an agent m
 
 ### Trigger test
 
-A separate set of prompts checks that the skill loads when an agent is asked for a document of one of the genres above, and does not load for a chat reply. `plugin eval`'s `tool_used: Skill` grader records whether it fired. The mix of should-load and should-not-load prompts follows `write-skill`'s trigger evals ("Track 3").
+A separate set of prompts checks that the skill loads when an agent is asked for a document of one of the genres above, and does not load for a chat reply. `plugin eval`'s `tool_used: Skill` grader records whether it fired, with `--ablation none` and `arm: both` so that must-not-load cases are scored. The plugin also ships the skills that compete for the same requests in real sessions - `write-guide`, `write-french`, `handoff`, `research`, `capturer-connaissance` - so a load shows the skill wins against them. The mix of should-load and should-not-load prompts follows `write-skill`'s trigger evals ("Track 3").
 
 ### Runs
 
@@ -161,12 +161,12 @@ Benchmark runs go to the session's scratchpad; only aggregated results go in `ev
 
 ## Success criteria
 
-1. On the baseline pilot, each task fails its target criterion at least once in 2 runs.
-2. On the full run, each task's target criterion passes at least 2 more times out of 3 with the skill than without it, and no other applying criterion loses more than 1 pass.
-3. On each task, words per checklist point fall with the skill, and no checklist point is lost.
+1. On the baseline pilot, each task fails its target criterion at least once in 2 runs. A task that passes it in both runs is rewritten.
+2. On the full run, summed over the 4 tasks, the target criteria pass at least 5 more times out of 12 with the skill than without it, and no task's target criterion passes fewer times with the skill. Across all tasks, no other criterion loses more than 1 pass in total.
+3. Words per checklist point fall on the mean of the 4 tasks, and rise by no more than 20% on any one task. A run that misses a checklist point counts as a failure of this criterion. The 20% threshold is an owner-approved first value.
 4. Sentences carrying several ideas and unglossed references, per 1000 words, do not rise with the skill.
 5. `dated-names` leaves `CLAUDE.md` only once the trigger test shows the skill loads on research reports and handoffs. Then the dated-notes test, run in real sessions with the rule removed from `CLAUDE.md` and the skill installed, passes as often as before: 4 of 4 on each of its two cases, P3 and N4 (`docs/research/2026-11-27-test-runner-fidelity.md`). The owner allows an A/B test; what counts is that the rule is followed with the skill.
-6. The trigger test loads the skill on at least 8 of 10 document requests and on at most 1 of 10 chat requests. These thresholds are a first proposal, to confirm with the owner after the test is designed.
+6. The trigger test loads the skill on at least 8 of 10 document requests and on at most 1 of 10 chat requests. The owner approved these thresholds.
 7. `write-french`, `write-guide` and `capturer-connaissance` cite `write-documents` and keep only what is specific to them; `write-guide` writes provenance as a half-sentence and gains the rule on the reader's actions.
 8. After merge, a `test-run` row in `RETROSPECTIVE.md` tracks the owner's hand corrections for length or structure on the next 5 output documents. It passes with at most 1 such correction.
 
@@ -178,4 +178,4 @@ Benchmark runs go to the session's scratchpad; only aggregated results go in `ev
 
 ## Open questions
 
-- The thresholds of success criteria 6 and 8.
+- None.
