@@ -1,6 +1,6 @@
 ---
 name: write-documents
-version: 1.0.0
+version: 0.2.0
 description: Use when writing or revising a document someone will read outside the chat - a PR body, a GitHub issue or comment, a README or docs page, a user guide, a research report, a handoff, a knowledge-base page, or a message asking someone to decide. Also when such a document runs long for what it delivers, buries its point, or needs a table or a diagram. Not for chat replies.
 ---
 
@@ -43,14 +43,16 @@ Give reasoning only where it changes the reader's decision.
 **`self-contained`** - The document holds what the reader needs to understand it and act on it.
 What to do goes in the document; how a mechanism works goes behind a link.
 Test: reread the document ignoring every link; rewrite any sentence that stops making sense.
+When the thing can fail, say what the reader sees and what they do, not how the failure is detected.
 A pure reference page (a command cheat sheet, a service inventory) is exempt.
 
 | Avoid (README of a backup tool) | Write |
 |---|---|
-| "The agent snapshots the volume, compresses it with zstd, uploads it in 64 MB parts and compares each part's ETag." | "Backups run every night. Each one is verified after upload. A failed backup makes the job exit 2. How backups work: `docs/design/backups.md`." |
+| "The agent snapshots the volume, compresses it with zstd, uploads it in 64 MB parts and compares each part's ETag." | "Backups run every night. Each one is verified after upload. A failed backup makes the job exit 2. Run `backup retry` to start it again. How backups work: `docs/design/backups.md`." |
+| "Exit 3: the agent compared the part's hash with the one stored in `state.json` and found a mismatch." | "Exit 3: an upload was corrupted. Run `backup retry` to upload it again." |
 
 **`provenance`** - A number the document keeps, or a claim that supports a decision or a recommendation, carries its provenance as a half-sentence in place ("measured on one excerpt"). That half-sentence also says why the claim has that strength.
-- Keep a source's strength, give the sample size, and claim nothing beyond the evidence.
+- Keep a source's strength, give the sample size, and claim nothing beyond the evidence. State the measurement, not a generalization drawn from it.
 - Keep a caveat next to the number it qualifies, not in a "Limitations" section further down.
 - A number that will age keeps what the reader needs in the text, such as its order of magnitude, with the date it was read and a link to its live source.
 - A choice that departs from the project's default says why.
@@ -59,20 +61,25 @@ A pure reference page (a command cheat sheet, a service inventory) is exempt.
 | Avoid | Write |
 |---|---|
 | "Latency drops from 900 ms to 120 ms." | "On one load test of staging (500 requests), median latency dropped from 900 ms to 120 ms." |
+| "The timeouts are short-lived. In one replay, they stopped after 2 s." | "In one replay, the timeouts stopped after 2 s." |
 | "Ask the DBA if you are unsure." (no DBA in the input) | Cut it. |
 
 **`nothing-extra`** - Cut what does not serve the document's question.
 - No commentary on the research or the writing. A provenance half-sentence is not commentary.
-- A document kept current (README, docs, knowledge-base page, skill) holds no history, past incident or snapshot of the day, such as a rollout calendar. A dated document may.
+- A document kept current (README, docs, knowledge-base page, skill) holds no history, rejected alternative, past incident or snapshot of the day, such as a rollout calendar. A dated document may.
 - A PR body does not restate what the tool already shows: no commit list, no file-by-file list, no test-by-test list. An empty section becomes one line, such as "Nothing to run."
 - No recap or checklist at the end that repeats the steps.
+- Link text names what the reader will find behind the link. It never summarizes it.
+- A guide or a README teaches only what the reader needs to use the thing: no lesson on the method behind it, and no origin or meaning of a name beyond the gloss `define-terms` asks for.
 
 | Avoid | Write |
 |---|---|
 | "`tests/test_cache.py`: 3 new tests. `test_hit`: a second call returns the cached page..." | "Tests cover a cache hit, expiry after 60 s and a bypass for logged-in users. The suite passes (212 tests)." |
+| `[Why we rejected Redis, and the Q3 rollout plan](docs/cache.md)` | `[Cache design](docs/cache.md)` |
+| A guide to the A/B-test screen that opens with a section on why randomized trials work, and says the method dates from 1920s agriculture | A guide that opens with what the screen does and the first step |
 
 **`decision-context`** - A document asking for a decision opens with one line giving the question and the recommendation.
-Then it recalls the context: the incident, the goal, the stake, the history, the rule in force.
+Then it recalls the context the decision depends on: the incident, the goal, the stake, the history, the rule in force.
 Then it gives the options.
 
 | Avoid | Write |

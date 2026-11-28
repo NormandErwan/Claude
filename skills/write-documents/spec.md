@@ -134,7 +134,7 @@ Each task's case lists which criteria apply; applicability never depends on the 
 | `provenance` | Numbers and decision claims carry their provenance in place; nothing claimed beyond the evidence | t1, t4 |
 | `decision-context` | One line with the question and the recommendation, then the context, then the options | t4 |
 | `examples` | Each abstract rule or notion has a concrete example; an explanation has one case worked end to end | t3 |
-| `form-by-use` | A table or a figure wherever the reader compares, follows or recognizes; labels on the figure | t3 |
+| `form-by-use` | A table, a numbered list and a figure (Mermaid, image, or a drawing in box or bar characters) are all present; three `regex` graders, since a pattern decides it and the `llm` judge mis-scored long guides in the 0.1.0 run | t3 |
 
 **Counted per 1000 words, not passed or failed:** sentences carrying several ideas (`one-idea`) and references with no gloss at first use (`define-terms`). An independent agent that does not know the arm counts them, as in `write-french/evidence.md`.
 

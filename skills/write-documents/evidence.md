@@ -49,7 +49,7 @@ A search on 2026-11-28 (installed skills, the claude.ai skill search, skills.sh,
 Runner: `claude plugin eval`, cases in `evals/`, no `CLAUDE.md` in either arm, Opus as the writer, Sonnet as the judge.
 Each case grades only the written file, one `llm` grader per criterion and per completeness point.
 
-### Baseline pilot, before 1.0.0 (2026-11-28)
+### Baseline pilot, before 0.1.0 (2026-11-28)
 
 Each task without the skill, 2 runs:
 
@@ -71,7 +71,7 @@ The pairs in `SKILL.md` keep each defect's form but move it to another domain, s
 
 Cost: $4.18 for the agent runs plus $2.98 for the judges, about $0.90 per graded output.
 
-### Full run, 1.0.0 (2026-11-28)
+### Full run, 0.1.0 (2026-11-28)
 
 4 tasks x 2 arms x 3 runs. The skill loaded in all 12 treatment runs and in no control run (probe and traces).
 
