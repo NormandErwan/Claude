@@ -70,3 +70,21 @@ Defects read in the outputs, each one the source of a rule's "avoid / write" pai
 The pairs in `SKILL.md` keep each defect's form but move it to another domain, so that no treatment run can pass by copying an example of its own task.
 
 Cost: $4.18 for the agent runs plus $2.98 for the judges, about $0.90 per graded output.
+
+### Full run, 1.0.0 (2026-11-28)
+
+4 tasks x 2 arms x 3 runs. The skill loaded in all 12 treatment runs and in no control run (probe and traces).
+
+| Task | Target criterion, with / without | Words per checklist point, with / without |
+|---|---|---|
+| t1 PR body | `provenance` 0 / 0 | 69 / 99 |
+| t2 README section | `self-contained` 1 / 1 | 78 / 73 |
+| t3 interface guide | `form-by-use` 1 / 0 (judge); 3 / 0 (figure, table and numbered steps counted in the files) | 220 / 316 |
+| t4 decision request | `decision-context` 2 / 0 | 81 / 65 |
+
+- Success criterion 2 fails as judged: +3 target passes, against +5 required. The `form-by-use` judge failed two t3 guides that hold a Mermaid or ASCII figure, tables and numbered steps; the spec asks for a pattern check there, and with it the gain is +5. No other criterion lost a pass; t3 `answer-first` and `scope` went from 0 to 3, t4 `answer-first` from 1 to 3.
+- Success criterion 3 fails: words per checklist point fall on the mean (138 to 112), but rise 25% on t4, against 20% allowed. The treatment's t4 messages add a context section.
+- Success criterion 4, counted blind by two independent agents: sentences carrying several ideas 4.4 to 4.6 per 1000 words, a rise within the counters' spread (each counter saw an unequal share of each arm); unglossed references 4.4 to 3.8.
+- Gaps read in the outputs: t1 still states a measurement as a general fact before qualifying it ("The 429s are short-lived."); t2 still explains how the sync detects a local edit and checks a download, in its failure section.
+- Trigger test: loaded on 9 of 10 document requests (missed the handoff request) and on 0 of 10 chat requests; criterion 6 holds.
+- Cost: $11.48 agent runs and $6.95 judges for 24 outputs; $1.97 for the trigger test.
