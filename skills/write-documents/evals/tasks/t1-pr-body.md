@@ -2,13 +2,14 @@ I'm opening a pull request on our internal Python library `fetchkit` and need th
 
 Background from my notes:
 - Nightly `catalog-sync` runs last week: failed Mon, Tue, Thu, Sat; passed Wed, Fri, Sun.
-- Log excerpt from Tuesday's failure:
+- Tuesday's log: `02:00:03.112 GET /v2/items?page=41 -> 429`, then `catalog-sync aborted: HTTPError 429 on page 41`.
+- Replaying page 41 by hand at 02:00 on Wednesday, one request every 0.5 s:
   ```
-  02:00:03.112 GET /v2/items?page=41 -> 429
-  02:00:03.598 GET /v2/items?page=42 -> 429
-  02:00:04.870 GET /v2/items?page=43 -> 429
-  02:00:05.031 GET /v2/items?page=44 -> 200
-  02:00:05.032 catalog-sync aborted: HTTPError 429 on page 41
+  02:00:03.10 429
+  02:00:03.60 429
+  02:00:04.10 429
+  02:00:04.60 429
+  02:00:05.10 200
   ```
 - Supplier rate limit: 600/min.
 - A retried POST could create a duplicate order on the supplier side.
