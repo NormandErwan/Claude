@@ -405,3 +405,160 @@ For the benchmark design: score fused sentences and dropped load-bearing words a
 | Pinker, *The Sense of Style* (2014); Williams & Bizup, *Style: Lessons in Clarity and Grace*; Minto, *The Pyramid Principle*; Tufte, *The Visual Display of Quantitative Information* | - | Not read: no authorised open copy found |
 | Local: `skills/write-french/SKILL.md`, `skills/write-french/evidence.md`, `skills/write-guide/SKILL.md`, `RETROSPECTIVE.md`, `BACKLOG.md`, `PROVENANCE.md`, `CLAUDE.md` | /home/user/Claude | Read |
 | Intelligence: `RETROSPECTIVE.md`, `skills/capturer-connaissance/SKILL.md`, `critere.md` | /home/user/intelligence | Read |
+
+## Completeness sweep (2026-11-28)
+
+Every top-level item of six sources, mapped to the rules of `spec.md`. Mapping: covered, new, out. Each source was fetched in this session. Sentence-length numbers are out because the spec rejected them.
+
+### 1. Google developer documentation style guide, Highlights
+
+| Item | Source wording | Mapping | Rule id | Reason |
+|---|---|---|---|---|
+| Friendly tone | "Be conversational and friendly without being frivolous." | out | - | Voice, not structure |
+| Pre-announcing | "Don't pre-announce anything in documentation." | out | - | Product-release rule |
+| Link text | "Use descriptive link text." | covered | `link-text` | |
+| Accessibility | "Write accessibly." | out | - | General heading; the checkable parts are the alt-text item below |
+| Global audience | "Write for a global audience." | new | `no-idioms` | Idioms and culture-bound phrases defeat non-native readers |
+| Second person | "Use second person: 'you' rather than 'we.'" | out | - | Fits user-facing docs; PR bodies and handoffs address no "you" |
+| Active voice | "Use active voice: make clear who's performing the action." | new | `active-voice` | |
+| Spelling | "Use standard American spelling and punctuation." | out | - | Locale choice; the repo's language rule governs |
+| Conditions | "Put conditions before instructions, not after." | new | `condition-first` | |
+| Word list | "For usage and spelling of specific words, see the word list." | out | - | Pointer to a word list |
+| Headings case | "Use sentence case for document titles and section headings." | out | - | Capitalization convention |
+| Numbered lists | "Use numbered lists for sequences." | covered | `form-by-use` (steps -> numbered list), `owner-steps` | |
+| Bulleted lists | "Use bulleted lists for most other lists." | covered | `signal-structure` | |
+| Description lists | "Use description lists for pairs of related pieces of data." | covered | `form-by-use` | Pairs of data are compared, so a table or list shows them |
+| Serial commas | "Use serial commas." | out | - | Punctuation convention |
+| Code font | "Put code-related text in code font." | new | `code-format` | |
+| UI bold | "Put UI elements in bold." | out | - | UI-documentation convention |
+| Dates | "Use unambiguous date formatting." | new | `unambiguous-dates` | |
+| Alt text | "Provide alt text." | new | `alt-text` | Markdown controls it: `![alt](src)` |
+| Image resolution | "Provide high-resolution or vector images when practical." | out | - | Production detail |
+
+Count: covered 4, new 6, out 10.
+
+### 2. Microsoft Writing Style Guide, Top 10 tips
+
+| Item | Source wording | Mapping | Rule id | Reason |
+|---|---|---|---|---|
+| Bigger ideas, fewer words | "Shorter is always better." | covered | `cut-to-question` | The spec counts concision in ideas, not words |
+| Write like you speak | "Avoid jargon and overly complex or technical language." | new | `plain-words` | The read-aloud and friendliness parts are voice, out |
+| Friendliness | "Use contractions like it's, you'll, you're, we're, and let's." | out | - | Tone |
+| Get to the point fast | "Lead with what's most important." | covered | `answer-first` | |
+| Be brief | "Give customers just enough information to make decisions confidently. Prune every excess word." | covered | `cut-to-question` | |
+| Capitalization | "Default to sentence-style capitalization" | out | - | Capitalization convention |
+| End punctuation | "Don't use a period or a colon at the end of titles, headings, subheadings, and UI titles." | out | - | Punctuation convention |
+| Last comma | "include a comma before the conjunction" | out | - | Punctuation convention |
+| Spacing | "Use only one space after periods, question marks, and colons—and no spaces around dashes." | out | - | Punctuation convention |
+| Revise weak writing | "start each statement with a verb ... Avoid weak phrasing like there is, there are, and there were." | covered | `known-before-new` (action in the verb) | |
+
+Count: covered 4, new 1, out 5.
+
+### 3. ISO 24495-1:2023, guidelines (DIN table of contents, headings only)
+
+Principles 1-4 (clause 4) are the spec's Objective and are not rows. Overview sub-clauses (5.x.1) are not guidelines.
+
+| Item | Source wording | Mapping | Rule id | Reason |
+|---|---|---|---|---|
+| 5.1.2 | "Identify the readers" | covered | `answer-first` (one named reader) | |
+| 5.1.3 | "Identify the readers' purpose" | covered | `answer-first` (one question) | |
+| 5.1.4 | "Identify the context in which readers will read the document" | new | `reader-context` | The rules name who reads, not when and in what situation |
+| 5.1.5 | "Select the document type or types" | covered | `one-doc-type` | |
+| 5.1.6 | "Select content that readers need" | covered | `self-contained` | |
+| 5.2.2 | "Structure the document for readers" | covered | `answer-first` | |
+| 5.2.3 | "Use information design techniques that enable readers to find information" | covered | `form-by-use` | |
+| 5.2.4 | "Use headings to help readers predict what comes next" | covered | `signal-structure` | |
+| 5.2.5 | "Keep supplementary information separate" | new | `separate-supplementary` | `next-reading` removes history; this keeps useful side detail apart from the main line |
+| 5.3.2 | "Choose familiar words" | new | `plain-words` | |
+| 5.3.3 | "Write clear sentences" | covered | `known-before-new` | |
+| 5.3.4 | "Write concise sentences" | covered | `cut-to-question` | |
+| 5.3.5 | "Write clear and concise paragraphs" | covered | `one-idea` | |
+| 5.3.6 | "Consider including images and multimedia" | covered | `form-by-use` | |
+| 5.3.7 | "Project a respectful tone" | out | - | Tone |
+| 5.3.8 | "Ensure that the document is cohesive" | covered | `known-before-new`, `one-term` (pronoun referents) | |
+| 5.4.2 | "Evaluate the document continually as it is developed" | covered | `recheck-rewrites` | |
+| 5.4.3 | "Evaluate the document further with readers" | covered | `outside-reviewer` | |
+| 5.4.4 | "Continue to evaluate readers' use of the document" | out | - | Monitoring after delivery; the spec's success criteria cover it for the skill |
+
+Count: covered 14, new 3, out 2.
+
+### 4. Write the Docs, Documentation principles
+
+| Item | Source wording | Mapping | Rule id | Reason |
+|---|---|---|---|---|
+| Precursory | "Begin documenting before you begin developing." | out | - | Process timing, not a document rule |
+| Participatory | "include everyone from developers to end users." | out | - | Process |
+| ARID | "Accept (some) Repetition In Documentation." | covered | `self-contained` | Repeat rather than link; `one-idea` bars repeating inside one document |
+| Skimmable, headings | "Headings — should be descriptive and concise." | covered | `signal-structure` | |
+| Skimmable, hyperlinks | "Hyperlinks — should surround words that describe the link itself" | covered | `link-text` | |
+| Skimmable, paragraphs | "Paragraphs and list items — should begin with identifiable concepts as early as possible." | new | `lead-sentence` | |
+| Exemplary | "Include (some) examples and tutorials in content." | covered | `worked-example` | |
+| Consistent | "Use consistent language and formatting in content." | covered | `one-term` | |
+| Current | "Consider incorrect documentation to be worse than missing documentation." | covered | `next-reading` | |
+| Nearby | "Store sources as close as possible to the code which they document." | out | - | Repository layout |
+| Unique | "Eliminate content overlap between separate sources." | out | - | Handled by the `prevent-drift` skill |
+| Discoverable | "Funnel users intuitively towards publications through all likely pathways." | out | - | Publication level |
+| Addressable | "Provide addresses to readers that link directly to content at a granular level." | out | - | Publication tooling |
+| Cumulative | "Content should be ordered to cover prerequisite concepts first." | new | `prerequisites-first` | |
+| Complete | "cover concepts in full, or not at all." | covered | `self-contained` | |
+| Beautiful | "Visual style should be intentional and aesthetically pleasing." | out | - | Visual design of a publication |
+| Comprehensive | "all the publications in the body of documentation can answer all questions" | out | - | Documentation set, not one document |
+
+Count: covered 7, new 2, out 8.
+
+### 5. GOV.UK, Clear language
+
+| Item | Source wording | Mapping | Rule id | Reason |
+|---|---|---|---|---|
+| Use clear language | "many people who will need to read GOV.UK will struggle unless language is kept simple." | new | `plain-words` | |
+| Write clearly for specialists too | "you still need to make sure everyone can understand" | covered | `define-terms` | |
+| Know about words to avoid | "Do not use formal or long words when easy or short ones will do." | new | `plain-words` | Also "Avoid government 'buzzwords' and jargon." and "Be open and specific." |
+| Words ending in -ion and -ment | "Words ending in '–ion' and '–ment' tend to make sentences longer" | covered | `known-before-new` (action in the verb) | |
+| Use specialist language if needed | "explain what they mean the first time you use them" | covered | `define-terms` | |
+| Users' choice of words | "Use the language that users:" | new | `plain-words` | The reader's own words |
+| Contractions | "avoid negative contractions like 'can't' or 'don't'" | out | - | Tone and punctuation |
+| Make requirements clear | "If you're talking about a legal requirement, use 'must'." | new | `requirement-words` | The legal wording is out; the principle is one word per level of obligation |
+| Active voice | "Use the active voice rather than the passive voice." | new | `active-voice` | |
+| Short paragraphs and sentences | "Paragraphs should have no more than 5 sentences each." and "Try to split up sentences that are over 25 words long." | out | - | Sentence-length numbers, rejected by the spec |
+
+Count: covered 3, new 5, out 2.
+
+### 6. Google Technical Writing One, units and course objectives
+
+The unit titles come from the course page's unit links. The wording column quotes the course page's learning objectives, which name the skills each unit teaches.
+
+| Item | Source wording | Mapping | Rule id | Reason |
+|---|---|---|---|---|
+| Just enough grammar (optional) | "Just enough grammar" | out | - | Teaches grammar terms, states no document rule |
+| Words | "Use terminology—including abbreviations and acronyms—consistently. Recognize ambiguous pronouns." | covered | `one-term` | |
+| Active voice | "Identify three ways in which active voice is superior to passive voice." | new | `active-voice` | |
+| Clear sentences | "Develop at least three strategies to make sentences clearer and more engaging." | covered | `known-before-new` | |
+| Short sentences | "Develop at least four strategies to shorten sentences." | covered | `cut-to-question` | No length numbers |
+| Lists and tables | "Understand the difference between bulleted lists and numbered lists. Create helpful lists." | covered | `form-by-use` | |
+| Paragraphs | "Create effective lead sentences for paragraphs. Focus each paragraph on a single topic." | new | `lead-sentence` | The single-topic half is `one-idea` |
+| Audience | "Identify your target audience. Determine what your target audience already knows and what your target audience needs to learn." | covered | `answer-first` | |
+| Documents | "State your document's scope (goals) and audience. Break long topics into appropriate sections. State key points at the start of each document." | covered | `scope` | |
+| Punctuation (optional) | "Use commas, parentheses, colons, em dashes, and semicolons properly." | out | - | Punctuation convention |
+| Markdown (optional) | "Develop beginner competency in Markdown." | out | - | Tool skill |
+| Summary | "Summary" | out | - | Recap of the course |
+| Course objective, idioms | "Identify and revise idioms." | new | `no-idioms` | |
+| Course objective, curse of knowledge | "Understand the curse of knowledge." | covered | `outside-reviewer` | |
+
+Count: covered 7, new 3, out 4.
+
+### Proposed new rules, merged across sources
+
+| Id | Group | Rule | Sources |
+|---|---|---|---|
+| `reader-context` | 1. Frame | Name the situation in which the reader will read the document: what they know and what they do next. | ISO 5.1.4 |
+| `separate-supplementary` | 2. Content | Keep supplementary information apart from the main line, in its own section. | ISO 5.2.5 |
+| `prerequisites-first` | 3. By document type | In a tutorial or an explanation, order the content so that prerequisite concepts come first. | Write the Docs, Cumulative |
+| `code-format` | 4. Form | Put code, commands, paths and identifiers in code formatting. | Google Highlights |
+| `alt-text` | 4. Form | Give every image alt text. | Google Highlights |
+| `active-voice` | 5. Sentences and words | Use the active voice so the reader sees who acts; use the passive only when the outcome matters more than the agent. | Google Highlights, GOV.UK, Technical Writing One |
+| `condition-first` | 5. Sentences and words | Put the condition before the instruction. | Google Highlights |
+| `plain-words` | 5. Sentences and words | Prefer short, familiar, specific words and the reader's own words; use a specialist term only when needed (then `define-terms`). | Microsoft, ISO 5.3.2, GOV.UK |
+| `no-idioms` | 5. Sentences and words | Avoid idioms and culture-bound phrases. | Google Highlights, Technical Writing One |
+| `lead-sentence` | 5. Sentences and words | Open each paragraph and list item with its main point. | Write the Docs, Technical Writing One |
+| `requirement-words` | 5. Sentences and words | Use one word per level of obligation (must, should, can) and keep it. | GOV.UK |
+| `unambiguous-dates` | 5. Sentences and words | Write dates in an unambiguous form such as `YYYY-MM-DD`. | Google Highlights |
