@@ -1,3 +1,12 @@
+---
+description: "Target criterion: decision-context (spec rule `decision-context`). Completeness checklist: graders/completeness-*.md."
+model: opus
+runs: 2
+max_turns: 10
+timeout_seconds: 600
+allowed_tools: [Read, Write, Skill]
+---
+
 I need you to write the message that asks Dana, the repository owner, to decide what to do with a backlog task. Write it to `outputs/decision.md`; I'll paste it into the issue.
 
 The task, as it stands in `BACKLOG.md`:

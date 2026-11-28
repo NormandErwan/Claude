@@ -1,3 +1,12 @@
+---
+description: "Target criterion: provenance (spec rule `provenance`). Completeness checklist: graders/completeness-*.md."
+model: opus
+runs: 2
+max_turns: 10
+timeout_seconds: 600
+allowed_tools: [Read, Write, Skill]
+---
+
 I'm opening a pull request on our internal Python library `fetchkit` and need the PR description. Write it to `outputs/pr-body.md`.
 
 Background from my notes:

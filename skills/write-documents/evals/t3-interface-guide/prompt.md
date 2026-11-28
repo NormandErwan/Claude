@@ -1,3 +1,12 @@
+---
+description: "Target criterion: form-by-use (spec rule `form-by-use`). Completeness checklist: graders/completeness-*.md."
+model: opus
+runs: 2
+max_turns: 10
+timeout_seconds: 600
+allowed_tools: [Read, Write, Skill]
+---
+
 Write a user guide for the "Run planner" screen of our internal lab tool, to `outputs/run-planner-guide.md`. The readers are lab technicians who start using the tool next week. They know their instruments and their samples well. They have never planned a designed experiment.
 
 What the screen does: a technician lists the factors they want to vary (for example temperature, pressure, catalyst amount), gives each factor its low and high value, and the tool generates the list of runs to perform. The technician then runs them on the instrument, types each result into the table, and the tool shows which factors matter.

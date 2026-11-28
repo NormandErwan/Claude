@@ -133,7 +133,7 @@ Each task's case lists which criteria apply; applicability never depends on the 
 
 ### Tasks
 
-Each prompt in `evals/tasks/` carries all its context inline, because an agent missing context describes the gap instead of writing (`RETROSPECTIVE.md` 2026-08-30). No prompt states the behavior the target criterion checks. Before any run, each case names its target criterion, the rule clause it follows from, and its `completeness` checklist.
+Each case's `prompt.md` carries all its context inline, because an agent missing context describes the gap instead of writing (`RETROSPECTIVE.md` 2026-08-30). No prompt states the behavior the target criterion checks. Before any run, each case names its target criterion, the rule clause it follows from, and its `completeness` checklist.
 
 | Task | Prompt | Source case | Target criterion |
 |---|---|---|---|
@@ -174,8 +174,7 @@ skills/write-documents/
   evidence.md                            sources, prior art and the gap, benchmark history
   spec.md                                this file, deleted once SKILL.md and evidence.md hold its content
   2026-11-28-principles-research.md      research and owner decisions
-  evals/tasks/                           benchmark prompts
-  evals/<task>/                          plugin eval cases: prompt.md, graders/
+  evals/<task>/                          plugin eval cases: prompt.md (the task prompt), graders/
 ```
 
 Benchmark runs go to the session's scratchpad; only aggregated results go in `evidence.md`.

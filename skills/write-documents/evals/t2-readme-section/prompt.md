@@ -1,3 +1,12 @@
+---
+description: "Target criterion: self-contained (spec rule `self-contained`). Completeness checklist: graders/completeness-*.md."
+model: opus
+runs: 2
+max_turns: 10
+timeout_seconds: 600
+allowed_tools: [Read, Write, Skill]
+---
+
 Our repo `shared-config` gets a new mechanism, and its README needs a section for it. Write only that section, to `outputs/readme-section.md`. The design note below will live in the repo at `docs/design/2026-11-20-config-sync.md`. Readers of the README are developers in the consumer repositories who want to turn the feature on.
 
 The design note:
