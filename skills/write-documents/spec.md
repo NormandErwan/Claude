@@ -19,37 +19,69 @@ Evidence, verdicts and full citations: `2026-11-28-principles-research.md` in th
 
 ## Rules
 
-Each rule has a short id. `Checked by` names the grid criterion that tests it.
+Each rule has a short id. `Checked by` names the grid criterion that tests it. The groups follow the order in which the writer uses them.
+
+### 1. Frame, before writing
+
+| Id | Rule | Source | Checked by |
+|---|---|---|---|
+| `answer-first` | One question and one named reader per document. Lead with the answer or the conclusion. Give reasoning only where it changes the reader's decision. | `write-guide` gates 1-2; Google Technical Writing One, "Documents"; Microsoft top 10 tips | `answer-first` |
+| `scope` | State what the document covers and what it does not. | Google Technical Writing One, "Documents"; `write-guide` | `scope` |
+| `one-doc-type` | One document type per document: tutorial, how-to guide, reference and explanation stay apart. | Diátaxis | `scope` |
+
+### 2. Content
 
 | Id | Rule | Source | Checked by |
 |---|---|---|---|
 | `self-contained` | The document holds everything the reader needs to understand and use it. A link only serves to go deeper or to verify. Test: reread it ignoring every link; a sentence that stops making sense is rewritten. | Google style guide, cross-references; Diátaxis; `capturer-connaissance` "Page autoporteuse" | `self-contained` |
-| `one-idea` | One idea per sentence, one point per paragraph and per section, no idea twice. | Gopen & Swan 1990; Google Technical Writing One; `write-french/evidence.md` v1.3.0 | `one-idea` |
-| `define-terms` | Every reference - term, acronym, named person or framework, internal shorthand - gets a gloss at its first use, in the sentence itself, even when specialists know it. | `write-french` defect 3 and its measured limit | `defined-terms` |
-| `one-term` | One term per concept throughout; every pronoun has a clear referent. No acronym used only a few times. | Google Technical Writing One, "Words"; Google abbreviations | `defined-terms` |
 | `cut-to-question` | Cut what does not serve the document's question. Never cut a word the sentence needs: concision is counted in ideas, not words. | Mayer, coherence principle; Gopen & Swan; `RETROSPECTIVE.md` 2026-08-30 | `completeness`, `nothing-extra` |
 | `reader-not-process` | Write for the reader: no commentary on the research or the writing. | Intelligence `RETROSPECTIVE.md` 2026-09-19; Mayer, coherence | `nothing-extra` |
 | `next-reading` | Keep what serves the next reading. History, past incidents and the day's snapshot go elsewhere; a skill's version log goes in `evidence.md`. | Intelligence 2026-10-24, 2026-10-27; `RETROSPECTIVE.md` 2026-08-31; Write the Docs, "Current" | `nothing-extra` |
-| `answer-first` | One question and one named reader per document. Lead with the answer or the conclusion. Give reasoning only where it changes the reader's decision. | `write-guide` gates 1-2; Google Technical Writing One, "Documents"; Microsoft top 10 tips | `answer-first` |
-| `signal-structure` | Signal the structure with headings and lists, sparingly. | Mayer, signaling; ISO 24495-1 5.2.4 (heading only read) | `answer-first` |
-| `known-before-new` | Known information before new. Keep the subject close to its verb. Put the action in the verb. | Gopen & Swan | `one-idea` |
 | `provenance` | Numbers, and claims that support a decision or a recommendation, carry their provenance as a half-sentence in place ("measured on one excerpt"), which also says why the claim has that strength. Keep a source's strength and give sample sizes. | `write-guide`, provenance in place; `RETROSPECTIVE.md` 2026-08-24, 2026-11-03; owner decision | `provenance` |
-| `live-numbers` | A number that will age is not copied in: point to its live source. If it must be copied, give its source and the date it was read. | `RETROSPECTIVE.md` 2026-09-22; Write the Docs, "Current" | `provenance` |
+| `live-numbers` | A number that will age links to its live source. The text keeps what the reader needs to understand it, such as its order of magnitude, with the date it was read. | `RETROSPECTIVE.md` 2026-09-22; Write the Docs, "Current" | `provenance` |
 | `justify-departures` | A number or a choice that departs from the project's default states why, in place. | `RETROSPECTIVE.md` 2026-11-22 | `provenance` |
 | `state-the-class` | A rule or an exception states its class; a named case is only its example. | `RETROSPECTIVE.md` 2026-11-16 | `state-the-class` |
-| `scope` | State what the document covers and what it does not. | Google Technical Writing One, "Documents"; `write-guide` | `scope` |
-| `one-doc-type` | One document type per document: tutorial, how-to guide, reference and explanation stay apart. | Diátaxis | `scope` |
-| `link-text` | Link text makes sense without the sentence around it. | Google style guide, cross-references | `self-contained` |
-| `form-by-use` | Choose the form by what the reader must do with the content. Prose carries an argument read in order. When the reader must compare items, see a trend or a distribution, follow a sequence, see how parts connect or recognize something visual, a table or a figure shows it at once. Examples: exact values -> table; data, raw or aggregated, whose shape matters -> chart; steps -> numbered list or flowchart; architecture -> diagram; interface -> screenshot or mock-up. Labels sit on the figure itself. A figure goes when it distracts from the point. | Mayer, multimedia, spatial contiguity, coherence; Bateman et al. 2010; owner decision | `figures` |
-| `decision-context` | A document asking for a decision first recalls the context - incident, goal, stake, history, rule in force - then gives the options and one recommendation. | `RETROSPECTIVE.md` 2026-11-03, 2026-11-27 | `decision` |
+
+### 3. By document type
+
+| Id | Rule | Source | Checked by |
+|---|---|---|---|
+| `decision-context` | A document asking for a decision opens with one line giving the question and the recommendation, then recalls the context - incident, goal, stake, history, rule in force - then gives the options. | `RETROSPECTIVE.md` 2026-11-03, 2026-11-27; owner decision 2026-11-28 | `decision` |
 | `owner-steps` | Steps only the owner can take go in their own ordered list, each exact. | `RETROSPECTIVE.md` 2026-11-09; Google, numbered lists | `owner-steps` |
 | `untested-code` | A snippet presented as working has been run; otherwise it says "untested". | `RETROSPECTIVE.md` 2026-09-27; Diátaxis, tutorials | `untested-code` |
 | `worked-example` | An explanation shows one case worked end to end, and gives the key terms, then the intuition, then the formal statement. Analogy, check questions and the interactive page stay in `write-guide` (backlog task `write-guide-explaining-section`). | `write-guide`; Write the Docs, "Exemplary"; Mayer, pre-training; owner decision | `worked-example` |
-| `dated-names` | A document whose content no longer changes is named `YYYY-MM-DD-<slug>.md`. A repo rule is pointed to, not restated. | `CLAUDE.md` Behavior | `repo-conventions` |
-| `language-by-type` | Language by document type: code-side documents (README, PR, commit, comment, skill) in English, deliverables for the user in the user's language, unless the repo's own rule says otherwise. | `CLAUDE.md` Claude Code | `repo-conventions` |
+
+### 4. Form
+
+| Id | Rule | Source | Checked by |
+|---|---|---|---|
+| `form-by-use` | Choose the form by what the reader must do with the content. Prose carries an argument read in order. When the reader must compare items, see a trend or a distribution, follow a sequence, see how parts connect or recognize something visual, a table or a figure shows it at once. Examples: exact values -> table; data, raw or aggregated, whose shape matters -> chart; steps -> numbered list or flowchart; architecture -> diagram; interface -> screenshot or mock-up. Labels sit on the figure itself. A figure goes when it distracts from the point. | Mayer, multimedia, spatial contiguity, coherence; Bateman et al. 2010; owner decision | `figures` |
+| `signal-structure` | Signal the structure with headings and lists, sparingly. | Mayer, signaling; ISO 24495-1 5.2.4 (heading only read) | `answer-first` |
+| `link-text` | Link text makes sense without the sentence around it. | Google style guide, cross-references | `self-contained` |
+
+### 5. Sentences and words
+
+| Id | Rule | Source | Checked by |
+|---|---|---|---|
+| `one-idea` | One idea per sentence, one point per paragraph and per section, no idea twice. | Gopen & Swan 1990; Google Technical Writing One; `write-french/evidence.md` v1.3.0 | `one-idea` |
+| `known-before-new` | Known information before new. Keep the subject close to its verb. Put the action in the verb. | Gopen & Swan | `one-idea` |
+| `define-terms` | Every reference - term, acronym, named person or framework, internal shorthand - gets a gloss at its first use, in the sentence itself, even when specialists know it. | `write-french` defect 3 and its measured limit | `defined-terms` |
+| `one-term` | One term per concept throughout; every pronoun has a clear referent. No acronym used only a few times. | Google Technical Writing One, "Words"; Google abbreviations | `defined-terms` |
+
+### 6. Before delivering
+
+| Id | Rule | Source | Checked by |
+|---|---|---|---|
 | `obey-own-rules` | The document obeys its own rules, examples and format included. | `RETROSPECTIVE.md` 2026-08-24, 2026-08-30 | `obeys-own-rules` |
 | `recheck-rewrites` | After any rewrite, re-check the rewritten text against every rule. | `RETROSPECTIVE.md` 2026-08-25, 2026-08-30 | `recheck-rewrites` |
 | `outside-reviewer` | A reader who did not write the text reviews it before delivery: a writer cannot see its own jargon. | `write-french/evidence.md`, known limit; Google Technical Writing One, "Audience" | `outside-reviewer` |
+| `dated-names` | A document whose content no longer changes is named `YYYY-MM-DD-<slug>.md`. A repo rule is pointed to, not restated. | `CLAUDE.md` Behavior | `repo-conventions` |
+| `language-by-type` | Language by document type: code-side documents (README, PR, commit, comment, skill) in English, deliverables for the user in the user's language, unless the repo's own rule says otherwise. | `CLAUDE.md` Claude Code | `repo-conventions` |
+
+### Priority
+
+- **Between rule sources:** the repo's own rules (`CLAUDE.md`, `CONTRIBUTING.md`) first, then the skill for the document's genre (`write-french`, `write-guide`, `capturer-connaissance`), then this skill. The more specific rule wins.
+- **Inside this skill:** a rule that keeps the reader able to understand or act wins over a rule that shortens the text. Examples: a gloss stays even when it lengthens the sentence (`define-terms` over `cut-to-question`); an ageing number keeps its order of magnitude in the text, with its date and a link to its live source (`self-contained` with `live-numbers`).
 
 ## Testing strategy
 
@@ -80,7 +112,7 @@ Each criterion is an expectation the grader marks passed or failed, as `write-sk
 | Criterion | Passes when |
 |---|---|
 | `figures` | A table or a figure wherever the reader compares, follows or recognizes; labels on the figure; nothing that distracts |
-| `decision` | Context, then options, then one recommendation |
+| `decision` | One line with the question and the recommendation, then the context, then the options |
 | `owner-steps` | Owner-only steps in their own exact, ordered list |
 | `untested-code` | Code presented as working was run, or says "untested" |
 | `worked-example` | One case worked end to end; terms, intuition, then formal statement |
